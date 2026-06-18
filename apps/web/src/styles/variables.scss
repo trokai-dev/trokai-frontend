@@ -101,8 +101,7 @@ h6 {
 
 .label-body-1 {
   font-size: 1.6rem !important;
-  font-weight: 300; // regular
-  color: $color-gray-default;
+  font-weight: 400 !important; // regular
 }
 
 .strong {
@@ -111,7 +110,7 @@ h6 {
 
 .label-body-2 {
   font-size: 1.4rem !important;
-  font-weight: 300; // regular
+  font-weight: 400 !important; // regular
   color: $color-gray-default;
 }
 
@@ -133,7 +132,7 @@ h6 {
 
 .label-caption-2 {
   font-size: 1.2rem !important;
-  font-weight: 600 !important; // bold
+  font-weight: 700 !important; // bold
 }
 
 .label-nano {
