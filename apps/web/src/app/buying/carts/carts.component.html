@@ -1,6 +1,6 @@
 <div class="container page">
-  <div class="row">
-    <div class="col-12 col-md-6">
+  <div class="grid-row">
+    <div class="gcol-12 gcol-md-6">
       <div class="flex items-end">
         <h2 class="color-gray-dark">
           {{ justAdded ? "Adicionado à sacola" : "Minhas sacolas" }}
@@ -30,13 +30,13 @@
     }
   } @else {
     @for (basket of baskets; track basket) {
-      <div class="row mt-24 basket-card">
-        <div class="col">
+      <div class="grid-row mt-24 basket-card">
+        <div class="gcol-12 gcol-md-9">
           <!-- Loja -->
-          <div class="row cursor-pointer">
+          <div class="flex items-center cursor-pointer">
             <div
               (click)="openOwner(basket.owner)"
-              class="col-auto flex justify-center items-center"
+              class="flex justify-center items-center"
             >
               <tk-user-avatar
                 [user]="basket.owner"
@@ -45,7 +45,7 @@
             </div>
             <div
               (click)="openOwner(basket.owner)"
-              class="col-auto flex ml-0 ms-md-2 flex-col items-start justify-center px-md-0"
+              class="flex ml-0 ml-md-8 flex-col items-start justify-center px-md-0"
             >
               <div class="flex items-center">
                 <h4 class="color-gray-dark capitalize">
@@ -102,7 +102,7 @@
           <!-- <app-reserve-time text="Continuar" color="primary" (open)="restore(cart)" [ownerId]="basket.owner"></app-reserve-time> -->
         </div>
         <div
-          class="col-12 col-md-3 mt-48 mt-md-0 flex flex-col justify-end"
+          class="gcol-12 gcol-md-3 mt-48 mt-md-0 flex flex-col justify-end"
         >
           <div class="flex justify-between">
             <span class="label-body-2"> Total</span>

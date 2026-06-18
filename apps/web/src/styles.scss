@@ -1,13 +1,10 @@
 // POPPINS
 @use 'tokens'; // @trokai/shared-styles design tokens (:root custom props)
-@use 'index'; // @trokai/shared-styles utilities (layout/spacing/typography) — shared with the app
-@use 'bootstrap-compat'; // native Flexbox/Grid shim — replaces `bootstrap`
+@use 'index'; // @trokai/shared-styles utilities (layout/spacing/typography/grid) — shared with the app
 @import "styles/variables.scss";
-@import "styles/margins.scss";
 @import "styles/material-styles.scss";
 @import "styles/dialogs.scss";
-
-// @import "styles/paddings.scss";
+// spacing: margins/paddings now come from shared `@use 'index'` (_spacing.scss)
 
 // import Swiper and modules styles
 @import "swiper/css";
@@ -62,10 +59,6 @@ label {
   @extend .label-body-2;
 }
 
-.flex-1 {
-  flex: 1;
-}
-
 .label-button {
   cursor: pointer;
   font-weight: 500;
@@ -118,21 +111,7 @@ hr {
   border-color: #b6b6b6 !important;
 }
 
-.border-bottom {
-  border-bottom: $border-trokai;
-}
-
-.border-top {
-  border-top: $border-trokai;
-}
-
-.border-left {
-  border-left: $border-trokai;
-}
-
-.border-right {
-  border-right: $border-trokai;
-}
+// .flex-1 / .border-* come from shared `@use 'index'` (_layout/_borders).
 
 .bullet-product {
   border-radius: 0.4rem;

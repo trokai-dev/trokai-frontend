@@ -2,12 +2,14 @@
 // Token-backed (--border-trokai = 1px solid var(--color-border)). Shared by both
 // apps; replaces the Bootstrap border classes (the shim never defined them).
 
-.border { border: var(--border-trokai); }
-.border-top { border-top: var(--border-trokai); }
-.border-bottom { border-bottom: var(--border-trokai); }
-.border-left, .border-start { border-left: var(--border-trokai); }
-.border-right, .border-end { border-right: var(--border-trokai); }
-.border-0 { border: 0; }
+// `!important` matches the web `$border-trokai` these replace, so border
+// utilities win consistently over component styles in both apps.
+.border { border: var(--border-trokai) !important; }
+.border-top { border-top: var(--border-trokai) !important; }
+.border-bottom { border-bottom: var(--border-trokai) !important; }
+.border-left, .border-start { border-left: var(--border-trokai) !important; }
+.border-right, .border-end { border-right: var(--border-trokai) !important; }
+.border-0 { border: 0 !important; }
 
 .rounded { border-radius: 0.375rem; }
 .rounded-circle { border-radius: 50%; }

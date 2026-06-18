@@ -1,5 +1,5 @@
-<div class="row mb-48">
-  <div class="col">
+<div class="grid-row mb-48">
+  <div class="gcol-12">
     <button color="primary" mat-button routerLink="/orders/sales/{{ orderId }}">
       <mat-icon>arrow_back</mat-icon> Venda
     </button>
@@ -8,7 +8,7 @@
 
 <div class="flex flex-1">
   <div>
-    <div class="flex d-md-none mb-24">
+    <div class="flex hidden-md mb-24">
       @if (shippingLogo) {
         <img
           class="shipping-logo"
@@ -25,7 +25,7 @@
     </span>
   </div>
 
-  <div class="items-end flex-1 justify-end hidden d-md-flex">
+  <div class="items-end flex-1 justify-end hidden flex-md">
     @if (shippingLogo) {
       <img
         class="shipping-logo"
@@ -78,8 +78,8 @@
   @if (selectedAgency) {
     <div class="checkout-fixed-footer border-top mt-40">
       <div class="container my-24">
-        <div class="row">
-          <div class="col-12 flex justify-end">
+        <div class="grid-row">
+          <div class="gcol-12 flex justify-end">
             <button mat-raised-button color="primary" (click)="confirmSelection()">
               Continuar
             </button>

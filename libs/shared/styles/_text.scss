@@ -12,10 +12,12 @@
 
 .small { font-size: 0.875em; }
 
-.fw-light { font-weight: 300; }
-.fw-normal { font-weight: 400; }
-.fw-semibold { font-weight: 600; }
-.fw-bold { font-weight: 700; }
+// `!important` so weight utilities reliably win over Ionic/Material defaults
+// (matches the per-app .fw-* the shared file replaces).
+.fw-light { font-weight: 300 !important; }
+.fw-normal { font-weight: 400 !important; }
+.fw-semibold { font-weight: 600 !important; }
+.fw-bold { font-weight: 700 !important; }
 
 .nowrap { white-space: nowrap; }
 .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

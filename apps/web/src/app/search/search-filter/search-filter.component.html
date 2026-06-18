@@ -12,12 +12,12 @@
   }
   <!-- sort -->
   @if(enableSorting){
-    <div class="row">
-      <div class="col">
+    <div class="grid-row">
+      <div class="gcol-12">
         <h6 class="color-gray-dark">Ordenar</h6>
       </div>
 
-      <div class="col-12 mt-24">
+      <div class="gcol-12 mt-24">
         <mat-form-field appearance="outline">
           <mat-select
             [(ngModel)]="filter.sorting"
@@ -32,8 +32,8 @@
       </div>
     </div>
     } @if (!hideTitle){
-    <div class="row">
-      <div class="col">
+    <div class="grid-row">
+      <div class="gcol-12">
         <h6 class="color-gray-dark">Filtros</h6>
       </div>
     </div>

@@ -1,10 +1,10 @@
 @if (owner) {
   <div class="container page">
-    <div class="row">
-      <div class="col">
-        <div class="row">
+    <div class="grid-row">
+      <div class="gcol-12">
+        <div class="flex items-center">
           <div
-            class="col-3 col-md-auto flex justify-center align-itens-center p-24"
+            class="flex justify-center items-center p-24"
             >
             <tk-user-avatar
               [user]="owner"
@@ -13,7 +13,7 @@
             ></tk-user-avatar>
           </div>
           <div
-            class="col-9 col-md ml-0 ms-md-4 flex flex-col items-start justify-center"
+            class="flex-1 ml-0 ml-md-24 flex flex-col items-start justify-center"
             >
             <div class="flex items-center w-full">
               <h1 class="color-gray-dark capitalize text-dots">
@@ -31,7 +31,7 @@
                   }
                 </div>
               </div>
-              <div class="row mt-8 w-full">
+              <div class="mt-8 w-full">
                 <div class="flex items-center justify-between">
                   <tk-review-stars
                     [stars]="owner.reviewsAverage"
@@ -47,8 +47,8 @@
             </div>
           </div>
           <hr class="m-0 mt-48" />
-          <div class="row">
-            <div class="col">
+          <div class="grid-row">
+            <div class="gcol-12">
               <div class="mt-24 flex gap-24 flex-wrap">
                 <!-- SEARCHBAR -->
                 <div class="nav-search flex">
@@ -156,10 +156,10 @@
                   }
                 </div>
               }
-              <div class="row row-cols-2 row-cols-md-5">
+              <div class="grid-row grid-cols-2 grid-cols-md-5">
                 @for (item of items; track item; let i = $index) {
                   <div
-                    class="col mt-24 pt-16"
+                    class="mt-24 pt-16"
                     >
                     <tk-product-card
                       [clean]="true"
@@ -170,8 +170,8 @@
                 }
               </div>
               @if (response?.count && items !== null) {
-                <div class="row">
-                  <div class="col">
+                <div class="grid-row">
+                  <div class="gcol-12">
                     <app-paginator [paginator]="paginator"></app-paginator>
                   </div>
                 </div>

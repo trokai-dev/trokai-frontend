@@ -1,14 +1,14 @@
-<div class="row mb-48">
-  <div class="col">
+<div class="grid-row mb-48">
+  <div class="gcol-12">
     <button color="primary" mat-button routerLink="/account/bank">
       <mat-icon>arrow_back</mat-icon> Cofrinho
     </button>
   </div>
 </div>
 
-<div class="row">
+<div class="grid-row">
   @if(balance){
-  <div class="col-12 col-md-5 mb-48">
+  <div class="gcol-12 gcol-md-5 mb-48">
     <h3 class="color-gray-dark">Resumo do saque</h3>
 
     <div class="w-full flex justify-between mb-8 mt-24">
@@ -49,7 +49,7 @@
     </div>
   </div>
 
-  <div class="col-12 col-md-6 offset-md-1">
+  <div class="gcol-12 gcol-md-6 offset-md-1">
     <h3 class="color-gray-dark">Conta bancária</h3>
 
     <app-bank-account-form (onContinue)="confirm()"></app-bank-account-form>

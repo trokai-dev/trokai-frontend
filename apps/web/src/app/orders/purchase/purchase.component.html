@@ -1,5 +1,5 @@
-<div class="row mb-48">
-  <div class="col">
+<div class="grid-row mb-48">
+  <div class="gcol-12">
     <button color="primary" mat-button routerLink="/orders/purchases">
       <mat-icon>arrow_back</mat-icon> Minhas compras
     </button>
@@ -21,8 +21,8 @@
       <span class="item-label mt-16">QR Code</span>
       <img class="pixQR" src="{{ pixQR }}" alt="QR Code para pagamento Pix" />
       <span class="item-label mt-16"> Copia e cola </span>
-      <div class="row">
-        <div class="col-12 col-md-6">
+      <div class="grid-row">
+        <div class="gcol-12 gcol-md-6">
           <mat-form-field
             appearance="outline"
             (click)="copyPix($event)"
@@ -48,8 +48,8 @@
     </div>
   }
 
-  <div class="row mt-48">
-    <div class="col-12 col-md-4">
+  <div class="grid-row mt-48">
+    <div class="gcol-12 gcol-md-4">
       <!-- Produtos -->
       <div class="page-section-mobile">
         <span class="section-title">Produtos</span>
@@ -66,7 +66,7 @@
       </div>
     </div>
 
-    <div class="col-12 col-md-4">
+    <div class="gcol-12 gcol-md-4">
       <!-- Detalhes -->
       <div class="page-section">
         <span class="section-title">Detalhes</span>

@@ -1,9 +1,9 @@
 @if (title) {
-  <div class="row mt-48 pt-0 pt-md-5">
-    <div class="col">
+  <div class="grid-row mt-48 pt-0 pt-md-48">
+    <div class="gcol-12">
       <div
       class="{{
-        borderBottom ? 'border-bottom pb-2' : ''
+        borderBottom ? 'border-bottom pb-8' : ''
       }} flex justify-between"
         >
         <h3 class="color-gray-dark mb-0">{{ title }}</h3>
@@ -20,9 +20,9 @@
   </div>
 }
 
-<div class="row row-cols-{{ colsMob }} row-cols-md-{{ colsDesk }}">
+<div class="products-grid" [style.--cols-mob]="colsMob" [style.--cols-desk]="colsDesk">
   @for (product of products; track product) {
-    <div class="col mt-24 pt-16">
+    <div class="mt-24 pt-16">
       <tk-product-card [product]="product"></tk-product-card>
     </div>
   }

@@ -12,8 +12,7 @@
 @import '@ionic/angular/css/text-transformation.css';
 @import '@ionic/angular/css/flex-utils.css';
 @import './theme/variables.scss';
-@import './theme/margins.scss';
-@import './theme/paddings.scss';
+// spacing: margins/paddings now come from shared `@use 'index'` (_spacing.scss)
 
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
@@ -880,65 +879,9 @@ ion-spinner {
   width: fit-content;
 }
 
-.w-100 {
-  width: 100%;
-}
-
-.w-75 {
-  width: 75%;
-}
-
-.w-50 {
-  width: 50%;
-}
-
-.w-25 {
-  width: 25%;
-}
-
-.h-100 {
-  height: 100%;
-}
-
-.p-relative {
-  position: relative;
-}
-
-.d-flex {
-  display: flex;
-}
-
-.d-grid {
-  display: grid;
-}
-
-.flex-1 {
-  flex: 1;
-}
-
-.d-none {
-  display: none;
-}
-
-.d-inline {
-  display: inline;
-}
-
-.d-block {
-  display: block;
-}
-
-.flex-column {
-  flex-direction: column;
-}
-
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
-.nowrap {
-  white-space: nowrap;
-}
+// Layout/sizing/flex/display utilities now come from shared `@use 'index'`
+// (_layout.scss): w-full/w-25/50/75, h-full, relative/absolute, flex, grid,
+// flex-1, flex-col, flex-wrap, block, hidden, inline-block, nowrap.
 
 .no-ripple {
   --ripple-color: transparent;
@@ -1258,13 +1201,7 @@ ion-spinner {
   overflow: hidden;
 }
 
-.border-bottom {
-  border-bottom: 1px solid $color-gray-light-2;
-}
-
-.border-top {
-  border-top: 1px solid $color-gray-light-2;
-}
+// .border-top / .border-bottom come from shared `@use 'index'` (_borders.scss).
 
 .image-badge-button {
   background: rgba(255, 255, 255, 0.7);
@@ -1472,13 +1409,7 @@ swiper-slide {
   box-sizing: border-box;
 }
 
-.fw-bold {
-  font-weight: bold !important;
-}
-
-.fw-semibold {
-  font-weight: 600 !important;
-}
+// .fw-* come from shared `@use 'index'` (_text.scss).
 
 // ── Pictures help modal ──────────────────────────────────────────────────────
 

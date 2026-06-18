@@ -2,15 +2,15 @@
 
 <div class="mt-48">
   @for (p of purchases; track p) {
-    <div class="row border-bottom mt-32 pb-48">
-      <div class="col">
+    <div class="grid-row border-bottom mt-32 pb-48">
+      <div class="gcol-12 gcol-md-8">
         @for (c of p.clothes; track c) {
           <div>
             <app-cart-item [product]="c" [showRemove]="false"></app-cart-item>
           </div>
         }
       </div>
-      <div class="col-12 col-md-4 flex flex-col">
+      <div class="gcol-12 gcol-md-4 flex flex-col">
         <div class="flex text-right flex-col">
           <span class="label-body-2 color-gray-dark">
             {{ p.createdAt | date : "dd/MM/yy" }}

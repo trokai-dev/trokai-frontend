@@ -1,15 +1,15 @@
 @if (itemsMap && product && owner) {
   <div class="container page">
-    <div class="row">
-      <div class="col">
-        <div class="row">
+    <div class="grid-row">
+      <div class="gcol-12">
+        <div class="grid-row">
           <!-- Foto(s) -->
-          <div class="col-12 col-md-6">
+          <div class="gcol-12 gcol-md-6">
             <!-- FOTOS -->
-            <div class="row">
-              <div class="col-12 product-main">
+            <div class="grid-row">
+              <div class="gcol-12 product-main">
                 <h2
-                  class="color-gray-dark capitalize block d-md-none px-24 px-md-0 pb-24"
+                  class="color-gray-dark capitalize block hidden-md px-24 px-md-0 pb-24"
                   >
                   {{ product.title }}
                 </h2>
@@ -21,14 +21,14 @@
             </div>
           </div>
           <!-- CTAs -->
-          <div class="col-12 col-md-6 product-ctas">
+          <div class="gcol-12 gcol-md-6 product-ctas">
             <h1
-              class="mt-48 mt-md-0 color-gray-dark capitalize hidden d-md-block"
+              class="mt-48 mt-md-0 color-gray-dark capitalize hidden block-md"
               >
               {{ product.title }}
             </h1>
-            <div class="row">
-              <div class="col">
+            <div class="grid-row">
+              <div class="gcol-12">
                 <div class="w-full">
                   <!-- CTA Venda -->
                   @if (
@@ -163,7 +163,7 @@
                             }
                             @if (product_in_basket) {
                               <div
-                                class="flex flex-col gap-4"
+                                class="flex flex-col gap-24"
                                 >
                                 <button
                                   routerLink="/buying/carts"
@@ -203,8 +203,8 @@
                   }
                   <!-- Status do produto -->
                   @if (myProduct || !product.published) {
-                    <div class="row mt-48 pb-24">
-                      <div class="col">
+                    <div class="grid-row mt-48 pb-24">
+                      <div class="gcol-12">
                         <div class="w-full">
                           <div class="flex flex-col gap-16">
                             <!--  STATUS -->
@@ -411,16 +411,16 @@
                     </div>
                     <!-- Loja -->
                     <div
-                      class="row py-48 cursor-pointer"
+                      class="flex items-center py-48 cursor-pointer"
                       routerLink="/users/{{ owner.nickname }}"
                       >
                       <div
-                        class="col-auto flex justify-center align-itens-center p-24"
+                        class="flex justify-center items-center p-24"
                         >
                         <tk-user-avatar [user]="owner" size="medium" />
                       </div>
                       <div
-                        class="col flex ml-0 ms-md-2 flex-col items-start justify-center px-md-0"
+                        class="flex-1 flex ml-0 ml-md-8 flex-col items-start justify-center px-md-0"
                         >
                         <div class="flex items-center">
                           <h4 class="color-gray-dark capitalize">
@@ -484,10 +484,10 @@
                       </div>
                       @if (myProduct || product.published) {
                         <!-- Perguntas -->
-                        <div class="row">
-                          <div class="col-12">
-                            <div class="row py-48">
-                              <div class="col">
+                        <div class="grid-row">
+                          <div class="gcol-12">
+                            <div class="grid-row py-48">
+                              <div class="gcol-12">
                                 <app-product-questions
                                   [product]="product"
                                 ></app-product-questions>

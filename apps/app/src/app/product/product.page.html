@@ -33,7 +33,7 @@
 <ion-content>
   <ion-grid class="p-0 pb-24">
     <div
-      class="p-0 p-relative"
+      class="p-0 relative"
       [ngClass]="{
       sold: sold,
       adjusts: myProduct && waiting_adjustment,
@@ -270,7 +270,7 @@
                 <div class="product-cta-delivery">
                   @if (owner?.inPerson) {
                   <span
-                    class="{{ owner.shipping ? ' mb-8 d-block' : '' }}"
+                    class="{{ owner.shipping ? ' mb-8 block' : '' }}"
                   >
                     Retirada presencial
                     @if (!myProduct) {

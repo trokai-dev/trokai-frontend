@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="save()" class="mt-48">
-  <div class="row">
-    <div class="col-12 col-md-8">
+  <div class="grid-row">
+    <div class="gcol-12 gcol-md-8">
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>CEP</mat-label>
         <input
@@ -17,23 +17,23 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-12 col-md-12">
+  <div class="grid-row">
+    <div class="gcol-12 gcol-md-12">
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Endereço</mat-label>
         <input matInput type="text" formControlName="street" />
       </mat-form-field>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12 col-md-4">
+  <div class="grid-row">
+    <div class="gcol-12 gcol-md-4">
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Número</mat-label>
         <input matInput type="text" formControlName="number" maxlength="6" />
       </mat-form-field>
     </div>
 
-    <div class="col-12 col-md-8">
+    <div class="gcol-12 gcol-md-8">
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Complemento</mat-label>
         <input matInput type="text" formControlName="complement" />
@@ -41,8 +41,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-12 ">
+  <div class="grid-row">
+    <div class="gcol-12 ">
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Bairro</mat-label>
         <input matInput type="text" formControlName="neighborhood" />
@@ -50,22 +50,22 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-12 col-md-8">
+  <div class="grid-row">
+    <div class="gcol-12 gcol-md-8">
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Cidade</mat-label>
         <input matInput readonly type="text" formControlName="city" />
       </mat-form-field>
     </div>
-    <div class="col-12 col-md-4">
+    <div class="gcol-12 gcol-md-4">
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Estado</mat-label>
         <input matInput readonly type="text" formControlName="state" />
       </mat-form-field>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12">
+  <div class="grid-row">
+    <div class="gcol-12">
       @if (!encapsulated && submit) {
         <div
           class="w-full flex justify-end mt-16"

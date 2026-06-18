@@ -1,0 +1,44 @@
+// @trokai/shared-styles — responsive (md+) utilities
+// Replaces the Bootstrap `-md` responsive classes from the compat shim.
+// Breakpoint matches the old shim ($bs-md: 768px).
+
+$_md: 768px;
+$_steps: (0, 4, 8, 12, 16, 24, 32, 40, 48, 56);
+
+@media (min-width: $_md) {
+  // display
+  .flex-md { display: flex !important; }
+  .block-md { display: block !important; }
+  .inline-block-md { display: inline-block !important; }
+  .hidden-md { display: none !important; }
+
+  // flex alignment (md+)
+  .justify-md-start { justify-content: flex-start !important; }
+  .justify-md-between { justify-content: space-between !important; }
+  .items-md-center { align-items: center !important; }
+
+  // spacing (token scale)
+  @each $s in $_steps {
+    $v: var(--space-#{$s});
+    .m-md-#{$s} { margin: $v !important; }
+    .mt-md-#{$s} { margin-top: $v !important; }
+    .mr-md-#{$s} { margin-right: $v !important; }
+    .mb-md-#{$s} { margin-bottom: $v !important; }
+    .ml-md-#{$s} { margin-left: $v !important; }
+    .mx-md-#{$s} { margin-left: $v !important; margin-right: $v !important; }
+    .my-md-#{$s} { margin-top: $v !important; margin-bottom: $v !important; }
+
+    .p-md-#{$s} { padding: $v !important; }
+    .pt-md-#{$s} { padding-top: $v !important; }
+    .pr-md-#{$s} { padding-right: $v !important; }
+    .pb-md-#{$s} { padding-bottom: $v !important; }
+    .pl-md-#{$s} { padding-left: $v !important; }
+    .px-md-#{$s} { padding-left: $v !important; padding-right: $v !important; }
+    .py-md-#{$s} { padding-top: $v !important; padding-bottom: $v !important; }
+  }
+  .mt-md-auto { margin-top: auto !important; }
+  .mb-md-auto { margin-bottom: auto !important; }
+  .ml-md-auto { margin-left: auto !important; }
+  .mr-md-auto { margin-right: auto !important; }
+  .mx-md-auto { margin-left: auto !important; margin-right: auto !important; }
+}

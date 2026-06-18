@@ -5,33 +5,36 @@
 
 $steps: (0, 4, 8, 12, 16, 24, 32, 40, 48, 56);
 
+// `!important` keeps these the single, predictable source of truth across both
+// apps (replaces the per-app margin/padding override files that also used it,
+// and reliably wins over Ionic/Material component styles).
 @each $s in $steps {
   $v: var(--space-#{$s});
 
-  .m-#{$s} { margin: $v; }
-  .mt-#{$s} { margin-top: $v; }
-  .mr-#{$s} { margin-right: $v; }
-  .mb-#{$s} { margin-bottom: $v; }
-  .ml-#{$s} { margin-left: $v; }
-  .mx-#{$s} { margin-left: $v; margin-right: $v; }
-  .my-#{$s} { margin-top: $v; margin-bottom: $v; }
+  .m-#{$s} { margin: $v !important; }
+  .mt-#{$s} { margin-top: $v !important; }
+  .mr-#{$s} { margin-right: $v !important; }
+  .mb-#{$s} { margin-bottom: $v !important; }
+  .ml-#{$s} { margin-left: $v !important; }
+  .mx-#{$s} { margin-left: $v !important; margin-right: $v !important; }
+  .my-#{$s} { margin-top: $v !important; margin-bottom: $v !important; }
 
-  .p-#{$s} { padding: $v; }
-  .pt-#{$s} { padding-top: $v; }
-  .pr-#{$s} { padding-right: $v; }
-  .pb-#{$s} { padding-bottom: $v; }
-  .pl-#{$s} { padding-left: $v; }
-  .px-#{$s} { padding-left: $v; padding-right: $v; }
-  .py-#{$s} { padding-top: $v; padding-bottom: $v; }
+  .p-#{$s} { padding: $v !important; }
+  .pt-#{$s} { padding-top: $v !important; }
+  .pr-#{$s} { padding-right: $v !important; }
+  .pb-#{$s} { padding-bottom: $v !important; }
+  .pl-#{$s} { padding-left: $v !important; }
+  .px-#{$s} { padding-left: $v !important; padding-right: $v !important; }
+  .py-#{$s} { padding-top: $v !important; padding-bottom: $v !important; }
 
-  .gap-#{$s} { gap: $v; }
+  .gap-#{$s} { gap: $v !important; }
 }
 
 // Auto margins (centering / pushing). Token-free.
-.m-auto { margin: auto; }
-.mx-auto { margin-left: auto; margin-right: auto; }
-.my-auto { margin-top: auto; margin-bottom: auto; }
-.mt-auto { margin-top: auto; }
-.mb-auto { margin-bottom: auto; }
-.ml-auto { margin-left: auto; }
-.mr-auto { margin-right: auto; }
+.m-auto { margin: auto !important; }
+.mx-auto { margin-left: auto !important; margin-right: auto !important; }
+.my-auto { margin-top: auto !important; margin-bottom: auto !important; }
+.mt-auto { margin-top: auto !important; }
+.mb-auto { margin-bottom: auto !important; }
+.ml-auto { margin-left: auto !important; }
+.mr-auto { margin-right: auto !important; }
