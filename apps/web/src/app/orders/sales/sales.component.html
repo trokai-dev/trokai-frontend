@@ -1,0 +1,42 @@
+<h3 class="color-gray-dark">Minhas vendas</h3>
+
+<div class="mt-5">
+  @for (s of sales; track s) {
+    <div class="row border-bottom mt-32 pb-5">
+      <div class="col">
+        @for (c of s.clothes; track c) {
+          <div>
+            <app-cart-item [product]="c" [showRemove]="false"></app-cart-item>
+          </div>
+        }
+      </div>
+      <div class="col-12 col-md-4 d-flex flex-column">
+        <div class="d-flex text-end flex-column">
+          <span class="item-value">
+            {{ s.createdAt | date : "dd/MM/yy" }}
+          </span>
+          <span class="item-value color-gray-dark">
+            {{ s.sellerProfit | cost | currency : "BRL" : "symbol" : "1.2" }}
+          </span>
+          <h6 class="color-gray-dark">{{ s.status }}</h6>
+        </div>
+        <button
+          class="mt-16"
+          mat-stroked-button
+          color="primary"
+          routerLink="{{ s._id }}"
+          >
+          Detalhes
+        </button>
+        <span class="order-id">cód. {{ s.customId }}</span>
+      </div>
+    </div>
+  }
+
+  @if (!sales || !sales.length) {
+    <div class="empty-page full">
+      <ion-icon name="sad-outline"></ion-icon>
+      <span class="label-body-2 d-block"> Nenhuma venda</span>
+    </div>
+  }
+</div>

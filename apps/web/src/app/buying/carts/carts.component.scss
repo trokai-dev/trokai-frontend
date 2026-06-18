@@ -1,0 +1,17 @@
+@import "../../../styles/variables.scss";
+
+.frete-unico {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.4rem;
+  padding: 1.2rem;
+  border: $border-trokai;
+  gap: 0rem;
+}
+
+.basket-card {
+  border-radius: 0.4rem;
+  border: 1px solid #ebebeb !important;
+  margin: 0rem;
+  padding: 1.6rem 0.4rem;
+}

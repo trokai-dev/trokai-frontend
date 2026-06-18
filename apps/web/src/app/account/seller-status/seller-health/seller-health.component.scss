@@ -1,0 +1,65 @@
+@import "../../../../styles/variables.scss";
+
+.score-number {
+  font-size: 3.6rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.score-max {
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin-left: 0.2rem;
+}
+
+.status-badge {
+  padding: 0.4rem 1.2rem;
+  border-radius: 20px;
+  font-size: 1.4rem;
+  font-weight: 600;
+
+  &.excellent,
+  &.good {
+    background: rgba($color-success, 0.12);
+    color: $color-success;
+  }
+
+  &.warning {
+    background: rgba($color-alert, 0.2);
+    color: darken($color-alert, 30%);
+  }
+
+  &.critical {
+    background: rgba($color-error, 0.1);
+    color: $color-error;
+  }
+}
+
+.progress-bar-bg {
+  background: $color-gray-light-2;
+  height: 10px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  transition: width 0.5s ease-in-out;
+}
+
+.tip-card {
+  padding: 1.6rem;
+  border-radius: 8px;
+  border-left: 4px solid transparent;
+
+  &--alert {
+    background: rgba($color-alert, 0.1);
+    border-left-color: $color-alert;
+  }
+
+  &--success {
+    background: rgba($color-success, 0.06);
+    border-left-color: $color-success;
+  }
+}
+

@@ -1,0 +1,75 @@
+@if (home_row.itemsType !== 'products') {
+  <div>
+    @if (home_generic.route) {
+      <a
+        rel="nofollow"
+        [routerLink]="home_generic.route"
+        [queryParams]="home_generic.queryParams"
+      >
+        <div class="home_generic">
+          <div
+            class="home_generic_box home_generic_{{ home_row.itemsShape }}"
+            style="position: relative"
+          >
+            @if (home_generic.imgUrl) {
+              @if (home_generic.imgUrl) {
+                <img
+                  alt="{{ home_generic.label }}"
+                  ngSrc="{{ home_generic.imgUrl }}"
+                  fill
+                />
+              }
+            }
+          </div>
+          @if (home_row.showLabels) {
+            <span class="home_generic_label">{{ home_generic.label }}</span>
+          }
+        </div>
+      </a>
+    }
+    @if (!home_generic.route) {
+      <a rel="nofollow" [href]="home_generic.actionUrl" target="_blank">
+        <div class="home_generic">
+          <div
+            class="home_generic_box home_generic_{{ home_row.itemsShape }}"
+            style="position: relative"
+          >
+            @if (home_generic.imgUrl) {
+              @if (home_generic.imgUrl) {
+                <img
+                  alt="{{ home_generic.label }}"
+                  ngSrc="{{ home_generic.imgUrl }}"
+                  fill
+                />
+              }
+            }
+          </div>
+          @if (home_row.showLabels) {
+            <span class="home_generic_label">{{ home_generic.label }}</span>
+          }
+        </div>
+      </a>
+    }
+  </div>
+}
+
+@if (home_row.itemsType === 'products') {
+  <div class="home_generic">
+    <div class="home_generic_box home_generic_{{ home_row.itemsShape }}">
+      @if (
+        home_row.itemsType === 'products' &&
+        home_generic.extras &&
+        home_generic.extras.product
+      ) {
+        <tk-product-card
+          [product]="home_generic.extras.product"
+          [extraImgClass]="childClass"
+        >
+        </tk-product-card>
+      }
+    </div>
+    @if (home_row.showLabels) {
+      <span class="home_generic_label">{{ home_generic.label }}</span>
+    }
+  </div>
+}

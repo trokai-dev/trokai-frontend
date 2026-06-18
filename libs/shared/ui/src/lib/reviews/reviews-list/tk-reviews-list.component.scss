@@ -1,0 +1,35 @@
+// Layout via the shared @trokai/shared-styles utilities; token colors/spacing here.
+.reviews-header {
+  padding-bottom: var(--space-16);
+  border-bottom: var(--border-trokai);
+
+  .name {
+    color: var(--color-gray-dark);
+    text-transform: capitalize;
+  }
+
+  .average {
+    color: var(--color-gray-dark);
+    font-weight: 600;
+  }
+
+  .count {
+    color: var(--color-gray-default);
+  }
+}
+
+.reviews-content {
+  padding-top: var(--space-8);
+}
+
+.empty {
+  gap: var(--space-8);
+  padding: var(--space-40) 0;
+  color: var(--color-gray-1);
+
+  mat-icon {
+    font-size: 4rem;
+    width: 4rem;
+    height: 4rem;
+  }
+}

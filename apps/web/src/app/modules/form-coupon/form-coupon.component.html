@@ -1,0 +1,60 @@
+<div class="mt-16">
+  @if(!couponApplied) {
+
+  <div>
+    @if(!showInput) {
+    <!-- btn show input -->
+    <button mat-button color="primary" (click)="onShowInput()">
+      Adicionar cupom
+    </button>
+
+    } @else {
+
+    <mat-form-field appearance="outline" class="w-100">
+      <input
+        matInput
+        #couponInput
+        type="text"
+        placeholder="Cupom de desconto"
+        [(ngModel)]="couponCode"
+        (keyup.Enter)="onApply()"
+        (blur)="onBlur()"
+      />
+      <button
+        mat-button
+        color="primary"
+        class="ms-16"
+        matSuffix
+        (click)="onApply()"
+      >
+        Aplicar
+      </button>
+    </mat-form-field>
+
+    }
+  </div>
+
+  } @else {
+
+  <div class="w-100 d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center">
+      <ion-icon class="color-primary" name="ticket-outline"></ion-icon>
+
+      <div class="d-flex flex-column ml-16 py-3">
+        <span class="label-body-2">
+          <b>{{ couponCode }}</b>
+        </span>
+        <span class="label-body-2 color-primary"> Cupom aplicado! </span>
+      </div>
+    </div>
+
+    <button
+      mat-icon-button
+      class="color-gray-default"
+      (click)="clearSelection()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  }
+</div>

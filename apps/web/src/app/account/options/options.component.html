@@ -1,0 +1,24 @@
+<div class="col-12 col-md-7">
+  <h3 class="color-gray-dark">Opções</h3>
+
+  @if (hasPassword) {
+    <app-password></app-password>
+  }
+
+  <div class="mt-40">
+    <h4 class="color-gray-dark">Apagar conta</h4>
+
+    <span class="label-body-2 mt-16 d-block"
+      >Excluir todos os meus dados do Trokaí.</span
+      >
+
+      <button
+        class="mt-16"
+        color="accent"
+        mat-stroked-button
+        (click)="deleteAccount()"
+        >
+        Apagar conta
+      </button>
+    </div>
+  </div>

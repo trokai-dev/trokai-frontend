@@ -1,0 +1,10 @@
+swiper-slide, swiper-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 80vh;
+}
+
+.animation {
+  width: 25rem;
+}

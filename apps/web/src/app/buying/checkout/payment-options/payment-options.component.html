@@ -1,0 +1,94 @@
+<h3 class="checkout-title">Escolha o método de pagamento</h3>
+
+<div class="checkout-body">
+  <mat-radio-group
+    class="custom-radio-group"
+    (change)="changePaymentOption($event)"
+    [(ngModel)]="selectedOption"
+    >
+    <!-- PIX -->
+    <mat-radio-button color="primary" [value]="paymentOptions.PIX">
+      <tk-payment-icon [paymentBrand]="paymentBrands.PIX" />
+
+      <div class="custom-radio-button-content">
+        <div class="d-flex justify-content-between">
+          <span class="custom-radio-button-title">PIX</span>
+
+          @if (pixDiscountPercent) {
+            <span class="color-primary label-body-2 fw-semibold">
+              &nbsp; {{ pixDiscountPercent * 100 }}% off
+            </span>
+          }
+        </div>
+        <span class="custom-radio-button-text">
+          À vista, aprovação imediata
+        </span>
+      </div>
+    </mat-radio-button>
+
+    <!-- Cartão de crédito -->
+
+    @for (card of cards; track card) {
+      <mat-radio-button color="primary" [value]="card._id">
+        <tk-payment-icon [paymentBrand]="card.brand" [showDefaultCardIcon]="true" />
+
+        <div class="custom-radio-button-content">
+          <span class="custom-radio-button-title text-capitalize">
+            {{ card.brand ?? "Cartão de crédito " }} **** {{ card.lastDigits }}
+          </span>
+          @if (maxInstallments && maxNoInterest) {
+
+            <span class="custom-radio-button-text">
+              <div class="product-installments">
+                <span class="product-installments-primary">
+                  <b>
+                    {{ maxNoInterest.installments }}x
+                    {{
+                    maxNoInterest.installmentValue
+                    | cost
+                    | currency : "BRL" : "symbol" : "1.2"
+                    }}
+                    sem juros
+                  </b>
+                </span>
+                @if (maxInstallments.installments > maxNoInterest.installments) {
+                  <span
+                    class="product-installments-secondary"
+                    >
+                    ou até
+                    {{ maxInstallments.installments }}x com juros
+                  </span>
+                }
+              </div>
+            </span>
+          }
+        </div>
+      </mat-radio-button>
+    }
+
+    <mat-radio-button color="primary" [value]="null">
+      <div class="custom-radio-button-icon">
+        <mat-icon>add_card</mat-icon>
+      </div>
+
+      <div class="custom-radio-button-content">
+        <span class="custom-radio-button-title">Novo cartão de crédito</span>
+        <span class="custom-radio-button-text">
+          {{ installmentString }}
+        </span>
+      </div>
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <!-- cupom -->
+  <tk-coupon-form />
+
+  <!-- total -->
+  <app-checkout-total />
+</div>
+
+<div class="checkout-footer">
+  <button mat-raised-button color="primary" (click)="onContinue()">
+    Continuar
+  </button>
+</div>

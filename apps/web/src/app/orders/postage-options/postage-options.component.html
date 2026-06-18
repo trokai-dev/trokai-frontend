@@ -1,0 +1,90 @@
+<div class="row mb-5">
+  <div class="col">
+    <button color="primary" mat-button routerLink="/orders/sales/{{ orderId }}">
+      <mat-icon>arrow_back</mat-icon> Venda
+    </button>
+  </div>
+</div>
+
+<div class="d-flex flex-1">
+  <div>
+    <div class="d-flex d-md-none mb-4">
+      @if (shippingLogo) {
+        <img
+          class="shipping-logo"
+          src="../../../assets/shipping/{{ shippingLogo }}"
+          alt=""
+          />
+      }
+    </div>
+
+    <h3 class="checkout-title">Ponto de coleta</h3>
+
+    <span class="label-body-2 mb-4">
+      Selecione um ponto de coleta próximo a você para entregar o seu pedido.
+    </span>
+  </div>
+
+  <div class="align-items-end flex-1 justify-content-end d-none d-md-flex">
+    @if (shippingLogo) {
+      <img
+        class="shipping-logo"
+        src="../../../assets/shipping/{{ shippingLogo }}"
+        alt=""
+        />
+    }
+  </div>
+</div>
+
+@if (loading) {
+  <div class="w-100 d-flex justify-content-center my-5">
+    <mat-spinner class="" diameter="30" color="primary"></mat-spinner>
+  </div>
+}
+
+@if (!loading) {
+  <div class="checkout-body">
+    <mat-radio-group class="custom-radio-group" (change)="selectAgency($event)">
+      @for(agency of visibleAgencies; track agency) {
+        <mat-radio-button color="primary" [value]="agency.id">
+          <div class="custom-radio-button-content">
+            <div class="d-flex justify-content-between">
+              <span class="custom-radio-button-title">
+                {{ agency.name }} ({{ agency.displayDistance }})
+              </span>
+            </div>
+            <span class="custom-radio-button-text">
+              {{ agency.displayAddress }}
+            </span>
+            <span class="custom-radio-button-text">
+              {{ agency.note }}
+            </span>
+          </div>
+        </mat-radio-button>
+      }
+    </mat-radio-group>
+
+    @if (agencies && visibleAgencies.length < agencies.length) {
+      <div
+        class="d-flex justify-content-center mt-4"
+        >
+        <button mat-stroked-button color="primary" (click)="loadMoreAgencies()">
+          Mostrar mais
+        </button>
+      </div>
+    }
+  </div>
+
+  @if (selectedAgency) {
+    <div class="checkout-fixed-footer border-top mt-40">
+      <div class="container my-4">
+        <div class="row">
+          <div class="col-12 d-flex justify-content-end">
+            <button mat-raised-button color="primary" (click)="confirmSelection()">
+              Continuar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    } }

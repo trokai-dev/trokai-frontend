@@ -1,0 +1,10 @@
+.horizontal-list {
+  background: transparent;
+  display: flex;
+  overflow-x: scroll;
+
+  .card {
+    width: 42vw;
+    min-width: 42vw;
+  }
+}

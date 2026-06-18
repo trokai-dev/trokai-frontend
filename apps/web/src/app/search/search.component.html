@@ -1,0 +1,68 @@
+<div class="container page">
+  <div class="row">
+    <!-- WRAPPER FILTROS -->
+    <div class="d-none d-md-block col-md-3">
+      <app-search-filter
+        (filtersChange)="applyFilters($event)"
+        [filter]="filters"
+      ></app-search-filter>
+    </div>
+
+    <!-- Resultados -->
+    @if (itemsMap && results) {
+      <div class="col pl-5 mt-md-4">
+        @if (filters.text) {
+          <h1 class="color-gray-dark d-none d-md-block">
+            {{ filters.text }}
+          </h1>
+        }
+        <div class="d-block d-md-none">
+          <div class="d-flex gap-4 align-items-center">
+            <button
+              mat-stroked-button
+              matBadge="{{ filters?.count() }}"
+              [matBadgeHidden]="true"
+              matBadgeSize="small"
+              matBadgeColor="accent"
+              (click)="showFiltersDialog()"
+              color="primary"
+            >
+              Filtros
+            </button>
+            <button
+              mat-stroked-button
+              (click)="showSortingDialog()"
+              color="primary"
+            >
+              ({{ getSortingString() }})
+            </button>
+          </div>
+        </div>
+        <div
+          class="label-body-2 d-flex justify-content-between align-items-center mt-4"
+        >
+          <span> {{ countString }}</span>
+          @if (pageString) {
+            <span> {{ pageString }}</span>
+          }
+        </div>
+        <div class="row row-cols-2 row-cols-md-4">
+          @for (product of results; track product; let i = $index) {
+            <div class="col mt-4 pt-3">
+              <tk-product-card
+                [clean]="true"
+                [product]="product"
+                [priority]="i < 2"
+              ></tk-product-card>
+            </div>
+          }
+        </div>
+        <div class="row">
+          <div class="col">
+            <app-paginator [paginator]="paginator"></app-paginator>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

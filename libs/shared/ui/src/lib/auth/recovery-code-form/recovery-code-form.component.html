@@ -1,0 +1,30 @@
+<form class="recovery-code-form" (ngSubmit)="submit()">
+  <mat-form-field appearance="outline">
+    <mat-label>Código</mat-label>
+    <input
+      matInput
+      [formControl]="code"
+      type="number"
+      inputmode="numeric"
+      maxlength="4"
+      placeholder="0 0 0 0"
+      (input)="onInput()"
+      [errorStateMatcher]="matcher"
+    />
+    @if (code.hasError('required')) {
+      <mat-error>Informe o código</mat-error>
+    } @else if (code.hasError('minlength')) {
+      <mat-error>O código tem 4 dígitos</mat-error>
+    }
+  </mat-form-field>
+
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    aria-label="Verificar"
+    [disabled]="loading"
+  >
+    Verificar
+  </button>
+</form>

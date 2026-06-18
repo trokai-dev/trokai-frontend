@@ -1,0 +1,138 @@
+// ── Image grid ───────────────────────────────────────────────────────────────
+
+.images-wrapper {
+  display: flex;
+  min-height: 16rem;
+  padding: 1.2rem;
+  border: 1px solid var(--color-gray-2);
+  border-radius: 0.8rem;
+}
+
+.add-empty {
+  margin: auto;
+}
+
+.images-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  width: 100%;
+  justify-content: start;
+  align-items: center;
+}
+
+.box-image {
+  position: relative;
+  flex: 1;
+  flex-shrink: 0;
+  max-width: 16rem;
+  aspect-ratio: 3 / 4;
+
+  .badge {
+    position: absolute;
+    bottom: 0.8rem;
+    left: 0.8rem;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    padding: 0 0.6rem;
+    border: 1px solid var(--color-gray-2);
+    border-radius: 100px;
+    background: white;
+    color: var(--color-gray-dark);
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    user-select: none;
+  }
+
+  // "add more" tile
+  &--add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-gray-2);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: var(--color-gray-15);
+    }
+  }
+}
+
+.dragging {
+  z-index: 10000;
+  opacity: 0.7;
+}
+
+.add-more-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--color-primary);
+  border-radius: 100px;
+  pointer-events: none;
+
+  mat-icon {
+    color: white;
+    font-size: 2.4rem;
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}
+
+// ── Help CTA ─────────────────────────────────────────────────────────────────
+
+.pictures-help-cta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+  padding: 1.2rem;
+  border-radius: 0.8rem;
+  background-color: var(--color-gray-25);
+  cursor: pointer;
+
+  .help-icon {
+    color: var(--color-primary);
+  }
+}
+
+.color-gray-dark {
+  color: var(--color-gray-dark);
+}
+.color-primary {
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .images-wrapper {
+    min-height: unset;
+    padding: 0.8rem;
+  }
+
+  .images-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 0.6rem;
+    width: 100%;
+  }
+
+  .box-image {
+    width: 100%;
+    height: auto;
+    max-width: unset;
+    aspect-ratio: 1;
+  }
+
+  .pictures-help-cta .help-icon {
+    min-width: 2.4rem;
+  }
+}

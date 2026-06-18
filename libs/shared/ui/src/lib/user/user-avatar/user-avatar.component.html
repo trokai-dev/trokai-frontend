@@ -1,0 +1,9 @@
+<div class="trokai-avatar {{ size }}">
+  <div
+    matBadgeSize="small"
+    matBadgeColor="accent"
+    [matBadge]="notificationCount"
+    [matBadgeHidden]="!notificationCount"
+  ></div>
+  <img [src]="avatar" alt="" class="avatar-img" hideLoading />
+</div>

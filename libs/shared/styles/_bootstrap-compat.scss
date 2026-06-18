@@ -1,0 +1,184 @@
+// @trokai/shared-styles — Bootstrap-compat shim (native Flexbox/Grid)
+// Drops the `bootstrap` dependency. Reimplements ONLY the Bootstrap 5 grid +
+// utility class NAMES the web templates actually use, so no per-template churn.
+// New code should prefer the native utilities in _layout.scss/_spacing.scss.
+@use 'sass:math';
+
+// Bootstrap spacing scale (rem). 0..5
+$bs-space: (0: 0, 1: .25rem, 2: .5rem, 3: 1rem, 4: 1.5rem, 5: 3rem);
+$bs-md: 768px;
+
+// --- Container ---
+.container, .container-fluid {
+  width: 100%;
+  padding-right: var(--bs-gutter-x, .75rem);
+  padding-left: var(--bs-gutter-x, .75rem);
+  margin-right: auto;
+  margin-left: auto;
+}
+.container {
+  @media (min-width: 576px)  { max-width: 540px; }
+  @media (min-width: 768px)  { max-width: 720px; }
+  @media (min-width: 992px)  { max-width: 960px; }
+  @media (min-width: 1200px) { max-width: 1140px; }
+  @media (min-width: 1400px) { max-width: 1320px; }
+}
+
+// --- Row / Col ---
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-.5 * var(--bs-gutter-x));
+  margin-left: calc(-.5 * var(--bs-gutter-x));
+
+  > * {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-top: var(--bs-gutter-y);
+  }
+}
+
+@mixin cols($prefix: '') {
+  .col#{$prefix} { flex: 1 0 0%; }
+  .col#{$prefix}-auto { flex: 0 0 auto; width: auto; }
+  @for $i from 1 through 12 {
+    .col#{$prefix}-#{$i} { flex: 0 0 auto; width: math.percentage(math.div($i, 12)); }
+  }
+}
+@include cols();
+@media (min-width: $bs-md) { @include cols('-md'); }
+
+// Gutters
+@each $k, $v in $bs-space {
+  .g-#{$k}  { --bs-gutter-x: #{$v}; --bs-gutter-y: #{$v}; }
+  .gx-#{$k} { --bs-gutter-x: #{$v}; }
+  .gy-#{$k} { --bs-gutter-y: #{$v}; }
+}
+
+// --- Display ---
+@mixin display($prefix: '') {
+  .d#{$prefix}-none { display: none; }
+  .d#{$prefix}-block { display: block; }
+  .d#{$prefix}-inline { display: inline; }
+  .d#{$prefix}-inline-block { display: inline-block; }
+  .d#{$prefix}-flex { display: flex; }
+  .d#{$prefix}-inline-flex { display: inline-flex; }
+  .d#{$prefix}-grid { display: grid; }
+}
+@include display();
+@media (min-width: $bs-md) { @include display('-md'); }
+
+// --- Flex ---
+@mixin flex-utils($prefix: '') {
+  .flex#{$prefix}-row { flex-direction: row; }
+  .flex#{$prefix}-column { flex-direction: column; }
+  .flex#{$prefix}-wrap { flex-wrap: wrap; }
+  .flex#{$prefix}-nowrap { flex-wrap: nowrap; }
+  .justify-content#{$prefix}-start { justify-content: flex-start; }
+  .justify-content#{$prefix}-end { justify-content: flex-end; }
+  .justify-content#{$prefix}-center { justify-content: center; }
+  .justify-content#{$prefix}-between { justify-content: space-between; }
+  .justify-content#{$prefix}-around { justify-content: space-around; }
+  .justify-content#{$prefix}-evenly { justify-content: space-evenly; }
+  .align-items#{$prefix}-start { align-items: flex-start; }
+  .align-items#{$prefix}-end { align-items: flex-end; }
+  .align-items#{$prefix}-center { align-items: center; }
+  .align-items#{$prefix}-baseline { align-items: baseline; }
+  .align-items#{$prefix}-stretch { align-items: stretch; }
+}
+@include flex-utils();
+@media (min-width: $bs-md) { @include flex-utils('-md'); }
+
+.flex-fill { flex: 1 1 auto; }
+.flex-grow-0 { flex-grow: 0; }
+.flex-grow-1 { flex-grow: 1; }
+.flex-shrink-0 { flex-shrink: 0; }
+.flex-shrink-1 { flex-shrink: 1; }
+.align-self-start { align-self: flex-start; }
+.align-self-end { align-self: flex-end; }
+.align-self-center { align-self: center; }
+.align-self-stretch { align-self: stretch; }
+@each $i in (0,1,2,3,4,5) { .order-#{$i} { order: #{$i}; } }
+
+// --- Spacing (margin/padding), Bootstrap names incl. legacy l/r aliases ---
+// sides: '' all, t top, b bottom, s/l start(left), e/r end(right), x, y
+@mixin space($prop, $abbr, $prefix: '') {
+  @each $k, $v in $bs-space {
+    .#{$abbr}#{$prefix}-#{$k}  { #{$prop}: $v; }
+    .#{$abbr}t#{$prefix}-#{$k} { #{$prop}-top: $v; }
+    .#{$abbr}b#{$prefix}-#{$k} { #{$prop}-bottom: $v; }
+    .#{$abbr}s#{$prefix}-#{$k}, .#{$abbr}l#{$prefix}-#{$k} { #{$prop}-left: $v; }
+    .#{$abbr}e#{$prefix}-#{$k}, .#{$abbr}r#{$prefix}-#{$k} { #{$prop}-right: $v; }
+    .#{$abbr}x#{$prefix}-#{$k} { #{$prop}-left: $v; #{$prop}-right: $v; }
+    .#{$abbr}y#{$prefix}-#{$k} { #{$prop}-top: $v; #{$prop}-bottom: $v; }
+  }
+}
+@include space(margin, m);
+@include space(padding, p);
+@media (min-width: $bs-md) {
+  @include space(margin, m, '-md');
+  @include space(padding, p, '-md');
+}
+// auto margins
+.m-auto  { margin: auto; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.my-auto { margin-top: auto; margin-bottom: auto; }
+.ms-auto, .ml-auto { margin-left: auto; }
+.me-auto, .mr-auto { margin-right: auto; }
+.mt-auto { margin-top: auto; }
+.mb-auto { margin-bottom: auto; }
+@media (min-width: $bs-md) {
+  .ms-md-auto { margin-left: auto; }
+  .me-md-auto { margin-right: auto; }
+  .mx-md-auto { margin-left: auto; margin-right: auto; }
+}
+
+// gap
+@each $k, $v in $bs-space { .gap-#{$k} { gap: $v; } }
+
+// --- Text ---
+@mixin text-align($prefix: '') {
+  .text#{$prefix}-start { text-align: left; }
+  .text#{$prefix}-end { text-align: right; }
+  .text#{$prefix}-center { text-align: center; }
+}
+@include text-align();
+@media (min-width: $bs-md) { @include text-align('-md'); }
+.text-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.text-nowrap { white-space: nowrap; }
+.text-uppercase { text-transform: uppercase; }
+.text-lowercase { text-transform: lowercase; }
+.text-capitalize { text-transform: capitalize; }
+.small { font-size: .875em; }
+.fw-light { font-weight: 300; }
+.fw-normal { font-weight: 400; }
+.fw-semibold { font-weight: 600; }
+.fw-bold { font-weight: 700; }
+.fst-italic { font-style: italic; }
+.lh-1 { line-height: 1; }
+
+// --- Sizing ---
+@each $p in (25, 50, 75, 100) {
+  .w-#{$p} { width: #{$p + '%'}; }
+  .h-#{$p} { height: #{$p + '%'}; }
+}
+.mw-100 { max-width: 100%; }
+.mh-100 { max-height: 100%; }
+
+// --- Misc ---
+.position-relative { position: relative; }
+.position-absolute { position: absolute; }
+.overflow-auto { overflow: auto; }
+.overflow-hidden { overflow: hidden; }
+.float-start { float: left; }
+.float-end { float: right; }
+.rounded { border-radius: .375rem; }
+.rounded-circle { border-radius: 50%; }
+.invisible { visibility: hidden; }
+.visible { visibility: visible; }

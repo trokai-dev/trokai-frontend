@@ -1,0 +1,57 @@
+<ion-list class="horizontal-list pt-0 px-24 pb-8">
+  @if (enableStatusFilter && statusFilter?.length) {
+  <div class="chip-filter">
+    <div class="d-flex ion-activatable ripple-parent">
+      <ion-select
+        interface="popover"
+        [value]="filters.status"
+        class="w-100 label-body-2"
+        (ionChange)="changeStatusFilter($event.target.value)"
+      >
+        @for (s of statusFilter; track s.value) {
+        <ion-select-option [value]="s.value">
+          <span class="label-body-2"> {{ s.name }}</span>
+        </ion-select-option>
+        }
+      </ion-select>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </div>
+  }
+
+  <div class="chip-filter" (click)="openFilterModal()">
+    <div class="d-flex ion-activatable ripple-parent">
+      <ion-icon name="filter-outline"></ion-icon>
+      <ion-label class="label-body-2"> Filtrar </ion-label>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    @if (filters?.enabled()) {
+    <ion-badge mode="ios">{{
+      filters.count()
+    }}</ion-badge>
+    }
+  </div>
+
+  @if (filters?.sorting && enableSorting) {
+  <div
+    class="chip-filter"
+    (click)="openSortingAction()"
+  >
+    <div class="d-flex ion-activatable ripple-parent">
+      <ion-icon name="reorder-two-outline"></ion-icon>
+      <ion-label class="label-body-2"> {{ getSortingText() }} </ion-label>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </div>
+  }
+
+  @if (filters?.enabled()) {
+  <div class="chip-filter" (click)="clearFilters()">
+    <div class="d-flex ion-activatable ripple-parent">
+      <ion-icon name="trash"></ion-icon>
+      <ion-label class="label-body-2"> Limpar </ion-label>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </div>
+  }
+</ion-list>

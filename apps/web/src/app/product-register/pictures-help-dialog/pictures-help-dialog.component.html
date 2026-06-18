@@ -1,0 +1,45 @@
+<div class="dialog-wrapper">
+  <!-- header -->
+  <div class="dialog-header pb-0 d-flex justify-content-end align-items-center">
+    <button mat-icon-button [mat-dialog-close]="true">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- swiper -->
+  <div class="dialog-content">
+    <div class="swiper pictures-help-swiper">
+      <div class="swiper-wrapper">
+        @for (tip of tips; track tip) {
+          <div class="swiper-slide">
+            <div class="tip-slide">
+              <h5 class="color-gray-dark text-center mb-2">
+                {{ tip.label }}
+              </h5>
+              <div class="tip-image-wrapper">
+                <img [src]="tip.img" [alt]="tip.label" class="tip-image" />
+              </div>
+              @if (tip.description) {
+                <p
+                  class="label-body-2 color-gray-default mt-2"
+                  >
+                  {{ tip.description }}
+                </p>
+              }
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="pictures-help-pagination mt-5"></div>
+    </div>
+
+    <!-- prev / next -->
+    <button mat-icon-button class="custom-prev tips">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <button mat-icon-button class="custom-next tips">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+</div>

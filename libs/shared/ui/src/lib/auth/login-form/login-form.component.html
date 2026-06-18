@@ -1,0 +1,69 @@
+<form [formGroup]="form" class="login-form" (ngSubmit)="submit()">
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      formControlName="email"
+      type="email"
+      autocomplete="email"
+      maxlength="256"
+      [errorStateMatcher]="matcher"
+    />
+    @if (form.controls.email.hasError('required')) {
+      <mat-error>Informe seu email</mat-error>
+    } @else if (form.controls.email.hasError('email')) {
+      <mat-error>Email inválido</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Senha</mat-label>
+    <input
+      matInput
+      formControlName="password"
+      [type]="hidePass ? 'password' : 'text'"
+      autocomplete="current-password"
+      [errorStateMatcher]="matcher"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      [attr.aria-label]="hidePass ? 'Mostrar senha' : 'Ocultar senha'"
+      (click)="hidePass = !hidePass"
+    >
+      <mat-icon>{{ hidePass ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+    @if (form.controls.password.hasError('required')) {
+      <mat-error>Informe sua senha</mat-error>
+    } @else if (form.controls.password.hasError('minlength')) {
+      <mat-error>Mínimo de 6 caracteres</mat-error>
+    }
+    <mat-hint>
+      <a tabindex="0" (click)="forgotPassword.emit()" (keyup.enter)="forgotPassword.emit()">Esqueci minha senha</a>
+    </mat-hint>
+  </mat-form-field>
+
+  @if (serverError) {
+    <p class="login-form__error">{{ serverError }}</p>
+  }
+
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    aria-label="Entrar"
+    [disabled]="loading"
+  >
+    Entrar
+  </button>
+
+  <ng-content></ng-content>
+
+  <div class="login-form__register">
+    <span class="label-body-2">Ainda não tem uma conta?</span>
+    <button mat-button color="primary" type="button" (click)="register.emit()">
+      <b>Cadastre-se agora</b>
+    </button>
+  </div>
+</form>

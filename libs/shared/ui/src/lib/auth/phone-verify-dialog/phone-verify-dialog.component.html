@@ -1,0 +1,83 @@
+<div class="dialog-wrapper">
+  <div class="dialog-header">
+    <div class="d-flex justify-content-end">
+      <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+
+    <div class="d-flex flex-column text-center align-items-center gap-2">
+      <mat-icon class="header-icon color-primary">mail_outline</mat-icon>
+      <h3 class="color-gray-dark">Verifique o seu número</h3>
+    </div>
+  </div>
+
+  <div class="dialog-content">
+    @if (!sentCode) {
+      <p class="mb-16">
+        Para manter nossa comunidade segura, precisamos verificar seu número de
+        telefone. Vamos enviar um código de verificação para o número abaixo.
+      </p>
+
+      <div class="number-info">
+        <h3 class="text-center">{{ phone | mask: '(00)00000-0000' }}</h3>
+      </div>
+
+      <mat-form-field appearance="outline" class="w-100 mt-16">
+        <mat-select [(ngModel)]="otpMethod">
+          @if (whatsappAvailable) {
+            <mat-option [value]="PhoneOtpMethod.WHATSAPP">
+              Enviar por Whatsapp
+            </mat-option>
+          }
+          @if (smsAvailable) {
+            <mat-option [value]="PhoneOtpMethod.SMS">
+              Enviar por SMS
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    } @else {
+      <p>
+        @if (otpMethod === PhoneOtpMethod.WHATSAPP) {
+          Enviamos um código de verificação via WhatsApp para
+          {{ phone | mask: '(00)00000-0000' }}. Por favor, insira o código
+          abaixo para verificar seu número.
+        } @else {
+          Enviamos um código de verificação via SMS para
+          {{ phone | mask: '(00)00000-0000' }}. Por favor, insira o código
+          abaixo para verificar seu número.
+        }
+      </p>
+
+      <mat-form-field appearance="outline" class="w-100 mt-16">
+        <mat-label>Código de verificação</mat-label>
+        <input matInput maxlength="6" type="text" [(ngModel)]="code" />
+      </mat-form-field>
+
+      <div class="resend-info d-flex align-items-center gap-2">
+        @if (canResend) {
+          <span>Não recebeu o código?</span>
+          <button mat-button color="primary" (click)="sendVerification()">
+            Reenviar código
+          </button>
+        } @else {
+          <span>Reenviar código em {{ secondsUntilResend }}s</span>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="dialog-footer d-flex flex-column gap-2">
+    <button
+      mat-raised-button
+      color="primary"
+      aria-label="Enviar código"
+      (click)="onAction()"
+      [disabled]="sentCode && (!code || code.length < 6)"
+      class="flex-grow-1"
+    >
+      {{ sentCode ? 'Validar código' : 'Enviar código' }}
+    </button>
+  </div>
+</div>

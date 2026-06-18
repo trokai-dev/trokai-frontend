@@ -1,0 +1,14 @@
+@import '../../theme/variables.scss';
+
+ion-label {
+  text-align: justify;
+}
+
+ion-col {
+  border: 0.5px solid $color-gray-default;
+  border-collapse: collapse;
+}
+
+.fees-table {
+  border: 0.5px solid $color-gray-default;
+}

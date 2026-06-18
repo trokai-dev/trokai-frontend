@@ -1,0 +1,62 @@
+<!-- menu section opened -->
+@if (navMenu && menuTab !== null) {
+  <div
+    class="container-fluid border-bottom nav-menu-categories"
+    (mouseenter)="showMenu.emit()"
+    (mouseleave)="hideMenu.emit()"
+    (click)="hideMenu.emit()"
+  >
+    <div class="container">
+      <div class="row">
+        <div class="col d-flex align-items-center">
+          <button class="mobile-only" mat-icon-button (click)="back.emit()">
+            <mat-icon> chevron_left </mat-icon>
+          </button>
+          <h3>
+            {{ navMenu[menuTab].label }}
+          </h3>
+          <a
+            rel="nofollow"
+            (click)="navigate(navMenu[menuTab].route, navMenu[menuTab].params)"
+          >
+            @if (menuTab < 2) {
+              <span class="label-caption-2 color-primary ms-3"> Ver tudo</span>
+            }
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        @for (col of navMenu[menuTab].cols; track col) {
+          <div class="col col-md-4">
+            <ul class="mt-32">
+              @if (col.label) {
+                <li class="mt-8 li-title label-body-1">
+                  <a
+                    title="{{ col.label }} em {{ navMenu[menuTab].label }}"
+                    class="color-gray-dark"
+                    (click)="navigate(col.route, col.params)"
+                  >
+                    <b> {{ col.label }}</b>
+                  </a>
+                </li>
+              }
+              <div class="mt-16 nav-column">
+                @for (item of col.list; track item) {
+                  <li class="li-item label-body-2">
+                    <a
+                      title="{{ item.label }} em {{ navMenu[menuTab].label }}"
+                      class="color-gray-default"
+                      (click)="navigate(item.route, item.params)"
+                    >
+                      {{ item.label | titlecase }}
+                    </a>
+                  </li>
+                }
+              </div>
+            </ul>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,48 @@
+<ion-content>
+  @if (!image) {
+  <div class="camera-buttons top-buttons" [style]="divsStyle">
+    <div (click)="setFlash()" class="camera-button" [style]="btn1Style">
+      <ion-icon name="{{ flashOn ? 'flash-outline' : 'flash-off-outline' }}">
+      </ion-icon>
+    </div>
+  </div>
+  }
+
+  @if (image) {
+  <img [src]="image" [style]="imageStyle" alt="" />
+  }
+
+  @if (!image) {
+  <div id="cameraPreview" class="cameraPreview"></div>
+  }
+
+  @if (!image) {
+  <div class="camera-buttons bottom-buttons" [style]="divsStyle">
+    <div class="camera-button" [style]="btn1Style" (click)="close()">
+      <ion-icon name="close-outline"> </ion-icon>
+    </div>
+    <div class="camera-button" [style]="btn2Style" (click)="captureImage()">
+      <ion-icon name="camera-outline"> </ion-icon>
+    </div>
+    <div class="camera-button" [style]="btn3Style" (click)="flipCamera()">
+      <ion-icon name="camera-reverse-outline"> </ion-icon>
+    </div>
+  </div>
+  }
+
+  @if (image) {
+  <div class="camera-buttons bottom-buttons" [style]="divsStyle">
+    <div class="camera-button" [style]="btn1Style" (click)="again()">
+      <ion-icon name="close-outline"> </ion-icon>
+    </div>
+
+    <div class="camera-button" [style]="btn2Style">
+      <!-- <ion-icon name="refresh-outline"></ion-icon> -->
+    </div>
+
+    <div class="camera-button" [style]="btn3Style" (click)="confirm()">
+      <ion-icon name="checkmark-outline"> </ion-icon>
+    </div>
+  </div>
+  }
+</ion-content>

@@ -1,0 +1,49 @@
+<div class="dialog-wrapper">
+  <!-- header -->
+  <div class="dialog-header border-bottom">
+    <div class="d-flex justify-content-end">
+      <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+
+    <h4 class="color-gray-dark">Filtrar busca</h4>
+  </div>
+
+  <!-- content -->
+  <div class="dialog-content">
+    @if(filter){
+    <app-search-filter
+      [filter]="filter"
+      [hideTitle]="true"
+      (filtersChange)="filter = $event"
+      [enableSorting]="false"
+    ></app-search-filter>
+    }
+  </div>
+
+  @if (filter){
+  <!-- footer -->
+  <div class="dialog-footer">
+    @if (filter.count()){
+    <button
+      mat-button
+      color="accent"
+      aria-label="remover filtros"
+      (click)="clearFilters()"
+    >
+      Remover filtros
+    </button>
+    }
+    <button
+      mat-raised-button
+      color="primary"
+      aria-label="ver produtos"
+      color="primary"
+      (click)="applyFilters(filter)"
+    >
+      Buscar
+    </button>
+  </div>
+  }
+</div>

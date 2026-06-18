@@ -1,0 +1,287 @@
+<div class="my-4" (mouseup)="changeCost()" style="position: relative">
+  <!-- dismiss -->
+  @if(dismissable){
+    <button
+      mat-icon-button
+      (click)="close()"
+      class="color-gray-light-1 button-remove"
+      style="position: absolute; top: -1.6rem; right: 0"
+      >
+      <mat-icon>close</mat-icon>
+    </button>
+  }
+  <!-- sort -->
+  @if(enableSorting){
+    <div class="row">
+      <div class="col">
+        <h6 class="color-gray-dark">Ordenar</h6>
+      </div>
+
+      <div class="col-12 mt-4">
+        <mat-form-field appearance="outline">
+          <mat-select
+            [(ngModel)]="filter.sorting"
+            aria-label="Ordenar resultados"
+            (selectionChange)="changeSorting()"
+            >
+            <mat-option value="relevance">Em destaque</mat-option>
+            <mat-option value="recent">Mais recentes </mat-option>
+            <mat-option value="cost">Mais baratos </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    } @if (!hideTitle){
+    <div class="row">
+      <div class="col">
+        <h6 class="color-gray-dark">Filtros</h6>
+      </div>
+    </div>
+  }
+
+  @if (itemsMap) {
+    <div class="mt-4">
+      <div class="accordion-item">
+        <div class="accordion-item-header">
+          <mat-checkbox
+            color="primary"
+            [(ngModel)]="sections.category"
+            (change)="checkSectionCategory()"
+            class="mat-form-field-wrapper"
+            >
+            <div class="d-flex flex-column">
+              <span class="label-body-2 color-gray-dark"> Categoria</span>
+            </div>
+          </mat-checkbox>
+        </div>
+        <div class="accordion-item-intermediate">
+          @if (sections.category) {
+            <div class="w-100">
+              <mat-radio-group
+                aria-labelledby="example-radio-group-label"
+                class="example-radio-group"
+                [(ngModel)]="filter.category"
+                (change)="selectCategory($event.value)"
+                >
+                @for (a of itemsMap.category; track a) {
+                  <mat-radio-button
+                    color="primary"
+                    class="example-radio-button d-block mt-2"
+                    [value]="a._id"
+                    >
+                    <span class="label-body-2 color-gray-dark">{{
+                      a.value | titlecase
+                    }}</span>
+                  </mat-radio-button>
+                }
+              </mat-radio-group>
+            </div>
+          }
+        </div>
+        @if (sections.category && filter.category !== null) {
+          <div
+            class="accordion-item-content"
+            >
+            @for (c of pieces; track c) {
+              <div
+                (click)="selectMultiple('piece', c)"
+                class="option-item"
+                [ngClass]="{ selected: selected('piece', c) }"
+                >
+                <span class="label-body-2 ion-text-capitalize"> {{ c.value }}</span>
+              </div>
+            }
+          </div>
+        }
+      </div>
+      <div class="accordion-item ion-activatable ripple-parent">
+        <div class="accordion-item-header">
+          <mat-checkbox
+            color="primary"
+            [(ngModel)]="sections.size"
+            (change)="checkSectionSize()"
+            class="mat-form-field-wrapper"
+            >
+            <div class="d-flex flex-column">
+              <span class="label-body-2 color-gray-dark"> Tamanho</span>
+            </div>
+          </mat-checkbox>
+        </div>
+        @if (sections.size) {
+          <div class="accordion-item-intermediate">
+            <div class="mb-4">
+              @if (filter.category === null) {
+                <span class="label-body-2"
+                  >Selecione uma categoria.</span
+                  >
+                }
+                @if (
+                  filter.category !== null &&
+                  category !== null &&
+                  (!category.sizes || category.sizes.length === 0)
+                  ) {
+                  <span
+                    class="label-body-2"
+                    >
+                    Categoria {{ category.value }} não possui tamanhos.</span
+                    >
+                  }
+                </div>
+                @if (
+                  filter.category !== null &&
+                  category !== null &&
+                  category.sizes &&
+                  category.sizes.length > 0
+                  ) {
+                  <div
+                    class="w-100"
+                    >
+                    <mat-radio-group
+                      aria-labelledby="example-radio-group-label"
+                      class="example-radio-group"
+                      [(ngModel)]="filter.age"
+                      (change)="selectAge()"
+                      >
+                      @for (a of itemsMap.age; track a) {
+                        <mat-radio-button
+                          color="primary"
+                          class="example-radio-button d-block mt-2"
+                          [value]="a._id"
+                          >
+                          <span class="label-body-2 color-gray-dark">{{
+                            a.value | titlecase
+                          }}</span>
+                        </mat-radio-button>
+                      }
+                    </mat-radio-group>
+                  </div>
+                }
+              </div>
+            }
+            @if (sections.size && sizes.length > 0) {
+              <div
+                class="accordion-item-content"
+                >
+                @for (s of sizes; track s) {
+                  <div
+                    (click)="selectMultiple('size', s)"
+                    class="option-item ion-activatable ripple-parent"
+                    [ngClass]="{ selected: selected('size', s) }"
+                    >
+                    <span class="label-body-2"> {{ s.value }}</span>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+          <div class="accordion-item ion-activatable ripple-parent">
+            <div class="accordion-item-header">
+              <mat-checkbox
+                color="primary"
+                [(ngModel)]="sections.promotional"
+                (change)="select('promotional')"
+                class="mat-form-field-wrapper"
+                >
+                <div class="d-flex flex-column">
+                  <span class="label-body-2 color-gray-dark"> Em promoção</span>
+                </div>
+              </mat-checkbox>
+            </div>
+          </div>
+          <div class="accordion-item ion-activatable ripple-parent">
+            <div class="accordion-item-header">
+              <mat-checkbox
+                color="primary"
+                [(ngModel)]="sections.condition"
+                (change)="checkSectionCondition()"
+                class="mat-form-field-wrapper"
+                >
+                <div class="d-flex flex-column">
+                  <span class="label-body-2 color-gray-dark"> Condição</span>
+                </div>
+              </mat-checkbox>
+            </div>
+            @if (sections.condition) {
+              <div class="accordion-item-content">
+                @for (c of itemsMap.condition; track c) {
+                  <div
+                    [ngClass]="{ selected: selected('condition', c) }"
+                    class="option-item ion-activatable ripple-parent"
+                    (click)="select('condition', c)"
+                    >
+                    <span class="label-body-2"> {{ c.value }}</span>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+          <div class="accordion-item ion-activatable ripple-parent">
+            <div class="accordion-item-header">
+              <mat-checkbox
+                color="primary"
+                [(ngModel)]="sections.gender"
+                (change)="checkSectionGender()"
+                class="mat-form-field-wrapper"
+                >
+                <div class="d-flex flex-column">
+                  <span class="label-body-2 color-gray-dark"> Gênero</span>
+                </div>
+              </mat-checkbox>
+            </div>
+            @if (sections.gender) {
+              <div class="accordion-item-content">
+                @for (c of itemsMap.gender; track c) {
+                  <div
+                    [ngClass]="{ selected: selected('gender', c) }"
+                    class="option-item ion-activatable ripple-parent"
+                    (click)="selectMultiple('gender', c)"
+                    >
+                    <span class="label-body-2"> {{ c.value }}</span>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+          <div class="accordion-item ion-activatable ripple-parent">
+            <div class="accordion-item-header">
+              <mat-checkbox
+                color="primary"
+                [(ngModel)]="sections.cost"
+                (change)="checkSectionCost()"
+                class="mat-form-field-wrapper"
+                >
+                <div class="d-flex flex-column">
+                  <span class="label-body-2 color-gray-dark"> Preço</span>
+                </div>
+              </mat-checkbox>
+            </div>
+            @if (sections.cost) {
+              <div class="accordion-item-content">
+                <mat-form-field appearance="outline">
+                  <mat-label>Mínimo</mat-label>
+                  <input
+                    matInput
+                    [(ngModel)]="costRange.lower"
+                    (blur)="changeCost()"
+                    type="number"
+                    [min]="minCost"
+                    [max]="maxCost"
+                    />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Máximo</mat-label>
+                  <input
+                    matInput
+                    [(ngModel)]="costRange.upper"
+                    (blur)="changeCost()"
+                    type="number"
+                    [min]="costRange.lower ?? 0"
+                    [max]="maxCost"
+                    />
+                </mat-form-field>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>

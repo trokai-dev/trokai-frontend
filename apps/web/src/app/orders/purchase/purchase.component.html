@@ -1,0 +1,264 @@
+<div class="row mb-5">
+  <div class="col">
+    <button color="primary" mat-button routerLink="/orders/purchases">
+      <mat-icon>arrow_back</mat-icon> Minhas compras
+    </button>
+  </div>
+</div>
+
+@if (order) {
+  <span class="page-title">Compra</span>
+  <span class="item-value">cód. {{ order.customId }}</span>
+
+  <!-- PIX -->
+  @if (order.pix && waiting_payment) {
+    <div class="page-section">
+      <span class="section-title">PIX</span>
+      <span class="item-label"> Vencimento </span>
+      <span class="item-value">
+        Realize o pagamento até <b>{{ pixExpiration }}</b>
+      </span>
+      <span class="item-label mt-16">QR Code</span>
+      <img class="pixQR" src="{{ pixQR }}" alt="QR Code para pagamento Pix" />
+      <span class="item-label mt-16"> Copia e cola </span>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <mat-form-field
+            appearance="outline"
+            (click)="copyPix($event)"
+            class="w-100"
+            >
+            <input
+              matInput
+              readonly="true"
+              value="{{ order?.pix?.payload }}"
+              (copy)="onInputCopy($event)"
+              type="text"
+              style="user-select: none"
+              />
+            <div matSuffix>
+              <button (click)="copyPix($event)" color="primary" mat-button>
+                <mat-icon>content_copy</mat-icon>
+                Copiar
+              </button>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  }
+
+  <div class="row mt-5">
+    <div class="col-12 col-md-4">
+      <!-- Produtos -->
+      <div class="page-section-mobile">
+        <span class="section-title">Produtos</span>
+
+        @for (c of order.clothes; track c) {
+          <div class="cursor-pointer">
+            <app-cart-item
+              (click)="openProduct(c)"
+              [product]="c"
+              [showRemove]="false"
+            ></app-cart-item>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <!-- Detalhes -->
+      <div class="page-section">
+        <span class="section-title">Detalhes</span>
+
+        <div class="d-grid gap-16">
+          <div>
+            <span class="item-label">Data</span>
+            <span class="item-value"
+              >{{ order.createdAt | date : "dd/MM/yyyy - HH:mm" }}
+            </span>
+          </div>
+
+          <div>
+            <span class="item-label">Status</span>
+            <span class="item-value"> {{ getOrderStatus() }} </span>
+          </div>
+
+          <div>
+            <span class="item-label">Pagamento</span>
+            <span class="item-value"> {{ getPayment() }} </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Entrega -->
+      <app-order-delivery
+        (confirmWithdrawalClick)="confirmWithdrawal()"
+        [order]="order"
+        [isPurchase]="true"
+        />
+
+      <!-- Valores -->
+      <div class="page-section">
+        <span class="section-title">Valores</span>
+
+        <div class="d-flex flex-column gap-2">
+          <!-- Carrinho -->
+          @for (c of order.clothes; track c) {
+            <div
+              class="d-flex justify-content-between"
+              >
+              <span class="item-value text-capitalize">
+                {{ c.title }}
+              </span>
+              <span class="item-value">
+                {{ c.cost | cost | currency : "BRL" : true : "1.2-2" }}
+              </span>
+            </div>
+          }
+
+          <!-- Frete -->
+          @if (order.shippingValues) {
+            <div
+              class="d-flex justify-content-between"
+              >
+              <span class="item-value">Frete</span>
+              <span class="item-value">
+                {{
+                order.shippingValues.shippingCost
+                | cost
+                | currency : "BRL" : true : "1.2-2"
+                }}
+              </span>
+            </div>
+          }
+
+          <!-- Juros -->
+          @if (
+            order.businessValues.interestValues &&
+            order.businessValues.interestValues.interest
+            ) {
+            <div
+              class="d-flex justify-content-between"
+              >
+              <span class="item-value">Juros parcelamento</span>
+              <span class="item-value">
+                {{
+                order.businessValues.interestValues.interest
+                | cost
+                | currency : "BRL" : true : "1.2-2"
+                }}
+              </span>
+            </div>
+          }
+
+          <!-- service fee -->
+          @if (order.businessValues.buyerServiceFee){
+            <div class="d-flex justify-content-between">
+              <span class="item-value">Taxa de serviço</span>
+              <span class="item-value">
+                {{
+                order.businessValues.buyerServiceFee
+                | cost
+                | currency : "BRL" : true : "1.2-2"
+                }}
+              </span>
+            </div>
+          }
+          <!-- processing fee -->
+          @if (order.businessValues.buyerProcessingFee){
+            <div class="d-flex justify-content-between">
+              <span class="item-value">Taxa de processamento</span>
+              <span class="item-value">
+                {{
+                order.businessValues.buyerProcessingFee
+                | cost
+                | currency : "BRL" : true : "1.2-2"
+                }}
+              </span>
+            </div>
+          }
+
+          <!-- desconto cupom -->
+          @if (order.businessValues.couponDiscount) {
+            <div
+              class="d-flex justify-content-between"
+              >
+              <span class="item-value">
+                Desconto cupom ({{ order.businessValues.couponCode }})
+              </span>
+              <span class="item-value">
+                {{
+                -order.businessValues.couponDiscount
+                | cost
+                | currency : "BRL" : true : "1.2-2"
+                }}
+              </span>
+            </div>
+          }
+
+          <!-- desconto pix -->
+          @if (order.businessValues.pixDiscount) {
+            <div
+              class="d-flex justify-content-between"
+              >
+              <span class="item-value">Desconto Pix</span>
+              <span class="item-value">
+                {{
+                -order.businessValues.pixDiscount
+                | cost
+                | currency : "BRL" : true : "1.2-2"
+                }}
+              </span>
+            </div>
+          }
+
+          <!-- Total -->
+          <div class="d-flex justify-content-between">
+            <span class="item-value"><b>Total</b></span>
+            <span class="item-value color-primary">
+              <b>
+                {{
+                order.businessValues.buyerCost
+                | cost
+                | currency : "BRL" : true : "1.2-2"
+                }}
+              </b>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vendedor -->
+      <div class="page-section pt-5">
+        <tk-user-header
+          [user]="order.seller"
+          [showChatButton]="showContact"
+          (clicked)="openOtherUser()"
+          (chatClick)="openChat()"
+        />
+      </div>
+
+      <!-- Cancelamento -->
+      @if (waiting_shipment || waiting_withdrawal || waiting_payment) {
+        <button
+          class="mt-32 color-error"
+          mat-stroked-button
+          (click)="cancel()"
+          >
+          Cancelar compra
+        </button>
+      }
+
+      @if (order_delivered && userMayReturn) {
+        <button
+          class="mt-32 color-error"
+          mat-stroked-button
+          (click)="return()"
+          >
+          Solicitar devolução
+        </button>
+      }
+    </div>
+  </div>
+}

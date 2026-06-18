@@ -1,0 +1,29 @@
+<div class="cart-item mt-16" (click)="clickProduct.emit()">
+  <img
+    alt="{{ product.title }}"
+    hideLoading
+    lazyLoad="{{ product.images?.[0]?.sm ?? (url + product.owner + '/' + product.smallPicture?.url) }}"
+    class="cart-item-img"
+    />
+
+
+  <div class="cart-item-text">
+    <span class="label-body-2 color-gray-dark text-capitalize"
+      ><b>{{ product.title }}</b>
+    </span>
+
+    <span class="label-body-2 mt-2">
+      {{ product.cost | cost | currency : "BRL" : "symbol" : "1.2" }}
+    </span>
+  </div>
+
+  @if (showRemove) {
+    <button
+      mat-icon-button
+      class="color-gray-light-1 button-remove"
+      (click)="remove($event)"
+      >
+      <mat-icon>delete</mat-icon>
+    </button>
+  }
+</div>

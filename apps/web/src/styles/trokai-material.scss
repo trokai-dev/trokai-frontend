@@ -1,0 +1,38 @@
+@use 'theme' as theme;
+@import "../styles/variables.scss";
+
+html {
+  @include theme.trokai-theme();
+}
+
+.mat-mdc-raised-button {
+  &.mat-primary,
+  &.mat-accent {
+    color: white !important;
+  }
+}
+
+.mat-mdc-checkbox.mat-primary {
+  --mdc-checkbox-selected-checkmark-color: white !important;
+}
+
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: $color-gray-default !important;
+}
+
+.mdc-button {
+  height: 45px !important;
+}
+
+.mdc-dialog {
+  max-width: 500px !important;
+}
+
+.mdc-dialog .mdc-dialog__content {
+  padding: 2rem !important;
+}
+
+::ng-deep .mdc-button-label {
+  font-size: 1.5rem !important;
+  text-transform: uppercase;
+}

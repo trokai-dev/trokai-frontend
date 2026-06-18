@@ -1,0 +1,84 @@
+<ion-content>
+  <ion-grid class="p-24">
+    <ion-row>
+      <ion-icon
+        name="close"
+        (click)="closeExit()"
+        class="modal-close"
+        mode="ios"
+      >
+      </ion-icon>
+    </ion-row>
+
+    @if (!done && !loading) {
+    <ion-row class="d-flex justify-content-center">
+      <h2 class="color-gray-dark">Solicitar cancelamento</h2>
+    </ion-row>
+    }
+
+    @if (loading) {
+    <div
+      class="d-flex justify-content-center align-items-center mt-40"
+    >
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+    }
+
+    @if (!done && !loading) {
+    <div>
+      <div class="div-beauty-textarea mt-40">
+        <ion-textarea
+          autoGrow="true"
+          maxlength="500"
+          style="height: auto"
+          mode="md"
+          (ionInput)="inputArea()"
+          [(ngModel)]="message"
+          style="
+            margin-top: 3%;
+            --padding-top: 0px;
+            --padding-end: 0px;
+            --padding-bottom: 4vh;
+            --padding-start: 0px;
+          "
+          placeHolder="Qual o motivo do cancelamento?"
+        ></ion-textarea>
+      </div>
+    </div>
+    }
+
+    @if (done && !loading) {
+    <div
+      class="d-flex flex-column justify-content-center align-items-center"
+    >
+      <ion-icon
+        name="checkmark-outline"
+        class="color-primary mt-40"
+        style="font-size: 7rem"
+      >
+      </ion-icon>
+
+      <h6 class="color-gray-dark mt-16">Cancelamento solicitado!</h6>
+
+      <ion-label class="label-body-2 ion-text-center color-gray-default mt-40">
+        Vamos te responder no email
+        <ion-text>
+          <b>{{ order.seller.email }}</b>
+        </ion-text>
+      </ion-label>
+    </div>
+    }
+  </ion-grid>
+</ion-content>
+
+<ion-footer class="px-24 py-16">
+  @if (!done) {
+  <ion-button
+    class="action-button"
+    [disabled]="loading || !formValid()"
+    (click)="sendMessage()"
+  >
+    Solicitar cancelamento
+  </ion-button>
+  }
+</ion-footer>

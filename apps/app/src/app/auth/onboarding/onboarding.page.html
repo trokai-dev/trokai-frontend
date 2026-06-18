@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar mode="ios" class="clear">
+    <ion-icon
+      name="close"
+      (click)="onClose()"
+      class="modal-close m-2"
+      mode="ios"
+    ></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <swiper-container
+    #swiper
+    [pagination]="true"
+    class="mt-16"
+    (onmouseup)="slideChanged()"
+  >
+    <swiper-slide>
+      <h2 class="ion-text-center color-gray-dark">Conheça o Trokaí</h2>
+
+      <label class="label-body-2 ion-text-center mt-40" style="width: 70vw">
+        Moda consciente e no precinho.
+      </label>
+      <div class="animation mt-40">
+        <ng-lottie [options]="options1"></ng-lottie>
+      </div>
+    </swiper-slide>
+
+    <swiper-slide>
+      <h2 class="ion-text-center color-gray-dark">Trokas otimizadas</h2>
+
+      <label class="label-body-2 ion-text-center mt-40" style="width: 70vw">
+        Troke roupas gratuitamente e ajude o meio ambiente
+      </label>
+      <div class="animation mt-40">
+        <ng-lottie [options]="options3"></ng-lottie>
+      </div>
+    </swiper-slide>
+
+    <swiper-slide>
+      <h2 class="ion-text-center color-gray-dark">Pagamentos seguros</h2>
+
+      <label class="label-body-2 ion-text-center mt-40" style="width: 70vw">
+        Compre e venda com pagamento seguro dentro pela plataforma.
+      </label>
+
+      <div class="animation mt-40">
+        <ng-lottie [options]="options4"></ng-lottie>
+      </div>
+    </swiper-slide>
+
+    <swiper-slide>
+      <div class="d-flex flex-column" style="margin-bottom: 8rem">
+        <h2 class="ion-text-center color-gray-dark">
+          Envio fácil pelos correios
+        </h2>
+        <label class="label-body-2 ion-text-center mt-40" style="width: 70vw">
+          Com cancelamento e devolução descomplicados.
+        </label>
+      </div>
+
+      <div class="animation">
+        <ng-lottie [options]="options6"></ng-lottie>
+      </div>
+    </swiper-slide>
+
+    <swiper-slide>
+      <h2 class="ion-text-center color-gray-dark">E relaxa...</h2>
+      <label class="label-body-2 ion-text-center mt-40" style="width: 70vw">
+        Nossa equipe está sempre disponível para te ajudar
+      </label>
+
+      <div class="animation">
+        <ng-lottie [options]="options7"></ng-lottie>
+      </div>
+
+      <div class="w-75">
+        <ion-button (click)="onGo()" class="mt-40 action-button">
+          Começar
+        </ion-button>
+      </div>
+    </swiper-slide>
+  </swiper-container>
+</ion-content>

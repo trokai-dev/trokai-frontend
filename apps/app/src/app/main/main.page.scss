@@ -1,0 +1,30 @@
+@import '../../theme/variables.scss';
+
+#bottom-tab {
+  border: none;
+}
+
+ion-tab-button {
+  ion-label {
+    @extend .label-caption-1;
+    @extend .color-gray-default;
+  }
+  ion-icon {
+    @extend .color-gray-default;
+  }
+
+  &.tab-selected {
+    ion-label {
+      color: $color-primary !important;
+      font-weight: bold !important;
+    }
+    ion-icon {
+      color: $color-primary !important;
+    }
+  }
+}
+
+.notification-badge {
+  right: 0rem;
+  bottom: 2rem;
+}

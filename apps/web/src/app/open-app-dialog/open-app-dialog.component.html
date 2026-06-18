@@ -1,0 +1,34 @@
+<div class="dialog-wrapper">
+  <!-- header -->
+  <div class="dialog-header">
+    <div class="d-flex justify-content-end">
+      <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- content -->
+  <div class="dialog-content">
+    <div class="open-app-dialog">
+      <img src="../../assets/logo/logo-fundo.png" alt="Trokaí" />
+
+      <span class="label-large-1 text-center">
+        Abra o app do Trokaí e aproveite uma experiência ainda melhor!
+      </span>
+
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="openApp()"
+        cdkFocusInitial
+      >
+        Abrir aplicativo do Trokaí
+      </button>
+
+      <button mat-button color="primary" class="mb-32" (click)="close()">
+        Continuar no site
+      </button>
+    </div>
+  </div>
+</div>

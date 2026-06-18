@@ -1,0 +1,20 @@
+// Layout via the shared @trokai/shared-styles utilities (.flex/.gap-*/.label-*),
+// loaded globally by both apps — only token-based colors/spacing live here.
+.review-card {
+  padding: var(--space-8) 0;
+
+  .name {
+    color: var(--color-gray-dark);
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+
+  .date {
+    color: var(--color-gray-1);
+  }
+
+  .comment {
+    margin-top: var(--space-12);
+    margin-bottom: 0;
+  }
+}

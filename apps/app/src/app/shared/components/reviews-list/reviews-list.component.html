@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <app-back-button
+        defaultHref="/main/home"
+        [blockNavigation]="true"
+        (buttonClick)="close()"
+      ></app-back-button>
+    </ion-buttons>
+    <ion-title>Avaliações</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="p-24">
+    <tk-reviews-list [user]="user" [reviews]="reviews"></tk-reviews-list>
+  </div>
+</ion-content>

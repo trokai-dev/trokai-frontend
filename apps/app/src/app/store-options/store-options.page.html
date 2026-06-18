@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <app-back-button defaultHref="/main/profile"></app-back-button>
+
+    <ion-title> Meu armário </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="p-24">
+    @if (!user) {
+      <div class="w-100 d-flex justify-content-center">
+        <ion-spinner></ion-spinner>
+      </div>
+    } @else {
+      <tk-seller-profile
+        [user]="user"
+        [pictureUpdating]="pictureUpdating"
+        [requireAvatar]="false"
+        [showBio]="false"
+        [showStoreVisibility]="true"
+        (submitted)="save($event)"
+      >
+        <tk-image-picker
+          avatarPicker
+          [disabled]="pictureUpdating"
+          [profile]="true"
+          externalURL="{{ user.avatar && user.avatar !== '' ? getUserAvatar() : '' }}"
+          redirectUrl="/profile"
+          (imagePick)="onImagePicked($event)"
+        >
+        </tk-image-picker>
+      </tk-seller-profile>
+    }
+  </ion-grid>
+</ion-content>

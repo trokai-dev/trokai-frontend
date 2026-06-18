@@ -1,0 +1,14 @@
+.dialog-header {
+  .header-icon {
+    font-size: 4rem;
+    width: 4rem;
+    height: 4rem;
+    color: var(--color-primary);
+  }
+}
+
+.number-info {
+  padding: var(--space-16);
+  background-color: var(--color-surface-variant, #f3f3f3);
+  border-radius: 0.8rem;
+}

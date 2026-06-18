@@ -1,0 +1,518 @@
+@if (itemsMap && product && owner) {
+  <div class="container page">
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <!-- Foto(s) -->
+          <div class="col-12 col-md-6">
+            <!-- FOTOS -->
+            <div class="row">
+              <div class="col-12 product-main">
+                <h2
+                  class="color-gray-dark text-capitalize d-block d-md-none px-4 px-md-0 pb-4"
+                  >
+                  {{ product.title }}
+                </h2>
+                <tk-product-image
+                  [product]="product"
+                  [myProduct]="myProduct"
+                ></tk-product-image>
+              </div>
+            </div>
+          </div>
+          <!-- CTAs -->
+          <div class="col-12 col-md-6 product-ctas">
+            <h1
+              class="mt-5 mt-md-0 color-gray-dark text-capitalize d-none d-md-block"
+              >
+              {{ product.title }}
+            </h1>
+            <div class="row">
+              <div class="col">
+                <div class="w-100">
+                  <!-- CTA Venda -->
+                  @if (
+                    product.sell &&
+                    (product.published || product.reserved || myProduct)
+                    ) {
+                    <div
+                      class="product-cta"
+                      >
+                      <div class="product-cta-footer">
+                        <div class="product-cta-cost">
+                          @if (payment) {
+                            <div>
+                              <!-- pix -->
+                              <div>
+                                <span class="product-cta-first-cost">
+                                  {{
+                                  product.firstCost
+                                  ? (product.firstCost
+                                  | cost
+                                  | currency : "BRL" : "symbol" : "1.2")
+                                  : ""
+                                  }}
+                                </span>
+                                @if (this.myProduct) {
+                                  <span class="product-cta-main-cost">
+                                    {{
+                                    product.cost
+                                    | cost
+                                    | currency : "BRL" : "symbol" : "1.2"
+                                    }}
+                                  </span>
+                                } @else {
+                                  <span class="product-cta-main-cost">
+                                    {{
+                                    payment.pix.buyerCost
+                                    | cost
+                                    | currency : "BRL" : "symbol" : "1.2"
+                                    }}
+                                    <span class="color-primary-2 label-body-2">
+                                      ({{ payment.pix.pixDiscountPercentage * 100 }}%
+                                      OFF no Pix)
+                                    </span>
+                                  </span>
+                                }
+                              </div>
+                              <!-- cc -->
+                              @if (!myProduct && product.published){
+                                <div class="product-installments">
+                                  <span class="product-installments-primary">
+                                    <b>
+                                      {{
+                                      payment.creditCard.maxNoInterest.installments
+                                      }}x
+                                      {{
+                                      payment.creditCard.maxNoInterest
+                                      .installmentValue
+                                      | cost
+                                      | currency : "BRL" : "symbol" : "1.2"
+                                      }}
+                                      sem juros
+                                    </b>
+                                  </span>
+                                  @if (
+                                    payment.creditCard.maxInstallments.installments >
+                                    payment.creditCard.maxNoInterest.installments
+                                    ) {
+                                    <span
+                                      class="product-installments-secondary"
+                                      >
+                                      ou até
+                                      {{
+                                      payment.creditCard.maxInstallments.installments
+                                      }}x com juros
+                                    </span>
+                                  }
+                                </div>
+                              }
+                              <div class="product-cta-delivery">
+                                @if (owner.inPerson) {
+                                  <span
+                                    class="{{ owner.shipping ? ' mb-2 d-block' : '' }}"
+                                    >
+                                    Retirada presencial
+                                    @if (!myProduct) {
+                                      <span> gratuita</span>
+                                    }
+                                  </span>
+                                }
+                                @if (owner.shipping && !myProduct) {
+                                  <div>
+                                    <tk-zipcode-shipping-fee
+                                      [productId]="productId"
+                                    ></tk-zipcode-shipping-fee>
+                                  </div>
+                                }
+                                @if (owner.shipping && myProduct) {
+                                  <div>
+                                    <span>Envio pelos correios</span>
+                                  </div>
+                                }
+                              </div>
+                            </div>
+                          }
+                        </div>
+                        @if (isInReserves && owner) {
+                          <div class="mt-4">
+                            <app-reserve-time
+                              [ownerId]="owner._id"
+                              (open)="openCheckout()"
+                              [text]="'Continuar compra'"
+                              [hideCancel]="true"
+                              >
+                            </app-reserve-time>
+                          </div>
+                        }
+                        <!-- DA OUTRA PESSOA -->
+                        @if (!myProduct && product.published) {
+                          <div>
+                            @if (!product_in_basket) {
+                              <button
+                                (click)="clickBuy()"
+                                mat-raised-button
+                                color="primary"
+                                >
+                                {{
+                                wardrobe_basket && !wardrobe_reserved
+                                ? "Adicionar à sacola"
+                                : "COMPRAR"
+                                }}
+                              </button>
+                            }
+                            @if (product_in_basket) {
+                              <div
+                                class="d-flex flex-column gap-1"
+                                >
+                                <button
+                                  routerLink="/buying/carts"
+                                  mat-raised-button
+                                  color="primary"
+                                  >
+                                  Ver na sacola
+                                </button>
+                                <button
+                                  class="mt-12"
+                                  (click)="removeFromBasket()"
+                                  mat-stroked-button
+                                  color="accent"
+                                  >
+                                  Remover da sacola
+                                </button>
+                              </div>
+                            }
+                            <div class="product-cta-hints">
+                              <div class="product-cta-hint">
+                                <ion-icon name="shield-checkmark"></ion-icon>
+                                <span class="product-cta-hint-title">
+                                  Compra protegida pelo Trokaí
+                                </span>
+                              </div>
+                              <div class="product-cta-hint">
+                                <ion-icon name="arrow-undo"></ion-icon>
+                                <span class="product-cta-hint-title">
+                                  Devolução garantida
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  }
+                  <!-- Status do produto -->
+                  @if (myProduct || !product.published) {
+                    <div class="row mt-5 pb-4">
+                      <div class="col">
+                        <div class="w-100">
+                          <div class="d-flex flex-column gap-3">
+                            <!--  STATUS -->
+                            <div class="mr-4 d-flex product-status-container">
+                              <!-- PUBLISHED -->
+                              @if (product.published && myProduct) {
+                                <div
+                                  matTooltip="Anúncio publicado."
+                                  class="product-cta-status"
+                                  >
+                                  <ion-icon name="checkmark-outline"></ion-icon>
+                                  <span> {{ expiration?.text ?? "" }} </span>
+                                </div>
+                              }
+                              <!-- WAITING PUB -->
+                              @if (product.waitingPublication && myProduct) {
+                                <div
+                                  matTooltip="O anúncio está em análise e deve ser publicado em alguns minutos"
+                                  class="product-cta-status"
+                                  >
+                                  <ion-icon name="time-outline"></ion-icon>
+                                  <span> Em análise </span>
+                                </div>
+                              }
+                              <!-- REQUIRES ADJUSTS -->
+                              @if (product.waitingAdjustment && myProduct) {
+                                <div
+                                  matTooltip="Corrija os problemas para publicar o anúncio."
+                                  class="product-cta-status error"
+                                  >
+                                  <ion-icon name="warning-outline"></ion-icon>
+                                  <span> Requer ajustes </span>
+                                </div>
+                              }
+                              <!-- EXPIRED -->
+                              @if (product.expired && myProduct) {
+                                <div
+                                  matTooltip="O anúncio expirou, clique em reativar para publicá-lo novamente."
+                                  class="product-cta-status error"
+                                  >
+                                  <ion-icon name="close-outline"></ion-icon>
+                                  <span> Anúncio expirado </span>
+                                </div>
+                              }
+                              @if (
+                                (product.expired && !myProduct) ||
+                                product.unavailable
+                                ) {
+                                <div
+                                  matTooltip="Este produto não está mais disponível."
+                                  class="product-cta-status error"
+                                  >
+                                  <ion-icon name="close-outline"></ion-icon>
+                                  <span> Produto indisponível </span>
+                                </div>
+                              }
+                              <!-- NEGOTIATIONS -->
+                              @if (product.reserved) {
+                                <div
+                                  class="product-cta-status"
+                                  >
+                                  <ion-icon name="ban-outline"></ion-icon>
+                                  <span> Produto reservado </span>
+                                </div>
+                              }
+                              @if (product.sold) {
+                                <div class="product-cta-status">
+                                  <ion-icon name="cash-outline"></ion-icon>
+                                  <span> Produto vendido </span>
+                                </div>
+                              }
+                              @if (product.selling) {
+                                <div
+                                  class="product-cta-status"
+                                  >
+                                  <ion-icon name="time-outline"></ion-icon>
+                                  <span> Reservado </span>
+                                </div>
+                              }
+                              <!-- PAUSED -->
+                              @if (product.paused && myProduct) {
+                                <div
+                                  matTooltip="O anúncio está pausado, clique em publicar para publicá-lo novamente."
+                                  class="product-cta-status"
+                                  >
+                                  <ion-icon name="pause-outline"></ion-icon>
+                                  <span> Anúncio pausado </span>
+                                </div>
+                              }
+                            </div>
+                            <!-- BUTTONS -->
+                            <div class="d-flex gap-2">
+                              <!-- BTN DUPLICATE -->
+                              @if (
+                                !showRenew && !product.unavailable && myProduct
+                                ) {
+                                <button
+                                  mat-stroked-button
+                                  (click)="duplicateProduct()"
+                                  aria-label="duplicar anúncio"
+                                  matTooltip="Duplicar anúncio"
+                                  >
+                                  <mat-icon class="color-gray-dark"
+                                    >content_copy</mat-icon
+                                    >
+                                  </button>
+                                }
+                                <!-- pause -->
+                                @if (product.paused) {
+                                  <button
+                                    mat-stroked-button
+                                    (click)="activateProduct()"
+                                    aria-label="publicar anúncio"
+                                    matTooltip="Publicar anúncio"
+                                    >
+                                    <mat-icon class="color-gray-dark">play_arrow</mat-icon>
+                                  </button>
+                                } @else if(product.published) {
+                                  <button
+                                    mat-stroked-button
+                                    (click)="deactivateProduct()"
+                                    aria-label="pausar anúncio"
+                                    matTooltip="Pausar anúncio"
+                                    >
+                                    <mat-icon class="color-gray-dark">pause</mat-icon>
+                                  </button>
+                                }
+                                <!--  -->
+                                @if( myProduct && (product.published ||
+                                  product.waitingPublication || product.paused ||
+                                  product.waitingAdjustment || showRenew)) {
+                                  <!-- BTN RENEW -->
+                                  @if (showRenew) {
+                                    <button
+                                      mat-stroked-button
+                                      (click)="renewProduct()"
+                                      aria-label="renovar anúncio"
+                                      matTooltip="Renovar anúncio"
+                                      >
+                                      <mat-icon class="color-gray-dark">refresh</mat-icon>
+                                    </button>
+                                  }
+                                  <!-- BTN EDIT -->
+                                  @if (!showRenew) {
+                                    <button
+                                      mat-stroked-button
+                                      (click)="editProduct()"
+                                      aria-label="editar anúncio"
+                                      matTooltip="Editar anúncio"
+                                      >
+                                      <mat-icon class="color-gray-dark">edit</mat-icon>
+                                    </button>
+                                  }
+                                  <!-- BTN DELETE -->
+                                  <button
+                                    mat-stroked-button
+                                    (click)="deleteProduct()"
+                                    aria-label="apagar anúncio"
+                                    matTooltip="Apagar anúncio"
+                                    >
+                                    <mat-icon class="color-gray-dark">delete</mat-icon>
+                                  </button>
+                                }
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    }
+                    <!-- categorias e descricao -->
+                    <div
+                  class="product-description-container {{
+                    !product.published ? '' : 'border-top'
+                  }}"
+                      >
+                      <p>{{ product.description }}</p>
+                      <!-- Categorias -->
+                      <div class="d-flex flex-wrap mt-4 gap-8">
+                        @if (product.brand) {
+                          <tk-status-pill
+                            variant="neutral"
+                            [label]="product.brand.name"
+                          />
+                        }
+                        <tk-status-pill
+                          variant="neutral"
+                          [label]="product.piece | itemName: 'piece' : product.category"
+                        />
+                        @if (product.size !== null) {
+                          <tk-status-pill
+                            variant="neutral"
+                            [label]="'Tam ' + (product.size | itemName: 'size' : product.category : product.age)"
+                          />
+                        }
+                        <tk-status-pill
+                          variant="neutral"
+                          [label]="product.gender | itemName: 'gender'"
+                        />
+                        <tk-status-pill
+                          variant="neutral"
+                          [label]="product.condition | itemName: 'condition'"
+                        />
+                      </div>
+                    </div>
+                    <!-- Loja -->
+                    <div
+                      class="row py-5 cursor-pointer"
+                      routerLink="/users/{{ owner.nickname }}"
+                      >
+                      <div
+                        class="col-auto d-flex justify-content-center align-itens-center p-4"
+                        >
+                        <tk-user-avatar [user]="owner" size="medium" />
+                      </div>
+                      <div
+                        class="col d-flex ms-0 ms-md-2 flex-column align-items-start justify-content-center px-md-0"
+                        >
+                        <div class="d-flex align-items-center">
+                          <h4 class="color-gray-dark text-capitalize">
+                            {{ owner.storeName ?? owner.name }}
+                          </h4>
+                          </div>
+                          <div class="d-flex align-items-center mt-1">
+                            <div class="d-flex flex-column">
+                              <span
+                                class="label-caption-1 color-gray-default max-user-address"
+                                >
+                                {{ owner.address.city }},
+                                {{ owner.address.state }}
+                              </span>
+                            </div>
+                          </div>
+                          <div
+                            class="mt-2 d-flex justify-content-between align-items-center"
+                            >
+                            <tk-review-stars
+                              [stars]="owner.reviewsAverage"
+                              [amount]="owner.reviewsAmount"
+                              [clickable]="!!owner.reviewsAmount"
+                              (clicked)="openReviews(owner)"
+                            ></tk-review-stars>
+                          </div>
+                          <div class="d-flex flex-wrap gap-5 mt-32">
+                            @if (owner.productsSold > 0) {
+                              <div class="d-flex flex-column">
+                                <span class="label-caption-1 fw-300 color-gray-default">
+                                  Vendidos
+                                </span>
+                                <span class="label-caption-1 color-gray-dark">
+                                  {{ owner.productsSold }}
+                                </span>
+                              </div>
+                            }
+                            <div class="d-flex flex-column">
+                              <span class="label-caption-1 fw-300 color-gray-default">
+                                À venda
+                              </span>
+                              <span class="label-caption-1 color-gray-dark">
+                                {{ owner.productsForSale }}
+                              </span>
+                            </div>
+                            @if (owner?.productsSold > 0) {
+                              <div class="d-flex flex-column">
+                                <span class="label-caption-1 fw-300 color-gray-default">
+                                  Tempo médio de envio
+                                </span>
+                                <span class="label-caption-1 color-gray-dark">
+                                  {{ owner.avgPostageDays }}
+                                  {{
+                                  owner.avgPostageDays > 1 ? "dias úteis" : "dia útil"
+                                  }}
+                                </span>
+                              </div>
+                            }
+                          </div>
+                        </div>
+                      </div>
+                      @if (myProduct || product.published) {
+                        <!-- Perguntas -->
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="row py-5">
+                              <div class="col">
+                                <app-product-questions
+                                  [product]="product"
+                                ></app-product-questions>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Mais da loja -->
+            @if (itemsMap && otherClothes && otherClothes.length > 0) {
+              <app-products-horizontal-list
+                title="Mais de {{ owner.storeName ?? owner.name | titlecase }}"
+                [products]="otherClothes"
+                [seeMore]="true"
+                [navText]="'Ver tudo'"
+                navMore="/users/{{ owner.nickname }}"
+                >
+              </app-products-horizontal-list>
+            }
+          </div>
+        </div>
+      </div>
+    }

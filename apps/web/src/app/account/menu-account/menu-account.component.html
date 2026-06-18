@@ -1,0 +1,66 @@
+<div class="account-menu page">
+  <div class="w-100 d-flex d-md-none pr-3 justify-content-end">
+    @if (!menuOppened) {
+      <mat-icon
+        type="button"
+        class="color-gray-default"
+        mat-icon-button
+        (click)="toggleMenu()"
+      >
+        menu
+      </mat-icon>
+    }
+    @if (menuOppened) {
+      <mat-icon
+        type="button"
+        class="color-gray-default"
+        mat-icon-button
+        (click)="toggleMenu()"
+      >
+        close
+      </mat-icon>
+    }
+  </div>
+
+  <div
+    class="d-md-block"
+    [ngClass]="{ 'd-block': menuOppened, 'd-none': !menuOppened }"
+  >
+    <h3>Minha conta</h3>
+
+    <div class="side-menu py-5">
+      @for (i of accountTabs; track i) {
+        <a
+          routerLinkActive="active-link"
+          routerLink="{{ i.route }}"
+          (click)="toggleMenu()"
+          mat-menu-item
+        >
+          <ion-icon name="{{ i.icon }}"></ion-icon>
+          <span>{{ i.text }}</span>
+        </a>
+      }
+    </div>
+
+    @if (showSellerOptions) {
+      <div class="d-flex align-items-center gap-2 mt-5">
+        <h3>Minha loja</h3>
+        <tk-seller-status-badge [user]="user" [isLoggedUser]="true" (badgeClick)="goToSellerStatus()" />
+      </div>
+
+      <div class="side-menu py-5">
+        @for (i of sellerTabs; track i) {
+          <a
+            routerLinkActive="active-link"
+            routerLink="{{ i.route }}"
+            (click)="toggleMenu()"
+            mat-menu-item
+          >
+            <ion-icon name="{{ i.icon }}"></ion-icon>
+            <span>{{ i.text }}</span>
+          </a>
+        }
+      </div>
+    }
+  </div>
+</div>

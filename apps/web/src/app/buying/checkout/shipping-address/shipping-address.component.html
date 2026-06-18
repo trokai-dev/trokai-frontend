@@ -1,0 +1,16 @@
+<h3 class="checkout-title">Endereço de entrega</h3>
+
+<div class="checkout-body">
+  <app-form-address  [submit]="false" />
+</div>
+
+<div class="checkout-footer mt-40">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onContinue()"
+    [disabled]="!formAddressComponent?.form.valid"
+  >
+    Continuar
+  </button>
+</div>

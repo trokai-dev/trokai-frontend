@@ -1,0 +1,118 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="profile-form">
+  <mat-form-field appearance="outline" class="profile-form__field">
+    <mat-label>Nome completo</mat-label>
+    <input
+      [errorStateMatcher]="nameErrorMatcher"
+      maxlength="256"
+      formControlName="name"
+      (change)="changeName()"
+      matInput
+      type="text"
+    />
+    @if (!nameValid) {
+      <mat-error>Nome inválido</mat-error>
+    } @else if (shortName) {
+      <mat-error>Preencha nome e sobrenome</mat-error>
+    }
+  </mat-form-field>
+
+  @if (!completingInformation) {
+    <mat-form-field appearance="outline" class="profile-form__field">
+      <mat-label>Email</mat-label>
+      <input
+        [errorStateMatcher]="emailErrorMatcher"
+        (blur)="onEmailBlur()"
+        maxlength="256"
+        formControlName="email"
+        matInput
+        type="email"
+      />
+      @if (emailRegistered) {
+        <mat-error>E-mail já cadastrado</mat-error>
+      }
+    </mat-form-field>
+  }
+
+  <mat-form-field appearance="outline" class="profile-form__field">
+    <mat-label>CPF</mat-label>
+    <input
+      matInput
+      mask="000.000.000-00"
+      (focus)="focusCPF()"
+      formControlName="cpf"
+      type="text"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="profile-form__field">
+    <mat-label>Data de nascimento</mat-label>
+    <input
+      [dropSpecialCharacters]="false"
+      [errorStateMatcher]="birthErrorMatcher"
+      matInput
+      mask="d0/M0/0000"
+      (change)="changeBirthday()"
+      formControlName="birthday"
+      type="text"
+    />
+    @if (under18) {
+      <mat-error>
+        É preciso ter 18 anos ou mais para utilizar o Trokaí
+      </mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="profile-form__field">
+    <mat-label>Telefone celular</mat-label>
+    <input
+      matInput
+      (blur)="onPhoneBlur()"
+      [errorStateMatcher]="phoneErrorMatcher"
+      mask="(00)00000-0000"
+      formControlName="phone"
+      type="text"
+    />
+    @if (phoneMatches && !user.phoneVerified) {
+      <mat-icon
+        matSuffix
+        class="color-alert"
+        matTooltip="Verificação de telefone pendente."
+        >warning</mat-icon
+      >
+    }
+    @if (phoneMatches && user.phoneVerified) {
+      <mat-icon matSuffix color="primary" matTooltip="Telefone verificado."
+        >done</mat-icon
+      >
+    }
+    @if (phoneRegistered) {
+      <mat-error>Celular já cadastrado</mat-error>
+    }
+  </mat-form-field>
+
+  @if (phoneMatches && !user.phoneVerified) {
+    <div class="profile-form__actions">
+      <button
+        type="button"
+        mat-stroked-button
+        aria-label="Verificar telefone"
+        (click)="verifyPhone.emit()"
+        color="secondary"
+      >
+        Verificar telefone
+      </button>
+    </div>
+  }
+
+  <div class="profile-form__actions">
+    <button
+      type="submit"
+      mat-raised-button
+      aria-label="Salvar"
+      color="primary"
+      [disabled]="loading"
+    >
+      Salvar
+    </button>
+  </div>
+</form>

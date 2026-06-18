@@ -1,0 +1,12 @@
+@import '../../theme/variables.scss';
+@import '../../global.scss';
+
+strong,
+b {
+  display: inherit !important;
+}
+
+.notification-badge {
+  left: 1.4rem;
+  bottom: 1.5rem;
+}

@@ -1,0 +1,18 @@
+@if (isBrowser) {
+  @if (isMobile) {
+    <div class="mobile-fallback">
+      <img src="assets/logo/logo@2x.png" alt="Trokaí" class="logo" />
+      <h1>Manual de Boas Práticas para Vendedores</h1>
+      <p>Toque no botão abaixo para abrir o PDF no seu dispositivo.</p>
+      <button mat-raised-button color="primary" (click)="openPdf()">
+        <mat-icon>picture_as_pdf</mat-icon>
+        Abrir PDF
+      </button>
+    </div>
+  } @else if (safePdfUrl) {
+    <iframe
+      [src]="safePdfUrl"
+      title="Manual de Boas Práticas para Vendedores Trokai"
+    ></iframe>
+  }
+}

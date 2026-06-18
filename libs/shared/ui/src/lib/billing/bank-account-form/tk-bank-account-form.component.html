@@ -1,0 +1,75 @@
+@if (user) {
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Nome completo</mat-label>
+      <input matInput type="text" formControlName="holderName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>CPF / CNPJ</mat-label>
+      <input matInput type="text" disabled [value]="user.cpf | mask:'000.000.000-00||00.000.000/0000-00'" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Banco</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="bank"
+        [matAutocomplete]="bankAuto"
+      />
+      <mat-autocomplete #bankAuto="matAutocomplete" [displayWith]="displayBank" (optionSelected)="selectBank($event.option.value)">
+        @for (b of filteredBanks$ | async; track b._id) {
+          <mat-option [value]="b">{{ b.value | titlecase }}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Agência</mat-label>
+          <input matInput type="text" inputmode="numeric" formControlName="branchNumber" maxlength="4" />
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Dígito (se houver)</mat-label>
+          <input matInput type="text" inputmode="numeric" formControlName="branchCheckDigit" maxlength="1" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Conta</mat-label>
+          <input matInput type="text" inputmode="numeric" formControlName="accountNumber" />
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Dígito (se houver)</mat-label>
+          <input matInput type="text" inputmode="numeric" formControlName="accountCheckDigit" maxlength="1" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="w-100 d-flex justify-content-between mt-16">
+      @if (accountBkp && !changingAccount) {
+        <button type="button" mat-button color="primary" (click)="changeAccount()">Alterar conta</button>
+      }
+      @if (accountBkp && changingAccount) {
+        <button type="button" mat-button color="accent" (click)="cancelChange()">Cancelar</button>
+      }
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="form.invalid || !form.get('bank')?.value?._id"
+      >
+        Confirmar
+      </button>
+    </div>
+  </form>
+}

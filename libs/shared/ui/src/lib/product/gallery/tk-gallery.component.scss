@@ -1,0 +1,74 @@
+.swiper {
+  height: 100%;
+}
+
+.dialog-wrapper {
+  position: relative;
+}
+
+.swiper-image {
+  max-width: 100dvw;
+  max-height: 90dvh;
+  cursor: zoom-in;
+}
+
+.close-button {
+  position: absolute;
+  top: 1.6rem;
+  right: 1.6rem;
+  z-index: 1000;
+  color: white;
+}
+
+.custom-prev,
+.custom-next {
+  position: absolute;
+  transform: translateY(-50%);
+  background-color: rgb(238 238 238 / 50%);
+  color: var(--color-primary);
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  top: 50%;
+  display: none;
+}
+
+.custom-prev {
+  left: 20rem;
+}
+.custom-next {
+  right: 20rem;
+}
+
+@media (min-width: 1200px) {
+  .swiper-slide {
+    height: 100dvh;
+  }
+  .swiper-image {
+    max-height: 85dvh;
+    width: 100%;
+  }
+
+  .dialog-content {
+    margin: auto;
+    width: 45%;
+  }
+
+  .custom-prev,
+  .custom-next {
+    display: block;
+  }
+
+  .close-button {
+    right: 20rem;
+  }
+}
+
+::ng-deep .swiper-pagination-bullet {
+  background: white;
+  opacity: 0.5;
+}
+
+::ng-deep .swiper-pagination-bullet-active {
+  background: var(--color-primary);
+}

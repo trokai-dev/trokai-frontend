@@ -1,0 +1,51 @@
+:host {
+  display: inline-flex;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.4rem 1.2rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &--incomplete {
+    background: var(--color-gray-25);
+    color: var(--color-gray-1);
+  }
+
+  &--pending-review {
+    background: #fef3e2;
+    color: #9a5c00;
+  }
+
+  &--approved {
+    background: #e6f4ea;
+    color: var(--color-success);
+  }
+
+  &--adjusts-required {
+    background: #fef3e2;
+    color: #9a5c00;
+  }
+
+  &--rejected {
+    background: #fde8e8;
+    color: var(--color-error);
+  }
+
+  &--suspended {
+    background: var(--color-gray-2);
+    color: var(--color-gray-1);
+  }
+
+  &--vacation {
+    background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+    color: #9b3848;
+  }
+}

@@ -1,0 +1,14 @@
+<div
+  role="button"
+  tabindex="0"
+  (click)="onClick($event)"
+  (keyup.enter)="onClick($any($event))"
+  (touchstart)="onTouchStart()"
+  (touchmove)="onTouchMove()"
+  (touchend)="onTouchEnd($event)"
+  class="tk-like-button image-badge-button heart-like {{ class }}"
+>
+  <mat-icon [ngClass]="{ 'like-active': favoriteStatus() }">
+    {{ favoriteStatus() ? 'favorite' : 'favorite_border' }}
+  </mat-icon>
+</div>

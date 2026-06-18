@@ -1,0 +1,28 @@
+<form class="recovery-email-form" (ngSubmit)="submit()">
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      [formControl]="email"
+      type="email"
+      autocomplete="email"
+      maxlength="256"
+      [errorStateMatcher]="matcher"
+    />
+    @if (email.hasError('required')) {
+      <mat-error>Informe seu email</mat-error>
+    } @else if (email.hasError('email')) {
+      <mat-error>Email inválido</mat-error>
+    }
+  </mat-form-field>
+
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    aria-label="Enviar código"
+    [disabled]="loading"
+  >
+    Enviar código
+  </button>
+</form>

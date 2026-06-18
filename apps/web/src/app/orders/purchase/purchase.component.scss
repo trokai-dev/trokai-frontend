@@ -1,0 +1,15 @@
+.pixQR {
+  width: 160px;
+}
+
+.d-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+}
+
+@media (min-width: 768px) {
+  .d-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

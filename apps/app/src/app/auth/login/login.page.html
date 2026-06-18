@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <app-back-button
+      [nav]="true"
+      (buttonClick)="clickBack()"
+      defaultHref="/main/auth"
+    ></app-back-button>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="d-flex justify-content-center p-24">
+    <tk-login-form
+      class="w-100 mt-40"
+      [loading]="loading"
+      (submitted)="login($event)"
+      (forgotPassword)="toForgot()"
+      (register)="toRegister()"
+    ></tk-login-form>
+  </div>
+</ion-content>

@@ -1,0 +1,16 @@
+.slide-buttons {
+  position: absolute;
+  top: 1rem;
+  z-index: 1000;
+  right: 4rem;
+}
+
+img {
+  max-height: 100vw;
+  width: 100%;
+  margin: 0px !important;
+  border-radius: 0;
+  border: none !important;
+  object-fit: cover;
+  aspect-ratio: 3 / 4;
+}

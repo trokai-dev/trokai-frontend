@@ -1,0 +1,17 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "TCDL5KGS5K.com.trokai.mobile",
+        "paths": [
+          "/",
+          "/search",
+          "/items/*",
+          "/users/*",
+          "NOT /*"
+        ]
+      }
+    ]
+  }
+}

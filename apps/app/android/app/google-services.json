@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "311804597430",
+    "firebase_url": "https://trokai.firebaseio.com",
+    "project_id": "trokai",
+    "storage_bucket": "trokai.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311804597430:android:fff8029c8c75bc351dc217",
+        "android_client_info": {
+          "package_name": "com.trokai.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "311804597430-3vn51fgs1kecd4fp7bmab43am26q4s9a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_bAr7bPzOQZLhyAYHWaT969RTzVcK4Ro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "311804597430-3vn51fgs1kecd4fp7bmab43am26q4s9a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "311804597430-d24753bo3erd3evbn0q9gv6mbbkifi94.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.trokai.mobile",
+                "app_store_id": "1487495619"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311804597430:android:082b4e5999c3569f1dc217",
+        "android_client_info": {
+          "package_name": "com.trokai.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "311804597430-92bi0ce5hge4thmshm2qq0k1aupm6i11.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.trokai.mobile",
+            "certificate_hash": "8c3dc36584f8eada57e46e514f6516e5b9b23b4b"
+          }
+        },
+        {
+          "client_id": "311804597430-3vn51fgs1kecd4fp7bmab43am26q4s9a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_bAr7bPzOQZLhyAYHWaT969RTzVcK4Ro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "311804597430-3vn51fgs1kecd4fp7bmab43am26q4s9a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "311804597430-d24753bo3erd3evbn0q9gv6mbbkifi94.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.trokai.mobile",
+                "app_store_id": "1487495619"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

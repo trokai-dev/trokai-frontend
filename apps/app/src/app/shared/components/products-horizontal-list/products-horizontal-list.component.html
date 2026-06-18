@@ -1,0 +1,39 @@
+<div>
+  @if (showTitle) {
+  <div
+    class="border-bottom d-flex justify-content-between align-items-center pb-0 mt-16 mx-24"
+  >
+    <h6 class="color-gray-dark">{{ title }}</h6>
+    @if (seeMore) {
+    <h6 class="color-primary" (click)="clickSeeMore()">
+      Ver tudo
+    </h6>
+    }
+  </div>
+  }
+
+  @if (!products) {
+  <ion-list
+    class="horizontal-list px-16 pb-8 ion-no-padding mt-16"
+  >
+    @for (p of emptyList; track $index) {
+    <div class="empty-card mx-8">
+      <ion-skeleton-text animated></ion-skeleton-text>
+    </div>
+    }
+  </ion-list>
+  }
+
+  @if (products && products.length > 0) {
+  <ion-list
+    class="horizontal-list px-16 pb-0 ion-no-padding mt-16"
+  >
+    @for (p of products; track p._id) {
+    <div class="mx-8 card">
+      <tk-product-card [useLink]="false" [product]="p" (open)="clicked(p)">
+      </tk-product-card>
+    </div>
+    }
+  </ion-list>
+  }
+</div>

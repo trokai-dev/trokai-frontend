@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <app-back-button defaultHref="/main/profile"></app-back-button>
+    </ion-buttons>
+    <ion-title>Minha conta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="p-24">
+    <!-- Dados pessoais -->
+    <div routerLink="profile" class="menu-item ion-activatable ripple-parent">
+      <div>
+        <ion-icon name="person-outline"></ion-icon>
+        <label class="label-body-1 ml-16">Dados pessoais</label>
+      </div>
+      <ion-icon name="chevron-forward"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <!-- Armario -->
+    <div routerLink="store" class="menu-item ion-activatable ripple-parent">
+      <div>
+        <ion-icon name="storefront-outline"></ion-icon>
+        <label class="label-body-1 ml-16">Armário</label>
+      </div>
+      <ion-icon name="chevron-forward"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <!-- Cartoes -->
+    <div (click)="cards()" class="menu-item ion-activatable ripple-parent">
+      <div>
+        <ion-icon name="card-outline"></ion-icon>
+        <label class="label-body-1 ml-16">Cartões</label>
+      </div>
+      <ion-icon name="chevron-forward"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <!-- Endereco -->
+    <div routerLink="address" class="menu-item ion-activatable ripple-parent">
+      <div>
+        <ion-icon name="location-outline"></ion-icon>
+        <label class="label-body-1 ml-16">Endereço</label>
+      </div>
+      <ion-icon name="chevron-forward"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <!-- Cofrinho -->
+    <div (click)="bank()" class="menu-item ion-activatable ripple-parent">
+      <div>
+        <ion-icon name="cash-outline"></ion-icon>
+        <label class="label-body-1 ml-16">Cofrinho</label>
+      </div>
+      <ion-icon name="chevron-forward"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <!-- Alterar senha -->
+    @if (hasPassword) {
+    <div
+      routerLink="/new-password"
+      class="menu-item ion-activatable ripple-parent"
+    >
+      <div>
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        <label class="label-body-1 ml-16">Alterar senha</label>
+      </div>
+      <ion-icon name="chevron-forward"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    }
+
+    <!-- Excluir a conta -->
+
+    <div (click)="askDelete()" class="menu-item ion-activatable ripple-parent">
+      <div>
+        <ion-icon name="trash-outline"></ion-icon>
+        <label class="label-body-1 ml-16">Excluir a conta</label>
+      </div>
+      <ion-icon name="chevron-forward"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </ion-grid>
+</ion-content>

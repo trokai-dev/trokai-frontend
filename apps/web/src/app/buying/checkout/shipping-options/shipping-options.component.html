@@ -1,0 +1,110 @@
+<!-- Shipping options -->
+
+@if (user && checkout && shipping && inPerson) {
+
+<h3 class="checkout-title">Escolha a opção de entrega</h3>
+
+<div class="checkout-body">
+  <mat-radio-group class="custom-radio-group" [(ngModel)]="selectedOption">
+    <mat-radio-button color="primary" [value]="shippingOptions.INPERSON">
+      <div class="custom-radio-button-content">
+        <span class="custom-radio-button-title">Retirada gratuita</span>
+        <span class="custom-radio-button-text">
+          Encontre o vendedor em {{ checkout.owner.address.city }},
+          {{ checkout.owner.address.state }}
+        </span>
+      </div>
+    </mat-radio-button>
+    <mat-radio-button color="primary" [value]="shippingOptions.SHIPPING">
+      <div class="custom-radio-button-content">
+        <div class="d-flex flex-1 justify-content-between flex-wrap">
+          <div class="d-flex flex-column">
+            <span class="custom-radio-button-title">
+              Enviar no meu endereço
+            </span>
+
+            <span class="custom-radio-button-text">
+              {{ user.address.street }}, {{ user.address.number
+              }}{{
+                user.address.complement ? ", " + user.address.complement : ""
+              }}, {{ user.address.neighborhood }}, {{ user.address.city }}
+            </span>
+          </div>
+          <div class="d-flex align-items-end">
+            <span class="label-button" (click)="onChangeAddress($event)">
+              Alterar endereço
+            </span>
+          </div>
+        </div>
+      </div>
+    </mat-radio-button>
+  </mat-radio-group>
+</div>
+
+<div class="checkout-footer">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onContinue()"
+    [disabled]="selectedOption === null"
+  >
+    Continuar
+  </button>
+</div>
+
+}
+
+<!-- Only shipping -->
+@if (user?.address && checkout && shipping && !inPerson) {
+<h3 class="checkout-title">Endereço de entrega</h3>
+
+<div class="checkout-body">
+  <div class="d-flex flex-column">
+    <span class="label-body-1">
+      {{ user.address.street }}, {{ user.address.number
+      }}{{ user.address.complement ? ", " + user.address.complement : "" }}
+    </span>
+    <span class="label-body-1">
+      {{ user.address.zipCode | mask : "00000-000" }},
+      {{ user.address.neighborhood }}
+    </span>
+    <span class="label-body-1"
+      >{{ user.address.city }} - {{ user.address.state }}
+    </span>
+  </div>
+</div>
+
+<div class="checkout-footer mt-40">
+  <button mat-button color="primary" (click)="onChangeAddress($event)">
+    Alterar endereço
+  </button>
+  <button mat-raised-button color="primary" (click)="onContinue()">
+    Continuar
+  </button>
+</div>
+
+}
+
+<!-- Only inPerson -->
+@if (user && checkout && !shipping && inPerson) {
+<h3 class="checkout-title">Retirada gratuita</h3>
+
+<div class="checkout-body">
+  <div class="d-flex flex-column">
+    <span class="label-body-1">
+      Este vendedor oferece apenas retirada em
+      <b>
+        {{ checkout.owner.address.city }},
+        {{ checkout.owner.address.state }}
+      </b>
+    </span>
+  </div>
+</div>
+
+<div class="checkout-footer mt-40">
+  <button mat-raised-button color="primary" (click)="onContinue()">
+    Continuar
+  </button>
+</div>
+
+}

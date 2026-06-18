@@ -1,0 +1,119 @@
+@if (user) {
+<form [formGroup]="form" (ngSubmit)="save()" class="mt-5">
+  <!-- Nome completo -->
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Nome completo</mat-label>
+    <input matInput type="text" formControlName="holderName" />
+  </mat-form-field>
+
+  <!-- Documentos -->
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>CPF / CNPJ</mat-label>
+    <input
+      matInput
+      type="text"
+      disabled
+      value="{{ user.cpf | mask : '000.000.000-00||00.000.000/0000-00' }}"
+    />
+  </mat-form-field>
+
+  <!-- Banco -->
+  @if (bancos) {
+  <app-autocomplete
+    [parentForm]="form"
+    controlName="bank"
+    name="Banco"
+    [options]="bancos"
+    (selected)="selectBanco($event)"
+  ></app-autocomplete>
+  }
+
+  <!-- Agencia -->
+  <div class="row">
+    <div class="col-6">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Agência</mat-label>
+        <input
+          matInput
+          type="text"
+          inputmode="numeric"
+          formControlName="branchNumber"
+          maxlength="4"
+        />
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Dígito (se houver)</mat-label>
+        <input
+          matInput
+          type="text"
+          inputmode="numeric"
+          formControlName="branchCheckDigit"
+          maxlength="1"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Conta -->
+  <div class="row">
+    <div class="col-6">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Conta</mat-label>
+        <input
+          matInput
+          type="text"
+          inputmode="numeric"
+          formControlName="accountNumber"
+        />
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Dígito (se houver)</mat-label>
+        <input
+          matInput
+          type="text"
+          inputmode="numeric"
+          formControlName="accountCheckDigit"
+          maxlength="1"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="w-100 d-flex justify-content-between mt-16">
+    @if(accountBkp && !changingAccount) {
+    <button
+      type="button"
+      mat-button
+      aria-label="Alterar conta"
+      color="primary"
+      (click)="changeAccount()"
+    >
+      Alterar conta
+    </button>
+    } @if(accountBkp && changingAccount) {
+    <button
+      type="button"
+      mat-button
+      aria-label="Cancelar"
+      color="accent"
+      (click)="cancelChange()"
+    >
+      Cancelar
+    </button>
+    }
+    <button
+      type="submit"
+      mat-raised-button
+      aria-label="Continuar"
+      color="primary"
+      [disabled]="form.invalid || !bancoSelecionado"
+    >
+      Confirmar
+    </button>
+  </div>
+</form>
+}

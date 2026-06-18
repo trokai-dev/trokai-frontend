@@ -1,0 +1,22 @@
+<ion-buttons slot="start">
+  <!-- Usado em nav ou modal -->
+  <ion-button
+    [ngStyle]="{ display: blockNavigation || nav ? 'block' : 'none' }"
+    text=""
+    mode="{{ mode }}"
+    color="primary"
+    (click)="click($event)"
+  >
+    <ion-icon name="arrow-back-outline" slot="icon-only" color="primary">
+    </ion-icon>
+  </ion-button>
+
+  <ion-back-button
+    [ngStyle]="{ display: blockNavigation || nav ? 'none' : 'block' }"
+    text=""
+    mode="{{ mode }}"
+    color="primary"
+    [defaultHref]="defaultHref"
+  >
+  </ion-back-button>
+</ion-buttons>

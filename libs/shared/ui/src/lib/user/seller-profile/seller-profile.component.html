@@ -1,0 +1,171 @@
+@if (user) {
+  <form [formGroup]="form" (ngSubmit)="save()" class="seller-profile">
+    @if (
+      user.sellerProfileStatus === SellerProfileStatus.ADJUSTS_REQUIRED &&
+      ((user.sellerAdjusts && user.sellerAdjusts.length > 0) ||
+        !!user.sellerAdjustsNote)
+    ) {
+      <div class="seller-profile__adjusts">
+        <h6 class="color-error">Ajustes necessários</h6>
+        @for (adjustId of user.sellerAdjusts; track adjustId; let i = $index) {
+          <span class="d-block label-caption-1">
+            {{ i + 1 }}) {{ getAdjustLabel(adjustId) }}
+          </span>
+        }
+        @if (user.sellerAdjustsNote) {
+          <span class="d-block label-caption-1"
+            >Nota: {{ user.sellerAdjustsNote }}</span
+          >
+        }
+      </div>
+    }
+
+    <div class="seller-profile__avatar">
+      <tk-user-avatar
+        [user]="user"
+        size="large"
+        [overrideUrl]="previewAvatarUrl"
+      />
+      <div class="seller-profile__avatar-actions">
+        <ng-content select="[avatarPicker]"></ng-content>
+        @if (submitAttempted && !avatarSatisfied) {
+          <mat-error class="label-caption-1">Foto obrigatória</mat-error>
+        }
+      </div>
+    </div>
+
+    <mat-form-field
+      appearance="outline"
+      class="seller-profile__field"
+      floatLabel="always"
+    >
+      <mat-label>Nome da loja</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="storeName"
+        placeholder="Nome da loja que será exibido para os usuários"
+        maxlength="50"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="seller-profile__field">
+      <mat-label>Link da loja</mat-label>
+      <span matTextPrefix class="color-gray">trokai.com.br/users/</span>
+      <input
+        matInput
+        type="text"
+        (input)="changeNickname()"
+        (blur)="trimNickname()"
+        formControlName="nickname"
+        onPaste="return false"
+        class="ion-text-lowercase"
+        maxlength="25"
+        [errorStateMatcher]="nicknameErrorMatcher"
+      />
+      <div matSuffix>
+        <button (click)="copyLink()" type="button" color="primary" mat-button>
+          <mat-icon>content_copy</mat-icon>
+          Copiar
+        </button>
+      </div>
+      @if (invalidNickname()) {
+        <mat-error
+          >Use apenas letras, números, ponto, traço ou sublinhado.</mat-error
+        >
+      }
+    </mat-form-field>
+
+    @if (showBio) {
+      <mat-form-field
+        appearance="outline"
+        class="seller-profile__field"
+        floatLabel="always"
+      >
+        <mat-label>Bio</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="3"
+          formControlName="profileBio"
+          maxlength="160"
+          placeholder="Conte um pouco sobre sua loja. Ex: brechó com curadoria vintage, roupas de grife, etc."
+        ></textarea>
+      </mat-form-field>
+    }
+
+    <hr class="seller-profile__divider" />
+
+    <h6 class="color-gray-dark">Opções de venda</h6>
+
+    <mat-checkbox
+      color="primary"
+      class="seller-profile__check"
+      formControlName="shipping"
+    >
+      <div class="seller-profile__check-text">
+        <h6 class="color-gray-dark">Envio pelos correios</h6>
+        <span class="label-caption-1">Frete pago pelo comprador.</span>
+      </div>
+    </mat-checkbox>
+
+    <mat-checkbox
+      color="primary"
+      class="seller-profile__check"
+      formControlName="inPerson"
+    >
+      <div class="seller-profile__check-text">
+        <h6 class="color-gray-dark">Retirada presencial</h6>
+        <span class="label-caption-1"
+          >Sem custo de frete para o comprador.</span
+        >
+      </div>
+    </mat-checkbox>
+
+    @if (
+      submitAttempted &&
+      !form.get('shipping')?.value &&
+      !form.get('inPerson')?.value
+    ) {
+      <mat-error class="label-caption-1 d-block"
+        >Selecione ao menos uma opção de venda.</mat-error
+      >
+    }
+
+    @if (showStoreVisibility) {
+      <h6 class="color-gray-dark seller-profile__section">Status do armário</h6>
+      <mat-radio-group
+        formControlName="storeVisibility"
+        class="seller-profile__radios"
+      >
+        <mat-radio-button [value]="StoreVisibility.OPEN">
+          <div class="seller-profile__check-text">
+            <h6 class="color-gray-dark">Publicado</h6>
+            <span class="label-caption-1"
+              >Seus produtos aparecem normalmente.</span
+            >
+          </div>
+        </mat-radio-button>
+        <mat-radio-button [value]="StoreVisibility.PAUSED">
+          <div class="seller-profile__check-text">
+            <h6 class="color-gray-dark">Pausado</h6>
+            <span class="label-caption-1"
+              >Seus produtos não aparecem para os outros usuários.</span
+            >
+          </div>
+        </mat-radio-button>
+      </mat-radio-group>
+    }
+
+    <div class="seller-profile__actions">
+      <button
+        type="submit"
+        mat-raised-button
+        aria-label="Salvar"
+        color="primary"
+      >
+        Salvar
+      </button>
+    </div>
+  </form>
+}

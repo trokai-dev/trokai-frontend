@@ -1,0 +1,30 @@
+.reviews-container {
+  display: flex;
+  align-items: start;
+
+  &.clickable {
+    cursor: pointer;
+  }
+
+  .review-stars {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .star {
+    width: 1.4rem;
+    height: 1.4rem;
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+    color: var(--color-star-full);
+
+    &.empty {
+      color: var(--color-star-empty);
+    }
+  }
+
+  .amount {
+    margin-left: 4px;
+  }
+}

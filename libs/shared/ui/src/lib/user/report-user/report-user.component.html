@@ -1,0 +1,44 @@
+<div class="report-user__close">
+  <button mat-icon-button type="button" aria-label="Fechar" (click)="closed.emit()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+@if (loading) {
+  <div class="report-user__feedback">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+} @else if (done) {
+  <div class="report-user__feedback">
+    <mat-icon class="color-primary report-user__done-icon">check_circle</mat-icon>
+    <h6 class="color-gray-dark">Denúncia enviada!</h6>
+    <span class="label-body-2 color-gray-default">Vamos analisar a sua denúncia.</span>
+    <button mat-raised-button color="primary" class="report-user__submit" (click)="closed.emit()">
+      Fechar
+    </button>
+  </div>
+} @else {
+  <div class="report-user__header">
+    <tk-user-avatar [user]="otherUser" size="large" />
+    <h2 class="color-gray-dark">Denunciar {{ firstName }}</h2>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="report-user">
+    <mat-radio-group formControlName="type" class="report-user__types">
+      <mat-radio-button value="SPAM">SPAM</mat-radio-button>
+      <mat-radio-button value="ASSEDIO">Assédio ou importunação</mat-radio-button>
+      <mat-radio-button value="COMPORTAMENTO">Comportamento inadequado</mat-radio-button>
+      <mat-radio-button value="CONTEUDO">Conteúdo impróprio ou ilegal</mat-radio-button>
+      <mat-radio-button value="OUTRO">Outro</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field appearance="outline" class="report-user__field">
+      <mat-label>Escreva sua mensagem</mat-label>
+      <textarea matInput formControlName="message" maxlength="500" rows="4"></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" class="report-user__submit" [disabled]="loading">
+      Enviar denúncia
+    </button>
+  </form>
+}

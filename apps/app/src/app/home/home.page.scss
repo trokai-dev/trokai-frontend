@@ -1,0 +1,108 @@
+ion-toolbar {
+  --background: white;
+  ion-img {
+    height: 4.5rem;
+    width: max-content;
+  }
+}
+
+ion-content {
+  --padding-top: 16px;
+}
+
+.notification-badge {
+  right: 5rem;
+  top: 0.5rem;
+}
+
+.cart-badge {
+  right: 0rem;
+  top: 0.5rem;
+}
+
+@import '../../theme/variables.scss';
+
+// Large devices (desktops, 992px and up)
+
+a {
+  text-decoration: none;
+  text-transform: none;
+}
+
+.home_row {
+  margin-top: 0rem;
+  margin-bottom: 1.6rem;
+
+  ion-col {
+    padding: 0;
+  }
+
+  .home_row_header {
+    margin-bottom: 1.6rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .home_row_title {
+    display: block;
+    font-weight: 400 !important;
+
+    @extend .label-body-1;
+    @extend .color-gray-dark;
+  }
+  .home_row_description {
+    display: block;
+  }
+}
+
+.home_swiper_button {
+  position: absolute;
+  top: 50%;
+  height: 48px;
+  transform: translateY(-50%);
+  z-index: 1000;
+
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0;
+  color: $color-primary;
+  font-size: 1.6rem;
+}
+
+.home_swiper_button_prev {
+  @extend .home_swiper_button;
+  left: -2.4rem;
+}
+
+.home_swiper_button_next {
+  @extend .home_swiper_button;
+  right: -2.4rem;
+}
+
+swiper-slide {
+  display: block !important;
+}
+
+.row-smooth-scroll {
+  display: flex;
+  overflow-x: auto;
+  -webkit-scrollbar: none; /* For Chrome, Safari and Opera */
+  scrollbar-width: none; /* For Firefox */
+}
+
+.row-smooth-scroll::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari and Opera */
+}
+
+.home_header_alert {
+  background: $color-primary;
+  color: white;
+  font-size: 14px;
+  margin-top: -16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  text-align: center;
+  margin-bottom: 16px;
+}

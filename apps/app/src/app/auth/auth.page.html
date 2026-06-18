@@ -1,0 +1,54 @@
+<ion-content>
+
+  <div class="top-div">
+    <ion-img src="../../assets/icons/trokai-clean.svg">
+    </ion-img>
+  </div>
+
+
+  <ion-grid class="p-24">
+
+    @if (!loading) {
+    <div>
+
+      <ion-button (click)="googleLogin()" fill="outline" color="medium" class="btn-google action-button ">
+        <ion-img slot="start" src="../assets/icons/google-icon.png">
+        </ion-img>
+        Continuar com o Google
+      </ion-button>
+
+      @if (showApple) {
+      <ion-button (click)="appleLogin()" fill="outline" color="medium" class="btn-apple action-button mt-8">
+        <ion-icon slot="start" name="logo-apple">
+        </ion-icon>
+        Continuar com a Apple
+      </ion-button>
+      }
+
+      <ion-button (click)="goToLogin()" class="action-button mt-40">
+        Entrar com email
+      </ion-button>
+
+
+      <div class="w-100 ion-text-center mt-40">
+        <ion-label class="label-body-2  w-100">
+          Ao continuar, você aceita nossa
+          <ion-text color="primary" (click)="openPoliticas()">Política de Privacidade</ion-text> e
+          <ion-text color="primary" (click)="openTermos()"> Termos de Uso </ion-text>
+        </ion-label>
+      </div>
+
+
+
+    </div>
+    }
+
+    @if (loading) {
+    <ion-row class="d-flex justify-content-center">
+      <ion-spinner name="crescent">
+      </ion-spinner>
+    </ion-row>
+    }
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,47 @@
+:host {
+  display: inline-flex;
+}
+
+.trokai-avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 100%;
+  position: relative;
+  background-color: var(--color-gray-2);
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &.medium {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+}
+
+.mat-badge {
+  right: 0;
+  top: 8px;
+  z-index: 100;
+}
+
+@media (max-width: 1199px) {
+  .large {
+    width: 6rem;
+    height: 6rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .large {
+    width: 8rem;
+    height: 8rem;
+  }
+}

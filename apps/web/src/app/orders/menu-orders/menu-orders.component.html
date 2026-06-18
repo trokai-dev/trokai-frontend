@@ -1,0 +1,12 @@
+<div class="side-menu border-right page d-none d-md-block">
+  @for (i of items; track i) {
+    <a
+      routerLinkActive="active-link"
+      routerLink="{{ i.route }}"
+      mat-menu-item
+      >
+      <ion-icon name="{{ i.icon }}"></ion-icon>
+      <span>{{ i.text }}</span>
+    </a>
+  }
+</div>

@@ -1,0 +1,33 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "strict": false,
+    "esModuleInterop": true,
+    "target": "es2022",
+    "moduleResolution": "bundler",
+    "module": "preserve",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "useDefineForClassFields": false,
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["src/*"],
+      "@trokai/shared-ui": ["../../libs/shared/ui/src/index.ts"],
+      "@trokai/shared-core": ["../../libs/shared/core/src/index.ts"],
+      "@trokai/shared-data-access": ["../../libs/shared/data-access/src/index.ts"]
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  },
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    }
+  ]
+}

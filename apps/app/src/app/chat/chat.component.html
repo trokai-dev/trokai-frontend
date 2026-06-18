@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="primary" (click)="options()">
+      <ion-icon
+        slot="icon-only"
+        class="color-primary"
+        mode="md"
+        name="ellipsis-vertical"
+      ></ion-icon>
+    </ion-buttons>
+
+    <ion-grid class="ion-no-padding d-flex py-16">
+      <div class="d-flex align-items-center">
+        <app-back-button
+          [blockNavigation]="true"
+          (buttonClick)="close()"
+        ></app-back-button>
+      </div>
+      <div>
+        <ion-row class="w-100 d-flex align-items-center">
+          <ion-col class="ion-no-padding">
+            <div class="ion-no-padding d-flex">
+              <div class="d-flex justify-content-center align-items-center mr-16">
+                <tk-user-avatar [user]="otherUser" />
+              </div>
+
+              <div
+                class="d-flex justify-content-center align-items-start flex-column"
+              >
+                <h6 class="color-gray-dark max-user-name">
+                  {{ otherUser.storeName }}
+                </h6>
+
+                @if (showStatus) {
+                <label
+                  class="label-caption-1 color-gray-default mt-2"
+                >
+                  {{ otherUser.nickname }}
+                </label>
+                }
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <tk-chat-thread
+    [user]="user"
+    [otherUser]="otherUser"
+    [negotiationId]="negotiationId"
+    [negotiationType]="negotiationType"
+    [enabled]="enabled"
+  ></tk-chat-thread>
+</ion-content>

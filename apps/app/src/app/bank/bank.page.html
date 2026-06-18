@@ -1,0 +1,159 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <app-back-button defaultHref="/main/profile"></app-back-button>
+    </ion-buttons>
+    <ion-title>Cofrinho</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- loading -->
+  @if (isLoading || !balance) {
+  <ion-grid class="p-24">
+    <div class="empty-page full w-100">
+      <ion-spinner name="crescent"> </ion-spinner>
+    </div>
+  </ion-grid>
+  }
+
+  <!-- loaded -->
+  @if (!isLoading && balance) {
+
+  <ion-grid class="p-24">
+    <!-- SALDO DISPONIVEL -->
+
+    <span class="d-block color-gray-dark">
+      <b>Balanço</b>
+    </span>
+
+    <div
+      class="d-flex align-items-center justify-content-between pb-8 border-bottom mt-24"
+    >
+      <span class="color-gray-dark">Saldo disponível</span>
+      <span class="color-primary">
+        <b>
+          {{ balance.saldoDisponivel | cost | currency: "BRL" : true : '1.2-2'}}
+        </b>
+      </span>
+    </div>
+    <!-- EM ANDAMENTO -->
+    <div
+      class="d-flex align-items-center justify-content-between mt-8 pb-8 border-bottom"
+    >
+      <span class="color-gray-dark">Em andamento</span>
+      <span class="color-gray-dark">
+        {{ balance.vendasEmAndamento | cost | currency: "BRL" : true : '1.2-2'}}
+      </span>
+    </div>
+
+    <!-- TOTAL JA VENDIDO -->
+    <div
+      class="d-flex align-items-center justify-content-between mt-8 pb-8 border-bottom"
+    >
+      <span class="color-gray-dark">Total vendido</span>
+
+      <span class="color-gray-dark">
+        {{ balance.totalJaVendido | cost | currency: "BRL" : true : '1.2-2'}}
+      </span>
+    </div>
+
+    <!-- ALL GOOD -->
+
+    <!-- can withdraw -->
+    @if (allGood) {
+    <ion-button
+      class="action-button mt-24"
+      [disabled]="balance.saldoDisponivel <= 0"
+      (click)="withdraw()"
+    >
+      Sacar saldo
+    </ion-button>
+    }
+
+    <!-- Movimentacoes -->
+
+    @if (ordersAndTransfers && ordersAndTransfers.length) {
+
+    <span class="d-block color-gray-dark mt-40">
+      <b>Movimentações</b>
+    </span>
+
+    <ion-list>
+      @for (order of ordersAndTransfers; track order) {
+      <div class="border-bottom py-16">
+        <!-- header -->
+        <div class="d-flex align-items-center w-100 justify-content-between">
+          <h6 class="color-gray-dark">{{order.title}}</h6>
+          <ion-label class="label-caption-1 ml-16 color-gray-light-1">
+            {{order.date | date: "dd/MM/YYYY"}}
+          </ion-label>
+        </div>
+
+        <!-- items -->
+        <div class="d-block">
+          @if(order.items){
+          <div
+            class="mt-8 d-flex w-100 align-items-start justify-content-between"
+          >
+            <!-- items -->
+            <div>
+              @for (i of order.items; track i) {
+
+              <ion-label
+                class="text-dots orderTransferText d-block label-body-2 color-gray-default"
+              >
+                {{i}} {{i?.refund ? "(Estornado)" : ""}}
+              </ion-label>
+              }
+            </div>
+
+            <!-- item saque -->
+            @if (order.title === 'Saque') {
+            <span class="color-gray-default d-block label-body-2">
+              {{ order.amount | cost | currency: "BRL" : true : '1.2-2'}}
+            </span>
+            }
+            <!-- item venda -->
+            @else if (order.title === 'Venda') {
+            <h6 class="color-primary d-block">
+              {{ order.amount | cost | currency: "BRL" : true : '1.2-2'}}
+            </h6>
+            }
+          </div>
+          }
+        </div>
+
+        @if (order.text || order.transferAt) {
+        <div class="mt-8">
+          <!-- order text -->
+          @if (order.text) {
+          <ion-label class="label-body-2 color-gray-default d-block">
+            {{order.text}}
+          </ion-label>
+          }
+
+          <!-- status -->
+          @if (order.transferAt) {
+          <div (click)="alertSaquePrevisao()">
+            <ion-label
+              class="label-body-2 color-gray-default d-flex align-items-end"
+            >
+              Previsão de saque: {{order.transferAt | date: "dd/MM/YYYY"}}
+              <ion-icon
+                name="information-circle-outline"
+                class="color-gray-light-1 ml-8 mt-4"
+              ></ion-icon>
+            </ion-label>
+          </div>
+          }
+        </div>
+        }
+      </div>
+
+      }
+    </ion-list>
+    }
+  </ion-grid>
+  }
+</ion-content>

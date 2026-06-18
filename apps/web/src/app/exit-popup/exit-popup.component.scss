@@ -1,0 +1,35 @@
+@import "../../styles/variables.scss";
+
+.dialog-wrapper {
+  background-color: $color-primary;
+  h2,
+  p {
+    color: white !important;
+  }
+
+  .close-button {
+    color: white;
+  }
+
+  .popup-actions {
+    .popup-action {
+      background-color: white;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 32px;
+      align-items: center;
+      padding: 0.8rem;
+      margin-top: 1.4rem;
+      span {
+        margin-left: 1rem;
+        font-weight: 600;
+      }
+    }
+
+    .popup-action-btn {
+      background-color: $color-accent;
+      color: white;
+      border-radius: 32px;
+    }
+  }
+}

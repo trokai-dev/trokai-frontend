@@ -1,0 +1,84 @@
+<div class="dialog-wrapper">
+  <!-- header -->
+  <div class="dialog-header border-bottom">
+    <div class="d-flex justify-content-end">
+      <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+    <h2>Não saia ainda!!</h2>
+
+    <p class="label-body-1 mt-4">
+      Separamos um <b>cupom de R$10 OFF</b> para você! Ajude-nos a melhorar nos
+      contando o motivo de sua saída.
+    </p>
+  </div>
+
+  <!-- content -->
+  <div class="dialog-content">
+    @if(!selection) {
+    <div class="popup-actions">
+      @for(r of reasons; track r){
+      <div class="popup-action">
+        <span class="label-body-2"> {{ r.text }}</span>
+
+        <div class="popup-action-btn">
+          <button mat-icon-button (click)="selection = r">
+            <mat-icon class="action-icon">arrow_forward</mat-icon>
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+    } @else {
+
+    <form [formGroup]="form" (ngSubmit)="next()">
+      <mat-form-field appearance="fill" class="d-block mt-4">
+        <mat-label>{{ selection.placeholder }}</mat-label>
+        <textarea
+          style="font-size: 14px; min-height: 75px"
+          matInput
+          formControlName="message"
+        ></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="d-block mt-2">
+        <mat-label>Email</mat-label>
+        <input
+          style="font-size: 14px"
+          matInput
+          type="email"
+          formControlName="email"
+        />
+      </mat-form-field>
+
+      <div class="mt-5 pt-5">
+        <button
+          mat-flat-button
+          type="submit"
+          [disabled]="form.invalid"
+          class="w-100 color-primary"
+        >
+          Enviar resposta
+        </button>
+
+        <button
+          mat-button
+          type="button"
+          (click)="back()"
+          style="color: white"
+          class="w-100 mt-3"
+        >
+          Voltar
+        </button>
+      </div>
+    </form>
+
+    }
+
+    <p class="label-body-1 text-center mt-4 border-top pt-4">
+      <b> Desconto de R$10 </b>em compras acima de R$150. USE O
+      <b>CUPOM 10OFF</b>
+    </p>
+  </div>
+</div>

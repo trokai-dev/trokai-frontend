@@ -1,0 +1,25 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  width: 100%;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  a {
+    color: var(--color-primary);
+    cursor: pointer;
+  }
+
+  &__error {
+    margin: 0;
+    color: var(--color-danger);
+  }
+
+  &__register {
+    margin-top: var(--space-24);
+    text-align: center;
+  }
+}

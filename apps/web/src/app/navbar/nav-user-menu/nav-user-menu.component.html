@@ -1,0 +1,57 @@
+<div id="nav-user-menu">
+  <span class="label-body-1 d-block color-gray-dark mt-3 mb-4 px-4"
+    ><b>{{ user?.name }}</b>
+  </span>
+
+  <a rel="nofollow" routerLink="/account/" mat-menu-item>
+    <ion-icon name="person-outline"></ion-icon>
+    <span class="label-body-2 color-gray-dark py-2">Minha conta</span>
+  </a>
+
+  @if (user?.isSeller) {
+    <a rel="nofollow" routerLink="/orders/sales/" mat-menu-item>
+      <ion-icon name="cash-outline"></ion-icon>
+      <span class="label-body-2 color-gray-dark py-2">Vendas</span>
+    </a>
+
+    <a
+      rel="nofollow"
+      mat-menu-item
+      routerLink="{{
+        user.nickname ? '/users/' + user.nickname : '/account/wardrobe'
+      }}"
+    >
+      <ion-icon name="shirt-outline"></ion-icon>
+      <span class="label-body-2 color-gray-dark py-2">Armário</span>
+    </a>
+  }
+
+  <a rel="nofollow" routerLink="/orders/purchases/" mat-menu-item>
+    <ion-icon name="bag-outline"></ion-icon>
+    <span class="label-body-2 color-gray-dark py-2">Compras</span>
+  </a>
+
+  <a rel="nofollow" routerLink="/notifications/" mat-menu-item>
+    <div class="d-flex p-relative">
+      <span
+        matBadgeSize="small"
+        matBadgeColor="accent"
+        [matBadge]="notificationsCount"
+        [matBadgeHidden]="notificationsCount === 0"
+      ></span>
+
+      <ion-icon name="notifications-outline"></ion-icon>
+    </div>
+    <span class="label-body-2 color-gray-dark py-2"> Notificações </span>
+  </a>
+
+  <a rel="nofollow" routerLink="/favorites/" mat-menu-item>
+    <ion-icon name="heart-outline"></ion-icon>
+    <span class="label-body-2 color-gray-dark py-2">Favoritos</span>
+  </a>
+
+  <a rel="nofollow" mat-menu-item (click)="logout()">
+    <ion-icon name="exit-outline"></ion-icon>
+    <span class="label-body-2 color-gray-dark py-2">Sair</span>
+  </a>
+</div>

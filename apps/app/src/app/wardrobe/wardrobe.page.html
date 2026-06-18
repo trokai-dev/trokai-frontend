@@ -1,0 +1,168 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <app-back-button defaultHref="/main/profile"></app-back-button>
+    <ion-title>Armário</ion-title>
+    <ion-buttons slot="primary">
+      @if (userIsOwner) {
+      <ion-button (click)="editWardrobe()">
+        <ion-icon name="create-outline" slot="icon-only" class="color-icon">
+        </ion-icon>
+      </ion-button>
+      } @if (owner?.nickname) {
+      <ion-button (click)="shareWardrobe()">
+        <ion-icon name="share-social" slot="icon-only" class="color-icon">
+        </ion-icon>
+      </ion-button>
+      }
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content>
+  <ion-refresher slot="fixed" color="primary" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid class="px-24 pt-24 pb-12">
+    @if (owner) {
+    <div class="d-flex align-items-center border-bottom pb-24">
+      <tk-user-avatar [user]="owner" class="mr-16" />
+
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column">
+          <div class="d-flex">
+            <h6
+              class="color-gray-dark max-user-name ion-text-capitalize d-flex align-items-center"
+            >
+              {{owner.storeName ?? owner.name}}
+            </h6>
+          </div>
+
+          @if (owner.address) {
+          <div class="d-flex mt-4 align-items-start">
+            <div class="d-flex flex-column">
+              <label
+                class="label-caption-1 color-gray-default max-user-address"
+              >
+                {{owner.address.city}}, {{owner.address.state}}
+              </label>
+            </div>
+          </div>
+          } @if (owner && reviews) {
+          <div class="mt-8 d-flex align-items-center justify-content-between">
+            <tk-review-stars
+              [stars]="owner.reviewsAverage"
+              [amount]="reviews.length"
+              [showAmount]="true"
+              [clickable]="reviews.length > 0"
+              (clicked)="openReviews()"
+            ></tk-review-stars>
+
+            @if (owner.storeVisibility === storeVisibility.PAUSED) {
+            <tk-status-pill
+              class="ml-16"
+              variant="accent"
+              [outline]="true"
+              label="Armário de férias"
+            />
+            }
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+    }
+
+    <!-- search container -->
+    <div class="mt-16">
+      @if (showSearchbar) {
+      <ion-searchbar
+        placeholder="Buscar no armário"
+        debounce="0"
+        showClearButton="always"
+        [(ngModel)]="searchText"
+        maxlength="100"
+        mode="md"
+        enterkeyhint="search"
+        (keypress)="enter($event)"
+        (ionClear)="clearSearch()"
+        (ionBlur)="blurSearch()"
+      ></ion-searchbar>
+      }
+    </div>
+  </ion-grid>
+
+  <div class="d-flex justify-content-between align-items-center pr-24 pb-16">
+    <div>
+      <app-filter-tags
+        [filters]="filter"
+        [statusFilter]="statusFilter"
+        [enableSorting]="false"
+        [enableStatusFilter]="userIsOwner"
+        (filtersChanged)="applyFilters($event)"
+      ></app-filter-tags>
+    </div>
+    <div class="d-flex align-items-center">
+      @if (!showSearchbar) {
+      <ion-button
+        (click)="startSearch()"
+        fill="clear"
+        class="clear-button"
+        color="primary"
+      >
+        <ion-icon name="search"></ion-icon>
+      </ion-button>
+      }
+    </div>
+  </div>
+
+  @if (showRenewAll && filter.status === 4 && !showSearchbar) {
+  <div class="px-24 pb-16">
+    <ion-button (click)="renewAll()" fill="outline" class="action-button">
+      Renovar todos
+    </ion-button>
+  </div>
+  } @if (isLoading || !items?.length) {
+  <ion-grid class="px-24 pt-24 pb-12">
+    @if (isLoading) {
+    <div class="d-flex justify-content-center align-items-center">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+    } @if (!isLoading && !items?.length) {
+    <div class="empty-page">
+      <ion-icon name="sad-outline"></ion-icon>
+      <ion-label>
+        {{ !filter ? 'Armário vazio' : 'Nenhum produto encontrado'}}
+      </ion-label>
+    </div>
+    }
+  </ion-grid>
+  } @if (!isLoading) {
+  <ion-list
+    class="vertical"
+    [ngStyle]="{'display': isLoading ? 'none' : 'block'}"
+  >
+    <ion-row>
+      @for (p of items; track p._id) {
+      <ion-col style="min-width: 50%; max-width: 50%">
+        <tk-product-card
+          [useLink]="false"
+          [product]="p"
+          [canFavorite]="!userIsOwner"
+          (open)="open(p)"
+        >
+        </tk-product-card>
+      </ion-col>
+      }
+    </ion-row>
+  </ion-list>
+  }
+
+  <ion-infinite-scroll
+    style="margin-bottom: 25vw"
+    [disabled]="!items || !items.length || endOfSearch"
+    (ionInfinite)="loadData($event)"
+  >
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

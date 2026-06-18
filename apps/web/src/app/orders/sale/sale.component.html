@@ -1,0 +1,130 @@
+<div class="row mb-5">
+  <div class="col">
+    <button color="primary" mat-button routerLink="/orders/sales">
+      <mat-icon>arrow_back</mat-icon> Minhas vendas
+    </button>
+  </div>
+</div>
+
+@if (order) {
+  <span class="page-title">Venda</span>
+  <span class="item-value">cód. {{ order.customId }}</span>
+
+  <div class="row mt-5">
+    <div class="col-12 col-md-4">
+      <!-- Produtos -->
+      <div class="page-section-mobile">
+        <span class="section-title">Produtos</span>
+
+        @for (c of order.clothes; track c) {
+          <div class="cursor-pointer">
+            <app-cart-item
+              (click)="openProduct(c)"
+              [product]="c"
+              [showRemove]="false"
+            ></app-cart-item>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <!-- Entrega -->
+
+      <div class="page-section">
+        <!-- Detalhes -->
+        <span class="section-title">Detalhes</span>
+
+        <div class="d-flex flex-wrap">
+          <div class="flex-1">
+            <span class="item-label">Data</span>
+            <span class="item-value"
+              >{{ order.createdAt | date: "dd/MM/yyyy - HH:mm" }}
+            </span>
+          </div>
+
+          <div class="flex-1">
+            <span class="item-label">Status</span>
+            <span class="item-value"> {{ getOrderStatus() }} </span>
+          </div>
+        </div>
+      </div>
+
+      <app-order-delivery [order]="order" [isSale]="true" />
+
+      <!-- Valores -->
+      <div class="page-section">
+        <span class="section-title">Valores</span>
+
+        <div class="d-flex flex-column gap-2">
+          @for (c of order.clothes; track c) {
+            <div
+              class="d-flex justify-content-between"
+              >
+              <span class="item-value text-capitalize">
+                {{ c.title }}
+              </span>
+              <span class="item-value">
+                {{ c.cost | cost | currency: "BRL" : true : "1.2-2" }}
+              </span>
+            </div>
+          }
+
+          <div class="d-flex justify-content-between">
+            <span class="item-value"> Comissão </span>
+            <span class="item-value">
+              -
+              {{
+              order.businessValues.sellerFinalPercentageFee
+              | cost
+              | currency: "BRL" : true : "1.2"
+              }}
+            </span>
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <span class="item-value"> Recebimento </span>
+            <span class="item-value color-primary">
+              {{
+              order.businessValues.sellerSplitBeforeAnticipation
+              | cost
+              | currency: "BRL" : true : "1.2"
+              }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Cofrinho -->
+        <button
+          mat-stroked-button
+          (click)="goToBank()"
+          class="mt-16"
+          color="primary"
+          >
+          Ver cofrinho
+        </button>
+      </div>
+
+      <!-- Comprador -->
+      <div class="page-section pt-5">
+        <tk-user-header
+          [user]="order.buyer"
+          [showChatButton]="showContact"
+          [canOpenProfile]="false"
+          (chatClick)="openChat()"
+        />
+      </div>
+
+      <!-- Cancelamento -->
+      @if (waiting_shipment || waiting_withdrawal) {
+        <button
+          class="mt-32 color-error"
+          mat-stroked-button
+          (click)="cancel()"
+          >
+          Cancelar venda
+        </button>
+      }
+    </div>
+  </div>
+}

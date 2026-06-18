@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <app-back-button defaultHref="/main/profile"></app-back-button>
+
+    <ion-title>
+      {{ completingInformation ? 'Complete seu perfil' : 'Meus dados' }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="p-24">
+    @if (!user) {
+      <div class="w-100 d-flex justify-content-center">
+        <ion-spinner></ion-spinner>
+      </div>
+    } @else {
+      <tk-profile-form
+        [user]="user"
+        [completingInformation]="completingInformation"
+        [emailRegistered]="emailRegistered"
+        [phoneRegistered]="phoneRegistered"
+        [loading]="loading"
+        (submitted)="save($event)"
+        (emailBlur)="checkMail($event)"
+        (phoneBlur)="checkPhone($event)"
+        (verifyPhone)="verifyPhone()"
+      />
+    }
+  </ion-grid>
+</ion-content>

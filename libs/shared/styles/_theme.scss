@@ -1,0 +1,35 @@
+// @trokai/shared-styles — Angular Material 3 (M3) theme
+// Built from the brand palettes in _theme-colors.scss (generated from
+// primary #13493b / secondary #58b692 / tertiary #f1b6be / error #d43c3c).
+// Applying this emits Material's M3 system variables (--mat-sys-*) that the
+// tokens in _tokens.scss bridge to, plus all component styles.
+//
+// Usage (once, in an app's GLOBAL stylesheet — never in a component):
+//   @use 'theme' as theme;
+//   html { @include theme.trokai-theme(); }
+@use '@angular/material' as mat;
+@use 'theme-colors' as brand;
+
+$trokai-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: brand.$primary-palette,
+      tertiary: brand.$tertiary-palette,
+    ),
+    typography: (
+      plain-family: ('Manrope', 'Helvetica Neue', sans-serif),
+      brand-family: ('Manrope', 'Helvetica Neue', sans-serif),
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+@mixin trokai-theme {
+  @include mat.core();
+  @include mat.elevation-classes();
+  @include mat.app-background();
+  @include mat.all-component-themes($trokai-theme);
+}

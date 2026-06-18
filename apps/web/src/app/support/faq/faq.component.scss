@@ -1,0 +1,22 @@
+@import "../../../styles/variables.scss";
+
+h4 {
+  font-weight: 300 !important;
+  font-size: 1.4rem !important;
+}
+
+.mat-expansion-panel-header {
+  padding: .8rem;
+      border-bottom: $border-trokai;
+}
+
+.mat-expanded {
+  h4 {
+    font-weight: 500 !important;
+  }
+
+  .mat-expansion-panel-header {
+    height: 48px;
+    background-color: $color-gray-light-2;
+  }
+}

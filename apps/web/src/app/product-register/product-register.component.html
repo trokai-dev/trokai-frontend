@@ -1,0 +1,17 @@
+<div class="container page">
+  <tk-product-register-form
+    [itemsMap]="itemsMap"
+    [params]="params"
+    [brands]="brands"
+    [product]="product"
+    [initialImages]="initialImages"
+    [duplicating]="duplicating"
+    [editingId]="editingId"
+    [waitingAdjustment]="waitingAdjustment"
+    [adjusts]="adjusts"
+    [adjustsNote]="adjustsNote"
+    [loading]="loading"
+    (submitted)="onSubmitted($event)"
+    (helpRequested)="onHelpPictures()"
+  ></tk-product-register-form>
+</div>

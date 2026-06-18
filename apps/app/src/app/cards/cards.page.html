@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <app-back-button defaultHref="/main/profile"></app-back-button>
+    </ion-buttons>
+    <ion-title>Cartões</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="p-24">
+    @if (!cards || cards.length === 0) {
+    <div class="empty-page full">
+      <ion-icon name="sad-outline"></ion-icon>
+      <ion-label> Nenhum cartão</ion-label>
+    </div>
+    } @for (c of cards; track c._id) {
+    <div class="menu-item ion-activatable ripple-parent">
+      <div>
+        <ion-icon name="card-outline"></ion-icon>
+        <label class="label-body-1 ml-16">Final {{c.lastDigits}}</label>
+      </div>
+
+      <ion-icon
+        (click)="delete(c)"
+        name="trash-outline"
+        class="color-gray-dark"
+      >
+      </ion-icon>
+
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    }
+  </ion-grid>
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+    class="p-16"
+    (click)="newCard()"
+  >
+    <ion-fab-button>
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

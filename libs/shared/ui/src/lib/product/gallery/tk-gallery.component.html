@@ -1,0 +1,42 @@
+<div class="dialog-wrapper p-0" role="button" tabindex="0" (click)="dialogRef.close()" (keyup.enter)="dialogRef.close()">
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+
+  <div class="dialog-content">
+    <div class="swiper gallery-swiper">
+      <div class="swiper-wrapper">
+        @for (imgUrl of data.imageUrls; track imgUrl) {
+          <div class="swiper-slide">
+            <div class="swiper-zoom-container">
+              <img
+                [src]="imgUrl"
+                alt="Imagem do produto"
+                class="swiper-image"
+                role="button"
+                tabindex="0"
+                (click)="onClickZoomContainer($event)"
+                (keyup.enter)="onClickZoomContainer($any($event))"
+              />
+            </div>
+          </div>
+        }
+      </div>
+      <div class="swiper-pagination" role="button" tabindex="0" (click)="$event.stopPropagation()" (keyup.enter)="$event.stopPropagation()"></div>
+    </div>
+  </div>
+  <button
+    mat-icon-button
+    class="custom-prev gallery"
+    (click)="$event.stopPropagation()"
+  >
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="custom-next gallery"
+    (click)="$event.stopPropagation()"
+  >
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</div>

@@ -1,0 +1,55 @@
+<div class="container page">
+  @if (otherUser && user) {
+    <div class="row">
+      <div class="col-12 col-md-3">
+        <div
+          class="d-flex mt-32 align-items-start justify-content-between justify-content-md-start"
+        >
+          <div class="d-none d-md-block me-4">
+            <tk-user-avatar [user]="otherUser"></tk-user-avatar>
+          </div>
+
+          <div class="d-flex flex-column">
+            <h4 class="color-gray-dark text-capitalize d-block">
+              {{ otherUser.storeName ?? otherUser.name }}
+            </h4>
+
+            <span class="label-caption-1 color-gray-default max-user-address d-block">
+              {{ otherUser.address.city }}, {{ otherUser.address.state }}
+            </span>
+
+            <button
+              class="d-none d-md-block mt-4"
+              (click)="openOrder()"
+              mat-stroked-button
+              color="primary"
+            >
+              Detalhes da {{ typeString }}
+            </button>
+          </div>
+
+          <button
+            class="d-block d-md-none"
+            (click)="openOrder()"
+            mat-stroked-button
+            color="primary"
+          >
+            Detalhes da {{ typeString }}
+          </button>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-9 px-0 mt-4 mt-md-0">
+        <div id="chat-wrapper">
+          <tk-chat-thread
+            [user]="user"
+            [otherUser]="otherUser"
+            [negotiationId]="negotiationId"
+            [negotiationType]="negotiationType"
+            [enabled]="enabled"
+          ></tk-chat-thread>
+        </div>
+      </div>
+    </div>
+  }
+</div>

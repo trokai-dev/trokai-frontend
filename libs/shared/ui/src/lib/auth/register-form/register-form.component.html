@@ -1,0 +1,113 @@
+<form [formGroup]="form" class="register-form" (ngSubmit)="submit()">
+  <mat-form-field appearance="outline">
+    <mat-label>Nome completo</mat-label>
+    <input
+      matInput
+      formControlName="name"
+      type="text"
+      maxlength="256"
+      autocomplete="name"
+      [errorStateMatcher]="matcher"
+    />
+    @if (form.controls.name.hasError('required')) {
+      <mat-error>Informe seu nome</mat-error>
+    } @else if (form.controls.name.hasError('pattern')) {
+      <mat-error>Nome inválido</mat-error>
+    } @else if (form.controls.name.hasError('fullName')) {
+      <mat-error>Preencha nome e sobrenome</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      formControlName="email"
+      type="email"
+      maxlength="256"
+      autocomplete="email"
+      (blur)="onEmailBlur()"
+      [errorStateMatcher]="emailMatcher"
+    />
+    @if (emailRegistered) {
+      <mat-error>E-mail já cadastrado</mat-error>
+    } @else if (form.controls.email.hasError('required')) {
+      <mat-error>Informe seu email</mat-error>
+    } @else if (form.controls.email.hasError('email')) {
+      <mat-error>Email inválido</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Senha</mat-label>
+    <input
+      matInput
+      formControlName="password"
+      [type]="hidePass1 ? 'password' : 'text'"
+      maxlength="100"
+      autocomplete="new-password"
+      [errorStateMatcher]="matcher"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      [attr.aria-label]="hidePass1 ? 'Mostrar senha' : 'Ocultar senha'"
+      (click)="hidePass1 = !hidePass1"
+    >
+      <mat-icon>{{ hidePass1 ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+    @if (form.controls.password.hasError('required')) {
+      <mat-error>Informe sua senha</mat-error>
+    } @else if (form.controls.password.hasError('minlength')) {
+      <mat-error>Mínimo de 6 caracteres</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Confirme a senha</mat-label>
+    <input
+      matInput
+      formControlName="password2"
+      [type]="hidePass2 ? 'password' : 'text'"
+      maxlength="100"
+      autocomplete="new-password"
+      [errorStateMatcher]="matcher"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      [attr.aria-label]="hidePass2 ? 'Mostrar senha' : 'Ocultar senha'"
+      (click)="hidePass2 = !hidePass2"
+    >
+      <mat-icon>{{ hidePass2 ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+    @if (
+      form.controls.password2.touched &&
+      form.hasError('passwordsMismatch') &&
+      !form.controls.password2.hasError('required')
+    ) {
+      <mat-error>As senhas não conferem</mat-error>
+    }
+  </mat-form-field>
+
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    aria-label="Cadastrar"
+    [disabled]="loading"
+  >
+    Cadastrar
+  </button>
+
+  <ng-content></ng-content>
+
+  <div class="register-form__login">
+    <span class="label-body-2">Já possui cadastro?</span>
+    <button mat-button color="primary" type="button" (click)="login.emit()">
+      <b>Entrar na conta</b>
+    </button>
+  </div>
+</form>

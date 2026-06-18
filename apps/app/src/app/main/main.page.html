@@ -1,0 +1,56 @@
+<ion-tabs #tabs>
+  <ion-tab-bar id="bottom-tab" slot="bottom">
+    <ion-tab-button tab="home" (click)="homeScroll()">
+      <ion-icon
+        name="home-outline"
+        name="{{getTab() === 'home' ? 'home' : 'home-outline'}}"
+      ></ion-icon>
+      <ion-label>Início</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="search" (click)="searchScroll()">
+      <ion-icon
+        name="search-outline"
+        name="{{getTab() === 'search' ? 'search' : 'search-outline'}}"
+      ></ion-icon>
+      <ion-label>Busca</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="registerItem()">
+      <ion-icon name="camera-outline"></ion-icon>
+      <ion-label>Anunciar</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="negotiations" (click)="negotiationsScroll()">
+      <ion-icon
+        name="cube-outline"
+        name="{{getTab() === 'negotiations' ? 'cube' : 'cube-outline'}}"
+      ></ion-icon>
+      <ion-label>Pedidos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      [ngStyle]="{'display': user ? 'flex':'none'}"
+      tab="profile"
+      (click)="profileScroll()"
+    >
+      <ion-icon
+        name="menu-outline"
+        name="{{getTab() === 'profile' ? 'menu' : 'menu-outline'}}"
+      ></ion-icon>
+      <ion-label>Mais</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      [ngStyle]="{'display': !user ? 'flex':'none'}"
+      tab="auth"
+      (click)="profileScroll()"
+    >
+      <ion-icon
+        name="enter-outline"
+        name="{{getTab() === 'login' ? 'enter' : 'enter-outline'}}"
+      ></ion-icon>
+      <ion-label>Entrar</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

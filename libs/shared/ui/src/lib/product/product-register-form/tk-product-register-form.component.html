@@ -1,0 +1,281 @@
+@if (form && itemsMap && params) {
+  <div>
+    <div class="row">
+      <div class="col">
+        <h2 class="color-gray-dark text-capitalize">
+          {{ duplicating ? "Duplicar anúncio" : "Anunciar" }}
+        </h2>
+      </div>
+    </div>
+    @if (waitingAdjustment && adjusts) {
+      <div class="row mt-5 pb-5 border-bottom">
+        <div class="col">
+          <h5 class="color-error">Problemas a corrigir</h5>
+          @for (adjust of adjusts; track adjust; let i = $index) {
+            <span class="d-block label-caption-1 mt-3">
+              {{ i + 1 }}) {{ adjust }}
+            </span>
+          }
+          @if (adjustsNote) {
+            <span class="d-block label-caption-1 mt-3">
+              Nota: {{ adjustsNote }}
+            </span>
+          }
+        </div>
+      </div>
+    }
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="row mt-5 border-bottom pb-5">
+        <div class="col">
+          <h5>Fotos</h5>
+          <div class="mt-4">
+            @if (initialImages) {
+              <tk-form-images
+                [disabled]="form.disabled"
+                [inputImages]="initialImages"
+                (onOutputImages)="outputImages($event)"
+                (helpRequested)="onHelpPictures()"
+              ></tk-form-images>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col">
+          <h5>Descrição</h5>
+        </div>
+      </div>
+      <div class="row mt-4 border-bottom pb-3">
+        <div class="col-12 col-md-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Título</mat-label>
+            <input
+              matInput
+              (change)="checkTitle()"
+              formControlName="title"
+              placeholder="Ex: Cropped soltinho"
+              maxlength="64"
+              type="text"
+            />
+            @if (titleError) {
+              <span class="label-caption-1">
+                <mat-error>
+                  {{ titleError }}
+                </mat-error>
+              </span>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-12 col-md-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Descrição</mat-label>
+            <textarea
+              formControlName="description"
+              placeholder="Ex: Muito confortável, sem avarias..."
+              maxlength="512"
+              matInput
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col">
+          <h5>Informações</h5>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12 col-md-3">
+          @if (ages) {
+            <tk-autocomplete
+              [parentForm]="form"
+              controlName="age"
+              name="Público"
+              [options]="ages"
+              (selected)="selectedAge($event)"
+            ></tk-autocomplete>
+          }
+        </div>
+        <div class="col-12 col-md-3">
+          @if (categories) {
+            <tk-autocomplete
+              [parentForm]="form"
+              controlName="category"
+              name="Categoria"
+              [options]="categories"
+              (selected)="selectedCategory($event)"
+            ></tk-autocomplete>
+          }
+        </div>
+        <div class="col-12 col-md-3">
+          @if (pieces) {
+            <tk-autocomplete
+              [parentForm]="form"
+              controlName="piece"
+              name="Produto"
+              [options]="pieces"
+              (selected)="selectedPiece($event)"
+            ></tk-autocomplete>
+          }
+        </div>
+        <div class="col-12 col-md-3">
+          @if (sizes) {
+            <tk-autocomplete
+              [parentForm]="form"
+              controlName="size"
+              name="Tamanho"
+              [options]="sizes"
+            ></tk-autocomplete>
+          }
+        </div>
+      </div>
+      <div class="row border-bottom pb-3">
+        <div class="col-12 col-md-3">
+          @if (genders) {
+            <tk-autocomplete
+              [parentForm]="form"
+              controlName="gender"
+              name="Gênero"
+              [options]="genders"
+            ></tk-autocomplete>
+          }
+        </div>
+        <div class="col-12 col-md-3">
+          @if (conditions) {
+            <tk-autocomplete
+              [parentForm]="form"
+              controlName="condition"
+              name="Condição"
+              [options]="conditions"
+            ></tk-autocomplete>
+          }
+        </div>
+        <div class="col-12 col-md-3">
+          <tk-autocomplete
+            [parentForm]="form"
+            controlName="brand"
+            name="Marca"
+            [options]="brands"
+            [minLength]="2"
+            [allowCustom]="true"
+          ></tk-autocomplete>
+        </div>
+        <div class="col-12 col-md-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Peso</mat-label>
+            <mat-select formControlName="weight">
+              @for (w of weightsList; track w; let i = $index) {
+                <mat-option [value]="w">
+                  {{ weightsStrings[i] }}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col">
+          <h5>Preço</h5>
+        </div>
+      </div>
+      <div class="row mt-4">
+        @if (firstCost) {
+          <div class="col-12 col-md-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Preço original</mat-label>
+              <input matInput readonly disabled [value]="firstCostFormatted" />
+            </mat-form-field>
+          </div>
+        }
+        <div class="col-12 col-md-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>
+              {{ firstCost ? "Preço novo" : "Preço" }}
+            </mat-label>
+            <input
+              [errorStateMatcher]="costRangeErrorMatcher"
+              matInput
+              type="number"
+              (change)="changeCost()"
+              formControlName="cost"
+            />
+            @if (costErrorMin) {
+              <mat-error class="label-caption-1 color-error">
+                O valor mínimo é
+                <b>
+                  {{
+                    params.minProductCost | cost | currency: "BRL" : true : "1.2-2"
+                  }}
+                </b>
+              </mat-error>
+            }
+            @if (costErrorMax) {
+              <mat-error class="label-caption-1 color-error">
+                O valor máximo é
+                <b>
+                  {{
+                    params.maxProductCost | cost | currency: "BRL" : true : "1.2-2"
+                  }}
+                </b>
+              </mat-error>
+            }
+            @if (costErrorOffer) {
+              <mat-error class="label-caption-1 color-error">
+                O valor promocional não pode ser maior que o original.
+              </mat-error>
+            }
+            @if (
+              !costErrorMin &&
+              !costErrorMax &&
+              !costErrorOffer &&
+              currentCost &&
+              firstCost
+            ) {
+              <span class="label-caption-1 color-primary">
+                {{ (1 - currentCost / firstCost) * 100 | number: "1.2-2" }}% de
+                desconto
+              </span>
+            }
+          </mat-form-field>
+        </div>
+        @if (isCostValid() && sellerFees) {
+          <div class="col-12 col-md-3">
+            <mat-form-field
+              appearance="outline"
+              class="w-100"
+              style="cursor: pointer"
+              (click)="openCalculator()"
+            >
+              <mat-label>Você recebe</mat-label>
+              <input
+                matInput
+                readonly
+                [value]="sellerProfit | cost | currency: 'BRL' : true : '1.2-2'"
+                style="cursor: pointer"
+              />
+              <mat-icon
+                matSuffix
+                class="color-gray-default icon-small"
+                matTooltip="Entenda os valores"
+                >help</mat-icon
+              >
+            </mat-form-field>
+          </div>
+        }
+      </div>
+      <div class="row mt-4">
+        <div class="col-12 d-flex justify-content-end mt-24 mt-md-0">
+          <button
+            class="w-25"
+            type="submit"
+            [disabled]="form.disabled"
+            mat-raised-button
+            aria-label="Salvar"
+            color="primary"
+          >
+            Enviar anuncio
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+}

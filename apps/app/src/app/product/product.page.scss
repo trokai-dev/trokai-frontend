@@ -1,0 +1,153 @@
+@import '../../theme/variables.scss';
+@import '../../global.scss';
+
+ion-list {
+  display: flex;
+  overflow-x: scroll;
+}
+
+.related-card {
+  flex: 0 0 auto;
+  width: 42vw;
+  margin-right: 1.4rem;
+}
+
+swiper-slide {
+  img {
+    object-fit: cover;
+    width: 100vw;
+    height: 95vw;
+  }
+}
+
+.status-wrapper {
+  border: 1px solid $color-gray-light-2;
+  padding: 1.6rem;
+}
+
+.slide-buttons {
+  position: absolute;
+  top: 1.2rem;
+  z-index: 1000;
+  right: 1.2rem;
+}
+
+.slide-expand {
+  position: absolute;
+  bottom: 1.2rem;
+  z-index: 1000;
+  right: 1.2rem;
+  transition: 2s;
+}
+
+.swiper-zoom-container {
+  height: 95vw !important;
+  img {
+    object-fit: cover;
+  }
+}
+
+.product-cta {
+  margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
+
+  .product-cta-delivery {
+    span {
+      @extend .label-body-2;
+    }
+
+    .product-cta-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      span {
+        @extend .label-body-1;
+        font-weight: 500 !important;
+        color: $color-gray-dark !important;
+      }
+    }
+
+    margin-top: 1.6rem;
+  }
+
+  .product-cta-footer {
+    .product-cta-costs {
+      display: flex;
+      flex-direction: column;
+
+      .product-cta-first-cost {
+        @extend .label-body-2;
+        font-size: 1.6rem !important;
+        color: $color-gray-light-1;
+        text-decoration: line-through;
+        display: block;
+      }
+
+      .product-cta-current-cost {
+        @extend .label-body-2;
+        font-size: 2rem !important;
+        font-weight: 500 !important;
+        color: $color-primary;
+      }
+    }
+
+    ion-button {
+      margin-top: 2.4rem;
+      width: 100%;
+      text-transform: uppercase;
+    }
+
+    .product-cta-hints {
+      margin-top: 1.6rem;
+    }
+
+    .product-cta-hint {
+      margin-top: 0.8rem;
+
+      display: flex;
+      align-items: center;
+
+      ion-icon {
+        @extend .icon-smaller;
+        color: $color-primary;
+        margin-right: 0.8rem;
+      }
+
+      .product-cta-hint-title {
+        font-size: 1.4rem;
+        color: $color-primary;
+        margin-right: 0.4rem;
+      }
+
+      .product-cta-hint-text {
+        @extend .label-caption-1;
+        color: $color-gray-light-1;
+      }
+    }
+
+    .product-installments {
+      .product-installments-primary {
+        @extend .label-body-2;
+        font-weight: 600 !important;
+        font-size: 1.5rem !important;
+      }
+
+      .product-installments-secondary {
+        @extend .label-body-2;
+        font-weight: 300 !important;
+        font-size: 1.5rem !important;
+      }
+    }
+  }
+
+  ion-icon {
+    color: $color-gray-dark;
+  }
+}
+
+// Status pill -> @trokai/shared-ui <tk-status-pill>.
+
+h6 {
+  white-space: normal !important;
+}

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <app-back-button
+      [nav]="true"
+      (buttonClick)="clickBack()"
+      defaultHref="/main/auth"
+    ></app-back-button>
+    <ion-title>Cadastro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="p-24">
+    <tk-register-form
+      [loading]="loading"
+      [emailRegistered]="emailRegistered"
+      (submitted)="onRegister($event)"
+      (emailBlur)="checkMail($event)"
+      (login)="toLogin()"
+    ></tk-register-form>
+  </div>
+</ion-content>

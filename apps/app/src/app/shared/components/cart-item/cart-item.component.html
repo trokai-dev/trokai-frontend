@@ -1,0 +1,26 @@
+<div class="cart-item mt-16" (click)="clickProduct.emit()">
+  <img
+    alt="{{ product.title }}"
+    src="{{ product.images?.[0]?.sm }}"
+    class="cart-item-img"
+  />
+
+  <div class="cart-item-text">
+    <span class="label-body-2 color-gray-dark text-capitalize"
+      ><b>{{ product.title }}</b>
+    </span>
+
+    <span class="label-body-2 mt-2">
+      {{ product.cost | cost | currency: 'BRL' : 'symbol' : '1.2' }}
+    </span>
+  </div>
+
+  @if (showRemove) {
+  <div
+    class="cart-action remove ml-8"
+    (click)="remove($event)"
+  >
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  }
+</div>

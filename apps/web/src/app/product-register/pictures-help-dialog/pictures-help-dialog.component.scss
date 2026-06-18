@@ -1,0 +1,52 @@
+@import "../../../styles/variables.scss";
+
+.tip-slide {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 90%;
+  margin: auto;
+}
+
+.tip-image-wrapper {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tip-image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.pictures-help-pagination {
+  display: flex;
+  justify-content: center;
+}
+
+// nav arrows
+.custom-prev.tips,
+.custom-next.tips {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.custom-prev.tips:not(.swiper-button-disabled),
+.custom-next.tips:not(.swiper-button-disabled) {
+  color: $color-primary;
+}
+
+.custom-prev.tips {
+  left: 0.4rem;
+}
+
+.custom-next.tips {
+  right: 0.4rem;
+}
+
+.dialog-content {
+  padding: 0 2.4rem;
+}

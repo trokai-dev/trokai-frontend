@@ -1,0 +1,18 @@
+<h3 class="checkout-title">Novo cartão de crédito</h3>
+
+<div class="checkout-body">
+  <app-form-card [onlyForm]="true" [encapsulated]="true" />
+</div>
+
+<div class="checkout-footer mt-40">
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="
+      !formCardComponent?.form?.valid || !formCardComponent?.addressValid()
+    "
+    (click)="onContinue()"
+  >
+    Continuar
+  </button>
+</div>

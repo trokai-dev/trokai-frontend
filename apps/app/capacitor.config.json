@@ -1,0 +1,25 @@
+{
+  "appId": "com.trokai.mobile",
+  "appName": "app-trokai",
+  "bundledWebRuntime": false,
+  "webDir": "../../dist/apps/app/browser",
+  "plugins": {
+    "GoogleAuth": {
+      "scopes": [
+        "profile",
+        "email"
+      ],
+      "webClientId": "311804597430-3vn51fgs1kecd4fp7bmab43am26q4s9a.apps.googleusercontent.com",
+      "clientId": "311804597430-3vn51fgs1kecd4fp7bmab43am26q4s9a.apps.googleusercontent.com",
+			"serverClientId": "311804597430-3vn51fgs1kecd4fp7bmab43am26q4s9a.apps.googleusercontent.com",
+      "androidClientId": "311804597430-3vn51fgs1kecd4fp7bmab43am26q4s9a.apps.googleusercontent.com",
+      "iosClientId": "311804597430-d24753bo3erd3evbn0q9gv6mbbkifi94.apps.googleusercontent.com",
+      "forceCodeForRefreshToken": true
+    },
+    "LocalNotifications": {
+      "icon": "ic_notif",
+      "smallIcon": "ic_notif",
+      "iconColor": "#58b792"
+    }
+  }
+}

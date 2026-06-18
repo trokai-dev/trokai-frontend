@@ -1,0 +1,40 @@
+import { Address } from '@trokai/shared-core';
+import { AlertService, TkAddressFormComponent } from '@trokai/shared-ui';
+import { AuthService } from './../../auth/auth.service';
+import { Component, OnInit, inject } from '@angular/core';
+import { CompletingInformationService } from 'src/app/services/completing-information.service';
+
+@Component({
+  selector: 'app-address',
+  standalone: true,
+  imports: [TkAddressFormComponent],
+  template: `
+    <div class="col-12 col-md-7">
+      <h3 class="color-gray-dark">Endereço</h3>
+      <tk-address-form [address]="address" (addressSave)="save($event)" />
+    </div>
+  `,
+})
+export class AddressComponent implements OnInit {
+  private authService = inject(AuthService);
+  private alert = inject(AlertService);
+  private completingInfo = inject(CompletingInformationService);
+
+  address?: Address;
+
+  ngOnInit(): void {
+    this.authService.user.subscribe((u) => {
+      if (u) this.address = u.address;
+    });
+  }
+
+  async save(address: Address) {
+    try {
+      await this.authService.updateAddress(address);
+      this.alert.postSuccess();
+      this.completingInfo.next();
+    } catch {
+      /* intentional */
+    }
+  }
+}

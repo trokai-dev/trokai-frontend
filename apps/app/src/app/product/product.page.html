@@ -1,0 +1,567 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <app-back-button defaultHref="/main/home"></app-back-button>
+    @if (product) {
+    <ion-title>Detalhes do Produto</ion-title>
+    }
+
+    <ion-buttons slot="primary">
+      @if (basketCount > 0 && !myProduct) {
+      <ion-button
+        slot="icon-only"
+        class="ml-16"
+        (click)="clickCart()"
+      >
+        <ion-icon name="cart-outline"></ion-icon>
+        <ion-badge color="tertiary"> {{ basketCount }} </ion-badge>
+      </ion-button>
+      }
+
+      @if (myProduct) {
+      <ion-button
+        slot="icon-only"
+        class="mr-4"
+        (click)="clickOptions()"
+      >
+        <ion-icon name="ellipsis-horizontal"></ion-icon>
+      </ion-button>
+      }
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="p-0 pb-24">
+    <div
+      class="p-0 p-relative"
+      [ngClass]="{
+      sold: sold,
+      adjusts: myProduct && waiting_adjustment,
+      expired: myProduct && expired,
+      waiting: myProduct && waiting_publication,
+      reserved: reserved || selling || unavailable,
+      paused: myProduct && paused
+    }"
+    >
+      @if (!product) {
+      <div class="w-100 d-flex justify-content-center mt-24">
+        <ion-spinner></ion-spinner>
+      </div>
+      }
+
+      @if (statusText) {
+      <tk-status-pill [variant]="statusVariant" [label]="statusText" position="overlay" />
+      }
+
+      @if (product) {
+      <swiper-container
+        #swiper
+        [pagination]="true"
+        class="wardrobe-slides"
+      >
+        @for (img of product.clothes.images; track $index; let i = $index) {
+        <swiper-slide>
+          <img
+            (click)="openGallery()"
+            src="{{ product.clothes.images[i].md }}"
+            alt="{{ product.clothes.title }}"
+          />
+        </swiper-slide>
+        }
+      </swiper-container>
+      }
+
+      @if (product) {
+      <div class="d-flex flex-column slide-buttons">
+        @if (product && !myProduct) {
+        <tk-like-button
+          class="large"
+          [productId]="product.clothes._id"
+        >
+        </tk-like-button>
+        }
+
+        <div
+          (click)="share()"
+          class="image-badge-button large ion-activatable ripple-parent"
+          [ngClass]="{'mt-12': !myProduct}"
+        >
+          <ion-icon color="primary" name="share-social"> </ion-icon>
+          <ion-ripple-effect></ion-ripple-effect>
+        </div>
+      </div>
+      }
+    </div>
+
+    @if (product) {
+    <div class="px-24">
+      <!-- titulo e preco -->
+      <div class="d-flex mt-24">
+        <h1 class="color-gray-dark ion-text-capitalize">
+          {{product.clothes.title}}
+        </h1>
+      </div>
+
+      <!-- status alternativos -->
+      <div>
+        @if (published && myProduct && expiration) {
+        <div class="mt-16 d-flex">
+          <!-- <ion-icon name="checkmark-outline" class="color-primary icon-smaller mr-8"></ion-icon> -->
+          <ion-label
+            class="label-body-2"
+            [ngClass]="{'color-error' : expiration?.days <= 5}"
+          >
+            <!-- Publicado! -->
+            {{expiration?.text}}
+          </ion-label>
+        </div>
+        }
+
+        @if (waiting_publication && myProduct) {
+        <div
+          class="mt-16 d-flex status-wrapper"
+        >
+          <ion-icon
+            name="time-outline"
+            class="color-primary icon-smaller mr-8"
+          ></ion-icon>
+          <ion-label class="label-body-2">Em análise</ion-label>
+        </div>
+        }
+
+        @if (reserved) {
+        <div class="mt-16 d-flex status-wrapper">
+          <ion-icon
+            name="time-outline"
+            class="color-primary icon-smaller mr-8"
+          ></ion-icon>
+          <ion-label class="label-body-2">Produto reservado</ion-label>
+        </div>
+        }
+
+        @if (paused) {
+        <div class="mt-16 d-flex status-wrapper">
+          <ion-icon
+            name="pause-outline"
+            class="color-primary icon-smaller mr-8"
+          ></ion-icon>
+          <ion-label class="label-body-2">Anúncio pausado</ion-label>
+        </div>
+        }
+
+        @if (sold) {
+        <div class="mt-16 d-flex status-wrapper">
+          <ion-icon
+            name="cash-outline"
+            class="color-primary icon-smaller mr-8"
+          ></ion-icon>
+          <ion-label class="label-body-2">Produto vendido</ion-label>
+        </div>
+        }
+
+        @if (selling) {
+        <div class="mt-16 d-flex status-wrapper">
+          <ion-icon
+            name="time-outline"
+            class="color-primary icon-smaller mr-8"
+          ></ion-icon>
+          <ion-label class="label-body-2">Reservado</ion-label>
+        </div>
+        }
+
+        @if (expired && myProduct) {
+        <div class="mt-16 d-flex status-wrapper">
+          <ion-icon
+            name="alert-circle-outline"
+            class="color-error icon-smaller mr-8"
+          ></ion-icon>
+          <ion-label class="label-body-2">Anúncio expirado</ion-label>
+        </div>
+        }
+
+        @if ((expired && !myProduct) || unavailable) {
+        <div
+          class="mt-16 d-flex status-wrapper"
+        >
+          <ion-icon
+            name="alert-circle-outline"
+            class="color-error icon-smaller mr-8"
+          ></ion-icon>
+          <ion-label class="label-body-2">Produto indisponível</ion-label>
+        </div>
+        }
+
+        @if (waiting_adjustment && myProduct) {
+        <div
+          class="mt-16 d-flex status-wrapper"
+        >
+          <ion-icon
+            name="alert-circle-outline"
+            class="color-error icon-smaller mr-8"
+          ></ion-icon>
+          <ion-label class="label-body-2">Requer ajustes</ion-label>
+        </div>
+        }
+      </div>
+
+      @if (published || myProduct) {
+      <div>
+        <!-- CTA Venda -->
+        @if (product.clothes.sell &&
+                        (published ||
+                          reserved ||
+                          waiting_adjustment ||
+                          waiting_publication)) {
+        <div
+          class="product-cta"
+        >
+          <div class="product-cta-footer">
+            <div class="product-cta-costs">
+              @if (product.payment) {
+              <div>
+                <!-- pix -->
+
+                <div>
+                  <span class="product-cta-first-cost">
+                    {{ product.clothes.firstCost ? (product.clothes.firstCost |
+                    cost | currency : "BRL" : "symbol" : "1.2") : "" }}
+                  </span>
+
+                  @if (myProduct) {
+                  <span class="product-cta-current-cost">
+                    {{ product.clothes.cost | cost | currency : "BRL" : "symbol"
+                    : "1.2" }}
+                  </span>
+                  } @else {
+                  <span class="product-cta-current-cost">
+                    {{ product.payment.pix.buyerCost | cost | currency : "BRL" :
+                    "symbol" : "1.2" }}
+                    <span class="color-primary label-body-2">
+                      ({{ product.payment.pix.pixDiscountPercentage * 100 }}%
+                      OFF no Pix)
+                    </span>
+                  </span>
+                  }
+                </div>
+
+                <!-- cc -->
+                @if (!myProduct && published){
+                <div class="product-installments">
+                  <span class="product-installments-primary">
+                    {{ product.payment.creditCard.maxNoInterest .installments
+                    }}x {{ product.payment.creditCard.maxNoInterest
+                    .installmentValue | cost | currency : "BRL" : "symbol" :
+                    "1.2" }} sem juros
+                  </span>
+                  @if (
+                    product.payment.creditCard.maxInstallments
+                      .installments >
+                    product.payment.creditCard.maxNoInterest
+                      .installments
+                  ) {
+                  <span class="product-installments-secondary">
+                    ou até {{ product.payment.creditCard.maxInstallments
+                    .installments }}x com juros
+                  </span>
+                  }
+                </div>
+                }
+
+                <div class="product-cta-delivery">
+                  @if (owner?.inPerson) {
+                  <span
+                    class="{{ owner.shipping ? ' mb-8 d-block' : '' }}"
+                  >
+                    Retirada presencial
+                    @if (!myProduct) {
+                    <ion-text>gratuita</ion-text>
+                    }
+                  </span>
+                  }
+                  @if (owner?.shipping && !myProduct) {
+                  <div>
+                    <tk-zipcode-shipping-fee
+                      [productId]="productId"
+                    ></tk-zipcode-shipping-fee>
+                  </div>
+                  }
+                  @if (owner?.shipping && myProduct) {
+                  <div>
+                    <span>Envio pelos correios</span>
+                  </div>
+                  }
+                </div>
+              </div>
+              }
+            </div>
+
+            <!-- DA OUTRA PESSOA -->
+            @if (!myProduct && published) {
+            <div>
+              @if (!product_in_basket) {
+              <ion-button
+                class="action-button"
+                (click)="clickBuy()"
+                color="primary"
+              >
+                <b>
+                  {{ wardrobe_basket && !wardrobe_reserved ? "Adicionar \à
+                  sacola" : "COMPRAR" }}
+                </b>
+              </ion-button>
+              }
+
+              @if (product_in_basket) {
+              <ion-button
+                class="action-button"
+                (click)="clickCart()"
+                color="primary"
+              >
+                <b> Ver na sacola </b>
+              </ion-button>
+              }
+
+              @if (product_in_basket) {
+              <ion-button
+                class="action-button mt-12"
+                (click)="removeFromBasket()"
+                color="tertiary"
+                fill="outline"
+              >
+                <b> Remover da sacola </b>
+              </ion-button>
+              }
+
+              <div class="product-cta-hints">
+                <div class="product-cta-hint">
+                  <ion-icon name="shield-checkmark"></ion-icon>
+                  <span class="product-cta-hint-title">
+                    Compra protegida pelo Trokaí
+                  </span>
+                </div>
+
+                <div class="product-cta-hint">
+                  <ion-icon name="arrow-undo"></ion-icon>
+
+                  <span class="product-cta-hint-title"
+                    >Devolução garantida</span
+                  >
+                </div>
+              </div>
+            </div>
+            }
+          </div>
+        </div>
+        }
+      </div>
+      }
+
+      @if (isInReserves && owner) {
+      <div class="mt-4">
+        <app-reserve-time
+          [ownerId]="owner._id"
+          (reserveOpen)="openCheckout(owner._id)"
+          [text]="'Continuar compra'"
+          [hideCancel]="true"
+        >
+        </app-reserve-time>
+      </div>
+      }
+
+      <!-- descricao -->
+      <div class="mt-16 pt-16 border-top">
+        <label class="label-body-2 color-gray-default"
+          >{{product.clothes.description}}</label
+        >
+      </div>
+
+      <div class="d-flex mt-16 flex-wrap gap-8">
+        @if (product.clothes.brand) {
+        <tk-status-pill variant="neutral" [label]="product.clothes.brand.name" />
+        }
+
+        <tk-status-pill
+          variant="neutral"
+          [label]="product.clothes.piece | itemName: 'piece' : product.clothes.category"
+        />
+
+        @if (product.clothes.size !== null) {
+        <tk-status-pill
+          variant="neutral"
+          [label]="'Tam ' + (product.clothes.size | itemName: 'size' : product.clothes.category : product.clothes.age)"
+        />
+        }
+
+        <tk-status-pill
+          variant="neutral"
+          [label]="product.clothes.gender | itemName: 'gender'"
+        />
+        <tk-status-pill
+          variant="neutral"
+          [label]="product.clothes.condition | itemName: 'condition'"
+        />
+      </div>
+
+      <!-- Perguntas -->
+      @if (published || reserved) {
+      <div>
+        <div class="border-bottom mt-32 pb-8">
+          <h6 class="color-gray-dark">Perguntas</h6>
+        </div>
+
+        @for (q of displayQuestions; track $index) {
+        <div
+          class="d-flex align-items-center justify-content-between py-16 ion-activatable ripple-parent"
+          (click)="openQuestion(q)"
+        >
+          <div class="d-flex flex-column">
+            <h6 class="color-gray-dark text-dots">{{q.question}}</h6>
+            <ion-label
+              class="mt-8 text-dots d-block label-body-2 color-gray-default"
+              >{{ q.answer ? q.answer : 'Aguardando resposta' }}
+            </ion-label>
+          </div>
+          <ion-icon name="chevron-forward" class="color-primary"></ion-icon>
+          <ion-ripple-effect></ion-ripple-effect>
+        </div>
+        }
+
+        @if (displayQuestions && displayQuestions.length === 0) {
+        <div class="mt-16">
+          <ion-label class="label-body-2 color-gray-default"
+            >Nenhuma pergunta
+          </ion-label>
+        </div>
+        }
+
+        @if (!myProduct && published) {
+        <div>
+          <ion-button class="action-button" fill="clear" (click)="askQuestion()"
+            >Fazer pergunta</ion-button
+          >
+        </div>
+        }
+      </div>
+      }
+      <!-- Perfil -->
+      @if (!myProduct && owner) {
+      <div
+        (click)="openOwnerWardrobe()"
+        class="mt-40 d-flex pb-8 ion-activatable ripple-parent align-items-center"
+      >
+        <tk-user-avatar [user]="owner" class="mr-16" />
+
+        <div class="d-flex justify-content-between flex-1">
+          <div class="d-flex flex-column justify-content-center flex-1">
+            <div class="d-flex align-items-center">
+              <h6
+                class="color-gray-dark max-user-name ion-text-capitalize d-flex align-items-center"
+              >
+                {{owner.storeName ?? owner.name}}
+              </h6>
+            </div>
+
+            <div class="d-flex mt-4 align-items-start">
+              <div class="d-flex flex-column">
+                <label
+                  class="label-caption-1 color-gray-default max-user-address"
+                >
+                  {{ owner.address.city }}, {{ owner.address.state }}
+                </label>
+              </div>
+            </div>
+
+            @if (owner) {
+            <div class="mt-8">
+              <tk-review-stars
+                [stars]="owner.reviewsAverage"
+                [amount]="owner.reviewsAmount"
+                [showAmount]="!!owner.reviewsAmount"
+              ></tk-review-stars>
+            </div>
+            }
+
+            @if (owner) {
+            <div class="d-flex justify-content-between mt-24">
+              @if (owner.productsSold > 0) {
+              <div class="d-flex flex-column">
+                <span class="label-caption-1 fw-300 color-gray-default">
+                  Vendidos
+                </span>
+                <span class="label-caption-1 color-gray-dark">
+                  {{ owner.productsSold }}
+                </span>
+              </div>
+              }
+              <div class="d-flex flex-column">
+                <span class="label-caption-1 fw-300 color-gray-default">
+                  À venda
+                </span>
+                <span class="label-caption-1 color-gray-dark">
+                  {{ owner.productsForSale }}
+                </span>
+              </div>
+              @if (owner.productsSold > 0) {
+              <div class="d-flex flex-column">
+                <span class="label-caption-1 fw-300 color-gray-default">
+                  Tempo médio de envio
+                </span>
+                <span class="label-caption-1 color-gray-dark">
+                  {{ owner.avgPostageDays }} {{ owner.avgPostageDays > 1 ? 'dias
+                  úteis' : 'dia útil' }}
+                </span>
+              </div>
+              }
+            </div>
+            }
+          </div>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+      }
+    </div>
+    }
+
+    <!-- Mais roupas -->
+
+    @if (owner && !myProduct && otherClothes.length > 0) {
+    <div class="mt-40">
+      <div class="border-bottom mx-24 pb-8">
+        <h6 class="color-gray-dark">Mais desse armário</h6>
+      </div>
+
+      <ion-list class="mt-16 px-24 py-0">
+        @for (item of otherClothes; track item._id) {
+        <div
+          class="related-card"
+          (click)="openAnotherProduct(item)"
+        >
+          <tk-product-card [useLink]="false" [product]="item">
+          </tk-product-card>
+        </div>
+        }
+      </ion-list>
+    </div>
+    }
+  </ion-grid>
+</ion-content>
+
+@if (expired) {
+<ion-footer class="px-24 py-16">
+  <ion-button (click)="renewProduct()" class="action-button">
+    Renovar anúncio
+  </ion-button>
+</ion-footer>
+} @else if (waiting_adjustment) {
+<ion-footer class="px-24 py-16">
+  <ion-button (click)="modalAdjusts()" class="action-button">
+    Corrigir anúncio
+  </ion-button>
+</ion-footer>
+} @else if (paused) {
+<ion-footer class="px-24 py-16">
+  <ion-button (click)="activateProduct()" class="action-button">
+    Ativar anúncio
+  </ion-button>
+</ion-footer>
+}

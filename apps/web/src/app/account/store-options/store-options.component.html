@@ -1,0 +1,23 @@
+<div class="col-12 col-md-7">
+  <h3 class="color-gray-dark">Perfil da loja</h3>
+
+  <tk-seller-profile
+    class="mt-5 d-block"
+    [user]="user"
+    [previewAvatarUrl]="previewAvatarUrl"
+    [pictureUpdating]="pictureUpdating"
+    [avatarPresent]="willHaveAvatar"
+    [sellerReviews]="sellerReviews"
+    (submitted)="save($event)"
+  >
+    <tk-image-picker
+      avatarPicker
+      mode="button"
+      [disabled]="pictureUpdating"
+      externalURL="{{ user?.avatar && user.avatar !== '' ? getUserAvatar() : '' }}"
+      [profile]="true"
+      (imagePick)="onImagePicked($event)"
+    >
+    </tk-image-picker>
+  </tk-seller-profile>
+</div>

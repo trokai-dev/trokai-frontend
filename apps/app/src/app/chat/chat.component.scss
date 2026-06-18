@@ -1,0 +1,27 @@
+ion-content {
+  --background: #fff;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+// Let the shared thread own the scroll (its own .chat-grid scrolls); the Ionic
+// content area just provides a full-height flex column for it to fill.
+ion-content::part(scroll) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+tk-chat-thread {
+  flex: 1;
+  min-height: 0;
+}
+
+.max-user-name {
+  max-width: 55vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

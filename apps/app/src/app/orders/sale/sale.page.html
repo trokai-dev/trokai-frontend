@@ -1,0 +1,180 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <app-back-button defaultHref="/main/negotiations/1"></app-back-button>
+
+    <ion-title> Venda </ion-title>
+
+    @if (showContact) {
+    <ion-buttons slot="primary">
+      <ion-button slot="icon-only" (click)="chat()">
+        <ion-icon name="chatbubble" class="color-primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    }
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="p-24">
+    <!-- loading -->
+    @if (loading) {
+    <div class="w-100 d-flex justify-content-center mt-40">
+      <ion-spinner></ion-spinner>
+    </div>
+    }
+
+    @if (order) {
+    <div>
+      @if (!loading) {
+      <div>
+        <ion-row class="mt-5">
+          <ion-col size="12" size-md="4">
+            <!-- Produtos -->
+            <div class="page-section">
+              <span class="section-title">Produtos</span>
+
+              @for (product of order.clothes; track product._id) {
+              <div class="cursor-pointer mt-16">
+                <app-cart-item
+                  (click)="openProduct(product)"
+                  [product]="product"
+                  [showRemove]="false"
+                ></app-cart-item>
+              </div>
+              }
+            </div>
+          </ion-col>
+
+          <ion-col size="12" size-md="4">
+            <!-- Detalhes -->
+            <div class="page-section">
+              <span class="section-title">Detalhes</span>
+
+              <div class="d-grid gap-16">
+                <div>
+                  <span class="item-label">Data</span>
+                  <span class="item-value">
+                    {{ order.createdAt | date : "dd/MM/yyyy - HH:mm" }}
+                  </span>
+                </div>
+
+                <div>
+                  <span class="item-label">Status</span>
+                  <span class="item-value"> {{ getOrderStatus() }} </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Entrega -->
+            <app-order-delivery [order]="order" [isSale]="true" />
+
+            <!-- Valores -->
+            <div class="page-section">
+              <span class="section-title">Valores</span>
+
+              <div class="d-flex flex-column gap-8">
+                <!-- Carrinho -->
+                @for (c of order.clothes; track c._id) {
+                <div class="d-flex justify-content-between">
+                  <span class="item-value ion-text-capitalize">
+                    {{ c.title }} {{ c.refund ? "(Estornado)" : "" }}
+                  </span>
+                  <span class="item-value">
+                    {{ c.cost | cost | currency : "BRL" : true : "1.2-2" }}
+                  </span>
+                </div>
+                }
+
+                <!-- Comissao -->
+                <div class="d-flex justify-content-between">
+                  <span class="item-value"> Comissão </span>
+                  <span class="item-value">
+                    - {{ order.businessValues.sellerFinalPercentageFee | cost |
+                    currency : "BRL" : true : "1.2" }}
+                  </span>
+                </div>
+
+                <!-- Envio seguro -->
+                @if(order.shippingValues?.finalDeclaredValue) {
+                <div class="d-flex justify-content-between">
+                  <span class="item-value"> Envio seguro </span>
+                  <span class="item-value">
+                    - {{ order.shippingValues.finalDeclaredValue | cost | currency
+                    : "BRL" : true : "1.2" }}
+                  </span>
+                </div>
+                }
+
+                <!-- Total a receber -->
+                <div class="d-flex justify-content-between">
+                  <span class="item-value"><b>A receber</b></span>
+                  <span class="item-value color-primary">
+                    <b>
+                      {{ order.businessValues.sellerSplitBeforeAnticipation | cost
+                      | currency : "BRL" : true : "1.2" }}
+                    </b>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Link to bank -->
+              <div class="mt-16">
+                <ion-button
+                  fill="clear"
+                  size="small"
+                  class="color-primary"
+                  (click)="goToBank()"
+                >
+                  Abrir cofrinho
+                </ion-button>
+              </div>
+            </div>
+
+            <!-- Comprador -->
+            <div class="page-section pt-5 mt-16">
+              <div
+                class="w-100 d-flex ion-activatable ripple-parent cursor-pointer"
+              >
+                <ion-avatar>
+                  <ion-img [src]="buyerAvatar"></ion-img>
+                </ion-avatar>
+
+                <div
+                  class="ml-24 d-flex align-items-start flex-column justify-content-center"
+                >
+                  <h6 class="color-gray-dark max-user-name">
+                    {{order.buyer.storeName ?? order.buyer.name}}
+                  </h6>
+
+                  <div class="d-flex mt-4 align-items-start">
+                    <label
+                      class="label-caption-1 color-gray-default max-user-address"
+                    >
+                      {{ order.buyer.address?.city }}, {{
+                      order.buyer.address?.state }}
+                    </label>
+                  </div>
+                </div>
+
+                <ion-ripple-effect></ion-ripple-effect>
+              </div>
+            </div>
+
+            <!-- CANCELAMENTO -->
+            @if (waiting_shipment || waiting_withdrawal) {
+            <ion-button
+              class="action-button mt-32 w-100 color-error"
+              fill="clear"
+              (click)="cancel()"
+            >
+              Cancelar venda
+            </ion-button>
+            }
+          </ion-col>
+        </ion-row>
+      </div>
+      }
+    </div>
+    }
+  </ion-grid>
+</ion-content>

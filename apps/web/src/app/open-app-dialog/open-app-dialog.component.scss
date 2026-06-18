@@ -1,0 +1,29 @@
+@import "../../styles/variables.scss";
+
+.open-app-dialog {
+  line-height: normal;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.4rem;
+
+  button {
+    min-width: 80%;
+  }
+
+  img {
+    width: 20%;
+    aspect-ratio: 1;
+    height: fit-content;
+    border-radius: 1.6rem;
+    box-shadow: 1px 2px 5px 0px $color-gray-light-1;
+  }
+}
+
+img {
+  width: 20%;
+  aspect-ratio: 1;
+  height: fit-content;
+  border-radius: 1.6rem;
+}

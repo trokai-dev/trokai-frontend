@@ -1,0 +1,113 @@
+<div class="dialog-wrapper">
+  <!-- header -->
+  <div class="dialog-header border-bottom">
+    <div class="d-flex justify-content-end">
+      <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+
+    <h4 class="color-gray-dark">Detalhes da compra</h4>
+  </div>
+
+  <!-- content -->
+
+  <div class="dialog-content">
+    <div class="mt-24 w-100">
+      <div class="d-flex justify-content-between mt-2">
+        <span class="label-body-2"> Carrinho</span>
+        <span class="label-body-2">
+          {{ cv.sumCart | cost | currency : "BRL" : "symbol" : "1.2" }}
+        </span>
+      </div>
+
+      @for(fee of cv.fees; track fee){
+      <div class="d-flex justify-content-between mt-2">
+        <div class="d-flex">
+          <span class="label-body-2">
+            {{ fee.name }}
+          </span>
+          <!-- help  -->
+          @if (fee.description){
+          <mat-icon
+            type="button"
+            class="ml-4 color-gray-default icon-small"
+            mat-icon-button
+            matTooltip="{{ fee.description }}"
+            (click)="showFeeInfo(fee)"
+          >
+            help_outline
+          </mat-icon>
+          }
+        </div>
+
+        <span class="label-body-2">
+          {{ fee.value | cost | currency : "BRL" : "symbol" : "1.2" }}
+        </span>
+      </div>
+      }
+
+
+      <!-- discount -->
+      @if(cv.interest) {
+
+      <div class="d-flex justify-content-between mt-2">
+        <span class="label-body-2"> Juros</span>
+        <span class="label-body-2 ">
+
+
+            {{
+              cv.interest | cost | currency : "BRL" : "symbol" : "1.2"
+            }}
+
+        </span>
+      </div>
+
+      }
+
+
+      <!-- discount -->
+      @if(cv.couponDiscount) {
+
+      <div class="d-flex justify-content-between mt-2">
+        <span class="label-body-2"> Cupom</span>
+        <span class="label-body-2 color-primary">
+          <b>
+            -
+            {{
+              cv.couponDiscount | cost | currency : "BRL" : "symbol" : "1.2"
+            }}</b
+          >
+        </span>
+      </div>
+
+      }
+      <!-- PIX -->
+      @if(cv.pixDiscount) {
+
+      <div class="d-flex justify-content-between mt-2">
+        <span class="label-body-2"> Desconto PIX</span>
+        <span class="label-body-2 color-primary">
+          <b>
+            - {{ cv.pixDiscount | cost | currency : "BRL" : "symbol" : "1.2" }}
+          </b>
+        </span>
+      </div>
+
+      }
+
+      <div class="d-flex justify-content-between mt-2">
+        <span class="label-body-2"> Total</span>
+        <span class="label-body-2 color-gray-dark">
+          <b>
+            {{
+              cv.totalAfterDiscounts
+                | cost
+                | currency : "BRL" : "symbol" : "1.2"
+            }}
+          </b>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

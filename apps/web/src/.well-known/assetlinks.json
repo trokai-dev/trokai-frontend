@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.trokai.mobile",
+      "sha256_cert_fingerprints": [
+        "BE:4D:9D:09:52:61:7C:17:EC:BC:CB:2F:2C:D1:6C:EC:98:01:D2:E4:7F:01:5E:87:90:96:91:F4:B9:F3:A9:9B",
+        "C0:35:AA:DB:92:73:2D:EA:C2:9F:56:DE:49:AF:64:00:46:EF:3E:1D:3A:4C:A5:25:71:FA:38:77:F1:2E:F3:D8"
+      ]
+    }
+  }
+]

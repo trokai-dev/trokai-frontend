@@ -1,0 +1,53 @@
+// All colors come from @trokai/shared-styles tokens (var(--color-*)) — zero hex.
+// Each variant sets a fill color (--_bg) and text color (--_fg); the filled and
+// outlined treatments both derive from those, so one base covers product status
+// (filled) and seller status (outlined) alike.
+:host {
+  display: inline-flex;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-caption);
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  border: 1px solid transparent;
+
+  // filled (default): solid background, contrast text
+  background-color: var(--_bg);
+  color: var(--_fg);
+
+  &__label {
+    display: inline-block;
+  }
+
+  // --- Variant palette (token-driven; fixes the legacy #6b6b6b drift) ---
+  &--neutral { --_bg: var(--color-surface); --_fg: var(--color-on-surface); }
+  &--success { --_bg: var(--color-primary); --_fg: var(--color-on-primary); }
+  &--warning { --_bg: var(--color-warning); --_fg: var(--color-gray-default); }
+  &--danger { --_bg: var(--color-error); --_fg: #fff; }
+  &--muted { --_bg: var(--color-gray-default); --_fg: #fff; }
+  &--accent { --_bg: var(--color-accent); --_fg: var(--color-gray-default); }
+
+  // outlined: transparent fill, variant-colored border + text (e.g. vacation badge)
+  &--outline {
+    background-color: transparent;
+    border-color: var(--_bg);
+    color: var(--_bg);
+  }
+
+  // absolutely positioned over a media element (e.g. product thumbnail)
+  &--overlay {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    z-index: 2;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
+  }
+}

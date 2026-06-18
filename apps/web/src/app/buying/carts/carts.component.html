@@ -1,0 +1,167 @@
+<div class="container page">
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <div class="d-flex align-items-end">
+        <h2 class="color-gray-dark">
+          {{ justAdded ? "Adicionado à sacola" : "Minhas sacolas" }}
+        </h2>
+      </div>
+    </div>
+  </div>
+
+  @if (baskets && baskets.length) {
+
+    <div class="mt-5 frete-unico">
+      <h4 class="color-primary">Frete único!</h4>
+      <span class="label-body-2 color-gray-default mt-2">
+        Compre mais produtos de um mesmo brechó e pague apenas um frete.
+      </span>
+    </div>
+  }
+  @if (baskets && !baskets.length) {
+    @if (baskets && !baskets.length) {
+      <div class="empty-page full">
+        <ion-icon name="sad-outline"></ion-icon>
+        <span class="label-body-2 d-block"> Nenhuma sacolinha</span>
+        <button routerLink="/search" mat-raised-button color="primary">
+          Ver produtos
+        </button>
+      </div>
+    }
+  } @else {
+    @for (basket of baskets; track basket) {
+      <div class="row mt-4 basket-card">
+        <div class="col">
+          <!-- Loja -->
+          <div class="row cursor-pointer">
+            <div
+              (click)="openOwner(basket.owner)"
+              class="col-auto d-flex justify-content-center align-items-center"
+            >
+              <tk-user-avatar
+                [user]="basket.owner"
+                size="medium"
+              ></tk-user-avatar>
+            </div>
+            <div
+              (click)="openOwner(basket.owner)"
+              class="col-auto d-flex ms-0 ms-md-2 flex-column align-items-start justify-content-center px-md-0"
+            >
+              <div class="d-flex align-items-center">
+                <h4 class="color-gray-dark text-capitalize">
+                  {{ basket.owner.storeName ?? basket.owner.name }}
+                </h4>
+              </div>
+              <div class="mt-1">
+                <tk-review-stars
+                  [showAmount]="false"
+                  [stars]="basket.owner.reviewsAverage"
+                  [amount]="basket.owner.reviewsAmount"
+                  [clickable]="!!basket.owner.reviewsAmount"
+                  (clicked)="openReviews(basket.owner)"
+                ></tk-review-stars>
+              </div>
+            </div>
+          </div>
+          @for (p of basket.products; track p) {
+            <div class="cart-item mt-24">
+              <a routerLink="{{ mountProductLink(p) }}">
+                <img
+                  alt="{{ p.title }}"
+                  hideLoading
+                  lazyLoad="{{
+                    p.images?.[0]?.sm ??
+                      url + basket.owner._id + '/' + p.smallPicture?.url
+                  }}"
+                  class="cart-item-img"
+                />
+              </a>
+              <a routerLink="{{ mountProductLink(p) }}">
+                <div class="cart-item-text">
+                  <span class="label-body-2 color-gray-dark text-capitalize"
+                    ><b>{{ p.title }}</b>
+                  </span>
+                  <span class="label-body-2 mt-2">
+                    {{
+                      p.cost * 0.95 | cost | currency: "BRL" : "symbol" : "1.2"
+                    }}
+                  </span>
+                </div>
+              </a>
+              @if (!basket.reserved) {
+                <button
+                  mat-icon-button
+                  class="color-gray-light-1 button-remove"
+                  (click)="removeProduct(p, $event)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              }
+            </div>
+          }
+          <!-- <app-reserve-time text="Continuar" color="primary" (open)="restore(cart)" [ownerId]="basket.owner"></app-reserve-time> -->
+        </div>
+        <div
+          class="col-12 col-md-3 mt-5 mt-md-0 d-flex flex-column justify-content-end"
+        >
+          <div class="d-flex justify-content-between">
+            <span class="label-body-2"> Total</span>
+            <span class="label-body-2 color-gray-dark">
+              <b>
+                {{
+                  basket.total() * 0.95
+                    | cost
+                    | currency: "BRL" : "symbol" : "1.2"
+                }}</b
+              >
+            </span>
+          </div>
+          @if (!basket.reserved) {
+            <div>
+              <button
+                class="mt-16 w-100"
+                mat-stroked-button
+                color="primary"
+                routerLink="/users/{{ basket.owner.nickname }}"
+              >
+                <b>Adicionar mais produtos</b>
+              </button>
+              <button
+                mat-raised-button
+                class="mt-8 w-100"
+                color="primary"
+                (click)="checkout(basket.owner._id)"
+              >
+                Ir para pagamento
+              </button>
+            </div>
+          }
+          @if (basket.reserved) {
+            <div>
+              <app-reserve-time
+                [ownerId]="basket.owner._id"
+                (open)="checkout(basket.owner._id)"
+                text="Continuar compra"
+              ></app-reserve-time>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  }
+
+  <!-- Suggestions only after adding new item to baskets (comming from product cta) -->
+
+  @if (suggestionHeader && suggestions && suggestions.length) {
+    <app-products-horizontal-list
+      title="{{ suggestionHeader }}"
+      [products]="suggestions"
+      [seeMore]="suggestionLink && suggestions && suggestions.length > 0"
+      navText="Ver tudo"
+      [navMore]="suggestionLink"
+      [colsDesk]="6"
+      [borderBottom]="false"
+    >
+    </app-products-horizontal-list>
+  }
+</div>

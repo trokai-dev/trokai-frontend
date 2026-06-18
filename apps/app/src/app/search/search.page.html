@@ -1,0 +1,217 @@
+<ion-header>
+  <ion-toolbar class="clear">
+    <div class="m-24">
+      <ion-searchbar
+        placeholder="Buscar no Trokaí"
+        debounce="0"
+        showClearButton="always"
+        [(ngModel)]="searchText"
+        (ionInput)="changeText()"
+        maxlength="100"
+        mode="md"
+        enterkeyhint="search"
+        (keypress)="enter($event)"
+        (ionClear)="clearSearchText()"
+      >
+      </ion-searchbar>
+
+      <ion-button type="submit" style="display: none" color="primary">
+        <ion-icon name="search"></ion-icon>
+      </ion-button>
+    </div>
+
+    @if (!showInitialPage() && target === 'clothes') {
+    <app-filter-tags
+      [filters]="filters"
+      (filtersChanged)="applyFilters($event)"
+    ></app-filter-tags>
+    }
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content>
+  @if (showInitialPage()) {
+  <div class="mx-24 best-categories">
+    <!-- menu -->
+    @if ((!searchText || searchText === '') && menu && menu.length) {
+    <ion-row
+      class="ion-no-padding mt-16"
+    >
+      <ion-toolbar>
+        <div class="tabs-trokai">
+          @for (section of menu; track $index; let i = $index) {
+          <div
+            class="tab-trokai"
+            [ngClass]="{'active': activeMenuTab === i}"
+            (click)="activeMenuTab = i"
+          >
+            <ion-label class="label-body-2 color-gray-default"
+              >{{section.label}}</ion-label
+            >
+            <div class="tab-trokai-indicator"></div>
+          </div>
+          }
+        </div>
+      </ion-toolbar>
+
+      @for (col of menu[activeMenuTab].cols; track $index) {
+      <ion-row class="mt-16 w-100">
+        <ion-col>
+          <div class="d-flex justify-content-between">
+            <span class="label-body-2"><b>{{col.label}}</b> </span>
+
+            @if (activeMenuTab < 2) {
+            <a (click)="selectInitialCat(col)">
+              <span class="label-caption-1 color-primary"> Ver tudo </span>
+            </a>
+            }
+          </div>
+
+          <div class="d-flex flex-wrap mt-16">
+            @for (c of col.list; track $index) {
+            <div
+              (click)="selectInitialCat(c)"
+              class="option-item ion-activatable ripple-parent"
+            >
+              <span class="label-body-2 color-gray-default ion-text-capitalize">
+                {{c.label }}</span
+              >
+              <ion-ripple-effect></ion-ripple-effect>
+            </div>
+            }
+          </div>
+        </ion-col>
+      </ion-row>
+      }
+
+      @if (activeMenuTab < 2) {
+      <ion-row class="mt-16 mb-32 w-100">
+        <ion-col size="12" class="ion-text-center">
+          <a (click)="selectInitialCat(menu[activeMenuTab])">
+            <span class="label-body-2 color-primary">
+              Ver tudo de {{ menu[activeMenuTab].label }}
+            </span>
+          </a>
+        </ion-col>
+      </ion-row>
+      }
+    </ion-row>
+    }
+
+    <!-- search in users or clothes -->
+    @if (searchText && searchText !== '') {
+    <ion-row
+      class="ion-no-padding mt-32"
+    >
+      <ion-label class="label-body-2 color-gray-dark">Buscar por</ion-label>
+      <div class="mt-32 w-100">
+        <div class="accordion-list">
+          <div
+            class="accordion-item ion-activatable ripple-parent w-100"
+            (click)="clickSuggestion('clothes')"
+          >
+            <div class="accordion-item-header">
+              <div
+                class="d-flex align-items-center justify-content-between w-100"
+              >
+                <ion-label class="label-body-1 color-gray-dark"
+                  >{{searchText}}</ion-label
+                >
+                <ion-label class="label-body-2 d-flex color-gray-default"
+                  >produtos
+                  <ion-icon class="ml-8" name="shirt-outline"></ion-icon>
+                </ion-label>
+              </div>
+            </div>
+            <ion-ripple-effect></ion-ripple-effect>
+          </div>
+
+          <div
+            class="accordion-item ion-activatable ripple-parent w-100"
+            (click)="clickSuggestion('users')"
+          >
+            <div class="accordion-item-header">
+              <div
+                class="d-flex align-items-center justify-content-between w-100"
+              >
+                <ion-label class="label-body-1 color-gray-dark"
+                  >{{searchText}}</ion-label
+                >
+                <ion-label class="label-body-2 d-flex color-gray-default"
+                  >armários e brechós
+                  <ion-icon class="ml-8" name="storefront-outline"></ion-icon>
+                </ion-label>
+              </div>
+            </div>
+            <ion-ripple-effect></ion-ripple-effect>
+          </div>
+        </div>
+      </div>
+    </ion-row>
+    }
+  </div>
+  }
+
+  @if (isLoading) {
+  <div
+    style="
+      height: 65vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    "
+  >
+    <ion-spinner name="crescent"> </ion-spinner>
+  </div>
+  }
+
+  @if (!showInitialPage()) {
+  <div>
+    @if (!isLoading) {
+    <div>
+      @if (!results || results.length === 0) {
+      <div class="empty-page full">
+        <ion-icon name="sad-outline"></ion-icon>
+        <ion-label> Nenhum resultado</ion-label>
+      </div>
+      }
+
+      @if (results && results.length > 0) {
+      <ion-list class="vertical my-24">
+        @if (target === 'clothes') {
+        <ion-row>
+          @for (r of results; track r._id) {
+          <ion-col
+            style="min-width: 50%; max-width: 50%"
+          >
+            <tk-product-card [useLink]="false" [product]="r" (open)="openClothe(r)">
+            </tk-product-card>
+          </ion-col>
+          }
+        </ion-row>
+        }
+
+        @if (target === 'users') {
+        <ion-row>
+          @for (r of results; track $index) {
+          <ion-col
+            style="min-width: 50%; max-width: 50%"
+          >
+            <tk-user-header [user]="r" layout="card" (clicked)="openUser($event)" />
+          </ion-col>
+          }
+        </ion-row>
+        }
+      </ion-list>
+      }
+    </div>
+    }
+    <ion-infinite-scroll
+      [disabled]="endOfSearch || isLoading"
+      (ionInfinite)="loadData($event)"
+    >
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  }
+</ion-content>

@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <app-back-button defaultHref="/main/negotiations/2"></app-back-button>
+
+    <ion-title> Ponto de coleta </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="p-24">
+    <ion-row class="d-flex flex-1">
+      <ion-col size="12" size-md="8">
+        <span class="label-body-2 mb-4">
+          Selecione um ponto de coleta próximo a você para entregar o seu
+          pedido.
+        </span>
+      </ion-col>
+    </ion-row>
+
+    @if (loading) {
+      <div class="w-100 d-flex justify-content-center my-5">
+        <ion-spinner color="primary"></ion-spinner>
+      </div>
+    }
+
+    @if (!loading) {
+      <div class="checkout-body">
+        <ion-radio-group (ionChange)="selectAgency($event)" mode="md">
+          @for (agency of visibleAgencies; track agency.id) {
+            <ion-item class="border-bottom mb-12 p-8" lines="none">
+              <ion-radio [labelPlacement]="'end'" justify="start" [value]="agency.id">
+                <ion-label class="ion-text-wrap">
+                  <div class="custom-radio-button-content">
+                    <div class="d-flex justify-content-between">
+                      <span class="item-label">
+                        {{ agency.name }} ({{ agency.displayDistance }})
+                      </span>
+                    </div>
+                    <span class="item-value">
+                      {{ agency.displayAddress }}. {{ agency.note }}
+                    </span>
+                  </div>
+                </ion-label></ion-radio
+              >
+            </ion-item>
+          }
+        </ion-radio-group>
+
+        @if (agencies && visibleAgencies.length < agencies.length) {
+        <div class="d-flex justify-content-center mt-4">
+          <ion-button
+            fill="outline"
+            color="primary"
+            (click)="loadMoreAgencies()"
+          >
+            Mostrar mais
+          </ion-button>
+        </div>
+        }
+      </div>
+    }
+  </ion-grid>
+</ion-content>
+
+@if (selectedAgency && !loading) {
+  <ion-footer class="px-24 py-16">
+    <ion-button
+      expand="block"
+      class="action-button"
+      color="primary"
+      (click)="confirmSelection()"
+    >
+      Continuar
+    </ion-button>
+  </ion-footer>
+}

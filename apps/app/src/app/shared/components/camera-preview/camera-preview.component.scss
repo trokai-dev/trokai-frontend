@@ -1,0 +1,66 @@
+// .overlay {
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   z-index: 10;
+// }
+
+.cameraPreview {
+  // display: flex;
+  width: 100vw;
+  margin-top: 100px;
+  height: 80vh;
+  // z-index: 8;
+}
+
+.camera-buttons {
+
+  &.top-buttons {
+    position: absolute;
+    top: 0px;
+  }
+
+  &.bottom-buttons {
+    position: absolute;
+    bottom: 0px;
+  }
+
+  .camera-button {
+    position: absolute;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    ion-icon {
+      color: var(--ion-color-primary);
+      font-size: 2.4rem;
+    }
+  }
+}
+
+#capture {
+  position: absolute;
+  bottom: 30px;
+  left: calc(50% - 25px);
+  width: 50px;
+  height: 50px;
+  z-index: 11;
+}
+
+#close {
+  position: absolute;
+  bottom: 30px;
+  left: calc(50% - 175px);
+  width: 50px;
+  height: 50px;
+  z-index: 11;
+}
+
+#flip {
+  position: absolute;
+  bottom: 30px;
+  left: calc(50% + 125px);
+  width: 50px;
+  height: 50px;
+  z-index: 11;
+}

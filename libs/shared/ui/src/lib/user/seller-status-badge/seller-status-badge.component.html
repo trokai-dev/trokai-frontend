@@ -1,0 +1,13 @@
+@if (user) {
+  <span
+    class="status-badge"
+    [class.cursor-pointer]="isLoggedUser"
+    [ngClass]="'status-badge--' + variant"
+    role="button"
+    [attr.tabindex]="isLoggedUser ? 0 : null"
+    (click)="onClick()"
+    (keyup.enter)="onClick()"
+  >
+    {{ label }}
+  </span>
+}

@@ -1,0 +1,73 @@
+<div class="home_banner">
+  <!-- banner desk -->
+  <div class="d-none d-md-block">
+    @if (item.route && item.imgUrl) {
+      <a
+        [routerLink]="item.route"
+        [queryParams]="item.queryParams"
+        >
+        <div class="image-wrapper">
+          <img
+            alt="{{ item.label }}"
+            ngSrc="{{ item.imgUrl }}"
+            fill
+            hideLoading
+            [priority]="priority"
+            />
+        </div>
+      </a>
+    }
+    @if (!item.route && item.imgUrl) {
+      <a
+        [href]="item.actionUrl"
+        target="_blank"
+        >
+        <div class="image-wrapper">
+          <img
+            alt="{{ item.label }}"
+            ngSrc="{{ item.imgUrl }}"
+            fill
+            hideLoading
+            [priority]="priority"
+            />
+        </div>
+      </a>
+    }
+  </div>
+
+  <!-- banner mobile -->
+  <div class="d-block d-md-none">
+    @if (item.route && item.imgMobileUrl) {
+      <a
+        [routerLink]="item.route"
+        [queryParams]="item.queryParams"
+        >
+        <div class="image-wrapper">
+          <img
+            alt="{{ item.label }}"
+            ngSrc="{{ item.imgMobileUrl }}"
+            fill
+            hideLoading
+            [priority]="priority"
+            />
+        </div>
+      </a>
+    }
+    @if (!item.route && item.imgMobileUrl) {
+      <a
+        [href]="item.actionUrl"
+        target="_blank"
+        >
+        <div class="image-wrapper">
+          <img
+            alt="{{ item.label }}"
+            ngSrc="{{ item.imgMobileUrl }}"
+            fill
+            hideLoading
+            [priority]="priority"
+            />
+        </div>
+      </a>
+    }
+  </div>
+</div>

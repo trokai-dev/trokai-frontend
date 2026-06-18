@@ -1,0 +1,78 @@
+<div class="container page my-5 pt-5">
+  @if (product) {
+    <div class="row">
+      <div class="col col-md-6 mx-auto text-start">
+        <h2 class="color-gray-dark text-capitalize">
+          {{ product.title }}
+        </h2>
+
+        @if (question || (!isOwner && sent)) {
+          <!-- SE TIVER PERGUNTA -->
+          <div class="mt-40">
+            <h4 class="color-gray-dark">Pergunta</h4>
+            <span class="label-body-2">
+              @if (question?.question) {
+                {{ question?.question }}
+              } @else if (!isOwner && sent) {
+                {{ message }}
+              }
+            </span>
+          </div>
+
+          <!-- RESPOSTA -->
+          <div class="mt-5">
+            <h4 class="color-gray-dark">Resposta</h4>
+            <span class="label-body-2">
+              @if (question?.answer) {
+                {{ question?.answer }}
+              } @else if (isOwner && sent) {
+                {{ message }}
+              } @else {
+                Aguardando resposta...
+              }
+            </span>
+          </div>
+        }
+
+        <!-- SE FOR VENDEDOR, RESPONDER - SE NAO TIVER RESPONDIDO -->
+        <!-- SE FOR COMPRADOR, PERGUNTAR - SE NAO TIVER PERGUNTADO -->
+
+        @if (showForm()) {
+          <div class="mt-5">
+            <mat-form-field appearance="outline" class="d-block">
+              <mat-label
+                >Escreva a {{ isOwner ? "Resposta" : "Pergunta" }}
+              </mat-label>
+              <textarea matInput [(ngModel)]="message"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="questions-help-cta">
+            <ion-icon name="warning" class="help-icon"></ion-icon>
+            <span class="color-gray-dark">
+              @if (isOwner) {
+                Não compartilhe dados de contato e nunca aceite pagamentos fora
+                do Trokai.
+              } @else {
+                Não compartilhe dados de contato e nunca realize pagamentos fora
+                do Trokai.
+              }
+            </span>
+          </div>
+
+          <div class="mt-5">
+            <button
+              mat-raised-button
+              class="w-100"
+              [disabled]="message?.length <= 5"
+              color="primary"
+              (click)="send()"
+            >
+              Enviar {{ isOwner ? "Resposta" : "Pergunta" }}
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

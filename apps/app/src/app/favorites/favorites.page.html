@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <app-back-button defaultHref="/main/profile"></app-back-button>
+    <ion-title>Favoritos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content>
+  <ion-refresher slot="fixed" color="primary" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  @if (isLoading) {
+  <div class="empty-page full w-100">
+    <ion-spinner name="crescent"> </ion-spinner>
+  </div>
+  }
+
+  @if ((!favorites || favorites.length === 0) && !isLoading) {
+  <div class="empty-page full">
+    <ion-icon name="sad-outline"></ion-icon>
+    <ion-label> Nenhum favorito</ion-label>
+  </div>
+  }
+
+  <ion-list class="vertical my-24" [ngStyle]="{'display': isLoading ? 'none' : 'block'}">
+    <ion-row>
+      @for (p of favorites; track p._id) {
+      <ion-col
+        style="min-width: 50%; max-width: 50%"
+      >
+        <tk-product-card [useLink]="false"
+          [product]="p"
+          (open)="open(p)"
+          (onFinishLiking)="finishLiking(p)"
+        >
+        </tk-product-card>
+      </ion-col>
+      }
+    </ion-row>
+  </ion-list>
+
+  <ion-infinite-scroll
+    style="margin-bottom: 25vw"
+    [disabled]="!favorites || !favorites.length || endOfSearch"
+    (ionInfinite)="loadData($event)"
+  >
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <button #btnTrigger style="display: none !important"></button>
+</ion-content>

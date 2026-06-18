@@ -1,0 +1,31 @@
+<div class="container page my-5">
+  <div class="row">
+    <div class="col col-md-4 mx-auto text-center">
+      <h2 class="color-gray-dark">Fazer login no Trokaí</h2>
+
+      <tk-login-form
+        class="mt-5 pt-5 d-block"
+        [loading]="loading"
+        (submitted)="login($event)"
+        (forgotPassword)="toForgot()"
+        (register)="toRegister()"
+      >
+        <span class="label-caption-1 mt-5 d-block">ou</span>
+
+        <tk-google-btn (googleClick)="googleLogin()"></tk-google-btn>
+
+        <button
+          mat-stroked-button
+          color="primary"
+          aria-label="Entrar com Apple"
+          (click)="appleLogin()"
+          type="button"
+          class="btn-social w-100 mt-4"
+        >
+          <img slot="start" class="mr-4" src="../../../assets/img/apple-icon.svg" alt="Apple" />
+          <span class="label-body-2"> Continuar com Apple</span>
+        </button>
+      </tk-login-form>
+    </div>
+  </div>
+</div>

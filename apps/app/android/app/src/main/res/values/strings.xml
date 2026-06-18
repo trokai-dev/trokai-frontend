@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Trokaí</string>
+    <string name="title_activity_main">Trokaí</string>
+    <string name="package_name">com.trokai.app</string>
+    <string name="fileprovider_authority">com.trokai.app.fileprovider</string>
+    <string name="custom_url_scheme">com.trokai.app</string>
+    <string name="server_client_id">311804597430-3vn51fgs1kecd4fp7bmab43am26q4s9a.apps.googleusercontent.com</string>
+</resources>

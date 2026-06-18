@@ -1,0 +1,177 @@
+@if (!selectedCard) {
+  <div class="mt-16">
+    <!-- CARDS LIST -->
+    @if (!onlyForm) {
+      <div>
+        @if (user && (!user.cards || user.cards.length === 0)) {
+          <div>
+            <span class="label-body-2">Nenhum cartão</span>
+          </div>
+        }
+        @if (user && user.cards && !selectable) {
+          <mat-list>
+            @for (c of user.cards; track c) {
+              <mat-list-item>
+                <div class="w-100 d-flex justify-content-between">
+                  <div class="d-flex align-items-center">
+                    <tk-payment-icon
+                      [paymentBrand]="c.brand"
+                      [showDefaultCardIcon]="true"
+                    />
+                    <span class="label-body-2 ml-16">
+                      **** **** **** {{ c.lastDigits }}</span
+                    >
+                  </div>
+                  <button
+                    mat-icon-button
+                    class="color-gray-default"
+                    (click)="deleteCard(c)"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            }
+          </mat-list>
+        }
+        @if (user && user.cards && selectable) {
+          <mat-radio-group
+            (change)="selectCard($event)"
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group"
+          >
+            @for (c of user.cards; track c) {
+              <mat-radio-button
+                color="primary"
+                class="example-radio-button d-flex mt-2"
+                [value]="c"
+              >
+                <span class="label-body-2 ml-16"
+                  >**** **** **** {{ c.lastDigits }}</span
+                >
+              </mat-radio-button>
+            }
+          </mat-radio-group>
+        }
+        @if (!formNew) {
+          <button
+            mat-stroked-button
+            color="primary"
+            (click)="formNew = true"
+            class="mt-5"
+          >
+            Adicionar cartão
+          </button>
+        }
+      </div>
+    }
+    <!-- CARD -->
+    @if (formNew) {
+      <form [formGroup]="form" class="mt-5">
+        <h4 class="color-gray-dark mb-16">Novo cartão</h4>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label> Nome do titular </mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="holderName"
+            maxlength="256"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label> CPF/CNPJ do titular </mat-label>
+          <input
+            matInput
+            mask="000.000.000-00||00.000.000/0000-00"
+            type="text"
+            formControlName="holderDocument"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label> Número do cartão </mat-label>
+          <input
+            matInput
+            mask="0000 0000 0000 0000"
+            type="text"
+            formControlName="number"
+            maxlength="19"
+            (input)="checkBrand()"
+          />
+          <div matSuffix class="me-4">
+            <tk-payment-icon [paymentBrand]="cardBrand" />
+          </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label> Validade </mat-label>
+          <input
+            matInput
+            mask="00/00"
+            type="text"
+            formControlName="expirationFull"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label> Cód. segurança </mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="cvv"
+            minlength="3"
+            maxlength="4"
+          />
+        </mat-form-field>
+        <h4 class="color-gray-dark mt-24 mb-16">Endereço de faturamento</h4>
+      </form>
+    }
+    <!-- ADDRESS -->
+    @if (user && user.address && formNew) {
+      <mat-checkbox color="primary" class="mt-8" [(ngModel)]="useUserAddress">
+        <div class="d-flex flex-column ml-4">
+          <h6 class="color-gray-dark">Usar endereço cadastrado</h6>
+          <mat-label class="label-caption-1" style="white-space: normal">
+            {{ user.address.street }}, {{ user.address.number }}, <br />
+            {{ user.address.neighborhood }}, {{ user.address.zipCode }},
+            {{ user.address.city }} - {{ user.address.state }}
+          </mat-label>
+        </div>
+      </mat-checkbox>
+    }
+    @if (!useUserAddress && formNew) {
+      <app-form-address [encapsulated]="true" [submit]="false" />
+    }
+    <!-- BUTTONS -->
+    @if (!encapsulated && formNew) {
+      <div class="w-100 d-flex justify-content-end mt-16">
+        <button
+          type="button"
+          mat-raised-button
+          aria-label="Salvar"
+          color="primary"
+          (click)="save()"
+        >
+          Salvar
+        </button>
+      </div>
+    }
+  </div>
+}
+
+<!-- selected card -->
+@if (selectedCard) {
+  <div class="w-100 d-flex justify-content-between">
+    <div class="d-flex align-items-center">
+      <ion-icon class="color-primary icon-small" name="card-outline"></ion-icon>
+      <span class="label-body-2 ml-16 py-3"
+        >**** **** **** {{ selectedCard.lastDigits }}</span
+      >
+    </div>
+    <button
+      mat-icon-button
+      class="color-gray-default"
+      (click)="clearSelection()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+}

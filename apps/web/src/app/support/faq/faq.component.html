@@ -1,0 +1,46 @@
+<div class="container page">
+  <div class="row mb-5">
+    <div class="col">
+      <button color="primary" mat-button routerLink="/help/">
+        <mat-icon>arrow_back</mat-icon> Central de ajuda
+      </button>
+    </div>
+  </div>
+
+  @if (faq) {
+  <div class="row">
+    <div class="col">
+      <h1>Ajuda | {{ faq.title }}</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="mt-40">
+        <!-- Section Title -->
+        <!-- <h2 [id]="section.slug" class="mb-16">{{ section.title }}</h2> -->
+
+        <!-- Accordion for Questions -->
+        <mat-accordion>
+          @for (topic of faq.topics; track topic) {
+
+          <h3 class="mt-24 mb-8" [id]="topic.slug">{{ topic.title }}</h3>
+
+          @for (q of topic.questions; track q) {
+
+          <mat-expansion-panel [id]="q.slug" class="mat-elevation-z0">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h4>{{ q.question }}</h4>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <p class="mt-8" [innerHTML]="getAnswerHtml(q.answer)"></p>
+          </mat-expansion-panel>
+          } }
+        </mat-accordion>
+      </div>
+    </div>
+  </div>
+  }
+</div>

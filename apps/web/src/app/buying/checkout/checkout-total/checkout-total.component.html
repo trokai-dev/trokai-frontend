@@ -1,0 +1,19 @@
+<div class="mt-16 py-5 border-top d-flex justify-content-between">
+  <h3>Valor</h3>
+  <div class="d-flex flex-column align-items-end">
+    @if (cv?.totalAfterDiscounts !== cv?.totalBeforeDiscounts) {
+    <span class="label-body-1 color-gray text-decoration-line-through">
+      {{
+        cv?.totalBeforeDiscounts | cost | currency : "BRL" : "symbol" : "1.2"
+      }}
+    </span>
+    }
+    <h3>
+      {{ cv?.totalAfterDiscounts | cost | currency : "BRL" : "symbol" : "1.2" }}
+    </h3>
+
+    <span class="label-button mt-16" (click)="openDetails()">
+      Ver detalhes
+    </span>
+  </div>
+</div>

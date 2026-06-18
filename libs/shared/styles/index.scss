@@ -1,0 +1,18 @@
+// @trokai/shared-styles — public entry. Single source of truth for design
+// tokens, theme & layout, consumed by both apps via
+// stylePreprocessorOptions.includePaths.
+//
+// In an app's GLOBAL stylesheet:
+//   @use 'tokens';            // design tokens (:root custom props) — always safe
+//   @use 'index';             // tokens + spacing/typography/layout utilities
+//   @use 'theme' as theme; html { @include theme.trokai-theme(); }  // M3 Material
+//
+// In a COMPONENT: just use `var(--color-*)` / `var(--space-*)` directly (global
+// CSS custom props — no import needed). `@use 'breakpoints' as bp;` only for the
+// `bp.media()` mixin (emits no CSS).
+
+@forward 'tokens'; // :root design tokens
+@forward 'breakpoints'; // bp() fn + media() mixin + --bp-* vars
+@forward 'typography'; // heading/label classes
+@forward 'spacing'; // .m-* / .p-* / .gap-* utilities
+@forward 'layout'; // flexbox + grid utilities

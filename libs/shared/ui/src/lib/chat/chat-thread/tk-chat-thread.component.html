@@ -1,0 +1,59 @@
+<div class="chat-thread">
+  <div #grid class="chat-grid">
+    @for (m of messages; track m) {
+      <!-- day divider -->
+      @if (isTimeDivider(m)) {
+        <div class="message-diff-row"><span>{{ m.text }}</span></div>
+      }
+
+      <!-- other user message -->
+      @if (m.senderId !== user._id && !isTimeDivider(m)) {
+        <div class="message-other-row">
+          <div class="message-container">
+            <span>{{ m.text }}</span>
+            <div class="message-footer"><span>{{ getMessageTime(m) }}</span></div>
+          </div>
+        </div>
+      }
+
+      <!-- own message -->
+      @if (m.senderId === user._id && !isTimeDivider(m)) {
+        <div class="message-user-row">
+          <div class="message-container">
+            <span>{{ m.text }}</span>
+            <div class="message-footer"><span>{{ getMessageTime(m) }}</span></div>
+          </div>
+        </div>
+      }
+    }
+  </div>
+
+  @if (!networkConnected) {
+    <div class="disconnected"><h6>SEM CONEXÃO</h6></div>
+  }
+
+  @if (enabled) {
+    <div class="control-wrapper">
+      <mat-form-field appearance="outline">
+        <textarea
+          #textarea
+          matInput
+          placeholder="Mensagem"
+          maxlength="140"
+          [disabled]="inputDisabled"
+          [(ngModel)]="message"
+          (keyup.enter)="enter()"
+        ></textarea>
+        <button
+          mat-icon-button
+          matSuffix
+          color="primary"
+          [style.opacity]="canSend ? 1 : 0.4"
+          (click)="createMessage()"
+        >
+          <mat-icon>arrow_upward</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  }
+</div>

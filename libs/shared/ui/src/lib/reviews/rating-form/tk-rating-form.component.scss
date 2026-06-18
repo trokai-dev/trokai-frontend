@@ -1,0 +1,33 @@
+// Layout via the shared @trokai/shared-styles utilities; token colors here.
+.rating-form {
+  .title {
+    color: var(--color-gray-dark);
+    text-align: center;
+  }
+
+  .subtitle {
+    color: var(--color-gray-default);
+    text-align: center;
+  }
+
+  .stars {
+    margin-top: var(--space-8);
+
+    .star-button {
+      width: 5rem;
+      height: 5rem;
+    }
+
+    .star {
+      font-size: 4rem;
+      width: 4rem;
+      height: 4rem;
+      line-height: 4rem;
+      color: var(--color-star-full);
+
+      &.empty {
+        color: var(--color-star-empty);
+      }
+    }
+  }
+}

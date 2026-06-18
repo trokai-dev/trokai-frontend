@@ -1,0 +1,48 @@
+@if (showTimeOnly && interval && timeLeft && timeLeft.getTime() > 0 ) {
+
+  <span class="label-body-1 color-primary">
+    <b>{{ timeLeft | date : "mm:ss" }}</b>
+  </span>
+
+} @else {
+
+  @if (interval && timeLeft && timeLeft.getTime() > 0) {
+    <div
+      class="reserved-info"
+      >
+      <button
+        (click)="open.emit()"
+        [color]="color"
+        mat-raised-button
+        class="w-100 mt-4"
+        >
+        <b> {{ text }} ({{ timeLeft | date : "mm:ss" }})</b>
+      </button>
+      @if (!hideCancel) {
+        <button
+          (click)="cancel()"
+          color="accent"
+          mat-stroked-button
+          class="w-100 mt-4"
+          >
+          Cancelar reserva
+        </button>
+      }
+    </div>
+  }
+
+  @if ((!interval && !timeLeft) || timeLeft.getTime() <= 0) {
+    <div
+      class="reserved-info"
+      >
+      <button
+        (click)="expired()"
+        [color]="color"
+        mat-stroked-button
+        class="w-100 mt-4"
+        >
+        Reserva expirada
+      </button>
+    </div>
+  }
+}

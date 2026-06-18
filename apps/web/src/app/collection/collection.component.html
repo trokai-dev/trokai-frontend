@@ -1,0 +1,34 @@
+<div class="container page">
+  <div class="row">
+    <div class="col">
+      <h2 class="color-gray-dark text-capitalize">{{ collectionName }}</h2>
+    </div>
+  </div>
+
+  <div class="row row-cols-2 row-cols-md-5">
+    @for (product of results; track product) {
+      <div class="col mt-4 pt-3">
+        <tk-product-card
+          [clean]="true"
+          [product]="product"
+        ></tk-product-card>
+      </div>
+    }
+  </div>
+
+  @if (results.length === 0) {
+    <div class="empty-page full">
+      <ion-icon name="sad-outline"></ion-icon>
+      <span class="label-body-2 d-block"> Nenhum produto nesta coleção</span>
+      <button routerLink="/search" mat-raised-button color="primary">
+        Ver produtos
+      </button>
+    </div>
+  }
+
+  <div class="row">
+    <div class="col">
+      <app-paginator [paginator]="paginator"></app-paginator>
+    </div>
+  </div>
+</div>

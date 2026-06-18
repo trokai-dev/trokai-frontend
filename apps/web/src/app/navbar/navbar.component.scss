@@ -1,0 +1,145 @@
+@import "../../styles/variables.scss";
+
+.navbar {
+  border-bottom: 1px solid $color-gray-light-2;
+  min-height: 65px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  align-items: center;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 2.4rem;
+    .logo img {
+      width: 7rem;
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+
+    a {
+      color: $color-gray-default !important;
+      font-weight: 300;
+    }
+
+    a:hover {
+      opacity: 0.8;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: unset;
+      display: flex;
+      margin: 0;
+      gap: 4.8rem;
+    }
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+
+    ul {
+      list-style: none;
+      padding-left: unset;
+      display: flex;
+      margin: 0;
+      gap: 0rem;
+
+      li {
+        display: flex;
+        align-items: center;
+
+        .mat-badge {
+          right: 3px;
+          top: 3px;
+        }
+      }
+    }
+  }
+}
+
+.li-user {
+  width: 48px;
+  height: 48px;
+  justify-content: center;
+}
+
+.mobile-only {
+  .nav-search {
+    margin: 0.8rem 0.8rem;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.nav-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: none;
+  border-radius: 8px;
+  border: 1px solid $color-gray-light-2;
+  padding: 0 1.4rem;
+  height: 48px;
+  max-width: 300px;
+
+  input {
+    height: 4rem;
+    width: 100%;
+    background-color: transparent;
+    border: 0px;
+    --swiper-theme-color: transparent !important;
+    outline: none !important;
+    @extend .label-body-1;
+    @extend .color-gray-dark;
+  }
+}
+
+// until 1200px
+@media (max-width: 1199px) {
+  .nav-left {
+    gap: 0.8rem !important;
+
+    .logo img {
+      width: 6rem !important;
+    }
+
+    .nav-search {
+      display: none !important;
+    }
+  }
+
+  .nav-links {
+    display: none !important;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  .nav-right {
+    ul {
+      gap: 2.4rem;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .mobile-only {
+    display: none !important;
+  }
+
+  #btn-login {
+    font-weight: 500;
+  }
+}

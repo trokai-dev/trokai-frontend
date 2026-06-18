@@ -1,0 +1,21 @@
+.support-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #ededed;
+  border-radius: 0.4rem;
+  padding: 1.6rem;
+
+  min-width: 200px;
+  min-height: 125px;
+
+  h4 {
+    margin-top: 0.8rem;
+    text-decoration: none;
+  }
+}
+
+a {
+  text-decoration: none;
+}

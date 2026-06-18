@@ -1,0 +1,68 @@
+import { CostPipe } from '@trokai/shared-ui';
+import { OrderDisplay, OrderListItem } from '@trokai/shared-core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  OnInit,
+  inject,
+} from '@angular/core';
+import { OrdersService } from '@trokai/shared-data-access';
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { CartItemComponent } from '../../modules/cart-item/cart-item.component';
+import { CurrencyPipe, DatePipe } from '@angular/common';
+
+@Component({
+  selector: 'app-sales',
+  templateUrl: './sales.component.html',
+  styleUrls: ['./sales.component.scss'],
+  standalone: true,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [
+    CartItemComponent,
+    MatButtonModule,
+    RouterLink,
+    CurrencyPipe,
+    DatePipe,
+    CostPipe,
+  ],
+})
+export class SalesComponent implements OnInit {
+  private ordersService = inject(OrdersService);
+
+  sales: OrderDisplay[] = [];
+
+  ngOnInit() {
+    this.load();
+  }
+
+  async load() {
+    try {
+      const sales = await this.ordersService.fetchSales();
+      this.mountSales(sales);
+    } finally {
+      /* intentional */
+    }
+  }
+
+  mountSales(sales: OrderListItem[]) {
+    const displays: OrderDisplay[] = [];
+
+    sales.forEach((s) => {
+      const display = new OrderDisplay();
+
+      display._id = s._id;
+      display.status = this.ordersService.getOrderStatus(s.status);
+      display.updatedAt = s.updatedAt;
+      display.createdAt = s.createdAt;
+      display.clothes = s.clothes;
+      display.sellerProfit = s.businessValues.sellerSplitBeforeAnticipation;
+      display.customId = s.customId;
+      displays.push(display);
+    });
+
+    displays.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
+
+    this.sales = displays;
+  }
+}

@@ -1,0 +1,15 @@
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  width: 100%;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  &__login {
+    margin-top: var(--space-24);
+    text-align: center;
+  }
+}

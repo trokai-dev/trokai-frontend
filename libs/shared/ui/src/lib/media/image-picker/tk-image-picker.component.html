@@ -1,0 +1,71 @@
+@if (mode === 'default') {
+  <div class="picker" role="button" tabindex="0" (click)="onPickImage()" (keyup.enter)="onPickImage()" [ngClass]="{ disabled: disabled }">
+    @if (selectedImage && showPreview) {
+      <img role="button" class="image" alt="Imagem selecionada" [src]="selectedImage" />
+    }
+    @if (externalURL && !selectedImage && showPreview) {
+      <img role="button" class="image" alt="Imagem externa" [src]="externalURL" />
+    }
+    @if ((!selectedImage && !externalURL) || !showPreview) {
+      <div class="add-circle">
+        <mat-icon>add</mat-icon>
+      </div>
+    }
+
+    <mat-menu hasBackdrop="true" #menu="matMenu" xPosition="after" yPosition="below">
+      @if (media.capabilities.camera) {
+        <button mat-menu-item (click)="takeFromCamera()">
+          <mat-icon>photo_camera</mat-icon>
+          <span class="label-body-2 color-gray-dark py-2">Tirar uma foto</span>
+        </button>
+      }
+      <button mat-menu-item (click)="pickFromGallery()">
+        <mat-icon>image</mat-icon>
+        <span class="label-body-2 color-gray-dark py-2">
+          {{ hasImage ? 'Trocar foto' : 'Escolher foto' }}
+        </span>
+      </button>
+      @if (canCrop) {
+        <button mat-menu-item (click)="cropCurrentImage()">
+          <mat-icon>crop</mat-icon>
+          <span class="label-body-2 color-gray-dark py-2">Editar foto</span>
+        </button>
+      }
+      @if (hasImage) {
+        <button mat-menu-item (click)="remove()">
+          <mat-icon>delete</mat-icon>
+          <span class="label-body-2 color-gray-dark py-2">Remover foto</span>
+        </button>
+      }
+    </mat-menu>
+    <div
+      [matMenuTriggerFor]="menu"
+      #menuTrigger="matMenuTrigger"
+      class="hiddenTrigger"
+    ></div>
+  </div>
+}
+
+@if (mode === 'button') {
+  <div>
+    <button
+      type="button"
+      mat-stroked-button
+      [attr.aria-label]="hasImage ? 'Trocar foto' : 'Adicionar foto'"
+      color="primary"
+      (click)="pickFromGallery()"
+    >
+      {{ hasImage ? 'Trocar foto' : 'Adicionar foto' }}
+    </button>
+  </div>
+}
+
+@if (usePicker) {
+  <input
+    type="file"
+    accept="image/jpeg;image/jpg"
+    class="d-none"
+    #filePicker
+    (change)="onFileChosen($event)"
+  />
+}

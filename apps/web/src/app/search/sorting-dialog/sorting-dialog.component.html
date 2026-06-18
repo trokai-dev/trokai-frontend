@@ -1,0 +1,59 @@
+<div class="dialog-wrapper">
+  <!-- header -->
+  <div class="dialog-header">
+    <div class="d-flex justify-content-end">
+      <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+
+    <h4 class="color-gray-dark">Ordenar busca</h4>
+  </div>
+
+  <!-- content -->
+  <div class="dialog-content">
+    <mat-radio-group
+      [(ngModel)]="sorting"
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+    >
+      <mat-radio-button
+        color="primary"
+        class="example-radio-button d-flex mt-2"
+        value="relevance"
+      >
+        <span class="label-body-2 ml-4">Em destaque</span>
+      </mat-radio-button>
+
+      <mat-radio-button
+        color="primary"
+        class="example-radio-button d-flex mt-2"
+        value="recent"
+      >
+        <span class="label-body-2 ml-4">Mais recentes</span>
+      </mat-radio-button>
+
+      <mat-radio-button
+        color="primary"
+        class="example-radio-button d-flex mt-2"
+        value="cost"
+      >
+        <span class="label-body-2 ml-4">Mais baratos</span>
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <!-- footer -->
+  <div class="dialog-footer">
+    <button
+      mat-raised-button
+      color="primary"
+      aria-label="ver produtos"
+      color="primary"
+      class="flex-grow-1"
+      (click)="applySorting()"
+    >
+      Ver produtos
+    </button>
+  </div>
+</div>

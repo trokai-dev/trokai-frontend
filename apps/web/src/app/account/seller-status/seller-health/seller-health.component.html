@@ -1,0 +1,41 @@
+@if (healthData && healthStatus) {
+<div>
+  <div class="d-flex justify-content-between align-items-end mb-2">
+    <span class="score-number color-gray-dark">
+      {{ healthData.finalScore }}<span class="score-max color-gray-light-1">/100</span>
+    </span>
+    <span class="status-badge" [ngClass]="healthStatus.class">{{ healthStatus.label }}</span>
+  </div>
+
+  <div class="progress-bar-bg mb-4">
+    <div
+      class="progress-bar-fill"
+      [style.width.%]="healthData.finalScore"
+      [style.background-color]="healthStatus.color"
+    ></div>
+  </div>
+
+  <h6 class="color-gray-dark mb-3">💡 Dicas para melhorar suas vendas</h6>
+
+  <div class="d-flex flex-column gap-3">
+    @for (tip of tipList; track $index) {
+    <div
+      class="tip-card"
+      [ngClass]="tip.isGood ? 'tip-card--success' : 'tip-card--alert'"
+    >
+      <p class="label-body-2 strong mb-1">{{ tip.title }}</p>
+      <p class="label-caption-1 color-gray-default mb-0">{{ tip.message }}</p>
+    </div>
+    }
+
+    @if (healthData.finalScore >= 90) {
+    <div class="tip-card tip-card--success">
+      <p class="label-body-2 strong mb-1">🎉 Parabéns!</p>
+      <p class="label-caption-1 color-gray-default mb-0">
+        Sua conta está voando. Continue assim para manter seus produtos no topo das buscas do Trokaí.
+      </p>
+    </div>
+    }
+  </div>
+</div>
+}

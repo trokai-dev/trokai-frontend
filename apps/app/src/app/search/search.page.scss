@@ -1,0 +1,19 @@
+ion-infinite-scroll {
+  --color: var(--ion-color-primary);
+}
+
+ion-list {
+  background: transparent;
+}
+
+.tabs-trokai {
+  padding-top: unset;
+  margin-left: unset;
+  margin-right: unset;
+
+  .tab-trokai{
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+}

@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar
+    mode="ios"
+    style="
+      padding-top: 0px !important;
+      --padding-start: 0px;
+      --padding-end: 0px;
+    "
+    class="px-24 py-2 clear"
+  >
+    <ion-buttons slot="primary">
+      <ion-icon
+        name="close"
+        (click)="closeOnly()"
+        mode="ios"
+        class="modal-close"
+      >
+      </ion-icon>
+    </ion-buttons>
+    <ion-title>
+      <h3>Ordenar</h3>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="m-24">
+    <ion-radio-group mode="md" [(ngModel)]="sorting" class="w-100">
+      @for (op of options; track $index) {
+      <ion-item class="ion-no-padding" lines="none">
+        <ion-radio [value]="op.value" justify="start" labelPlacement="end">
+          <div class="d-flex flex-column">
+            <ion-label class="color-gray-default label-body-1">
+              {{ op.text }}</ion-label
+            >
+            @if (op.text2) {
+            <ion-label
+              class="color-gray-light-1 label-body-1 ion-text-capitalize"
+            >
+              {{ op.text2 }}
+            </ion-label>
+            }
+          </div>
+        </ion-radio>
+      </ion-item>
+      }
+    </ion-radio-group>
+  </div>
+</ion-content>
+
+<ion-footer class="px-24 py-16">
+  <ion-button class="action-button" (click)="applySorting()">
+    Aplicar
+  </ion-button>
+</ion-footer>

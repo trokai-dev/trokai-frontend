@@ -1,0 +1,283 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <app-back-button defaultHref="/main/negotiations/0"></app-back-button>
+
+    <ion-title> Compra </ion-title>
+
+    @if (showContact) {
+    <ion-buttons slot="primary">
+      <ion-button slot="icon-only" (click)="chat()">
+        <ion-icon name="chatbubble" class="color-primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    }
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="p-24">
+    <!-- loading -->
+    @if (loading) {
+    <div class="w-100 d-flex justify-content-center mt-40">
+      <ion-spinner></ion-spinner>
+    </div>
+    }
+
+    @if (order) {
+    <div>
+      @if (!loading) {
+      <div>
+        <!-- PIX -->
+        @if (order.pix && waiting_payment) {
+        <div class="page-section">
+          <span class="section-title">PIX</span>
+
+          <span class="item-label"> Vencimento </span>
+
+          <span class="item-value">
+            Realize o pagamento até <b>{{ pixExpiration }}</b>
+          </span>
+
+          <span class="item-label mt-16"> Copia e cola </span>
+
+          <ion-item class="ion-no-padding mt-8">
+            <ion-input
+              (copy)="copyPix($event)"
+              readonly="true"
+              [value]="order?.pix?.payload"
+              style="user-select: none"
+            />
+
+            <ion-button fill="clear" slot="end" (click)="copyPix($event)">
+              <ion-icon name="copy-outline"></ion-icon>
+              Copiar
+            </ion-button>
+          </ion-item>
+        </div>
+        }
+
+        <ion-row class="mt-5">
+          <ion-col size="12" size-md="4">
+            <!-- Produtos -->
+            <div class="page-section">
+              <span class="section-title">Produtos</span>
+
+              @for (product of order.clothes; track product._id) {
+              <div class="cursor-pointer mt-16">
+                <app-cart-item
+                  (click)="openProduct(product)"
+                  [product]="product"
+                  [showRemove]="false"
+                ></app-cart-item>
+              </div>
+              }
+            </div>
+          </ion-col>
+
+          <ion-col size="12" size-md="4">
+            <!-- Detalhes -->
+            <div class="page-section">
+              <span class="section-title">Detalhes</span>
+
+              <div class="d-grid gap-16">
+                <div>
+                  <span class="item-label">Data</span>
+                  <span class="item-value">
+                    {{ order.createdAt | date : "dd/MM/yyyy - HH:mm" }}
+                  </span>
+                </div>
+
+                <div>
+                  <span class="item-label">Status</span>
+                  <span class="item-value"> {{ getOrderStatus() }} </span>
+                </div>
+
+                <div>
+                  <span class="item-label">Pagamento</span>
+                  <span class="item-value"> {{ getPayment() }} </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Entrega -->
+            <app-order-delivery
+              (confirmWithdrawalClick)="confirmWithdrawal()"
+              [order]="order"
+              [isPurchase]="true"
+            />
+
+            <!-- Valores -->
+            <div class="page-section">
+              <span class="section-title">Valores</span>
+
+              <div class="d-flex flex-column gap-8">
+                <!-- Carrinho -->
+                @for (c of order.clothes; track c._id) {
+                <div class="d-flex justify-content-between">
+                  <span class="item-value ion-text-capitalize">
+                     {{ c.title }} {{ c.refund ? "(Estornado)" : "" }}
+                  </span>
+                  <span class="item-value">
+                    {{ c.cost | cost | currency : "BRL" : true : "1.2-2" }}
+                  </span>
+                </div>
+                }
+
+                <!-- Frete -->
+                @if (order.shippingValues) {
+                <div class="d-flex justify-content-between">
+                  <span class="item-value">Frete</span>
+                  <span class="item-value">
+                    {{ order.shippingValues.shippingCost | cost | currency : "BRL"
+                    : true : "1.2-2" }}
+                  </span>
+                </div>
+                }
+
+                <!-- Juros -->
+                @if (
+                  order.businessValues.interestValues &&
+                  order.businessValues.interestValues.interest
+                ) {
+                <div class="d-flex justify-content-between">
+                  <span class="item-value">Juros parcelamento</span>
+                  <span class="item-value">
+                    {{ order.businessValues.interestValues.interest | cost |
+                    currency : "BRL" : true : "1.2-2" }}
+                  </span>
+                </div>
+                }
+
+                <!-- service fee -->
+                @if (order.businessValues.buyerServiceFee){
+                <div class="d-flex justify-content-between">
+                  <span class="item-value">Taxa de serviço</span>
+                  <span class="item-value">
+                    {{ order.businessValues.buyerServiceFee | cost | currency :
+                    "BRL" : true : "1.2-2" }}
+                  </span>
+                </div>
+                }
+                <!-- processing fee -->
+                @if (order.businessValues.buyerProcessingFee){
+                <div class="d-flex justify-content-between">
+                  <span class="item-value">Taxa de processamento</span>
+                  <span class="item-value">
+                    {{ order.businessValues.buyerProcessingFee | cost | currency :
+                    "BRL" : true : "1.2-2" }}
+                  </span>
+                </div>
+                }
+
+                <!-- desconto cupom -->
+                @if (order.businessValues.couponDiscount) {
+                <div class="d-flex justify-content-between">
+                  <span class="item-value">
+                    Desconto cupom ({{ order.businessValues.couponCode }})
+                  </span>
+                  <span class="item-value">
+                    {{ -order.businessValues.couponDiscount | cost | currency :
+                    "BRL" : true : "1.2-2" }}
+                  </span>
+                </div>
+                }
+
+                <!-- desconto pix -->
+                @if (order.businessValues.pixDiscount) {
+                <div class="d-flex justify-content-between">
+                  <span class="item-value">Desconto Pix</span>
+                  <span class="item-value">
+                    {{ -order.businessValues.pixDiscount | cost | currency : "BRL"
+                    : true : "1.2-2" }}
+                  </span>
+                </div>
+                }
+
+                <!-- Total -->
+                <div class="d-flex justify-content-between">
+                  <span class="item-value"><b>Total</b></span>
+                  <span class="item-value color-primary">
+                    <b>
+                      {{ order.businessValues.buyerCost | cost | currency : "BRL"
+                      : true : "1.2-2" }}
+                    </b>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vendedor -->
+            <div class="page-section pt-5 mt-16">
+              <div
+                class="w-100 d-flex ion-activatable ripple-parent cursor-pointer"
+                (click)="openOtherUser()"
+              >
+                <ion-avatar>
+                  <ion-img [src]="sellerAvatar"></ion-img>
+                </ion-avatar>
+
+                <div
+                  class="ml-24 d-flex align-items-start flex-column justify-content-center"
+                >
+                  <h6 class="color-gray-dark max-user-name">
+                    {{order.seller.storeName ?? order.seller.name}}
+                  </h6>
+
+                  <div class="d-flex mt-4 align-items-start">
+                    <label
+                      class="label-caption-1 color-gray-default max-user-address"
+                    >
+                      {{ order.seller.address?.city }}, {{
+                      order.seller.address?.state }}
+                    </label>
+                  </div>
+                </div>
+
+                <ion-ripple-effect></ion-ripple-effect>
+              </div>
+            </div>
+
+            <!-- CANCELAMENTO -->
+            @if (waiting_shipment || waiting_withdrawal || waiting_payment) {
+            <ion-button
+              class="action-button mt-32 w-100 color-error"
+              fill="clear"
+              (click)="cancel()"
+            >
+              Cancelar compra
+            </ion-button>
+            }
+
+            @if (order_delivered && userMayReturn) {
+            <ion-button
+              class="action-button mt-32 w-100 color-error"
+              fill="clear"
+              (click)="return()"
+            >
+              Solicitar devolução
+            </ion-button>
+            }
+          </ion-col>
+        </ion-row>
+      </div>
+      }
+    </div>
+    }
+  </ion-grid>
+</ion-content>
+
+@if (waiting_review && !userMadeReview && !loading) {
+<ion-footer class="px-24 py-16">
+  <ion-button (click)="checkReview()" class="action-button">
+    Avaliar compra
+  </ion-button>
+</ion-footer>
+}
+
+@if (waiting_withdrawal && !loading) {
+<ion-footer class="px-24 py-16">
+  <ion-button (click)="confirmWithdrawal()" class="action-button">
+    Já recebi minha compra
+  </ion-button>
+</ion-footer>
+}

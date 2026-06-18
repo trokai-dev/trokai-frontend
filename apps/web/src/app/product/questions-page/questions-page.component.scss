@@ -1,0 +1,17 @@
+@import "../../../styles/variables.scss";
+
+.questions-help-cta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.2rem;
+  background-color: #f3f3f3;
+  border-radius: 0.8rem;
+  margin-top: 1.2rem;
+  cursor: pointer;
+  ion-icon {
+    font-size: 1.8rem;
+    color: $color-primary;
+    min-width: 2rem;
+  }
+}

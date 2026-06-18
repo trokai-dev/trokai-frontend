@@ -1,0 +1,136 @@
+<ion-header>
+  <ion-toolbar mode="ios" class="clear">
+    <app-back-button
+      [nav]="true"
+      (buttonClick)="clickBack()"
+      defaultHref="/main/home"
+    ></app-back-button>
+
+    <ion-title> Entrega </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  @if (checkoutLocal) {
+  <ion-grid class="p-24">
+    <!-- ENTREGA -->
+    <div class="pb-8 mt-24">
+      <div class="w-100 mt-16">
+        <ion-radio-group
+          mode="md"
+          [value]="checkoutLocal.shippingOption"
+          (ionChange)="changeAddressOption($event.detail.value)"
+        >
+          @if (checkoutLocal.owner.inPerson) {
+          <ion-item
+            lines="none"
+            class="ion-no-padding"
+          >
+            <ion-radio
+              mode="md"
+              justify="start"
+              labelPlacement="end"
+              class="w-100 py-24 m-0"
+              [value]="enumAddress.INPERSON"
+            >
+              <span class="d-flex flex-column cursor-pointer py-4">
+                <span class="label-body-1 fw-semibold color-gray-dark"
+                  >Retirada presencial
+                </span>
+
+                <span
+                  class="label-body-2 color-gray-default mt-4"
+                  style="white-space: normal"
+                >
+                  <ion-text class="fw-semibold">
+                    Gratuito ({{ checkoutLocal.owner.address.city }},
+                    {{checkoutLocal.owner.address.state}})</ion-text
+                  >
+                </span>
+
+                <span
+                  class="label-body-2 color-gray-default mt-4"
+                  style="white-space: normal"
+                >
+                  Você pode combinar a retirada com o vendedor através do chat.
+                </span>
+              </span>
+            </ion-radio>
+          </ion-item>
+          }
+
+          @if (user?.address && checkoutLocal.owner.shipping) {
+          <ion-item
+            [ngClass]="{'border-top': checkoutLocal.owner.inPerson}"
+            lines="none"
+            class="ion-no-padding mb-16"
+          >
+            <ion-radio
+              mode="md"
+              justify="start"
+              labelPlacement="end"
+              class="w-100 py-24 m-0"
+              [value]="enumAddress.SHIPPING"
+            >
+              <span class="d-flex flex-column cursor-pointer">
+                <span class="label-body-1 fw-semibold color-gray-dark"
+                  >Entrega pelos correios
+                </span>
+
+                <!-- Shipping info -->
+                <span class="d-flex justify-content-between align-items-center mt-4">
+                  <span class="color-gray-default fw-semibold label-body-2">
+                    @if(checkoutResponse.shipping.shippingValues.maxDeliveryTime)
+                    {
+                    <span>
+                      Em até {{
+                      checkoutResponse.shipping.shippingValues.maxDeliveryTime
+                      }} dias após o envio por
+                    </span>
+                    {{ checkoutResponse.shipping.shippingValues.shippingCost |
+                    cost | currency : "BRL" : "symbol" : "1.2" }} }
+                  </span>
+                </span>
+
+                <span class="label-caption-1 color-gray-default">
+                  {{ user.address.street }}, {{ user.address.number }} {{
+                  user.address.complement ? ", " + user.address.complement : ""
+                  }}
+                  <br />
+                  {{ user.address.zipCode | mask : "00000-000" }}, {{
+                  user.address.neighborhood }} <br />
+                  {{ user.address.city }}, {{ user.address.state }}
+                </span>
+              </span>
+            </ion-radio>
+          </ion-item>
+          }
+        </ion-radio-group>
+      </div>
+
+      @if (checkoutLocal.owner.shipping) {
+      <ion-button
+        [disabled]="checkoutLocal.shippingOption !== enumAddress.SHIPPING"
+        (click)="openAddressForm()"
+        fill="clear"
+        class="action-button"
+      >
+        Alterar endereço
+      </ion-button>
+      }
+    </div>
+  </ion-grid>
+  }
+</ion-content>
+
+<ion-footer class="px-24 py-24 border-top">
+  @if (checkoutLocal && checkoutLocal.owner._id) {
+  <app-reserve-time
+    [ownerId]="checkoutLocal.owner._id"
+    (reserveOpen)="continue()"
+    text="Continuar"
+    [hideCancel]="true"
+  >
+  </app-reserve-time>
+  }
+</ion-footer>

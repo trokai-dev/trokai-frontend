@@ -1,0 +1,17 @@
+.questions-help-cta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.2rem;
+  background-color: var(--color-gray-25, #f3f3f3);
+  border-radius: var(--radius-sm);
+  margin-top: 1.2rem;
+
+  .help-icon {
+    font-size: 1.8rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    color: var(--color-primary);
+    min-width: 2rem;
+  }
+}

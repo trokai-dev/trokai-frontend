@@ -1,0 +1,38 @@
+<div class="dialog-wrapper">
+  <!-- header -->
+  <div class="dialog-header">
+    <div class="d-flex justify-content-end">
+      <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- content -->
+  <div class="dialog-content">
+    <span class="label-large-1 text-center d-flex gap-2">
+      <mat-icon>sell</mat-icon> <b>CUPOM "{{ data.coupon.code }}"</b>
+    </span>
+
+    <p class="label-body-1 text-center mt-4">
+      {{ data.coupon.description }}
+    </p>
+
+    @if (data.coupon.sellerUser) {
+
+    <p class="label-body-1 text-center mt-2 mb-2">
+      Cupom exclusivo de
+      <b>{{ data.coupon.sellerUser.storeName }}</b>
+    </p>
+    }
+
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="copyCode()"
+      cdkFocusInitial
+    >
+      Copiar código do cupom
+    </button>
+  </div>
+</div>

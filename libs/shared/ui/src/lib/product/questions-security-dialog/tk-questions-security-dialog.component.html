@@ -1,0 +1,43 @@
+<div class="dialog-wrapper">
+  <div class="dialog-header">
+    <div class="d-flex flex-column text-center align-items-center gap-2">
+      <mat-icon class="color-primary icon-large">verified_user</mat-icon>
+      <h3 class="color-gray-dark">Termos de segurança</h3>
+    </div>
+  </div>
+
+  <div class="dialog-content">
+    <p class="mt-2">
+      Para garantir uma experiência protegida, mantenha suas conversas e
+      transações exclusivamente dentro do Trokaí. Não compartilhe dados de
+      contato e jamais aceite ou realize pagamentos por fora da plataforma.
+      <b>
+        O Trokaí não se responsabiliza por transações realizadas fora da
+        plataforma.
+      </b>
+    </p>
+
+    <mat-checkbox
+      color="primary"
+      [(ngModel)]="agreed"
+      class="mat-form-field-wrapper mt-4"
+    >
+      <span class="label-body-2 color-gray-dark">
+        Declaro que li e concordo
+      </span>
+    </mat-checkbox>
+  </div>
+
+  <div class="dialog-footer">
+    <button
+      (click)="onConfirm()"
+      mat-raised-button
+      color="primary"
+      [disabled]="!agreed"
+      aria-label="ver produtos"
+      class="flex-grow-1"
+    >
+      Continuar
+    </button>
+  </div>
+</div>

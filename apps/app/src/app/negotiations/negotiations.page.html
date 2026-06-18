@@ -1,0 +1,130 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title>Pedidos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-toolbar>
+  <div class="tabs-trokai">
+    @for (t of tabList; track $index) {
+    <div
+      class="tab-trokai"
+      [ngClass]="{'active': tab === t}"
+      (click)="changeTab(t)"
+    >
+      <ion-label class="label-body-2 color-gray-default">{{t}}</ion-label>
+      <div class="tab-trokai-indicator"></div>
+    </div>
+    }
+  </div>
+</ion-toolbar>
+
+<ion-content>
+  <!-- tabs superiores -->
+
+  <ion-refresher slot="fixed" color="primary" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid>
+    <!-- loading -->
+    @if (isLoading) {
+    <div
+      class="w-100 d-flex justify-content-center align-items-center"
+      style="height: 60vh"
+    >
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+    </div>
+    }
+
+    <!-- Compras -->
+    @if (!isLoading && tab === 'Compras') {
+    <div class="w-100 negotiations">
+      @for (p of purchases; track p._id) {
+      <div
+        class="border-bottom py-24 w-100 d-flex justify-content-between ion-activatable ripple-parent"
+        (click)="openPurchase(p)"
+      >
+        <div class="w-75 d-flex align-items-center">
+          @if (p.images[0]) {
+          <ion-thumbnail>
+            <ion-img [src]="p.images[0]"></ion-img>
+          </ion-thumbnail>
+          }
+
+          @if (p.images[1]) {
+          <ion-thumbnail class="ml-8">
+            <ion-img [src]="p.images[1]"></ion-img>
+          </ion-thumbnail>
+          }
+        </div>
+
+        <div class="w-100 ion-text-end">
+          <label class="label-caption-1"
+            >{{p.createdAt | date: 'dd/MM/YYYY - HH:mm'}}</label
+          >
+          <h6 class="color-gray-dark">{{p.status}}</h6>
+          <label class="label-body-2">
+            {{ p.buyerCost | cost | currency: "BRL" : true : '1.2-2'}}</label
+          >
+        </div>
+
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+      }
+
+      @if (!purchases || purchases.length === 0) {
+      <div class="empty-page full">
+        <ion-icon name="sad-outline"></ion-icon>
+        <ion-label> Nenhuma compra</ion-label>
+      </div>
+      }
+    </div>
+    }
+
+    <!-- Vendas -->
+    @if (!isLoading && tab === 'Vendas') {
+    <div class="w-100 negotiations">
+      @for (s of sales; track s._id) {
+      <div
+        class="border-bottom py-24 w-100 d-flex justify-content-between ion-activatable ripple-parent"
+        (click)="openSale(s)"
+      >
+        <div class="w-75 d-flex align-items-center">
+          @if (s.images[0]) {
+          <ion-thumbnail>
+            <ion-img [src]="s.images[0]"></ion-img>
+          </ion-thumbnail>
+          }
+
+          @if (s.images[1]) {
+          <ion-thumbnail class="ml-8">
+            <ion-img [src]="s.images[1]"></ion-img>
+          </ion-thumbnail>
+          }
+        </div>
+
+        <div class="w-100 ion-text-end">
+          <label class="label-caption-1"
+            >{{s.updatedAt | date: 'dd/MM/YYYY - HH:mm'}}</label
+          >
+          <h6 class="color-gray-dark">{{s.status}}</h6>
+          <label class="label-body-2">
+            {{ s.sellerProfit | cost | currency: "BRL" : true : '1.2-2'}}</label
+          >
+        </div>
+
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+      }
+
+      @if (!sales || sales.length === 0) {
+      <div class="empty-page full">
+        <ion-icon name="sad-outline"></ion-icon>
+        <ion-label> Nenhuma venda</ion-label>
+      </div>
+      }
+    </div>
+    }
+  </ion-grid>
+</ion-content>

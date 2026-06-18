@@ -1,0 +1,14 @@
+.profile-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-form__field {
+  display: block;
+}
+
+.profile-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-16);
+}

@@ -1,0 +1,14 @@
+.heart-like {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  mat-icon {
+    color: var(--color-on-surface, #6b6b6b);
+  }
+
+  .like-active {
+    color: var(--color-primary) !important;
+  }
+}

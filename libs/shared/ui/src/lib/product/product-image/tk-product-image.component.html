@@ -1,0 +1,77 @@
+<div [ngClass]="getClasses()">
+  <!-- desktop -->
+  <div class="product-image-desktop">
+    @for (img of product.images; track img; let i = $index) {
+      <div
+        class="product-image-div"
+        role="button"
+        tabindex="0"
+        (click)="openGallery(i)"
+        (keyup.enter)="openGallery(i)"
+        [ngStyle]="{ display: activeImage === i ? 'block' : 'none' }"
+      >
+        @if (!product.published) {
+          <tk-status-pill [variant]="statusVariant" [label]="product.statusFormatted" position="overlay" />
+        }
+
+        <img
+          alt="{{ product.title }}"
+          hideLoading
+          class="product-image-full"
+          ngSrc="{{ img.md }}"
+          fill
+          [priority]="i === 0"
+        />
+
+        <div class="slide-buttons">
+          @if (product && !myProduct) {
+            <tk-like-button class="large" [productId]="product._id!"></tk-like-button>
+          }
+        </div>
+      </div>
+    }
+
+    <div class="my-thumbs">
+      @for (img of product.images; track img; let i = $index) {
+        <div role="button" tabindex="0" (click)="activeImage = i" (keyup.enter)="activeImage = i" class="thumb-wrapper">
+          <img
+            alt="{{ product.title }}"
+            hideLoading
+            [ngClass]="{ 'thumb-active': activeImage === i }"
+            class="thumb-img"
+            ngSrc="{{ img.sm }}"
+            fill
+          />
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- mobile (swiper) -->
+  <div class="product-image-mobile">
+    @if (!product.published) {
+      <tk-status-pill [variant]="statusVariant" [label]="product.statusFormatted" position="overlay" />
+    }
+    <div class="swiper product-image-swiper">
+      <div class="swiper-wrapper">
+        @for (img of product.images; track img; let i = $index) {
+          <div class="swiper-slide">
+            <img
+              alt="{{ product.title }}"
+              hideLoading
+              class="product-image-full"
+              ngSrc="{{ img.md }}"
+              fill
+              [priority]="i === 0"
+              role="button"
+              tabindex="0"
+              (click)="openGallery(i)"
+              (keyup.enter)="openGallery(i)"
+            />
+          </div>
+        }
+      </div>
+      <div class="swiper-pagination" role="button" tabindex="0" (click)="$event.stopPropagation()" (keyup.enter)="$event.stopPropagation()"></div>
+    </div>
+  </div>
+</div>

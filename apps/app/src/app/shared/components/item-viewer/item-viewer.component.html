@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar mode="ios" class="clear" style="padding-top: 0px !important">
+    <ion-buttons slot="primary">
+      <ion-icon name="close" (click)="close()" mode="ios" class="modal-close">
+      </ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content>
+  <ion-grid class="ion-no-padding">
+    <div>
+      <swiper-container #slide [pagination]="true" class="wardrobe-slides">
+        @for (img of product.images; track $index; let i = $index) {
+        <swiper-slide>
+          <img
+            src="{{ product.images[i].lg }}"
+            alt="{{ product.title }}"
+          />
+        </swiper-slide>
+        }
+      </swiper-container>
+
+      <div class="d-flex flex-column slide-buttons">
+        @if (canFavorite) {
+        <tk-like-button
+          class="small"
+          [productId]="product._id"
+        ></tk-like-button>
+        }
+
+        @if (canShare) {
+        <div
+          (click)="share()"
+          class="image-badge-button small ion-activatable ripple-parent"
+          [ngClass]="{ 'mt-12': canFavorite }"
+        >
+          <ion-icon color="primary" name="share-social-sharp"> </ion-icon>
+          <ion-ripple-effect></ion-ripple-effect>
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="px-24">
+      <div class="d-flex justify-content-between mt-24">
+        <h5 class="color-gray-dark text-dots">{{ product.title }}</h5>
+        @if (product.cost !== null && product.cost > 0) {
+        <h5 class="color-primary">
+          {{ product.cost | cost | currency: 'BRL' : true : '1.2' }}
+        </h5>
+        }
+      </div>
+
+      <div class="mt-16">
+        <label class="label-body-2 color-gray-default">{{
+          product.description
+        }}</label>
+      </div>
+
+      <div class="d-flex mt-16 flex-wrap gap-8">
+        <tk-status-pill
+          variant="neutral"
+          [label]="product.piece | itemName: 'piece' : product.category"
+        />
+
+        @if (product.size !== null && product.size !== '') {
+        <tk-status-pill
+          variant="neutral"
+          [label]="'Tam ' + (product.size | itemName: 'size' : product.category : product.age)"
+        />
+        }
+
+        <tk-status-pill
+          variant="neutral"
+          [label]="product.gender | itemName: 'gender'"
+        />
+        <tk-status-pill
+          variant="neutral"
+          [label]="product.condition | itemName: 'condition'"
+        />
+      </div>
+    </div>
+  </ion-grid>
+</ion-content>
+
+@if (buying) {
+<ion-footer class="px-24 py-16">
+  @if (!inCart) {
+  <ion-button
+    class="action-button"
+    color="primary"
+    (click)="clickAdd()"
+  >
+    Adicionar ao carrinho
+  </ion-button>
+  }
+  @if (inCart) {
+  <ion-button
+    class="action-button"
+    color="danger"
+    (click)="clickRemove()"
+  >
+    Remover do carrinho
+  </ion-button>
+  }
+</ion-footer>
+}

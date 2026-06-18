@@ -1,0 +1,135 @@
+<div class="onboarding-page">
+  <div class="seller-onboarding-wrapper">
+    <!-- header -->
+    <div
+      class="onboarding-header d-flex align-items-center justify-content-between"
+    >
+      <button
+        mat-icon-button
+        class="onboarding-nav-prev"
+        (click)="prev()"
+        [class.invisible]="isFirstSlide"
+      >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <span></span>
+    </div>
+
+    <!-- swiper -->
+    <div class="onboarding-content">
+      <div class="swiper seller-onboarding-swiper" #swiperEl>
+        <div class="swiper-wrapper">
+          <!-- Slide 1: O Propósito -->
+          <div class="swiper-slide">
+            <div class="onboarding-slide">
+              <div class="onboarding-icon">✨</div>
+              <h2 class="onboarding-title color-gray-dark">
+                Venda no Trokaí:<br />Uma vitrine de excelência
+              </h2>
+              <p class="label-body-2 color-gray-default">
+                Ficamos felizes com o seu interesse em vender com a gente!
+              </p>
+              <p class="label-body-2 color-gray-default">
+                Para garantir a segurança e a confiança da nossa comunidade, a
+                entrada de novos vendedores é feita através de uma curadoria
+                seletiva, focada em manter um catálogo com alto padrão de
+                qualidade para todos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Slide 2: Os Critérios -->
+          <div class="swiper-slide">
+            <div class="onboarding-slide">
+              <h2 class="onboarding-title color-gray-dark">
+                Como funciona a nossa triagem?
+              </h2>
+              <p class="label-body-2 color-gray-default mb-3">
+                Para ativar a sua loja, você passará por duas etapas iniciais:
+              </p>
+              <div class="criteria-card">
+                <span class="criteria-icon">👤</span>
+                <div>
+                  <p class="label-body-2 color-gray-dark mb-1">
+                    <strong>1. Identidade da Loja</strong>
+                  </p>
+                  <p class="label-body-2 color-gray-default">
+                    Analisamos a composição da sua identidade visual, a clareza
+                    do nome escolhido e a consistência das informações
+                    apresentadas em seu perfil.
+                  </p>
+                </div>
+              </div>
+              <div class="criteria-card">
+                <span class="criteria-icon">👗</span>
+                <div>
+                  <p class="label-body-2 color-gray-dark mb-1">
+                    <strong>2. Primeiras {{ minClothesToSell }} Peças</strong>
+                  </p>
+                  <p class="label-body-2 color-gray-default">
+                    Você precisará cadastrar {{ minClothesToSell }} anúncios.
+                    Nossa equipe de curadoria avaliará o padrão visual das
+                    imagens, a qualidade das descrições e o estado de
+                    conservação das peças para garantir uma vitrine atrativa.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: O Aceite e Início -->
+          <div class="swiper-slide">
+            <div class="onboarding-slide">
+              <h2 class="onboarding-title color-gray-dark">
+                O que acontece depois?
+              </h2>
+              <p class="label-body-2 color-gray-default">
+                Após o cadastro da loja e das {{ minClothesToSell }} primeiras
+                peças, nossa equipe de curadoria entra em ação.
+              </p>
+              <p class="label-body-2 color-gray-default">
+                A partir da nossa análise, sua loja poderá ser
+                <strong>Aprovada</strong>, receber um pedido de
+                <strong>Ajustes</strong> ou <strong>Reprovada</strong>, caso não
+                atinja o padrão da nossa vitrine.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- pagination + action -->
+    <div class="onboarding-footer">
+      <button
+        mat-flat-button
+        color="primary"
+        class="onboarding-nav-next w-100"
+        [class.d-none]="isLastSlide"
+        (click)="next()"
+      >
+        Próximo
+      </button>
+
+      <mat-checkbox
+        [(ngModel)]="accepted"
+        color="primary"
+        class="acceptance-check"
+        [class.d-none]="!isLastSlide"
+      >
+        Estou ciente e aceito os critérios de curadoria para vender no Trokaí.
+      </mat-checkbox>
+
+      <button
+        mat-flat-button
+        color="primary"
+        class="w-100"
+        [class.d-none]="!isLastSlide"
+        [disabled]="!accepted"
+        (click)="start()"
+      >
+        Criar minha loja
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,152 @@
+<ion-header>
+  <ion-toolbar mode="ios" class="clear">
+    <ion-buttons slot="start">
+      <app-back-button defaultHref="/main/profile"></app-back-button>
+    </ion-buttons>
+    <ion-title>Notificações</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-toolbar>
+  <div class="tabs-trokai">
+    <div
+      class="tab-trokai"
+      [ngClass]="{'active': tab === 'Notificações'}"
+      (click)="changeTab('Notificações')"
+    >
+      <ion-label class="label-body-2 color-gray-default"
+        >Notificações
+      </ion-label>
+
+      <div class="tab-trokai-indicator"></div>
+    </div>
+    <div
+      class="tab-trokai"
+      [ngClass]="{'active': tab === 'Mensagens'}"
+      (click)="changeTab('Mensagens')"
+    >
+      <ion-label class="label-body-2 p-relative color-gray-default"
+        >Mensagens
+        @if (unreadMsgs) {
+        <div class="notification-badge"></div>
+        }
+      </ion-label>
+      <div class="tab-trokai-indicator"></div>
+    </div>
+  </div>
+</ion-toolbar>
+
+<ion-content>
+  @if (notifications) {
+  <ion-refresher
+    slot="fixed"
+    color="primary"
+    (ionRefresh)="doRefresh($event)"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  }
+
+  @if (tab === 'Notificações') {
+  <ion-grid class="p-24">
+    @if (isLoading) {
+    <div class="empty-page full w-100">
+      <ion-spinner name="crescent"> </ion-spinner>
+    </div>
+    }
+
+    @if ((!notifications || notifications.length === 0) && !isLoading) {
+    <div class="empty-page full">
+      <ion-icon name="sad-outline"></ion-icon>
+      <ion-label> Nenhuma notificação</ion-label>
+    </div>
+    }
+
+    @if (!isLoading) {
+    <div>
+      @for (n of notifications; track $index) {
+      <div
+        class="menu-item ion-activatable ripple-parent"
+        (click)="n.action()"
+      >
+        <div>
+          <ion-icon name="{{n.icon}}"></ion-icon>
+          <label
+            class="label-body-1 ml-16"
+            [innerHtml]="n.text + n.date"
+          ></label>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+        @if (!n.read) {
+        <div class="notification-badge"></div>
+        }
+      </div>
+      }
+    </div>
+    }
+  </ion-grid>
+  }
+
+  @if (tab === 'Mensagens') {
+  <ion-grid class="p-24">
+    @if (isLoading) {
+    <div class="empty-page full w-100">
+      <ion-spinner name="crescent"> </ion-spinner>
+    </div>
+    }
+
+    @if ((!chats || chats.length === 0) && !isLoading) {
+    <div class="empty-page full">
+      <ion-icon name="sad-outline"></ion-icon>
+      <ion-label> Nenhuma mensagem</ion-label>
+    </div>
+    }
+
+    @if (!isLoading) {
+    <div>
+      @for (c of chats; track $index) {
+      <div
+        class="menu-item ion-activatable ripple-parent"
+        (click)="openChat(c)"
+      >
+        <div>
+          <ion-avatar>
+            <ion-img [src]="getOtherAvatar(c)"></ion-img>
+          </ion-avatar>
+
+          <div
+            class="d-block ml-16 flex-column"
+            style="align-items: start !important"
+          >
+            <div>
+              <h6 class="label-body-1 text-dots color-gray-dark">
+                {{c.otherUser.storeName ?? c.otherUser.name}}
+                <label class="label-caption-1 ml-8 color-gray-light-1">
+                  {{c.lastMessage.createdAt| shortDate}}
+                </label>
+              </h6>
+            </div>
+            <label
+              class="label-caption-1 text-dots"
+              [ngClass]="{ 'color-gray-dark': c.unreadCount, 'color-gray-default': !c.unreadCount}"
+            >
+              {{c.lastMessage.text}}
+            </label>
+          </div>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+      }
+    </div>
+    }
+  </ion-grid>
+  }
+
+  <ion-infinite-scroll
+    [disabled]="endOfSearch || !notifications || notifications.length === 0"
+    (ionInfinite)="loadData($event)"
+  >
+    <ion-infinite-scroll-content loadingSpinner="crescent" color="primary">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,28 @@
+// @trokai/shared-styles — spacing utilities
+// Generated from the --space-* token scale so margin/padding/gap utilities stay
+// in sync with the tokens and scale via media queries on the CSS vars.
+@use 'sass:map';
+
+$steps: (0, 4, 8, 12, 16, 24, 32, 40, 48, 56);
+
+@each $s in $steps {
+  $v: var(--space-#{$s});
+
+  .m-#{$s} { margin: $v; }
+  .mt-#{$s} { margin-top: $v; }
+  .mr-#{$s} { margin-right: $v; }
+  .mb-#{$s} { margin-bottom: $v; }
+  .ml-#{$s} { margin-left: $v; }
+  .mx-#{$s} { margin-left: $v; margin-right: $v; }
+  .my-#{$s} { margin-top: $v; margin-bottom: $v; }
+
+  .p-#{$s} { padding: $v; }
+  .pt-#{$s} { padding-top: $v; }
+  .pr-#{$s} { padding-right: $v; }
+  .pb-#{$s} { padding-bottom: $v; }
+  .pl-#{$s} { padding-left: $v; }
+  .px-#{$s} { padding-left: $v; padding-right: $v; }
+  .py-#{$s} { padding-top: $v; padding-bottom: $v; }
+
+  .gap-#{$s} { gap: $v; }
+}

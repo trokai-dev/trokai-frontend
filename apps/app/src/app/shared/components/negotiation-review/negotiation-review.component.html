@@ -1,0 +1,11 @@
+<ion-content>
+  <div class="p-24">
+    <tk-rating-form
+      [order]="order"
+      [otherUser]="otherUser"
+      [isSale]="isSale"
+      (reviewed)="close(true)"
+      (closed)="close(false)"
+    ></tk-rating-form>
+  </div>
+</ion-content>

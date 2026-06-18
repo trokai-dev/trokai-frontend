@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar mode="ios" class="clear" style="padding-top: 0px !important">
+    <ion-buttons slot="primary">
+      <ion-icon
+        name="close"
+        (click)="closeExit()"
+        mode="ios"
+        class="modal-close"
+      >
+      </ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="p-24">
+    <h6 class="ion-text-center color-gray-dark">Alterar CEP</h6>
+
+    <ion-item class="ion-no-padding mt-32" mode="md">
+      <ion-input
+        label="CEP"
+        labelPlacement="floating"
+        [appMask]="'00000-000'"
+        [(ngModel)]="zipcode"
+        maxlength="9"
+        type="text"
+        inputmode="numeric"
+      >
+      </ion-input>
+    </ion-item>
+  </div>
+</ion-content>
+
+<ion-footer class="px-24 py-16">
+  <ion-button
+    class="action-button"
+    (click)="save()"
+    [disabled]="!zipcode || zipcode.toString().length !== 9"
+    >Confirmar
+  </ion-button>
+</ion-footer>

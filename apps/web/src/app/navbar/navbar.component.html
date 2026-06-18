@@ -1,0 +1,187 @@
+<div class="navbar">
+  <div class="container">
+    <!-- LEFT -->
+    <div class="nav-left">
+      @if (!checkout) {
+        <button
+          class="mobile-only"
+          mat-icon-button
+          type="button"
+          (click)="toggleNav.emit()"
+          aria-label="Abrir menu"
+        >
+          <mat-icon color="primary">menu</mat-icon>
+        </button>
+      }
+
+      <!-- LOGO -->
+      <a rel="nofollow" class="logo" routerLink="/home">
+        <img
+          src="../../assets/logo/logo.png"
+          srcset="
+            ../../assets/logo/logo@2x.png 2x,
+            ../../assets/logo/logo@3x.png 3x
+          "
+          alt="Logo Trokaí"
+        />
+      </a>
+
+      <!-- SEARCH -->
+
+      @if (!clearNav && !checkout) {
+        <div class="nav-search desktop-only">
+          <input
+            #searchInput
+            placeholder="Buscar no Trokaí"
+            [(ngModel)]="searchText"
+            (keyup.Enter)="search()"
+          />
+          <mat-icon color="primary" class="cursor-pointer" (click)="search()">
+            search
+          </mat-icon>
+        </div>
+      }
+    </div>
+
+    <!-- CENTER -->
+
+    @if (!clearNav && !checkout) {
+      <div class="nav-links">
+        <ul>
+          @for (link of navLinks; track link) {
+            <li>
+              <a
+                [routerLink]="link.route"
+                [queryParams]="link.queryParams"
+                (mouseenter)="link.expandable ? showMenu(link.menuIndex) : null"
+                (mouseleave)="link.expandable ? hideMenu() : null"
+                [ariaLabel]="link.label"
+              >
+                {{ link.label }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+    @if (!checkout) {
+      <div class="nav-right">
+        <ul>
+          <!-- -->
+
+          @if (!buying) {
+            <li>
+              <a routerLink="/help">
+                <button mat-icon-button style="color: #797979">
+                  <mat-icon> help_outline </mat-icon>
+                </button>
+              </a>
+            </li>
+          }
+          @if (!buying) {
+            <li class="d-md-block {{ !baskets ? 'd-none' : '' }}">
+              <a routerLink="/buying/carts" rel="nofollow">
+                <button mat-icon-button color="primary">
+                  <mat-icon
+                    matBadge="{{ baskets }}"
+                    matBadgeHidden="{{ !baskets }}"
+                    matBadgeSize="small"
+                    matBadgeColor="accent"
+                  >
+                    shopping_cart
+                  </mat-icon>
+                </button>
+              </a>
+            </li>
+          }
+          <!--  -->
+          @if (!clearNav && !user) {
+            <li class="px-3">
+              <a aria-label="Entrar" routerLink="/auth/login" id="btn-login">
+                Entrar
+              </a>
+            </li>
+          }
+          <!-- -->
+          @if (user) {
+            <li
+              class="li-user"
+              #menuTrigger="matMenuTrigger"
+              [matMenuTriggerFor]="menu"
+              aria-label="Menu"
+            >
+              <tk-user-avatar
+                [user]="user"
+                [notificationCount]="notificationCount + messageCount"
+              >
+              </tk-user-avatar>
+
+              <mat-menu #menu="matMenu" xPosition="after" yPosition="above">
+                <app-nav-user-menu
+                  [user]="user"
+                  [notificationsCount]="notificationCount + messageCount"
+                ></app-nav-user-menu>
+              </mat-menu>
+            </li>
+          }
+          <!--  -->
+          @if (!clearNav) {
+            <li class="desktop-only ml-12">
+              <a routerLink="/sell" rel="nofollow"
+                ><button
+                  mat-stroked-button
+                  aria-label="Anunciar"
+                  class="mt-16 mt-md-0"
+                  style="min-width: unset !important"
+                  color="primary"
+                >
+                  <b>Anunciar</b>
+                </button>
+              </a>
+            </li>
+
+            <li class="px-3 mobile-only">
+              <a
+                routerLink="/sell"
+                rel="nofollow"
+                class="d-flex align-items-center"
+              >
+                Anunciar
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+    @if (checkout && checkoutOwner) {
+      <div class="nav-right">
+        <app-reserve-time [ownerId]="checkoutOwner" [showTimeOnly]="true" />
+      </div>
+    }
+  </div>
+
+  @if (!clearNav && !checkout && showSearch) {
+    <div class="container mobile-only">
+      <div class="nav-search">
+        <input
+          #searchInput
+          placeholder="Buscar no Trokaí"
+          [(ngModel)]="searchText"
+          (keyup.Enter)="search()"
+        />
+        <mat-icon color="primary" class="cursor-pointer" (click)="search()">
+          search
+        </mat-icon>
+      </div>
+    </div>
+  }
+</div>
+
+@if (menuTab !== null) {
+  <app-nav-expanded-menu
+    [menuTab]="menuTab"
+    [navMenu]="navMenu"
+    (hideMenu)="hideMenu()"
+    (showMenu)="showMenu(menuTab)"
+  />
+}

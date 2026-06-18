@@ -1,0 +1,245 @@
+$color-primary: #13493b;
+$color-accent: #f1b6be;
+
+$color-primary-2: #58b692; // old primary
+// $old-accent: #f1a4a4;
+
+$color-primary-light: #b8e0d1;
+$color-gray-dark: #000000;
+$color-gray-default: #3d3d3d;
+$color-gray-light-1: #adacac;
+$color-gray-light-15: #dddddd;
+$color-gray-light-2: #ebebeb;
+$color-gray-light-25: #f1f1f1;
+
+$color-error: #d43c3c;
+$color-success: #0f800d;
+$color-alert: #faca23;
+
+$color-star-full: #f3b410;
+$color-star-empty: $color-gray-light-1;
+
+$color-box-shadow: rgba(0, 0, 0, 0.08);
+
+$card-border-radius: 16px;
+$card-box-shadow: 0px 8px 16px $color-box-shadow !important;
+
+$plan-standard: #f1b6be;
+$plan-bronze: #aa6129;
+$plan-silver: #b4b4b4;
+$plan-gold: #e5a62c;
+
+$border-trokai: 1px solid $color-gray-light-2 !important;
+
+.color-primary {
+  color: $color-primary !important;
+}
+
+.color-primary-2 {
+  color: $color-primary-2 !important;
+}
+
+.color-accent {
+  color: $color-accent !important;
+}
+
+.color-primary-light {
+  color: $color-primary-light !important;
+}
+.color-gray-dark {
+  color: $color-gray-dark !important;
+}
+.color-gray-default {
+  color: $color-gray-default !important;
+}
+.color-gray-light-1 {
+  color: $color-gray-light-1 !important;
+}
+.color-gray-light-2 {
+  color: $color-gray-light-2 !important;
+}
+.color-error {
+  color: $color-error !important;
+}
+.color-success {
+  color: $color-success !important;
+}
+.color-alert {
+  color: $color-alert !important;
+}
+
+.review-star-full {
+  color: $color-star-full;
+}
+
+.review-star-empty {
+  color: $color-star-empty;
+}
+
+p {
+  color: $color-gray-default;
+  font-size: 1.4rem;
+  font-weight: 300;
+  margin: unset;
+  line-height: normal;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 600;
+  margin: 0px !important;
+}
+
+b {
+  font-weight: 500 !important;
+}
+
+h1::first-letter,
+p::first-letter {
+  text-transform: capitalize;
+}
+
+ion-title {
+  color: $color-gray-dark;
+}
+
+h2 {
+  font-size: 2.4rem !important;
+  font-weight: 600 !important; // semibold
+  margin: 0px;
+}
+
+h3 {
+  font-size: 1.8rem !important;
+  font-weight: 500 !important; // medium
+  margin: 0px;
+}
+
+h4 {
+  font-size: 1.6rem !important;
+  font-weight: 500 !important; // bold
+  margin: 0px;
+}
+
+h5 {
+  font-size: 1.6rem !important;
+  font-weight: 600 !important; // semibold
+  margin: 0px;
+}
+
+h6 {
+  font-size: 1.4rem !important;
+  font-weight: 400 !important; // medium
+  margin: 0px;
+}
+
+.label-body-1 {
+  font-size: 1.6rem !important;
+  font-weight: 300; // regular
+  color: $color-gray-default;
+}
+
+.strong {
+  font-weight: 600 !important;
+}
+.line-through {
+  text-decoration: line-through;
+}
+
+.label-body-2 {
+  font-size: 1.4rem !important;
+  font-weight: 300; // regular
+  color: $color-gray-default;
+}
+
+.label-large-1 {
+  font-size: 1.8rem !important;
+  font-weight: 400 !important; // regular
+}
+
+.label-large-2 {
+  font-size: 1.6rem !important;
+  font-weight: 300 !important; // regular
+}
+
+.label-caption-1 {
+  font-size: 1.2rem !important;
+  font-weight: 400 !important; // regular
+  color: $color-gray-default;
+}
+
+.label-caption-2 {
+  font-size: 1.2rem !important;
+  font-weight: 600 !important; // bold
+}
+
+.label-nano {
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+}
+
+.icon-large {
+  font-size: 4rem;
+}
+
+.icon-default {
+  font-size: 2.2rem;
+}
+
+.icon-small {
+  font-size: 1.6rem;
+}
+
+.icon-nano {
+  font-size: 1.2rem;
+}
+
+.text-dots {
+  overflow: hidden !important;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.fw-300 {
+  font-weight: 300 !important;
+}
+
+.page-title {
+  margin-top: 2.4rem;
+  font-size: 2rem !important;
+  font-weight: 600;
+  display: block;
+}
+
+.page-section {
+  border-bottom: $border-trokai;
+  padding-bottom: 2.4rem;
+}
+
+.section-title {
+  margin: 1.6rem 0rem;
+  font-size: 1.6rem !important;
+  font-weight: 600;
+  display: block;
+}
+
+.item-label {
+  @extend .label-body-2;
+  color: $color-gray-dark;
+  display: block;
+  font-weight: normal;
+}
+
+.item-value {
+  @extend .label-body-2;
+  color: $color-gray-default;
+  font-weight: lighter;
+  white-space: normal;
+}
+
+@media (max-width: 768px) {
+  .page-section-mobile {
+    border-bottom: $border-trokai;
+    padding-bottom: 2.4rem;
+  }
+}

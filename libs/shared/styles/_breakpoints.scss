@@ -1,0 +1,30 @@
+// @trokai/shared-styles — breakpoints
+// Single source of truth for responsive breakpoints. The SCSS map drives the
+// `media()` mixin for structural @media queries; the CSS custom props expose the
+// same numeric values to TS (CDK BreakpointObserver) so JS and CSS agree.
+@use 'sass:map';
+
+$breakpoints: (
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1224px, // web container cap
+);
+
+@function bp($name) {
+  @return map.get($breakpoints, $name);
+}
+
+// Mobile-first: styles apply from the given breakpoint upward.
+@mixin media($name) {
+  @media (min-width: bp($name)) {
+    @content;
+  }
+}
+
+:root {
+  --bp-sm: #{bp(sm)};
+  --bp-md: #{bp(md)};
+  --bp-lg: #{bp(lg)};
+  --bp-xl: #{bp(xl)};
+}

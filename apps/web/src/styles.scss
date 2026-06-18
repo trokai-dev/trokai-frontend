@@ -1,0 +1,623 @@
+// POPPINS
+@use 'tokens'; // @trokai/shared-styles design tokens (:root custom props)
+@use 'index'; // @trokai/shared-styles utilities (layout/spacing/typography) — shared with the app
+@use 'bootstrap-compat'; // native Flexbox/Grid shim — replaces `bootstrap`
+@import "styles/variables.scss";
+@import "styles/margins.scss";
+@import "styles/material-styles.scss";
+@import "styles/dialogs.scss";
+
+// @import "styles/paddings.scss";
+
+// import Swiper and modules styles
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+@import "swiper/css/zoom";
+
+// Root
+// Media Query ..... em
+// Margens ......... rem
+// Font-size ....... rem
+// Widths .......... vw
+:root {
+  // root font-size as 62.5% of browsers size (usually 16px)
+  // 1rem = 10px
+  // scroll-behavior: smooth;
+  font-size: 62.5%;
+
+  html,
+  body {
+    height: 100%;
+    overflow: unset;
+    position: unset;
+  }
+
+  body {
+    margin: 0;
+    font-size: 1.6rem !important;
+  }
+
+  button {
+    span {
+      color: unset;
+    }
+  }
+
+  * {
+    font-family: "Manrope", "Helvetica Neue", sans-serif !important;
+  }
+
+  .material-icons {
+    font-family: "Material Icons" !important;
+  }
+
+  label {
+    margin: 0px;
+  }
+}
+
+span,
+label {
+  @extend .label-body-2;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.label-button {
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: $color-primary;
+}
+
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-stroked-button,
+.mat-mdc-outlined-button {
+  min-width: 108px !important;
+
+  .mdc-button__label {
+    font-size: 1.5rem !important;
+    font-weight: 500;
+  }
+
+  .mat-icon {
+    width: auto !important;
+  }
+}
+
+a {
+  text-decoration: none !important;
+  cursor: pointer;
+  color: $color-primary;
+
+  &.underline:hover {
+    text-decoration: underline !important;
+  }
+}
+
+a:hover {
+  color: $color-primary !important;
+}
+
+button {
+  font-size: 1.4rem !important;
+  height: 4.8rem;
+  text-transform: none;
+  margin: 0px;
+
+  &.mat-raised-button {
+    padding: 0rem 4rem !important;
+  }
+}
+
+hr {
+  border-color: #b6b6b6 !important;
+}
+
+.border-bottom {
+  border-bottom: $border-trokai;
+}
+
+.border-top {
+  border-top: $border-trokai;
+}
+
+.border-left {
+  border-left: $border-trokai;
+}
+
+.border-right {
+  border-right: $border-trokai;
+}
+
+.bullet-product {
+  border-radius: 0.4rem;
+  color: $color-gray-default;
+  padding: 0.4rem 0.8rem;
+  margin-right: 0.8rem;
+  text-transform: capitalize;
+  white-space: nowrap;
+  margin-bottom: 0.8rem;
+  border: 1px solid $color-gray-light-2;
+
+  @extend .label-caption-1;
+}
+
+.hover-parent {
+  // background: $color-gray-light-2;
+  cursor: pointer;
+}
+
+.trokai-hoverable-parent:hover {
+  @extend .hover-parent;
+}
+
+.trokai-radio-parent {
+  .trokai-radio-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    /* background: black; */
+    border: 0.2rem solid $color-gray-dark;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 0.5rem;
+
+    .trokai-radio-inside {
+      width: 1.5rem;
+      height: 1.5rem;
+      background: $color-gray-dark;
+      border-radius: inherit;
+    }
+  }
+}
+
+.trokai-radio-parent:hover {
+  @extend .hover-parent;
+}
+
+.max-user-name {
+  // width: 16vw;
+  @extend .text-dots;
+}
+
+.max-user-address {
+  // width: 16vw;
+  @extend .text-dots;
+}
+
+.container {
+  max-width: 1224px;
+}
+
+.page {
+  min-height: calc(100vh - 161px - 65px);
+  // min-height: -webkit-fill-available;
+}
+
+.empty-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &.full {
+    height: 50vh;
+  }
+
+  ion-icon {
+    @extend .color-gray-light-1;
+    font-size: 4rem;
+  }
+
+  // style for span that is not child of button
+  span:not(button *) {
+    @extend .mt-8;
+    @extend .color-gray-light-1;
+    @extend .label-body-2;
+  }
+
+  button {
+    @extend .mt-32;
+  }
+}
+
+.image-badge-button {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  cursor: pointer;
+
+  &.large {
+    width: 4.8rem;
+    height: 4.8rem;
+
+    mat-icon,
+    ion-icon {
+      font-size: 3rem;
+      color: $color-primary;
+    }
+  }
+
+  &.small {
+    width: 3.2rem;
+    height: 3.2rem;
+
+    mat-icon,
+    ion-icon {
+      font-size: 2.2rem;
+      @extend .color-gray-dark;
+    }
+
+    &.left {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+    }
+
+    &.right {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+  }
+}
+
+.label-button {
+  cursor: pointer;
+}
+
+.label-button:hover {
+  opacity: 0.7;
+}
+
+// SWIPER
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: white;
+}
+
+.swiper-button-next {
+  right: 8px;
+}
+
+.swiper-button-prev {
+  left: 8px;
+}
+
+.swiper-pagination {
+  bottom: 8px;
+  width: 100%;
+}
+
+.swiper-pagination-bullet {
+  margin: 0 2px;
+}
+
+.swiper-pagination-bullet-active {
+  background: white;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 2.4rem;
+}
+
+.pictures-help-pagination {
+  .swiper-pagination-bullet-active {
+    background: $color-primary;
+  }
+}
+
+
+// MODAL
+// dialog general styles
+.mat-mdc-dialog-container {
+  font-size: 62.5%;
+}
+
+.modal-open {
+  padding-right: 0px !important;
+}
+
+.modal-backdrop {
+  width: 100%;
+}
+
+.btn-close {
+  box-sizing: content-box;
+  width: 1em;
+  height: 1em;
+  padding: 0.25em 0.25em;
+  color: #000;
+  background: transparent
+    url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e")
+    center/1em auto no-repeat;
+  border: 0;
+  border-radius: 0.25rem;
+  opacity: 0.5;
+}
+
+.modal-content {
+  border-radius: 16px;
+  border: none !important;
+}
+
+.modal-header {
+  border-bottom: none !important;
+}
+
+.modal-footer {
+  border-top: none !important;
+}
+
+.download-app-dialog {
+  max-width: 600px !important;
+}
+
+.exit-dialog {
+  max-width: 600px !important;
+}
+
+.rating-modal {
+  max-width: 500px !important;
+}
+
+.fees-modal {
+  width: 300px !important;
+}
+
+.popup-modal {
+  // .modal-content{
+  //   background-color: transparent !important;
+  // }
+  max-width: 600px !important;
+  margin-top: 5%;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+// .popup-modal{
+
+//     margin-top: 10%;
+//     min-height: 226px;
+//     .modal-content{
+//       background-color: transparent;
+
+//       .modal-body {
+//         background-image: url('assets/modal-primeira-10.png');
+//         background-size: cover;
+//       }
+
+//     }
+
+// }
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal-backdrop.show {
+  opacity: 0.7;
+}
+
+.__jivoMobileButton {
+  z-index: 1000 !important;
+}
+
+.cdk-overlay-container {
+  z-index: 100000000000 !important;
+}
+
+select {
+  border: 1px solid $color-gray-light-2;
+  padding: 4px;
+  border-radius: 8px;
+  @extend .label-body-2;
+  cursor: pointer;
+  outline: unset;
+}
+
+.btn-social {
+  border-color: $color-primary !important;
+  color: $color-gray-dark !important;
+  font-weight: 400 !important;
+
+  img {
+    width: 2rem;
+  }
+}
+
+.cropper-modal {
+  background-color: #fff !important;
+  opacity: 0.8 !important;
+}
+
+// cropper
+
+.ngx-ic-resize.ngx-ic-topright,
+.ngx-ic-resize.ngx-ic-right,
+.ngx-ic-resize.ngx-ic-bottom,
+.ngx-ic-resize.ngx-ic-bottomleft,
+.ngx-ic-resize.ngx-ic-left,
+.ngx-ic-resize.ngx-ic-topleft,
+.ngx-ic-resize.ngx-ic-top {
+  display: none !important;
+}
+
+.ngx-ic-resize {
+  z-index: 1000 !important;
+  opacity: 1 !important;
+}
+
+.ngx-ic-bottomright {
+  .ngx-ic-square {
+    background-color: $color-primary !important;
+    width: 16px !important;
+    height: 16px !important;
+    border: none;
+    border-radius: 3px;
+  }
+}
+
+.cropper-face {
+  opacity: 0 !important;
+}
+
+.cropper-point.point-n,
+.cropper-point.point-ne,
+.cropper-point.point-nw,
+.cropper-point.point-s,
+.cropper-point.point-sw,
+.cropper-point.point-e,
+.cropper-point.point-w {
+  bottom: -5px !important;
+  cursor: nwse-resize !important;
+  height: 25px !important;
+  opacity: 0 !important;
+  right: -5px !important;
+  width: 25px !important;
+}
+
+.cropper-point.point-se {
+  bottom: -5px !important;
+  cursor: nwse-resize !important;
+  height: 25px !important;
+  opacity: 1 !important;
+  right: -5px !important;
+  width: 25px !important;
+}
+
+.cropper-crop-box {
+  border: 1px dashed black;
+}
+
+.cropper-line {
+  background-color: $color-primary !important;
+  opacity: 0 !important;
+
+  &.line-n {
+    height: 10px !important;
+  }
+
+  &.line-s {
+    height: 10px !important;
+  }
+
+  &.line-e {
+    width: 10px !important;
+  }
+
+  &.line-w {
+    width: 10px !important;
+  }
+}
+
+.cropper-view-box {
+  outline: $color-primary !important;
+}
+
+.spinner-small {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.spinner-nano {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+
+  .cart-item-img {
+    width: 75px;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  .cart-item-text {
+    margin-left: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    width: 160px;
+  }
+
+  .button-remove {
+    opacity: 0.5;
+  }
+}
+
+.side-menu {
+  width: 250px;
+
+  a {
+    border: 2px solid transparent;
+  }
+
+  .active-link {
+    background-color: $color-gray-light-25;
+  }
+}
+
+// mantem o tamanho da etiqueta na impressao
+@media print {
+  @page {
+    size: a4 !important;
+  }
+
+  body {
+    min-width: unset !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-mdc-menu-item-text {
+  display: flex;
+  align-items: center;
+}
+
+.mat-icon {
+  display: flex !important;
+  align-items: center;
+}
+
+// medias
+
+@media (max-width: 1199px) {
+  .page {
+    padding-top: 1.6rem;
+    padding-bottom: 1.6rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .page {
+    padding-top: 3.2rem;
+    padding-bottom: 3.2rem;
+  }
+}

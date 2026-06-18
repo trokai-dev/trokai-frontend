@@ -1,0 +1,23 @@
+#side-menu-nav {
+  display: flex;
+  flex-direction: column;
+
+  padding: 4rem 0rem 10rem 0rem;
+  width: 90vw;
+
+  max-height: 100dvh;
+  overflow-y: auto;
+
+  a,
+  h3,
+  .menu-item {
+    padding: 0 2.4rem;
+  }
+
+  .menu-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+}

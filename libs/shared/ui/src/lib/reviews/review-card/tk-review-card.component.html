@@ -1,0 +1,21 @@
+<div class="flex gap-12 review-card">
+  @if (review.madeByUser) {
+    <tk-user-avatar [user]="review.madeByUser" size="small"></tk-user-avatar>
+  }
+
+  <div class="flex flex-col w-full">
+    <div class="flex items-center justify-between w-full">
+      <span class="label-body-2 name">{{ review.madeByUser?.name }}</span>
+
+      @if (review.createdAt) {
+        <span class="label-caption-1 date">{{
+          review.createdAt | date: 'dd/MM/yyyy'
+        }}</span>
+      }
+    </div>
+
+    <tk-review-stars [stars]="review.stars" [showAmount]="false"></tk-review-stars>
+
+    <p class="label-body-2 comment">{{ review.comment }}</p>
+  </div>
+</div>

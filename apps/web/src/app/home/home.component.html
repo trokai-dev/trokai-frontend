@@ -1,0 +1,136 @@
+@for (home_row of payload; track home_row; let row = $index) {
+  <div class="container px-0 home_row" style="position: relative">
+    @if (home_row.title && home_row.visibleWeb) {
+      <div class="row home_row_header">
+        <div class="col-8 px-0">
+          <h2 class="home_row_title">{{ home_row.title }}</h2>
+          @if (home_row.description) {
+            <span class="home_row_description">
+              {{ home_row.description }}
+            </span>
+          }
+        </div>
+        @if (home_row.actionText && home_row.actionUrl) {
+          <div class="col px-0 d-flex justify-content-end">
+            @if (home_row.route) {
+              <a
+                rel="nofollow"
+                [routerLink]="home_row.route"
+                [queryParams]="home_row.queryParams"
+              >
+                <span class="label-body-2 color-primary">
+                  {{ home_row.actionText }}
+                </span>
+              </a>
+            }
+            @if (!home_row.route) {
+              <a rel="nofollow" [href]="home_row.actionUrl">
+                <span class="label-body-2 color-primary">
+                  {{ home_row.actionText }}
+                </span>
+              </a>
+            }
+          </div>
+        }
+      </div>
+    }
+    <div class="__row">
+      @if (home_row.objectType === 'banner') {
+        <div class="__inner-row">
+          @if (home_row.swiper) {
+            <div class="__item banner">
+              <div class="swiper banner-swiper">
+                <div class="swiper-wrapper">
+                  @for (item of home_row.items; track item) {
+                    <div class="swiper-slide">
+                      <app-banner
+                        [viewportHeight]="viewportHeight"
+                        [item]="item"
+                        [priority]="row < 2"
+                      ></app-banner>
+                    </div>
+                  }
+                </div>
+                <div class="swiper-pagination"></div>
+                <!-- <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div> -->
+              </div>
+              <button mat-icon-button class="custom-prev banner">
+                <mat-icon>chevron_left</mat-icon>
+              </button>
+              <button mat-icon-button class="custom-next banner">
+                <mat-icon>chevron_right</mat-icon>
+              </button>
+            </div>
+          } @else {
+            <div class="__item banner">
+              <app-banner
+                [viewportHeight]="viewportHeight"
+                [item]="home_row.items[0]"
+                [priority]="row < 2"
+              ></app-banner>
+            </div>
+          }
+        </div>
+      }
+      @if (home_row.objectType === 'generic' && home_row.visibleWeb) {
+        <div class="__inner-row">
+          @for (
+            home_generic of home_row.items;
+            track home_generic;
+            let col = $index
+          ) {
+            <div
+              class="__item"
+              [style.minWidth]="home_row.itemMobileWidth"
+              [style.maxWidth]="home_row.itemMobileWidth"
+              [style.width]="home_row.itemMobileWidth"
+            >
+              <app-home-generic
+                [home_generic]="home_generic"
+                [home_row]="home_row"
+                [viewportHeight]="viewportHeight"
+              >
+              </app-home-generic>
+            </div>
+          }
+        </div>
+      }
+      @if (home_row.objectType === 'ratings') {
+        <div class="__inner-row">
+          <div class="__item banner">
+            <div class="swiper ratings-swiper">
+              <div class="swiper-wrapper">
+                @for (item of ratings; track item) {
+                  <div class="swiper-slide rating-slide">
+                    <div class="rating-slide-item">
+                      <span class="label-body-2 text-capitalize d-block mb-2"
+                        ><b>{{ item.name }}</b></span
+                      >
+                      <tk-review-stars
+                        [stars]="item.rating"
+                        [showAmount]="false"
+                      />
+                      <p class="label-body-2 rating-text mt-12">
+                        {{ item.text }}
+                      </p>
+                    </div>
+                  </div>
+                }
+              </div>
+              <!-- <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div> -->
+              <!-- Custom navigation buttons -->
+            </div>
+            <button mat-icon-button class="custom-prev ratings">
+              <mat-icon>chevron_left</mat-icon>
+            </button>
+            <button mat-icon-button class="custom-next ratings">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+}

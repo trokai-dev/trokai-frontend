@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <app-back-button defaultHref="/main/home"></app-back-button>
+    <ion-title>Anunciar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="px-24">
+    <tk-product-register-form
+      [itemsMap]="itemsMap"
+      [params]="params"
+      [brands]="brands"
+      [product]="product"
+      [initialImages]="initialImages"
+      [duplicating]="duplicating"
+      [editingId]="editingId"
+      [loading]="loading"
+      (submitted)="onSubmitted($event)"
+    ></tk-product-register-form>
+  </div>
+</ion-content>

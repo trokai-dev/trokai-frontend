@@ -1,0 +1,133 @@
+@import "../styles/variables.scss";
+
+:root {
+  --mat-badge-background-color: $color-accent;
+}
+
+.mat-badge-content {
+  font-size: 1.2rem !important;
+  color: white !important;
+  font-weight: 600 !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-badge-hidden .mat-badge-content {
+  display: none !important;
+}
+
+.mat-form-field {
+  font-weight: 300;
+  @extend .label-body-2;
+}
+
+.mat-mdc-select-value,
+.mdc-list-item__primary-text {
+  @extend .label-body-2;
+}
+
+.mat-option-text {
+  font-weight: 300;
+  @extend .label-body-2;
+}
+
+.mat-form-field-subscript-wrapper {
+  margin-top: 0.4rem !important;
+}
+
+.mat-checkbox-frame,
+.mat-radio-outer-circle {
+  border-width: 1px !important;
+  border-color: $color-gray-light-1 !important;
+}
+
+.mat-menu-panel {
+  min-width: 200px !important;
+}
+
+.mat-mdc-menu-item {
+  display: flex !important;
+  align-items: center;
+  span {
+    @extend .label-body-1;
+  }
+  ion-icon {
+    color: $color-primary;
+    margin-right: 1rem;
+    font-size: 1.8rem;
+  }
+}
+
+.mat-mdc-dialog-content {
+  max-height: unset !important;
+}
+
+.mat-checkbox-disabled {
+  opacity: 0.5;
+}
+
+.ng-submitted {
+  .mat-form-field {
+    &.ng-invalid {
+      @extend .mat-form-field-invalid;
+    }
+  }
+
+  .mat-form-field-appearance-outline.ng-invalid .mat-form-field-outline-thick,
+  .mat-form-field-appearance-outline.mat-form-field-invalid
+    .mat-form-field-outline-thick {
+    opacity: 1;
+  }
+}
+
+.mat-ripple {
+  cursor: pointer;
+}
+
+.close-button {
+  padding: 0px !important;
+  height: 2rem !important;
+  width: 2rem !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.mat-dialog-container {
+  padding: 4rem 4.4rem 4rem 4rem !important;
+}
+
+.mat-dialog-content {
+  max-height: unset !important;
+}
+
+mat-hint {
+  font-size: 1.2rem;
+}
+
+.mdc-text-field--outlined .mdc-floating-label--float-above {
+  font-size: unset !important;
+}
+
+.mat-mdc-tooltip .mdc-tooltip__surface {
+  font-size: 1.2rem !important;
+}
+
+.mdc-list-item__primary-text {
+  display: flex;
+  align-items: center;
+}
+
+.transparent-dialog {
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    background-color: transparent;
+  }
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    box-shadow: none !important;
+  }
+}
+
+.mdc-tab__text-label {
+  font-weight: 500 !important;
+}

@@ -1,0 +1,391 @@
+.wrap-etiqueta {
+  width: 210mm;
+
+  margin-top: 150px;
+
+  span {
+    font-family: "poppins" "arial" !important;
+    font-size: 12px !important;
+  }
+
+  p {
+    font-family: "poppins" "arial" !important;
+    font-size: 11px !important;
+    margin: unset;
+  }
+
+  span,
+  label,
+  p,
+  h3 {
+    color: black !important;
+    margin-bottom: 0px;
+  }
+
+  span {
+    display: block;
+    // font-size: 1.4rem !important;
+    font-weight: 300 !important; // regular
+    color: #6b6b6b;
+  }
+
+  #top {
+    display: flex;
+    padding-bottom: 7mm;
+
+    position: relative;
+
+    #dicas {
+      width: 40%;
+      height: 144mm;
+      position: relative;
+
+      #tesoura-1 {
+        position: absolute;
+        top: 5mm;
+        right: -4mm;
+        width: 8mm;
+      }
+
+      .seta {
+        position: absolute;
+        width: 50mm;
+        height: 20mm;
+
+        img {
+          width: 8mm;
+          height: 8mm;
+          float: right;
+        }
+      }
+
+      #seta-lado {
+        right: 6mm;
+        bottom: 35mm;
+        text-align: right;
+      }
+
+      #seta-baixo {
+        left: 4mm;
+        bottom: 2mm;
+        text-align: center;
+      }
+    }
+
+    #etiqueta {
+      width: 60%;
+      border: 2px dashed black;
+      background-color: white;
+      z-index: 1;
+
+      #etiqueta-top {
+        padding: 2mm 4mm;
+
+        #logos {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          img {
+            width: 20mm;
+          }
+        }
+
+        #contrato {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        #barra-1 {
+          height: 20mm;
+          width: 60mm;
+        }
+      }
+
+      #destinatario {
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
+
+        width: 100%;
+        position: relative;
+        padding: 2mm 4mm;
+
+        #caps-destinatario {
+          padding: 0.5mm;
+          background-color: black;
+          position: absolute;
+          top: 0;
+          left: 0;
+
+          h3 {
+            color: white !important;
+          }
+        }
+
+        #logo-correios-destinatario {
+          position: absolute;
+          top: 1mm;
+          right: 4mm;
+          width: 30mm;
+        }
+
+        #barra-2 {
+          width: 42mm;
+        }
+      }
+
+      #remetente {
+        padding: 2mm 4mm;
+      }
+    }
+  }
+
+  .campo-assinatura {
+    width: 100%;
+    border-bottom: 1px solid;
+  }
+
+  .campo-data {
+    font-family: Arial !important;
+    display: flex;
+  }
+
+  #declaracao {
+    margin-top: 10mm;
+    margin-bottom: 10mm;
+    page-break-before: always;
+    #header-declaracao {
+      width: 168mm;
+      height: 40mm;
+      display: flex;
+      flex-direction: column;
+
+      #header-declaracao-title {
+        height: 45mm;
+        border: 2px solid black;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+
+      #titulo-exclusivos-correios {
+        height: 6mm;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid black;
+        margin-top: 2mm;
+      }
+
+      #campos-exclusivos-correios-1 {
+        width: 82mm;
+        border-left: 2px solid;
+        border-right: 2px solid;
+        border-bottom: 2px solid;
+        margin-right: 2mm;
+      }
+
+      #campos-exclusivos-correios-2 {
+        width: 84mm;
+        border-left: 2px solid;
+        border-right: 2px solid;
+        border-bottom: 2px solid;
+      }
+    }
+
+    #carimbo {
+      width: 40mm;
+      height: 40mm;
+      border: 2px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: end;
+    }
+
+    .declaracao-subtitulo {
+      border-bottom: 2px solid black;
+      text-align: center;
+    }
+
+    .declaracao-content {
+      padding: 2mm;
+    }
+
+    #remetente-destinatario {
+      display: flex;
+
+      #declaracao-remetente {
+        border: 1px solid;
+        margin-top: 2mm;
+        width: 82mm;
+        margin-right: 2mm;
+      }
+
+      #declaracao-destinatario {
+        border: 1px solid;
+        margin-top: 2mm;
+        width: 126mm;
+      }
+
+      table {
+        width: 100%;
+      }
+
+      tr,
+      td {
+        border: 1px solid;
+      }
+
+      table,
+      tr,
+      th,
+      td {
+        border-collapse: collapse;
+      }
+
+      th {
+        text-align: center;
+      }
+    }
+
+    .back-cinza {
+      background-color: #cccccc;
+    }
+
+    .titulo-tabela {
+      border-bottom: 2px solid !important;
+    }
+
+    #declaracao-bens {
+      margin-top: 2mm;
+      width: 100%;
+
+      table {
+        border: 2px solid;
+      }
+
+      th,
+      td {
+        border: 1px solid;
+      }
+
+      table {
+        width: 100%;
+
+        th {
+          text-align: center;
+        }
+
+        td {
+          text-align: center;
+        }
+      }
+    }
+
+    #declaracao-declaracao {
+      border: 2px solid;
+      margin-top: 2mm;
+
+      p {
+        text-indent: 1.6rem;
+      }
+    }
+
+    #declaracao-observacao {
+      border: 2px solid;
+      margin-top: 2mm;
+      padding: 2mm;
+    }
+  }
+
+  // margins
+
+  .m1 {
+    margin: 1mm !important;
+  }
+
+  .m2 {
+    margin: 2mm !important;
+  }
+
+  .m3 {
+    margin: 3mm !important;
+  }
+
+  .m4 {
+    margin: 4mm !important;
+  }
+
+  .m5 {
+    margin: 5mm !important;
+  }
+
+  .mt-1 {
+    margin-top: 1mm !important;
+  }
+
+  .mt-2 {
+    margin-top: 2mm !important;
+  }
+
+  .mt-3 {
+    margin-top: 3mm !important;
+  }
+
+  .mt-4 {
+    margin-top: 4mm !important;
+  }
+
+  .mt-5 {
+    margin-top: 5mm !important;
+  }
+
+  // paddings
+
+  .p1 {
+    padding: 1mm !important;
+  }
+
+  .p2 {
+    padding: 2mm !important;
+  }
+
+  .p3 {
+    padding: 3mm !important;
+  }
+
+  .p4 {
+    padding: 4mm !important;
+  }
+
+  .p5 {
+    padding: 5mm !important;
+  }
+}
+
+.nav-etiqueta {
+  width: 100vw;
+  flex-direction: column;
+  padding: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .nav-etiqueta-actions {
+
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+}

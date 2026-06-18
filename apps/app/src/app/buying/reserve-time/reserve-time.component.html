@@ -1,0 +1,42 @@
+@if (interval && timeLeft && timeLeft.getTime() > 0) {
+<div class="reserved-info">
+  @if (!timerOnly) {
+  <ion-button
+    (click)="reserveOpen.emit()"
+    [color]="color"
+    class="action-button w-100 mt-8"
+  >
+    <b> {{ text }} ({{ timeLeft | date : "mm:ss" }})</b>
+  </ion-button>
+  }
+
+  @if (!hideCancel && !timerOnly) {
+  <ion-button
+    (click)="cancel()"
+    color="tertiary"
+    fill="clear"
+    class="action-button w-100 mt-8"
+  >
+    Cancelar reserva
+  </ion-button>
+  }
+
+  @if (timerOnly) {
+  <ion-text class="color-primary fw-bold px-16">
+    {{ timeLeft | date : "mm:ss" }}
+  </ion-text>
+  }
+</div>
+}
+
+@if ((!interval && !timeLeft) || timeLeft.getTime() <= 0) {
+<div class="reserved-info">
+  <ion-button
+    (click)="expired()"
+    [color]="color"
+    class="action-button w-100 mt-8"
+  >
+    <b>Reserva expirada</b>
+  </ion-button>
+</div>
+}

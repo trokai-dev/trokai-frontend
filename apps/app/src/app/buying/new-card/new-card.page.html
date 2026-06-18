@@ -1,0 +1,250 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <app-back-button
+      [nav]="buying"
+      (buttonClick)="clickBack()"
+      defaultHref="/main/home"
+    ></app-back-button>
+    <ion-title> Novo cartão </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="p-24">
+    <div class="w-100 mt-40">
+      <h6>Dados do cartão</h6>
+    </div>
+
+    <form [formGroup]="cardForm">
+      <ion-row class="mt-8">
+        <ion-col class="ion-no-padding item-input" size="12">
+          <ion-item class="ion-no-padding">
+            <ion-input
+              label="Nome do titular"
+              labelPlacement="floating"
+              formControlName="holderName"
+              maxlength="256"
+              type="text"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="mt-8">
+        <ion-col class="ion-no-padding item-input" size-sm="6" offset-sm="3">
+          <ion-item class="ion-no-padding">
+            <ion-input
+              label="CPF/CNPJ do titular"
+              labelPlacement="floating"
+              [appMask]="'000.000.000-00||00.000.000/0000-00'"
+              formControlName="holderDocument"
+              type="text"
+              inputmode="numeric"
+            >
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="mt-8">
+        <ion-col class="ion-no-padding item-input" size-sm="6" offset-sm="3">
+          <ion-item class="ion-no-padding">
+            <ion-input
+              label="Número do cartão"
+              labelPlacement="floating"
+              [appMask]="'0000 0000 0000 0000'"
+              formControlName="number"
+              type="text"
+              maxlength="19"
+              inputmode="numeric"
+            >
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="mt-8 d-flex align-items-end">
+        <ion-col class="ion-no-padding item-input" size="5">
+          <ion-item class="ion-no-padding">
+            <ion-input
+              label="Validade"
+              labelPlacement="floating"
+              formControlName="expirationFull"
+              [appMask]="'00/00'"
+              type="text"
+              inputmode="numeric"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col class="ion-no-padding item-input" size="6" offset="1">
+          <ion-item class="ion-no-padding">
+            <ion-input
+              label="Cód. segurança"
+              labelPlacement="floating"
+              formControlName="cvv"
+              type="text"
+              maxlength="4"
+              minlength="3"
+              inputmode="numeric"
+            >
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </form>
+
+    <div class="w-100 mt-40">
+      <h6>Endereço de cobrança</h6>
+    </div>
+
+    <ion-row class="mt-32">
+      @if (user && user.address) {
+      <ion-item
+        class="mt-8 ion-no-padding"
+        lines="none"
+      >
+        <ion-checkbox
+          justify="start"
+          labelPlacement="end"
+          mode="md"
+          slot="start"
+          (ionChange)="checkAddress()"
+          [(ngModel)]="useAddress"
+        >
+          <ion-label class="color-gray-dark label-body-2">
+            Utilizar endereço cadastrado
+          </ion-label>
+        </ion-checkbox>
+      </ion-item>
+      }
+    </ion-row>
+
+    <ion-row [ngStyle]="{display: useAddress ? 'none':'block'}">
+      <form [formGroup]="addressForm">
+        <ion-grid>
+          <ion-row class="mt-8">
+            <ion-col
+              class="ion-no-padding item-input"
+              size-sm="6"
+              offset-sm="3"
+            >
+              <ion-item class="ion-no-padding">
+                <ion-input
+                  label="CEP"
+                  labelPlacement="floating"
+                  [appMask]="'00000-000'"
+                  formControlName="zipCode"
+                  (ionInput)="zipChange()"
+                  maxlength="9"
+                  type="text"
+                  inputmode="numeric"
+                >
+                </ion-input>
+              </ion-item>
+
+              @if (viaCepError) {
+              <ion-label class="label-caption-1 red-danger">
+                CEP não encontrado
+              </ion-label>
+              }
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="mt-8">
+            <ion-col class="ion-no-padding item-input" size="12">
+              <ion-item class="ion-no-padding">
+                <ion-input
+                  label="Endereço"
+                  labelPlacement="floating"
+                  formControlName="street"
+                  maxlength="256"
+                  type="email"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="mt-8">
+            <ion-col class="ion-no-padding item-input" size="3">
+              <ion-item class="ion-no-padding">
+                <ion-input
+                  label="Número"
+                  labelPlacement="floating"
+                  formControlName="number"
+                  maxlength="256"
+                  type="text"
+                  inputmode="numeric"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col class="ion-no-padding item-input" size="8" offset="1">
+              <ion-item class="ion-no-padding">
+                <ion-input
+                  label="Complemento"
+                  labelPlacement="floating"
+                  formControlName="complement"
+                  maxlength="256"
+                  type="text"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="mt-8">
+            <ion-col class="ion-no-padding item-input" size="12">
+              <ion-item class="ion-no-padding">
+                <ion-input
+                  label="Bairro"
+                  labelPlacement="floating"
+                  formControlName="neighborhood"
+                  maxlength="256"
+                  type="text"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="mt-8">
+            <ion-col class="ion-no-padding item-input" size="5">
+              <ion-item class="ion-no-padding">
+                <ion-input
+                  label="Estado"
+                  labelPlacement="floating"
+                  [disabled]="true"
+                  formControlName="state"
+                  maxlength="256"
+                  type="text"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col class="ion-no-padding item-input" size="6" offset="1">
+              <ion-item class="ion-no-padding">
+                <ion-input
+                  label="Cidade"
+                  labelPlacement="floating"
+                  [disabled]="true"
+                  formControlName="city"
+                  maxlength="256"
+                  type="text"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer class="px-24 py-16">
+  <ion-button
+    (click)="save()"
+    [disabled]="!enabled()"
+    shape="round"
+    class="w-100 action-button"
+  >
+    Salvar cartão
+  </ion-button>
+</ion-footer>

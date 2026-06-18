@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <app-back-button></app-back-button>
+    <ion-title>{{ product?.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  @if (product) {
+    <div class="p-24">
+      @if (question || (!isOwner && sent)) {
+        <!-- PERGUNTA -->
+        <div>
+          <h4 class="color-gray-dark">Pergunta</h4>
+          <span class="label-body-2">
+            @if (question?.question) {
+              {{ question?.question }}
+            } @else if (!isOwner && sent) {
+              {{ message }}
+            }
+          </span>
+        </div>
+
+        <!-- RESPOSTA -->
+        <div class="mt-32">
+          <h4 class="color-gray-dark">Resposta</h4>
+          <span class="label-body-2">
+            @if (question?.answer) {
+              {{ question?.answer }}
+            } @else if (isOwner && sent) {
+              {{ message }}
+            } @else {
+              Aguardando resposta...
+            }
+          </span>
+        </div>
+      }
+
+      <!-- VENDEDOR responde se ainda não respondeu / COMPRADOR pergunta se ainda não perguntou -->
+      @if (showForm()) {
+        <div class="mt-32">
+          <mat-form-field appearance="outline" class="d-block">
+            <mat-label>Escreva a {{ isOwner ? "Resposta" : "Pergunta" }}</mat-label>
+            <textarea matInput [(ngModel)]="message"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="questions-help-cta">
+          <mat-icon class="help-icon">warning</mat-icon>
+          <span class="color-gray-dark">
+            @if (isOwner) {
+              Não compartilhe dados de contato e nunca aceite pagamentos fora do
+              Trokai.
+            } @else {
+              Não compartilhe dados de contato e nunca realize pagamentos fora do
+              Trokai.
+            }
+          </span>
+        </div>
+
+        <div class="mt-32">
+          <button
+            mat-raised-button
+            class="w-100"
+            [disabled]="message?.length <= 5"
+            color="primary"
+            (click)="send()"
+          >
+            Enviar {{ isOwner ? "Resposta" : "Pergunta" }}
+          </button>
+        </div>
+      }
+    </div>
+  }
+</ion-content>

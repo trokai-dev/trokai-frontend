@@ -1,0 +1,144 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.chat-thread {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--color-surface, #fff);
+}
+
+// ── Message list ─────────────────────────────────────────────────────────────
+
+.chat-grid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.6rem;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.message-diff-row {
+  display: flex;
+  justify-content: center;
+  margin: 2.4rem;
+
+  span {
+    font-size: var(--font-size-caption);
+    color: var(--color-gray-1);
+  }
+}
+
+%message-row {
+  display: flex;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.message-container {
+  position: relative;
+  max-width: 300px;
+  min-width: 125px;
+  padding: 0.8rem 1.6rem;
+  border-radius: 2rem;
+
+  > span {
+    font-size: var(--font-size-body-2);
+  }
+
+  .message-footer {
+    display: flex;
+    margin-top: 0.4rem;
+
+    span {
+      font-size: var(--font-size-nano);
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 1px;
+    width: 0;
+    height: 0;
+    border: 1.6rem solid transparent;
+  }
+}
+
+.message-other-row {
+  @extend %message-row;
+  justify-content: flex-start;
+
+  .message-footer {
+    justify-content: flex-end;
+  }
+
+  .message-container {
+    background: var(--color-gray-2);
+    color: var(--color-gray-dark);
+
+    &::after {
+      left: -5px;
+      border-right-color: var(--color-gray-2);
+      border-left: 0;
+      border-top: 0;
+      transform: rotate(70deg);
+    }
+  }
+}
+
+.message-user-row {
+  @extend %message-row;
+  justify-content: flex-end;
+
+  .message-footer {
+    justify-content: flex-start;
+  }
+
+  .message-container {
+    background: var(--color-primary);
+
+    > span {
+      color: #fff;
+    }
+
+    &::after {
+      right: -5px;
+      border-left-color: var(--color-primary);
+      border-right: 0;
+      border-bottom: 0;
+      transform: rotate(20deg);
+    }
+  }
+}
+
+// ── Disconnected banner ──────────────────────────────────────────────────────
+
+.disconnected {
+  display: flex;
+  justify-content: center;
+  padding: 0.8rem;
+  background: var(--color-error);
+
+  h6 {
+    color: #fff;
+  }
+}
+
+// ── Composer ─────────────────────────────────────────────────────────────────
+
+.control-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--color-gray-2);
+
+  mat-form-field {
+    width: 100%;
+    padding: 1.6rem;
+  }
+}

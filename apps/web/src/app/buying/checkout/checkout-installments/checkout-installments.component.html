@@ -1,0 +1,48 @@
+<h3 class="checkout-title">Escolha o parcelamento</h3>
+
+<div class="checkout-body">
+  <mat-radio-group
+    class="custom-radio-group"
+    [(ngModel)]="selectedInstallments"
+  >
+    @for(i of cv?.installments; track i) {
+    <mat-radio-button color="primary" [value]="i.installments">
+      <div class="custom-radio-button-content">
+        <div class="d-flex justify-content-between">
+          <span class="custom-radio-button-title">
+            {{ i.installments }} x
+            {{ i.installmentValue | cost | currency : "BRL" : true : "1.2" }}
+          </span>
+
+          @if (!i.interest){
+          <span class="color-primary label-body-2 fw-semibold">
+            sem juros
+          </span>
+          } @else {
+          <span class="color-gray-default label-body-2 fw-semibold">
+            {{ i.buyerCost | cost | currency : "BRL" : true : "1.2" }}
+          </span>
+          }
+        </div>
+      </div>
+    </mat-radio-button>
+    }
+  </mat-radio-group>
+</div>
+
+<div class="checkout-fixed-footer border-top mt-40">
+  <div class="container my-4">
+    <div class="row">
+      <div class="col-12 col-md-6 offset-md-3 d-flex justify-content-end">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!selectedInstallments"
+          (click)="onContinue()"
+        >
+          Continuar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

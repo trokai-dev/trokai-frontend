@@ -1,0 +1,41 @@
+// @trokai/shared-styles — native layout utilities
+// Flexbox (1D micro-alignment) + CSS Grid (2D macro structure). Replaces the
+// Bootstrap grid/utility classes as templates are migrated.
+
+// --- Flexbox (1D) ---
+.flex { display: flex; }
+.inline-flex { display: inline-flex; }
+.flex-col { display: flex; flex-direction: column; }
+.flex-row { display: flex; flex-direction: row; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-1 { flex: 1 1 0%; }
+.flex-auto { flex: 1 1 auto; }
+.flex-none { flex: none; }
+
+.items-start { align-items: flex-start; }
+.items-center { align-items: center; }
+.items-end { align-items: flex-end; }
+.items-stretch { align-items: stretch; }
+
+.justify-start { justify-content: flex-start; }
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+
+// --- Grid (2D) ---
+.grid { display: grid; }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+// Auto-fill responsive cards: --grid-min sets the minimum track width.
+.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--grid-min, 16rem), 1fr));
+}
+
+// --- Sizing helpers ---
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.block { display: block; }
+.hidden { display: none; }

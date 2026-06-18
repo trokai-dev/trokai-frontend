@@ -1,0 +1,47 @@
+@import "../../styles/variables.scss";
+
+.header-alert {
+  min-height: 40px;
+  background-color: $color-primary;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+
+  span {
+    color: #ffffff;
+    font-size: 1.4rem !important;
+  }
+}
+
+.mat-drawer-container {
+  background-color: inherit;
+}
+
+@media screen and (max-width: 768px) {
+  .header-alert {
+    span {
+      font-size: 1.2rem !important;
+      max-width: 80%;
+    }
+  }
+}
+
+.app-stability {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10000;
+
+  &.stable {
+    background-color: green;
+  }
+
+  &.unstable {
+    background-color: red;
+  }
+
+
+}

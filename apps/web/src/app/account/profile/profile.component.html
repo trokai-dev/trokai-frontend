@@ -1,0 +1,17 @@
+<div class="col-12 col-md-7">
+  <h3 class="color-gray-dark">Dados pessoais</h3>
+
+  @if (user) {
+    <tk-profile-form
+      class="mt-5 d-block"
+      [user]="user"
+      [completingInformation]="completingInformation"
+      [emailRegistered]="emailRegistered"
+      [phoneRegistered]="phoneRegistered"
+      (submitted)="save($event)"
+      (emailBlur)="checkMail($event)"
+      (phoneBlur)="checkPhone($event)"
+      (verifyPhone)="verifyPhone()"
+    />
+  }
+</div>

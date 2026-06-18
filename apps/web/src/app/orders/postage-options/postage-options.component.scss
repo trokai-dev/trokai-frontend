@@ -1,0 +1,75 @@
+@import "../../../styles/variables.scss";
+
+.shipping-logo {
+  max-height: 4rem;
+}
+
+::ng-deep .custom-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+
+  mat-radio-button {
+    min-height: 100px;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    border-radius: 0.4rem;
+    border: $border-trokai;
+
+    padding-left: 2rem;
+
+    @media screen and (max-width: 768px) {
+      padding-left: 1rem;
+    }
+
+    .mdc-form-field {
+      flex: 1;
+      cursor: pointer;
+
+      .mdc-label {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        .custom-radio-button-content {
+          padding: 1.6rem;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          flex: 1;
+
+          .custom-radio-button-title {
+            font-size: 1.6rem !important;
+            font-weight: 500;
+            color: $color-gray-dark;
+          }
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .checkout-title {
+  font-size: 2.4rem !important;
+  font-weight: 600 !important;
+  margin: 0px;
+}
+
+::ng-deep .checkout-body {
+  margin-top: 4rem;
+}
+
+::ng-deep .checkout-fixed-footer {
+  position: fixed;
+  bottom: 0;
+  background: white;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  button {
+    min-width: 180px !important;
+  }
+}

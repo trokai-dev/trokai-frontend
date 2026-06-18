@@ -1,0 +1,19 @@
+@import "../../styles/variables.scss";
+
+#chat-wrapper {
+  height: 75dvh;
+  border: 1px solid $color-gray-light-2;
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+
+.max-user-address {
+  display: block;
+  max-width: 18rem;
+}
+
+@media screen and (max-width: 768px) {
+  #chat-wrapper {
+    height: 65dvh;
+  }
+}

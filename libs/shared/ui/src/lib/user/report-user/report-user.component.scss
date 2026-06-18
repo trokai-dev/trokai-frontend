@@ -1,0 +1,48 @@
+.report-user {
+  display: flex;
+  flex-direction: column;
+}
+
+.report-user__close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.report-user__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-16);
+  margin-bottom: var(--space-24);
+}
+
+.report-user__types {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--space-24);
+}
+
+.report-user__field {
+  display: block;
+}
+
+.report-user__submit {
+  width: 100%;
+  margin-top: var(--space-16);
+}
+
+.report-user__feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-16);
+  padding: var(--space-40) 0;
+  text-align: center;
+}
+
+.report-user__done-icon {
+  font-size: 4.5rem;
+  width: 4.5rem;
+  height: 4.5rem;
+}

@@ -1,0 +1,16 @@
+.dialog-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.icon-large {
+  font-size: 3.2rem;
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.dialog-footer {
+  display: flex;
+  margin-top: var(--space-8);
+}

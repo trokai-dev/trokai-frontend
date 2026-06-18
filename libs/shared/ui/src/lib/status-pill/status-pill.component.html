@@ -1,0 +1,9 @@
+<span
+  class="pill"
+  [class]="'pill--' + variant"
+  [class.pill--overlay]="position === 'overlay'"
+  [class.pill--outline]="outline"
+>
+  <ng-content select="[icon]"></ng-content>
+  <span class="pill__label">{{ label }}</span>
+</span>

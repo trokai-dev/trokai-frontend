@@ -1,0 +1,47 @@
+<div class="rating-form">
+  <div class="flex justify-end">
+    <button mat-icon-button (click)="closed.emit()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="flex flex-col items-center gap-16 body">
+    <tk-user-avatar [user]="otherUser" size="large"></tk-user-avatar>
+
+    <h2 class="title">Como foi a {{ action }}?</h2>
+
+    <span class="label-body-2 subtitle">
+      Avalie a experiência de {{ actionVerb }} {{ firstName }}
+    </span>
+
+    <div class="flex stars">
+      @for (i of positions; track i) {
+        <button mat-icon-button class="star-button" (click)="rate(i)">
+          <mat-icon class="star" [class.empty]="stars < i">{{
+            stars >= i ? 'star' : 'star_border'
+          }}</mat-icon>
+        </button>
+      }
+    </div>
+
+    <mat-form-field class="comment w-full" appearance="outline">
+      <mat-label>Comentário (opcional)</mat-label>
+      <textarea
+        matInput
+        [rows]="5"
+        [maxlength]="500"
+        [(ngModel)]="comment"
+      ></textarea>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      class="submit w-full"
+      [disabled]="!stars || loading"
+      (click)="send()"
+    >
+      Enviar avaliação
+    </button>
+  </div>
+</div>

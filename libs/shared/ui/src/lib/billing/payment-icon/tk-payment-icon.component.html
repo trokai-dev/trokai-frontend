@@ -1,0 +1,10 @@
+@if (imgName) {
+  <div class="payment-icon">
+    <img src="assets/payments/{{ imgName }}" alt="" />
+  </div>
+}
+@if (!imgName && showDefaultCardIcon) {
+  <div class="custom-radio-button-icon">
+    <mat-icon>credit_card</mat-icon>
+  </div>
+}

@@ -1,0 +1,24 @@
+@import "../../styles/variables.scss";
+@import "../../styles/margins.scss";
+
+.trokai-footer {
+  min-height: 65px;
+  display: flex;
+  align-items: center;
+  // margin-top: 8rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+
+  ul {
+    padding-left: 0;
+    li {
+      list-style: none;
+      margin-bottom: 1rem;
+      a {
+        @extend .label-caption-1;
+        @extend .mt-4;
+        display: block;
+      }
+    }
+  }
+}

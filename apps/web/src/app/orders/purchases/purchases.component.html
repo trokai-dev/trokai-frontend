@@ -1,0 +1,42 @@
+<h3 class="color-gray-dark">Minhas compras</h3>
+
+<div class="mt-5">
+  @for (p of purchases; track p) {
+    <div class="row border-bottom mt-32 pb-5">
+      <div class="col">
+        @for (c of p.clothes; track c) {
+          <div>
+            <app-cart-item [product]="c" [showRemove]="false"></app-cart-item>
+          </div>
+        }
+      </div>
+      <div class="col-12 col-md-4 d-flex flex-column">
+        <div class="d-flex text-end flex-column">
+          <span class="label-body-2 color-gray-dark">
+            {{ p.createdAt | date : "dd/MM/yy" }}
+          </span>
+          <span class="label-body-2 color-gray-dark">
+            {{ p.buyerCost | cost | currency : "BRL" : "symbol" : "1.2" }}
+          </span>
+          <h6 class="color-gray-dark">{{ p.status }}</h6>
+        </div>
+        <button
+          class="mt-16"
+          mat-stroked-button
+          color="primary"
+          routerLink="{{ p._id }}"
+          >
+          Ver compra
+        </button>
+        <span class="order-id">cód. {{ p.customId }}</span>
+      </div>
+    </div>
+  }
+
+  @if (!purchases || !purchases.length) {
+    <div class="empty-page full">
+      <ion-icon name="sad-outline"></ion-icon>
+      <span class="label-body-2 d-block"> Nenhuma compra</span>
+    </div>
+  }
+</div>

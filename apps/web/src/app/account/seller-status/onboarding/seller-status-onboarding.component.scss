@@ -1,0 +1,140 @@
+@import "../../../../styles/variables.scss";
+
+// ─── Status Card ────────────────────────────────────────────────────────────
+
+.status-card {
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1.5px solid $color-gray-light-2;
+  background: #ffffff;
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+
+  &__icon {
+    font-size: 3rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &--incomplete &__icon       { color: $color-gray-light-1; }
+  &--pending-review &__icon   { color: $color-gray-light-1; }
+  &--profile-approved &__icon { color: $color-success; }
+  &--adjusts-required &__icon { color: #c97a10; }
+}
+
+// ─── Clothes Progress ────────────────────────────────────────────────────────
+
+.clothes-progress {
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1.5px solid $color-gray-light-2;
+}
+
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.progress-bar-wrapper {
+  flex: 1;
+  height: 8px;
+  background: $color-gray-light-2;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: $color-primary;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+  min-width: 4px;
+}
+
+.progress-label {
+  font-weight: 600;
+  min-width: 4rem;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+// ─── Clothes Alerts ──────────────────────────────────────────────────────────
+
+.clothes-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.clothes-alert {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.2rem 1.6rem;
+  border-radius: 10px;
+  text-decoration: none;
+
+  &__icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  &--warning {
+    background: #fef3e2;
+    color: #9a5c00;
+    border: 1px solid #f5c97a;
+  }
+
+  &--error {
+    background: #fde8e8;
+    color: $color-error;
+    border: 1px solid #f5a3a3;
+  }
+}
+
+// ─── Seller Guide Card ───────────────────────────────────────────────────────
+
+.seller-guide-card {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  padding: 1.6rem 2rem;
+  border-radius: 12px;
+  border: 1.5px solid $color-gray-light-2;
+  background: #ffffff;
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    border-color: $color-primary;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  &__icon {
+    font-size: 2.4rem;
+    color: $color-primary;
+    flex-shrink: 0;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__arrow {
+    font-size: 2rem;
+    color: $color-gray-light-1;
+    flex-shrink: 0;
+  }
+}

@@ -1,0 +1,154 @@
+<ion-header>
+  <ion-toolbar mode="ios" class="clear">
+    <ion-buttons slot="start">
+      <app-back-button defaultHref="/main/profile"></app-back-button>
+    </ion-buttons>
+    <ion-title>Minhas sacolas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="p-24">
+    @if (baskets && !baskets.length) {
+    <div class="empty-page full">
+      <ion-icon name="sad-outline"></ion-icon>
+
+      <ion-label> Nenhuma sacolinha</ion-label>
+
+      <ion-button
+        routerLink="/main/search"
+        color="primary"
+        class="action-button mt-16"
+        style="width: 50%"
+      >
+        Ver produtos
+      </ion-button>
+    </div>
+    }
+
+    @if (baskets && baskets.length) {
+    <div class="mt-5 frete-unico">
+      <h4 class="color-primary">Frete único!</h4>
+      <span class="label-body-2 color-gray-default mt-2">
+        Compre mais produtos do mesmo brechó e pague apenas um frete.
+      </span>
+    </div>
+    }
+
+    @for (basket of baskets; track $index) {
+    <div class="row mt-24 border-bottom pb-24">
+      <div class="col">
+        <!-- Perfil -->
+        @if (basket.owner) {
+        <div
+          (click)="openWardrobe(basket.owner)"
+          class="d-flex pb-8 ion-activatable ripple-parent align-items-center"
+        >
+          <tk-user-avatar [user]="basket.owner" class="mr-16" />
+
+          <div class="d-flex justify-content-between">
+            <div class="d-flex flex-column justify-content-center">
+              <h6
+                class="color-gray-dark max-user-name ion-text-capitalize d-flex align-items-center"
+              >
+                {{basket.owner.storeName ?? basket.owner.name}}
+              </h6>
+
+              <div class="d-flex mt-4 align-items-start">
+                <div class="d-flex flex-column">
+                  <label
+                    class="label-caption-1 color-gray-default max-user-address"
+                  >
+                    {{ basket.owner.address.city }}, {{
+                    basket.owner.address.state }}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ion-ripple-effect></ion-ripple-effect>
+        </div>
+        }
+
+        @for (p of basket.products; track p._id) {
+        <div
+          (click)="open(p)"
+          class="cart-item mt-16 d-flex w-100 justify-content-between"
+        >
+          <div class="d-flex align-items-center">
+            <ion-thumbnail class="product-item">
+              <ion-img
+                src="{{ p.images?.[0]?.sm }}"
+              >
+              </ion-img>
+            </ion-thumbnail>
+
+            <div class="cart-item-text">
+              <span class="label-body-2 color-gray-dark ion-text-capitalize"
+                ><b>{{ p.title }}</b>
+              </span>
+
+              <span class="label-body-2 mt-2">
+                {{ p.cost | cost | currency : "BRL" : "symbol" : "1.2" }}
+              </span>
+            </div>
+          </div>
+          @if (!basket.reserved) {
+          <div
+            class="cart-action remove ml-8"
+            (click)="removeProduct(p)"
+          >
+            <ion-icon name="close-outline"></ion-icon>
+          </div>
+          }
+        </div>
+        }
+      </div>
+
+      <div
+        class="col-12 col-md-3 mt-24 mt-md-0 d-flex flex-column justify-content-end"
+      >
+        <div class="d-flex justify-content-between">
+          <span class="label-body-1 color-gray-dark"> <b>Total</b></span>
+          <span class="label-body-1 color-gray-dark">
+            <b>
+              {{ basket.total() | cost | currency : "BRL" : "symbol" : "1.2"
+              }}</b
+            >
+          </span>
+        </div>
+
+        @if (!basket.reserved) {
+        <div>
+          <ion-button
+            fill="outline"
+            class="mt-24 w-100 action-button"
+            color="primary"
+            (click)="goToWardrobe(basket.owner._id)"
+          >
+            <b>Adicionar mais produtos</b>
+          </ion-button>
+          <ion-button
+            class="mt-8 w-100 action-button"
+            color="primary"
+            (click)="checkout(basket.owner._id)"
+          >
+            <b>Ir para pagamento</b>
+          </ion-button>
+        </div>
+        }
+
+        @if (basket.reserved) {
+        <div class="mt-16">
+          <app-reserve-time
+            [ownerId]="basket.owner._id"
+            (reserveOpen)="checkout(basket.owner._id)"
+            text="Continuar compra"
+          ></app-reserve-time>
+        </div>
+        }
+      </div>
+    </div>
+    }
+  </ion-grid>
+</ion-content>

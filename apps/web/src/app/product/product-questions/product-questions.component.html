@@ -1,0 +1,37 @@
+@if (product) {
+  <div>
+    <div class="border-bottom pb-2 d-flex justify-content-between">
+      <h4 class="color-gray-dark mb-0">Perguntas</h4>
+    </div>
+    @if (questions?.length > 0) {
+      <div class="mt-4">
+        @for (q of questions; track q) {
+          <div class="d-flex align-items-center justify-content-between py-3" matRipple
+            routerLink="question/{{q._id}}">
+            <div class="d-flex flex-column justify-content-between">
+              <h4 class="color-gray-dark">{{q.question}}</h4>
+              <span class="label-body-2 color-gray-default">{{q.answer?? 'Aguardando resposta'}}</span>
+            </div>
+            <mat-icon color="primary">
+              chevron_right
+            </mat-icon>
+          </div>
+        }
+      </div>
+    }
+    @if (!questions || questions?.length === 0) {
+      <div class="mt-4">
+        <div class="d-flex align-items-center justify-content-between ">
+          <div class="d-flex flex-column justify-content-between">
+            <span class="label-body-2 color-gray-default mt-3">Nenhuma pergunta</span>
+          </div>
+        </div>
+      </div>
+    }
+    @if (!ownerVision) {
+      <div class="mt-5">
+        <button mat-stroked-button class="w-100" color="primary" routerLink="question">Fazer uma pergunta</button>
+      </div>
+    }
+  </div>
+}

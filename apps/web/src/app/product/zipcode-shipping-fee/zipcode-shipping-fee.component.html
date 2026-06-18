@@ -1,0 +1,60 @@
+<div class="d-flex">
+  @if(!typeZip && !zipLoading && zipCode){
+  <span
+    class="d-block shipping-label label-body-2"
+    (click)="clickShippingLabel($event)"
+  >
+    Em até {{ shippingInfo.maxDeliveryTime }} dias após o envio por
+    <span>
+      @if (shippingInfo.fullShippingCost && shippingInfo.fullShippingCost >
+      shippingInfo.shippingCost) {
+      <span class="label-body-2 color-gray-light-1 line-through">
+        {{
+          shippingInfo.fullShippingCost
+            | cost
+            | currency : "BRL" : "symbol" : "1.2"
+        }}
+      </span>
+      }
+
+      <b>
+        {{
+          shippingInfo.shippingCost
+            | cost
+            | currency : "BRL" : "symbol" : "1.0-2"
+        }}
+      </b></span
+    >
+    (CEP {{ zipCode | mask : "00000-000" }})
+  </span>
+  } @if (!typeZip && !zipLoading && !zipCode){
+  <span
+    class="d-block shipping-label label-body-2 color-primary"
+    (click)="clickShippingLabel($event)"
+  >
+    <b>Calcular frete de entrega</b>
+  </span>
+  }
+  <mat-form-field
+    appearance="outline"
+    [ngClass]="{ 'd-none': !typeZip, 'd-block': typeZip }"
+  >
+    <input
+      matInput
+      #zipInput
+      [(ngModel)]="zipCode"
+      (blur)="zipBlur()"
+      (input)="zipChange()"
+      type="text"
+      mask="00000-000"
+      placeholder="Digite o CEP"
+    />
+  </mat-form-field>
+
+  @if (zipLoading){
+  <div class="d-flex align-items-center">
+    <mat-spinner color="primary" class="spinner-nano"></mat-spinner>
+    <span class="label-caption ms-4">Buscando valor do frete</span>
+  </div>
+  }
+</div>

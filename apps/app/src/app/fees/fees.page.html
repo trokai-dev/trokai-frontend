@@ -1,0 +1,200 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <app-back-button defaultHref="/main/home"></app-back-button>
+    <ion-title>Taxas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  @if (params) {
+  <ion-grid class="p-24">
+    <!-- trokas -->
+    <div>
+      <div class="border-bottom pb-8">
+        <h6 class="color-gray-dark">Das trokas</h6>
+      </div>
+
+      <ion-label class="mt-8 d-block label-body-2"
+        >As trokas são gratuitas.</ion-label
+      >
+    </div>
+
+    <!-- vendas -->
+    <div class="mt-32">
+      <div class="border-bottom pb-8">
+        <h6 class="color-gray-dark">Das vendas</h6>
+      </div>
+
+      <ion-label class="mt-12 d-block label-body-2"
+        >1) É cobrada do vendedor uma comissão de
+        <b>{{params.sellPercentageFee * 100}}%</b> sobre o valor da venda, mais
+        uma taxa fixa de serviço do Trokaí, que é definida de acordo com a
+        tabela abaixo:
+      </ion-label>
+
+      <div class="fees-table mt-16">
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              Valor da venda</ion-label
+            >
+          </ion-col>
+
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">Taxa</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              Até R$ 15,00</ion-label
+            >
+          </ion-col>
+
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              {{ params.sellFixedFee[0] |cost| currency: "BRL" : true :
+              '1.2-2'}}
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              R$ 15,01 a R$ 50,00</ion-label
+            >
+          </ion-col>
+
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              {{ params.sellFixedFee[1] |cost| currency: "BRL" : true :
+              '1.2-2'}}
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              R$ 50,01 a R$ 70,00</ion-label
+            >
+          </ion-col>
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              {{ params.sellFixedFee[2] |cost| currency: "BRL" : true :
+              '1.2-2'}}
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              R$ 70,01 a R$ 100,00</ion-label
+            >
+          </ion-col>
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              {{ params.sellFixedFee[3] |cost| currency: "BRL" : true :
+              '1.2-2'}}
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              R$ 100,01 a R$ 150,00</ion-label
+            >
+          </ion-col>
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              {{ params.sellFixedFee[4] |cost| currency: "BRL" : true :
+              '1.2-2'}}
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              R$ 150,01 a R$ 300,00</ion-label
+            >
+          </ion-col>
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              {{ params.sellFixedFee[5] |cost| currency: "BRL" : true :
+              '1.2-2'}}
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              R$ 300,01 a R$ 500,00</ion-label
+            >
+          </ion-col>
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              {{ params.sellFixedFee[6] |cost| currency: "BRL" : true :
+              '1.2-2'}}</ion-label
+            >
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              Acima de R$ 500,00</ion-label
+            >
+          </ion-col>
+          <ion-col class="ion-text-center">
+            <ion-label class="label-body-2 color-gray-dark">
+              {{ params.sellFixedFee[7] |cost| currency: "BRL" : true :
+              '1.2-2'}}
+            </ion-label>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <ion-label class="mt-16 d-block label-body-2"
+        >2) Caso o vendedor opte pelo envio seguro, será cobrada uma taxa
+        proporcional aos valores dos produtos vendidos. Esse valor é exibido no
+        cadastro do produto.
+      </ion-label>
+
+      <ion-label class="mt-16 d-block label-body-2"
+        >3) Para efetuar um saque do cofrinho, será cobrada uma taxa de
+        <b>
+          {{ params.gatewayWithdrawFee ?? 0 |cost| currency: "BRL" : true :
+          '1.2-2'}} </b
+        >. Essa taxa é cobrada pelo parceiro de pagamentos, não pelo Trokaí. Seu
+        valor é fixo (não depende do valor do saque).
+      </ion-label>
+
+      <ion-label class="mt-16 d-block label-body-2"
+        >4) As taxas do vendedor são exibidas de forma clara no aplicativo e/ou
+        site nas telas de cadastro e edição de um produto.
+      </ion-label>
+    </div>
+
+    <!-- vendas -->
+    <div class="mt-32">
+      <div class="border-bottom pb-8">
+        <h6 class="color-gray-dark">Das compras</h6>
+      </div>
+
+      <ion-label class="mt-8 d-block label-body-2"
+        >1) O comprador paga uma taxa de
+        <b>{{params.buyPercentageFee * 100}}%</b> sobre o valor do carrinho. Os
+        valores mínimos e máximos dessa taxa são {{ params.minBuyFee |cost|
+        currency: "BRL" : true : '1.2-2'}} e {{ params.maxBuyFee |cost|
+        currency: "BRL" : true : '1.2-2'}}. Essa taxa é referente a utilização
+        dos serviços do Trokaí e ao serviço de segurança da compra que garante
+        que o valor pago será devolvido ao comprador caso o vendedor não envie o
+        produto.</ion-label
+      >
+
+      <ion-label class="mt-16 d-block label-body-2">
+        2) As taxas do comprador são exibidas de forma clara na tela de checkout
+        (última etapa do fluxo de compra) do Aplicativo e/ou Site.
+      </ion-label>
+    </div>
+  </ion-grid>
+  }
+</ion-content>

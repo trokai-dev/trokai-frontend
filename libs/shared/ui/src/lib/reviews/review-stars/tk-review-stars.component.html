@@ -1,0 +1,22 @@
+<div
+  class="reviews-container"
+  [class.clickable]="clickable"
+  matTooltip="Ver avaliações"
+  [matTooltipDisabled]="!clickable"
+  role="button"
+  [attr.tabindex]="clickable ? 0 : null"
+  (click)="onClick($event)"
+  (keyup.enter)="onClick($any($event))"
+>
+  <div class="review-stars">
+    @for (i of positions; track i) {
+      <mat-icon class="star" [class.empty]="(stars || 0) < i - 0.5">{{
+        iconFor(i)
+      }}</mat-icon>
+    }
+  </div>
+
+  @if (showAmount && amount) {
+    <span class="amount label-caption-1 color-gray-default">{{ amount }}</span>
+  }
+</div>

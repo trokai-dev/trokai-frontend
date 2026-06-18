@@ -1,0 +1,37 @@
+<div class="d-flex pt-16">
+  <div class="flex-1"></div>
+  <div class="align-items-center d-flex flex-1 justify-content-center">
+    <span class="label-body-1"><b>Dicas de fotos</b></span>
+  </div>
+  <div class="flex-1 d-flex justify-content-end">
+    <ion-button (click)="close()" class="pr-16" fill="clear">
+      <ion-icon
+        slot="icon-only"
+        name="close-outline"
+        class="color-gray-default"
+      ></ion-icon>
+    </ion-button>
+  </div>
+</div>
+
+<ion-content>
+  <swiper-container #swiper [pagination]="true" class="tips-swiper">
+    @for (tip of tips; track $index) {
+    <swiper-slide>
+      <div class="tip-slide">
+        <h5 class="color-gray-dark ion-text-center">{{ tip.label }}</h5>
+        <div class="tip-image-wrapper">
+          <img [src]="tip.img" [alt]="tip.label" class="tip-image" />
+        </div>
+        @if (tip.description) {
+        <p
+          class="label-body-2 color-gray-default mt-8 ion-text-start"
+        >
+          {{ tip.description }}
+        </p>
+        }
+      </div>
+    </swiper-slide>
+    }
+  </swiper-container>
+</ion-content>

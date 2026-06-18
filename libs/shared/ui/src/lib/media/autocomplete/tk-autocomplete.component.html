@@ -1,0 +1,36 @@
+<form [formGroup]="parentForm">
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>{{ name }}</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControlName]="controlName"
+      [matAutocomplete]="auto"
+      (blur)="verify()"
+      [errorStateMatcher]="errorStateMatcher"
+    />
+    @if (showClear()) {
+      <mat-icon
+        matSuffix
+        type="button"
+        mat-icon-button
+        (click)="clear()"
+        matTooltip="Limpar"
+      >
+        close
+      </mat-icon>
+    }
+    <mat-autocomplete
+      autoActiveFirstOption
+      #auto="matAutocomplete"
+      [displayWith]="displayFn"
+      (closed)="change()"
+    >
+      @for (option of filteredOptions | async; track option) {
+        <mat-option [value]="option" class="label-body-2 color-gray-default">
+          {{ option.value | titlecase }}
+        </mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

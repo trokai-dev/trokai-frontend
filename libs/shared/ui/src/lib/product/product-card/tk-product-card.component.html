@@ -1,0 +1,97 @@
+<div
+  class="product-list-item"
+  [ngClass]="{
+    clean: clean,
+    sold: sold,
+    adjusts: myProduct && waitingAdjustment,
+    expired: myProduct && expired,
+    waiting: myProduct && waitingPublication,
+    reserved: reserved || negotiatingSell,
+    paused: myProduct && paused,
+  }"
+>
+  @if (statusText) {
+    <tk-status-pill
+      [variant]="statusVariant"
+      [label]="statusText"
+      position="overlay"
+    />
+  }
+
+  @if (canFavorite && !myProduct && product._id) {
+    <tk-like-button
+      [productId]="product._id"
+      class="small right"
+      (onFinishLiking)="onFinishLiking.emit()"
+    />
+  }
+
+  <a
+    [routerLink]="useLink ? productLink : null"
+    (click)="onClick()"
+    class="card-link"
+  >
+    <div class="image-wrapper {{ extraImgClass }}">
+      @if (thumbUrl) {
+        <img
+          class="{{ extraImgClass }}"
+          [alt]="product.title"
+          hideLoading
+          fill
+          [ngSrc]="thumbUrl"
+          [priority]="priority"
+        />
+      }
+    </div>
+
+    <div class="div-card text-dots d-flex flex-column">
+      <div class="text-start d-grid">
+        <span
+          style="max-width: 90%"
+          class="label-body-2 d-block color-gray-default text-dots text-capitalize"
+        >
+          {{ product.title }}
+        </span>
+      </div>
+
+      <div class="d-flex align-items-center justify-content-between mt-2">
+        @if (product.sell) {
+          <div
+            [ngStyle]="{
+              visibility:
+                product.cost !== null && product.cost > 0
+                  ? 'visible'
+                  : 'hidden',
+            }"
+          >
+            <span class="label-body-1 color-primary">
+              <b>{{
+                product.cost | cost | currency: 'BRL' : 'symbol' : '1.0-2'
+              }}</b>
+            </span>
+            @if (product.firstCost) {
+              <span class="color-gray-light-1 line-through">
+                {{
+                  product.firstCost
+                    | cost
+                    | currency: 'BRL' : 'symbol' : '1.0-2'
+                }}
+              </span>
+            }
+          </div>
+        }
+
+        <div
+          class="d-flex align-items-center text-dots justify-content-between"
+          [ngStyle]="{
+            visibility: product.size !== null ? 'visible' : 'hidden',
+          }"
+        >
+          <span class="size">
+            {{ sizeString }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

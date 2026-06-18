@@ -1,0 +1,180 @@
+<div class="col-12 col-md-7">
+  <div class="d-flex align-items-center gap-3">
+    <h3 class="color-gray-dark mb-0">Status da loja</h3>
+    @if (user) {
+      <tk-seller-status-badge [user]="user" [isLoggedUser]="true" />
+    }
+  </div>
+
+  @if (user) {
+    <!-- Macro sellerStatus info -->
+
+    @if (user.sellerStatus !== SellerStatus.APPROVED) {
+      <div
+        class="info-notice mt-3"
+        [ngClass]="{
+          'info-notice--warning': user.sellerStatus === SellerStatus.SUSPENDED,
+          'info-notice--danger': user.sellerStatus === SellerStatus.REJECTED,
+        }"
+      >
+        <ion-icon
+          [name]="
+            user.sellerStatus === SellerStatus.REJECTED
+              ? 'close-circle-outline'
+              : user.sellerStatus === SellerStatus.SUSPENDED
+                ? 'warning-outline'
+                : 'information-circle-outline'
+          "
+          class="info-notice__icon"
+        ></ion-icon>
+        <p class="label-body-2 color-gray-default mb-0">
+          @if (user.sellerStatus === SellerStatus.ONBOARDING) {
+            Sua loja ficará visível ao público somente após a
+            <strong>aprovação da conta</strong> e das
+            <strong>{{ minClothesToSell }} primeiras peças</strong>.
+          } @else if (user.sellerStatus === SellerStatus.REJECTED) {
+            Sua conta foi <strong>reprovada</strong>. Entre em contato com nosso
+            suporte para mais informações.
+          } @else if (user.sellerStatus === SellerStatus.SUSPENDED) {
+            Sua loja está <strong>suspensa</strong>. Entre em contato com nosso
+            suporte para regularizar sua situação.
+          }
+        </p>
+      </div>
+    }
+
+    <!-- ONBOARDING: detailed onboarding flow -->
+    @if (user.sellerStatus === SellerStatus.ONBOARDING) {
+      <app-seller-status-onboarding [user]="user" />
+    }
+
+    <!-- only for APPROVED -->
+    @if (user.sellerStatus === SellerStatus.APPROVED) {
+      <!-- Reviews -->
+      <div class="section mt-4">
+        <h6 class="color-gray-dark mb-1">Saúde da conta</h6>
+
+        <app-seller-health />
+      </div>
+
+      <!-- Reviews -->
+      <div class="section mt-4">
+        <h6 class="color-gray-dark mb-1">Avaliações</h6>
+        <p class="label-caption-1 color-gray-default mb-3">
+          Avaliação média recebida pelos compradores.
+        </p>
+
+        <tk-review-stars
+          [stars]="user?.reviewsAverage ?? 0"
+          [amount]="user?.reviewsAmount ?? null"
+          [showAmount]="true"
+          [clickable]="!!user?.reviewsAmount"
+          (clicked)="openReviews(user!)"
+        />
+      </div>
+
+      <!-- Sales summary -->
+      <div class="section mt-4">
+        <h6 class="color-gray-dark mb-4">Resumo de vendas</h6>
+
+        <div class="d-flex justify-content-between align-items-center py-3">
+          <span class="label-body-2">Vendas concluidas</span>
+          <span class="label-body-2">{{ user.salesCount ?? 0 }}</span>
+        </div>
+        <mat-divider></mat-divider>
+
+        <div class="d-flex justify-content-between align-items-center py-3">
+          <span class="label-body-2">Vendas em andamento</span>
+          <span class="label-body-2">TODO</span>
+        </div>
+        <mat-divider></mat-divider>
+
+        <div class="d-flex justify-content-between align-items-center py-3">
+          <span class="label-body-2">Vendas canceladas por você</span>
+          <span class="label-body-2">TODO</span>
+        </div>
+        <mat-divider></mat-divider>
+
+        <div class="d-flex justify-content-between align-items-center py-3">
+          <span class="label-body-2">Devoluções</span>
+          <span class="label-body-2">TODO</span>
+        </div>
+      </div>
+
+      <!-- Visibility summary -->
+      <div class="section mt-4">
+        <h6 class="color-gray-dark mb-1">Visibilidade da loja</h6>
+
+        <div class="visibility-options mt-4">
+          <button
+            type="button"
+            class="visibility-option"
+            [class.visibility-option--active]="
+              user.storeVisibility === StoreVisibility.OPEN
+            "
+            [disabled]="savingVisibility"
+            (click)="setVisibility(StoreVisibility.OPEN)"
+          >
+            <ion-icon
+              name="play-outline"
+              class="visibility-option__icon"
+            ></ion-icon>
+            <div class="visibility-option__text">
+              <h6 class="color-gray-dark mb-1">Publicado</h6>
+              <p class="label-caption-1 color-gray-default mb-0">
+                Seus anúncios aparecem para todos no Trokaí.
+              </p>
+            </div>
+            <ion-icon
+              name="checkmark-circle"
+              class="visibility-option__check"
+            ></ion-icon>
+          </button>
+          <button
+            type="button"
+            class="visibility-option"
+            [class.visibility-option--active]="
+              user.storeVisibility === StoreVisibility.PAUSED
+            "
+            [disabled]="savingVisibility"
+            (click)="setVisibility(StoreVisibility.PAUSED)"
+          >
+            <ion-icon
+              name="pause-circle-outline"
+              class="visibility-option__icon"
+            ></ion-icon>
+            <div class="visibility-option__text">
+              <h6 class="color-gray-dark mb-1">Pausado</h6>
+              <p class="label-caption-1 color-gray-default mb-0">
+                Seus anúncios não aparecem no Trokaí.
+              </p>
+            </div>
+            <ion-icon
+              name="checkmark-circle"
+              class="visibility-option__check"
+            ></ion-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats summary -->
+      <div class="section mt-4">
+        <h6 class="color-gray-dark mb-1">Resumo de produtos</h6>
+
+        <div class="mt-4">
+          @for (item of allStatuses; track item.status; let last = $last) {
+            <div class="d-flex justify-content-between align-items-center py-3">
+              <span class="label-body-2">{{ item.label }}</span>
+              <span class="label-body-2">{{
+                getStatusCount(item.status)
+              }}</span>
+            </div>
+            @if (!last) {
+              <mat-divider></mat-divider>
+            }
+          }
+        </div>
+      </div>
+    }
+  }
+</div>

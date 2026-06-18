@@ -1,0 +1,107 @@
+<ion-header>
+  <ion-toolbar>
+    @if (user) {
+    <div
+      routerLink="options"
+      class="d-flex mx-24 my-8 align-items-center"
+    >
+      <tk-user-avatar [user]="user" class="mr-16" />
+
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column">
+          <h6 class="color-gray-dark max-user-name d-flex align-items-center">
+            {{user.storeName ?? user.name}}
+          </h6>
+        </div>
+      </div>
+    </div>
+    }
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="p-24">
+    <!-- Armario -->
+    <div routerLink="inventory" class="menu-item ion-activatable ripple-parent">
+      <div>
+        <ion-icon name="shirt-outline"></ion-icon>
+        <label class="label-body-1 ml-16">Armário</label>
+      </div>
+      <ion-icon name="chevron-forward"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <!-- Notificacoes -->
+    <div
+      routerLink="notifications"
+      class="menu-item ion-activatable ripple-parent"
+    >
+      <div>
+        <ion-icon name="notifications-outline"></ion-icon>
+        <label class="label-body-1 ml-16">Notificações</label>
+        @if (notificationCount + messageCount > 0) {
+        <ion-badge
+          color="tertiary"
+          class="ml-8"
+          mode="ios"
+        >
+          {{ notificationCount + messageCount }}
+        </ion-badge>
+        }
+      </div>
+
+      <ion-icon name="chevron-forward"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <!-- Favoritos -->
+    <div routerLink="favorites" class="menu-item ion-activatable ripple-parent">
+      <div>
+        <ion-icon name="heart-outline"></ion-icon>
+        <label class="label-body-1 ml-16">Favoritos</label>
+      </div>
+      <ion-icon name="chevron-forward"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <!-- Minha conta -->
+    <div routerLink="options" class="menu-item ion-activatable ripple-parent">
+      <div>
+        <ion-icon name="person-outline"></ion-icon>
+        <label class="label-body-1 ml-16">Minha conta</label>
+      </div>
+      <ion-icon name="chevron-forward"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <!-- Minha conta -->
+    <div routerLink="help" class="menu-item ion-activatable ripple-parent">
+      <div>
+        <ion-icon name="help-outline"></ion-icon>
+        <label class="label-body-1 ml-16">Ajuda</label>
+      </div>
+      <ion-icon name="chevron-forward"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <!-- Convidar amigos -->
+    <div (click)="share()" class="menu-item ion-activatable ripple-parent">
+      <div>
+        <ion-icon name="share-social-outline"></ion-icon>
+        <label class="label-body-1 ml-16">Convidar amigos</label>
+      </div>
+      <ion-icon name="chevron-forward"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <!-- Sair -->
+    <div (click)="logout()" class="menu-item ion-activatable ripple-parent">
+      <div>
+        <ion-icon name="exit-outline"></ion-icon>
+        <label class="label-body-1 ml-16">Sair</label>
+      </div>
+      <ion-icon name="chevron-forward"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </ion-grid>
+</ion-content>
