@@ -2,14 +2,14 @@
   <h3 class="color-gray-dark">Cofrinho</h3>
 
   @if (isLoading) {
-    <mat-spinner color="primary" class="spinner-small mt-4"></mat-spinner>
+    <mat-spinner color="primary" class="spinner-small mt-24"></mat-spinner>
   }
   @if (balance) {
     <div class="mt-32">
       <div class="row">
         <div class="col">
-          <h6 class="color-gray-dark d-block">Saldo disponível</h6>
-          <span class="label-body-2 mt-3 color-primary d-block">
+          <h6 class="color-gray-dark block">Saldo disponível</h6>
+          <span class="label-body-2 mt-16 color-primary block">
             <b>
               {{
                 balance.saldoDisponivel
@@ -21,8 +21,8 @@
         </div>
 
         <div class="col">
-          <h6 class="color-gray-dark d-block">Em adamento</h6>
-          <span class="label-body-2 mt-3 color-gray-default d-block">
+          <h6 class="color-gray-dark block">Em adamento</h6>
+          <span class="label-body-2 mt-16 color-gray-default block">
             {{
               balance.vendasEmAndamento
                 | cost
@@ -32,9 +32,9 @@
         </div>
 
         <div class="col">
-          <h6 class="color-gray-dark d-block">Total vendido</h6>
+          <h6 class="color-gray-dark block">Total vendido</h6>
 
-          <span class="label-body-2 mt-3 color-gray-default d-block">
+          <span class="label-body-2 mt-16 color-gray-default block">
             {{
               balance.totalJaVendido | cost | currency: 'BRL' : true : '1.2-2'
             }}
@@ -43,7 +43,7 @@
       </div>
 
       <button
-        class="my-5"
+        class="my-48"
         mat-raised-button
         color="primary"
         (click)="withdraw()"
@@ -53,14 +53,14 @@
     </div>
 
     @if (ordersAndTransfers && ordersAndTransfers.length) {
-      <h6 class="color-gray-dark d-block mt-32">Movimentações</h6>
+      <h6 class="color-gray-dark block mt-32">Movimentações</h6>
 
       <mat-list class="mt-16">
         @for (order of ordersAndTransfers; track order) {
-          <div class="py-4">
-            <div class="w-100">
-              <div class="d-flex justify-content-between">
-                <h6 class="color-gray-dark d-block">{{ order.title }}</h6>
+          <div class="py-24">
+            <div class="w-full">
+              <div class="flex justify-between">
+                <h6 class="color-gray-dark block">{{ order.title }}</h6>
 
                 <span class="label-caption-1 ml-16">
                   {{ order.date | date: 'dd/MM/yyyy' }}
@@ -68,13 +68,13 @@
               </div>
 
               <!--  -->
-              <div class="d-flex justify-content-between mt-16">
+              <div class="flex justify-between mt-16">
                 <div>
                   @if (order.items) {
                     <div class="my-8">
                       @for (i of order.items; track i) {
                         <span
-                          class="text-dots orderTransferText d-block label-caption-1 color-gray-default"
+                          class="text-dots orderTransferText block label-caption-1 color-gray-default"
                         >
                           {{ i }}
                         </span>
@@ -90,13 +90,13 @@
                   @if (order.transferAt) {
                     <div>
                       <span
-                        class="mt-8 label-caption-1 color-gray-default d-flex align-items-end"
+                        class="mt-8 label-caption-1 color-gray-default flex items-end"
                       >
                         Previsão de saque:
                         {{ order.transferAt | date: 'dd/MM/yyyy' }}
                         <mat-icon
                           type="button"
-                          class="ml-4 mt-1 color-gray-default pt-2 icon-small"
+                          class="ml-24 mt-4 color-gray-default pt-8 icon-small"
                           mat-icon-button
                           (click)="alertSaquePrevisao()"
                           matTooltip="Previsão de saque"
@@ -106,7 +106,7 @@
                     </div>
                   }
                 </div>
-                <div class="d-flex align-items-end justify-content-end">
+                <div class="flex items-end justify-end">
                   <span
                     class="label-body-2"
                     [ngClass]="

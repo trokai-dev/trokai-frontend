@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar
     mode="ios"
-    class="d-flex justify-content-center align-items-center px-8"
+    class="flex justify-center items-center px-8"
   >
     <ion-img src="../../assets/icons/trokai-clean.svg"></ion-img>
 
@@ -55,7 +55,7 @@
       </ion-col>
       @if (home_row.actionText && home_row.actionUrl) {
       <ion-col
-        class="d-flex justify-content-end"
+        class="flex justify-end"
       >
         <a (click)="navigate(home_row)">
           <span class="label-caption-1 color-primary">

@@ -17,8 +17,8 @@
     </mat-radio-button>
     <mat-radio-button color="primary" [value]="shippingOptions.SHIPPING">
       <div class="custom-radio-button-content">
-        <div class="d-flex flex-1 justify-content-between flex-wrap">
-          <div class="d-flex flex-column">
+        <div class="flex flex-1 justify-between flex-wrap">
+          <div class="flex flex-col">
             <span class="custom-radio-button-title">
               Enviar no meu endereço
             </span>
@@ -30,7 +30,7 @@
               }}, {{ user.address.neighborhood }}, {{ user.address.city }}
             </span>
           </div>
-          <div class="d-flex align-items-end">
+          <div class="flex items-end">
             <span class="label-button" (click)="onChangeAddress($event)">
               Alterar endereço
             </span>
@@ -59,7 +59,7 @@
 <h3 class="checkout-title">Endereço de entrega</h3>
 
 <div class="checkout-body">
-  <div class="d-flex flex-column">
+  <div class="flex flex-col">
     <span class="label-body-1">
       {{ user.address.street }}, {{ user.address.number
       }}{{ user.address.complement ? ", " + user.address.complement : "" }}
@@ -90,7 +90,7 @@
 <h3 class="checkout-title">Retirada gratuita</h3>
 
 <div class="checkout-body">
-  <div class="d-flex flex-column">
+  <div class="flex flex-col">
     <span class="label-body-1">
       Este vendedor oferece apenas retirada em
       <b>

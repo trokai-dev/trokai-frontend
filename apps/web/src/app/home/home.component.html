@@ -11,7 +11,7 @@
           }
         </div>
         @if (home_row.actionText && home_row.actionUrl) {
-          <div class="col px-0 d-flex justify-content-end">
+          <div class="col px-0 flex justify-end">
             @if (home_row.route) {
               <a
                 rel="nofollow"
@@ -104,7 +104,7 @@
                 @for (item of ratings; track item) {
                   <div class="swiper-slide rating-slide">
                     <div class="rating-slide-item">
-                      <span class="label-body-2 text-capitalize d-block mb-2"
+                      <span class="label-body-2 capitalize block mb-8"
                         ><b>{{ item.name }}</b></span
                       >
                       <tk-review-stars

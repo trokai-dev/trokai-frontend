@@ -8,7 +8,7 @@
   >
     <div class="container">
       <div class="row">
-        <div class="col d-flex align-items-center">
+        <div class="col flex items-center">
           <button class="mobile-only" mat-icon-button (click)="back.emit()">
             <mat-icon> chevron_left </mat-icon>
           </button>
@@ -20,7 +20,7 @@
             (click)="navigate(navMenu[menuTab].route, navMenu[menuTab].params)"
           >
             @if (menuTab < 2) {
-              <span class="label-caption-2 color-primary ms-3"> Ver tudo</span>
+              <span class="label-caption-2 color-primary ml-16"> Ver tudo</span>
             }
           </a>
         </div>

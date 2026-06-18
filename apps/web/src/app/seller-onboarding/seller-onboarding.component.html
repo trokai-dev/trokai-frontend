@@ -2,7 +2,7 @@
   <div class="seller-onboarding-wrapper">
     <!-- header -->
     <div
-      class="onboarding-header d-flex align-items-center justify-content-between"
+      class="onboarding-header flex items-center justify-between"
     >
       <button
         mat-icon-button
@@ -44,13 +44,13 @@
               <h2 class="onboarding-title color-gray-dark">
                 Como funciona a nossa triagem?
               </h2>
-              <p class="label-body-2 color-gray-default mb-3">
+              <p class="label-body-2 color-gray-default mb-16">
                 Para ativar a sua loja, você passará por duas etapas iniciais:
               </p>
               <div class="criteria-card">
                 <span class="criteria-icon">👤</span>
                 <div>
-                  <p class="label-body-2 color-gray-dark mb-1">
+                  <p class="label-body-2 color-gray-dark mb-4">
                     <strong>1. Identidade da Loja</strong>
                   </p>
                   <p class="label-body-2 color-gray-default">
@@ -63,7 +63,7 @@
               <div class="criteria-card">
                 <span class="criteria-icon">👗</span>
                 <div>
-                  <p class="label-body-2 color-gray-dark mb-1">
+                  <p class="label-body-2 color-gray-dark mb-4">
                     <strong>2. Primeiras {{ minClothesToSell }} Peças</strong>
                   </p>
                   <p class="label-body-2 color-gray-default">
@@ -104,7 +104,7 @@
       <button
         mat-flat-button
         color="primary"
-        class="onboarding-nav-next w-100"
+        class="onboarding-nav-next w-full"
         [class.d-none]="isLastSlide"
         (click)="next()"
       >
@@ -123,7 +123,7 @@
       <button
         mat-flat-button
         color="primary"
-        class="w-100"
+        class="w-full"
         [class.d-none]="!isLastSlide"
         [disabled]="!accepted"
         (click)="start()"

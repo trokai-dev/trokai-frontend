@@ -25,22 +25,22 @@
 
   <ion-grid class="px-24 pt-24 pb-12">
     @if (owner) {
-    <div class="d-flex align-items-center border-bottom pb-24">
+    <div class="flex items-center border-bottom pb-24">
       <tk-user-avatar [user]="owner" class="mr-16" />
 
-      <div class="d-flex justify-content-between">
-        <div class="d-flex flex-column">
-          <div class="d-flex">
+      <div class="flex justify-between">
+        <div class="flex flex-col">
+          <div class="flex">
             <h6
-              class="color-gray-dark max-user-name ion-text-capitalize d-flex align-items-center"
+              class="color-gray-dark max-user-name ion-text-capitalize flex items-center"
             >
               {{owner.storeName ?? owner.name}}
             </h6>
           </div>
 
           @if (owner.address) {
-          <div class="d-flex mt-4 align-items-start">
-            <div class="d-flex flex-column">
+          <div class="flex mt-4 items-start">
+            <div class="flex flex-col">
               <label
                 class="label-caption-1 color-gray-default max-user-address"
               >
@@ -49,7 +49,7 @@
             </div>
           </div>
           } @if (owner && reviews) {
-          <div class="mt-8 d-flex align-items-center justify-content-between">
+          <div class="mt-8 flex items-center justify-between">
             <tk-review-stars
               [stars]="owner.reviewsAverage"
               [amount]="reviews.length"
@@ -92,7 +92,7 @@
     </div>
   </ion-grid>
 
-  <div class="d-flex justify-content-between align-items-center pr-24 pb-16">
+  <div class="flex justify-between items-center pr-24 pb-16">
     <div>
       <app-filter-tags
         [filters]="filter"
@@ -102,7 +102,7 @@
         (filtersChanged)="applyFilters($event)"
       ></app-filter-tags>
     </div>
-    <div class="d-flex align-items-center">
+    <div class="flex items-center">
       @if (!showSearchbar) {
       <ion-button
         (click)="startSearch()"
@@ -125,7 +125,7 @@
   } @if (isLoading || !items?.length) {
   <ion-grid class="px-24 pt-24 pb-12">
     @if (isLoading) {
-    <div class="d-flex justify-content-center align-items-center">
+    <div class="flex justify-center items-center">
       <ion-spinner name="crescent"></ion-spinner>
     </div>
     } @if (!isLoading && !items?.length) {

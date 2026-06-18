@@ -1,7 +1,7 @@
 <div class="dialog-wrapper">
   <!-- header -->
   <div class="dialog-header border-bottom">
-    <div class="d-flex justify-content-end">
+    <div class="flex justify-end">
       <button mat-icon-button class="close-button" [mat-dialog-close]="true">
         <mat-icon class="close-icon">close</mat-icon>
       </button>
@@ -13,8 +13,8 @@
   <!-- content -->
 
   <div class="dialog-content">
-    <div class="mt-24 w-100">
-      <div class="d-flex justify-content-between mt-2">
+    <div class="mt-24 w-full">
+      <div class="flex justify-between mt-8">
         <span class="label-body-2"> Carrinho</span>
         <span class="label-body-2">
           {{ cv.sumCart | cost | currency : "BRL" : "symbol" : "1.2" }}
@@ -22,8 +22,8 @@
       </div>
 
       @for(fee of cv.fees; track fee){
-      <div class="d-flex justify-content-between mt-2">
-        <div class="d-flex">
+      <div class="flex justify-between mt-8">
+        <div class="flex">
           <span class="label-body-2">
             {{ fee.name }}
           </span>
@@ -31,7 +31,7 @@
           @if (fee.description){
           <mat-icon
             type="button"
-            class="ml-4 color-gray-default icon-small"
+            class="ml-24 color-gray-default icon-small"
             mat-icon-button
             matTooltip="{{ fee.description }}"
             (click)="showFeeInfo(fee)"
@@ -51,7 +51,7 @@
       <!-- discount -->
       @if(cv.interest) {
 
-      <div class="d-flex justify-content-between mt-2">
+      <div class="flex justify-between mt-8">
         <span class="label-body-2"> Juros</span>
         <span class="label-body-2 ">
 
@@ -69,7 +69,7 @@
       <!-- discount -->
       @if(cv.couponDiscount) {
 
-      <div class="d-flex justify-content-between mt-2">
+      <div class="flex justify-between mt-8">
         <span class="label-body-2"> Cupom</span>
         <span class="label-body-2 color-primary">
           <b>
@@ -85,7 +85,7 @@
       <!-- PIX -->
       @if(cv.pixDiscount) {
 
-      <div class="d-flex justify-content-between mt-2">
+      <div class="flex justify-between mt-8">
         <span class="label-body-2"> Desconto PIX</span>
         <span class="label-body-2 color-primary">
           <b>
@@ -96,7 +96,7 @@
 
       }
 
-      <div class="d-flex justify-content-between mt-2">
+      <div class="flex justify-between mt-8">
         <span class="label-body-2"> Total</span>
         <span class="label-body-2 color-gray-dark">
           <b>

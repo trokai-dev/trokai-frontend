@@ -4,7 +4,7 @@
       <div class="col">
         <div class="row">
           <div
-            class="col-3 col-md-auto d-flex justify-content-center align-itens-center p-4"
+            class="col-3 col-md-auto flex justify-center align-itens-center p-24"
             >
             <tk-user-avatar
               [user]="owner"
@@ -13,15 +13,15 @@
             ></tk-user-avatar>
           </div>
           <div
-            class="col-9 col-md ms-0 ms-md-4 d-flex flex-column align-items-start justify-content-center"
+            class="col-9 col-md ml-0 ms-md-4 flex flex-col items-start justify-center"
             >
-            <div class="d-flex align-items-center w-100">
-              <h1 class="color-gray-dark text-capitalize text-dots">
+            <div class="flex items-center w-full">
+              <h1 class="color-gray-dark capitalize text-dots">
                 {{ owner.storeName ?? owner.name }}
               </h1>
               </div>
-              <div class="d-flex align-items-center mt-2">
-                <div class="d-flex flex-column">
+              <div class="flex items-center mt-8">
+                <div class="flex flex-col">
                   @if (owner.address) {
                     <span
                       class="label-body-2 color-gray-default max-user-address"
@@ -31,8 +31,8 @@
                   }
                 </div>
               </div>
-              <div class="row mt-2 w-100">
-                <div class="d-flex align-items-center justify-content-between">
+              <div class="row mt-8 w-full">
+                <div class="flex items-center justify-between">
                   <tk-review-stars
                     [stars]="owner.reviewsAverage"
                     [amount]="owner.reviewsAmount"
@@ -46,12 +46,12 @@
               </div>
             </div>
           </div>
-          <hr class="m-0 mt-5" />
+          <hr class="m-0 mt-48" />
           <div class="row">
             <div class="col">
-              <div class="mt-24 d-flex gap-4 flex-wrap">
+              <div class="mt-24 flex gap-24 flex-wrap">
                 <!-- SEARCHBAR -->
-                <div class="nav-search d-flex">
+                <div class="nav-search flex">
                   <input
                     #searchInput
                     placeholder="Buscar no armário"
@@ -116,7 +116,7 @@
                     <button
                       mat-stroked-button
                       color="primary"
-                      class="ms-auto mb-24 mb-md-0"
+                      class="ml-auto mb-24 mb-md-0"
                       aria-label="Renovar expirados"
                       (click)="renewAll()"
                       >
@@ -126,14 +126,14 @@
                 }
               </div>
               <div
-                class="label-body-2 w-100 d-flex justify-content-between"
+                class="label-body-2 w-full flex justify-between"
                 [ngClass]="{ 'mt-24': !userOwner }"
                 >
                 @if (countString) {
                   <span> {{ countString }}</span>
                 }
                 @if (pageString) {
-                  <span class="d-block">
+                  <span class="block">
                     {{ pageString }}
                   </span>
                 }
@@ -141,7 +141,7 @@
               @if (items?.length === 0) {
                 <div class="empty-page full">
                   <ion-icon name="sad-outline"></ion-icon>
-                  <span class="label-body-2 d-block"> Nenhum resultado</span>
+                  <span class="label-body-2 block"> Nenhum resultado</span>
                   @if (owner._id === user._id) {
                     <button
                       type="button"
@@ -159,7 +159,7 @@
               <div class="row row-cols-2 row-cols-md-5">
                 @for (item of items; track item; let i = $index) {
                   <div
-                    class="col mt-4 pt-3"
+                    class="col mt-24 pt-16"
                     >
                     <tk-product-card
                       [clean]="true"

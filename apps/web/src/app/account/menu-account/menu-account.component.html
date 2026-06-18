@@ -1,5 +1,5 @@
 <div class="account-menu page">
-  <div class="w-100 d-flex d-md-none pr-3 justify-content-end">
+  <div class="w-full flex d-md-none pr-16 justify-end">
     @if (!menuOppened) {
       <mat-icon
         type="button"
@@ -24,11 +24,11 @@
 
   <div
     class="d-md-block"
-    [ngClass]="{ 'd-block': menuOppened, 'd-none': !menuOppened }"
+    [ngClass]="{ 'block': menuOppened, 'hidden': !menuOppened }"
   >
     <h3>Minha conta</h3>
 
-    <div class="side-menu py-5">
+    <div class="side-menu py-48">
       @for (i of accountTabs; track i) {
         <a
           routerLinkActive="active-link"
@@ -43,12 +43,12 @@
     </div>
 
     @if (showSellerOptions) {
-      <div class="d-flex align-items-center gap-2 mt-5">
+      <div class="flex items-center gap-8 mt-48">
         <h3>Minha loja</h3>
         <tk-seller-status-badge [user]="user" [isLoggedUser]="true" (badgeClick)="goToSellerStatus()" />
       </div>
 
-      <div class="side-menu py-5">
+      <div class="side-menu py-48">
         @for (i of sellerTabs; track i) {
           <a
             routerLinkActive="active-link"

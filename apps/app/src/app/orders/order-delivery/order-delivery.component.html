@@ -4,7 +4,7 @@
 
     <!-- Shipping -->
     @if (order.isShipping) {
-      <div class="d-grid gap-16">
+      <div class="grid gap-16">
         <!-- Service -->
         @if (isSale) {
           <div>
@@ -73,7 +73,7 @@
         <div class="flex-1 mt-16">
           <span class="item-label">Endereço</span>
 
-          <span class="item-value d-block">
+          <span class="item-value block">
             {{ order.shippingAddress.street }},
             {{ order.shippingAddress.number }}
             {{
@@ -82,11 +82,11 @@
                 : ''
             }}
           </span>
-          <span class="item-value d-block">
+          <span class="item-value block">
             {{ order.shippingAddress.zipCode | mask: '00000-000' }},
             {{ order.shippingAddress.neighborhood }}
           </span>
-          <span class="item-value d-block">
+          <span class="item-value block">
             {{ order.shippingAddress.city }} - {{ order.shippingAddress.state }}
           </span>
         </div>
@@ -100,7 +100,7 @@
           <span class="item-value">
             {{ order.postageLabel?.melhorEnvioAgency.name }}
           </span>
-          <span class="item-value d-block">
+          <span class="item-value block">
             {{ order.postageLabel?.melhorEnvioAgency.displayAddress }}.
             {{ order.postageLabel?.melhorEnvioAgency.note }}
           </span>
@@ -124,7 +124,7 @@
       <!-- GERAR ETIQUETA -->
       @if (isSale && !order.isLegacyShipping && !order.orderSent) {
         <ion-button
-          class="mt-16 w-100 action-button"
+          class="mt-16 w-full action-button"
           color="primary"
           (click)="onClickEtiqueta()"
         >
@@ -139,7 +139,7 @@
 
     <!-- WITHDRAWAL -->
     @if (!order.isShipping) {
-      <div class="d-flex flex-wrap gap-16">
+      <div class="flex flex-wrap gap-16">
         <div class="flex-1">
           <span class="item-label">Retirada presencial</span>
           <span class="item-value">
@@ -169,7 +169,7 @@
               Confirmar retirada
             </ion-button>
 
-            <span class="d-block mt-2 label-caption-1">
+            <span class="block mt-8 label-caption-1">
               Confirme a retirada quando estiver com os produtos em mãos
             </span>
           </div>
@@ -178,7 +178,7 @@
         <!-- SELLER -->
         @if (isSale) {
           <div class="mt-16">
-            <span class="color-error d-block">Atenção</span>
+            <span class="color-error block">Atenção</span>
             <span>
               Para liberar seu pagamento, solicite que
               {{ order.buyer.name.split(' ')[0] }} confirme o recebimento pela

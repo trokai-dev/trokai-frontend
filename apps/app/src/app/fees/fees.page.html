@@ -14,7 +14,7 @@
         <h6 class="color-gray-dark">Das trokas</h6>
       </div>
 
-      <ion-label class="mt-8 d-block label-body-2"
+      <ion-label class="mt-8 block label-body-2"
         >As trokas são gratuitas.</ion-label
       >
     </div>
@@ -25,7 +25,7 @@
         <h6 class="color-gray-dark">Das vendas</h6>
       </div>
 
-      <ion-label class="mt-12 d-block label-body-2"
+      <ion-label class="mt-12 block label-body-2"
         >1) É cobrada do vendedor uma comissão de
         <b>{{params.sellPercentageFee * 100}}%</b> sobre o valor da venda, mais
         uma taxa fixa de serviço do Trokaí, que é definida de acordo com a
@@ -152,13 +152,13 @@
         </ion-row>
       </div>
 
-      <ion-label class="mt-16 d-block label-body-2"
+      <ion-label class="mt-16 block label-body-2"
         >2) Caso o vendedor opte pelo envio seguro, será cobrada uma taxa
         proporcional aos valores dos produtos vendidos. Esse valor é exibido no
         cadastro do produto.
       </ion-label>
 
-      <ion-label class="mt-16 d-block label-body-2"
+      <ion-label class="mt-16 block label-body-2"
         >3) Para efetuar um saque do cofrinho, será cobrada uma taxa de
         <b>
           {{ params.gatewayWithdrawFee ?? 0 |cost| currency: "BRL" : true :
@@ -167,7 +167,7 @@
         valor é fixo (não depende do valor do saque).
       </ion-label>
 
-      <ion-label class="mt-16 d-block label-body-2"
+      <ion-label class="mt-16 block label-body-2"
         >4) As taxas do vendedor são exibidas de forma clara no aplicativo e/ou
         site nas telas de cadastro e edição de um produto.
       </ion-label>
@@ -179,7 +179,7 @@
         <h6 class="color-gray-dark">Das compras</h6>
       </div>
 
-      <ion-label class="mt-8 d-block label-body-2"
+      <ion-label class="mt-8 block label-body-2"
         >1) O comprador paga uma taxa de
         <b>{{params.buyPercentageFee * 100}}%</b> sobre o valor do carrinho. Os
         valores mínimos e máximos dessa taxa são {{ params.minBuyFee |cost|
@@ -190,7 +190,7 @@
         produto.</ion-label
       >
 
-      <ion-label class="mt-16 d-block label-body-2">
+      <ion-label class="mt-16 block label-body-2">
         2) As taxas do comprador são exibidas de forma clara na tela de checkout
         (última etapa do fluxo de compra) do Aplicativo e/ou Site.
       </ion-label>

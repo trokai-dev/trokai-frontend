@@ -1,11 +1,11 @@
 <ion-content>
   <ion-grid class="p-24">
-    <div class="d-flex flex-column justify-content-center align-items-center" style="height: 90vh;">
+    <div class="flex flex-col justify-center items-center" style="height: 90vh;">
 
       <ion-icon name="sad-outline" class="color-gray-dark" style="font-size: 4rem;"></ion-icon>
 
       @if (outdated) {
-      <h2 class=" d-block color-gray-dark mt-56">
+      <h2 class=" block color-gray-dark mt-56">
         Aplicativo desatualizado
       </h2>
       }
@@ -17,7 +17,7 @@
       }
 
       @if (banned) {
-      <h2 class=" d-block color-gray-dark mt-56">
+      <h2 class=" block color-gray-dark mt-56">
         Conta banida
       </h2>
       }

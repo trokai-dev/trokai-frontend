@@ -1,7 +1,7 @@
 <div class="container page">
   <div class="row">
     <div class="col-12 col-md-6">
-      <div class="d-flex align-items-end">
+      <div class="flex items-end">
         <h2 class="color-gray-dark">
           {{ justAdded ? "Adicionado à sacola" : "Minhas sacolas" }}
         </h2>
@@ -11,9 +11,9 @@
 
   @if (baskets && baskets.length) {
 
-    <div class="mt-5 frete-unico">
+    <div class="mt-48 frete-unico">
       <h4 class="color-primary">Frete único!</h4>
-      <span class="label-body-2 color-gray-default mt-2">
+      <span class="label-body-2 color-gray-default mt-8">
         Compre mais produtos de um mesmo brechó e pague apenas um frete.
       </span>
     </div>
@@ -22,7 +22,7 @@
     @if (baskets && !baskets.length) {
       <div class="empty-page full">
         <ion-icon name="sad-outline"></ion-icon>
-        <span class="label-body-2 d-block"> Nenhuma sacolinha</span>
+        <span class="label-body-2 block"> Nenhuma sacolinha</span>
         <button routerLink="/search" mat-raised-button color="primary">
           Ver produtos
         </button>
@@ -30,13 +30,13 @@
     }
   } @else {
     @for (basket of baskets; track basket) {
-      <div class="row mt-4 basket-card">
+      <div class="row mt-24 basket-card">
         <div class="col">
           <!-- Loja -->
           <div class="row cursor-pointer">
             <div
               (click)="openOwner(basket.owner)"
-              class="col-auto d-flex justify-content-center align-items-center"
+              class="col-auto flex justify-center items-center"
             >
               <tk-user-avatar
                 [user]="basket.owner"
@@ -45,14 +45,14 @@
             </div>
             <div
               (click)="openOwner(basket.owner)"
-              class="col-auto d-flex ms-0 ms-md-2 flex-column align-items-start justify-content-center px-md-0"
+              class="col-auto flex ml-0 ms-md-2 flex-col items-start justify-center px-md-0"
             >
-              <div class="d-flex align-items-center">
-                <h4 class="color-gray-dark text-capitalize">
+              <div class="flex items-center">
+                <h4 class="color-gray-dark capitalize">
                   {{ basket.owner.storeName ?? basket.owner.name }}
                 </h4>
               </div>
-              <div class="mt-1">
+              <div class="mt-24">
                 <tk-review-stars
                   [showAmount]="false"
                   [stars]="basket.owner.reviewsAverage"
@@ -78,10 +78,10 @@
               </a>
               <a routerLink="{{ mountProductLink(p) }}">
                 <div class="cart-item-text">
-                  <span class="label-body-2 color-gray-dark text-capitalize"
+                  <span class="label-body-2 color-gray-dark capitalize"
                     ><b>{{ p.title }}</b>
                   </span>
-                  <span class="label-body-2 mt-2">
+                  <span class="label-body-2 mt-8">
                     {{
                       p.cost * 0.95 | cost | currency: "BRL" : "symbol" : "1.2"
                     }}
@@ -102,9 +102,9 @@
           <!-- <app-reserve-time text="Continuar" color="primary" (open)="restore(cart)" [ownerId]="basket.owner"></app-reserve-time> -->
         </div>
         <div
-          class="col-12 col-md-3 mt-5 mt-md-0 d-flex flex-column justify-content-end"
+          class="col-12 col-md-3 mt-48 mt-md-0 flex flex-col justify-end"
         >
-          <div class="d-flex justify-content-between">
+          <div class="flex justify-between">
             <span class="label-body-2"> Total</span>
             <span class="label-body-2 color-gray-dark">
               <b>
@@ -119,7 +119,7 @@
           @if (!basket.reserved) {
             <div>
               <button
-                class="mt-16 w-100"
+                class="mt-16 w-full"
                 mat-stroked-button
                 color="primary"
                 routerLink="/users/{{ basket.owner.nickname }}"
@@ -128,7 +128,7 @@
               </button>
               <button
                 mat-raised-button
-                class="mt-8 w-100"
+                class="mt-8 w-full"
                 color="primary"
                 (click)="checkout(basket.owner._id)"
               >

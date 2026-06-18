@@ -1,6 +1,6 @@
 <div class="dialog-wrapper">
   <div class="dialog-header border-bottom">
-    <div class="d-flex justify-content-end">
+    <div class="flex justify-end">
       <button mat-icon-button class="close-button" (click)="close()">
         <mat-icon class="close-icon">close</mat-icon>
       </button>
@@ -35,19 +35,19 @@
   </div>
 
   <div class="dialog-footer">
-    <div class="d-flex flex-wrap align-items-center w-100">
+    <div class="flex flex-wrap items-center w-full">
       <button mat-button (click)="zoom(true)">
-        <mat-icon class="mr-1">add</mat-icon>Aproximar
+        <mat-icon class="mr-4">add</mat-icon>Aproximar
       </button>
       <button mat-button (click)="zoom(false)">
-        <mat-icon class="mr-1">remove</mat-icon>Afastar
+        <mat-icon class="mr-4">remove</mat-icon>Afastar
       </button>
       <button mat-button (click)="rotate()">
-        <mat-icon class="mr-1">refresh</mat-icon>Girar
+        <mat-icon class="mr-4">refresh</mat-icon>Girar
       </button>
       <button
         mat-raised-button
-        class="align-self-end mt-3"
+        class="self-end mt-16"
         aria-label="salvar"
         (click)="saveAndLeave()"
         color="primary"

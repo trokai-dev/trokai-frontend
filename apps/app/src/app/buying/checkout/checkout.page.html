@@ -16,9 +16,9 @@
       @for(p of checkoutLocal.products; track p) {
       <div
         (click)="open(p)"
-        class="cart-item mt-16 d-flex w-100 justify-content-between"
+        class="cart-item mt-16 flex w-full justify-between"
       >
-        <div class="d-flex align-items-center">
+        <div class="flex items-center">
           <ion-thumbnail class="product-item">
             <ion-img
               src="{{ p.images?.[0]?.sm }}"
@@ -27,11 +27,11 @@
           </ion-thumbnail>
 
           <div class="cart-item-text">
-            <span class="label-body-2 color-gray-dark text-capitalize"
+            <span class="label-body-2 color-gray-dark capitalize"
               ><b>{{ p.title }}</b>
             </span>
 
-            <span class="label-body-2 mt-2">
+            <span class="label-body-2 mt-8">
               {{ p.cost | cost | currency : "BRL" : "symbol" : "1.2" }}
             </span>
           </div>
@@ -42,7 +42,7 @@
 
     <!-- METODO -->
     <div class="py-24">
-      <span class="label-body-1 color-gray-dark d-block"
+      <span class="label-body-1 color-gray-dark block"
         ><b>Método de pagamento</b>
       </span>
 
@@ -62,10 +62,10 @@
             mode="md"
             justify="start"
             labelPlacement="end"
-            class="w-100 py-8 m-0"
+            class="w-full py-8 m-0"
             [value]="PaymentOption.PIX"
           >
-            <span class="d-flex cursor-pointer py-4">
+            <span class="flex cursor-pointer py-4">
               <span class="label-body-2 color-gray-dark">PIX</span>
               @if (pixDiscountPercent) {
               <span class="color-primary label-body-2 fw-semibold">
@@ -83,7 +83,7 @@
             mode="md"
             justify="start"
             labelPlacement="end"
-            class="w-100 py-8 m-0"
+            class="w-full py-8 m-0"
             [value]="PaymentOption.CREDIT_CARD"
           >
             <span class="label-body-2 ion-text-capitalize">
@@ -97,7 +97,7 @@
     <!-- CARTAO -->
     @if (checkoutLocal.paymentOption === PaymentOption.CREDIT_CARD) {
     <div class="py-24 border-top">
-      <div class="d-flex justify-content-between align-items-center">
+      <div class="flex justify-between items-center">
         <span class="label-body-1 color-gray-dark"><b>Cartão</b> </span>
         <ion-button (click)="newCard()" fill="clear"> Adicionar </ion-button>
       </div>
@@ -108,7 +108,7 @@
           <ion-select
             label="Cartão"
             labelPlacement="floating"
-            class="w-100"
+            class="w-full"
             [(ngModel)]="checkoutLocal.cardId"
             okText="Selecionar"
             cancelText="Cancelar"
@@ -127,7 +127,7 @@
       <div>
         <ion-item class="ion-no-padding">
           <ion-select
-            class="w-100"
+            class="w-full"
             [(ngModel)]="checkoutLocal.selectedInstallments"
             (ionChange)="installmentsSelected($event.detail.value)"
             okText="Selecionar"
@@ -154,7 +154,7 @@
     <div class="py-24">
       <span class="label-body-1 color-gray-dark"><b>Valor a pagar</b> </span>
 
-      <div class="d-flex flex-column mt-16">
+      <div class="flex flex-col mt-16">
         <ion-item lines="none" class="ion-no-padding">
           <span class="label-body-2 ion-text-capitalize"> Carrinho </span>
           <span slot="end" class="label-body-2">
@@ -167,7 +167,7 @@
           <ion-item lines="none" class="ion-no-padding">
           <span
             (click)="showFeeInfo(fee)"
-            class="label-body-2 ion-text-capitalize d-flex align-items-center"
+            class="label-body-2 ion-text-capitalize flex items-center"
           >
             {{ fee.name }}
 
@@ -181,7 +181,7 @@
 
           @if (fee.type === UserFeeType.BUYER_SHIPPING_REDUCED) {
 
-            <div slot="end" class="d-flex gap-2 align-items-center">
+            <div slot="end" class="flex gap-8 items-center">
               <span class="label-body-2 color-gray-light-1 line-through mr-4">
                 {{
                   fullShippingCost | cost | currency : "BRL" : "symbol" : "1.2"

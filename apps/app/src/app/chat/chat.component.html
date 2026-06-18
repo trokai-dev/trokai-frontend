@@ -9,23 +9,23 @@
       ></ion-icon>
     </ion-buttons>
 
-    <ion-grid class="ion-no-padding d-flex py-16">
-      <div class="d-flex align-items-center">
+    <ion-grid class="ion-no-padding flex py-16">
+      <div class="flex items-center">
         <app-back-button
           [blockNavigation]="true"
           (buttonClick)="close()"
         ></app-back-button>
       </div>
       <div>
-        <ion-row class="w-100 d-flex align-items-center">
+        <ion-row class="w-full flex items-center">
           <ion-col class="ion-no-padding">
-            <div class="ion-no-padding d-flex">
-              <div class="d-flex justify-content-center align-items-center mr-16">
+            <div class="ion-no-padding flex">
+              <div class="flex justify-center items-center mr-16">
                 <tk-user-avatar [user]="otherUser" />
               </div>
 
               <div
-                class="d-flex justify-content-center align-items-start flex-column"
+                class="flex justify-center items-start flex-col"
               >
                 <h6 class="color-gray-dark max-user-name">
                   {{ otherUser.storeName }}
@@ -33,7 +33,7 @@
 
                 @if (showStatus) {
                 <label
-                  class="label-caption-1 color-gray-default mt-2"
+                  class="label-caption-1 color-gray-default mt-8"
                 >
                   {{ otherUser.nickname }}
                 </label>

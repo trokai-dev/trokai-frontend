@@ -7,10 +7,10 @@
 ion-tab-button {
   ion-label {
     @extend .label-caption-1;
-    @extend .color-gray-default;
+    color: var(--color-gray-default) !important;
   }
   ion-icon {
-    @extend .color-gray-default;
+    color: var(--color-gray-default) !important;
   }
 
   &.tab-selected {

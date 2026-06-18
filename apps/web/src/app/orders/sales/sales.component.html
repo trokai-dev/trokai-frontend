@@ -1,8 +1,8 @@
 <h3 class="color-gray-dark">Minhas vendas</h3>
 
-<div class="mt-5">
+<div class="mt-48">
   @for (s of sales; track s) {
-    <div class="row border-bottom mt-32 pb-5">
+    <div class="row border-bottom mt-32 pb-48">
       <div class="col">
         @for (c of s.clothes; track c) {
           <div>
@@ -10,8 +10,8 @@
           </div>
         }
       </div>
-      <div class="col-12 col-md-4 d-flex flex-column">
-        <div class="d-flex text-end flex-column">
+      <div class="col-12 col-md-4 flex flex-col">
+        <div class="flex text-right flex-col">
           <span class="item-value">
             {{ s.createdAt | date : "dd/MM/yy" }}
           </span>
@@ -36,7 +36,7 @@
   @if (!sales || !sales.length) {
     <div class="empty-page full">
       <ion-icon name="sad-outline"></ion-icon>
-      <span class="label-body-2 d-block"> Nenhuma venda</span>
+      <span class="label-body-2 block"> Nenhuma venda</span>
     </div>
   }
 </div>

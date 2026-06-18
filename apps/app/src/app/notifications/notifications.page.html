@@ -50,7 +50,7 @@
   @if (tab === 'Notificações') {
   <ion-grid class="p-24">
     @if (isLoading) {
-    <div class="empty-page full w-100">
+    <div class="empty-page full w-full">
       <ion-spinner name="crescent"> </ion-spinner>
     </div>
     }
@@ -90,7 +90,7 @@
   @if (tab === 'Mensagens') {
   <ion-grid class="p-24">
     @if (isLoading) {
-    <div class="empty-page full w-100">
+    <div class="empty-page full w-full">
       <ion-spinner name="crescent"> </ion-spinner>
     </div>
     }
@@ -115,7 +115,7 @@
           </ion-avatar>
 
           <div
-            class="d-block ml-16 flex-column"
+            class="block ml-16 flex-col"
             style="align-items: start !important"
           >
             <div>

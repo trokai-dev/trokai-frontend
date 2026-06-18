@@ -11,7 +11,7 @@
 
 <ion-content>
   <ion-grid class="p-24">
-    <div class="w-100 mt-40">
+    <div class="w-full mt-40">
       <h6>Dados do cartão</h6>
     </div>
 
@@ -63,7 +63,7 @@
         </ion-col>
       </ion-row>
 
-      <ion-row class="mt-8 d-flex align-items-end">
+      <ion-row class="mt-8 flex items-end">
         <ion-col class="ion-no-padding item-input" size="5">
           <ion-item class="ion-no-padding">
             <ion-input
@@ -93,7 +93,7 @@
       </ion-row>
     </form>
 
-    <div class="w-100 mt-40">
+    <div class="w-full mt-40">
       <h6>Endereço de cobrança</h6>
     </div>
 
@@ -243,7 +243,7 @@
     (click)="save()"
     [disabled]="!enabled()"
     shape="round"
-    class="w-100 action-button"
+    class="w-full action-button"
   >
     Salvar cartão
   </ion-button>

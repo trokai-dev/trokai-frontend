@@ -1,0 +1,4 @@
+// Uneven 2:1 field row (e.g. Cidade / Estado).
+.grid-2-1 {
+  grid-template-columns: 2fr 1fr;
+}

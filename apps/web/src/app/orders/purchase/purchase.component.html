@@ -1,4 +1,4 @@
-<div class="row mb-5">
+<div class="row mb-48">
   <div class="col">
     <button color="primary" mat-button routerLink="/orders/purchases">
       <mat-icon>arrow_back</mat-icon> Minhas compras
@@ -26,7 +26,7 @@
           <mat-form-field
             appearance="outline"
             (click)="copyPix($event)"
-            class="w-100"
+            class="w-full"
             >
             <input
               matInput
@@ -48,7 +48,7 @@
     </div>
   }
 
-  <div class="row mt-5">
+  <div class="row mt-48">
     <div class="col-12 col-md-4">
       <!-- Produtos -->
       <div class="page-section-mobile">
@@ -71,7 +71,7 @@
       <div class="page-section">
         <span class="section-title">Detalhes</span>
 
-        <div class="d-grid gap-16">
+        <div class="grid gap-16">
           <div>
             <span class="item-label">Data</span>
             <span class="item-value"
@@ -102,13 +102,13 @@
       <div class="page-section">
         <span class="section-title">Valores</span>
 
-        <div class="d-flex flex-column gap-2">
+        <div class="flex flex-col gap-8">
           <!-- Carrinho -->
           @for (c of order.clothes; track c) {
             <div
-              class="d-flex justify-content-between"
+              class="flex justify-between"
               >
-              <span class="item-value text-capitalize">
+              <span class="item-value capitalize">
                 {{ c.title }}
               </span>
               <span class="item-value">
@@ -120,7 +120,7 @@
           <!-- Frete -->
           @if (order.shippingValues) {
             <div
-              class="d-flex justify-content-between"
+              class="flex justify-between"
               >
               <span class="item-value">Frete</span>
               <span class="item-value">
@@ -139,7 +139,7 @@
             order.businessValues.interestValues.interest
             ) {
             <div
-              class="d-flex justify-content-between"
+              class="flex justify-between"
               >
               <span class="item-value">Juros parcelamento</span>
               <span class="item-value">
@@ -154,7 +154,7 @@
 
           <!-- service fee -->
           @if (order.businessValues.buyerServiceFee){
-            <div class="d-flex justify-content-between">
+            <div class="flex justify-between">
               <span class="item-value">Taxa de serviço</span>
               <span class="item-value">
                 {{
@@ -167,7 +167,7 @@
           }
           <!-- processing fee -->
           @if (order.businessValues.buyerProcessingFee){
-            <div class="d-flex justify-content-between">
+            <div class="flex justify-between">
               <span class="item-value">Taxa de processamento</span>
               <span class="item-value">
                 {{
@@ -182,7 +182,7 @@
           <!-- desconto cupom -->
           @if (order.businessValues.couponDiscount) {
             <div
-              class="d-flex justify-content-between"
+              class="flex justify-between"
               >
               <span class="item-value">
                 Desconto cupom ({{ order.businessValues.couponCode }})
@@ -200,7 +200,7 @@
           <!-- desconto pix -->
           @if (order.businessValues.pixDiscount) {
             <div
-              class="d-flex justify-content-between"
+              class="flex justify-between"
               >
               <span class="item-value">Desconto Pix</span>
               <span class="item-value">
@@ -214,7 +214,7 @@
           }
 
           <!-- Total -->
-          <div class="d-flex justify-content-between">
+          <div class="flex justify-between">
             <span class="item-value"><b>Total</b></span>
             <span class="item-value color-primary">
               <b>
@@ -230,7 +230,7 @@
       </div>
 
       <!-- Vendedor -->
-      <div class="page-section pt-5">
+      <div class="page-section pt-48">
         <tk-user-header
           [user]="order.seller"
           [showChatButton]="showContact"

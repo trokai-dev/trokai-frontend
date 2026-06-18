@@ -15,7 +15,7 @@
   <ion-grid class="p-24">
     <!-- ENTREGA -->
     <div class="pb-8 mt-24">
-      <div class="w-100 mt-16">
+      <div class="w-full mt-16">
         <ion-radio-group
           mode="md"
           [value]="checkoutLocal.shippingOption"
@@ -30,10 +30,10 @@
               mode="md"
               justify="start"
               labelPlacement="end"
-              class="w-100 py-24 m-0"
+              class="w-full py-24 m-0"
               [value]="enumAddress.INPERSON"
             >
-              <span class="d-flex flex-column cursor-pointer py-4">
+              <span class="flex flex-col cursor-pointer py-4">
                 <span class="label-body-1 fw-semibold color-gray-dark"
                   >Retirada presencial
                 </span>
@@ -69,16 +69,16 @@
               mode="md"
               justify="start"
               labelPlacement="end"
-              class="w-100 py-24 m-0"
+              class="w-full py-24 m-0"
               [value]="enumAddress.SHIPPING"
             >
-              <span class="d-flex flex-column cursor-pointer">
+              <span class="flex flex-col cursor-pointer">
                 <span class="label-body-1 fw-semibold color-gray-dark"
                   >Entrega pelos correios
                 </span>
 
                 <!-- Shipping info -->
-                <span class="d-flex justify-content-between align-items-center mt-4">
+                <span class="flex justify-between items-center mt-4">
                   <span class="color-gray-default fw-semibold label-body-2">
                     @if(checkoutResponse.shipping.shippingValues.maxDeliveryTime)
                     {

@@ -44,17 +44,17 @@
       }
     </div>
 
-    <div class="div-card text-dots d-flex flex-column">
-      <div class="text-start d-grid">
+    <div class="div-card text-dots flex flex-col">
+      <div class="text-left grid">
         <span
           style="max-width: 90%"
-          class="label-body-2 d-block color-gray-default text-dots text-capitalize"
+          class="label-body-2 block color-gray-default text-dots capitalize"
         >
           {{ product.title }}
         </span>
       </div>
 
-      <div class="d-flex align-items-center justify-content-between mt-2">
+      <div class="flex items-center justify-between mt-8">
         @if (product.sell) {
           <div
             [ngStyle]="{
@@ -82,7 +82,7 @@
         }
 
         <div
-          class="d-flex align-items-center text-dots justify-content-between"
+          class="flex items-center text-dots justify-between"
           [ngStyle]="{
             visibility: product.size !== null ? 'visible' : 'hidden',
           }"

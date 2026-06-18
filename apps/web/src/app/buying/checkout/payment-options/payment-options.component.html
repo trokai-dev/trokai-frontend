@@ -11,7 +11,7 @@
       <tk-payment-icon [paymentBrand]="paymentBrands.PIX" />
 
       <div class="custom-radio-button-content">
-        <div class="d-flex justify-content-between">
+        <div class="flex justify-between">
           <span class="custom-radio-button-title">PIX</span>
 
           @if (pixDiscountPercent) {
@@ -33,7 +33,7 @@
         <tk-payment-icon [paymentBrand]="card.brand" [showDefaultCardIcon]="true" />
 
         <div class="custom-radio-button-content">
-          <span class="custom-radio-button-title text-capitalize">
+          <span class="custom-radio-button-title capitalize">
             {{ card.brand ?? "Cartão de crédito " }} **** {{ card.lastDigits }}
           </span>
           @if (maxInstallments && maxNoInterest) {

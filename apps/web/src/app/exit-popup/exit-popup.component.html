@@ -1,14 +1,14 @@
 <div class="dialog-wrapper">
   <!-- header -->
   <div class="dialog-header border-bottom">
-    <div class="d-flex justify-content-end">
+    <div class="flex justify-end">
       <button mat-icon-button class="close-button" [mat-dialog-close]="true">
         <mat-icon class="close-icon">close</mat-icon>
       </button>
     </div>
     <h2>Não saia ainda!!</h2>
 
-    <p class="label-body-1 mt-4">
+    <p class="label-body-1 mt-24">
       Separamos um <b>cupom de R$10 OFF</b> para você! Ajude-nos a melhorar nos
       contando o motivo de sua saída.
     </p>
@@ -33,7 +33,7 @@
     } @else {
 
     <form [formGroup]="form" (ngSubmit)="next()">
-      <mat-form-field appearance="fill" class="d-block mt-4">
+      <mat-form-field appearance="fill" class="block mt-24">
         <mat-label>{{ selection.placeholder }}</mat-label>
         <textarea
           style="font-size: 14px; min-height: 75px"
@@ -42,7 +42,7 @@
         ></textarea>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="d-block mt-2">
+      <mat-form-field appearance="fill" class="block mt-8">
         <mat-label>Email</mat-label>
         <input
           style="font-size: 14px"
@@ -52,12 +52,12 @@
         />
       </mat-form-field>
 
-      <div class="mt-5 pt-5">
+      <div class="mt-48 pt-48">
         <button
           mat-flat-button
           type="submit"
           [disabled]="form.invalid"
-          class="w-100 color-primary"
+          class="w-full color-primary"
         >
           Enviar resposta
         </button>
@@ -67,7 +67,7 @@
           type="button"
           (click)="back()"
           style="color: white"
-          class="w-100 mt-3"
+          class="w-full mt-16"
         >
           Voltar
         </button>
@@ -76,7 +76,7 @@
 
     }
 
-    <p class="label-body-1 text-center mt-4 border-top pt-4">
+    <p class="label-body-1 text-center mt-24 border-top pt-24">
       <b> Desconto de R$10 </b>em compras acima de R$150. USE O
       <b>CUPOM 10OFF</b>
     </p>

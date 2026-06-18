@@ -1,5 +1,5 @@
 <div class="col-12 col-md-7">
-  <div class="d-flex align-items-center gap-3">
+  <div class="flex items-center gap-16">
     <h3 class="color-gray-dark mb-0">Status da loja</h3>
     @if (user) {
       <tk-seller-status-badge [user]="user" [isLoggedUser]="true" />
@@ -11,7 +11,7 @@
 
     @if (user.sellerStatus !== SellerStatus.APPROVED) {
       <div
-        class="info-notice mt-3"
+        class="info-notice mt-16"
         [ngClass]="{
           'info-notice--warning': user.sellerStatus === SellerStatus.SUSPENDED,
           'info-notice--danger': user.sellerStatus === SellerStatus.REJECTED,
@@ -51,16 +51,16 @@
     <!-- only for APPROVED -->
     @if (user.sellerStatus === SellerStatus.APPROVED) {
       <!-- Reviews -->
-      <div class="section mt-4">
-        <h6 class="color-gray-dark mb-1">Saúde da conta</h6>
+      <div class="section mt-24">
+        <h6 class="color-gray-dark mb-4">Saúde da conta</h6>
 
         <app-seller-health />
       </div>
 
       <!-- Reviews -->
-      <div class="section mt-4">
-        <h6 class="color-gray-dark mb-1">Avaliações</h6>
-        <p class="label-caption-1 color-gray-default mb-3">
+      <div class="section mt-24">
+        <h6 class="color-gray-dark mb-4">Avaliações</h6>
+        <p class="label-caption-1 color-gray-default mb-16">
           Avaliação média recebida pelos compradores.
         </p>
 
@@ -74,38 +74,38 @@
       </div>
 
       <!-- Sales summary -->
-      <div class="section mt-4">
-        <h6 class="color-gray-dark mb-4">Resumo de vendas</h6>
+      <div class="section mt-24">
+        <h6 class="color-gray-dark mb-24">Resumo de vendas</h6>
 
-        <div class="d-flex justify-content-between align-items-center py-3">
+        <div class="flex justify-between items-center py-16">
           <span class="label-body-2">Vendas concluidas</span>
           <span class="label-body-2">{{ user.salesCount ?? 0 }}</span>
         </div>
         <mat-divider></mat-divider>
 
-        <div class="d-flex justify-content-between align-items-center py-3">
+        <div class="flex justify-between items-center py-16">
           <span class="label-body-2">Vendas em andamento</span>
           <span class="label-body-2">TODO</span>
         </div>
         <mat-divider></mat-divider>
 
-        <div class="d-flex justify-content-between align-items-center py-3">
+        <div class="flex justify-between items-center py-16">
           <span class="label-body-2">Vendas canceladas por você</span>
           <span class="label-body-2">TODO</span>
         </div>
         <mat-divider></mat-divider>
 
-        <div class="d-flex justify-content-between align-items-center py-3">
+        <div class="flex justify-between items-center py-16">
           <span class="label-body-2">Devoluções</span>
           <span class="label-body-2">TODO</span>
         </div>
       </div>
 
       <!-- Visibility summary -->
-      <div class="section mt-4">
-        <h6 class="color-gray-dark mb-1">Visibilidade da loja</h6>
+      <div class="section mt-24">
+        <h6 class="color-gray-dark mb-4">Visibilidade da loja</h6>
 
-        <div class="visibility-options mt-4">
+        <div class="visibility-options mt-24">
           <button
             type="button"
             class="visibility-option"
@@ -120,7 +120,7 @@
               class="visibility-option__icon"
             ></ion-icon>
             <div class="visibility-option__text">
-              <h6 class="color-gray-dark mb-1">Publicado</h6>
+              <h6 class="color-gray-dark mb-4">Publicado</h6>
               <p class="label-caption-1 color-gray-default mb-0">
                 Seus anúncios aparecem para todos no Trokaí.
               </p>
@@ -144,7 +144,7 @@
               class="visibility-option__icon"
             ></ion-icon>
             <div class="visibility-option__text">
-              <h6 class="color-gray-dark mb-1">Pausado</h6>
+              <h6 class="color-gray-dark mb-4">Pausado</h6>
               <p class="label-caption-1 color-gray-default mb-0">
                 Seus anúncios não aparecem no Trokaí.
               </p>
@@ -158,12 +158,12 @@
       </div>
 
       <!-- Stats summary -->
-      <div class="section mt-4">
-        <h6 class="color-gray-dark mb-1">Resumo de produtos</h6>
+      <div class="section mt-24">
+        <h6 class="color-gray-dark mb-4">Resumo de produtos</h6>
 
-        <div class="mt-4">
+        <div class="mt-24">
           @for (item of allStatuses; track item.status; let last = $last) {
-            <div class="d-flex justify-content-between align-items-center py-3">
+            <div class="flex justify-between items-center py-16">
               <span class="label-body-2">{{ item.label }}</span>
               <span class="label-body-2">{{
                 getStatusCount(item.status)

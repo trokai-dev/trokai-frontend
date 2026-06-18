@@ -18,7 +18,7 @@
   <ion-grid class="p-24">
     <!-- loading -->
     @if (loading) {
-    <div class="w-100 d-flex justify-content-center mt-40">
+    <div class="w-full flex justify-center mt-40">
       <ion-spinner></ion-spinner>
     </div>
     }
@@ -56,7 +56,7 @@
         </div>
         }
 
-        <ion-row class="mt-5">
+        <ion-row class="mt-48">
           <ion-col size="12" size-md="4">
             <!-- Produtos -->
             <div class="page-section">
@@ -79,7 +79,7 @@
             <div class="page-section">
               <span class="section-title">Detalhes</span>
 
-              <div class="d-grid gap-16">
+              <div class="grid gap-16">
                 <div>
                   <span class="item-label">Data</span>
                   <span class="item-value">
@@ -110,10 +110,10 @@
             <div class="page-section">
               <span class="section-title">Valores</span>
 
-              <div class="d-flex flex-column gap-8">
+              <div class="flex flex-col gap-8">
                 <!-- Carrinho -->
                 @for (c of order.clothes; track c._id) {
-                <div class="d-flex justify-content-between">
+                <div class="flex justify-between">
                   <span class="item-value ion-text-capitalize">
                      {{ c.title }} {{ c.refund ? "(Estornado)" : "" }}
                   </span>
@@ -125,7 +125,7 @@
 
                 <!-- Frete -->
                 @if (order.shippingValues) {
-                <div class="d-flex justify-content-between">
+                <div class="flex justify-between">
                   <span class="item-value">Frete</span>
                   <span class="item-value">
                     {{ order.shippingValues.shippingCost | cost | currency : "BRL"
@@ -139,7 +139,7 @@
                   order.businessValues.interestValues &&
                   order.businessValues.interestValues.interest
                 ) {
-                <div class="d-flex justify-content-between">
+                <div class="flex justify-between">
                   <span class="item-value">Juros parcelamento</span>
                   <span class="item-value">
                     {{ order.businessValues.interestValues.interest | cost |
@@ -150,7 +150,7 @@
 
                 <!-- service fee -->
                 @if (order.businessValues.buyerServiceFee){
-                <div class="d-flex justify-content-between">
+                <div class="flex justify-between">
                   <span class="item-value">Taxa de serviço</span>
                   <span class="item-value">
                     {{ order.businessValues.buyerServiceFee | cost | currency :
@@ -160,7 +160,7 @@
                 }
                 <!-- processing fee -->
                 @if (order.businessValues.buyerProcessingFee){
-                <div class="d-flex justify-content-between">
+                <div class="flex justify-between">
                   <span class="item-value">Taxa de processamento</span>
                   <span class="item-value">
                     {{ order.businessValues.buyerProcessingFee | cost | currency :
@@ -171,7 +171,7 @@
 
                 <!-- desconto cupom -->
                 @if (order.businessValues.couponDiscount) {
-                <div class="d-flex justify-content-between">
+                <div class="flex justify-between">
                   <span class="item-value">
                     Desconto cupom ({{ order.businessValues.couponCode }})
                   </span>
@@ -184,7 +184,7 @@
 
                 <!-- desconto pix -->
                 @if (order.businessValues.pixDiscount) {
-                <div class="d-flex justify-content-between">
+                <div class="flex justify-between">
                   <span class="item-value">Desconto Pix</span>
                   <span class="item-value">
                     {{ -order.businessValues.pixDiscount | cost | currency : "BRL"
@@ -194,7 +194,7 @@
                 }
 
                 <!-- Total -->
-                <div class="d-flex justify-content-between">
+                <div class="flex justify-between">
                   <span class="item-value"><b>Total</b></span>
                   <span class="item-value color-primary">
                     <b>
@@ -207,9 +207,9 @@
             </div>
 
             <!-- Vendedor -->
-            <div class="page-section pt-5 mt-16">
+            <div class="page-section pt-48 mt-16">
               <div
-                class="w-100 d-flex ion-activatable ripple-parent cursor-pointer"
+                class="w-full flex ion-activatable ripple-parent cursor-pointer"
                 (click)="openOtherUser()"
               >
                 <ion-avatar>
@@ -217,13 +217,13 @@
                 </ion-avatar>
 
                 <div
-                  class="ml-24 d-flex align-items-start flex-column justify-content-center"
+                  class="ml-24 flex items-start flex-col justify-center"
                 >
                   <h6 class="color-gray-dark max-user-name">
                     {{order.seller.storeName ?? order.seller.name}}
                   </h6>
 
-                  <div class="d-flex mt-4 align-items-start">
+                  <div class="flex mt-4 items-start">
                     <label
                       class="label-caption-1 color-gray-default max-user-address"
                     >
@@ -240,7 +240,7 @@
             <!-- CANCELAMENTO -->
             @if (waiting_shipment || waiting_withdrawal || waiting_payment) {
             <ion-button
-              class="action-button mt-32 w-100 color-error"
+              class="action-button mt-32 w-full color-error"
               fill="clear"
               (click)="cancel()"
             >
@@ -250,7 +250,7 @@
 
             @if (order_delivered && userMayReturn) {
             <ion-button
-              class="action-button mt-32 w-100 color-error"
+              class="action-button mt-32 w-full color-error"
               fill="clear"
               (click)="return()"
             >

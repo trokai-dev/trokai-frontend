@@ -27,35 +27,35 @@
     }
 
     @if (baskets && baskets.length) {
-    <div class="mt-5 frete-unico">
+    <div class="mt-48 frete-unico">
       <h4 class="color-primary">Frete único!</h4>
-      <span class="label-body-2 color-gray-default mt-2">
+      <span class="label-body-2 color-gray-default mt-8">
         Compre mais produtos do mesmo brechó e pague apenas um frete.
       </span>
     </div>
     }
 
     @for (basket of baskets; track $index) {
-    <div class="row mt-24 border-bottom pb-24">
-      <div class="col">
+    <div class="mt-24 border-bottom pb-24">
+      <div>
         <!-- Perfil -->
         @if (basket.owner) {
         <div
           (click)="openWardrobe(basket.owner)"
-          class="d-flex pb-8 ion-activatable ripple-parent align-items-center"
+          class="flex pb-8 ion-activatable ripple-parent items-center"
         >
           <tk-user-avatar [user]="basket.owner" class="mr-16" />
 
-          <div class="d-flex justify-content-between">
-            <div class="d-flex flex-column justify-content-center">
+          <div class="flex justify-between">
+            <div class="flex flex-col justify-center">
               <h6
-                class="color-gray-dark max-user-name ion-text-capitalize d-flex align-items-center"
+                class="color-gray-dark max-user-name ion-text-capitalize flex items-center"
               >
                 {{basket.owner.storeName ?? basket.owner.name}}
               </h6>
 
-              <div class="d-flex mt-4 align-items-start">
-                <div class="d-flex flex-column">
+              <div class="flex mt-4 items-start">
+                <div class="flex flex-col">
                   <label
                     class="label-caption-1 color-gray-default max-user-address"
                   >
@@ -73,9 +73,9 @@
         @for (p of basket.products; track p._id) {
         <div
           (click)="open(p)"
-          class="cart-item mt-16 d-flex w-100 justify-content-between"
+          class="cart-item mt-16 flex w-full justify-between"
         >
-          <div class="d-flex align-items-center">
+          <div class="flex items-center">
             <ion-thumbnail class="product-item">
               <ion-img
                 src="{{ p.images?.[0]?.sm }}"
@@ -88,7 +88,7 @@
                 ><b>{{ p.title }}</b>
               </span>
 
-              <span class="label-body-2 mt-2">
+              <span class="label-body-2 mt-8">
                 {{ p.cost | cost | currency : "BRL" : "symbol" : "1.2" }}
               </span>
             </div>
@@ -106,9 +106,9 @@
       </div>
 
       <div
-        class="col-12 col-md-3 mt-24 mt-md-0 d-flex flex-column justify-content-end"
+        class="col-12 col-md-3 mt-24 mt-md-0 flex flex-col justify-end"
       >
-        <div class="d-flex justify-content-between">
+        <div class="flex justify-between">
           <span class="label-body-1 color-gray-dark"> <b>Total</b></span>
           <span class="label-body-1 color-gray-dark">
             <b>
@@ -122,14 +122,14 @@
         <div>
           <ion-button
             fill="outline"
-            class="mt-24 w-100 action-button"
+            class="mt-24 w-full action-button"
             color="primary"
             (click)="goToWardrobe(basket.owner._id)"
           >
             <b>Adicionar mais produtos</b>
           </ion-button>
           <ion-button
-            class="mt-8 w-100 action-button"
+            class="mt-8 w-full action-button"
             color="primary"
             (click)="checkout(basket.owner._id)"
           >

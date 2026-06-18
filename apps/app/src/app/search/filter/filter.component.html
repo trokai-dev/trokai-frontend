@@ -6,7 +6,7 @@
       --padding-start: 0px;
       --padding-end: 0px;
     "
-    class="px-24 py-2 clear"
+    class="px-24 py-8 clear"
   >
     <ion-buttons slot="start">
       <ion-icon name="close" (click)="close()" mode="ios" class="modal-close">
@@ -31,7 +31,7 @@
 
 <ion-content>
   <div class="mx-24">
-    <div class="w-100 d-flex accordion-item">
+    <div class="w-full flex accordion-item">
       <div
         [ngClass]="{ selected: filter.promotional }"
         (click)="select('promotional')"
@@ -48,7 +48,7 @@
       <!-- Category -->
       <div class="accordion-item ion-activatable ripple-parent">
         <div class="accordion-item-header" (click)="openSection('category')">
-          <div class="d-flex align-items-center">
+          <div class="flex items-center">
             <label class="label-body-1">Categoria</label>
             @if (
                 !sections.category &&
@@ -69,7 +69,7 @@
         @if (sections.category) {
         <div class="accordion-item-intermediate">
           <!-- Categorias -->
-          <div class="w-100">
+          <div class="w-full">
             <ion-radio-group
               mode="md"
               [value]="filter.category"
@@ -81,7 +81,7 @@
                 lines="none"
               >
                 <ion-radio [value]="a._id" justify="start" labelPlacement="end">
-                  <div class="d-flex flex-column">
+                  <div class="flex flex-col">
                     <ion-label
                       class="color-gray-default label-body-1 ion-text-capitalize"
                     >
@@ -121,7 +121,7 @@
       <!-- Tamanho -->
       <div class="accordion-item ion-activatable ripple-parent">
         <div class="accordion-item-header" (click)="openSection('size')">
-          <div class="d-flex align-items-center">
+          <div class="flex items-center">
             <label class="label-body-1">Tamanho</label>
 
             @if (sections.size) {
@@ -171,7 +171,7 @@
               category.sizes.length > 0
             ) {
           <div
-            class="w-100"
+            class="w-full"
           >
             <ion-radio-group
               mode="md"
@@ -184,7 +184,7 @@
                 lines="none"
               >
                 <ion-radio [value]="a._id" justify="start" labelPlacement="end">
-                  <div class="d-flex flex-column">
+                  <div class="flex flex-col">
                     <ion-label
                       class="color-gray-default label-body-1 ion-text-capitalize"
                     >
@@ -223,7 +223,7 @@
       <!-- Condition -->
       <div class="accordion-item ion-activatable ripple-parent">
         <div class="accordion-item-header" (click)="openSection('condition')">
-          <div class="d-flex align-items-center">
+          <div class="flex items-center">
             <label class="label-body-1">Condição</label>
             @if (
                 !sections.condition &&
@@ -263,7 +263,7 @@
       <!-- Gender -->
       <div class="accordion-item ion-activatable ripple-parent">
         <div class="accordion-item-header" (click)="openSection('gender')">
-          <div class="d-flex align-items-center">
+          <div class="flex items-center">
             <label class="label-body-1">Gênero</label>
             @if (!sections.gender && filter.gender && filter.gender.length) {
             <ion-badge
@@ -299,7 +299,7 @@
       <!-- Cost -->
       <div class="accordion-item ion-activatable ripple-parent">
         <div class="accordion-item-header" (click)="openSection('cost')">
-          <div class="d-flex align-items-center">
+          <div class="flex items-center">
             <label class="label-body-1">Preço</label>
             @if (
                 !sections.cost &&
@@ -319,7 +319,7 @@
 
         @if (sections.cost) {
         <div class="accordion-item-content">
-          <div class="w-100 ion-text-center">
+          <div class="w-full ion-text-center">
             <label class="label-body-2 color-gray-default">
               {{ costRange.lower | cost | currency: 'BRL' : true : '1.0' }}
             </label>
@@ -341,8 +341,8 @@
             }
           </div>
 
-          <ion-row class="w-100">
-            <ion-item lines="none" class="ion-no-padding w-100">
+          <ion-row class="w-full">
+            <ion-item lines="none" class="ion-no-padding w-full">
               <ion-range
                 dualKnobs="true"
                 min="0"

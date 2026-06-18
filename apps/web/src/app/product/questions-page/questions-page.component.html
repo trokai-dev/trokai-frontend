@@ -1,8 +1,8 @@
-<div class="container page my-5 pt-5">
+<div class="container page my-48 pt-48">
   @if (product) {
     <div class="row">
-      <div class="col col-md-6 mx-auto text-start">
-        <h2 class="color-gray-dark text-capitalize">
+      <div class="col col-md-6 mx-auto text-left">
+        <h2 class="color-gray-dark capitalize">
           {{ product.title }}
         </h2>
 
@@ -20,7 +20,7 @@
           </div>
 
           <!-- RESPOSTA -->
-          <div class="mt-5">
+          <div class="mt-48">
             <h4 class="color-gray-dark">Resposta</h4>
             <span class="label-body-2">
               @if (question?.answer) {
@@ -38,8 +38,8 @@
         <!-- SE FOR COMPRADOR, PERGUNTAR - SE NAO TIVER PERGUNTADO -->
 
         @if (showForm()) {
-          <div class="mt-5">
-            <mat-form-field appearance="outline" class="d-block">
+          <div class="mt-48">
+            <mat-form-field appearance="outline" class="block">
               <mat-label
                 >Escreva a {{ isOwner ? "Resposta" : "Pergunta" }}
               </mat-label>
@@ -60,10 +60,10 @@
             </span>
           </div>
 
-          <div class="mt-5">
+          <div class="mt-48">
             <button
               mat-raised-button
-              class="w-100"
+              class="w-full"
               [disabled]="message?.length <= 5"
               color="primary"
               (click)="send()"

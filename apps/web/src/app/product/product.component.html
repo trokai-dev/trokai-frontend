@@ -9,7 +9,7 @@
             <div class="row">
               <div class="col-12 product-main">
                 <h2
-                  class="color-gray-dark text-capitalize d-block d-md-none px-4 px-md-0 pb-4"
+                  class="color-gray-dark capitalize block d-md-none px-24 px-md-0 pb-24"
                   >
                   {{ product.title }}
                 </h2>
@@ -23,13 +23,13 @@
           <!-- CTAs -->
           <div class="col-12 col-md-6 product-ctas">
             <h1
-              class="mt-5 mt-md-0 color-gray-dark text-capitalize d-none d-md-block"
+              class="mt-48 mt-md-0 color-gray-dark capitalize hidden d-md-block"
               >
               {{ product.title }}
             </h1>
             <div class="row">
               <div class="col">
-                <div class="w-100">
+                <div class="w-full">
                   <!-- CTA Venda -->
                   @if (
                     product.sell &&
@@ -110,7 +110,7 @@
                               <div class="product-cta-delivery">
                                 @if (owner.inPerson) {
                                   <span
-                                    class="{{ owner.shipping ? ' mb-2 d-block' : '' }}"
+                                    class="{{ owner.shipping ? ' mb-8 block' : '' }}"
                                     >
                                     Retirada presencial
                                     @if (!myProduct) {
@@ -135,7 +135,7 @@
                           }
                         </div>
                         @if (isInReserves && owner) {
-                          <div class="mt-4">
+                          <div class="mt-24">
                             <app-reserve-time
                               [ownerId]="owner._id"
                               (open)="openCheckout()"
@@ -163,7 +163,7 @@
                             }
                             @if (product_in_basket) {
                               <div
-                                class="d-flex flex-column gap-1"
+                                class="flex flex-col gap-4"
                                 >
                                 <button
                                   routerLink="/buying/carts"
@@ -203,12 +203,12 @@
                   }
                   <!-- Status do produto -->
                   @if (myProduct || !product.published) {
-                    <div class="row mt-5 pb-4">
+                    <div class="row mt-48 pb-24">
                       <div class="col">
-                        <div class="w-100">
-                          <div class="d-flex flex-column gap-3">
+                        <div class="w-full">
+                          <div class="flex flex-col gap-16">
                             <!--  STATUS -->
-                            <div class="mr-4 d-flex product-status-container">
+                            <div class="mr-24 flex product-status-container">
                               <!-- PUBLISHED -->
                               @if (product.published && myProduct) {
                                 <div
@@ -296,7 +296,7 @@
                               }
                             </div>
                             <!-- BUTTONS -->
-                            <div class="d-flex gap-2">
+                            <div class="flex gap-8">
                               <!-- BTN DUPLICATE -->
                               @if (
                                 !showRenew && !product.unavailable && myProduct
@@ -382,7 +382,7 @@
                       >
                       <p>{{ product.description }}</p>
                       <!-- Categorias -->
-                      <div class="d-flex flex-wrap mt-4 gap-8">
+                      <div class="flex flex-wrap mt-24 gap-8">
                         @if (product.brand) {
                           <tk-status-pill
                             variant="neutral"
@@ -411,24 +411,24 @@
                     </div>
                     <!-- Loja -->
                     <div
-                      class="row py-5 cursor-pointer"
+                      class="row py-48 cursor-pointer"
                       routerLink="/users/{{ owner.nickname }}"
                       >
                       <div
-                        class="col-auto d-flex justify-content-center align-itens-center p-4"
+                        class="col-auto flex justify-center align-itens-center p-24"
                         >
                         <tk-user-avatar [user]="owner" size="medium" />
                       </div>
                       <div
-                        class="col d-flex ms-0 ms-md-2 flex-column align-items-start justify-content-center px-md-0"
+                        class="col flex ml-0 ms-md-2 flex-col items-start justify-center px-md-0"
                         >
-                        <div class="d-flex align-items-center">
-                          <h4 class="color-gray-dark text-capitalize">
+                        <div class="flex items-center">
+                          <h4 class="color-gray-dark capitalize">
                             {{ owner.storeName ?? owner.name }}
                           </h4>
                           </div>
-                          <div class="d-flex align-items-center mt-1">
-                            <div class="d-flex flex-column">
+                          <div class="flex items-center mt-4">
+                            <div class="flex flex-col">
                               <span
                                 class="label-caption-1 color-gray-default max-user-address"
                                 >
@@ -438,7 +438,7 @@
                             </div>
                           </div>
                           <div
-                            class="mt-2 d-flex justify-content-between align-items-center"
+                            class="mt-8 flex justify-between items-center"
                             >
                             <tk-review-stars
                               [stars]="owner.reviewsAverage"
@@ -447,9 +447,9 @@
                               (clicked)="openReviews(owner)"
                             ></tk-review-stars>
                           </div>
-                          <div class="d-flex flex-wrap gap-5 mt-32">
+                          <div class="flex flex-wrap gap-48 mt-32">
                             @if (owner.productsSold > 0) {
-                              <div class="d-flex flex-column">
+                              <div class="flex flex-col">
                                 <span class="label-caption-1 fw-300 color-gray-default">
                                   Vendidos
                                 </span>
@@ -458,7 +458,7 @@
                                 </span>
                               </div>
                             }
-                            <div class="d-flex flex-column">
+                            <div class="flex flex-col">
                               <span class="label-caption-1 fw-300 color-gray-default">
                                 À venda
                               </span>
@@ -467,7 +467,7 @@
                               </span>
                             </div>
                             @if (owner?.productsSold > 0) {
-                              <div class="d-flex flex-column">
+                              <div class="flex flex-col">
                                 <span class="label-caption-1 fw-300 color-gray-default">
                                   Tempo médio de envio
                                 </span>
@@ -486,7 +486,7 @@
                         <!-- Perguntas -->
                         <div class="row">
                           <div class="col-12">
-                            <div class="row py-5">
+                            <div class="row py-48">
                               <div class="col">
                                 <app-product-questions
                                   [product]="product"

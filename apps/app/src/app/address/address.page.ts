@@ -43,7 +43,7 @@ import { FirebaseService } from '../services/firebase.service';
     </ion-header>
     <ion-content>
       @if (!user) {
-        <div class="w-100 d-flex justify-content-center mt-56">
+        <div class="w-full flex justify-center mt-56">
           <ion-spinner></ion-spinner>
         </div>
       }
@@ -51,11 +51,11 @@ import { FirebaseService } from '../services/firebase.service';
         <div class="p-24">
           <tk-address-form [address]="userAddress" [submit]="false" (addressSave)="onAddressSave($event)" />
           <div class="mt-56">
-            <ion-button [disabled]="!formRef?.form.valid" (click)="formRef?.save()" color="primary" shape="round" class="action-button w-100">
+            <ion-button [disabled]="!formRef?.form.valid" (click)="formRef?.save()" color="primary" shape="round" class="action-button w-full">
               {{ getStringButton() }}
             </ion-button>
             @if (buyingChangeAddress && zipShipping) {
-              <ion-button (click)="useRegisteredAddress()" color="primary" fill="outline" shape="round" class="action-button w-100 mt-16">
+              <ion-button (click)="useRegisteredAddress()" color="primary" fill="outline" shape="round" class="action-button w-full mt-16">
                 Usar endereço cadastrado
               </ion-button>
             }

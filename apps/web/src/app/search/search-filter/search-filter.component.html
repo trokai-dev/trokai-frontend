@@ -1,4 +1,4 @@
-<div class="my-4" (mouseup)="changeCost()" style="position: relative">
+<div class="my-24" (mouseup)="changeCost()" style="position: relative">
   <!-- dismiss -->
   @if(dismissable){
     <button
@@ -17,7 +17,7 @@
         <h6 class="color-gray-dark">Ordenar</h6>
       </div>
 
-      <div class="col-12 mt-4">
+      <div class="col-12 mt-24">
         <mat-form-field appearance="outline">
           <mat-select
             [(ngModel)]="filter.sorting"
@@ -40,7 +40,7 @@
   }
 
   @if (itemsMap) {
-    <div class="mt-4">
+    <div class="mt-24">
       <div class="accordion-item">
         <div class="accordion-item-header">
           <mat-checkbox
@@ -49,14 +49,14 @@
             (change)="checkSectionCategory()"
             class="mat-form-field-wrapper"
             >
-            <div class="d-flex flex-column">
+            <div class="flex flex-col">
               <span class="label-body-2 color-gray-dark"> Categoria</span>
             </div>
           </mat-checkbox>
         </div>
         <div class="accordion-item-intermediate">
           @if (sections.category) {
-            <div class="w-100">
+            <div class="w-full">
               <mat-radio-group
                 aria-labelledby="example-radio-group-label"
                 class="example-radio-group"
@@ -66,7 +66,7 @@
                 @for (a of itemsMap.category; track a) {
                   <mat-radio-button
                     color="primary"
-                    class="example-radio-button d-block mt-2"
+                    class="example-radio-button block mt-8"
                     [value]="a._id"
                     >
                     <span class="label-body-2 color-gray-dark">{{
@@ -102,14 +102,14 @@
             (change)="checkSectionSize()"
             class="mat-form-field-wrapper"
             >
-            <div class="d-flex flex-column">
+            <div class="flex flex-col">
               <span class="label-body-2 color-gray-dark"> Tamanho</span>
             </div>
           </mat-checkbox>
         </div>
         @if (sections.size) {
           <div class="accordion-item-intermediate">
-            <div class="mb-4">
+            <div class="mb-24">
               @if (filter.category === null) {
                 <span class="label-body-2"
                   >Selecione uma categoria.</span
@@ -134,7 +134,7 @@
                   category.sizes.length > 0
                   ) {
                   <div
-                    class="w-100"
+                    class="w-full"
                     >
                     <mat-radio-group
                       aria-labelledby="example-radio-group-label"
@@ -145,7 +145,7 @@
                       @for (a of itemsMap.age; track a) {
                         <mat-radio-button
                           color="primary"
-                          class="example-radio-button d-block mt-2"
+                          class="example-radio-button block mt-8"
                           [value]="a._id"
                           >
                           <span class="label-body-2 color-gray-dark">{{
@@ -182,7 +182,7 @@
                 (change)="select('promotional')"
                 class="mat-form-field-wrapper"
                 >
-                <div class="d-flex flex-column">
+                <div class="flex flex-col">
                   <span class="label-body-2 color-gray-dark"> Em promoção</span>
                 </div>
               </mat-checkbox>
@@ -196,7 +196,7 @@
                 (change)="checkSectionCondition()"
                 class="mat-form-field-wrapper"
                 >
-                <div class="d-flex flex-column">
+                <div class="flex flex-col">
                   <span class="label-body-2 color-gray-dark"> Condição</span>
                 </div>
               </mat-checkbox>
@@ -223,7 +223,7 @@
                 (change)="checkSectionGender()"
                 class="mat-form-field-wrapper"
                 >
-                <div class="d-flex flex-column">
+                <div class="flex flex-col">
                   <span class="label-body-2 color-gray-dark"> Gênero</span>
                 </div>
               </mat-checkbox>
@@ -250,7 +250,7 @@
                 (change)="checkSectionCost()"
                 class="mat-form-field-wrapper"
                 >
-                <div class="d-flex flex-column">
+                <div class="flex flex-col">
                   <span class="label-body-2 color-gray-dark"> Preço</span>
                 </div>
               </mat-checkbox>

@@ -14,7 +14,7 @@
 
 <ion-content>
   @if (!user) {
-  <div class="w-100 d-flex justify-content-center mt-56">
+  <div class="w-full flex justify-center mt-56">
     <ion-spinner></ion-spinner>
   </div>
   }
@@ -130,13 +130,13 @@
         </ion-row>
 
         <div class="mt-56">
-          <ion-row class="d-flex justify-content-center">
+          <ion-row class="flex justify-center">
             <ion-button
               [disabled]="!saveEnabled()"
               type="submit"
               color="primary"
               shape="round"
-              class="action-button w-100"
+              class="action-button w-full"
             >
               {{ getStringButton() }}
             </ion-button>
@@ -144,7 +144,7 @@
 
           @if (buyingChangeAddress && zipShipping) {
           <ion-row
-            class="d-flex justify-content-center mt-16"
+            class="flex justify-center mt-16"
           >
             <ion-button
               (click)="useRegisteredAddress()"
@@ -152,7 +152,7 @@
               color="primary"
               fill="outline"
               shape="round"
-              class="action-button w-100"
+              class="action-button w-full"
             >
               Usar endereço cadastrado
             </ion-button>

@@ -30,8 +30,8 @@
       </ion-button>
 
 
-      <div class="w-100 ion-text-center mt-40">
-        <ion-label class="label-body-2  w-100">
+      <div class="w-full ion-text-center mt-40">
+        <ion-label class="label-body-2  w-full">
           Ao continuar, você aceita nossa
           <ion-text color="primary" (click)="openPoliticas()">Política de Privacidade</ion-text> e
           <ion-text color="primary" (click)="openTermos()"> Termos de Uso </ion-text>
@@ -44,7 +44,7 @@
     }
 
     @if (loading) {
-    <ion-row class="d-flex justify-content-center">
+    <ion-row class="flex justify-center">
       <ion-spinner name="crescent">
       </ion-spinner>
     </ion-row>

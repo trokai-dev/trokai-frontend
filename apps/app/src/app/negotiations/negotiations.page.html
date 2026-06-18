@@ -30,7 +30,7 @@
     <!-- loading -->
     @if (isLoading) {
     <div
-      class="w-100 d-flex justify-content-center align-items-center"
+      class="w-full flex justify-center items-center"
       style="height: 60vh"
     >
       <ion-spinner name="crescent" color="primary"></ion-spinner>
@@ -39,13 +39,13 @@
 
     <!-- Compras -->
     @if (!isLoading && tab === 'Compras') {
-    <div class="w-100 negotiations">
+    <div class="w-full negotiations">
       @for (p of purchases; track p._id) {
       <div
-        class="border-bottom py-24 w-100 d-flex justify-content-between ion-activatable ripple-parent"
+        class="border-bottom py-24 w-full flex justify-between ion-activatable ripple-parent"
         (click)="openPurchase(p)"
       >
-        <div class="w-75 d-flex align-items-center">
+        <div class="w-75 flex items-center">
           @if (p.images[0]) {
           <ion-thumbnail>
             <ion-img [src]="p.images[0]"></ion-img>
@@ -59,7 +59,7 @@
           }
         </div>
 
-        <div class="w-100 ion-text-end">
+        <div class="w-full ion-text-end">
           <label class="label-caption-1"
             >{{p.createdAt | date: 'dd/MM/YYYY - HH:mm'}}</label
           >
@@ -84,13 +84,13 @@
 
     <!-- Vendas -->
     @if (!isLoading && tab === 'Vendas') {
-    <div class="w-100 negotiations">
+    <div class="w-full negotiations">
       @for (s of sales; track s._id) {
       <div
-        class="border-bottom py-24 w-100 d-flex justify-content-between ion-activatable ripple-parent"
+        class="border-bottom py-24 w-full flex justify-between ion-activatable ripple-parent"
         (click)="openSale(s)"
       >
-        <div class="w-75 d-flex align-items-center">
+        <div class="w-75 flex items-center">
           @if (s.images[0]) {
           <ion-thumbnail>
             <ion-img [src]="s.images[0]"></ion-img>
@@ -104,7 +104,7 @@
           }
         </div>
 
-        <div class="w-100 ion-text-end">
+        <div class="w-full ion-text-end">
           <label class="label-caption-1"
             >{{s.updatedAt | date: 'dd/MM/YYYY - HH:mm'}}</label
           >

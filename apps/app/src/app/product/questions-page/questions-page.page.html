@@ -39,7 +39,7 @@
       <!-- VENDEDOR responde se ainda não respondeu / COMPRADOR pergunta se ainda não perguntou -->
       @if (showForm()) {
         <div class="mt-32">
-          <mat-form-field appearance="outline" class="d-block">
+          <mat-form-field appearance="outline" class="block">
             <mat-label>Escreva a {{ isOwner ? "Resposta" : "Pergunta" }}</mat-label>
             <textarea matInput [(ngModel)]="message"></textarea>
           </mat-form-field>
@@ -61,7 +61,7 @@
         <div class="mt-32">
           <button
             mat-raised-button
-            class="w-100"
+            class="w-full"
             [disabled]="message?.length <= 5"
             color="primary"
             (click)="send()"

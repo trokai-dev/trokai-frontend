@@ -79,7 +79,7 @@
             </li>
           }
           @if (!buying) {
-            <li class="d-md-block {{ !baskets ? 'd-none' : '' }}">
+            <li class="d-md-block {{ !baskets ? 'hidden' : '' }}">
               <a routerLink="/buying/carts" rel="nofollow">
                 <button mat-icon-button color="primary">
                   <mat-icon
@@ -96,7 +96,7 @@
           }
           <!--  -->
           @if (!clearNav && !user) {
-            <li class="px-3">
+            <li class="px-16">
               <a aria-label="Entrar" routerLink="/auth/login" id="btn-login">
                 Entrar
               </a>
@@ -140,11 +140,11 @@
               </a>
             </li>
 
-            <li class="px-3 mobile-only">
+            <li class="px-16 mobile-only">
               <a
                 routerLink="/sell"
                 rel="nofollow"
-                class="d-flex align-items-center"
+                class="flex items-center"
               >
                 Anunciar
               </a>

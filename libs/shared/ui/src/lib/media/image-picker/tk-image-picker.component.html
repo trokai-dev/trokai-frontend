@@ -16,25 +16,25 @@
       @if (media.capabilities.camera) {
         <button mat-menu-item (click)="takeFromCamera()">
           <mat-icon>photo_camera</mat-icon>
-          <span class="label-body-2 color-gray-dark py-2">Tirar uma foto</span>
+          <span class="label-body-2 color-gray-dark py-8">Tirar uma foto</span>
         </button>
       }
       <button mat-menu-item (click)="pickFromGallery()">
         <mat-icon>image</mat-icon>
-        <span class="label-body-2 color-gray-dark py-2">
+        <span class="label-body-2 color-gray-dark py-8">
           {{ hasImage ? 'Trocar foto' : 'Escolher foto' }}
         </span>
       </button>
       @if (canCrop) {
         <button mat-menu-item (click)="cropCurrentImage()">
           <mat-icon>crop</mat-icon>
-          <span class="label-body-2 color-gray-dark py-2">Editar foto</span>
+          <span class="label-body-2 color-gray-dark py-8">Editar foto</span>
         </button>
       }
       @if (hasImage) {
         <button mat-menu-item (click)="remove()">
           <mat-icon>delete</mat-icon>
-          <span class="label-body-2 color-gray-dark py-2">Remover foto</span>
+          <span class="label-body-2 color-gray-dark py-8">Remover foto</span>
         </button>
       }
     </mat-menu>
@@ -64,7 +64,7 @@
   <input
     type="file"
     accept="image/jpeg;image/jpg"
-    class="d-none"
+    class="hidden"
     #filePicker
     (change)="onFileChosen($event)"
   />

@@ -11,7 +11,7 @@
   <!-- loading -->
   @if (isLoading || !balance) {
   <ion-grid class="p-24">
-    <div class="empty-page full w-100">
+    <div class="empty-page full w-full">
       <ion-spinner name="crescent"> </ion-spinner>
     </div>
   </ion-grid>
@@ -23,12 +23,12 @@
   <ion-grid class="p-24">
     <!-- SALDO DISPONIVEL -->
 
-    <span class="d-block color-gray-dark">
+    <span class="block color-gray-dark">
       <b>Balanço</b>
     </span>
 
     <div
-      class="d-flex align-items-center justify-content-between pb-8 border-bottom mt-24"
+      class="flex items-center justify-between pb-8 border-bottom mt-24"
     >
       <span class="color-gray-dark">Saldo disponível</span>
       <span class="color-primary">
@@ -39,7 +39,7 @@
     </div>
     <!-- EM ANDAMENTO -->
     <div
-      class="d-flex align-items-center justify-content-between mt-8 pb-8 border-bottom"
+      class="flex items-center justify-between mt-8 pb-8 border-bottom"
     >
       <span class="color-gray-dark">Em andamento</span>
       <span class="color-gray-dark">
@@ -49,7 +49,7 @@
 
     <!-- TOTAL JA VENDIDO -->
     <div
-      class="d-flex align-items-center justify-content-between mt-8 pb-8 border-bottom"
+      class="flex items-center justify-between mt-8 pb-8 border-bottom"
     >
       <span class="color-gray-dark">Total vendido</span>
 
@@ -75,7 +75,7 @@
 
     @if (ordersAndTransfers && ordersAndTransfers.length) {
 
-    <span class="d-block color-gray-dark mt-40">
+    <span class="block color-gray-dark mt-40">
       <b>Movimentações</b>
     </span>
 
@@ -83,7 +83,7 @@
       @for (order of ordersAndTransfers; track order) {
       <div class="border-bottom py-16">
         <!-- header -->
-        <div class="d-flex align-items-center w-100 justify-content-between">
+        <div class="flex items-center w-full justify-between">
           <h6 class="color-gray-dark">{{order.title}}</h6>
           <ion-label class="label-caption-1 ml-16 color-gray-light-1">
             {{order.date | date: "dd/MM/YYYY"}}
@@ -91,17 +91,17 @@
         </div>
 
         <!-- items -->
-        <div class="d-block">
+        <div class="block">
           @if(order.items){
           <div
-            class="mt-8 d-flex w-100 align-items-start justify-content-between"
+            class="mt-8 flex w-full items-start justify-between"
           >
             <!-- items -->
             <div>
               @for (i of order.items; track i) {
 
               <ion-label
-                class="text-dots orderTransferText d-block label-body-2 color-gray-default"
+                class="text-dots orderTransferText block label-body-2 color-gray-default"
               >
                 {{i}} {{i?.refund ? "(Estornado)" : ""}}
               </ion-label>
@@ -110,13 +110,13 @@
 
             <!-- item saque -->
             @if (order.title === 'Saque') {
-            <span class="color-gray-default d-block label-body-2">
+            <span class="color-gray-default block label-body-2">
               {{ order.amount | cost | currency: "BRL" : true : '1.2-2'}}
             </span>
             }
             <!-- item venda -->
             @else if (order.title === 'Venda') {
-            <h6 class="color-primary d-block">
+            <h6 class="color-primary block">
               {{ order.amount | cost | currency: "BRL" : true : '1.2-2'}}
             </h6>
             }
@@ -128,7 +128,7 @@
         <div class="mt-8">
           <!-- order text -->
           @if (order.text) {
-          <ion-label class="label-body-2 color-gray-default d-block">
+          <ion-label class="label-body-2 color-gray-default block">
             {{order.text}}
           </ion-label>
           }
@@ -137,7 +137,7 @@
           @if (order.transferAt) {
           <div (click)="alertSaquePrevisao()">
             <ion-label
-              class="label-body-2 color-gray-default d-flex align-items-end"
+              class="label-body-2 color-gray-default flex items-end"
             >
               Previsão de saque: {{order.transferAt | date: "dd/MM/YYYY"}}
               <ion-icon

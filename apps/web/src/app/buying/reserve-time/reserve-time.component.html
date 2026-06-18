@@ -14,7 +14,7 @@
         (click)="open.emit()"
         [color]="color"
         mat-raised-button
-        class="w-100 mt-4"
+        class="w-full mt-24"
         >
         <b> {{ text }} ({{ timeLeft | date : "mm:ss" }})</b>
       </button>
@@ -23,7 +23,7 @@
           (click)="cancel()"
           color="accent"
           mat-stroked-button
-          class="w-100 mt-4"
+          class="w-full mt-24"
           >
           Cancelar reserva
         </button>
@@ -39,7 +39,7 @@
         (click)="expired()"
         [color]="color"
         mat-stroked-button
-        class="w-100 mt-4"
+        class="w-full mt-24"
         >
         Reserva expirada
       </button>

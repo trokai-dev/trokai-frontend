@@ -1,7 +1,7 @@
 <div class="dialog-wrapper">
   <!-- header -->
   <div class="dialog-header border-bottom">
-    <div class="d-flex justify-content-end">
+    <div class="flex justify-end">
       <button mat-icon-button class="close-button" [mat-dialog-close]="true">
         <mat-icon class="close-icon">close</mat-icon>
       </button>
@@ -14,15 +14,15 @@
 
   <div class="dialog-content">
     @if (sellerFees) {
-      <div class="mt-5">
-        <div class="mt-3 d-flex justify-content-between">
+      <div class="mt-48">
+        <div class="mt-16 flex justify-between">
           <span class="label-body-2"> Valor do produto </span>
           <span class="label-body-2">
             -
             {{ productCost | cost | currency : "BRL" : true : "1.2" }}
           </span>
         </div>
-        <div class="mt-3 d-flex justify-content-between">
+        <div class="mt-16 flex justify-between">
           <span class="label-body-2">
             Comissão ({{
             sellerFees.sellerPercentageFee * 100 | number : "1.0-2"
@@ -38,7 +38,7 @@
             </span>
           </div>
           @if (declaredValue) {
-            <div class="mt-3 d-flex justify-content-between">
+            <div class="mt-16 flex justify-between">
               <span class="label-body-2"> Envio seguro </span>
               <span class="label-body-2">
                 -
@@ -48,7 +48,7 @@
               </span>
             </div>
           }
-          <div class="mt-3 d-flex justify-content-between">
+          <div class="mt-16 flex justify-between">
             <span class="label-body-2"><b>Você recebe</b></span>
             <span class="label-body-2">
               <b> {{ sellerProfit | cost | currency : "BRL" : true : "1.2" }}</b>

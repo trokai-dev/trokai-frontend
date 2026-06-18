@@ -101,7 +101,7 @@
     --swiper-theme-color: transparent !important;
     outline: none !important;
     @extend .label-body-1;
-    @extend .color-gray-dark;
+    color: var(--color-gray-dark) !important;
   }
 }
 

@@ -3,23 +3,23 @@
     <div class="row">
       <div class="col-12 col-md-3">
         <div
-          class="d-flex mt-32 align-items-start justify-content-between justify-content-md-start"
+          class="flex mt-32 items-start justify-between justify-content-md-start"
         >
-          <div class="d-none d-md-block me-4">
+          <div class="hidden d-md-block mr-24">
             <tk-user-avatar [user]="otherUser"></tk-user-avatar>
           </div>
 
-          <div class="d-flex flex-column">
-            <h4 class="color-gray-dark text-capitalize d-block">
+          <div class="flex flex-col">
+            <h4 class="color-gray-dark capitalize block">
               {{ otherUser.storeName ?? otherUser.name }}
             </h4>
 
-            <span class="label-caption-1 color-gray-default max-user-address d-block">
+            <span class="label-caption-1 color-gray-default max-user-address block">
               {{ otherUser.address.city }}, {{ otherUser.address.state }}
             </span>
 
             <button
-              class="d-none d-md-block mt-4"
+              class="hidden d-md-block mt-24"
               (click)="openOrder()"
               mat-stroked-button
               color="primary"
@@ -29,7 +29,7 @@
           </div>
 
           <button
-            class="d-block d-md-none"
+            class="block d-md-none"
             (click)="openOrder()"
             mat-stroked-button
             color="primary"
@@ -39,7 +39,7 @@
         </div>
       </div>
 
-      <div class="col-12 col-md-9 px-0 mt-4 mt-md-0">
+      <div class="col-12 col-md-9 px-0 mt-24 mt-md-0">
         <div id="chat-wrapper">
           <tk-chat-thread
             [user]="user"

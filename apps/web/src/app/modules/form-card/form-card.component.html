@@ -12,8 +12,8 @@
           <mat-list>
             @for (c of user.cards; track c) {
               <mat-list-item>
-                <div class="w-100 d-flex justify-content-between">
-                  <div class="d-flex align-items-center">
+                <div class="w-full flex justify-between">
+                  <div class="flex items-center">
                     <tk-payment-icon
                       [paymentBrand]="c.brand"
                       [showDefaultCardIcon]="true"
@@ -44,7 +44,7 @@
             @for (c of user.cards; track c) {
               <mat-radio-button
                 color="primary"
-                class="example-radio-button d-flex mt-2"
+                class="example-radio-button flex mt-8"
                 [value]="c"
               >
                 <span class="label-body-2 ml-16"
@@ -59,7 +59,7 @@
             mat-stroked-button
             color="primary"
             (click)="formNew = true"
-            class="mt-5"
+            class="mt-48"
           >
             Adicionar cartão
           </button>
@@ -68,9 +68,9 @@
     }
     <!-- CARD -->
     @if (formNew) {
-      <form [formGroup]="form" class="mt-5">
+      <form [formGroup]="form" class="mt-48">
         <h4 class="color-gray-dark mb-16">Novo cartão</h4>
-        <mat-form-field appearance="outline" class="w-100">
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label> Nome do titular </mat-label>
           <input
             matInput
@@ -79,7 +79,7 @@
             maxlength="256"
           />
         </mat-form-field>
-        <mat-form-field appearance="outline" class="w-100">
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label> CPF/CNPJ do titular </mat-label>
           <input
             matInput
@@ -88,7 +88,7 @@
             formControlName="holderDocument"
           />
         </mat-form-field>
-        <mat-form-field appearance="outline" class="w-100">
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label> Número do cartão </mat-label>
           <input
             matInput
@@ -98,11 +98,11 @@
             maxlength="19"
             (input)="checkBrand()"
           />
-          <div matSuffix class="me-4">
+          <div matSuffix class="mr-24">
             <tk-payment-icon [paymentBrand]="cardBrand" />
           </div>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="w-100">
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label> Validade </mat-label>
           <input
             matInput
@@ -111,7 +111,7 @@
             formControlName="expirationFull"
           />
         </mat-form-field>
-        <mat-form-field appearance="outline" class="w-100">
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label> Cód. segurança </mat-label>
           <input
             matInput
@@ -127,7 +127,7 @@
     <!-- ADDRESS -->
     @if (user && user.address && formNew) {
       <mat-checkbox color="primary" class="mt-8" [(ngModel)]="useUserAddress">
-        <div class="d-flex flex-column ml-4">
+        <div class="flex flex-col ml-24">
           <h6 class="color-gray-dark">Usar endereço cadastrado</h6>
           <mat-label class="label-caption-1" style="white-space: normal">
             {{ user.address.street }}, {{ user.address.number }}, <br />
@@ -142,7 +142,7 @@
     }
     <!-- BUTTONS -->
     @if (!encapsulated && formNew) {
-      <div class="w-100 d-flex justify-content-end mt-16">
+      <div class="w-full flex justify-end mt-16">
         <button
           type="button"
           mat-raised-button
@@ -159,10 +159,10 @@
 
 <!-- selected card -->
 @if (selectedCard) {
-  <div class="w-100 d-flex justify-content-between">
-    <div class="d-flex align-items-center">
+  <div class="w-full flex justify-between">
+    <div class="flex items-center">
       <ion-icon class="color-primary icon-small" name="card-outline"></ion-icon>
-      <span class="label-body-2 ml-16 py-3"
+      <span class="label-body-2 ml-16 py-16"
         >**** **** **** {{ selectedCard.lastDigits }}</span
       >
     </div>

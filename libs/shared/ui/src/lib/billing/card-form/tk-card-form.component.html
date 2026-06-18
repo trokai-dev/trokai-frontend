@@ -1,30 +1,30 @@
 <form [formGroup]="form">
   <h4 class="color-gray-dark mb-16">Novo cartão</h4>
 
-  <mat-form-field appearance="outline" class="w-100">
+  <mat-form-field appearance="outline" class="w-full">
     <mat-label>Nome do titular</mat-label>
     <input matInput type="text" formControlName="holderName" maxlength="256" />
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="w-100">
+  <mat-form-field appearance="outline" class="w-full">
     <mat-label>CPF/CNPJ do titular</mat-label>
     <input matInput mask="000.000.000-00||00.000.000/0000-00" type="text" formControlName="holderDocument" />
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="w-100">
+  <mat-form-field appearance="outline" class="w-full">
     <mat-label>Número do cartão</mat-label>
     <input matInput mask="0000 0000 0000 0000" type="text" formControlName="number" maxlength="19" (input)="checkBrand()" />
-    <div matSuffix class="me-4">
+    <div matSuffix class="mr-24">
       <tk-payment-icon [paymentBrand]="cardBrand" />
     </div>
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="w-100">
+  <mat-form-field appearance="outline" class="w-full">
     <mat-label>Validade</mat-label>
     <input matInput mask="00/00" type="text" formControlName="expirationFull" />
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="w-100">
+  <mat-form-field appearance="outline" class="w-full">
     <mat-label>Cód. segurança</mat-label>
     <input matInput type="text" formControlName="cvv" minlength="3" maxlength="4" />
   </mat-form-field>
@@ -34,7 +34,7 @@
 
 @if (user?.address) {
   <mat-checkbox color="primary" class="mt-8" [(ngModel)]="useUserAddress">
-    <div class="d-flex flex-column ml-4">
+    <div class="flex flex-col ml-24">
       <h6 class="color-gray-dark">Usar endereço cadastrado</h6>
       <mat-label class="label-caption-1" style="white-space: normal">
         {{ user.address.street }}, {{ user.address.number }},
@@ -47,49 +47,41 @@
 
 @if (!useUserAddress) {
   <form [formGroup]="addressForm">
-    <mat-form-field appearance="outline" class="w-100">
+    <mat-form-field appearance="outline" class="w-full">
       <mat-label>CEP</mat-label>
       <input matInput mask="00000-000" type="text" formControlName="zipCode" />
     </mat-form-field>
-    <mat-form-field appearance="outline" class="w-100">
+    <mat-form-field appearance="outline" class="w-full">
       <mat-label>Logradouro</mat-label>
       <input matInput type="text" formControlName="street" />
     </mat-form-field>
-    <div class="row">
-      <div class="col-6">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Número</mat-label>
-          <input matInput type="text" formControlName="number" />
-        </mat-form-field>
-      </div>
-      <div class="col-6">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Complemento</mat-label>
-          <input matInput type="text" formControlName="complement" />
-        </mat-form-field>
-      </div>
+    <div class="grid grid-cols-2 gap-12">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Número</mat-label>
+        <input matInput type="text" formControlName="number" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Complemento</mat-label>
+        <input matInput type="text" formControlName="complement" />
+      </mat-form-field>
     </div>
-    <mat-form-field appearance="outline" class="w-100">
+    <mat-form-field appearance="outline" class="w-full">
       <mat-label>Bairro</mat-label>
       <input matInput type="text" formControlName="neighborhood" />
     </mat-form-field>
-    <div class="row">
-      <div class="col-8">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Cidade</mat-label>
-          <input matInput type="text" formControlName="city" />
-        </mat-form-field>
-      </div>
-      <div class="col-4">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Estado</mat-label>
-          <input matInput type="text" formControlName="state" maxlength="2" />
-        </mat-form-field>
-      </div>
+    <div class="grid grid-2-1 gap-12">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Cidade</mat-label>
+        <input matInput type="text" formControlName="city" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Estado</mat-label>
+        <input matInput type="text" formControlName="state" maxlength="2" />
+      </mat-form-field>
     </div>
   </form>
 }
 
-<div class="w-100 d-flex justify-content-end mt-16">
+<div class="w-full flex justify-end mt-16">
   <button mat-raised-button color="primary" [disabled]="!isValid()" (click)="save()">Salvar</button>
 </div>

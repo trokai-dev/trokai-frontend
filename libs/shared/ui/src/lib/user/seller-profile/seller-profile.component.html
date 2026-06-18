@@ -8,12 +8,12 @@
       <div class="seller-profile__adjusts">
         <h6 class="color-error">Ajustes necessários</h6>
         @for (adjustId of user.sellerAdjusts; track adjustId; let i = $index) {
-          <span class="d-block label-caption-1">
+          <span class="block label-caption-1">
             {{ i + 1 }}) {{ getAdjustLabel(adjustId) }}
           </span>
         }
         @if (user.sellerAdjustsNote) {
-          <span class="d-block label-caption-1"
+          <span class="block label-caption-1"
             >Nota: {{ user.sellerAdjustsNote }}</span
           >
         }
@@ -59,7 +59,7 @@
         (blur)="trimNickname()"
         formControlName="nickname"
         onPaste="return false"
-        class="ion-text-lowercase"
+        class="lowercase"
         maxlength="25"
         [errorStateMatcher]="nicknameErrorMatcher"
       />
@@ -127,7 +127,7 @@
       !form.get('shipping')?.value &&
       !form.get('inPerson')?.value
     ) {
-      <mat-error class="label-caption-1 d-block"
+      <mat-error class="label-caption-1 block"
         >Selecione ao menos uma opção de venda.</mat-error
       >
     }

@@ -16,14 +16,14 @@ import { NgxMaskDirective } from 'ngx-mask';
   template: `
     <form [formGroup]="form" (ngSubmit)="save()" class="tk-address-form">
       <div class="tk-row">
-        <mat-form-field appearance="outline" class="w-100">
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label>CEP</mat-label>
           <input matInput type="text" mask="00000-000" formControlName="zipCode" (keyup)="onChangeCEP()" />
           @if (viaCepError) { <mat-hint>CEP inválido</mat-hint> }
         </mat-form-field>
       </div>
       <div class="tk-row">
-        <mat-form-field appearance="outline" class="w-100">
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label>Endereço</mat-label>
           <input matInput type="text" formControlName="street" />
         </mat-form-field>
@@ -39,7 +39,7 @@ import { NgxMaskDirective } from 'ngx-mask';
         </mat-form-field>
       </div>
       <div class="tk-row">
-        <mat-form-field appearance="outline" class="w-100">
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label>Bairro</mat-label>
           <input matInput type="text" formControlName="neighborhood" />
         </mat-form-field>
@@ -67,11 +67,10 @@ import { NgxMaskDirective } from 'ngx-mask';
   styles: [`
     .tk-address-form { display: flex; flex-direction: column; gap: 0; }
     .tk-row { width: 100%; }
-    .tk-row--cols { display: flex; gap: 12px; }
+    .tk-row--cols { display: flex; gap: var(--space-12); }
     .tk-col-4 { flex: 0 0 33.33%; }
     .tk-col-8 { flex: 1; }
-    .tk-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
-    .w-100 { width: 100%; }
+    .tk-actions { display: flex; justify-content: flex-end; gap: var(--space-8); margin-top: var(--space-16); }
   `],
 })
 export class TkAddressFormComponent implements OnChanges {

@@ -21,36 +21,10 @@ $card-border-radius: 16px;
 $card-box-shadow: 0px 8px 16px $color-box-shadow !important;
 $border-trokai: 1px solid $color-gray-light-2 !important;
 
-.color-primary {
-  color: $color-primary !important;
-}
-.color-primary-light {
-  color: $color-primary-light !important;
-}
-.color-gray-dark {
-  color: $color-gray-dark !important;
-}
-.color-gray-default {
-  color: $color-gray-default !important;
-}
-.color-gray-light-1 {
-  color: $color-gray-light-1 !important;
-}
-.color-gray-light-2 {
-  color: $color-gray-light-2 !important;
-}
-.color-error {
-  color: $color-error !important;
-}
+// .color-* text utilities now live in @trokai/shared-styles (_colors.scss),
+// loaded globally via `@use 'index'` in global.scss.
 .bg-error {
   background-color: $color-error !important;
-}
-
-.color-success {
-  color: $color-success !important;
-}
-.color-alert {
-  color: $color-alert !important;
 }
 
 .review-star-full {

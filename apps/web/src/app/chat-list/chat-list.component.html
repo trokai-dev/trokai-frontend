@@ -3,18 +3,18 @@
     @if (true) {
       <ion-icon name="sad-outline"></ion-icon>
     }
-    <span class="label-body-2 d-block"> Nenhuma mensagem</span>
+    <span class="label-body-2 block"> Nenhuma mensagem</span>
   </div>
 } @else {
   <!--  -->
   @for (c of chats; track c){
     <div
-      class="d-flex border-bottom py-5 px-4 cursor-pointer"
+      class="flex border-bottom py-48 px-24 cursor-pointer"
       (click)="openChat(c)"
       >
       <tk-user-avatar [user]="c.otherUser"></tk-user-avatar>
 
-      <div class="d-block ml-16 flex-column" style="align-items: start !important">
+      <div class="block ml-16 flex-col" style="align-items: start !important">
         <div>
           <h6 class="label-body-1 text-dots color-gray-dark">
             {{ c.otherUser.storeName ?? c.otherUser.name }}
@@ -24,7 +24,7 @@
           </h6>
         </div>
         <label
-          class="label-body-2 text-dots mt-2"
+          class="label-body-2 text-dots mt-8"
           [ngClass]="{ 'fw-bold': c.unreadCount }"
           >
           {{ c.lastMessage.text }}

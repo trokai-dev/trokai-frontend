@@ -8,7 +8,7 @@
     @for(i of cv?.installments; track i) {
     <mat-radio-button color="primary" [value]="i.installments">
       <div class="custom-radio-button-content">
-        <div class="d-flex justify-content-between">
+        <div class="flex justify-between">
           <span class="custom-radio-button-title">
             {{ i.installments }} x
             {{ i.installmentValue | cost | currency : "BRL" : true : "1.2" }}
@@ -31,9 +31,9 @@
 </div>
 
 <div class="checkout-fixed-footer border-top mt-40">
-  <div class="container my-4">
+  <div class="container my-24">
     <div class="row">
-      <div class="col-12 col-md-6 offset-md-3 d-flex justify-content-end">
+      <div class="col-12 col-md-6 offset-md-3 flex justify-end">
         <button
           mat-raised-button
           color="primary"

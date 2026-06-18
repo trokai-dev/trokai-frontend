@@ -1,13 +1,13 @@
 <div class="container page">
   <div class="row">
     <div class="col">
-      <h2 class="color-gray-dark text-capitalize">Favoritos</h2>
+      <h2 class="color-gray-dark capitalize">Favoritos</h2>
     </div>
   </div>
 
   <div class="row row-cols-2 row-cols-md-4">
     @for (product of results; track product) {
-      <div class="col mt-4 pt-3">
+      <div class="col mt-24 pt-16">
         <tk-product-card
           [clean]="true"
           [product]="product"
@@ -19,7 +19,7 @@
   @if (results.length === 0) {
     <div class="empty-page full">
       <ion-icon name="sad-outline"></ion-icon>
-      <span class="label-body-2 d-block"> Nenhum favorito</span>
+      <span class="label-body-2 block"> Nenhum favorito</span>
       <button routerLink="/search" mat-raised-button color="primary">
         Ver produtos
       </button>

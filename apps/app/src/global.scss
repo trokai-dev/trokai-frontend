@@ -1120,12 +1120,8 @@ ion-spinner {
 //   letter-spacing: -0.02em;
 // }
 
-.text-dots {
-  overflow: hidden !important;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
+// .text-dots / .line-through now live in @trokai/shared-styles (_text.scss),
+// loaded globally via `@use 'index'`.
 .max-user-name {
   max-width: 63vw;
   @extend .text-dots;
@@ -1134,10 +1130,6 @@ ion-spinner {
 .max-user-address {
   max-width: 60vw;
   @extend .text-dots;
-}
-
-.line-through {
-  text-decoration: line-through;
 }
 
 .icon-smaller {

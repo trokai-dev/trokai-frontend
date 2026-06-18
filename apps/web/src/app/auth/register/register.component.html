@@ -1,17 +1,17 @@
-<div class="container page my-5">
+<div class="container page my-48">
   <div class="row">
     <div class="col col-md-4 mx-auto text-center">
       <h2 class="color-gray-dark">Crie sua conta</h2>
 
       <tk-register-form
-        class="mt-5 pt-5 d-block"
+        class="mt-48 pt-48 block"
         [loading]="loading"
         [emailRegistered]="emailRegistered"
         (submitted)="register($event)"
         (emailBlur)="checkMail($event)"
         (login)="toLogin()"
       >
-        <span class="label-caption-1 mt-5 d-block">ou</span>
+        <span class="label-caption-1 mt-48 block">ou</span>
         <tk-google-btn (googleClick)="googleRegister()"></tk-google-btn>
       </tk-register-form>
     </div>

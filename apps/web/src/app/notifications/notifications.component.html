@@ -1,18 +1,18 @@
 <div #content class="container page">
   <div class="row">
     <div class="col">
-      <div class="w-100">
+      <div class="w-full">
         <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
           <mat-tab class="fw-bold" label="{{ 'Notificações'  + notificationsString() }}">
             <!-- Notificações -->
-            <div class="mt-5">
+            <div class="mt-48">
               <app-notifications-list></app-notifications-list>
             </div>
           </mat-tab>
 
           <mat-tab class="fw-bold" label="{{ 'Mensagens' + messagesString() }}">
             <!-- Mensagens -->
-            <div class="mt-5">
+            <div class="mt-48">
               <app-chat-list></app-chat-list>
             </div>
           </mat-tab>

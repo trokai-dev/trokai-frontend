@@ -31,42 +31,8 @@ $plan-gold: #e5a62c;
 
 $border-trokai: 1px solid $color-gray-light-2 !important;
 
-.color-primary {
-  color: $color-primary !important;
-}
-
-.color-primary-2 {
-  color: $color-primary-2 !important;
-}
-
-.color-accent {
-  color: $color-accent !important;
-}
-
-.color-primary-light {
-  color: $color-primary-light !important;
-}
-.color-gray-dark {
-  color: $color-gray-dark !important;
-}
-.color-gray-default {
-  color: $color-gray-default !important;
-}
-.color-gray-light-1 {
-  color: $color-gray-light-1 !important;
-}
-.color-gray-light-2 {
-  color: $color-gray-light-2 !important;
-}
-.color-error {
-  color: $color-error !important;
-}
-.color-success {
-  color: $color-success !important;
-}
-.color-alert {
-  color: $color-alert !important;
-}
+// .color-* text utilities now live in @trokai/shared-styles (_colors.scss),
+// loaded globally via `@use 'index'` in styles.scss.
 
 .review-star-full {
   color: $color-star-full;
@@ -142,9 +108,6 @@ h6 {
 .strong {
   font-weight: 600 !important;
 }
-.line-through {
-  text-decoration: line-through;
-}
 
 .label-body-2 {
   font-size: 1.4rem !important;
@@ -192,12 +155,6 @@ h6 {
 
 .icon-nano {
   font-size: 1.2rem;
-}
-
-.text-dots {
-  overflow: hidden !important;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .fw-300 {

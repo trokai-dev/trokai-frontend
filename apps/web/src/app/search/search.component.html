@@ -1,7 +1,7 @@
 <div class="container page">
   <div class="row">
     <!-- WRAPPER FILTROS -->
-    <div class="d-none d-md-block col-md-3">
+    <div class="hidden d-md-block col-md-3">
       <app-search-filter
         (filtersChange)="applyFilters($event)"
         [filter]="filters"
@@ -10,14 +10,14 @@
 
     <!-- Resultados -->
     @if (itemsMap && results) {
-      <div class="col pl-5 mt-md-4">
+      <div class="col pl-48 mt-md-4">
         @if (filters.text) {
-          <h1 class="color-gray-dark d-none d-md-block">
+          <h1 class="color-gray-dark hidden d-md-block">
             {{ filters.text }}
           </h1>
         }
-        <div class="d-block d-md-none">
-          <div class="d-flex gap-4 align-items-center">
+        <div class="block d-md-none">
+          <div class="flex gap-24 items-center">
             <button
               mat-stroked-button
               matBadge="{{ filters?.count() }}"
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div
-          class="label-body-2 d-flex justify-content-between align-items-center mt-4"
+          class="label-body-2 flex justify-between items-center mt-24"
         >
           <span> {{ countString }}</span>
           @if (pageString) {
@@ -48,7 +48,7 @@
         </div>
         <div class="row row-cols-2 row-cols-md-4">
           @for (product of results; track product; let i = $index) {
-            <div class="col mt-4 pt-3">
+            <div class="col mt-24 pt-16">
               <tk-product-card
                 [clean]="true"
                 [product]="product"

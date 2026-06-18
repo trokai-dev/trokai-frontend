@@ -10,7 +10,7 @@
 
     } @else {
 
-    <mat-form-field appearance="outline" class="w-100">
+    <mat-form-field appearance="outline" class="w-full">
       <input
         matInput
         #couponInput
@@ -36,11 +36,11 @@
 
   } @else {
 
-  <div class="w-100 d-flex align-items-center justify-content-between">
-    <div class="d-flex align-items-center">
+  <div class="w-full flex items-center justify-between">
+    <div class="flex items-center">
       <ion-icon class="color-primary" name="ticket-outline"></ion-icon>
 
-      <div class="d-flex flex-column ml-16 py-3">
+      <div class="flex flex-col ml-16 py-16">
         <span class="label-body-2">
           <b>{{ couponCode }}</b>
         </span>

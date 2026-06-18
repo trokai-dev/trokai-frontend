@@ -1,7 +1,7 @@
-<div class="d-flex">
+<div class="flex">
   @if (!zipLoading && zipCode) {
   <span
-    class="d-block shipping-label label-body-2"
+    class="block shipping-label label-body-2"
     (click)="clickShippingLabel($event)"
   >
     Em até {{ shippingInfo.maxDeliveryTime }} dias após o envio por
@@ -32,7 +32,7 @@
 
   @if (!zipLoading && !zipCode) {
   <span
-    class="d-block shipping-label color-primary label-body-2"
+    class="block shipping-label color-primary label-body-2"
     (click)="clickShippingLabel($event)"
   >
     <b>Calcular frete de entrega</b>
@@ -40,7 +40,7 @@
   }
 
   @if (zipLoading) {
-  <div class="d-flex align-items-center">
+  <div class="flex items-center">
     <ion-spinner name="dots"></ion-spinner>
     <span class="label-body-2 ms-4">Buscando valor do frete</span>
   </div>

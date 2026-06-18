@@ -1,6 +1,6 @@
 <div class="home_banner">
   <!-- banner desk -->
-  <div class="d-none d-md-block">
+  <div class="hidden d-md-block">
     @if (item.route && item.imgUrl) {
       <a
         [routerLink]="item.route"
@@ -36,7 +36,7 @@
   </div>
 
   <!-- banner mobile -->
-  <div class="d-block d-md-none">
+  <div class="block d-md-none">
     @if (item.route && item.imgMobileUrl) {
       <a
         [routerLink]="item.route"

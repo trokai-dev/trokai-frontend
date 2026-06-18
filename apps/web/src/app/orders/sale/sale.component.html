@@ -1,4 +1,4 @@
-<div class="row mb-5">
+<div class="row mb-48">
   <div class="col">
     <button color="primary" mat-button routerLink="/orders/sales">
       <mat-icon>arrow_back</mat-icon> Minhas vendas
@@ -10,7 +10,7 @@
   <span class="page-title">Venda</span>
   <span class="item-value">cód. {{ order.customId }}</span>
 
-  <div class="row mt-5">
+  <div class="row mt-48">
     <div class="col-12 col-md-4">
       <!-- Produtos -->
       <div class="page-section-mobile">
@@ -35,7 +35,7 @@
         <!-- Detalhes -->
         <span class="section-title">Detalhes</span>
 
-        <div class="d-flex flex-wrap">
+        <div class="flex flex-wrap">
           <div class="flex-1">
             <span class="item-label">Data</span>
             <span class="item-value"
@@ -56,12 +56,12 @@
       <div class="page-section">
         <span class="section-title">Valores</span>
 
-        <div class="d-flex flex-column gap-2">
+        <div class="flex flex-col gap-8">
           @for (c of order.clothes; track c) {
             <div
-              class="d-flex justify-content-between"
+              class="flex justify-between"
               >
-              <span class="item-value text-capitalize">
+              <span class="item-value capitalize">
                 {{ c.title }}
               </span>
               <span class="item-value">
@@ -70,7 +70,7 @@
             </div>
           }
 
-          <div class="d-flex justify-content-between">
+          <div class="flex justify-between">
             <span class="item-value"> Comissão </span>
             <span class="item-value">
               -
@@ -82,7 +82,7 @@
             </span>
           </div>
 
-          <div class="d-flex justify-content-between">
+          <div class="flex justify-between">
             <span class="item-value"> Recebimento </span>
             <span class="item-value color-primary">
               {{
@@ -106,7 +106,7 @@
       </div>
 
       <!-- Comprador -->
-      <div class="page-section pt-5">
+      <div class="page-section pt-48">
         <tk-user-header
           [user]="order.buyer"
           [showChatButton]="showContact"

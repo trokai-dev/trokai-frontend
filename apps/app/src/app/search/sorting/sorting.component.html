@@ -6,7 +6,7 @@
       --padding-start: 0px;
       --padding-end: 0px;
     "
-    class="px-24 py-2 clear"
+    class="px-24 py-8 clear"
   >
     <ion-buttons slot="primary">
       <ion-icon
@@ -25,11 +25,11 @@
 
 <ion-content>
   <div class="m-24">
-    <ion-radio-group mode="md" [(ngModel)]="sorting" class="w-100">
+    <ion-radio-group mode="md" [(ngModel)]="sorting" class="w-full">
       @for (op of options; track $index) {
       <ion-item class="ion-no-padding" lines="none">
         <ion-radio [value]="op.value" justify="start" labelPlacement="end">
-          <div class="d-flex flex-column">
+          <div class="flex flex-col">
             <ion-label class="color-gray-default label-body-1">
               {{ op.text }}</ion-label
             >

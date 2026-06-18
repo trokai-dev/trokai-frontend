@@ -1,0 +1,12 @@
+// Responsive two-column layout (stacked on mobile, side-by-side from md).
+.withdraw-grid {
+  display: grid;
+  gap: var(--space-32);
+}
+
+@media (min-width: 768px) {
+  .withdraw-grid {
+    grid-template-columns: 5fr 6fr;
+    gap: var(--space-48);
+  }
+}

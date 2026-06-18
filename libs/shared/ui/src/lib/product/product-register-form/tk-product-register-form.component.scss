@@ -1,3 +1,22 @@
 :host {
   display: block;
 }
+
+// Section divider: bottom border + padding under a block of fields.
+.pr-divider {
+  border-bottom: var(--border-trokai);
+  padding-bottom: var(--space-48);
+}
+
+// Field grids: single column on mobile, fixed tracks from md up.
+// Items shorter than the track count left-align (mirrors the old col-md-* grid).
+.fields-2,
+.fields-4 {
+  display: grid;
+  gap: var(--space-16);
+}
+
+@media (min-width: 768px) {
+  .fields-2 { grid-template-columns: repeat(2, 1fr); }
+  .fields-4 { grid-template-columns: repeat(4, 1fr); }
+}

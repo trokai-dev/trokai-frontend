@@ -11,11 +11,18 @@
 .flex-1 { flex: 1 1 0%; }
 .flex-auto { flex: 1 1 auto; }
 .flex-none { flex: none; }
+.flex-grow-1 { flex-grow: 1; }
+.flex-grow-0 { flex-grow: 0; }
+.flex-shrink-0 { flex-shrink: 0; }
 
 .items-start { align-items: flex-start; }
 .items-center { align-items: center; }
 .items-end { align-items: flex-end; }
 .items-stretch { align-items: stretch; }
+
+.self-start { align-self: flex-start; }
+.self-center { align-self: center; }
+.self-end { align-self: flex-end; }
 
 .justify-start { justify-content: flex-start; }
 .justify-center { justify-content: center; }
@@ -37,5 +44,9 @@
 // --- Sizing helpers ---
 .w-full { width: 100%; }
 .h-full { height: 100%; }
+.w-25 { width: 25%; }
+.w-50 { width: 50%; }
+.w-75 { width: 75%; }
 .block { display: block; }
+.inline-block { display: inline-block; }
 .hidden { display: none; }

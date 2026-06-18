@@ -1,4 +1,4 @@
-<div class="row mb-5">
+<div class="row mb-48">
   <div class="col">
     <button color="primary" mat-button routerLink="/account/bank">
       <mat-icon>arrow_back</mat-icon> Cofrinho
@@ -8,10 +8,10 @@
 
 <div class="row">
   @if(balance){
-  <div class="col-12 col-md-5 mb-5">
+  <div class="col-12 col-md-5 mb-48">
     <h3 class="color-gray-dark">Resumo do saque</h3>
 
-    <div class="w-100 d-flex justify-content-between mb-8 mt-24">
+    <div class="w-full flex justify-between mb-8 mt-24">
       <span class="label-body-2"> Valor disponível</span>
       <span class="label-body-2">
         {{
@@ -22,14 +22,14 @@
 
     <mat-divider></mat-divider>
 
-    <div class="w-100 d-flex justify-content-between my-8">
+    <div class="w-full flex justify-between my-8">
       <span class="label-body-2"> Taxa de saque</span>
       <span class="label-body-2">
         {{ gatewayWithdrawFee | cost | currency : "BRL" : true : "1.2-2" }}
       </span>
     </div>
     <mat-divider></mat-divider>
-    <div class="w-100 d-flex justify-content-between my-8">
+    <div class="w-full flex justify-between my-8">
       <span class="label-body-2"> Valor a receber</span>
       <span class="label-body-2 color-primary">
         @if(hasEnough()){

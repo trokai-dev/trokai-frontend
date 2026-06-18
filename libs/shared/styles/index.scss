@@ -16,3 +16,6 @@
 @forward 'typography'; // heading/label classes
 @forward 'spacing'; // .m-* / .p-* / .gap-* utilities
 @forward 'layout'; // flexbox + grid utilities
+@forward 'text'; // text align/transform/overflow utilities
+@forward 'borders'; // token-backed border + radius utilities
+@forward 'colors'; // token-backed text-color utilities

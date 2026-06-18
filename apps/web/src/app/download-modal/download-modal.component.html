@@ -1,7 +1,7 @@
 <div class="dialog-wrapper">
   <!-- header -->
   <div class="dialog-header">
-    <div class="d-flex justify-content-end">
+    <div class="flex justify-end">
       <button mat-icon-button class="close-button" [mat-dialog-close]="true">
         <mat-icon class="close-icon">close</mat-icon>
       </button>
@@ -12,14 +12,14 @@
   <div class="dialog-content">
     <h2 class="color-gray-dark">Baixe o aplicativo</h2>
 
-    <p class="label-body-1 mt-4">
+    <p class="label-body-1 mt-24">
       Para experimentar o Trokaí por completo, baixe gratuitamente o aplicativo
       para Android ou iOS.
     </p>
 
     <div class="row mt-40">
       <div
-        class="col-10 offset-1 col-md-6 offset-md-0 d-flex justify-content-center"
+        class="col-10 offset-1 col-md-6 offset-md-0 flex justify-center"
         >
         <img
           id="phone-image"
@@ -28,9 +28,9 @@
           />
       </div>
       <div
-        class="col d-flex flex-column align-items-center justify-content-around"
+        class="col flex flex-col items-center justify-around"
         >
-        <div class="mx-4 d-none d-md-flex justify-content-center">
+        <div class="mx-24 hidden d-md-flex justify-center">
           <img
             src="../../../../assets/img/qr-code-download.png"
             class="w-75"
@@ -39,36 +39,36 @@
         </div>
 
         @if (!isAndroid && !isApple) {
-          <div class="mt-5 w-100">
+          <div class="mt-48 w-full">
             <button
               (click)="clickDownload('android')"
               mat-stroked-button
               color="primary"
-              class="w-100 d-flex align-items-center"
+              class="w-full flex items-center"
               >
-              <ion-icon name="logo-google-playstore" class="mr-3"></ion-icon>
+              <ion-icon name="logo-google-playstore" class="mr-16"></ion-icon>
               Google Play
             </button>
             <button
               (click)="clickDownload('ios')"
               mat-stroked-button
               color="primary"
-              class="w-100 mt-4 d-flex align-items-center"
+              class="w-full mt-24 flex items-center"
               >
-              <ion-icon name="logo-apple" class="mr-3"></ion-icon> App Store
+              <ion-icon name="logo-apple" class="mr-16"></ion-icon> App Store
             </button>
           </div>
         }
 
         @if (isAndroid || isApple) {
-          <div class="w-100 mt-5">
+          <div class="w-full mt-48">
             @if (isAndroid) {
               <button
                 (click)="clickDownload('android')"
                 mat-stroked-button
                 color="primary"
                 >
-                <ion-icon name="logo-google-playstore" class="mr-3"></ion-icon>
+                <ion-icon name="logo-google-playstore" class="mr-16"></ion-icon>
                 Baixar na Google Play
               </button>
             }
@@ -78,7 +78,7 @@
                 mat-stroked-button
                 color="primary"
                 >
-                <ion-icon name="logo-apple" class="mr-3"></ion-icon> Baixar na App
+                <ion-icon name="logo-apple" class="mr-16"></ion-icon> Baixar na App
                 Store
               </button>
             }

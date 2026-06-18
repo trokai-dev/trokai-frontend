@@ -1,0 +1,24 @@
+// @trokai/shared-styles — text utilities
+// Generic alignment/transform/overflow helpers, token-free. Shared by both apps
+// so shared-ui renders identically (replaces the web-only bootstrap-compat text-*).
+
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+
+.small { font-size: 0.875em; }
+
+.fw-light { font-weight: 300; }
+.fw-normal { font-weight: 400; }
+.fw-semibold { font-weight: 600; }
+.fw-bold { font-weight: 700; }
+
+.nowrap { white-space: nowrap; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+// `text-dots` = legacy alias of `truncate` (kept: ~hundreds of template usages).
+.text-dots { overflow: hidden !important; text-overflow: ellipsis; white-space: nowrap; }
+.line-through { text-decoration: line-through; }

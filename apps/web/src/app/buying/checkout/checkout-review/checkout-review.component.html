@@ -3,12 +3,12 @@
 @if (checkoutLocal && user ){
 
 <div class="checkout-body">
-  <div class="d-flex flex-column">
+  <div class="flex flex-col">
     <!-- Produtos -->
-    <div class="py-5">
+    <div class="py-48">
       <h3>Produtos</h3>
 
-      <div class="d-flex flex-column">
+      <div class="flex flex-col">
         @for (product of checkoutLocal?.products; track product) {
         <app-cart-item [product]="product" [showRemove]="false" />
         }
@@ -16,15 +16,15 @@
     </div>
 
     <!-- Entrega -->
-    <div class="border-top py-5">
-      <div class="d-flex justify-content-between">
+    <div class="border-top py-48">
+      <div class="flex justify-between">
         <h3>Entrega</h3>
         <span class="label-button" (click)="onChangeShipping()">Alterar</span>
       </div>
 
       @if (checkoutLocal?.shippingOption === shippingOptions.SHIPPING) { @if
       (user?.address) {
-      <div class="d-flex flex-column mt-16">
+      <div class="flex flex-col mt-16">
         <span class="label-body-2">
           {{ user.address.street }},
           {{ user.address.number }}
@@ -39,7 +39,7 @@
         </span>
       </div>
       } } @else {
-      <div class="d-flex flex-column mt-16">
+      <div class="flex flex-col mt-16">
         <span class="label-body-2">
           {{ checkoutLocal.owner.address.city }} (Retirada presencial)
         </span>
@@ -48,13 +48,13 @@
     </div>
 
     <!-- Pagamento -->
-    <div class="border-top py-5">
-      <div class="d-flex justify-content-between">
+    <div class="border-top py-48">
+      <div class="flex justify-between">
         <h3>Pagamento</h3>
         <span class="label-button" (click)="onChangePayment()">Alterar</span>
       </div>
 
-      <div class="d-flex gap-4 mt-16">
+      <div class="flex gap-24 mt-16">
         @if (checkoutLocal?.paymentOption === paymentOptions.PIX) {
         <tk-payment-icon [paymentBrand]="'pix'" />
         <span class="label-body-2">PIX</span>
@@ -63,7 +63,7 @@
           [paymentBrand]="card.brand"
           [showDefaultCardIcon]="true"
         />
-        <span class="label-body-2 text-capitalize">
+        <span class="label-body-2 capitalize">
           {{ card.brand ?? "Cartão de crédito " }} ****
           {{ card.lastDigits }} ({{ checkoutLocal.selectedInstallments }}x)
         </span>

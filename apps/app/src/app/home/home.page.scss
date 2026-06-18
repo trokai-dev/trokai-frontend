@@ -48,7 +48,7 @@ a {
     font-weight: 400 !important;
 
     @extend .label-body-1;
-    @extend .color-gray-dark;
+    color: var(--color-gray-dark) !important;
   }
   .home_row_description {
     display: block;

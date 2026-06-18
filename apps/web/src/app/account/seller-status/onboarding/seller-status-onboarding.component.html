@@ -1,11 +1,11 @@
 <!-- Status Card: Perfil da loja (sellerProfileStatus only) -->
 <div
-  class="status-card mt-5"
+  class="status-card mt-48"
   [ngClass]="'status-card--' + profileStatusVariant"
 >
-  <h6 class="color-gray-dark mb-3">Perfil da loja</h6>
-  <div class="status-card__body flex-column">
-    <div class="d-flex gap-4 align-center">
+  <h6 class="color-gray-dark mb-16">Perfil da loja</h6>
+  <div class="status-card__body flex-col">
+    <div class="flex gap-24 align-center">
       <div class="status-card__icon">
         @switch (user.sellerProfileStatus) {
           @case (SellerProfileStatus.PENDING_REVIEW) {
@@ -49,12 +49,12 @@
     <!-- Seller adjusts alert -->
     @if (user.sellerProfileStatus === SellerProfileStatus.ADJUSTS_REQUIRED) {
       <a
-        class="clothes-alert clothes-alert--warning mt-4"
+        class="clothes-alert clothes-alert--warning mt-24"
         routerLink="/account/wardrobe"
       >
         <ion-icon name="warning-outline" class="clothes-alert__icon"></ion-icon>
         <span class="label-body-2">Ver ajustes necessários na conta</span>
-        <ion-icon name="chevron-forward-outline" class="ms-auto"></ion-icon>
+        <ion-icon name="chevron-forward-outline" class="ml-auto"></ion-icon>
       </a>
     }
   </div>
@@ -62,13 +62,13 @@
 
 <!-- Clothes Progress -->
 @if (showClothesProgress) {
-  <div class="clothes-progress mt-5">
-    <h6 class="color-gray-dark mb-1">Peças aprovadas</h6>
-    <p class="label-caption-1 mb-3">
+  <div class="clothes-progress mt-48">
+    <h6 class="color-gray-dark mb-4">Peças aprovadas</h6>
+    <p class="label-caption-1 mb-16">
       Mínimo de {{ minClothesToSell }} peças aprovadas para ativar a loja
     </p>
 
-    <div class="progress-row mb-2">
+    <div class="progress-row mb-8">
       <div class="progress-bar-wrapper">
         <div class="progress-bar-fill" [style.width.%]="progressPercent"></div>
       </div>
@@ -89,7 +89,7 @@
 
     <!-- Clothes Alerts -->
     @if (adjustsCount > 0 || reprovedCount > 0) {
-      <div class="clothes-alerts mt-5">
+      <div class="clothes-alerts mt-48">
         @if (adjustsCount > 0) {
           <a
             class="clothes-alert clothes-alert--warning"
@@ -108,16 +108,16 @@
                   : "peças requerem ajuste"
               }}
             </span>
-            <ion-icon name="chevron-forward-outline" class="ms-auto"></ion-icon>
+            <ion-icon name="chevron-forward-outline" class="ml-auto"></ion-icon>
           </a>
         }
       </div>
     }
 
     @if (showAddProductsCta) {
-      <div class="d-flex gap-4 mt-4 justify-content-end">
+      <div class="flex gap-24 mt-24 justify-end">
         <button
-          class="mt-4"
+          class="mt-24"
           mat-stroked-button
           color="primary"
           routerLink="/users/{{ user.nickname }}"
@@ -126,7 +126,7 @@
         </button>
 
         <button
-          class="mt-4"
+          class="mt-24"
           mat-flat-button
           color="primary"
           (click)="goAddProducts()"
@@ -139,7 +139,7 @@
 }
 
 <!-- Seller Guide -->
-<a class="seller-guide-card mt-5" routerLink="/guia-vendedor">
+<a class="seller-guide-card mt-48" routerLink="/guia-vendedor">
   <ion-icon name="book-outline" class="seller-guide-card__icon"></ion-icon>
   <div class="seller-guide-card__content">
     <h6 class="color-gray-dark mb-0">Guia do Vendedor Trokaí</h6>
