@@ -5,7 +5,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatRadioChange, MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { PaymentIconComponent } from '../../../payment-icon/payment-icon.component';
+import { TkPaymentIconComponent as PaymentIconComponent } from '@trokai/shared-ui';
 import { PaymentBrands } from '@trokai/shared-core';
 import { AuthService } from 'src/app/auth/auth.service';
 import {
@@ -16,7 +16,7 @@ import {
   PaymentOption,
 } from '@trokai/shared-data-access';
 import { FormsModule } from '@angular/forms';
-import { FormCouponComponent } from '../../../modules/form-coupon/form-coupon.component';
+import { TkCouponFormComponent as FormCouponComponent } from '@trokai/shared-ui';
 import { CheckoutTotalComponent } from '../checkout-total/checkout-total.component';
 import { AutoUnsubscribe } from 'src/app/autounsubscribe';
 import { takeUntil } from 'rxjs';

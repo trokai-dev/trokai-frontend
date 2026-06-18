@@ -2,7 +2,7 @@ import { Card, User } from '@trokai/shared-core';
 import { Component, OnInit, inject } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
-import { PaymentIconComponent } from '../../../payment-icon/payment-icon.component';
+import { TkPaymentIconComponent as PaymentIconComponent } from '@trokai/shared-ui';
 import { CheckoutTotalComponent } from '../checkout-total/checkout-total.component';
 import { takeUntil } from 'rxjs';
 import { AutoUnsubscribe } from 'src/app/autounsubscribe';

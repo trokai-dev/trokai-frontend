@@ -7,7 +7,7 @@ import {
 } from '@trokai/shared-ui';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Component, OnInit, inject } from '@angular/core';
-import { CompletingInformationService } from 'src/app/services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 import { ActivatedRoute } from '@angular/router';
 import { DialogService } from 'src/app/services/dialog.service';
 

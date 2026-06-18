@@ -18,7 +18,7 @@ import {
 } from '@ionic/angular/standalone';
 import { AlertService, LoadingService } from '@trokai/shared-ui';
 import { RecoveryCodeFormComponent } from '@trokai/shared-ui';
-import { CompletingInformationService } from 'src/app/services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 
 @Component({
   selector: 'app-forgot-password-code',

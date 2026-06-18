@@ -21,10 +21,10 @@ import {
 } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
-import { FavoritesService } from '../favorites/favorites.service';
+import { FavoritesService } from '@trokai/shared-data-access';
 import { GlobalService } from '../services/global.service';
 import { BuyingService } from '@trokai/shared-data-access';
-import { CompletingInformationService } from '../services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 import { GeolocationService } from '../services/geolocation.service';
 import { FooterComponent } from '../footer/footer.component';
 

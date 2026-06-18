@@ -2,7 +2,7 @@ import { Address } from '@trokai/shared-core';
 import { AlertService, TkAddressFormComponent } from '@trokai/shared-ui';
 import { AuthService } from './../../auth/auth.service';
 import { Component, OnInit, inject } from '@angular/core';
-import { CompletingInformationService } from 'src/app/services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 
 @Component({
   selector: 'app-address',

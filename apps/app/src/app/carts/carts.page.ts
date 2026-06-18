@@ -1,4 +1,4 @@
-import { User } from '@trokai/shared-core';
+import { ClothesStatus, User } from '@trokai/shared-core';
 import { Clothes } from '@trokai/shared-core';
 import { CurrencyPipe } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
@@ -6,7 +6,6 @@ import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { BuyingService, Basket } from '@trokai/shared-data-access';
-import { ClothesStatus } from '../services/inventory.service';
 import { SearchService } from '../services/search.service';
 import { MainService } from '../services/main.service';
 import { ItemViewerComponent } from '../shared/components/item-viewer/item-viewer.component';
@@ -32,7 +31,7 @@ import {
 import { addIcons } from 'ionicons';
 import { sadOutline } from 'ionicons/icons';
 import { closeOutline } from 'ionicons/icons';
-import { CompletingInformationService } from '../services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 import { LoadingService, CostPipe, TkUserAvatarComponent } from '@trokai/shared-ui';
 
 @Component({

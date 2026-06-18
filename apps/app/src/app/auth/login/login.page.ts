@@ -15,7 +15,7 @@ import { ForgotPasswordEmailPage } from '../forgot-password-email/forgot-passwor
 import { RegisterPage } from '../register/register.page';
 import { Keyboard } from '@capacitor/keyboard';
 import { BackButtonComponent } from 'src/app/shared/components/back-button/back-button.component';
-import { CompletingInformationService } from 'src/app/services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 import {
   LoadingService,
   LoginCredentials,

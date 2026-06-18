@@ -30,7 +30,7 @@ import {
 import { PushNotificationsService } from './services/push-notifications.service';
 import { SocialLogin } from '@capgo/capacitor-social-login';
 import { environment } from 'src/environments/environment';
-import { CompletingInformationService } from './services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 register();
 
 @Component({

@@ -19,7 +19,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { AlertService } from '@trokai/shared-ui';
-import { FormAddressComponent } from '../form-address/form-address.component';
+import { TkAddressFormComponent as FormAddressComponent } from '@trokai/shared-ui';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BuyingService } from '@trokai/shared-data-access';
 import { GlobalService } from 'src/app/services/global.service';
@@ -34,7 +34,7 @@ import { MatListModule } from '@angular/material/list';
 
 import { NgxMaskDirective } from 'ngx-mask';
 import { getCreditCardBrand, PaymentBrands } from '@trokai/shared-core';
-import { PaymentIconComponent } from 'src/app/payment-icon/payment-icon.component';
+import { TkPaymentIconComponent as PaymentIconComponent } from '@trokai/shared-ui';
 
 @Component({
   selector: 'app-form-card',

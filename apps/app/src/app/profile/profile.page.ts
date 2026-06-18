@@ -21,7 +21,7 @@ import {
   ProfileFormComponent,
   ProfileFormValue,
 } from '@trokai/shared-ui';
-import { CompletingInformationService } from '../services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 import { ToastService } from '../services/toast-service';
 import { GlobalService } from '../services/global.service';
 

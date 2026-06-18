@@ -1,4 +1,4 @@
-import { StoreVisibility, User } from '@trokai/shared-core';
+import { ClothesStatus, StoreVisibility, User } from '@trokai/shared-core';
 import { Clothes } from '@trokai/shared-core';
 import {
   Component,
@@ -8,7 +8,7 @@ import {
   ViewChild,
   inject,
 } from '@angular/core';
-import { ClothesStatus, InventoryService } from '../services/inventory.service';
+import { InventoryService } from '../services/inventory.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '@trokai/shared-data-access';

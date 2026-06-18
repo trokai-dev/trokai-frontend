@@ -1,4 +1,4 @@
-import { ClothesStatus } from '../services/inventory.service';
+import { ClothesStatus } from '@trokai/shared-core';
 
 const statusForVisitor = [
   {

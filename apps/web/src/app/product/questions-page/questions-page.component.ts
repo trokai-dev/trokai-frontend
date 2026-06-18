@@ -18,7 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { QUESTIONS_SECURITY_DIALOG_AGREED_KEY } from '@trokai/shared-ui';
 import { DialogService } from 'src/app/services/dialog.service';
-import { CompletingInformationService } from 'src/app/services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 
 @Component({
   selector: 'app-questions-page',

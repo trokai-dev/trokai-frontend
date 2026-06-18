@@ -19,7 +19,7 @@ import {
   RegisterFormComponent,
 } from '@trokai/shared-ui';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import { CompletingInformationService } from 'src/app/services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 
 @Component({
   selector: 'app-register',

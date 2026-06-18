@@ -18,7 +18,7 @@ import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { BrowserRef } from './browser-ref.service';
-import { ItemsMap } from '../models/items-map';
+import { ItemsMap } from '@trokai/shared-core';
 
 @Injectable({
   providedIn: 'root',

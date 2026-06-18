@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Subscription } from 'rxjs';
 import { Router, RouterOutlet } from '@angular/router';
-import { CompletingInformationService } from '../services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 
 @Component({
   selector: 'app-auth',

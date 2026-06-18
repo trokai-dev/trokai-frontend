@@ -12,7 +12,7 @@ import {
   inject,
 } from '@angular/core';
 import { GlobalService } from 'src/app/services/global.service';
-import { ItemsMap, CategoryModel } from 'src/app/models/items-map';
+import { ItemsMap, CategoryModel } from '@trokai/shared-core';
 
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';

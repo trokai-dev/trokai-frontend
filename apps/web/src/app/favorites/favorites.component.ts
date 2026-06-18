@@ -6,8 +6,8 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { GlobalService } from '../services/global.service';
-import { FavoritesService } from './favorites.service';
-import { ItemsMap } from '../models/items-map';
+import { FavoritesService } from '@trokai/shared-data-access';
+import { ItemsMap } from '@trokai/shared-core';
 import { Clothes } from '@trokai/shared-core';
 import { MatButtonModule } from '@angular/material/button';
 import { TkProductCardComponent } from '@trokai/shared-ui';

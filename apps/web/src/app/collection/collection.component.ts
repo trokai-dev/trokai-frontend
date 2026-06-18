@@ -13,7 +13,7 @@ import {
 } from '../search/paginator/paginator.component';
 import { GlobalService } from '../services/global.service';
 import { SearchService } from '../search/search.service';
-import { ItemsMap } from '../models/items-map';
+import { ItemsMap } from '@trokai/shared-core';
 import { MatButtonModule } from '@angular/material/button';
 import { TkProductCardComponent } from '@trokai/shared-ui';
 

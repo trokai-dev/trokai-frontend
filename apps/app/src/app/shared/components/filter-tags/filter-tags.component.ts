@@ -11,8 +11,7 @@ import {
 } from '@ionic/angular/standalone';
 import { SortingComponent } from 'src/app/search/sorting/sorting.component';
 import { FilterComponent } from 'src/app/search/filter/filter.component';
-import { Filters } from '@trokai/shared-core';
-import { ClothesStatus } from 'src/app/services/inventory.service';
+import { ClothesStatus, Filters } from '@trokai/shared-core';
 
 import { addIcons } from 'ionicons';
 import { filterOutline, reorderTwoOutline, trash } from 'ionicons/icons';

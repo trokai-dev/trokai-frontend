@@ -1,4 +1,4 @@
-import { User } from '@trokai/shared-core';
+import { ClothesStatus, User } from '@trokai/shared-core';
 import { Clothes } from '@trokai/shared-core';
 import {
   Component,
@@ -15,11 +15,8 @@ import { Share } from '@capacitor/share';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Basket, BuyingService } from '@trokai/shared-data-access';
-import {
-  ClothesPayment,
-  ClothesStatus,
-  InventoryService,
-} from '../services/inventory.service';
+import { InventoryService } from '../services/inventory.service';
+import { ClothesPayment } from '@trokai/shared-data-access';
 import { RequiredAdjustsComponent } from '../wardrobe/required-adjusts/required-adjusts.component';
 import { StatusPillComponent, StatusPillVariant, ItemNamePipe, CostPipe } from '@trokai/shared-ui';
 import { MainService } from '../services/main.service';
@@ -31,7 +28,7 @@ import { Filters, GlobalParams } from '@trokai/shared-core';
 import { BackButtonComponent } from '../shared/components/back-button/back-button.component';
 import { NgClass, CurrencyPipe } from '@angular/common';
 import { TkLikeButtonComponent } from '@trokai/shared-ui';
-import { ZipcodeShippingFeeComponent } from '../shared/zipcode-shipping-fee/zipcode-shipping-fee.component';
+import { TkZipcodeShippingFeeComponent as ZipcodeShippingFeeComponent } from '@trokai/shared-ui';
 import { TkReviewStarsComponent } from '@trokai/shared-ui';
 import { TkProductCardComponent } from '@trokai/shared-ui';
 import {
@@ -83,7 +80,7 @@ import { GlobalService } from '../services/global.service';
 import { ProductService } from '@trokai/shared-data-access';
 import { ToastService } from '../services/toast-service';
 import { ReserveTimeComponent } from '../buying/reserve-time/reserve-time.component';
-import { CompletingInformationService } from '../services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 
 @Component({
   selector: 'app-product',

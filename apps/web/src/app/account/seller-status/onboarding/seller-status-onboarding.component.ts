@@ -9,7 +9,7 @@ import {
 import { NgClass } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { CompletingInformationService } from '../../../services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 
 @Component({
   selector: 'app-seller-status-onboarding',

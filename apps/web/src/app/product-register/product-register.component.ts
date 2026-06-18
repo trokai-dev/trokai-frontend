@@ -7,7 +7,7 @@ import {
   UploadPictureItem,
   User,
 } from '@trokai/shared-core';
-import { CompletingInformationService } from 'src/app/services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 import { ProductService } from '@trokai/shared-data-access';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';

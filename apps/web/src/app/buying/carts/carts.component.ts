@@ -26,7 +26,7 @@ import { Filters } from '@trokai/shared-core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TkUserAvatarComponent } from '@trokai/shared-ui';
 import { TkReviewStarsComponent } from '@trokai/shared-ui';
-import { CompletingInformationService } from 'src/app/services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 import { DialogService } from 'src/app/services/dialog.service';
 import { User } from '@trokai/shared-core';
 

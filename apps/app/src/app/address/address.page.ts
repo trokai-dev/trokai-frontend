@@ -18,7 +18,7 @@ import {
   NavParams,
   Platform,
 } from '@ionic/angular/standalone';
-import { CompletingInformationService } from '../services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 import { FirebaseService } from '../services/firebase.service';
 
 @Component({

@@ -27,7 +27,7 @@ import {
   cubeOutline,
   cube,
 } from 'ionicons/icons';
-import { CompletingInformationService } from '../services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 import { TutorialService } from '../services/tutorial.service';
 
 @Component({

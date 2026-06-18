@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserReviewsDialogComponent } from '../modules/reviews/user-reviews-dialog/user-reviews-dialog.component';
 import { DownloadModalComponent } from '../download-modal/download-modal.component';
 import { Overlay } from '@angular/cdk/overlay';
-import { FeesCalculatorComponent } from '../modules/fees-calculator/fees-calculator.component';
+import { TkFeesCalculatorComponent as FeesCalculatorComponent } from '@trokai/shared-ui';
 import { OpenAppDialogComponent } from '../open-app-dialog/open-app-dialog.component';
 import { ExitPopupComponent } from '../exit-popup/exit-popup.component';
 import { CheckoutValues, Coupon } from '@trokai/shared-data-access';

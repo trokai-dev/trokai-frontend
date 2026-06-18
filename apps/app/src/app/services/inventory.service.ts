@@ -18,9 +18,6 @@ import { CatalogService } from '@trokai/shared-data-access';
  *                      On PATCH the backend keeps it in place via its _id.
  *                      `serverUrl` (.lg) lets us re-fetch the blob for duplication/cropping.
  */
-export { ClothesStatus } from '@trokai/shared-core';
-
-export { ClothesPayment } from '@trokai/shared-data-access';
 
 @Injectable({
   providedIn: 'root',

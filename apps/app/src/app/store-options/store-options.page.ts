@@ -18,7 +18,7 @@ import {
   IonSpinner,
 } from '@ionic/angular/standalone';
 import { SellerProfileComponent, SellerProfileValue } from '@trokai/shared-ui';
-import { CompletingInformationService } from '../services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 import { ToastService } from '../services/toast-service';
 
 @Component({

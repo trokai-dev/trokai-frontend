@@ -1,7 +1,7 @@
 import { CartsComponent } from './carts/carts.component';
 import { CheckoutV2Component } from './checkout/checkout-v2.component';
 import { ShippingOptionsComponent } from './checkout/shipping-options/shipping-options.component';
-import { ShippingAddressComponent } from './checkout/shipping-address/shipping-address.component';
+import { TkShippingAddressComponent as ShippingAddressComponent } from '@trokai/shared-ui';
 import { PaymentOptionsComponent } from './checkout/payment-options/payment-options.component';
 import { NewCardComponent } from './checkout/new-card/new-card.component';
 import { CheckoutReviewComponent } from './checkout/checkout-review/checkout-review.component';

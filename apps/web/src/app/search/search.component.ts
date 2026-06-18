@@ -10,7 +10,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GlobalService } from '../services/global.service';
 import { Paginator, PaginatorComponent } from './paginator/paginator.component';
 import { SearchService } from './search.service';
-import { ItemsMap } from '../models/items-map';
+import { ItemsMap } from '@trokai/shared-core';
 
 import { TkProductCardComponent } from '@trokai/shared-ui';
 import { MatBadgeModule } from '@angular/material/badge';

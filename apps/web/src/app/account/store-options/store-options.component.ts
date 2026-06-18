@@ -10,7 +10,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TkImagePickerComponent } from '@trokai/shared-ui';
 import { environment } from '../../../environments/environment';
-import { CompletingInformationService } from '../../services/completing-information.service';
+import { CompletingInformationService } from '@trokai/shared-data-access';
 
 @Component({
   selector: 'app-store-options',
