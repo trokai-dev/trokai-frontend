@@ -11,23 +11,15 @@
     @if (!loading) {
     <div>
 
-      <ion-button (click)="googleLogin()" fill="outline" color="medium" class="btn-google action-button ">
-        <ion-img slot="start" src="../assets/icons/google-icon.png">
-        </ion-img>
-        Continuar com o Google
-      </ion-button>
+      <tk-google-btn (googleClick)="googleLogin()"></tk-google-btn>
 
       @if (showApple) {
-      <ion-button (click)="appleLogin()" fill="outline" color="medium" class="btn-apple action-button mt-8">
-        <ion-icon slot="start" name="logo-apple">
-        </ion-icon>
-        Continuar com a Apple
-      </ion-button>
+      <tk-apple-btn class="mt-8 block" (appleClick)="appleLogin()"></tk-apple-btn>
       }
 
-      <ion-button (click)="goToLogin()" class="action-button mt-40">
+      <button mat-flat-button (click)="goToLogin()" class="action-button mt-40">
         Entrar com email
-      </ion-button>
+      </button>
 
 
       <div class="w-full ion-text-center mt-40">

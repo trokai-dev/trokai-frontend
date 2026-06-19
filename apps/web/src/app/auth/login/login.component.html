@@ -13,22 +13,7 @@
 
       <tk-google-btn (googleClick)="googleLogin()"></tk-google-btn>
 
-      <button
-        mat-stroked-button
-        color="primary"
-        aria-label="Entrar com Apple"
-        (click)="appleLogin()"
-        type="button"
-        class="btn-social w-full mt-8"
-      >
-        <img
-          slot="start"
-          class="mr-24"
-          src="../../../assets/img/apple-icon.svg"
-          alt="Apple"
-        />
-        <span class="label-body-2"> Continuar com Apple</span>
-      </button>
+      <tk-apple-btn class="mt-8 block" (appleClick)="appleLogin()"></tk-apple-btn>
     </tk-login-form>
   </div>
 </div>

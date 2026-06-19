@@ -2,20 +2,20 @@ import {
   LoadingService,
   LoginCredentials,
   LoginFormComponent,
+  TkAppleBtnComponent,
   TkGoogleBtnComponent,
 } from '@trokai/shared-ui';
 import { Router } from '@angular/router';
 import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { GlobalService } from 'src/app/services/global.service';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   standalone: true,
-  imports: [LoginFormComponent, MatButtonModule, TkGoogleBtnComponent],
+  imports: [LoginFormComponent, TkGoogleBtnComponent, TkAppleBtnComponent],
 })
 export class LoginComponent implements OnInit {
   private authService = inject(AuthService);

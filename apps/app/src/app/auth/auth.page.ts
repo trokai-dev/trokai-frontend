@@ -1,4 +1,4 @@
-import { Component, OnDestroy, AfterViewInit, inject, OnInit } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
@@ -12,10 +12,8 @@ import {
 } from '@capacitor-community/apple-sign-in';
 
 import {
-  IonButton,
   IonContent,
   IonGrid,
-  IonIcon,
   IonImg,
   IonNav,
   isPlatform,
@@ -25,10 +23,12 @@ import {
   IonRow,
   IonSpinner,
 } from '@ionic/angular/standalone';
-// const { SignInWithApple } = Plugins;
-import { logoApple } from 'ionicons/icons';
-import { addIcons } from 'ionicons';
-import { AlertService } from '@trokai/shared-ui';
+import { MatButtonModule } from '@angular/material/button';
+import {
+  AlertService,
+  TkAppleBtnComponent,
+  TkGoogleBtnComponent,
+} from '@trokai/shared-ui';
 import { FirebaseService } from '../services/firebase.service';
 import { ToastService } from '../services/toast-service';
 import { MainService } from '../services/main.service';
@@ -46,12 +46,13 @@ import { SocialLogin } from '@capgo/capacitor-social-login';
     IonLabel,
     IonContent,
     IonGrid,
-    IonIcon,
-    IonButton,
     IonImg,
+    MatButtonModule,
+    TkGoogleBtnComponent,
+    TkAppleBtnComponent,
   ],
 })
-export class AuthPage implements OnDestroy, AfterViewInit, OnInit {
+export class AuthPage implements OnDestroy, AfterViewInit {
   private router = inject(Router);
   private loadingCtrl = inject(LoadingController);
   private authService = inject(AuthService);
@@ -68,11 +69,6 @@ export class AuthPage implements OnDestroy, AfterViewInit, OnInit {
   loading = false;
   showPhone = false;
   showApple = false;
-
-  ngOnInit() {
-    addIcons({ logoApple });
-  }
-
 
   ngAfterViewInit() {
     if (isPlatform('ios')) this.showApple = true;
