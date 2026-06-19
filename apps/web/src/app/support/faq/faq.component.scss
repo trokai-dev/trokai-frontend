@@ -1,4 +1,8 @@
-@import "../../../styles/variables.scss";
+@import '../../../styles/variables.scss';
+
+:host {
+  display: block;
+}
 
 h4 {
   font-weight: 300 !important;
@@ -6,8 +10,8 @@ h4 {
 }
 
 .mat-expansion-panel-header {
-  padding: .8rem;
-      border-bottom: $border-trokai;
+  padding: 0.8rem;
+  border-bottom: $border-trokai;
 }
 
 .mat-expanded {

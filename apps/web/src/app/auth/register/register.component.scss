@@ -1,0 +1,9 @@
+:host {
+  display: block;
+}
+
+// Was gcol-md-4 + mx-auto — centered, ~4/12 of container on desktop.
+.auth-card {
+  max-width: 38rem;
+  margin-inline: auto;
+}

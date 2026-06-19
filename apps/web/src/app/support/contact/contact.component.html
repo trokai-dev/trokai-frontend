@@ -1,25 +1,21 @@
-<div class="container page">
-  <div class="grid-row mb-48">
-    <div class="gcol-12">
-      <button color="primary" mat-button routerLink="/help/">
-        <mat-icon>arrow_back</mat-icon> Central de ajuda
-      </button>
-    </div>
+<div class="page-wrap">
+  <div class="mb-48">
+    <button color="primary" mat-button routerLink="/help/">
+      <mat-icon>arrow_back</mat-icon> Central de ajuda
+    </button>
   </div>
 
-  <div class="grid-row">
-    <div class="gcol-12 gcol-md-4 mx-auto text-center">
-      <span class="label-body-1 mb-48 block">
-        Dúvidas? Problemas? Sugestões?
-        <br />
-        Chama que a gente conversa!!
-      </span>
+  <div class="contact-card text-center">
+    <span class="label-body-1 mb-48 block">
+      Dúvidas? Problemas? Sugestões?
+      <br />
+      Chama que a gente conversa!!
+    </span>
 
-      <tk-contact-form
-        [showName]="true"
-        [loading]="loading"
-        (submitted)="sendMail($event)"
-      />
-    </div>
+    <tk-contact-form
+      [showName]="true"
+      [loading]="loading"
+      (submitted)="sendMail($event)"
+    />
   </div>
 </div>

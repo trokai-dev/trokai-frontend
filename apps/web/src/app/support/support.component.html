@@ -1,57 +1,45 @@
-<div class="container page">
-  <div class="grid-row">
-    <div class="gcol-12">
-      <h1>Ajuda</h1>
+<div class="page-wrap">
+  <div>
+    <h1>Ajuda</h1>
+  </div>
+
+  <div class="mt-40">
+    <h3>Dúvidas Frequentes</h3>
+
+    <div class="support-areas mt-16">
+      <a routerLink="/help/faq/seller">
+        <div class="support-area">
+          <!-- botao vendedor -->
+          <mat-icon class="color-primary">storefront</mat-icon>
+          <h4>Vendas</h4>
+        </div>
+      </a>
+
+      <a routerLink="/help/faq/buyer">
+        <div class="support-area">
+          <!-- botao comprador -->
+          <mat-icon class="color-primary">shopping_cart</mat-icon>
+          <h4>Compras</h4>
+        </div>
+      </a>
     </div>
   </div>
 
-  <div class="grid-row mt-40">
-    <div class="gcol-12">
-      <h3>Dúvidas Frequentes</h3>
+  <div class="mt-40">
+    <h3>Fale com o Trokaí</h3>
+    <p class="mt-8">
+      Se não encontrou a resposta para sua dúvida, entre em contato com a gente!
+      Estamos prontos para ajudar.
+    </p>
 
-      <div class="grid-row mt-16">
-        <div class="gcol-12 gcol-md-3">
-          <a routerLink="/help/faq/seller">
-            <div class="support-area">
-              <!-- botao vendedor -->
-              <mat-icon class="color-primary">storefront</mat-icon>
-              <h4>Vendas</h4>
-            </div>
-          </a>
+    <div class="support-areas mt-16">
+      <a routerLink="contact">
+        <div class="support-area">
+          <!-- botao vendedor -->
+          <mat-icon class="color-primary">mail</mat-icon>
+          <h4>Entrar em contato</h4>
         </div>
-
-        <div class="gcol-12 gcol-md-3 mt-24 mt-md-0">
-          <a routerLink="/help/faq/buyer">
-            <div class="support-area">
-              <!-- botao comprador -->
-              <mat-icon class="color-primary">shopping_cart</mat-icon>
-              <h4>Compras</h4>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid-row mt-40">
-    <div class="gcol-12">
-      <h3>Fale com o Trokaí</h3>
-      <p class="mt-8">
-        Se não encontrou a resposta para sua dúvida, entre em contato com a
-        gente! Estamos prontos para ajudar.
-      </p>
-
-      <div class="grid-row mt-16">
-        <div class="gcol-12 gcol-md-3">
-          <a routerLink="contact">
-            <div class="support-area">
-              <!-- botao vendedor -->
-              <mat-icon class="color-primary">mail</mat-icon>
-              <h4>Entrar em contato</h4>
-            </div>
-          </a>
-        </div>
-      </div>
+      </a>
     </div>
   </div>
 </div>

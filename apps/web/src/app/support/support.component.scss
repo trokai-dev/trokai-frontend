@@ -1,3 +1,18 @@
+:host {
+  display: block;
+}
+
+// Was gcol-md-3 cards — full-width stacked on mobile, row on desktop.
+.support-areas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
 .support-area {
   display: flex;
   justify-content: center;
@@ -6,10 +21,11 @@
   border: 1px solid #ededed;
   border-radius: 0.4rem;
   padding: 1.6rem;
-
-
-  min-width: 200px;
   min-height: 125px;
+
+  @media (min-width: 768px) {
+    min-width: 200px;
+  }
 
   h4 {
     margin-top: 0.8rem;
