@@ -54,7 +54,7 @@ workspace lets us:
 ## Workspace structure
 
 ```
-trokai-monorepo/
+trokai-frontend/
 ├── apps/
 │   ├── web/                      # Angular 21 SSR site
 │   │   ├── src/                  # app code (prefix: app-)
