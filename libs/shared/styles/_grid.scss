@@ -7,16 +7,27 @@
 // Page-width wrapper (kept — it's a layout primitive, not a column).
 .container,
 .container-fluid {
+  box-sizing: border-box; // padding must not add to 100% width (no global reset)
   width: 100%;
   margin-inline: auto;
   padding-inline: var(--space-12);
 }
 .container {
-  @media (min-width: 576px)  { max-width: 540px; }
-  @media (min-width: 768px)  { max-width: 720px; }
-  @media (min-width: 992px)  { max-width: 960px; }
-  @media (min-width: 1200px) { max-width: 1140px; }
-  @media (min-width: 1400px) { max-width: 1320px; }
+  @media (min-width: 576px) {
+    max-width: 540px;
+  }
+  @media (min-width: 768px) {
+    max-width: 720px;
+  }
+  @media (min-width: 992px) {
+    max-width: 960px;
+  }
+  @media (min-width: 1200px) {
+    max-width: 1140px;
+  }
+  @media (min-width: 1400px) {
+    max-width: 1320px;
+  }
 }
 
 .grid-row {
@@ -27,31 +38,51 @@
 }
 
 @for $i from 1 through 12 {
-  .gcol-#{$i} { grid-column: span #{$i}; }
+  .gcol-#{$i} {
+    grid-column: span #{$i};
+  }
 }
-.gcol-auto { grid-column: auto; }
+.gcol-auto {
+  grid-column: auto;
+}
 
 // Equal-width auto grids (was Bootstrap row-cols-N). Children auto-place.
 @for $i from 1 through 6 {
-  .grid-cols-#{$i} { grid-template-columns: repeat(#{$i}, 1fr); }
+  .grid-cols-#{$i} {
+    grid-template-columns: repeat(#{$i}, 1fr);
+  }
 }
 
 // Offsets — margin-left as a fraction of the row width (Bootstrap-equivalent).
 @for $i from 1 through 11 {
-  .offset-#{$i} { margin-left: math.percentage(math.div($i, 12)); }
+  .offset-#{$i} {
+    margin-left: math.percentage(math.div($i, 12));
+  }
 }
-.offset-0 { margin-left: 0; }
+.offset-0 {
+  margin-left: 0;
+}
 
 @media (min-width: 768px) {
   @for $i from 1 through 12 {
-    .gcol-md-#{$i} { grid-column: span #{$i}; }
+    .gcol-md-#{$i} {
+      grid-column: span #{$i};
+    }
   }
-  .gcol-md-auto { grid-column: auto; }
+  .gcol-md-auto {
+    grid-column: auto;
+  }
   @for $i from 1 through 6 {
-    .grid-cols-md-#{$i} { grid-template-columns: repeat(#{$i}, 1fr); }
+    .grid-cols-md-#{$i} {
+      grid-template-columns: repeat(#{$i}, 1fr);
+    }
   }
   @for $i from 1 through 11 {
-    .offset-md-#{$i} { margin-left: math.percentage(math.div($i, 12)); }
+    .offset-md-#{$i} {
+      margin-left: math.percentage(math.div($i, 12));
+    }
   }
-  .offset-md-0 { margin-left: 0; }
+  .offset-md-0 {
+    margin-left: 0;
+  }
 }

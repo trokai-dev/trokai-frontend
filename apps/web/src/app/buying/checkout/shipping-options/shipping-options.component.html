@@ -43,7 +43,7 @@
 
 <div class="checkout-footer">
   <button
-    mat-raised-button
+    mat-flat-button
     color="primary"
     (click)="onContinue()"
     [disabled]="selectedOption === null"
@@ -78,7 +78,7 @@
   <button mat-button color="primary" (click)="onChangeAddress($event)">
     Alterar endereço
   </button>
-  <button mat-raised-button color="primary" (click)="onContinue()">
+  <button mat-flat-button color="primary" (click)="onContinue()">
     Continuar
   </button>
 </div>
@@ -102,7 +102,7 @@
 </div>
 
 <div class="checkout-footer mt-40">
-  <button mat-raised-button color="primary" (click)="onContinue()">
+  <button mat-flat-button color="primary" (click)="onContinue()">
     Continuar
   </button>
 </div>

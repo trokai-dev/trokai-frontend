@@ -1,31 +1,34 @@
-<div class="container page my-48">
-  <div class="grid-row">
-    <div class="gcol-12 gcol-md-4 mx-auto text-center">
-      <h2 class="color-gray-dark">Fazer login no Trokaí</h2>
+<div class="page-wrap">
+  <div class="login-card text-center">
+    <h2 class="color-gray-dark">Fazer login no Trokaí</h2>
 
-      <tk-login-form
-        class="mt-48 pt-48 block"
-        [loading]="loading"
-        (submitted)="login($event)"
-        (forgotPassword)="toForgot()"
-        (register)="toRegister()"
+    <tk-login-form
+      class="mt-24 pt-48 block"
+      [loading]="loading"
+      (submitted)="login($event)"
+      (forgotPassword)="toForgot()"
+      (register)="toRegister()"
+    >
+      <span class="label-caption-1 my-16 block">ou</span>
+
+      <tk-google-btn (googleClick)="googleLogin()"></tk-google-btn>
+
+      <button
+        mat-stroked-button
+        color="primary"
+        aria-label="Entrar com Apple"
+        (click)="appleLogin()"
+        type="button"
+        class="btn-social w-full mt-8"
       >
-        <span class="label-caption-1 mt-48 block">ou</span>
-
-        <tk-google-btn (googleClick)="googleLogin()"></tk-google-btn>
-
-        <button
-          mat-stroked-button
-          color="primary"
-          aria-label="Entrar com Apple"
-          (click)="appleLogin()"
-          type="button"
-          class="btn-social w-full mt-24"
-        >
-          <img slot="start" class="mr-24" src="../../../assets/img/apple-icon.svg" alt="Apple" />
-          <span class="label-body-2"> Continuar com Apple</span>
-        </button>
-      </tk-login-form>
-    </div>
+        <img
+          slot="start"
+          class="mr-24"
+          src="../../../assets/img/apple-icon.svg"
+          alt="Apple"
+        />
+        <span class="label-body-2"> Continuar com Apple</span>
+      </button>
+    </tk-login-form>
   </div>
 </div>

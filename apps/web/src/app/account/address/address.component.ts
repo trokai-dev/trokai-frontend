@@ -9,11 +9,12 @@ import { CompletingInformationService } from '@trokai/shared-data-access';
   standalone: true,
   imports: [TkAddressFormComponent],
   template: `
-    <div class="col-12 col-md-7">
+    <div class="address">
       <h3 class="color-gray-dark">Endereço</h3>
       <tk-address-form [address]="address" (addressSave)="save($event)" />
     </div>
   `,
+  styleUrl: './address.component.scss',
 })
 export class AddressComponent implements OnInit {
   private authService = inject(AuthService);

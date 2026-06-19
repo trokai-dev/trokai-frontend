@@ -18,7 +18,7 @@
       Vamos te responder, por email, em até 1 dia útil.
     </span>
     @if (dismissable) {
-      <button mat-raised-button color="primary" class="contact-form__submit" (click)="closed.emit()">
+      <button mat-flat-button color="primary" class="contact-form__submit" (click)="closed.emit()">
         Fechar
       </button>
     }
@@ -52,7 +52,7 @@
       <textarea matInput formControlName="message" maxlength="500" rows="4" [errorStateMatcher]="matcher"></textarea>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" class="contact-form__submit" [disabled]="loading">
+    <button mat-flat-button color="primary" type="submit" class="contact-form__submit" [disabled]="loading">
       Enviar mensagem
     </button>
   </form>

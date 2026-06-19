@@ -1,0 +1,10 @@
+:host {
+  display: block;
+}
+
+// Was gcol-md-4 + mx-auto — centered, ~4/12 of container on desktop.
+// Root 62.5% → 1rem = 10px. 4/12 of ~1140 ≈ 38rem. Full width on mobile.
+.login-card {
+  max-width: 38rem;
+  margin-inline: auto;
+}

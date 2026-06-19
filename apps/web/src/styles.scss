@@ -1,16 +1,16 @@
 // POPPINS
 @use 'tokens'; // @trokai/shared-styles design tokens (:root custom props)
 @use 'index'; // @trokai/shared-styles utilities (layout/spacing/typography/grid) — shared with the app
-@import "styles/variables.scss";
-@import "styles/material-styles.scss";
-@import "styles/dialogs.scss";
+@import 'styles/variables.scss';
+@import 'styles/material-styles.scss';
+@import 'styles/dialogs.scss';
 // spacing: margins/paddings now come from shared `@use 'index'` (_spacing.scss)
 
 // import Swiper and modules styles
-@import "swiper/css";
-@import "swiper/css/navigation";
-@import "swiper/css/pagination";
-@import "swiper/css/zoom";
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+@import 'swiper/css/zoom';
 
 // Root
 // Media Query ..... em
@@ -42,11 +42,11 @@
   }
 
   * {
-    font-family: "Manrope", "Helvetica Neue", sans-serif !important;
+    font-family: 'Manrope', 'Helvetica Neue', sans-serif !important;
   }
 
   .material-icons {
-    font-family: "Material Icons" !important;
+    font-family: 'Material Icons' !important;
   }
 
   label {
@@ -180,6 +180,23 @@ hr {
   // min-height: -webkit-fill-available;
 }
 
+// Page shell — one class for routed content pages. Replaces the repeated
+// `container page my-48` trio: centered max-width container + min-height +
+// vertical rhythm. Bare `.page` stays for sidebars/menus that only need height.
+.page-wrap {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1224px;
+  margin-inline: auto;
+  padding-inline: var(--space-12);
+  padding-block: var(--space-32);
+  min-height: calc(100vh - 161px - 65px);
+
+  @media (min-width: 1200px) {
+    padding-block: var(--space-48);
+  }
+}
+
 .empty-page {
   display: flex;
   flex-direction: column;
@@ -297,7 +314,6 @@ hr {
     background: $color-primary;
   }
 }
-
 
 // MODAL
 // dialog general styles
@@ -572,7 +588,7 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .mat-mdc-menu-item-text {

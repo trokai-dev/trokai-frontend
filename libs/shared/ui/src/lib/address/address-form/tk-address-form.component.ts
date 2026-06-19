@@ -59,7 +59,7 @@ import { NgxMaskDirective } from 'ngx-mask';
           @if (encapsulated) {
             <button type="button" mat-button color="light" (click)="close()">Cancelar</button>
           }
-          <button type="submit" mat-raised-button color="primary">Salvar</button>
+          <button type="submit" mat-flat-button color="primary">Salvar</button>
         </div>
       }
     </form>

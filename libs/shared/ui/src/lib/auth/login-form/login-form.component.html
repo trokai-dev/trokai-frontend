@@ -40,7 +40,12 @@
       <mat-error>Mínimo de 6 caracteres</mat-error>
     }
     <mat-hint>
-      <a tabindex="0" (click)="forgotPassword.emit()" (keyup.enter)="forgotPassword.emit()">Esqueci minha senha</a>
+      <a
+        tabindex="0"
+        (click)="forgotPassword.emit()"
+        (keyup.enter)="forgotPassword.emit()"
+        >Esqueci minha senha</a
+      >
     </mat-hint>
   </mat-form-field>
 
@@ -50,7 +55,8 @@
 
   <button
     type="submit"
-    mat-raised-button
+    mat-flat-button
+    class="mt-16"
     color="primary"
     aria-label="Entrar"
     [disabled]="loading"

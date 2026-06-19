@@ -1,0 +1,9 @@
+:host {
+  display: block;
+}
+
+// Was col-md-7 — constrain form to ~7/12 of container on desktop.
+// Root 62.5% → 1rem = 10px. 7/12 of ~1140 ≈ 66rem.
+.address {
+  max-width: 66rem;
+}

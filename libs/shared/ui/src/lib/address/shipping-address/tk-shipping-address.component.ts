@@ -16,7 +16,7 @@ import { TkAddressFormComponent } from '../address-form/tk-address-form.componen
       <tk-address-form [submit]="false" />
     </div>
     <div class="checkout-footer mt-40">
-      <button mat-raised-button color="primary" (click)="onContinue()" [disabled]="!formRef?.form.valid">
+      <button mat-flat-button color="primary" (click)="onContinue()" [disabled]="!formRef?.form.valid">
         Continuar
       </button>
     </div>

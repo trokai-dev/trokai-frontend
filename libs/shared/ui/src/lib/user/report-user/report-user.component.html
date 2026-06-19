@@ -13,7 +13,7 @@
     <mat-icon class="color-primary report-user__done-icon">check_circle</mat-icon>
     <h6 class="color-gray-dark">Denúncia enviada!</h6>
     <span class="label-body-2 color-gray-default">Vamos analisar a sua denúncia.</span>
-    <button mat-raised-button color="primary" class="report-user__submit" (click)="closed.emit()">
+    <button mat-flat-button color="primary" class="report-user__submit" (click)="closed.emit()">
       Fechar
     </button>
   </div>
@@ -37,7 +37,7 @@
       <textarea matInput formControlName="message" maxlength="500" rows="4"></textarea>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" class="report-user__submit" [disabled]="loading">
+    <button mat-flat-button color="primary" type="submit" class="report-user__submit" [disabled]="loading">
       Enviar denúncia
     </button>
   </form>
