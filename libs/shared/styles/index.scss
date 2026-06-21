@@ -14,6 +14,7 @@
 @forward 'tokens'; // :root design tokens
 @forward 'breakpoints'; // bp() fn + media() mixin + --bp-* vars
 @forward 'typography'; // heading/label classes
+@forward 'elements'; // global element defaults + page/section/item helpers
 @forward 'spacing'; // .m-* / .p-* / .gap-* utilities
 @forward 'layout'; // flexbox + grid utilities
 @forward 'text'; // text align/transform/overflow utilities

@@ -1,0 +1,36 @@
+// @trokai/shared-styles — %placeholders for component `@extend`.
+// Emits NO CSS on its own. Components `@import 'placeholders';` then
+// `@extend %label-body-2;` etc. — `@extend` resolves placeholders through
+// old-style @import (it can't cross @use/@forward module boundaries, which is
+// why these live here rather than being @extend-ed off the global classes).
+// Values + !important mirror the per-app variables.scss they replace.
+
+%label-body-1 {
+  font-size: var(--font-size-body-1) !important;
+  font-weight: 400 !important;
+}
+
+%label-body-2 {
+  font-size: var(--font-size-body-2) !important;
+  font-weight: 400 !important;
+  color: var(--color-gray-default);
+}
+
+%label-large-2 {
+  font-size: var(--font-size-body-1) !important;
+  font-weight: 300 !important;
+}
+
+%label-caption-1 {
+  font-size: var(--font-size-caption) !important;
+  font-weight: 400 !important;
+  color: var(--color-gray-default);
+}
+
+%icon-small {
+  font-size: 1.6rem;
+}
+
+%icon-smaller {
+  font-size: 1.6rem;
+}

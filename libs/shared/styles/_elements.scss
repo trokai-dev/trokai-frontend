@@ -1,0 +1,95 @@
+// @trokai/shared-styles — global element + page-utility styles.
+// Shared across both apps (consolidated from the per-app variables.scss). Type
+// scale (headings/labels) lives in _typography.scss; this holds element defaults
+// and page/section/item helpers. Loaded once via `@use 'index'` in each app's
+// global stylesheet, so `@extend .label-*` resolves against _typography.
+
+p {
+  color: var(--color-gray-default);
+  font-size: var(--font-size-body-2);
+  font-weight: 300;
+  margin: unset;
+  line-height: normal;
+}
+
+b {
+  font-weight: 500 !important;
+}
+
+h1::first-letter,
+p::first-letter {
+  text-transform: capitalize;
+}
+
+.fw-300 {
+  font-weight: 300 !important;
+}
+
+.page-title {
+  margin-top: 2.4rem;
+  font-size: 2rem !important;
+  font-weight: 600;
+  display: block;
+}
+
+.page-section {
+  border-bottom: var(--border-trokai);
+  padding-bottom: 2.4rem;
+}
+
+.section-title {
+  margin: 1.6rem 0;
+  font-size: 1.6rem !important;
+  font-weight: 600;
+  display: block;
+}
+
+// item-label/value carry the .label-body-2 size; @extend can't reach typography
+// across the module boundary, so the body-2 font-size is inlined here.
+.item-label {
+  font-size: var(--font-size-body-2);
+  color: var(--color-gray-dark);
+  display: block;
+  font-weight: normal;
+}
+
+.item-value {
+  font-size: var(--font-size-body-2);
+  color: var(--color-gray-default);
+  font-weight: lighter;
+  white-space: normal;
+}
+
+.icon-large {
+  font-size: 4rem;
+}
+.icon-default {
+  font-size: 2.2rem;
+}
+.icon-small {
+  font-size: 1.6rem;
+}
+.icon-nano {
+  font-size: 1.2rem;
+}
+
+.review-star-full {
+  color: var(--color-star-full);
+}
+.review-star-half {
+  color: var(--color-star-full);
+}
+.review-star-empty {
+  color: var(--color-star-empty);
+}
+
+.bg-error {
+  background-color: var(--color-error) !important;
+}
+
+@media (max-width: 768px) {
+  .page-section-mobile {
+    border-bottom: var(--border-trokai);
+    padding-bottom: 2.4rem;
+  }
+}

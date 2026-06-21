@@ -20,7 +20,8 @@ ion-content {
   top: 0.5rem;
 }
 
-@import '../../theme/variables.scss';
+@import 'variables';
+@import 'placeholders';
 
 // Large devices (desktops, 992px and up)
 
@@ -47,7 +48,7 @@ a {
     display: block;
     font-weight: 400 !important;
 
-    @extend .label-body-1;
+    @extend %label-body-1;
     color: var(--color-gray-dark) !important;
   }
   .home_row_description {

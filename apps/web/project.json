@@ -47,7 +47,7 @@
             "input": "apps/web/src/theme/variables.css"
           },
           {
-            "input": "apps/web/src/styles/trokai-material.scss"
+            "input": "libs/shared/styles/trokai-material.scss"
           }
         ],
         "scripts": [],

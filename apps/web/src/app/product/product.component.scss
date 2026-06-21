@@ -1,4 +1,5 @@
-@import "../../styles/variables.scss";
+@import 'variables';
+@import 'placeholders';
 
 .product-status-container {
   border: 1px solid $color-gray-light-2;
@@ -17,7 +18,7 @@
   gap: 0.8rem;
 
   ion-icon {
-    @extend .icon-small;
+    @extend %icon-small;
     color: $color-primary;
   }
 
@@ -28,7 +29,7 @@
   }
 
   span {
-    @extend .label-body-2;
+    @extend %label-body-2;
   }
 }
 
@@ -49,7 +50,7 @@ button {
 
   .product-cta-delivery {
     span {
-      @extend .label-body-2;
+      @extend %label-body-2;
     }
 
     .product-cta-title {
@@ -59,7 +60,7 @@ button {
       margin-bottom: 0.8rem;
 
       span {
-        @extend .label-body-1;
+        @extend %label-body-1;
         font-weight: 500 !important;
         color: $color-gray-dark !important;
       }
@@ -75,7 +76,7 @@ button {
       align-items: center;
 
       .product-cta-first-cost {
-        @extend .label-large-2;
+        @extend %label-large-2;
         color: $color-gray-light-1;
         text-decoration: line-through;
         display: block;
@@ -116,7 +117,7 @@ button {
       align-items: center;
 
       ion-icon {
-        @extend .icon-small;
+        @extend %icon-small;
         color: $color-primary;
         margin-right: 0.8rem;
       }
@@ -127,7 +128,7 @@ button {
       }
 
       .product-cta-hint-text {
-        @extend .label-caption-1;
+        @extend %label-caption-1;
         color: $color-gray-light-1;
       }
     }

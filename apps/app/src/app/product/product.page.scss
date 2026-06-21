@@ -1,4 +1,5 @@
-@import '../../theme/variables.scss';
+@import 'variables';
+@import 'placeholders';
 @import '../../global.scss';
 
 ion-list {
@@ -53,7 +54,7 @@ swiper-slide {
 
   .product-cta-delivery {
     span {
-      @extend .label-body-2;
+      @extend %label-body-2;
     }
 
     .product-cta-title {
@@ -62,7 +63,7 @@ swiper-slide {
       align-items: center;
       margin-bottom: 0.8rem;
       span {
-        @extend .label-body-1;
+        @extend %label-body-1;
         font-weight: 500 !important;
         color: $color-gray-dark !important;
       }
@@ -77,7 +78,7 @@ swiper-slide {
       flex-direction: column;
 
       .product-cta-first-cost {
-        @extend .label-body-2;
+        @extend %label-body-2;
         font-size: 1.6rem !important;
         color: $color-gray-light-1;
         text-decoration: line-through;
@@ -85,7 +86,7 @@ swiper-slide {
       }
 
       .product-cta-current-cost {
-        @extend .label-body-2;
+        @extend %label-body-2;
         font-size: 2rem !important;
         font-weight: 500 !important;
         color: $color-primary;
@@ -109,7 +110,7 @@ swiper-slide {
       align-items: center;
 
       ion-icon {
-        @extend .icon-smaller;
+        @extend %icon-smaller;
         color: $color-primary;
         margin-right: 0.8rem;
       }
@@ -121,20 +122,20 @@ swiper-slide {
       }
 
       .product-cta-hint-text {
-        @extend .label-caption-1;
+        @extend %label-caption-1;
         color: $color-gray-light-1;
       }
     }
 
     .product-installments {
       .product-installments-primary {
-        @extend .label-body-2;
+        @extend %label-body-2;
         font-weight: 600 !important;
         font-size: 1.5rem !important;
       }
 
       .product-installments-secondary {
-        @extend .label-body-2;
+        @extend %label-body-2;
         font-weight: 300 !important;
         font-size: 1.5rem !important;
       }

@@ -29,9 +29,8 @@
           }
         ],
         "styles": [
-          "apps/app/src/theme/variables.scss",
           "apps/app/src/global.scss",
-          "apps/app/src/styles/trokai-material.scss"
+          "libs/shared/styles/trokai-material.scss"
         ],
         "scripts": [],
         "allowedCommonJsDependencies": ["dayjs", "xml2js", "scriptjs", "core-js"],

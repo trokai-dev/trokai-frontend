@@ -1,0 +1,36 @@
+// @trokai/shared-styles — Sass variables (single source of truth).
+// PURE variables only — emits no CSS, so components can `@import 'variables';`
+// (resolved via stylePreprocessorOptions.includePaths) with zero output cost.
+// Kept as literal Sass colors (not var(--token)) because components run them
+// through Sass color fns — e.g. rgba($color-alert, .15), darken($color-error).
+// Values are the canonical palette; mirror libs/shared/styles/_tokens.scss.
+
+$color-primary: #13493b;
+$color-primary-2: #58b692; // old primary
+$color-primary-light: #b8e0d1;
+$color-accent: #f1b6be;
+
+$color-gray-dark: #000000;
+$color-gray-default: #3d3d3d;
+$color-gray-light-1: #adacac;
+$color-gray-light-15: #dddddd;
+$color-gray-light-2: #ebebeb;
+$color-gray-light-25: #f1f1f1;
+
+$color-error: #d43c3c;
+$color-success: #0f800d;
+$color-alert: #faca23;
+
+$color-star-full: #f3b410;
+$color-star-empty: #adacac;
+
+$color-box-shadow: rgba(0, 0, 0, 0.08);
+
+$card-border-radius: 16px;
+$card-box-shadow: 0px 8px 16px $color-box-shadow !important;
+$border-trokai: 1px solid $color-gray-light-2 !important;
+
+$plan-standard: #f1b6be;
+$plan-bronze: #aa6129;
+$plan-silver: #b4b4b4;
+$plan-gold: #e5a62c;

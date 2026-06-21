@@ -1,0 +1,72 @@
+// @trokai/shared-styles — single Angular Material theme for both apps.
+// Entrypoint (referenced from each app's project.json `styles`). Uses the
+// shared M3 theme mixin (_theme.scss) and global design tokens (var(--color-*)).
+@use 'theme' as theme;
+
+html {
+  @include theme.trokai-theme();
+}
+
+// Filled buttons → exact brand primary. M3 derives a lighter primary tone
+// otherwise; pin to --color-primary so buttons match the brand green.
+.mat-mdc-unelevated-button.mat-primary {
+  --mat-button-filled-container-color: var(--color-primary);
+  --mat-button-filled-label-text-color: var(--color-on-primary);
+}
+
+// Button corner radius — .4rem on every mat button variant (M3 shape tokens).
+.mat-mdc-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button {
+  --mat-button-text-container-shape: 0.4rem;
+  --mat-button-filled-container-shape: 0.4rem;
+  --mat-button-protected-container-shape: 0.4rem;
+  --mat-button-outlined-container-shape: 0.4rem;
+  --mat-button-tonal-container-shape: 0.4rem;
+}
+
+.mat-mdc-checkbox.mat-primary {
+  --mdc-checkbox-selected-checkmark-color: white !important;
+}
+
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: var(--color-gray-default) !important;
+}
+
+.mdc-button {
+  height: 45px !important;
+}
+
+.mdc-dialog {
+  max-width: 500px !important;
+}
+
+.mdc-dialog .mdc-dialog__content {
+  padding: 2rem !important;
+}
+
+::ng-deep .mdc-button-label {
+  font-size: 1.5rem !important;
+  text-transform: uppercase;
+}
+
+// Pill buttons (replaces ion-button shape="round").
+.mat-mdc-button-base.round {
+  --mat-button-filled-container-shape: 2.4rem;
+  --mat-button-outlined-container-shape: 2.4rem;
+  --mat-button-text-container-shape: 2.4rem;
+  border-radius: 2.4rem;
+}
+
+// Tertiary-colored buttons (replaces ion-button color="tertiary").
+.mat-mdc-button-base.btn-tertiary {
+  --mdc-text-button-label-text-color: var(--ion-color-tertiary);
+  --mdc-outlined-button-label-text-color: var(--ion-color-tertiary);
+  --mat-outlined-button-outline-color: var(--ion-color-tertiary);
+  color: var(--ion-color-tertiary);
+}
+
+// Re-scale M3 typography tokens to the 62.5% root. Must come after the theme
+// include above so it overrides. See partial header for rationale.
+@import './material-typography-scale.scss';

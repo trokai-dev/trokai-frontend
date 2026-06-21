@@ -1,7 +1,11 @@
-@import "../styles/variables.scss";
-
+// @trokai/shared-styles — extra global Angular Material overrides (shared).
+// Moved from apps/web/src/styles/material-styles.scss. Loaded via
+// `@import 'material-styles';` in each app's global stylesheet (so the
+// `@extend .label-*` below resolve against _typography). Sass $colors swapped
+// for var(--color-*) tokens; pre-MDC selectors kept (harmless no-ops) so no
+// current behaviour is lost.
 :root {
-  --mat-badge-background-color: $color-accent;
+  --mat-badge-background-color: var(--color-accent);
 }
 
 .mat-badge-content {
@@ -39,7 +43,7 @@
 .mat-checkbox-frame,
 .mat-radio-outer-circle {
   border-width: 1px !important;
-  border-color: $color-gray-light-1 !important;
+  border-color: var(--color-gray-1) !important;
 }
 
 .mat-menu-panel {
@@ -53,7 +57,7 @@
     @extend .label-body-1;
   }
   ion-icon {
-    color: $color-primary;
+    color: var(--color-primary);
     margin-right: 1rem;
     font-size: 1.8rem;
   }

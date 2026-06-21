@@ -1,9 +1,9 @@
 // POPPINS
 @use 'tokens'; // @trokai/shared-styles design tokens (:root custom props)
 @use 'index'; // @trokai/shared-styles utilities (layout/spacing/typography/grid) — shared with the app
-@import 'styles/variables.scss';
-@import 'styles/material-styles.scss';
-@import 'styles/dialogs.scss';
+@import 'variables'; // @trokai/shared-styles Sass $vars (color fns etc.)
+@import 'material-styles'; // @trokai/shared-styles global Material overrides
+@import 'dialogs'; // @trokai/shared-styles Material dialog layout
 // spacing: margins/paddings now come from shared `@use 'index'` (_spacing.scss)
 
 // import Swiper and modules styles

@@ -1,10 +1,12 @@
+// @trokai/shared-styles — Material dialog layout helpers (shared).
+// Moved from apps/web/src/styles/dialogs.scss. Loaded via `@import 'dialogs';`
+// in each app's global stylesheet. Used by the shared-ui dialog components.
 .mat-mdc-dialog-container {
   font-size: 62.5%;
 
   mat-form-field {
     font-size: 1.6rem;
   }
-
 }
 
 .dialog-wrapper {
@@ -30,7 +32,7 @@
   display: flex;
   gap: 0.8rem;
   padding-top: 1.6rem;
-  border-top: $border-trokai;
+  border-top: var(--border-trokai);
   button {
     flex-grow: 1;
   }
@@ -101,7 +103,6 @@
     max-width: 700px !important;
     min-width: 700px !important;
     max-height: 700px !important;
-    // min-height: 700px !important;
 
     .dialog-wrapper {
       max-height: 700px;
@@ -113,10 +114,6 @@
     min-width: 100dvw !important;
     max-height: 100dvh !important;
     min-height: 100dvh !important;
-
-    .dialog-wrapper {
-      // max-height: 700px;
-    }
 
     .mdc-dialog {
       max-width: unset !important;

@@ -1,4 +1,5 @@
-@import '../../theme/variables.scss';
+@import 'variables';
+@import 'placeholders';
 
 #bottom-tab {
   border: none;
@@ -6,7 +7,7 @@
 
 ion-tab-button {
   ion-label {
-    @extend .label-caption-1;
+    @extend %label-caption-1;
     color: var(--color-gray-default) !important;
   }
   ion-icon {

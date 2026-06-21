@@ -1,4 +1,5 @@
-@import "../../../styles/variables.scss";
+@import 'variables';
+@import 'placeholders';
 
 .accordion-item {
   //   padding: 1.6rem 0rem;
@@ -41,7 +42,7 @@
 
       label,
       span {
-        @extend .label-caption-1;
+        @extend %label-caption-1;
         cursor: pointer;
       }
 
