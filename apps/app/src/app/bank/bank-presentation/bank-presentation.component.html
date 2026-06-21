@@ -2,10 +2,10 @@
   <ion-grid class="p-24">
     <h2 class="color-gray-dark mt-24 ion-text-center">Conheça o confrinho</h2>
 
-    <ion-label class="label-body-2 mt-48 block ion-text-center">
+    <span class="label-body-2 mt-48 block ion-text-center">
       Os valores recebidos nas suas vendas serão armazenados no cofrinho.
       Transfira o dinheiro para sua conta bancária através do saque.
-    </ion-label>
+    </span>
 
     <!-- <div class="animation" lottie [options]="options"></div> -->
 
@@ -16,5 +16,7 @@
 </ion-content>
 
 <ion-footer class="px-24 py-16">
-  <ion-button class="action-button" (click)="close()">Entendi</ion-button>
+  <button mat-flat-button color="primary" class="action-button" (click)="close()">
+    Entendi
+  </button>
 </ion-footer>

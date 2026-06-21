@@ -26,18 +26,17 @@ import {
   IonGrid,
   IonFooter,
   IonButtons,
-  IonButton,
   IonIcon,
   IonSpinner,
   IonAvatar,
   IonImg,
   IonRippleEffect,
-  IonLabel,
   IonCol,
   IonRow,
   IonThumbnail,
   IonText,
 } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
 import { chatbubble, chevronDown, chevronUp } from 'ionicons/icons';
 import { ChatComponent } from 'src/app/chat/chat.component';
@@ -54,6 +53,8 @@ import { CartItemComponent } from 'src/app/shared/components/cart-item/cart-item
   styleUrls: ['./sale.page.scss'],
   standalone: true,
   imports: [
+    MatButtonModule,
+    
     IonFooter,
     IonHeader,
     IonToolbar,
@@ -65,7 +66,6 @@ import { CartItemComponent } from 'src/app/shared/components/cart-item/cart-item
     DatePipe,
     CostPipe,
     IonButtons,
-    IonButton,
     IonIcon,
     IonSpinner,
     IonAvatar,

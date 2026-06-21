@@ -33,12 +33,10 @@ import {
   NavController,
   ModalController,
   IonHeader,
-  IonButton,
   IonButtons,
   IonContent,
   IonGrid,
   IonIcon,
-  IonLabel,
   IonRow,
   IonToolbar,
   IonInfiniteScroll,
@@ -51,6 +49,7 @@ import {
   IonList,
   IonCol,
 } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
 import {
   pencil,
@@ -70,6 +69,8 @@ import { ToastService } from '../services/toast-service';
   styleUrls: ['./wardrobe.page.scss'],
   standalone: true,
   imports: [
+    MatButtonModule,
+    
     StatusPillComponent,
     IonHeader,
     IonToolbar,
@@ -77,11 +78,9 @@ import { ToastService } from '../services/toast-service';
     IonRefresher,
     IonRefresherContent,
     IonButtons,
-    IonButton,
     IonIcon,
     IonContent,
     IonGrid,
-    IonLabel,
     IonInfiniteScroll,
     IonInfiniteScrollContent,
     IonRow,

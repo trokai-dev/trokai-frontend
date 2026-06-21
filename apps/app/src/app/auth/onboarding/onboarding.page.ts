@@ -8,7 +8,6 @@ import {
   inject,
 } from '@angular/core';
 import {
-  IonButton,
   IonContent,
   IonHeader,
   IonIcon,
@@ -17,6 +16,7 @@ import {
   NavController,
   Platform,
 } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 
 import { Observable, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -35,11 +35,12 @@ import { close } from 'ionicons/icons';
   styleUrls: ['./onboarding.page.scss'],
   standalone: true,
   imports: [
+    MatButtonModule,
+    
     IonHeader,
     IonToolbar,
     IonIcon,
     IonContent,
-    IonButton,
     LottieComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

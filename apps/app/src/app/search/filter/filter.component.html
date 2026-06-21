@@ -17,13 +17,9 @@
     </ion-title>
     <ion-buttons slot="primary">
       @if (filtersOn()) {
-      <ion-button
-        fill="clear"
-        color="primary"
-        (click)="clear()"
-      >
+      <button mat-button color="primary" (click)="clear()">
         Limpar
-      </ion-button>
+      </button>
       }
     </ion-buttons>
   </ion-toolbar>
@@ -70,28 +66,24 @@
         <div class="accordion-item-intermediate">
           <!-- Categorias -->
           <div class="w-full">
-            <ion-radio-group
-              mode="md"
+            <mat-radio-group
               [value]="filter.category"
-              (ionChange)="changeCategory($event.target.value)"
+              (change)="changeCategory($event.value)"
             >
               @for (a of itemsMap.category; track a._id) {
-              <ion-item
-                class="ion-no-padding"
-                lines="none"
-              >
-                <ion-radio [value]="a._id" justify="start" labelPlacement="end">
+              <div>
+                <mat-radio-button color="primary" [value]="a._id">
                   <div class="flex flex-col">
-                    <ion-label
-                      class="color-gray-default label-body-1 ion-text-capitalize"
+                    <span
+                      class="color-gray-default label-body-1 capitalize"
                     >
-                      {{ a.value }}</ion-label
+                      {{ a.value }}</span
                     >
                   </div>
-                </ion-radio>
-              </ion-item>
+                </mat-radio-button>
+              </div>
               }
-            </ion-radio-group>
+            </mat-radio-group>
           </div>
         </div>
         }
@@ -173,28 +165,24 @@
           <div
             class="w-full"
           >
-            <ion-radio-group
-              mode="md"
+            <mat-radio-group
               [value]="filter.age"
-              (ionChange)="mountSizes($event.target.value)"
+              (change)="mountSizes($event.value)"
             >
               @for (a of itemsMap.age; track a._id) {
-              <ion-item
-                class="ion-no-padding"
-                lines="none"
-              >
-                <ion-radio [value]="a._id" justify="start" labelPlacement="end">
+              <div>
+                <mat-radio-button color="primary" [value]="a._id">
                   <div class="flex flex-col">
-                    <ion-label
-                      class="color-gray-default label-body-1 ion-text-capitalize"
+                    <span
+                      class="color-gray-default label-body-1 capitalize"
                     >
-                      {{ a.value }}</ion-label
+                      {{ a.value }}</span
                     >
                   </div>
-                </ion-radio>
-              </ion-item>
+                </mat-radio-button>
+              </div>
               }
-            </ion-radio-group>
+            </mat-radio-group>
           </div>
           }
         </div>
@@ -342,17 +330,18 @@
           </div>
 
           <ion-row class="w-full">
-            <ion-item lines="none" class="ion-no-padding w-full">
-              <ion-range
-                dualKnobs="true"
-                min="0"
-                max="21000"
-                step="1000"
-                [(ngModel)]="costRange"
-                (ionChange)="changeCost($event)"
-              >
-              </ion-range>
-            </ion-item>
+            <mat-slider class="w-full" min="0" [max]="maxCost" step="1000">
+              <input
+                matSliderStartThumb
+                [(ngModel)]="costRange.lower"
+                (ngModelChange)="changeCost()"
+              />
+              <input
+                matSliderEndThumb
+                [(ngModel)]="costRange.upper"
+                (ngModelChange)="changeCost()"
+              />
+            </mat-slider>
           </ion-row>
         </div>
         }
@@ -366,7 +355,7 @@
 </ion-content>
 
 <ion-footer class="px-24 py-16">
-  <ion-button class="action-button" (click)="applyFilters()">
+  <button mat-flat-button color="primary" class="action-button" (click)="applyFilters()">
     Aplicar filtros
-  </ion-button>
+  </button>
 </ion-footer>

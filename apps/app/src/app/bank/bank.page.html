@@ -62,13 +62,15 @@
 
     <!-- can withdraw -->
     @if (allGood) {
-    <ion-button
+    <button
+      mat-flat-button
+      color="primary"
       class="action-button mt-24"
       [disabled]="balance.saldoDisponivel <= 0"
       (click)="withdraw()"
     >
       Sacar saldo
-    </ion-button>
+    </button>
     }
 
     <!-- Movimentacoes -->
@@ -85,9 +87,9 @@
         <!-- header -->
         <div class="flex items-center w-full justify-between">
           <h6 class="color-gray-dark">{{order.title}}</h6>
-          <ion-label class="label-caption-1 ml-16 color-gray-light-1">
+          <span class="label-caption-1 ml-16 color-gray-light-1">
             {{order.date | date: "dd/MM/YYYY"}}
-          </ion-label>
+          </span>
         </div>
 
         <!-- items -->
@@ -100,11 +102,11 @@
             <div>
               @for (i of order.items; track i) {
 
-              <ion-label
+              <span
                 class="text-dots orderTransferText block label-body-2 color-gray-default"
               >
                 {{i}} {{i?.refund ? "(Estornado)" : ""}}
-              </ion-label>
+              </span>
               }
             </div>
 
@@ -128,15 +130,15 @@
         <div class="mt-8">
           <!-- order text -->
           @if (order.text) {
-          <ion-label class="label-body-2 color-gray-default block">
+          <span class="label-body-2 color-gray-default block">
             {{order.text}}
-          </ion-label>
+          </span>
           }
 
           <!-- status -->
           @if (order.transferAt) {
           <div (click)="alertSaquePrevisao()">
-            <ion-label
+            <span
               class="label-body-2 color-gray-default flex items-end"
             >
               Previsão de saque: {{order.transferAt | date: "dd/MM/YYYY"}}
@@ -144,7 +146,7 @@
                 name="information-circle-outline"
                 class="color-gray-light-1 ml-8 mt-4"
               ></ion-icon>
-            </ion-label>
+            </span>
           </div>
           }
         </div>

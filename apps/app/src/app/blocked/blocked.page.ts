@@ -2,13 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import {
-  IonButton,
   IonContent,
   IonGrid,
   IonIcon,
-  IonLabel,
   isPlatform,
 } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
 import { sadOutline } from 'ionicons/icons';
 
@@ -17,7 +16,9 @@ import { sadOutline } from 'ionicons/icons';
   templateUrl: './blocked.page.html',
   styleUrls: ['./blocked.page.scss'],
   standalone: true,
-  imports: [IonContent, IonGrid, IonLabel, IonButton, IonIcon],
+  imports: [
+    MatButtonModule,
+    IonContent, IonGrid, IonIcon],
 })
 export class BlockedPage implements OnInit {
   private router = inject(Router);

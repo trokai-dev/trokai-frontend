@@ -9,10 +9,9 @@ import {
   IonTitle,
   IonContent,
   IonFooter,
-  IonButton,
-  IonRadio,
-  IonRadioGroup,
-  IonItem, IonLabel } from '@ionic/angular/standalone';
+} from '@ionic/angular/standalone';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonModule } from '@angular/material/button';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { addIcons } from 'ionicons';
@@ -23,19 +22,17 @@ import { close } from 'ionicons/icons';
   templateUrl: './sorting.component.html',
   styleUrls: ['./sorting.component.scss'],
   standalone: true,
-  imports: [IonLabel,
+  imports: [
     IonHeader,
     IonToolbar,
     IonButtons,
-    IonButton,
     IonIcon,
     IonTitle,
     IonContent,
     IonFooter,
     FormsModule,
-    IonRadio,
-    IonRadioGroup,
-    IonItem,
+    MatRadioModule,
+    MatButtonModule,
   ],
 })
 export class SortingComponent implements OnInit {

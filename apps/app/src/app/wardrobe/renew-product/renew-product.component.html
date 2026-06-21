@@ -15,11 +15,13 @@
 
 <ion-footer class="px-24 py-16">
   <ion-row>
-    <ion-button (click)="editFirst()" class="action-button"> Editar antes
-    </ion-button>
+    <button mat-flat-button color="primary" (click)="editFirst()" class="action-button">
+      Editar antes
+    </button>
   </ion-row>
   <ion-row class="mt-8">
-    <ion-button (click)="renew()" class="action-button" fill="clear"> Renovar sem editar
-    </ion-button>
+    <button mat-button (click)="renew()" class="action-button">
+      Renovar sem editar
+    </button>
   </ion-row>
 </ion-footer>

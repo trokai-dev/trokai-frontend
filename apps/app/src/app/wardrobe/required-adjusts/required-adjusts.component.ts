@@ -1,14 +1,13 @@
 import { Component, OnInit, Input, inject } from '@angular/core';
 import {
-  IonButton,
   IonContent,
   IonFooter,
   IonGrid,
   IonIcon,
-  IonLabel,
   IonList,
   IonRow,
   ModalController, IonItem } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
 import { close, warning } from 'ionicons/icons';
 
@@ -17,13 +16,13 @@ import { close, warning } from 'ionicons/icons';
   templateUrl: './required-adjusts.component.html',
   styleUrls: ['./required-adjusts.component.scss'],
   standalone: true,
-  imports: [IonItem,
-    IonButton,
+  imports: [
+    MatButtonModule,
+    IonItem,
     IonIcon,
     IonContent,
     IonGrid,
     IonList,
-    IonLabel,
     IonFooter,
     IonRow,
   ],

@@ -12,7 +12,7 @@
       [ngClass]="{'active': tab === t}"
       (click)="changeTab(t)"
     >
-      <ion-label class="label-body-2 color-gray-default">{{t}}</ion-label>
+      <span class="label-body-2 color-gray-default">{{t}}</span>
       <div class="tab-trokai-indicator"></div>
     </div>
     }
@@ -76,7 +76,7 @@
       @if (!purchases || purchases.length === 0) {
       <div class="empty-page full">
         <ion-icon name="sad-outline"></ion-icon>
-        <ion-label> Nenhuma compra</ion-label>
+        <span> Nenhuma compra</span>
       </div>
       }
     </div>
@@ -121,7 +121,7 @@
       @if (!sales || sales.length === 0) {
       <div class="empty-page full">
         <ion-icon name="sad-outline"></ion-icon>
-        <ion-label> Nenhuma venda</ion-label>
+        <span> Nenhuma venda</span>
       </div>
       }
     </div>

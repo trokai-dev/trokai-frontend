@@ -14,28 +14,30 @@
 
 <ion-content>
   <div class="p-24">
-    <h6 class="ion-text-center color-gray-dark">Alterar CEP</h6>
+    <h6 class="text-center color-gray-dark">Alterar CEP</h6>
 
-    <ion-item class="ion-no-padding mt-32" mode="md">
-      <ion-input
-        label="CEP"
-        labelPlacement="floating"
+    <mat-form-field appearance="outline" class="w-full mt-32">
+      <mat-label>CEP</mat-label>
+      <input
+        matInput
         [appMask]="'00000-000'"
         [(ngModel)]="zipcode"
         maxlength="9"
         type="text"
         inputmode="numeric"
-      >
-      </ion-input>
-    </ion-item>
+      />
+    </mat-form-field>
   </div>
 </ion-content>
 
 <ion-footer class="px-24 py-16">
-  <ion-button
+  <button
+    mat-flat-button
+    color="primary"
     class="action-button"
     (click)="save()"
     [disabled]="!zipcode || zipcode.toString().length !== 9"
-    >Confirmar
-  </ion-button>
+  >
+    Confirmar
+  </button>
 </ion-footer>

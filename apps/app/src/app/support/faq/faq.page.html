@@ -19,7 +19,7 @@
       @for (q of topic.questions; track q) {
       <ion-accordion [value]="q.slug">
         <ion-item slot="header">
-          <ion-label class="label-body-2">{{ q.question }}</ion-label>
+          <span class="label-body-2">{{ q.question }}</span>
         </ion-item>
         <div class="ion-padding accordion-content" slot="content">
           <p

@@ -1,0 +1,132 @@
+// Angular Material theme for the mobile app. Mirrors apps/web/src/styles/
+// trokai-material.scss. Required because the app now uses Material form
+// controls/buttons alongside the Ionic shell. Uses the shared M3 theme mixin
+// (libs/shared/styles/_theme.scss, on the sass includePaths).
+@use 'theme' as theme;
+
+html {
+  @include theme.trokai-theme();
+}
+
+// Filled buttons → exact brand primary (M3 derives a lighter tone otherwise).
+.mat-mdc-unelevated-button.mat-primary {
+  --mat-button-filled-container-color: var(--color-primary);
+  --mat-button-filled-label-text-color: var(--color-on-primary);
+}
+
+// Button corner radius — .4rem on every variant.
+.mat-mdc-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button {
+  --mat-button-text-container-shape: 0.4rem;
+  --mat-button-filled-container-shape: 0.4rem;
+  --mat-button-protected-container-shape: 0.4rem;
+  --mat-button-outlined-container-shape: 0.4rem;
+  --mat-button-tonal-container-shape: 0.4rem;
+}
+
+.mat-mdc-checkbox.mat-primary {
+  --mdc-checkbox-selected-checkmark-color: white !important;
+}
+
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: var(--color-gray-default) !important;
+}
+
+// Pill buttons (replaces ion-button shape="round").
+.mat-mdc-button-base.round {
+  --mat-button-filled-container-shape: 2.4rem;
+  --mat-button-outlined-container-shape: 2.4rem;
+  --mat-button-text-container-shape: 2.4rem;
+  border-radius: 2.4rem;
+}
+
+// Tertiary-colored buttons (replaces ion-button color="tertiary").
+.mat-mdc-button-base.btn-tertiary {
+  --mdc-text-button-label-text-color: var(--ion-color-tertiary);
+  --mdc-outlined-button-label-text-color: var(--ion-color-tertiary);
+  --mat-outlined-button-outline-color: var(--ion-color-tertiary);
+  color: var(--ion-color-tertiary);
+}
+
+// Re-scale M3 typography tokens to the 62.5% root (1rem=10px). Material M3
+// type tokens assume a 16px root, so without this every Material text renders
+// 0.625x. Affects ONLY Material (--mat-*) text. Must come after the theme.
+html {
+  --mat-badge-large-size-text-size: 1.1008rem;
+  --mat-badge-text-size: 1.1008rem;
+  --mat-bottom-sheet-container-text-line-height: 2.4rem;
+  --mat-bottom-sheet-container-text-size: 1.6rem;
+  --mat-button-filled-label-text-size: 1.4rem;
+  --mat-button-outlined-label-text-size: 1.4rem;
+  --mat-button-protected-label-text-size: 1.4rem;
+  --mat-button-text-label-text-size: 1.4rem;
+  --mat-button-toggle-label-text-line-height: 2rem;
+  --mat-button-toggle-label-text-size: 1.4rem;
+  --mat-button-tonal-label-text-size: 1.4rem;
+  --mat-card-subtitle-text-line-height: 2.4rem;
+  --mat-card-subtitle-text-size: 1.6rem;
+  --mat-card-title-text-line-height: 2.8rem;
+  --mat-card-title-text-size: 2.2rem;
+  --mat-checkbox-label-text-line-height: 2rem;
+  --mat-checkbox-label-text-size: 1.4rem;
+  --mat-chip-label-text-line-height: 2rem;
+  --mat-chip-label-text-size: 1.4rem;
+  --mat-datepicker-calendar-body-label-text-size: 1.4rem;
+  --mat-datepicker-calendar-header-text-size: 1.4rem;
+  --mat-datepicker-calendar-period-button-text-size: 1.4rem;
+  --mat-datepicker-calendar-text-size: 1.4rem;
+  --mat-dialog-supporting-text-line-height: 2rem;
+  --mat-dialog-supporting-text-size: 1.4rem;
+  --mat-expansion-container-text-line-height: 2.4rem;
+  --mat-expansion-container-text-size: 1.6rem;
+  --mat-expansion-header-text-line-height: 2.4rem;
+  --mat-expansion-header-text-size: 1.6rem;
+  --mat-fab-extended-label-text-size: 1.4rem;
+  --mat-form-field-container-text-line-height: 2.4rem;
+  --mat-form-field-container-text-size: 1.6rem;
+  --mat-form-field-filled-label-text-size: 1.6rem;
+  --mat-form-field-outlined-label-text-size: 1.6rem;
+  --mat-form-field-subscript-text-line-height: 1.6rem;
+  --mat-form-field-subscript-text-size: 1.2rem;
+  --mat-list-list-item-label-text-line-height: 2.4rem;
+  --mat-list-list-item-label-text-size: 1.6rem;
+  --mat-list-list-item-supporting-text-line-height: 2rem;
+  --mat-list-list-item-supporting-text-size: 1.4rem;
+  --mat-list-list-item-trailing-supporting-text-line-height: 1.6rem;
+  --mat-list-list-item-trailing-supporting-text-size: 1.1008rem;
+  --mat-menu-item-label-text-line-height: 2rem;
+  --mat-menu-item-label-text-size: 1.4rem;
+  --mat-optgroup-label-text-line-height: 2rem;
+  --mat-optgroup-label-text-size: 1.4rem;
+  --mat-option-label-text-line-height: 2rem;
+  --mat-option-label-text-size: 1.6rem;
+  --mat-paginator-container-text-line-height: 1.6rem;
+  --mat-paginator-container-text-size: 1.2rem;
+  --mat-paginator-select-trigger-text-size: 1.2rem;
+  --mat-radio-label-text-line-height: 2rem;
+  --mat-radio-label-text-size: 1.4rem;
+  --mat-select-trigger-text-line-height: 2.4rem;
+  --mat-select-trigger-text-size: 1.6rem;
+  --mat-slide-toggle-label-text-line-height: 2rem;
+  --mat-slide-toggle-label-text-size: 1.4rem;
+  --mat-slider-label-label-text-line-height: 1.6rem;
+  --mat-slider-label-label-text-size: 1.2rem;
+  --mat-snack-bar-supporting-text-line-height: 2rem;
+  --mat-snack-bar-supporting-text-size: 1.4rem;
+  --mat-stepper-header-error-state-label-text-size: 1.4rem;
+  --mat-stepper-header-label-text-size: 1.4rem;
+  --mat-stepper-header-selected-state-label-text-size: 1.4rem;
+  --mat-tab-label-text-line-height: 2rem;
+  --mat-tab-label-text-size: 1.4rem;
+  --mat-table-footer-supporting-text-line-height: 2rem;
+  --mat-table-footer-supporting-text-size: 1.4rem;
+  --mat-table-row-item-label-text-line-height: 2rem;
+  --mat-table-row-item-label-text-size: 1.4rem;
+  --mat-toolbar-title-text-line-height: 2.8rem;
+  --mat-toolbar-title-text-size: 2.2rem;
+  --mat-tooltip-supporting-text-line-height: 1.6rem;
+  --mat-tooltip-supporting-text-size: 1.2rem;
+  --mat-tree-node-text-size: 1.6rem;
+}

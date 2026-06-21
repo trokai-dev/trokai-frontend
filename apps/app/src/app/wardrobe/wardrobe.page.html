@@ -4,15 +4,13 @@
     <ion-title>Armário</ion-title>
     <ion-buttons slot="primary">
       @if (userIsOwner) {
-      <ion-button (click)="editWardrobe()">
-        <ion-icon name="create-outline" slot="icon-only" class="color-icon">
-        </ion-icon>
-      </ion-button>
+      <button mat-icon-button (click)="editWardrobe()">
+        <ion-icon name="create-outline" class="color-icon"> </ion-icon>
+      </button>
       } @if (owner?.nickname) {
-      <ion-button (click)="shareWardrobe()">
-        <ion-icon name="share-social" slot="icon-only" class="color-icon">
-        </ion-icon>
-      </ion-button>
+      <button mat-icon-button (click)="shareWardrobe()">
+        <ion-icon name="share-social" class="color-icon"> </ion-icon>
+      </button>
       }
     </ion-buttons>
   </ion-toolbar>
@@ -104,23 +102,23 @@
     </div>
     <div class="flex items-center">
       @if (!showSearchbar) {
-      <ion-button
+      <button
+        mat-icon-button
         (click)="startSearch()"
-        fill="clear"
         class="clear-button"
         color="primary"
       >
         <ion-icon name="search"></ion-icon>
-      </ion-button>
+      </button>
       }
     </div>
   </div>
 
   @if (showRenewAll && filter.status === 4 && !showSearchbar) {
   <div class="px-24 pb-16">
-    <ion-button (click)="renewAll()" fill="outline" class="action-button">
+    <button mat-stroked-button color="primary" (click)="renewAll()" class="action-button">
       Renovar todos
-    </ion-button>
+    </button>
   </div>
   } @if (isLoading || !items?.length) {
   <ion-grid class="px-24 pt-24 pb-12">
@@ -131,9 +129,9 @@
     } @if (!isLoading && !items?.length) {
     <div class="empty-page">
       <ion-icon name="sad-outline"></ion-icon>
-      <ion-label>
+      <span>
         {{ !filter ? 'Armário vazio' : 'Nenhum produto encontrado'}}
-      </ion-label>
+      </span>
     </div>
     }
   </ion-grid>

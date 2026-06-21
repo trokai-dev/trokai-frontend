@@ -16,20 +16,14 @@
     <!-- ENTREGA -->
     <div class="pb-8 mt-24">
       <div class="w-full mt-16">
-        <ion-radio-group
-          mode="md"
+        <mat-radio-group
           [value]="checkoutLocal.shippingOption"
-          (ionChange)="changeAddressOption($event.detail.value)"
+          (change)="changeAddressOption($event.value)"
         >
           @if (checkoutLocal.owner.inPerson) {
-          <ion-item
-            lines="none"
-            class="ion-no-padding"
-          >
-            <ion-radio
-              mode="md"
-              justify="start"
-              labelPlacement="end"
+          <div class="w-full">
+            <mat-radio-button
+              color="primary"
               class="w-full py-24 m-0"
               [value]="enumAddress.INPERSON"
             >
@@ -55,20 +49,17 @@
                   Você pode combinar a retirada com o vendedor através do chat.
                 </span>
               </span>
-            </ion-radio>
-          </ion-item>
+            </mat-radio-button>
+          </div>
           }
 
           @if (user?.address && checkoutLocal.owner.shipping) {
-          <ion-item
+          <div
             [ngClass]="{'border-top': checkoutLocal.owner.inPerson}"
-            lines="none"
-            class="ion-no-padding mb-16"
+            class="mb-16"
           >
-            <ion-radio
-              mode="md"
-              justify="start"
-              labelPlacement="end"
+            <mat-radio-button
+              color="primary"
               class="w-full py-24 m-0"
               [value]="enumAddress.SHIPPING"
             >
@@ -102,21 +93,21 @@
                   {{ user.address.city }}, {{ user.address.state }}
                 </span>
               </span>
-            </ion-radio>
-          </ion-item>
+            </mat-radio-button>
+          </div>
           }
-        </ion-radio-group>
+        </mat-radio-group>
       </div>
 
       @if (checkoutLocal.owner.shipping) {
-      <ion-button
+      <button
+        mat-button
         [disabled]="checkoutLocal.shippingOption !== enumAddress.SHIPPING"
         (click)="openAddressForm()"
-        fill="clear"
         class="action-button"
       >
         Alterar endereço
-      </ion-button>
+      </button>
       }
     </div>
   </ion-grid>

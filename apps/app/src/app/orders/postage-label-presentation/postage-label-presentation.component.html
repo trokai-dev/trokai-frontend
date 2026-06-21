@@ -3,10 +3,10 @@
 
     <h2 class="color-gray-dark mt-24 ion-text-center"> Etiqueta dos Correios </h2>
 
-    <ion-label class="label-body-2 mt-48 block ion-text-center">
+    <span class="label-body-2 mt-48 block ion-text-center">
       Para realizar a venda através dos correios é necessário que
       você gere uma etiqueta que é disponibilizada pelo Trokaí.
-    </ion-label>
+    </span>
 
     <div class="w-full flex justify-center">
           <!-- <div class="animation" lottie [options]="options"></div> -->
@@ -15,18 +15,18 @@
           </div>
     </div>
 
-    <ion-label class="label-body-2 color-gray-light-1 block mt-8"> Você deve: </ion-label>
+    <span class="label-body-2 color-gray-light-1 block mt-8"> Você deve: </span>
 
     <div class="mt-8">
       <ul>
         <li>
-          <ion-label class="label-body-2 color-gray-default">Gerar e imprimir a etiqueta</ion-label>
+          <span class="label-body-2 color-gray-default">Gerar e imprimir a etiqueta</span>
         </li>
         <li>
-          <ion-label class="label-body-2 color-gray-default"> Colar a etiqueta na embalagem</ion-label>
+          <span class="label-body-2 color-gray-default"> Colar a etiqueta na embalagem</span>
         </li>
         <li>
-          <ion-label class="label-body-2 color-gray-default"> Levar a embalagem aos correios</ion-label>
+          <span class="label-body-2 color-gray-default"> Levar a embalagem aos correios</span>
         </li>
       </ul>
     </div>
@@ -35,5 +35,7 @@
 </ion-content>
 
 <ion-footer class="px-24 py-16">
-  <ion-button class="action-button" (click)="close()">Gerar etiqueta</ion-button>
+  <button mat-flat-button color="primary" class="action-button" (click)="close()">
+    Gerar etiqueta
+  </button>
 </ion-footer>

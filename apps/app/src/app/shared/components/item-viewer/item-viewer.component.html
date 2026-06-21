@@ -87,22 +87,24 @@
 @if (buying) {
 <ion-footer class="px-24 py-16">
   @if (!inCart) {
-  <ion-button
+  <button
+    mat-flat-button
     class="action-button"
     color="primary"
     (click)="clickAdd()"
   >
     Adicionar ao carrinho
-  </ion-button>
+  </button>
   }
   @if (inCart) {
-  <ion-button
+  <button
+    mat-flat-button
     class="action-button"
-    color="danger"
+    color="warn"
     (click)="clickRemove()"
   >
     Remover do carrinho
-  </ion-button>
+  </button>
   }
 </ion-footer>
 }

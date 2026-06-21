@@ -15,9 +15,9 @@
       >
       </ion-searchbar>
 
-      <ion-button type="submit" style="display: none" color="primary">
+      <button mat-icon-button type="submit" style="display: none" color="primary">
         <ion-icon name="search"></ion-icon>
-      </ion-button>
+      </button>
     </div>
 
     @if (!showInitialPage() && target === 'clothes') {
@@ -45,8 +45,8 @@
             [ngClass]="{'active': activeMenuTab === i}"
             (click)="activeMenuTab = i"
           >
-            <ion-label class="label-body-2 color-gray-default"
-              >{{section.label}}</ion-label
+            <span class="label-body-2 color-gray-default"
+              >{{section.label}}</span
             >
             <div class="tab-trokai-indicator"></div>
           </div>
@@ -103,7 +103,7 @@
     <ion-row
       class="ion-no-padding mt-32"
     >
-      <ion-label class="label-body-2 color-gray-dark">Buscar por</ion-label>
+      <span class="label-body-2 color-gray-dark">Buscar por</span>
       <div class="mt-32 w-full">
         <div class="accordion-list">
           <div
@@ -114,13 +114,13 @@
               <div
                 class="flex items-center justify-between w-full"
               >
-                <ion-label class="label-body-1 color-gray-dark"
-                  >{{searchText}}</ion-label
+                <span class="label-body-1 color-gray-dark"
+                  >{{searchText}}</span
                 >
-                <ion-label class="label-body-2 flex color-gray-default"
+                <span class="label-body-2 flex color-gray-default"
                   >produtos
                   <ion-icon class="ml-8" name="shirt-outline"></ion-icon>
-                </ion-label>
+                </span>
               </div>
             </div>
             <ion-ripple-effect></ion-ripple-effect>
@@ -134,13 +134,13 @@
               <div
                 class="flex items-center justify-between w-full"
               >
-                <ion-label class="label-body-1 color-gray-dark"
-                  >{{searchText}}</ion-label
+                <span class="label-body-1 color-gray-dark"
+                  >{{searchText}}</span
                 >
-                <ion-label class="label-body-2 flex color-gray-default"
+                <span class="label-body-2 flex color-gray-default"
                   >armários e brechós
                   <ion-icon class="ml-8" name="storefront-outline"></ion-icon>
-                </ion-label>
+                </span>
               </div>
             </div>
             <ion-ripple-effect></ion-ripple-effect>
@@ -172,7 +172,7 @@
       @if (!results || results.length === 0) {
       <div class="empty-page full">
         <ion-icon name="sad-outline"></ion-icon>
-        <ion-label> Nenhum resultado</ion-label>
+        <span> Nenhum resultado</span>
       </div>
       }
 

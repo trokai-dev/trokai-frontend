@@ -3,12 +3,11 @@ import {
   ModalController,
   IonIcon,
   IonRippleEffect,
-  IonLabel,
   IonList,
-  IonSelect,
   IonBadge,
-  IonSelectOption,
 } from '@ionic/angular/standalone';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { SortingComponent } from 'src/app/search/sorting/sorting.component';
 import { FilterComponent } from 'src/app/search/filter/filter.component';
 import { ClothesStatus, Filters } from '@trokai/shared-core';
@@ -25,11 +24,10 @@ import { ToastService } from 'src/app/services/toast-service';
   imports: [
     IonBadge,
     IonList,
-    IonLabel,
     IonRippleEffect,
     IonIcon,
-    IonSelect,
-    IonSelectOption,
+    MatFormFieldModule,
+    MatSelectModule,
   ],
 })
 export class FilterTagsComponent {

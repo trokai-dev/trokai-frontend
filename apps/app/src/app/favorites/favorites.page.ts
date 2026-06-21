@@ -18,7 +18,7 @@ import {
   IonRefresherContent,
   IonRow,
   IonTitle,
-  IonToolbar, IonIcon, IonLabel, IonCol, IonSpinner } from '@ionic/angular/standalone';
+  IonToolbar, IonIcon, IonCol, IonSpinner } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { close } from 'ionicons/icons';
 
@@ -27,7 +27,7 @@ import { close } from 'ionicons/icons';
   templateUrl: './favorites.page.html',
   styleUrls: ['./favorites.page.scss'],
   standalone: true,
-  imports: [IonSpinner, IonCol, IonLabel, IonIcon, 
+  imports: [IonSpinner, IonCol, IonIcon, 
     IonHeader,
     IonToolbar,
     IonContent,

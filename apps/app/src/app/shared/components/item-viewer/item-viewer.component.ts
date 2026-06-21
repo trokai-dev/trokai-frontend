@@ -9,7 +9,6 @@ import { InventoryService } from 'src/app/services/inventory.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { take } from 'rxjs/operators';
 import {
-  IonButton,
   IonButtons,
   IonContent,
   IonFooter,
@@ -20,6 +19,7 @@ import {
   IonToolbar,
   ModalController,
 } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import { Share } from '@capacitor/share';
 import { NgClass, CurrencyPipe } from '@angular/common';
 import { TkLikeButtonComponent } from '@trokai/shared-ui';
@@ -35,10 +35,11 @@ import { GlobalService } from 'src/app/services/global.service';
   styleUrls: ['./item-viewer.component.scss'],
   standalone: true,
   imports: [
+    MatButtonModule,
+    
     IonHeader,
     IonToolbar,
     IonButtons,
-    IonButton,
     IonIcon,
     IonContent,
     IonGrid,

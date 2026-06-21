@@ -7,24 +7,24 @@
 
     <ion-buttons slot="primary">
       @if (basketCount > 0 && !myProduct) {
-      <ion-button
-        slot="icon-only"
+      <button
+        mat-icon-button
         class="ml-16"
         (click)="clickCart()"
       >
         <ion-icon name="cart-outline"></ion-icon>
         <ion-badge color="tertiary"> {{ basketCount }} </ion-badge>
-      </ion-button>
+      </button>
       }
 
       @if (myProduct) {
-      <ion-button
-        slot="icon-only"
+      <button
+        mat-icon-button
         class="mr-4"
         (click)="clickOptions()"
       >
         <ion-icon name="ellipsis-horizontal"></ion-icon>
-      </ion-button>
+      </button>
       }
     </ion-buttons>
   </ion-toolbar>
@@ -107,13 +107,13 @@
         @if (published && myProduct && expiration) {
         <div class="mt-16 flex">
           <!-- <ion-icon name="checkmark-outline" class="color-primary icon-smaller mr-8"></ion-icon> -->
-          <ion-label
+          <span
             class="label-body-2"
             [ngClass]="{'color-error' : expiration?.days <= 5}"
           >
             <!-- Publicado! -->
             {{expiration?.text}}
-          </ion-label>
+          </span>
         </div>
         }
 
@@ -125,7 +125,7 @@
             name="time-outline"
             class="color-primary icon-smaller mr-8"
           ></ion-icon>
-          <ion-label class="label-body-2">Em análise</ion-label>
+          <span class="label-body-2">Em análise</span>
         </div>
         }
 
@@ -135,7 +135,7 @@
             name="time-outline"
             class="color-primary icon-smaller mr-8"
           ></ion-icon>
-          <ion-label class="label-body-2">Produto reservado</ion-label>
+          <span class="label-body-2">Produto reservado</span>
         </div>
         }
 
@@ -145,7 +145,7 @@
             name="pause-outline"
             class="color-primary icon-smaller mr-8"
           ></ion-icon>
-          <ion-label class="label-body-2">Anúncio pausado</ion-label>
+          <span class="label-body-2">Anúncio pausado</span>
         </div>
         }
 
@@ -155,7 +155,7 @@
             name="cash-outline"
             class="color-primary icon-smaller mr-8"
           ></ion-icon>
-          <ion-label class="label-body-2">Produto vendido</ion-label>
+          <span class="label-body-2">Produto vendido</span>
         </div>
         }
 
@@ -165,7 +165,7 @@
             name="time-outline"
             class="color-primary icon-smaller mr-8"
           ></ion-icon>
-          <ion-label class="label-body-2">Reservado</ion-label>
+          <span class="label-body-2">Reservado</span>
         </div>
         }
 
@@ -175,7 +175,7 @@
             name="alert-circle-outline"
             class="color-error icon-smaller mr-8"
           ></ion-icon>
-          <ion-label class="label-body-2">Anúncio expirado</ion-label>
+          <span class="label-body-2">Anúncio expirado</span>
         </div>
         }
 
@@ -187,7 +187,7 @@
             name="alert-circle-outline"
             class="color-error icon-smaller mr-8"
           ></ion-icon>
-          <ion-label class="label-body-2">Produto indisponível</ion-label>
+          <span class="label-body-2">Produto indisponível</span>
         </div>
         }
 
@@ -199,7 +199,7 @@
             name="alert-circle-outline"
             class="color-error icon-smaller mr-8"
           ></ion-icon>
-          <ion-label class="label-body-2">Requer ajustes</ion-label>
+          <span class="label-body-2">Requer ajustes</span>
         </div>
         }
       </div>
@@ -299,7 +299,8 @@
             @if (!myProduct && published) {
             <div>
               @if (!product_in_basket) {
-              <ion-button
+              <button
+                mat-flat-button
                 class="action-button"
                 (click)="clickBuy()"
                 color="primary"
@@ -308,28 +309,28 @@
                   {{ wardrobe_basket && !wardrobe_reserved ? "Adicionar \à
                   sacola" : "COMPRAR" }}
                 </b>
-              </ion-button>
+              </button>
               }
 
               @if (product_in_basket) {
-              <ion-button
+              <button
+                mat-flat-button
                 class="action-button"
                 (click)="clickCart()"
                 color="primary"
               >
                 <b> Ver na sacola </b>
-              </ion-button>
+              </button>
               }
 
               @if (product_in_basket) {
-              <ion-button
-                class="action-button mt-12"
+              <button
+                mat-stroked-button
+                class="action-button mt-12 btn-tertiary"
                 (click)="removeFromBasket()"
-                color="tertiary"
-                fill="outline"
               >
                 <b> Remover da sacola </b>
-              </ion-button>
+              </button>
               }
 
               <div class="product-cta-hints">
@@ -416,10 +417,10 @@
         >
           <div class="flex flex-col">
             <h6 class="color-gray-dark text-dots">{{q.question}}</h6>
-            <ion-label
+            <span
               class="mt-8 text-dots block label-body-2 color-gray-default"
               >{{ q.answer ? q.answer : 'Aguardando resposta' }}
-            </ion-label>
+            </span>
           </div>
           <ion-icon name="chevron-forward" class="color-primary"></ion-icon>
           <ion-ripple-effect></ion-ripple-effect>
@@ -428,17 +429,17 @@
 
         @if (displayQuestions && displayQuestions.length === 0) {
         <div class="mt-16">
-          <ion-label class="label-body-2 color-gray-default"
+          <span class="label-body-2 color-gray-default"
             >Nenhuma pergunta
-          </ion-label>
+          </span>
         </div>
         }
 
         @if (!myProduct && published) {
         <div>
-          <ion-button class="action-button" fill="clear" (click)="askQuestion()"
-            >Fazer pergunta</ion-button
-          >
+          <button mat-button class="action-button" (click)="askQuestion()">
+            Fazer pergunta
+          </button>
         </div>
         }
       </div>
@@ -548,20 +549,20 @@
 
 @if (expired) {
 <ion-footer class="px-24 py-16">
-  <ion-button (click)="renewProduct()" class="action-button">
+  <button mat-flat-button color="primary" (click)="renewProduct()" class="action-button">
     Renovar anúncio
-  </ion-button>
+  </button>
 </ion-footer>
 } @else if (waiting_adjustment) {
 <ion-footer class="px-24 py-16">
-  <ion-button (click)="modalAdjusts()" class="action-button">
+  <button mat-flat-button color="primary" (click)="modalAdjusts()" class="action-button">
     Corrigir anúncio
-  </ion-button>
+  </button>
 </ion-footer>
 } @else if (paused) {
 <ion-footer class="px-24 py-16">
-  <ion-button (click)="activateProduct()" class="action-button">
+  <button mat-flat-button color="primary" (click)="activateProduct()" class="action-button">
     Ativar anúncio
-  </ion-button>
+  </button>
 </ion-footer>
 }

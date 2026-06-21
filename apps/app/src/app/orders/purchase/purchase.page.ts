@@ -27,11 +27,9 @@ import {
   IonTitle,
   IonContent,
   IonGrid,
-  IonLabel,
   IonRow,
   IonCol,
   IonButtons,
-  IonButton,
   IonIcon,
   IonRippleEffect,
   IonFooter,
@@ -39,9 +37,10 @@ import {
   IonSpinner,
   IonThumbnail,
   IonAvatar,
-  IonInput,
-  IonItem,
 } from '@ionic/angular/standalone';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
 import {
   chatbubble,
@@ -68,7 +67,9 @@ import { CartItemComponent } from 'src/app/shared/components/cart-item/cart-item
     IonFooter,
     IonRippleEffect,
     IonIcon,
-    IonButton,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
     IonButtons,
     IonCol,
     IonRow,
@@ -82,8 +83,6 @@ import { CartItemComponent } from 'src/app/shared/components/cart-item/cart-item
     DatePipe,
     CostPipe,
     IonAvatar,
-    IonInput,
-    IonItem,
     OrderDeliveryComponent,
     CartItemComponent,
   ],

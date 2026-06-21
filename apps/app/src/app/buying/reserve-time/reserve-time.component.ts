@@ -10,7 +10,8 @@ import {
 import { Subscription } from 'rxjs';
 import { BuyingService } from '@trokai/shared-data-access';
 import { DatePipe } from '@angular/common';
-import { IonButton, IonText } from '@ionic/angular/standalone';
+import { IonText } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import { AlertService } from '@trokai/shared-ui';
 
 
@@ -19,7 +20,7 @@ import { AlertService } from '@trokai/shared-ui';
   templateUrl: './reserve-time.component.html',
   styleUrls: ['./reserve-time.component.scss'],
   standalone: true,
-  imports: [IonButton, IonText, DatePipe],
+  imports: [MatButtonModule, IonText, DatePipe],
 })
 export class ReserveTimeComponent implements OnInit, OnDestroy {
   @Input() ownerId: string = null;

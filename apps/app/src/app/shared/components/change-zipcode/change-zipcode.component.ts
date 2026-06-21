@@ -1,18 +1,17 @@
 import { Component, inject } from '@angular/core';
 import {
   ModalController,
-  IonButton,
   IonFooter,
-  IonLabel,
-  IonItem,
   IonToolbar,
   IonHeader,
   IonButtons,
   IonIcon,
   IonContent,
-  IonInput,
 } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { MaskDirective } from '../../directives/mask/mask.directive';
 import { addIcons } from 'ionicons';
 import { close } from 'ionicons/icons';
@@ -28,11 +27,10 @@ import { close } from 'ionicons/icons';
     IonButtons,
     IonHeader,
     IonToolbar,
-    IonItem,
-    IonLabel,
-    IonInput,
     IonFooter,
-    IonButton,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
     FormsModule,
     MaskDirective,
   ],

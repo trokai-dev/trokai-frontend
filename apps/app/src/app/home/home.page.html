@@ -7,12 +7,12 @@
 
     <ion-buttons slot="primary">
       <!-- help btn -->
-      <ion-button slot="icon-only" routerLink="help">
+      <button mat-icon-button routerLink="help">
         <ion-icon name="help-circle-outline"></ion-icon>
-      </ion-button>
+      </button>
 
       <!-- notif btn -->
-      <ion-button slot="icon-only" class="ml-16" routerLink="notifications">
+      <button mat-icon-button class="ml-16" routerLink="notifications">
         <ion-icon name="notifications-outline"></ion-icon>
 
         @if (notificationCount + messageCount > 0) {
@@ -20,9 +20,9 @@
           {{ notificationCount + messageCount }}
         </ion-badge>
         }
-      </ion-button>
+      </button>
 
-      <ion-button slot="icon-only" class="ml-16" routerLink="carts">
+      <button mat-icon-button class="ml-16" routerLink="carts">
         <ion-icon name="cart-outline"></ion-icon>
 
         @if (basketCount > 0) {
@@ -30,7 +30,7 @@
           {{ basketCount }}
         </ion-badge>
         }
-      </ion-button>
+      </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

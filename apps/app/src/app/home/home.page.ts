@@ -24,7 +24,6 @@ import { NgIf, NgFor } from '@angular/common';
 import { BannerComponent } from './banner/banner.component';
 import { HomeGenericComponent } from './home-generic/home-generic.component';
 import {
-  IonButton,
   IonButtons,
   IonContent,
   IonHeader,
@@ -35,6 +34,7 @@ import {
   IonCol,
   IonBadge,
 } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import {
   cartOutline,
   helpCircleOutline,
@@ -48,6 +48,8 @@ import { addIcons } from 'ionicons';
   styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [
+    MatButtonModule,
+    
     IonBadge,
     IonCol,
     IonRow,
@@ -55,7 +57,6 @@ import { addIcons } from 'ionicons';
     IonToolbar,
     IonImg,
     IonButtons,
-    IonButton,
     IonIcon,
     IonContent,
     RouterLink,

@@ -42,16 +42,15 @@ import {
   LoadingController,
   ModalController,
   NavController,
-  IonButton,
   IonIcon,
   IonButtons,
   ActionSheetController,
   IonList,
   IonRippleEffect,
-  IonLabel,
   IonBadge,
   IonText,
 } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
 import {
   alertCircle,
@@ -89,16 +88,16 @@ import { CompletingInformationService } from '@trokai/shared-data-access';
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
+    MatButtonModule,
+    
     IonText,
     IonBadge,
     IonButtons,
     IonIcon,
-    IonButton,
     IonHeader,
     IonList,
     IonRippleEffect,
     TkUserAvatarComponent,
-    IonLabel,
     IonToolbar,
     IonContent,
     IonGrid,

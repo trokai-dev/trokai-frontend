@@ -13,16 +13,17 @@
     <div class="empty-page full">
       <ion-icon name="sad-outline"></ion-icon>
 
-      <ion-label> Nenhuma sacolinha</ion-label>
+      <span> Nenhuma sacolinha</span>
 
-      <ion-button
+      <button
+        mat-flat-button
         routerLink="/main/search"
         color="primary"
         class="action-button mt-16"
         style="width: 50%"
       >
         Ver produtos
-      </ion-button>
+      </button>
     </div>
     }
 
@@ -120,21 +121,22 @@
 
         @if (!basket.reserved) {
         <div>
-          <ion-button
-            fill="outline"
+          <button
+            mat-stroked-button
             class="mt-24 w-full action-button"
             color="primary"
             (click)="goToWardrobe(basket.owner._id)"
           >
             <b>Adicionar mais produtos</b>
-          </ion-button>
-          <ion-button
+          </button>
+          <button
+            mat-flat-button
             class="mt-8 w-full action-button"
             color="primary"
             (click)="checkout(basket.owner._id)"
           >
             <b>Ir para pagamento</b>
-          </ion-button>
+          </button>
         </div>
         }
 

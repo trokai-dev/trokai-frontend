@@ -8,7 +8,6 @@ import {
   IonIcon,
   IonTabBar,
   IonTabButton,
-  IonLabel,
 } from '@ionic/angular/standalone';
 import { InventoryService } from '../services/inventory.service';
 import { MainService } from '../services/main.service';
@@ -35,7 +34,7 @@ import { TutorialService } from '../services/tutorial.service';
   templateUrl: './main.page.html',
   styleUrls: ['./main.page.scss'],
   standalone: true,
-  imports: [IonIcon, NgStyle, IonTabs, IonTabBar, IonTabButton, IonLabel],
+  imports: [IonIcon, NgStyle, IonTabs, IonTabBar, IonTabButton],
 })
 export class MainPage implements OnInit {
   private authService = inject(AuthService);

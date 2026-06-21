@@ -29,7 +29,6 @@ import {
   IonHeader,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
-  IonLabel,
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
@@ -68,7 +67,6 @@ import { NotificationDisplay } from '@trokai/shared-core';
     IonToolbar,
     IonButtons,
     IonTitle,
-    IonLabel,
     IonContent,
     IonInfiniteScroll,
     IonInfiniteScrollContent,

@@ -17,16 +17,16 @@
     <ion-list class="mt-32 ion-no-padding px-4">
       @for (adjust of adjusts; track $index) {
       <ion-item class="ion-no-padding">
-        <ion-label class="label-body-2 color-gray-default py-8">
+        <span class="label-body-2 color-gray-default py-8">
           {{ getAdjustInfo(adjust) }}
-        </ion-label>
+        </span>
       </ion-item>
       }
     </ion-list>
 
     @if (adjustsNote && adjustsNote.length > 0) {
     <div class="px-4 mt-16">
-      <ion-label class="label-body-2 color-gray-dark">Observação</ion-label>
+      <span class="label-body-2 color-gray-dark">Observação</span>
 
       <div class="mt-8">
         <label class="label-body-2 color-gray-default">
@@ -39,7 +39,7 @@
 </ion-content>
 
 <ion-footer class="px-24 py-16">
-  <ion-button (click)="adjust()" class="action-button">
+  <button mat-flat-button color="primary" (click)="adjust()" class="action-button">
     Corrigir anúncio
-  </ion-button>
+  </button>
 </ion-footer>

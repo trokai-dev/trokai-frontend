@@ -46,22 +46,18 @@
         ><b>Método de pagamento</b>
       </span>
 
-      <ion-radio-group
-        mode="md"
+      <mat-radio-group
         [value]="checkoutLocal.paymentOption"
-        (ionChange)="changePaymentOption($event.detail.value)"
+        (change)="changePaymentOption($event.value)"
       >
-        <ion-item lines="none" class="ion-no-padding py-8 mt-12">
+        <div class="flex items-center py-8 mt-12">
           <ion-icon
             class="mr-16"
-            slot="start"
             src="../../../assets/icons/pix.svg"
           ></ion-icon>
 
-          <ion-radio
-            mode="md"
-            justify="start"
-            labelPlacement="end"
+          <mat-radio-button
+            color="primary"
             class="w-full py-8 m-0"
             [value]="PaymentOption.PIX"
           >
@@ -73,25 +69,21 @@
               </span>
               }
             </span>
-          </ion-radio>
-        </ion-item>
+          </mat-radio-button>
+        </div>
 
-        <ion-item lines="none" class="ion-no-padding py-8">
-          <ion-icon class="mr-16" slot="start" name="card-outline"></ion-icon>
+        <div class="flex items-center py-8">
+          <ion-icon class="mr-16" name="card-outline"></ion-icon>
 
-          <ion-radio
-            mode="md"
-            justify="start"
-            labelPlacement="end"
+          <mat-radio-button
+            color="primary"
             class="w-full py-8 m-0"
             [value]="PaymentOption.CREDIT_CARD"
           >
-            <span class="label-body-2 ion-text-capitalize">
-              Cartão de crédito
-            </span>
-          </ion-radio>
-        </ion-item>
-      </ion-radio-group>
+            <span class="label-body-2 capitalize"> Cartão de crédito </span>
+          </mat-radio-button>
+        </div>
+      </mat-radio-group>
     </div>
 
     <!-- CARTAO -->
@@ -99,51 +91,41 @@
     <div class="py-24 border-top">
       <div class="flex justify-between items-center">
         <span class="label-body-1 color-gray-dark"><b>Cartão</b> </span>
-        <ion-button (click)="newCard()" fill="clear"> Adicionar </ion-button>
+        <button mat-button color="primary" (click)="newCard()">Adicionar</button>
       </div>
 
       @if (user.cards && user.cards.length > 0) {
       <div class="mt-16">
-        <ion-item class="ion-no-padding">
-          <ion-select
-            label="Cartão"
-            labelPlacement="floating"
-            class="w-full"
-            [(ngModel)]="checkoutLocal.cardId"
-            okText="Selecionar"
-            cancelText="Cancelar"
-          >
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Cartão</mat-label>
+          <mat-select [(ngModel)]="checkoutLocal.cardId">
             @for (c of user.cards; track c._id) {
-            <ion-select-option [value]="c._id">
+            <mat-option [value]="c._id">
               **** **** **** {{c.lastDigits}}
-            </ion-select-option>
+            </mat-option>
             }
-          </ion-select>
-        </ion-item>
+          </mat-select>
+        </mat-form-field>
       </div>
       }
 
       @if (user.cards && user.cards.length > 0 && checkoutLocal.cardId !== null) {
       <div>
-        <ion-item class="ion-no-padding">
-          <ion-select
-            class="w-full"
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Parcelas</mat-label>
+          <mat-select
             [(ngModel)]="checkoutLocal.selectedInstallments"
-            (ionChange)="installmentsSelected($event.detail.value)"
-            okText="Selecionar"
-            cancelText="Cancelar"
-            label="Parcelas"
-            labelPlacement="floating"
+            (selectionChange)="installmentsSelected($event.value)"
           >
             @for (i of installments; track $index) {
-            <ion-select-option [value]="i.installments">
+            <mat-option [value]="i.installments">
               {{ i.installments }} x de {{ i.installmentValue | cost | currency
               : "BRL" : true : "1.2" }} {{ i.installments > 1 ? i.interest ? "
               com juros" : " sem juros" : "" }}
-            </ion-select-option>
+            </mat-option>
             }
-          </ion-select>
-        </ion-item>
+          </mat-select>
+        </mat-form-field>
       </div>
       }
     </div>

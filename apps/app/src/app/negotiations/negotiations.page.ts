@@ -20,7 +20,6 @@ import {
   IonImg,
   IonRippleEffect,
   IonIcon,
-  IonLabel,
   IonSpinner,
   IonThumbnail,
 } from '@ionic/angular/standalone';
@@ -34,7 +33,6 @@ import { sadOutline } from 'ionicons/icons';
   standalone: true,
   imports: [
     IonSpinner,
-    IonLabel,
     IonIcon,
     IonRippleEffect,
     IonImg,

@@ -17,8 +17,8 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
-  IonLabel,
-  IonRippleEffect, IonIcon, IonList, IonSpinner, IonButton } from '@ionic/angular/standalone';
+  IonRippleEffect, IonIcon, IonList, IonSpinner } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
 import { informationCircleOutline, sadOutline } from 'ionicons/icons';
 import { AlertService, CostPipe } from '@trokai/shared-ui';
@@ -31,8 +31,9 @@ import { Subscription } from 'rxjs';
   templateUrl: './bank.page.html',
   styleUrls: ['./bank.page.scss'],
   standalone: true,
-  imports: [IonButton, IonSpinner, IonList, IonIcon, 
-    IonLabel,
+  imports: [
+    MatButtonModule,
+    IonSpinner, IonList, IonIcon,
     IonHeader,
     IonToolbar,
     IonButtons,

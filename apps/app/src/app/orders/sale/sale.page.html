@@ -6,9 +6,9 @@
 
     @if (showContact) {
     <ion-buttons slot="primary">
-      <ion-button slot="icon-only" (click)="chat()">
+      <button mat-icon-button (click)="chat()">
         <ion-icon name="chatbubble" class="color-primary"></ion-icon>
-      </ion-button>
+      </button>
     </ion-buttons>
     }
   </ion-toolbar>
@@ -119,14 +119,13 @@
 
               <!-- Link to bank -->
               <div class="mt-16">
-                <ion-button
-                  fill="clear"
-                  size="small"
+                <button
+                  mat-button
                   class="color-primary"
                   (click)="goToBank()"
                 >
                   Abrir cofrinho
-                </ion-button>
+                </button>
               </div>
             </div>
 
@@ -162,13 +161,13 @@
 
             <!-- CANCELAMENTO -->
             @if (waiting_shipment || waiting_withdrawal) {
-            <ion-button
+            <button
+              mat-button
               class="action-button mt-32 w-full color-error"
-              fill="clear"
               (click)="cancel()"
             >
               Cancelar venda
-            </ion-button>
+            </button>
             }
           </ion-col>
         </ion-row>

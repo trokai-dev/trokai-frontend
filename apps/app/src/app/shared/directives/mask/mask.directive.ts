@@ -10,7 +10,6 @@ import {
   inject,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { IonInput } from '@ionic/angular/standalone';
 import { NgxMaskService } from 'ngx-mask';
 
 @Directive({
@@ -20,19 +19,20 @@ import { NgxMaskService } from 'ngx-mask';
 export class MaskDirective implements AfterViewInit {
   @Input() appMask;
 
-  private el = inject(IonInput);
+  private el = inject(ElementRef<HTMLInputElement>);
   private ngControl = inject(NgControl, { optional: true });
   private mask = inject(NgxMaskService);
 
   ngAfterViewInit(): void {
-    setTimeout(() => this.applyMask(this.el.value));
+    setTimeout(() => this.applyMask(this.el.nativeElement.value));
   }
 
   @HostListener('keyup', ['$event'])
   public onKeyup(event: KeyboardEvent): void {
     const value = (event.target as HTMLInputElement).value;
 
-    if (value.length > this.appMask.length) this.el.value = value.slice(0, -1);
+    if (value.length > this.appMask.length)
+      this.el.nativeElement.value = value.slice(0, -1);
 
     this.applyMask(value);
   }
@@ -62,6 +62,6 @@ export class MaskDirective implements AfterViewInit {
     }
 
     if (this.ngControl) this.ngControl.control.setValue(masked);
-    else this.el.value = masked;
+    else this.el.nativeElement.value = masked;
   }
 }

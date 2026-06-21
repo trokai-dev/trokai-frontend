@@ -10,7 +10,6 @@ import { FilterTagsComponent } from '../shared/components/filter-tags/filter-tag
 import { TkProductCardComponent } from '@trokai/shared-ui';
 import { TkUserHeaderComponent } from '@trokai/shared-ui';
 import {
-  IonButton,
   IonContent,
   IonHeader,
   IonIcon,
@@ -20,12 +19,12 @@ import {
   IonSearchbar,
   IonCol,
   IonRow,
-  IonLabel,
   IonRippleEffect,
   IonList,
   IonSpinner,
   IonInfiniteScrollContent,
 } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
 import {
   sadOutline,
@@ -41,14 +40,14 @@ import { FirebaseService } from '../services/firebase.service';
   styleUrls: ['./search.page.scss'],
   standalone: true,
   imports: [
+    MatButtonModule,
+    
     IonCol,
     IonSearchbar,
     IonHeader,
     IonToolbar,
-    IonButton,
     IonIcon,
     IonRow,
-    IonLabel,
     IonRippleEffect,
     IonList,
     IonSpinner,

@@ -9,20 +9,17 @@
 
 <ion-content>
   <div class="p-24">
-    <h6 class="ion-text-center color-gray-dark">Cupom de desconto</h6>
+    <h6 class="text-center color-gray-dark">Cupom de desconto</h6>
 
-    <ion-item class="ion-no-padding mt-32" mode="md">
-      <ion-input
-        label="Código do cupom"
-        labelPlacement="floating"
-        [(ngModel)]="couponCode"
-        type="text"
-      >
-      </ion-input>
-    </ion-item>
+    <mat-form-field appearance="outline" class="w-full mt-32">
+      <mat-label>Código do cupom</mat-label>
+      <input matInput [(ngModel)]="couponCode" type="text" />
+    </mat-form-field>
   </div>
 </ion-content>
 
 <ion-footer class="px-24 py-16">
-  <ion-button class="action-button" (click)="onApply()">Aplicar</ion-button>
+  <button mat-flat-button color="primary" class="action-button" (click)="onApply()">
+    Aplicar
+  </button>
 </ion-footer>

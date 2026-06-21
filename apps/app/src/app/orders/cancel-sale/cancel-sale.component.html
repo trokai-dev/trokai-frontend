@@ -26,24 +26,17 @@
 
     @if (!done && !loading) {
     <div>
-      <div class="div-beauty-textarea mt-40">
-        <ion-textarea
-          autoGrow="true"
+      <mat-form-field appearance="outline" class="w-full mt-40">
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="4"
           maxlength="500"
-          style="height: auto"
-          mode="md"
-          (ionInput)="inputArea()"
+          (input)="inputArea()"
           [(ngModel)]="message"
-          style="
-            margin-top: 3%;
-            --padding-top: 0px;
-            --padding-end: 0px;
-            --padding-bottom: 4vh;
-            --padding-start: 0px;
-          "
-          placeHolder="Qual o motivo do cancelamento?"
-        ></ion-textarea>
-      </div>
+          placeholder="Qual o motivo do cancelamento?"
+        ></textarea>
+      </mat-form-field>
     </div>
     }
 
@@ -60,12 +53,12 @@
 
       <h6 class="color-gray-dark mt-16">Cancelamento solicitado!</h6>
 
-      <ion-label class="label-body-2 ion-text-center color-gray-default mt-40">
+      <span class="label-body-2 text-center color-gray-default mt-40 block">
         Vamos te responder no email
         <ion-text>
           <b>{{ order.seller.email }}</b>
         </ion-text>
-      </ion-label>
+      </span>
     </div>
     }
   </ion-grid>
@@ -73,12 +66,14 @@
 
 <ion-footer class="px-24 py-16">
   @if (!done) {
-  <ion-button
+  <button
+    mat-flat-button
+    color="primary"
     class="action-button"
     [disabled]="loading || !formValid()"
     (click)="sendMessage()"
   >
     Solicitar cancelamento
-  </ion-button>
+  </button>
   }
 </ion-footer>

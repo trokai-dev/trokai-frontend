@@ -6,9 +6,9 @@
 
     @if (showContact) {
     <ion-buttons slot="primary">
-      <ion-button slot="icon-only" (click)="chat()">
+      <button mat-icon-button (click)="chat()">
         <ion-icon name="chatbubble" class="color-primary"></ion-icon>
-      </ion-button>
+      </button>
     </ion-buttons>
     }
   </ion-toolbar>
@@ -40,19 +40,20 @@
 
           <span class="item-label mt-16"> Copia e cola </span>
 
-          <ion-item class="ion-no-padding mt-8">
-            <ion-input
+          <mat-form-field appearance="outline" class="w-full mt-8">
+            <input
+              matInput
               (copy)="copyPix($event)"
-              readonly="true"
+              readonly
               [value]="order?.pix?.payload"
               style="user-select: none"
             />
 
-            <ion-button fill="clear" slot="end" (click)="copyPix($event)">
+            <button mat-button matSuffix (click)="copyPix($event)">
               <ion-icon name="copy-outline"></ion-icon>
               Copiar
-            </ion-button>
-          </ion-item>
+            </button>
+          </mat-form-field>
         </div>
         }
 
@@ -239,23 +240,23 @@
 
             <!-- CANCELAMENTO -->
             @if (waiting_shipment || waiting_withdrawal || waiting_payment) {
-            <ion-button
+            <button
+              mat-button
               class="action-button mt-32 w-full color-error"
-              fill="clear"
               (click)="cancel()"
             >
               Cancelar compra
-            </ion-button>
+            </button>
             }
 
             @if (order_delivered && userMayReturn) {
-            <ion-button
+            <button
+              mat-button
               class="action-button mt-32 w-full color-error"
-              fill="clear"
               (click)="return()"
             >
               Solicitar devolução
-            </ion-button>
+            </button>
             }
           </ion-col>
         </ion-row>
@@ -268,16 +269,16 @@
 
 @if (waiting_review && !userMadeReview && !loading) {
 <ion-footer class="px-24 py-16">
-  <ion-button (click)="checkReview()" class="action-button">
+  <button mat-flat-button color="primary" (click)="checkReview()" class="action-button">
     Avaliar compra
-  </ion-button>
+  </button>
 </ion-footer>
 }
 
 @if (waiting_withdrawal && !loading) {
 <ion-footer class="px-24 py-16">
-  <ion-button (click)="confirmWithdrawal()" class="action-button">
+  <button mat-flat-button color="primary" (click)="confirmWithdrawal()" class="action-button">
     Já recebi minha compra
-  </ion-button>
+  </button>
 </ion-footer>
 }

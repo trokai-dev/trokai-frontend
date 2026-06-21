@@ -5,7 +5,7 @@
         name="home-outline"
         name="{{getTab() === 'home' ? 'home' : 'home-outline'}}"
       ></ion-icon>
-      <ion-label>Início</ion-label>
+      <span>Início</span>
     </ion-tab-button>
 
     <ion-tab-button tab="search" (click)="searchScroll()">
@@ -13,12 +13,12 @@
         name="search-outline"
         name="{{getTab() === 'search' ? 'search' : 'search-outline'}}"
       ></ion-icon>
-      <ion-label>Busca</ion-label>
+      <span>Busca</span>
     </ion-tab-button>
 
     <ion-tab-button (click)="registerItem()">
       <ion-icon name="camera-outline"></ion-icon>
-      <ion-label>Anunciar</ion-label>
+      <span>Anunciar</span>
     </ion-tab-button>
 
     <ion-tab-button tab="negotiations" (click)="negotiationsScroll()">
@@ -26,7 +26,7 @@
         name="cube-outline"
         name="{{getTab() === 'negotiations' ? 'cube' : 'cube-outline'}}"
       ></ion-icon>
-      <ion-label>Pedidos</ion-label>
+      <span>Pedidos</span>
     </ion-tab-button>
 
     <ion-tab-button
@@ -38,7 +38,7 @@
         name="menu-outline"
         name="{{getTab() === 'profile' ? 'menu' : 'menu-outline'}}"
       ></ion-icon>
-      <ion-label>Mais</ion-label>
+      <span>Mais</span>
     </ion-tab-button>
 
     <ion-tab-button
@@ -50,7 +50,7 @@
         name="enter-outline"
         name="{{getTab() === 'login' ? 'enter' : 'enter-outline'}}"
       ></ion-icon>
-      <ion-label>Entrar</ion-label>
+      <span>Entrar</span>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

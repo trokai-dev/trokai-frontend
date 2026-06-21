@@ -16,21 +16,17 @@ import {
   IonHeader,
   IonToolbar,
   IonButtons,
-  IonButton,
   IonIcon,
   IonTitle,
   IonContent,
-  IonItem,
-  IonLabel,
   IonFooter,
-  IonToggle,
   IonBadge,
-  IonRadioGroup,
-  IonRadio,
   IonRippleEffect,
-  IonRange,
   IonRow,
 } from '@ionic/angular/standalone';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
 import {
   chevronDown,
@@ -51,20 +47,15 @@ import { BasicModel, notNullOrEmpty } from '@trokai/shared-core';
     IonHeader,
     IonToolbar,
     IonButtons,
-    IonButton,
     IonIcon,
     IonTitle,
-    IonToggle,
     IonBadge,
-    IonRadioGroup,
-    IonItem,
-    IonRadio,
     IonRippleEffect,
-    IonRange,
     IonContent,
     IonFooter,
-    IonItem,
-    IonLabel,
+    MatRadioModule,
+    MatSliderModule,
+    MatButtonModule,
     FormsModule,
     NgClass,
     IonRow,
@@ -225,11 +216,11 @@ export class FilterComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  changeCost(ev) {
+  changeCost() {
     this.filter.costLower =
-      ev.target.value.lower > 0 ? ev.target.value.lower : null;
+      this.costRange.lower > 0 ? this.costRange.lower : null;
     this.filter.costUpper =
-      ev.target.value.upper < this.maxCost ? ev.target.value.upper : null;
+      this.costRange.upper < this.maxCost ? this.costRange.upper : null;
   }
 
   applyFilters() {

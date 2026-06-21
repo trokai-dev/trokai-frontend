@@ -8,7 +8,6 @@ import { AlertService } from '@trokai/shared-ui';
 
 import {
   IonButtons,
-  IonButton,
   IonIcon,
   IonTitle,
   IonToolbar,
@@ -18,13 +17,10 @@ import {
   IonRow,
   IonCol,
   IonSpinner,
-  IonRadioGroup,
-  IonRadio,
-  IonItem,
-  IonLabel,
   IonFooter,
-  RadioGroupCustomEvent,
 } from '@ionic/angular/standalone';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonModule } from '@angular/material/button';
 import { BackButtonComponent } from 'src/app/shared/components/back-button/back-button.component';
 import { Browser } from '@capacitor/browser';
 
@@ -35,16 +31,13 @@ import { Browser } from '@capacitor/browser';
     IonHeader,
     IonToolbar,
     IonTitle,
-    IonButton,
     IonContent,
     IonGrid,
     IonRow,
     IonCol,
     IonSpinner,
-    IonRadioGroup,
-    IonRadio,
-    IonItem,
-    IonLabel,
+    MatRadioModule,
+    MatButtonModule,
     IonFooter,
     FormsModule,
     RouterModule,
@@ -127,8 +120,7 @@ export class PostageOptionsComponent implements OnInit {
     this.agenciesPage++;
   }
 
-  selectAgency(event: RadioGroupCustomEvent) {
-    const selectedId = event.detail.value;
+  selectAgency(selectedId: PostageAgency['id']) {
     this.selectedAgency =
       this.agencies.find((agency) => agency.id === selectedId) || null;
   }

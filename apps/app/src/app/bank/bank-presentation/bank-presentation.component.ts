@@ -1,11 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { ModalController } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import {
-  IonButton,
   IonContent,
   IonFooter,
   IonGrid,
-  IonLabel,
 } from '@ionic/angular/standalone';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 
@@ -15,11 +14,11 @@ import { AnimationOptions, LottieComponent } from 'ngx-lottie';
   styleUrls: ['./bank-presentation.component.scss'],
   standalone: true,
   imports: [
+    MatButtonModule,
+    
     IonContent,
     IonGrid,
-    IonLabel,
     IonFooter,
-    IonButton,
     LottieComponent,
   ],
 })

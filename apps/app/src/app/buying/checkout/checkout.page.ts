@@ -32,16 +32,15 @@ import {
   IonGrid,
   IonThumbnail,
   IonImg,
-  IonButton,
   IonItem,
   IonIcon,
-  IonRadio,
-  IonRadioGroup,
-  IonSelect,
   IonNav,
   NavController,
-  IonSelectOption,
 } from '@ionic/angular/standalone';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonModule } from '@angular/material/button';
 
 import { addIcons } from 'ionicons';
 import { cardOutline, closeOutline, helpCircleOutline } from 'ionicons/icons';
@@ -62,15 +61,14 @@ import { AlertService } from '@trokai/shared-ui';
     IonTitle,
     IonFooter,
     IonGrid,
-    IonButton,
     IonItem,
     IonIcon,
     IonContent,
     IonThumbnail,
-    IonRadio,
-    IonRadioGroup,
-    IonSelect,
-    IonSelectOption,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatButtonModule,
     IonImg,
     BackButtonComponent,
     FormsModule,

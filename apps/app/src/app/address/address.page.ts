@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { BackButtonComponent } from '../shared/components/back-button/back-button.component';
 import {
-  IonButton,
   IonContent,
   IonHeader,
   IonNav,
@@ -18,6 +17,7 @@ import {
   NavParams,
   Platform,
 } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import { CompletingInformationService } from '@trokai/shared-data-access';
 import { FirebaseService } from '../services/firebase.service';
 
@@ -30,7 +30,7 @@ import { FirebaseService } from '../services/firebase.service';
     IonHeader,
     IonToolbar,
     IonSpinner,
-    IonButton,
+    MatButtonModule,
     IonTitle,
     IonContent,
   ],
@@ -51,13 +51,13 @@ import { FirebaseService } from '../services/firebase.service';
         <div class="p-24">
           <tk-address-form [address]="userAddress" [submit]="false" (addressSave)="onAddressSave($event)" />
           <div class="mt-56">
-            <ion-button [disabled]="!formRef?.form.valid" (click)="formRef?.save()" color="primary" shape="round" class="action-button w-full">
+            <button mat-flat-button [disabled]="!formRef?.form.valid" (click)="formRef?.save()" color="primary" class="action-button w-full round">
               {{ getStringButton() }}
-            </ion-button>
+            </button>
             @if (buyingChangeAddress && zipShipping) {
-              <ion-button (click)="useRegisteredAddress()" color="primary" fill="outline" shape="round" class="action-button w-full mt-16">
+              <button mat-stroked-button (click)="useRegisteredAddress()" color="primary" class="action-button w-full mt-16 round">
                 Usar endereço cadastrado
-              </ion-button>
+              </button>
             }
           </div>
         </div>

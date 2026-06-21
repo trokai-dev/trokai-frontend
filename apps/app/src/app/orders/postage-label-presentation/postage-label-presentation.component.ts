@@ -1,12 +1,11 @@
 import { Component, inject } from '@angular/core';
 import {
-  IonButton,
   IonContent,
   IonFooter,
   IonGrid,
-  IonLabel,
   ModalController,
 } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 
 @Component({
@@ -15,10 +14,10 @@ import { AnimationOptions, LottieComponent } from 'ngx-lottie';
   styleUrls: ['./postage-label-presentation.component.scss'],
   standalone: true,
   imports: [
+    MatButtonModule,
+    
     IonContent,
     IonGrid,
-    IonLabel,
-    IonButton,
     IonFooter,
     LottieComponent,
   ],

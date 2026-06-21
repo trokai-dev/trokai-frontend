@@ -12,7 +12,7 @@
     @if (!cards || cards.length === 0) {
     <div class="empty-page full">
       <ion-icon name="sad-outline"></ion-icon>
-      <ion-label> Nenhum cartão</ion-label>
+      <span> Nenhum cartão</span>
     </div>
     } @for (c of cards; track c._id) {
     <div class="menu-item ion-activatable ripple-parent">

@@ -2,15 +2,13 @@ import { Address, User } from '@trokai/shared-core';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import {
   IonNav,
-  IonRadio,
-  IonRadioGroup,
   NavController,
-  IonButton,
   IonSpinner,
   IonText,
-  IonItem,
   IonGrid,
 } from '@ionic/angular/standalone';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonModule } from '@angular/material/button';
 import { Subscription } from 'rxjs';
 import { AddressPage } from 'src/app/address/address.page';
 import { AuthService } from 'src/app/services/auth.service';
@@ -44,17 +42,14 @@ import { LoadingService, CostPipe } from '@trokai/shared-ui';
   standalone: true,
   imports: [
     IonGrid,
-    IonItem,
     IonText,
-    IonButton,
     IonHeader,
     IonToolbar,
     IonTitle,
     IonContent,
     IonFooter,
-    IonRadio,
-    IonItem,
-    IonRadioGroup,
+    MatRadioModule,
+    MatButtonModule,
     BackButtonComponent,
     NgClass,
     ReserveTimeComponent,

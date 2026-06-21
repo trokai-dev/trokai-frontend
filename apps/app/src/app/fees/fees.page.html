@@ -14,8 +14,8 @@
         <h6 class="color-gray-dark">Das trokas</h6>
       </div>
 
-      <ion-label class="mt-8 block label-body-2"
-        >As trokas são gratuitas.</ion-label
+      <span class="mt-8 block label-body-2"
+        >As trokas são gratuitas.</span
       >
     </div>
 
@@ -25,152 +25,152 @@
         <h6 class="color-gray-dark">Das vendas</h6>
       </div>
 
-      <ion-label class="mt-12 block label-body-2"
+      <span class="mt-12 block label-body-2"
         >1) É cobrada do vendedor uma comissão de
         <b>{{params.sellPercentageFee * 100}}%</b> sobre o valor da venda, mais
         uma taxa fixa de serviço do Trokaí, que é definida de acordo com a
         tabela abaixo:
-      </ion-label>
+      </span>
 
       <div class="fees-table mt-16">
         <ion-row>
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
-              Valor da venda</ion-label
+            <span class="label-body-2 color-gray-dark">
+              Valor da venda</span
             >
           </ion-col>
 
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">Taxa</ion-label>
+            <span class="label-body-2 color-gray-dark">Taxa</span>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
-              Até R$ 15,00</ion-label
+            <span class="label-body-2 color-gray-dark">
+              Até R$ 15,00</span
             >
           </ion-col>
 
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
+            <span class="label-body-2 color-gray-dark">
               {{ params.sellFixedFee[0] |cost| currency: "BRL" : true :
               '1.2-2'}}
-            </ion-label>
+            </span>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
-              R$ 15,01 a R$ 50,00</ion-label
+            <span class="label-body-2 color-gray-dark">
+              R$ 15,01 a R$ 50,00</span
             >
           </ion-col>
 
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
+            <span class="label-body-2 color-gray-dark">
               {{ params.sellFixedFee[1] |cost| currency: "BRL" : true :
               '1.2-2'}}
-            </ion-label>
+            </span>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
-              R$ 50,01 a R$ 70,00</ion-label
+            <span class="label-body-2 color-gray-dark">
+              R$ 50,01 a R$ 70,00</span
             >
           </ion-col>
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
+            <span class="label-body-2 color-gray-dark">
               {{ params.sellFixedFee[2] |cost| currency: "BRL" : true :
               '1.2-2'}}
-            </ion-label>
+            </span>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
-              R$ 70,01 a R$ 100,00</ion-label
+            <span class="label-body-2 color-gray-dark">
+              R$ 70,01 a R$ 100,00</span
             >
           </ion-col>
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
+            <span class="label-body-2 color-gray-dark">
               {{ params.sellFixedFee[3] |cost| currency: "BRL" : true :
               '1.2-2'}}
-            </ion-label>
+            </span>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
-              R$ 100,01 a R$ 150,00</ion-label
+            <span class="label-body-2 color-gray-dark">
+              R$ 100,01 a R$ 150,00</span
             >
           </ion-col>
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
+            <span class="label-body-2 color-gray-dark">
               {{ params.sellFixedFee[4] |cost| currency: "BRL" : true :
               '1.2-2'}}
-            </ion-label>
+            </span>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
-              R$ 150,01 a R$ 300,00</ion-label
+            <span class="label-body-2 color-gray-dark">
+              R$ 150,01 a R$ 300,00</span
             >
           </ion-col>
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
+            <span class="label-body-2 color-gray-dark">
               {{ params.sellFixedFee[5] |cost| currency: "BRL" : true :
               '1.2-2'}}
-            </ion-label>
+            </span>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
-              R$ 300,01 a R$ 500,00</ion-label
+            <span class="label-body-2 color-gray-dark">
+              R$ 300,01 a R$ 500,00</span
             >
           </ion-col>
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
+            <span class="label-body-2 color-gray-dark">
               {{ params.sellFixedFee[6] |cost| currency: "BRL" : true :
-              '1.2-2'}}</ion-label
+              '1.2-2'}}</span
             >
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
-              Acima de R$ 500,00</ion-label
+            <span class="label-body-2 color-gray-dark">
+              Acima de R$ 500,00</span
             >
           </ion-col>
           <ion-col class="ion-text-center">
-            <ion-label class="label-body-2 color-gray-dark">
+            <span class="label-body-2 color-gray-dark">
               {{ params.sellFixedFee[7] |cost| currency: "BRL" : true :
               '1.2-2'}}
-            </ion-label>
+            </span>
           </ion-col>
         </ion-row>
       </div>
 
-      <ion-label class="mt-16 block label-body-2"
+      <span class="mt-16 block label-body-2"
         >2) Caso o vendedor opte pelo envio seguro, será cobrada uma taxa
         proporcional aos valores dos produtos vendidos. Esse valor é exibido no
         cadastro do produto.
-      </ion-label>
+      </span>
 
-      <ion-label class="mt-16 block label-body-2"
+      <span class="mt-16 block label-body-2"
         >3) Para efetuar um saque do cofrinho, será cobrada uma taxa de
         <b>
           {{ params.gatewayWithdrawFee ?? 0 |cost| currency: "BRL" : true :
           '1.2-2'}} </b
         >. Essa taxa é cobrada pelo parceiro de pagamentos, não pelo Trokaí. Seu
         valor é fixo (não depende do valor do saque).
-      </ion-label>
+      </span>
 
-      <ion-label class="mt-16 block label-body-2"
+      <span class="mt-16 block label-body-2"
         >4) As taxas do vendedor são exibidas de forma clara no aplicativo e/ou
         site nas telas de cadastro e edição de um produto.
-      </ion-label>
+      </span>
     </div>
 
     <!-- vendas -->
@@ -179,7 +179,7 @@
         <h6 class="color-gray-dark">Das compras</h6>
       </div>
 
-      <ion-label class="mt-8 block label-body-2"
+      <span class="mt-8 block label-body-2"
         >1) O comprador paga uma taxa de
         <b>{{params.buyPercentageFee * 100}}%</b> sobre o valor do carrinho. Os
         valores mínimos e máximos dessa taxa são {{ params.minBuyFee |cost|
@@ -187,13 +187,13 @@
         currency: "BRL" : true : '1.2-2'}}. Essa taxa é referente a utilização
         dos serviços do Trokaí e ao serviço de segurança da compra que garante
         que o valor pago será devolvido ao comprador caso o vendedor não envie o
-        produto.</ion-label
+        produto.</span
       >
 
-      <ion-label class="mt-16 block label-body-2">
+      <span class="mt-16 block label-body-2">
         2) As taxas do comprador são exibidas de forma clara na tela de checkout
         (última etapa do fluxo de compra) do Aplicativo e/ou Site.
-      </ion-label>
+      </span>
     </div>
   </ion-grid>
   }

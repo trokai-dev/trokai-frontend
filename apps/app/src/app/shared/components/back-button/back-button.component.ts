@@ -5,9 +5,9 @@ import {
   Platform,
   IonIcon,
   IonButtons,
-  IonButton,
   IonBackButton,
 } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import { NgStyle } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline } from 'ionicons/icons';
@@ -17,7 +17,7 @@ import { arrowBackOutline } from 'ionicons/icons';
   templateUrl: './back-button.component.html',
   styleUrls: ['./back-button.component.scss'],
   standalone: true,
-  imports: [IonButtons, IonButton, IonBackButton, IonIcon, NgStyle],
+  imports: [IonButtons, MatButtonModule, IonBackButton, IonIcon, NgStyle],
 })
 export class BackButtonComponent {
   @Input() defaultHref = '';

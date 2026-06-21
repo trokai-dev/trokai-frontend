@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { LoadingController, NavController, IonLabel, IonRippleEffect } from '@ionic/angular/standalone';
+import { LoadingController, NavController, IonRippleEffect } from '@ionic/angular/standalone';
 import { AuthService } from '../services/auth.service';
 import { BuyingService } from '@trokai/shared-data-access';
 import { BackButtonComponent } from '../shared/components/back-button/back-button.component';
@@ -31,7 +31,7 @@ import { ToastService } from '../services/toast-service';
   templateUrl: './cards.page.html',
   styleUrls: ['./cards.page.scss'],
   standalone: true,
-  imports: [IonRippleEffect, IonLabel, 
+  imports: [IonRippleEffect, 
     IonHeader,
     IonToolbar,
     IonButtons,

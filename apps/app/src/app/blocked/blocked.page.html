@@ -11,9 +11,9 @@
       }
 
       @if (outdated) {
-      <ion-label class="label-body-2 color-gray-default ion-text-center mt-16 mx-8">
+      <span class="label-body-2 color-gray-default ion-text-center mt-16 mx-8">
        Por favor, atualize seu aplicativo para continuar usando o Trokaí.
-      </ion-label>
+      </span>
       }
 
       @if (banned) {
@@ -23,13 +23,13 @@
       }
 
       @if (banned) {
-      <ion-label class="label-body-2 color-gray-default ion-text-center mt-16 mx-40">
+      <span class="label-body-2 color-gray-default ion-text-center mt-16 mx-40">
         Sua conta foi banida por violar os termos de uso do Trokaí.
-      </ion-label>
+      </span>
       }
 
       @if (outdated) {
-      <ion-button class="action-button mt-56" (click)="openStore()">Atualizar o Trokaí</ion-button>
+      <button mat-flat-button color="primary" class="action-button mt-56" (click)="openStore()">Atualizar o Trokaí</button>
       }
 
     </div>

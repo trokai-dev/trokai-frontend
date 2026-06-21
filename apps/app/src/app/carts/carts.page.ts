@@ -23,11 +23,10 @@ import {
   ModalController,
   IonImg,
   IonRippleEffect,
-  IonButton,
   IonIcon,
-  IonLabel,
   IonThumbnail,
 } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
 import { sadOutline } from 'ionicons/icons';
 import { closeOutline } from 'ionicons/icons';
@@ -40,10 +39,10 @@ import { LoadingService, CostPipe, TkUserAvatarComponent } from '@trokai/shared-
   styleUrls: ['./carts.page.scss'],
   standalone: true,
   imports: [
-    IonLabel,
+    MatButtonModule,
+    
     TkUserAvatarComponent,
     IonIcon,
-    IonButton,
     IonRippleEffect,
     IonImg,
     IonHeader,

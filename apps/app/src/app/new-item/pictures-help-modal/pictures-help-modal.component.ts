@@ -6,7 +6,6 @@ import {
   inject,
 } from '@angular/core';
 import {
-  IonButton,
   IonButtons,
   IonContent,
   IonHeader,
@@ -15,6 +14,7 @@ import {
   IonToolbar,
   ModalController,
 } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
 import { closeOutline } from 'ionicons/icons';
 import { PictureTip } from '@trokai/shared-core';
@@ -26,11 +26,12 @@ import { PictureTip } from '@trokai/shared-core';
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
+    MatButtonModule,
+    
     IonHeader,
     IonToolbar,
     IonTitle,
     IonButtons,
-    IonButton,
     IonIcon,
     IonContent,
   ],

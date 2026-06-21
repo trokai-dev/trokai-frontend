@@ -9,12 +9,13 @@ import {
   IonIcon,
   IonRow,
   ModalController,
-  IonButton,
-  IonLabel,
   IonSpinner,
   IonText,
-  IonTextarea,
 } from '@ionic/angular/standalone';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { TextFieldModule } from '@angular/cdk/text-field';
 import { addIcons } from 'ionicons';
 import { checkmarkOutline, close } from 'ionicons/icons';
 
@@ -26,16 +27,16 @@ import { checkmarkOutline, close } from 'ionicons/icons';
   imports: [
     IonText,
     IonSpinner,
-    IonLabel,
-    IonButton,
     IonContent,
     IonGrid,
     IonRow,
     IonIcon,
     IonFooter,
     FormsModule,
-    IonTextarea,
-    IonIcon,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    TextFieldModule,
   ],
 })
 export class CancelSaleComponent implements OnInit {

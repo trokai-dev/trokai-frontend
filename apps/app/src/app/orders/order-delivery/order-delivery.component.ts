@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Browser } from '@capacitor/browser';
-import { IonButton } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 import { NgxMaskPipe } from 'ngx-mask';
 import { LoadingService } from '@trokai/shared-ui';
 import { OrdersService } from '@trokai/shared-data-access';
@@ -13,7 +13,7 @@ import { OrdersService } from '@trokai/shared-data-access';
   templateUrl: './order-delivery.component.html',
   styleUrls: ['./order-delivery.component.scss'],
   standalone: true,
-  imports: [IonButton, DatePipe, NgxMaskPipe],
+  imports: [MatButtonModule, DatePipe, NgxMaskPipe],
 })
 export class OrderDeliveryComponent implements OnInit {
   private ordersService = inject(OrdersService);

@@ -2,19 +2,21 @@ import { Component, inject } from '@angular/core';
 import {
   ModalController,
   IonContent,
-  IonButton,
   IonFooter,
   IonGrid,
   IonIcon,
   IonRow,
 } from '@ionic/angular/standalone';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-renew-product',
   templateUrl: './renew-product.component.html',
   styleUrls: ['./renew-product.component.scss'],
   standalone: true,
-  imports: [IonContent, IonButton, IonIcon, IonGrid, IonFooter, IonRow],
+  imports: [
+    MatButtonModule,
+    IonContent, IonIcon, IonGrid, IonFooter, IonRow],
 })
 export class RenewProductComponent {
   private modalCtrl = inject(ModalController);

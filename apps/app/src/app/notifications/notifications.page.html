@@ -14,9 +14,9 @@
       [ngClass]="{'active': tab === 'Notificações'}"
       (click)="changeTab('Notificações')"
     >
-      <ion-label class="label-body-2 color-gray-default"
+      <span class="label-body-2 color-gray-default"
         >Notificações
-      </ion-label>
+      </span>
 
       <div class="tab-trokai-indicator"></div>
     </div>
@@ -25,12 +25,12 @@
       [ngClass]="{'active': tab === 'Mensagens'}"
       (click)="changeTab('Mensagens')"
     >
-      <ion-label class="label-body-2 relative color-gray-default"
+      <span class="label-body-2 relative color-gray-default"
         >Mensagens
         @if (unreadMsgs) {
         <div class="notification-badge"></div>
         }
-      </ion-label>
+      </span>
       <div class="tab-trokai-indicator"></div>
     </div>
   </div>
@@ -58,7 +58,7 @@
     @if ((!notifications || notifications.length === 0) && !isLoading) {
     <div class="empty-page full">
       <ion-icon name="sad-outline"></ion-icon>
-      <ion-label> Nenhuma notificação</ion-label>
+      <span> Nenhuma notificação</span>
     </div>
     }
 
@@ -98,7 +98,7 @@
     @if ((!chats || chats.length === 0) && !isLoading) {
     <div class="empty-page full">
       <ion-icon name="sad-outline"></ion-icon>
-      <ion-label> Nenhuma mensagem</ion-label>
+      <span> Nenhuma mensagem</span>
     </div>
     }
 

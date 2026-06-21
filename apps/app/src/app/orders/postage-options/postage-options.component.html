@@ -25,11 +25,11 @@
 
     @if (!loading) {
       <div class="checkout-body">
-        <ion-radio-group (ionChange)="selectAgency($event)" mode="md">
+        <mat-radio-group (change)="selectAgency($event.value)">
           @for (agency of visibleAgencies; track agency.id) {
-            <ion-item class="border-bottom mb-12 p-8" lines="none">
-              <ion-radio [labelPlacement]="'end'" justify="start" [value]="agency.id">
-                <ion-label class="ion-text-wrap">
+            <div class="border-bottom mb-12 p-8">
+              <mat-radio-button color="primary" [value]="agency.id">
+                <span class="ion-text-wrap">
                   <div class="custom-radio-button-content">
                     <div class="flex justify-between">
                       <span class="item-label">
@@ -40,21 +40,17 @@
                       {{ agency.displayAddress }}. {{ agency.note }}
                     </span>
                   </div>
-                </ion-label></ion-radio
-              >
-            </ion-item>
+                </span>
+              </mat-radio-button>
+            </div>
           }
-        </ion-radio-group>
+        </mat-radio-group>
 
         @if (agencies && visibleAgencies.length < agencies.length) {
         <div class="flex justify-center mt-4">
-          <ion-button
-            fill="outline"
-            color="primary"
-            (click)="loadMoreAgencies()"
-          >
+          <button mat-stroked-button color="primary" (click)="loadMoreAgencies()">
             Mostrar mais
-          </ion-button>
+          </button>
         </div>
         }
       </div>
@@ -64,13 +60,13 @@
 
 @if (selectedAgency && !loading) {
   <ion-footer class="px-24 py-16">
-    <ion-button
-      expand="block"
+    <button
+      mat-flat-button
       class="action-button"
       color="primary"
       (click)="confirmSelection()"
     >
       Continuar
-    </ion-button>
+    </button>
   </ion-footer>
 }

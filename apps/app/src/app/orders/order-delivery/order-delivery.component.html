@@ -111,19 +111,20 @@
 
       <!-- Rastrear -->
       @if (showTracking && !order.isLegacyShipping) {
-        <ion-button
+        <button
+          mat-stroked-button
           class="action-button mt-16"
           (click)="onClickRastrear()"
           color="primary"
-          fill="outline"
         >
           Rastrear pedido
-        </ion-button>
+        </button>
       }
 
       <!-- GERAR ETIQUETA -->
       @if (isSale && !order.isLegacyShipping && !order.orderSent) {
-        <ion-button
+        <button
+          mat-flat-button
           class="mt-16 w-full action-button"
           color="primary"
           (click)="onClickEtiqueta()"
@@ -133,7 +134,7 @@
               ? 'Gerar nova etiqueta'
               : 'Imprimir etiqueta'
           }}
-        </ion-button>
+        </button>
       }
     }
 
@@ -161,13 +162,14 @@
         <!-- BUYER -->
         @if (isPurchase) {
           <div class="mt-16">
-            <ion-button
+            <button
+              mat-flat-button
               class="action-button"
               color="primary"
               (click)="onConfirmWithdrawal()"
             >
               Confirmar retirada
-            </ion-button>
+            </button>
 
             <span class="block mt-8 label-caption-1">
               Confirme a retirada quando estiver com os produtos em mãos
