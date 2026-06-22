@@ -178,7 +178,10 @@ export class NavbarComponent implements OnInit {
     // macrotask every time the user interacts with the nav menu.
     this.ngZone.runOutsideAngular(() => {
       this.hideMenuTimer = setTimeout(
-        () => this.ngZone.run(() => (this.menuTab = 0)),
+        () =>
+          this.ngZone.run(() => {
+            this.menuTab = null;
+          }),
         500,
       );
     });

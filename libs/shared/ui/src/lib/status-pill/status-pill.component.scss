@@ -25,10 +25,11 @@
 
   &__label {
     display: inline-block;
+    text-transform: capitalize;
   }
 
   // --- Variant palette (token-driven; fixes the legacy #6b6b6b drift) ---
-  &--neutral { --_bg: var(--color-surface); --_fg: var(--color-on-surface); }
+  &--neutral { --_bg: var(--color-gray-25); --_fg: var(--color-on-surface); }
   &--success { --_bg: var(--color-primary); --_fg: var(--color-on-primary); }
   &--warning { --_bg: var(--color-warning); --_fg: var(--color-gray-default); }
   &--danger { --_bg: var(--color-error); --_fg: #fff; }

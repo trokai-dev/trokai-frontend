@@ -34,10 +34,13 @@ import { CostPipe } from '../../pipes/cost.pipe';
           <b>Calcular frete de entrega</b>
         </span>
       }
+      @if (typeZip) {
       <mat-form-field appearance="outline" [ngClass]="{ 'hidden': !typeZip, 'block': typeZip }">
         <input matInput #zipInput [(ngModel)]="zipCode" (blur)="zipBlur()" (input)="zipChange()" type="text" mask="00000-000" placeholder="Digite o CEP" />
       </mat-form-field>
+      }
       @if (zipLoading) {
+
         <div class="flex items-center">
           <mat-spinner color="primary" class="spinner-nano"></mat-spinner>
           <span class="label-caption ml-24">Buscando valor do frete</span>

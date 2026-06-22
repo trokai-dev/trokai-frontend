@@ -10,7 +10,7 @@
 
     <!-- Resultados -->
     @if (itemsMap && results) {
-      <div class="gcol-12 gcol-md-9 pl-48 mt-md-24">
+      <div class="gcol-12 gcol-md-9 mt-24">
         @if (filters.text) {
           <h1 class="color-gray-dark hidden block-md">
             {{ filters.text }}
@@ -38,23 +38,21 @@
             </button>
           </div>
         </div>
-        <div
-          class="label-body-2 flex justify-between items-center mt-24"
-        >
+
+        <div class="label-body-2 flex justify-between items-center py-16">
           <span> {{ countString }}</span>
           @if (pageString) {
             <span> {{ pageString }}</span>
           }
         </div>
+
         <div class="grid-row grid-cols-2 grid-cols-md-4">
           @for (product of results; track product; let i = $index) {
-            <div class="mt-24 pt-16">
-              <tk-product-card
-                [clean]="true"
-                [product]="product"
-                [priority]="i < 2"
-              ></tk-product-card>
-            </div>
+            <tk-product-card
+              [clean]="true"
+              [product]="product"
+              [priority]="i < 2"
+            ></tk-product-card>
           }
         </div>
         <div class="grid-row">
