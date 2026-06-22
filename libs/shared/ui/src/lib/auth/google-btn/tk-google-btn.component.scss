@@ -5,6 +5,12 @@
   justify-content: center;
   gap: var(--space-8);
 
+  .google-btn-content {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-8);
+  }
+
   svg {
     width: 2rem;
     height: 2rem;
