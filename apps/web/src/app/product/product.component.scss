@@ -9,11 +9,14 @@
 // 50/50 split from md (768px) up.
 .product-layout {
   display: grid;
+  // minmax(0,1fr): caps the track. Bare auto/1fr sizes to content, but the
+  // square fill-image has no intrinsic width -> track runs away to 2^25px.
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-24);
   align-items: start;
 
   @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 }
 
