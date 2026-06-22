@@ -8,6 +8,7 @@ export * from './lib/reviews';
 export * from './lib/media';
 export * from './lib/chat';
 export * from './lib/status-pill/status-pill.component';
+export * from './lib/badge/badge.component';
 export * from './lib/pipes/item-name.pipe';
 export * from './lib/pipes/cost.pipe';
 export * from './lib/pipes/short-date.pipe';

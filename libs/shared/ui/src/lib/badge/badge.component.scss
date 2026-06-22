@@ -1,0 +1,34 @@
+// Offsets overridable per host via --tk-badge-top / --tk-badge-right.
+:host {
+  display: inline-flex;
+}
+
+.tk-badge-host {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0; // drop inline descender so wrapped icons stay centered
+}
+
+.tk-badge {
+  position: absolute;
+  top: var(--tk-badge-top, -6px);
+  right: var(--tk-badge-right, -8px);
+  min-width: 1.6rem;
+  height: 1.6rem;
+  padding: 0 0.4rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--color-error);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 0 0 2px var(--color-surface, #fff);
+  pointer-events: none;
+  z-index: 100;
+}

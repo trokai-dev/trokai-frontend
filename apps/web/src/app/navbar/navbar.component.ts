@@ -18,7 +18,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 
 import { FormsModule } from '@angular/forms';
-import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import {
   ActivationStart,
@@ -26,7 +25,7 @@ import {
   Router,
   RouterLink,
 } from '@angular/router';
-import { TkUserAvatarComponent } from '@trokai/shared-ui';
+import { TkUserAvatarComponent, TkBadgeComponent } from '@trokai/shared-ui';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../auth/auth.service';
 import { BuyingService } from '@trokai/shared-data-access';
@@ -47,10 +46,10 @@ import { ReserveTimeComponent } from '../buying/reserve-time/reserve-time.compon
     RouterLink,
     MatButtonModule,
     MatIconModule,
-    MatBadgeModule,
     FormsModule,
     MatMenuModule,
     TkUserAvatarComponent,
+    TkBadgeComponent,
     NavUserMenuComponent,
     NavExpandedMenuComponent,
     ReserveTimeComponent,

@@ -32,17 +32,9 @@
   </a>
 
   <a rel="nofollow" routerLink="/notifications/" mat-menu-item>
-    <div class="flex p-relative">
-      <span
-        matBadgeSize="small"
-        matBadgeColor="accent"
-        [matBadge]="notificationsCount"
-        [matBadgeHidden]="notificationsCount === 0"
-        matBadgeDescription="{{ notificationsCount }} notificações"
-      ></span>
-
+    <tk-badge [count]="notificationsCount">
       <ion-icon name="notifications-outline"></ion-icon>
-    </div>
+    </tk-badge>
     <span class="label-body-2 color-gray-dark py-8"> Notificações </span>
   </a>
 

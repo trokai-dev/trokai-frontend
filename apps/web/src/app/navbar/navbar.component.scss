@@ -58,14 +58,15 @@
       li {
         display: flex;
         align-items: center;
-
-        .mat-badge {
-          right: 3px;
-          top: 3px;
-        }
       }
     }
   }
+}
+
+// Pull badge inward to hug the cart glyph (icon button has 8px padding).
+.cart-badge {
+  --tk-badge-top: 4px;
+  --tk-badge-right: 4px;
 }
 
 .li-user {

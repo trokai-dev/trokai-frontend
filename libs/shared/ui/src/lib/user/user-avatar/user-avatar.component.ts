@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, OnChanges, inject } from '@angular/core';
 import { HideLoadingImageDirective } from '../../directives/hide-loading-image.directive';
+import { TkBadgeComponent } from '../../badge/badge.component';
 import { User, APP_CONFIG } from '@trokai/shared-core';
 
 @Component({
@@ -7,7 +8,7 @@ import { User, APP_CONFIG } from '@trokai/shared-core';
   templateUrl: './user-avatar.component.html',
   styleUrls: ['./user-avatar.component.scss'],
   standalone: true,
-  imports: [HideLoadingImageDirective],
+  imports: [HideLoadingImageDirective, TkBadgeComponent],
 })
 export class TkUserAvatarComponent implements OnInit, OnChanges {
   @Input() user!: User;

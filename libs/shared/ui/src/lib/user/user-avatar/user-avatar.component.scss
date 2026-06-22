@@ -26,28 +26,10 @@
   display: block;
 }
 
-// Notification count bubble. Sits on the top-right edge, outside the circular
-// crop (no overflow clip), with a white ring so it reads on any avatar.
+// Badge sits on the top-right edge of the circular crop.
 .avatar-badge {
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  min-width: 1.6rem;
-  height: 1.6rem;
-  padding: 0 0.4rem;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  background: var(--color-error);
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1;
-  box-shadow: 0 0 0 2px var(--color-surface, #fff);
-  pointer-events: none;
-  z-index: 100;
+  --tk-badge-top: -2px;
+  --tk-badge-right: -2px;
 }
 
 @media (max-width: 1199px) {

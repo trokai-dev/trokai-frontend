@@ -79,21 +79,18 @@
             </li>
           }
           @if (!buying) {
-            <li class="block-md {{ !baskets ? 'hidden' : '' }}">
+            <li [class.hidden]="!baskets">
               <a routerLink="/buying/carts" rel="nofollow">
-                <button mat-icon-button color="primary">
-                  <mat-icon
-                    matBadge="{{ baskets }}"
-                    matBadgeHidden="{{ !baskets }}"
-                    matBadgeSize="small"
-                    matBadgeColor="accent"
-                    matBadgeDescription="{{ baskets }} itens no carrinho"
-                    aria-label="Carrinho de compras"
-                    aria-hidden="false"
-                  >
-                    shopping_cart
-                  </mat-icon>
-                </button>
+                <tk-badge [count]="baskets" class="cart-badge">
+                  <button mat-icon-button color="primary">
+                    <mat-icon
+                      aria-label="Carrinho de compras"
+                      aria-hidden="false"
+                    >
+                      shopping_cart
+                    </mat-icon>
+                  </button>
+                </tk-badge>
               </a>
             </li>
           }

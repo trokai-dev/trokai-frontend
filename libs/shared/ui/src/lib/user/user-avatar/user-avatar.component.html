@@ -1,6 +1,5 @@
-<div class="trokai-avatar {{ size }}">
-  <img [src]="avatar" alt="" class="avatar-img" hideLoading />
-  @if (notificationCount) {
-    <span class="avatar-badge">{{ notificationCount }}</span>
-  }
-</div>
+<tk-badge [count]="notificationCount" class="avatar-badge">
+  <div class="trokai-avatar {{ size }}">
+    <img [src]="avatar" alt="" class="avatar-img" hideLoading />
+  </div>
+</tk-badge>

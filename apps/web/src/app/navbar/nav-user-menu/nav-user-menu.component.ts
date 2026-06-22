@@ -8,13 +8,13 @@ import {
 
 import { RouterLink } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatBadgeModule } from '@angular/material/badge';
+import { TkBadgeComponent } from '@trokai/shared-ui';
 import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-nav-user-menu',
   standalone: true,
-  imports: [RouterLink, MatMenuModule, MatBadgeModule],
+  imports: [RouterLink, MatMenuModule, TkBadgeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './nav-user-menu.component.html',
   styleUrl: './nav-user-menu.component.scss',
