@@ -75,3 +75,10 @@ ion-footer {
     min-width: 180px;
   }
 }
+
+// Was ion-col size-md-8 — full on mobile, ~8/12 on desktop.
+.postage-intro {
+  @media (min-width: 768px) {
+    max-width: 66.6666%;
+  }
+}

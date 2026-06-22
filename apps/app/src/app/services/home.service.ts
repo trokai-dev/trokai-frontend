@@ -1,7 +1,4 @@
-import {
-  HomePayloadRow,
-  HomePayloadRowItem,
-} from '@trokai/shared-core';
+import { HomePayloadRow, HomePayloadRowItem } from '@trokai/shared-core';
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';

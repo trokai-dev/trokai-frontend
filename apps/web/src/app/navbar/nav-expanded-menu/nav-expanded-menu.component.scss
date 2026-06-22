@@ -1,3 +1,15 @@
+// Was grid-row + gcol-md-4 columns — 1 column on mobile, 3 across on desktop.
+.nav-menu-cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-24);
+  align-items: start;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .nav-menu-categories {
   min-height: 300px;
 

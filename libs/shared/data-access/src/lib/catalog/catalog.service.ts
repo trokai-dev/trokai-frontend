@@ -69,6 +69,8 @@ export class CatalogService {
     )
       return null;
 
-    return selectedCategory.sizes[age].find((s) => s._id === size)?.value ?? null;
+    return (
+      selectedCategory.sizes[age].find((s) => s._id === size)?.value ?? null
+    );
   }
 }

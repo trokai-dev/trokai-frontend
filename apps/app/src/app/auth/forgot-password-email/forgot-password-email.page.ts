@@ -4,12 +4,7 @@ import { Subscription } from 'rxjs';
 import { PasswordServiceService } from 'src/app/services/password-service.service';
 import { ForgotPasswordCodePage } from '../forgot-password-code/forgot-password-code.page';
 import { BackButtonComponent } from '../../shared/components/back-button/back-button.component';
-import {
-  IonContent,
-  IonGrid,
-  IonHeader,
-  IonToolbar,
-} from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonToolbar } from '@ionic/angular/standalone';
 import { RecoveryEmailFormComponent } from '@trokai/shared-ui';
 
 @Component({
@@ -21,7 +16,6 @@ import { RecoveryEmailFormComponent } from '@trokai/shared-ui';
     IonHeader,
     IonToolbar,
     IonContent,
-    IonGrid,
     BackButtonComponent,
     RecoveryEmailFormComponent,
   ],

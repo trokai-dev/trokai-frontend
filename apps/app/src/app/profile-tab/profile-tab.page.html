@@ -1,10 +1,7 @@
 <ion-header>
   <ion-toolbar>
     @if (user) {
-    <div
-      routerLink="options"
-      class="flex mx-24 my-8 items-center"
-    >
+    <div routerLink="options" class="flex mx-24 my-8 items-center">
       <tk-user-avatar [user]="user" class="mr-16" />
 
       <div class="flex justify-between">
@@ -20,7 +17,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="p-24">
+  <div class="p-24">
     <!-- Armario -->
     <div routerLink="inventory" class="menu-item ion-activatable ripple-parent">
       <div>
@@ -40,11 +37,7 @@
         <ion-icon name="notifications-outline"></ion-icon>
         <label class="label-body-1 ml-16">Notificações</label>
         @if (notificationCount + messageCount > 0) {
-        <ion-badge
-          color="tertiary"
-          class="ml-8"
-          mode="ios"
-        >
+        <ion-badge color="tertiary" class="ml-8" mode="ios">
           {{ notificationCount + messageCount }}
         </ion-badge>
         }
@@ -103,5 +96,5 @@
       <ion-icon name="chevron-forward"></ion-icon>
       <ion-ripple-effect></ion-ripple-effect>
     </div>
-  </ion-grid>
+  </div>
 </ion-content>

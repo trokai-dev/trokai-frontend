@@ -2,11 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { APP_CONFIG } from '@trokai/shared-core';
 import { BehaviorSubject, lastValueFrom, tap } from 'rxjs';
-import {
-  BalanceModel,
-  BankAccountModel,
-  TransferStatus,
-} from './bank.models';
+import { BalanceModel, BankAccountModel, TransferStatus } from './bank.models';
 
 @Injectable({ providedIn: 'root' })
 export class BankService {

@@ -1,6 +1,11 @@
 @if (dismissable) {
   <div class="contact-form__close">
-    <button mat-icon-button type="button" aria-label="Fechar" (click)="closed.emit()">
+    <button
+      mat-icon-button
+      type="button"
+      aria-label="Fechar"
+      (click)="closed.emit()"
+    >
       <mat-icon>close</mat-icon>
     </button>
   </div>
@@ -12,13 +17,20 @@
   </div>
 } @else if (done) {
   <div class="contact-form__done">
-    <mat-icon class="color-primary contact-form__done-icon">check_circle</mat-icon>
+    <mat-icon class="color-primary contact-form__done-icon"
+      >check_circle</mat-icon
+    >
     <h6 class="color-gray-dark">Mensagem enviada!</h6>
     <span class="label-body-2 color-gray-default">
       Vamos te responder, por email, em até 1 dia útil.
     </span>
     @if (dismissable) {
-      <button mat-flat-button color="primary" class="contact-form__submit" (click)="closed.emit()">
+      <button
+        mat-flat-button
+        color="primary"
+        class="contact-form__submit"
+        (click)="closed.emit()"
+      >
         Fechar
       </button>
     }
@@ -38,21 +50,43 @@
     @if (showName) {
       <mat-form-field appearance="outline" class="contact-form__field">
         <mat-label>Nome</mat-label>
-        <input matInput formControlName="name" type="text" [errorStateMatcher]="matcher" />
+        <input
+          matInput
+          formControlName="name"
+          type="text"
+          [errorStateMatcher]="matcher"
+        />
       </mat-form-field>
     }
 
     <mat-form-field appearance="outline" class="contact-form__field">
       <mat-label>E-mail para contato</mat-label>
-      <input matInput formControlName="email" type="email" [errorStateMatcher]="matcher" />
+      <input
+        matInput
+        formControlName="email"
+        type="email"
+        [errorStateMatcher]="matcher"
+      />
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="contact-form__field">
       <mat-label>Escreva sua mensagem</mat-label>
-      <textarea matInput formControlName="message" maxlength="500" rows="4" [errorStateMatcher]="matcher"></textarea>
+      <textarea
+        matInput
+        formControlName="message"
+        maxlength="500"
+        rows="4"
+        [errorStateMatcher]="matcher"
+      ></textarea>
     </mat-form-field>
 
-    <button mat-flat-button color="primary" type="submit" class="contact-form__submit" [disabled]="loading">
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      class="contact-form__submit"
+      [disabled]="loading"
+    >
       Enviar mensagem
     </button>
   </form>

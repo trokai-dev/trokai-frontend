@@ -37,7 +37,12 @@ export class Clothes {
   status?: ClothesStatus;
   adjusts: number[];
   adjustsNote!: string;
-  questions?: { _id: string; question: string; answer?: string; questioner?: string }[];
+  questions?: {
+    _id: string;
+    question: string;
+    answer?: string;
+    questioner?: string;
+  }[];
   copyOf?: string;
   createdAt?: Date;
   updatedAt?: Date;

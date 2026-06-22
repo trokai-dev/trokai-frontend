@@ -188,7 +188,7 @@ export class Order {
     // new agency object
     if (this.postageLabel?.melhorEnvioAgency) {
       this.postageLabel.melhorEnvioAgency = new PostageAgency(
-        this.postageLabel.melhorEnvioAgency
+        this.postageLabel.melhorEnvioAgency,
       );
     }
   }
@@ -255,13 +255,17 @@ export class Order {
   }
 
   get isTransportadora(): boolean {
-    return this.shippingValues?.service ? isTransportadora(this.shippingValues.service) : false;
+    return this.shippingValues?.service
+      ? isTransportadora(this.shippingValues.service)
+      : false;
   }
 
   get shippingServiceName(): string {
     if (this.isLegacyShipping || !this.shippingValues?.service)
       return 'Correios';
-    return (ShippingServiceName as Record<string, string>)[this.shippingValues.service];
+    return (ShippingServiceName as Record<string, string>)[
+      this.shippingValues.service
+    ];
   }
 
   get legacyTrackingCode(): string | undefined {
@@ -325,7 +329,7 @@ export class Order {
 
     const estimate = new Date(this.postageLabelExpiration);
     estimate.setDate(
-      estimate.getDate() + this.shippingValues.maxDeliveryTime - 1
+      estimate.getDate() + this.shippingValues.maxDeliveryTime - 1,
     );
 
     return estimate;
@@ -347,14 +351,14 @@ export class Order {
     // procura na historico de status
     if (this.shippingType === AddressOption.INPERSON) {
       const s = this.statusHistory?.find(
-        (s) => s.status === OrderStatus.WAITING_REVIEW
+        (s) => s.status === OrderStatus.WAITING_REVIEW,
       );
       if (s) return new Date(s.createdAt);
     }
 
     if (this.shippingType === AddressOption.SHIPPING) {
       const s = this.statusHistory?.find(
-        (s) => s.status === OrderStatus.ORDER_DELIVERED
+        (s) => s.status === OrderStatus.ORDER_DELIVERED,
       );
       if (s) return new Date(s.createdAt);
     }

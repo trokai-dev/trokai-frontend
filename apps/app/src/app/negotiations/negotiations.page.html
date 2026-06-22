@@ -26,13 +26,10 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-grid>
+  <div>
     <!-- loading -->
     @if (isLoading) {
-    <div
-      class="w-full flex justify-center items-center"
-      style="height: 60vh"
-    >
+    <div class="w-full flex justify-center items-center" style="height: 60vh">
       <ion-spinner name="crescent" color="primary"></ion-spinner>
     </div>
     }
@@ -50,9 +47,7 @@
           <ion-thumbnail>
             <ion-img [src]="p.images[0]"></ion-img>
           </ion-thumbnail>
-          }
-
-          @if (p.images[1]) {
+          } @if (p.images[1]) {
           <ion-thumbnail class="ml-8">
             <ion-img [src]="p.images[1]"></ion-img>
           </ion-thumbnail>
@@ -71,9 +66,7 @@
 
         <ion-ripple-effect></ion-ripple-effect>
       </div>
-      }
-
-      @if (!purchases || purchases.length === 0) {
+      } @if (!purchases || purchases.length === 0) {
       <div class="empty-page full">
         <ion-icon name="sad-outline"></ion-icon>
         <span> Nenhuma compra</span>
@@ -95,9 +88,7 @@
           <ion-thumbnail>
             <ion-img [src]="s.images[0]"></ion-img>
           </ion-thumbnail>
-          }
-
-          @if (s.images[1]) {
+          } @if (s.images[1]) {
           <ion-thumbnail class="ml-8">
             <ion-img [src]="s.images[1]"></ion-img>
           </ion-thumbnail>
@@ -116,9 +107,7 @@
 
         <ion-ripple-effect></ion-ripple-effect>
       </div>
-      }
-
-      @if (!sales || sales.length === 0) {
+      } @if (!sales || sales.length === 0) {
       <div class="empty-page full">
         <ion-icon name="sad-outline"></ion-icon>
         <span> Nenhuma venda</span>
@@ -126,5 +115,5 @@
       }
     </div>
     }
-  </ion-grid>
+  </div>
 </ion-content>

@@ -1,17 +1,10 @@
-<div class="container page">
-  <div class="grid-row">
-    <div class="gcol-12">
-      <h2 class="color-gray-dark capitalize">Favoritos</h2>
-    </div>
-  </div>
+<div class="container fill-height">
+  <h2 class="color-gray-dark capitalize">Favoritos</h2>
 
-  <div class="grid-row grid-cols-2 grid-cols-md-4">
+  <div class="favorites-grid">
     @for (product of results; track product) {
       <div class="mt-24 pt-16">
-        <tk-product-card
-          [clean]="true"
-          [product]="product"
-        ></tk-product-card>
+        <tk-product-card [clean]="true" [product]="product"></tk-product-card>
       </div>
     }
   </div>
@@ -25,5 +18,4 @@
       </button>
     </div>
   }
-
 </div>

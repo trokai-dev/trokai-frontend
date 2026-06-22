@@ -36,7 +36,7 @@ import { close } from 'ionicons/icons';
   standalone: true,
   imports: [
     MatButtonModule,
-    
+
     IonHeader,
     IonToolbar,
     IonIcon,

@@ -26,9 +26,6 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonGrid,
-  IonRow,
-  IonCol,
   IonButtons,
   IonIcon,
   IonRippleEffect,
@@ -49,7 +46,11 @@ import {
   copyOutline,
 } from 'ionicons/icons';
 import { ChatComponent } from 'src/app/chat/chat.component';
-import { AlertService, CostPipe, TkSellerHeaderComponent } from '@trokai/shared-ui';
+import {
+  AlertService,
+  CostPipe,
+  TkSellerHeaderComponent,
+} from '@trokai/shared-ui';
 import { GlobalService } from 'src/app/services/global.service';
 import { ToastService } from 'src/app/services/toast-service';
 import dayjs from 'dayjs';
@@ -71,13 +72,10 @@ import { CartItemComponent } from 'src/app/shared/components/cart-item/cart-item
     MatInputModule,
     MatButtonModule,
     IonButtons,
-    IonCol,
-    IonRow,
     IonHeader,
     IonToolbar,
     IonTitle,
     IonContent,
-    IonGrid,
     BackButtonComponent,
     CurrencyPipe,
     DatePipe,
@@ -162,7 +160,9 @@ export class PurchasePage implements OnInit, OnDestroy {
       this.mountDiscount();
 
       this.loading = false;
-    } catch { /* intentional */ }
+    } catch {
+      /* intentional */
+    }
   }
 
   copyPix(event?) {

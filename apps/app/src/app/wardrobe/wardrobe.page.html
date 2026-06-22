@@ -21,7 +21,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-grid class="px-24 pt-24 pb-12">
+  <div class="px-24 pt-24 pb-12">
     @if (owner) {
     <div class="border-bottom pb-24">
       <tk-seller-header [user]="owner" size="sm">
@@ -66,7 +66,7 @@
       ></ion-searchbar>
       }
     </div>
-  </ion-grid>
+  </div>
 
   <div class="flex justify-between items-center pr-24 pb-16">
     <div>
@@ -94,12 +94,17 @@
 
   @if (showRenewAll && filter.status === 4 && !showSearchbar) {
   <div class="px-24 pb-16">
-    <button mat-stroked-button color="primary" (click)="renewAll()" class="action-button">
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="renewAll()"
+      class="action-button"
+    >
       Renovar todos
     </button>
   </div>
   } @if (isLoading || !items?.length) {
-  <ion-grid class="px-24 pt-24 pb-12">
+  <div class="px-24 pt-24 pb-12">
     @if (isLoading) {
     <div class="flex justify-center items-center">
       <ion-spinner name="crescent"></ion-spinner>
@@ -112,15 +117,15 @@
       </span>
     </div>
     }
-  </ion-grid>
+  </div>
   } @if (!isLoading) {
   <ion-list
     class="vertical"
     [ngStyle]="{'display': isLoading ? 'none' : 'block'}"
   >
-    <ion-row>
+    <div class="wardrobe-grid">
       @for (p of items; track p._id) {
-      <ion-col style="min-width: 50%; max-width: 50%">
+      <div>
         <tk-product-card
           [useLink]="false"
           [product]="p"
@@ -128,9 +133,9 @@
           (open)="open(p)"
         >
         </tk-product-card>
-      </ion-col>
+      </div>
       }
-    </ion-row>
+    </div>
   </ion-list>
   }
 

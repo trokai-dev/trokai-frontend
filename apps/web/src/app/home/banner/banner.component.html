@@ -2,10 +2,7 @@
   <!-- banner desk -->
   <div class="hidden block-md">
     @if (item.route && item.imgUrl) {
-      <a
-        [routerLink]="item.route"
-        [queryParams]="item.queryParams"
-        >
+      <a [routerLink]="item.route" [queryParams]="item.queryParams">
         <div class="image-wrapper">
           <img
             alt="{{ item.label }}"
@@ -13,15 +10,12 @@
             fill
             hideLoading
             [priority]="priority"
-            />
+          />
         </div>
       </a>
     }
     @if (!item.route && item.imgUrl) {
-      <a
-        [href]="item.actionUrl"
-        target="_blank"
-        >
+      <a [href]="item.actionUrl" target="_blank">
         <div class="image-wrapper">
           <img
             alt="{{ item.label }}"
@@ -29,7 +23,7 @@
             fill
             hideLoading
             [priority]="priority"
-            />
+          />
         </div>
       </a>
     }
@@ -38,10 +32,7 @@
   <!-- banner mobile -->
   <div class="block hidden-md">
     @if (item.route && item.imgMobileUrl) {
-      <a
-        [routerLink]="item.route"
-        [queryParams]="item.queryParams"
-        >
+      <a [routerLink]="item.route" [queryParams]="item.queryParams">
         <div class="image-wrapper">
           <img
             alt="{{ item.label }}"
@@ -49,15 +40,12 @@
             fill
             hideLoading
             [priority]="priority"
-            />
+          />
         </div>
       </a>
     }
     @if (!item.route && item.imgMobileUrl) {
-      <a
-        [href]="item.actionUrl"
-        target="_blank"
-        >
+      <a [href]="item.actionUrl" target="_blank">
         <div class="image-wrapper">
           <img
             alt="{{ item.label }}"
@@ -65,7 +53,7 @@
             fill
             hideLoading
             [priority]="priority"
-            />
+          />
         </div>
       </a>
     }

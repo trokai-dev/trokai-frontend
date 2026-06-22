@@ -13,11 +13,14 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import {
   IonButtons,
   IonContent,
-  IonGrid,
   IonHeader,
   IonTitle,
   IonToolbar,
-  IonRippleEffect, IonIcon, IonList, IonSpinner } from '@ionic/angular/standalone';
+  IonRippleEffect,
+  IonIcon,
+  IonList,
+  IonSpinner,
+} from '@ionic/angular/standalone';
 import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
 import { informationCircleOutline, sadOutline } from 'ionicons/icons';
@@ -33,13 +36,14 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [
     MatButtonModule,
-    IonSpinner, IonList, IonIcon,
+    IonSpinner,
+    IonList,
+    IonIcon,
     IonHeader,
     IonToolbar,
     IonButtons,
     IonTitle,
     IonContent,
-    IonGrid,
     BackButtonComponent,
     CurrencyPipe,
     DatePipe,
@@ -100,7 +104,9 @@ export class BankPage implements OnInit, OnDestroy {
         amount: t.amount,
         items: t.ordersIds.map((id) => {
           const order = this.balance.orders?.find((o) => o._id === id);
-          return order?.items.map((item) => (item.description + (item.refund ? ' (Estornado)' : '')));
+          return order?.items.map(
+            (item) => item.description + (item.refund ? ' (Estornado)' : ''),
+          );
         }),
       };
 
@@ -112,7 +118,9 @@ export class BankPage implements OnInit, OnDestroy {
         title: 'Venda',
         text: OrderStatusString[t.status],
         date: t.createdAt,
-        items: t.items.map((item) => (item.description + (item.refund ? ' (Estornado)' : ''))),
+        items: t.items.map(
+          (item) => item.description + (item.refund ? ' (Estornado)' : ''),
+        ),
         amount: t.sellerProfit,
         transferAt: this.checkOrderTransferAt(t),
       };

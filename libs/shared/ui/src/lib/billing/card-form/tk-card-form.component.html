@@ -8,12 +8,24 @@
 
   <mat-form-field appearance="outline" class="w-full">
     <mat-label>CPF/CNPJ do titular</mat-label>
-    <input matInput mask="000.000.000-00||00.000.000/0000-00" type="text" formControlName="holderDocument" />
+    <input
+      matInput
+      mask="000.000.000-00||00.000.000/0000-00"
+      type="text"
+      formControlName="holderDocument"
+    />
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="w-full">
     <mat-label>Número do cartão</mat-label>
-    <input matInput mask="0000 0000 0000 0000" type="text" formControlName="number" maxlength="19" (input)="checkBrand()" />
+    <input
+      matInput
+      mask="0000 0000 0000 0000"
+      type="text"
+      formControlName="number"
+      maxlength="19"
+      (input)="checkBrand()"
+    />
     <div matSuffix class="mr-24">
       <tk-payment-icon [paymentBrand]="cardBrand" />
     </div>
@@ -26,7 +38,13 @@
 
   <mat-form-field appearance="outline" class="w-full">
     <mat-label>Cód. segurança</mat-label>
-    <input matInput type="text" formControlName="cvv" minlength="3" maxlength="4" />
+    <input
+      matInput
+      type="text"
+      formControlName="cvv"
+      minlength="3"
+      maxlength="4"
+    />
   </mat-form-field>
 </form>
 
@@ -83,5 +101,12 @@
 }
 
 <div class="w-full flex justify-end mt-16">
-  <button mat-flat-button color="primary" [disabled]="!isValid()" (click)="save()">Salvar</button>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="!isValid()"
+    (click)="save()"
+  >
+    Salvar
+  </button>
 </div>

@@ -15,7 +15,12 @@
       >
       </ion-searchbar>
 
-      <button mat-icon-button type="submit" style="display: none" color="primary">
+      <button
+        mat-icon-button
+        type="submit"
+        style="display: none"
+        color="primary"
+      >
         <ion-icon name="search"></ion-icon>
       </button>
     </div>
@@ -34,9 +39,7 @@
   <div class="mx-24 best-categories">
     <!-- menu -->
     @if ((!searchText || searchText === '') && menu && menu.length) {
-    <ion-row
-      class="ion-no-padding mt-16"
-    >
+    <div class="mt-16">
       <ion-toolbar>
         <div class="tabs-trokai">
           @for (section of menu; track $index; let i = $index) {
@@ -55,8 +58,8 @@
       </ion-toolbar>
 
       @for (col of menu[activeMenuTab].cols; track $index) {
-      <ion-row class="mt-16 w-full">
-        <ion-col>
+      <div class="mt-16 w-full">
+        <div>
           <div class="flex justify-between">
             <span class="label-body-2"><b>{{col.label}}</b> </span>
 
@@ -80,29 +83,25 @@
             </div>
             }
           </div>
-        </ion-col>
-      </ion-row>
-      }
-
-      @if (activeMenuTab < 2) {
-      <ion-row class="mt-16 mb-32 w-full">
-        <ion-col size="12" class="ion-text-center">
+        </div>
+      </div>
+      } @if (activeMenuTab < 2) {
+      <div class="mt-16 mb-32 w-full">
+        <div class="ion-text-center">
           <a (click)="selectInitialCat(menu[activeMenuTab])">
             <span class="label-body-2 color-primary">
               Ver tudo de {{ menu[activeMenuTab].label }}
             </span>
           </a>
-        </ion-col>
-      </ion-row>
+        </div>
+      </div>
       }
-    </ion-row>
+    </div>
     }
 
     <!-- search in users or clothes -->
     @if (searchText && searchText !== '') {
-    <ion-row
-      class="ion-no-padding mt-32"
-    >
+    <div class="mt-32">
       <span class="label-body-2 color-gray-dark">Buscar por</span>
       <div class="mt-32 w-full">
         <div class="accordion-list">
@@ -111,12 +110,8 @@
             (click)="clickSuggestion('clothes')"
           >
             <div class="accordion-item-header">
-              <div
-                class="flex items-center justify-between w-full"
-              >
-                <span class="label-body-1 color-gray-dark"
-                  >{{searchText}}</span
-                >
+              <div class="flex items-center justify-between w-full">
+                <span class="label-body-1 color-gray-dark">{{searchText}}</span>
                 <span class="label-body-2 flex color-gray-default"
                   >produtos
                   <ion-icon class="ml-8" name="shirt-outline"></ion-icon>
@@ -131,12 +126,8 @@
             (click)="clickSuggestion('users')"
           >
             <div class="accordion-item-header">
-              <div
-                class="flex items-center justify-between w-full"
-              >
-                <span class="label-body-1 color-gray-dark"
-                  >{{searchText}}</span
-                >
+              <div class="flex items-center justify-between w-full">
+                <span class="label-body-1 color-gray-dark">{{searchText}}</span>
                 <span class="label-body-2 flex color-gray-default"
                   >armários e brechós
                   <ion-icon class="ml-8" name="storefront-outline"></ion-icon>
@@ -147,12 +138,10 @@
           </div>
         </div>
       </div>
-    </ion-row>
+    </div>
     }
   </div>
-  }
-
-  @if (isLoading) {
+  } @if (isLoading) {
   <div
     style="
       height: 65vh;
@@ -163,9 +152,7 @@
   >
     <ion-spinner name="crescent"> </ion-spinner>
   </div>
-  }
-
-  @if (!showInitialPage()) {
+  } @if (!showInitialPage()) {
   <div>
     @if (!isLoading) {
     <div>
@@ -174,33 +161,29 @@
         <ion-icon name="sad-outline"></ion-icon>
         <span> Nenhum resultado</span>
       </div>
-      }
-
-      @if (results && results.length > 0) {
+      } @if (results && results.length > 0) {
       <ion-list class="vertical my-24">
         @if (target === 'clothes') {
-        <ion-row>
+        <div class="search-grid">
           @for (r of results; track r._id) {
-          <ion-col
-            style="min-width: 50%; max-width: 50%"
-          >
-            <tk-product-card [useLink]="false" [product]="r" (open)="openClothe(r)">
+          <div>
+            <tk-product-card
+              [useLink]="false"
+              [product]="r"
+              (open)="openClothe(r)"
+            >
             </tk-product-card>
-          </ion-col>
+          </div>
           }
-        </ion-row>
-        }
-
-        @if (target === 'users') {
-        <ion-row>
+        </div>
+        } @if (target === 'users') {
+        <div class="search-grid">
           @for (r of results; track $index) {
-          <ion-col
-            style="min-width: 50%; max-width: 50%"
-          >
+          <div>
             <tk-user-card [user]="r" (clicked)="openUser($event)" />
-          </ion-col>
+          </div>
           }
-        </ion-row>
+        </div>
         }
       </ion-list>
       }

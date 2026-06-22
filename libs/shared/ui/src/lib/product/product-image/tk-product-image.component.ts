@@ -7,7 +7,12 @@ import {
   PLATFORM_ID,
   inject,
 } from '@angular/core';
-import { isPlatformBrowser, NgClass, NgOptimizedImage, NgStyle } from '@angular/common';
+import {
+  isPlatformBrowser,
+  NgClass,
+  NgOptimizedImage,
+  NgStyle,
+} from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import Swiper from 'swiper';
 import { Pagination } from 'swiper/modules';

@@ -1,17 +1,15 @@
-<div class="grid-row mb-48">
-  <div class="gcol-12">
-    <button color="primary" mat-button routerLink="/orders/sales">
-      <mat-icon>arrow_back</mat-icon> Minhas vendas
-    </button>
-  </div>
+<div class="mb-48">
+  <button color="primary" mat-button routerLink="/orders/sales">
+    <mat-icon>arrow_back</mat-icon> Minhas vendas
+  </button>
 </div>
 
 @if (order) {
   <span class="page-title">Venda</span>
   <span class="item-value">cód. {{ order.customId }}</span>
 
-  <div class="grid-row mt-48">
-    <div class="gcol-12 gcol-md-4">
+  <div class="sale-grid mt-48">
+    <div>
       <!-- Produtos -->
       <div class="page-section-mobile">
         <span class="section-title">Produtos</span>
@@ -28,7 +26,7 @@
       </div>
     </div>
 
-    <div class="gcol-12 gcol-md-4">
+    <div>
       <!-- Entrega -->
 
       <div class="page-section">
@@ -39,7 +37,7 @@
           <div class="flex-1">
             <span class="item-label">Data</span>
             <span class="item-value"
-              >{{ order.createdAt | date: "dd/MM/yyyy - HH:mm" }}
+              >{{ order.createdAt | date: 'dd/MM/yyyy - HH:mm' }}
             </span>
           </div>
 
@@ -58,14 +56,12 @@
 
         <div class="flex flex-col gap-8">
           @for (c of order.clothes; track c) {
-            <div
-              class="flex justify-between"
-              >
+            <div class="flex justify-between">
               <span class="item-value capitalize">
                 {{ c.title }}
               </span>
               <span class="item-value">
-                {{ c.cost | cost | currency: "BRL" : true : "1.2-2" }}
+                {{ c.cost | cost | currency: 'BRL' : true : '1.2-2' }}
               </span>
             </div>
           }
@@ -75,9 +71,9 @@
             <span class="item-value">
               -
               {{
-              order.businessValues.sellerFinalPercentageFee
-              | cost
-              | currency: "BRL" : true : "1.2"
+                order.businessValues.sellerFinalPercentageFee
+                  | cost
+                  | currency: 'BRL' : true : '1.2'
               }}
             </span>
           </div>
@@ -86,9 +82,9 @@
             <span class="item-value"> Recebimento </span>
             <span class="item-value color-primary">
               {{
-              order.businessValues.sellerSplitBeforeAnticipation
-              | cost
-              | currency: "BRL" : true : "1.2"
+                order.businessValues.sellerSplitBeforeAnticipation
+                  | cost
+                  | currency: 'BRL' : true : '1.2'
               }}
             </span>
           </div>
@@ -100,7 +96,7 @@
           (click)="goToBank()"
           class="mt-16"
           color="primary"
-          >
+        >
           Ver cofrinho
         </button>
       </div>
@@ -117,11 +113,7 @@
 
       <!-- Cancelamento -->
       @if (waiting_shipment || waiting_withdrawal) {
-        <button
-          class="mt-32 color-error"
-          mat-stroked-button
-          (click)="cancel()"
-          >
+        <button class="mt-32 color-error" mat-stroked-button (click)="cancel()">
           Cancelar venda
         </button>
       }

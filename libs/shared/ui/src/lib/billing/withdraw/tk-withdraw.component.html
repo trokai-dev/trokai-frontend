@@ -5,14 +5,18 @@
 
       <div class="w-full flex justify-between mb-8 mt-24">
         <span class="label-body-2">Valor disponível</span>
-        <span class="label-body-2">{{ balance.saldoDisponivel | cost | currency:'BRL':true:'1.2-2' }}</span>
+        <span class="label-body-2">{{
+          balance.saldoDisponivel | cost | currency: 'BRL' : true : '1.2-2'
+        }}</span>
       </div>
 
       <mat-divider />
 
       <div class="w-full flex justify-between my-8">
         <span class="label-body-2">Taxa de saque</span>
-        <span class="label-body-2">{{ gatewayWithdrawFee | cost | currency:'BRL':true:'1.2-2' }}</span>
+        <span class="label-body-2">{{
+          gatewayWithdrawFee | cost | currency: 'BRL' : true : '1.2-2'
+        }}</span>
       </div>
 
       <mat-divider />
@@ -21,14 +25,19 @@
         <span class="label-body-2">Valor a receber</span>
         @if (hasEnough()) {
           <span class="label-body-2 color-primary">
-            {{ balance.saldoDisponivel - gatewayWithdrawFee | cost | currency:'BRL':true:'1.2-2' }}
+            {{
+              balance.saldoDisponivel - gatewayWithdrawFee
+                | cost
+                | currency: 'BRL' : true : '1.2-2'
+            }}
           </span>
         }
       </div>
 
       <div class="mt-24">
         <span class="label-caption-1">
-          A taxa de saque é fixa e não depende do valor a ser sacado. É uma taxa do parceiro de pagamentos, não do Trokaí.
+          A taxa de saque é fixa e não depende do valor a ser sacado. É uma taxa
+          do parceiro de pagamentos, não do Trokaí.
         </span>
       </div>
     </div>

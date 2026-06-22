@@ -4,11 +4,14 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Subject, lastValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Filters, SearchResponse, UploadPictureItem } from '@trokai/shared-core';
+import {
+  Filters,
+  SearchResponse,
+  UploadPictureItem,
+} from '@trokai/shared-core';
 import { AlertService } from '@trokai/shared-ui';
 import { GlobalService } from './global.service';
 import { CatalogService } from '@trokai/shared-data-access';
-
 
 /**
  * A picture slot as perceived by the upload pipeline.
@@ -99,7 +102,9 @@ export class InventoryService {
       this._recentProducts.next(
         new Map(this._recentProducts.value).set(item._id, undefined),
       );
-    } catch { /* intentional */ }
+    } catch {
+      /* intentional */
+    }
   }
 
   async duplicate() {

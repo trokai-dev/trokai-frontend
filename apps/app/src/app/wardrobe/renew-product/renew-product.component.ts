@@ -3,9 +3,7 @@ import {
   ModalController,
   IonContent,
   IonFooter,
-  IonGrid,
   IonIcon,
-  IonRow,
 } from '@ionic/angular/standalone';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -14,9 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './renew-product.component.html',
   styleUrls: ['./renew-product.component.scss'],
   standalone: true,
-  imports: [
-    MatButtonModule,
-    IonContent, IonIcon, IonGrid, IonFooter, IonRow],
+  imports: [MatButtonModule, IonContent, IonIcon, IonFooter],
 })
 export class RenewProductComponent {
   private modalCtrl = inject(ModalController);

@@ -14,30 +14,30 @@
   <div class="empty-page full w-full">
     <ion-spinner name="crescent"> </ion-spinner>
   </div>
-  }
-
-  @if ((!favorites || favorites.length === 0) && !isLoading) {
+  } @if ((!favorites || favorites.length === 0) && !isLoading) {
   <div class="empty-page full">
     <ion-icon name="sad-outline"></ion-icon>
     <span> Nenhum favorito</span>
   </div>
   }
 
-  <ion-list class="vertical my-24" [ngStyle]="{'display': isLoading ? 'none' : 'block'}">
-    <ion-row>
+  <ion-list
+    class="vertical my-24"
+    [ngStyle]="{'display': isLoading ? 'none' : 'block'}"
+  >
+    <div class="favorites-grid">
       @for (p of favorites; track p._id) {
-      <ion-col
-        style="min-width: 50%; max-width: 50%"
-      >
-        <tk-product-card [useLink]="false"
+      <div>
+        <tk-product-card
+          [useLink]="false"
           [product]="p"
           (open)="open(p)"
           (onFinishLiking)="finishLiking(p)"
         >
         </tk-product-card>
-      </ion-col>
+      </div>
       }
-    </ion-row>
+    </div>
   </ion-list>
 
   <ion-infinite-scroll

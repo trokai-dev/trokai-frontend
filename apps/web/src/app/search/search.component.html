@@ -1,7 +1,7 @@
-<div class="container page">
-  <div class="grid-row">
+<div class="container fill-height">
+  <div class="search-grid">
     <!-- WRAPPER FILTROS -->
-    <div class="hidden block-md gcol-md-3">
+    <div class="hidden block-md">
       <app-search-filter
         (filtersChange)="applyFilters($event)"
         [filter]="filters"
@@ -10,7 +10,7 @@
 
     <!-- Resultados -->
     @if (itemsMap && results) {
-      <div class="gcol-12 gcol-md-9 mt-24">
+      <div class="mt-24">
         @if (filters.text) {
           <h1 class="color-gray-dark hidden block-md">
             {{ filters.text }}
@@ -46,7 +46,7 @@
           }
         </div>
 
-        <div class="grid-row grid-cols-2 grid-cols-md-4">
+        <div class="search-products">
           @for (product of results; track product; let i = $index) {
             <tk-product-card
               [clean]="true"
@@ -55,11 +55,7 @@
             ></tk-product-card>
           }
         </div>
-        <div class="grid-row">
-          <div class="gcol-12">
-            <app-paginator [paginator]="paginator"></app-paginator>
-          </div>
-        </div>
+        <app-paginator [paginator]="paginator"></app-paginator>
       </div>
     }
   </div>

@@ -1,78 +1,76 @@
-<div class="container page my-48 pt-48">
+<div class="container fill-height my-48 pt-48">
   @if (product) {
-    <div class="grid-row">
-      <div class="gcol-12 gcol-md-6 mx-auto text-left">
-        <h2 class="color-gray-dark capitalize">
-          {{ product.title }}
-        </h2>
+    <div class="question-card text-left">
+      <h2 class="color-gray-dark capitalize">
+        {{ product.title }}
+      </h2>
 
-        @if (question || (!isOwner && sent)) {
-          <!-- SE TIVER PERGUNTA -->
-          <div class="mt-40">
-            <h4 class="color-gray-dark">Pergunta</h4>
-            <span class="label-body-2">
-              @if (question?.question) {
-                {{ question?.question }}
-              } @else if (!isOwner && sent) {
-                {{ message }}
-              }
-            </span>
-          </div>
+      @if (question || (!isOwner && sent)) {
+        <!-- SE TIVER PERGUNTA -->
+        <div class="mt-40">
+          <h4 class="color-gray-dark">Pergunta</h4>
+          <span class="label-body-2">
+            @if (question?.question) {
+              {{ question?.question }}
+            } @else if (!isOwner && sent) {
+              {{ message }}
+            }
+          </span>
+        </div>
 
-          <!-- RESPOSTA -->
-          <div class="mt-48">
-            <h4 class="color-gray-dark">Resposta</h4>
-            <span class="label-body-2">
-              @if (question?.answer) {
-                {{ question?.answer }}
-              } @else if (isOwner && sent) {
-                {{ message }}
-              } @else {
-                Aguardando resposta...
-              }
-            </span>
-          </div>
-        }
+        <!-- RESPOSTA -->
+        <div class="mt-48">
+          <h4 class="color-gray-dark">Resposta</h4>
+          <span class="label-body-2">
+            @if (question?.answer) {
+              {{ question?.answer }}
+            } @else if (isOwner && sent) {
+              {{ message }}
+            } @else {
+              Aguardando resposta...
+            }
+          </span>
+        </div>
+      }
 
-        <!-- SE FOR VENDEDOR, RESPONDER - SE NAO TIVER RESPONDIDO -->
-        <!-- SE FOR COMPRADOR, PERGUNTAR - SE NAO TIVER PERGUNTADO -->
+      <!-- SE FOR VENDEDOR, RESPONDER - SE NAO TIVER RESPONDIDO -->
+      <!-- SE FOR COMPRADOR, PERGUNTAR - SE NAO TIVER PERGUNTADO -->
 
-        @if (showForm()) {
-          <div class="mt-48">
-            <mat-form-field appearance="outline" class="block">
-              <mat-label
-                >Escreva a {{ isOwner ? "Resposta" : "Pergunta" }}
-              </mat-label>
-              <textarea matInput [(ngModel)]="message"></textarea>
-            </mat-form-field>
-          </div>
+      @if (showForm()) {
+        <div class="mt-48">
+          <mat-form-field appearance="outline" class="block">
+            <mat-label
+              >Escreva a {{ isOwner ? 'Resposta' : 'Pergunta' }}
+            </mat-label>
+            <textarea matInput [(ngModel)]="message"></textarea>
+          </mat-form-field>
+        </div>
 
-          <div class="questions-help-cta">
-            <ion-icon name="warning" class="help-icon"></ion-icon>
-            <span class="color-gray-dark">
-              @if (isOwner) {
-                Não compartilhe dados de contato e nunca aceite pagamentos fora
-                do Trokai.
-              } @else {
-                Não compartilhe dados de contato e nunca realize pagamentos fora
-                do Trokai.
-              }
-            </span>
-          </div>
+        <div class="questions-help-cta">
+          <ion-icon name="warning" class="help-icon"></ion-icon>
+          <span class="color-gray-dark">
+            @if (isOwner) {
+              Não compartilhe dados de contato e nunca aceite pagamentos fora do
+              Trokai.
+            } @else {
+              Não compartilhe dados de contato e nunca realize pagamentos fora
+              do Trokai.
+            }
+          </span>
+        </div>
 
-          <div class="mt-48">
-            <button
-              mat-flat-button
-              class="w-full"
-              [disabled]="message?.length <= 5"
-              color="primary"
-              (click)="send()"
-            >
-              Enviar {{ isOwner ? "Resposta" : "Pergunta" }}
-            </button>
-          </div>
-        }
-      </div>
+        <div class="mt-48">
+          <button
+            mat-flat-button
+            class="w-full"
+            [disabled]="message?.length <= 5"
+            color="primary"
+            (click)="send()"
+          >
+            Enviar {{ isOwner ? 'Resposta' : 'Pergunta' }}
+          </button>
+        </div>
+      }
     </div>
   }
 </div>

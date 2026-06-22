@@ -5,7 +5,7 @@
     class="custom-radio-group"
     (change)="changePaymentOption($event)"
     [(ngModel)]="selectedOption"
-    >
+  >
     <!-- PIX -->
     <mat-radio-button color="primary" [value]="paymentOptions.PIX">
       <tk-payment-icon [paymentBrand]="paymentBrands.PIX" />
@@ -30,31 +30,33 @@
 
     @for (card of cards; track card) {
       <mat-radio-button color="primary" [value]="card._id">
-        <tk-payment-icon [paymentBrand]="card.brand" [showDefaultCardIcon]="true" />
+        <tk-payment-icon
+          [paymentBrand]="card.brand"
+          [showDefaultCardIcon]="true"
+        />
 
         <div class="custom-radio-button-content">
           <span class="custom-radio-button-title capitalize">
-            {{ card.brand ?? "Cartão de crédito " }} **** {{ card.lastDigits }}
+            {{ card.brand ?? 'Cartão de crédito ' }} **** {{ card.lastDigits }}
           </span>
           @if (maxInstallments && maxNoInterest) {
-
             <span class="custom-radio-button-text">
               <div class="product-installments">
                 <span class="product-installments-primary">
                   <b>
                     {{ maxNoInterest.installments }}x
                     {{
-                    maxNoInterest.installmentValue
-                    | cost
-                    | currency : "BRL" : "symbol" : "1.2"
+                      maxNoInterest.installmentValue
+                        | cost
+                        | currency: 'BRL' : 'symbol' : '1.2'
                     }}
                     sem juros
                   </b>
                 </span>
-                @if (maxInstallments.installments > maxNoInterest.installments) {
-                  <span
-                    class="product-installments-secondary"
-                    >
+                @if (
+                  maxInstallments.installments > maxNoInterest.installments
+                ) {
+                  <span class="product-installments-secondary">
                     ou até
                     {{ maxInstallments.installments }}x com juros
                   </span>

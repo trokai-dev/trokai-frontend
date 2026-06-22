@@ -17,9 +17,7 @@
     </ion-title>
     <ion-buttons slot="primary">
       @if (filtersOn()) {
-      <button mat-button color="primary" (click)="clear()">
-        Limpar
-      </button>
+        <button mat-button color="primary" (click)="clear()">Limpar</button>
       }
     </ion-buttons>
   </ion-toolbar>
@@ -40,322 +38,307 @@
 
     <!-- Accordion List -->
     @if (itemsMap) {
-    <div class="accordion-list">
-      <!-- Category -->
-      <div class="accordion-item ion-activatable ripple-parent">
-        <div class="accordion-item-header" (click)="openSection('category')">
-          <div class="flex items-center">
-            <label class="label-body-1">Categoria</label>
-            @if (
+      <div class="accordion-list">
+        <!-- Category -->
+        <div class="accordion-item ion-activatable ripple-parent">
+          <div class="accordion-item-header" (click)="openSection('category')">
+            <div class="flex items-center">
+              <label class="label-body-1">Categoria</label>
+              @if (
                 !sections.category &&
                 (filter.category !== null || filter.piece.length > 0)
               ) {
-            <ion-badge
-              mode="ios"
-            >
-              {{ 1 + filter.piece.length }}
-            </ion-badge>
-            }
-          </div>
-          <ion-icon
-            name="{{ sections.category ? 'chevron-up' : 'chevron-down' }}"
-          ></ion-icon>
-        </div>
-
-        @if (sections.category) {
-        <div class="accordion-item-intermediate">
-          <!-- Categorias -->
-          <div class="w-full">
-            <mat-radio-group
-              [value]="filter.category"
-              (change)="changeCategory($event.value)"
-            >
-              @for (a of itemsMap.category; track a._id) {
-              <div>
-                <mat-radio-button color="primary" [value]="a._id">
-                  <div class="flex flex-col">
-                    <span
-                      class="color-gray-default label-body-1 capitalize"
-                    >
-                      {{ a.value }}</span
-                    >
-                  </div>
-                </mat-radio-button>
-              </div>
+                <ion-badge mode="ios">
+                  {{ 1 + filter.piece.length }}
+                </ion-badge>
               }
-            </mat-radio-group>
-          </div>
-        </div>
-        }
-
-        @if (sections.category && filter.category !== null) {
-        <div
-          class="accordion-item-content"
-        >
-          @for (c of pieces; track c._id) {
-          <div
-            (click)="selectMultiple('piece', c)"
-            class="option-item ion-activatable ripple-parent"
-            [ngClass]="{ selected: selected('piece', c) }"
-          >
-            <label class="label-body-2 ion-text-capitalize">
-              {{ c.value }}</label
-            >
-            <ion-ripple-effect></ion-ripple-effect>
-          </div>
-          }
-        </div>
-        }
-
-        <ion-ripple-effect></ion-ripple-effect>
-      </div>
-
-      <!-- Tamanho -->
-      <div class="accordion-item ion-activatable ripple-parent">
-        <div class="accordion-item-header" (click)="openSection('size')">
-          <div class="flex items-center">
-            <label class="label-body-1">Tamanho</label>
-
-            @if (sections.size) {
+            </div>
             <ion-icon
-              name="help-circle-outline"
-              (click)="helpSize($event)"
-              class="color-gray-light-1 ml-4"
-            >
-            </ion-icon>
-            }
-
-            @if (
-                !sections.size && (filter.age !== null || filter.size.length > 0)
-              ) {
-            <ion-badge
-              mode="ios"
-            >
-              {{ 1 + filter.size.length }}
-            </ion-badge>
-            }
+              name="{{ sections.category ? 'chevron-up' : 'chevron-down' }}"
+            ></ion-icon>
           </div>
-          <ion-icon
-            name="{{ sections.size ? 'chevron-up' : 'chevron-down' }}"
-          ></ion-icon>
-        </div>
 
-        @if (sections.size) {
-        <div class="accordion-item-intermediate">
-          @if (filter.category === null) {
-          <label class="label-body-1">Selecione uma categoria.</label>
-          }
-          @if (
-              filter.category !== null &&
-              (!category.sizes || category.sizes.length === 0)
-            ) {
-          <label
-            class="label-body-1"
-            >Categoria {{ category.value }} não possui tamanhos.</label
-          >
-          }
-
-          <!-- Faixa etária -->
-
-          @if (
-              filter.category !== null &&
-              category.sizes &&
-              category.sizes.length > 0
-            ) {
-          <div
-            class="w-full"
-          >
-            <mat-radio-group
-              [value]="filter.age"
-              (change)="mountSizes($event.value)"
-            >
-              @for (a of itemsMap.age; track a._id) {
-              <div>
-                <mat-radio-button color="primary" [value]="a._id">
-                  <div class="flex flex-col">
-                    <span
-                      class="color-gray-default label-body-1 capitalize"
-                    >
-                      {{ a.value }}</span
-                    >
-                  </div>
-                </mat-radio-button>
+          @if (sections.category) {
+            <div class="accordion-item-intermediate">
+              <!-- Categorias -->
+              <div class="w-full">
+                <mat-radio-group
+                  [value]="filter.category"
+                  (change)="changeCategory($event.value)"
+                >
+                  @for (a of itemsMap.category; track a._id) {
+                    <div>
+                      <mat-radio-button color="primary" [value]="a._id">
+                        <div class="flex flex-col">
+                          <span
+                            class="color-gray-default label-body-1 capitalize"
+                          >
+                            {{ a.value }}</span
+                          >
+                        </div>
+                      </mat-radio-button>
+                    </div>
+                  }
+                </mat-radio-group>
               </div>
+            </div>
+          }
+
+          @if (sections.category && filter.category !== null) {
+            <div class="accordion-item-content">
+              @for (c of pieces; track c._id) {
+                <div
+                  (click)="selectMultiple('piece', c)"
+                  class="option-item ion-activatable ripple-parent"
+                  [ngClass]="{ selected: selected('piece', c) }"
+                >
+                  <label class="label-body-2 ion-text-capitalize">
+                    {{ c.value }}</label
+                  >
+                  <ion-ripple-effect></ion-ripple-effect>
+                </div>
               }
-            </mat-radio-group>
-          </div>
+            </div>
           }
-        </div>
-        }
 
-        @if (sections.size && sizes.length > 0) {
-        <div
-          class="accordion-item-content"
-        >
-          @for (s of sizes; track s._id) {
-          <div
-            (click)="selectMultiple('size', s)"
-            class="option-item ion-activatable ripple-parent"
-            [ngClass]="{ selected: selected('size', s) }"
-          >
-            <label class="label-body-1"> {{ s.value }}</label>
-            <ion-ripple-effect></ion-ripple-effect>
+          <ion-ripple-effect></ion-ripple-effect>
+        </div>
+
+        <!-- Tamanho -->
+        <div class="accordion-item ion-activatable ripple-parent">
+          <div class="accordion-item-header" (click)="openSection('size')">
+            <div class="flex items-center">
+              <label class="label-body-1">Tamanho</label>
+
+              @if (sections.size) {
+                <ion-icon
+                  name="help-circle-outline"
+                  (click)="helpSize($event)"
+                  class="color-gray-light-1 ml-4"
+                >
+                </ion-icon>
+              }
+
+              @if (
+                !sections.size &&
+                (filter.age !== null || filter.size.length > 0)
+              ) {
+                <ion-badge mode="ios">
+                  {{ 1 + filter.size.length }}
+                </ion-badge>
+              }
+            </div>
+            <ion-icon
+              name="{{ sections.size ? 'chevron-up' : 'chevron-down' }}"
+            ></ion-icon>
           </div>
+
+          @if (sections.size) {
+            <div class="accordion-item-intermediate">
+              @if (filter.category === null) {
+                <label class="label-body-1">Selecione uma categoria.</label>
+              }
+              @if (
+                filter.category !== null &&
+                (!category.sizes || category.sizes.length === 0)
+              ) {
+                <label class="label-body-1"
+                  >Categoria {{ category.value }} não possui tamanhos.</label
+                >
+              }
+
+              <!-- Faixa etária -->
+
+              @if (
+                filter.category !== null &&
+                category.sizes &&
+                category.sizes.length > 0
+              ) {
+                <div class="w-full">
+                  <mat-radio-group
+                    [value]="filter.age"
+                    (change)="mountSizes($event.value)"
+                  >
+                    @for (a of itemsMap.age; track a._id) {
+                      <div>
+                        <mat-radio-button color="primary" [value]="a._id">
+                          <div class="flex flex-col">
+                            <span
+                              class="color-gray-default label-body-1 capitalize"
+                            >
+                              {{ a.value }}</span
+                            >
+                          </div>
+                        </mat-radio-button>
+                      </div>
+                    }
+                  </mat-radio-group>
+                </div>
+              }
+            </div>
           }
+
+          @if (sections.size && sizes.length > 0) {
+            <div class="accordion-item-content">
+              @for (s of sizes; track s._id) {
+                <div
+                  (click)="selectMultiple('size', s)"
+                  class="option-item ion-activatable ripple-parent"
+                  [ngClass]="{ selected: selected('size', s) }"
+                >
+                  <label class="label-body-1"> {{ s.value }}</label>
+                  <ion-ripple-effect></ion-ripple-effect>
+                </div>
+              }
+            </div>
+          }
+
+          <ion-ripple-effect></ion-ripple-effect>
         </div>
-        }
 
-        <ion-ripple-effect></ion-ripple-effect>
-      </div>
-
-      <!-- Condition -->
-      <div class="accordion-item ion-activatable ripple-parent">
-        <div class="accordion-item-header" (click)="openSection('condition')">
-          <div class="flex items-center">
-            <label class="label-body-1">Condição</label>
-            @if (
+        <!-- Condition -->
+        <div class="accordion-item ion-activatable ripple-parent">
+          <div class="accordion-item-header" (click)="openSection('condition')">
+            <div class="flex items-center">
+              <label class="label-body-1">Condição</label>
+              @if (
                 !sections.condition &&
                 filter.condition &&
                 filter.condition.length
               ) {
-            <ion-badge
-              mode="ios"
-            >
-              {{ filter.condition.length }}
-            </ion-badge>
-            }
+                <ion-badge mode="ios">
+                  {{ filter.condition.length }}
+                </ion-badge>
+              }
+            </div>
+            <ion-icon
+              name="{{ sections.condition ? 'chevron-up' : 'chevron-down' }}"
+            ></ion-icon>
           </div>
-          <ion-icon
-            name="{{ sections.condition ? 'chevron-up' : 'chevron-down' }}"
-          ></ion-icon>
-        </div>
 
-        @if (sections.condition) {
-        <div class="accordion-item-content">
-          @for (c of itemsMap.condition; track c._id) {
-          <div
-            [ngClass]="{ selected: filter.condition.includes(c._id) }"
-            class="option-item ion-activatable ripple-parent"
-            (click)="select('condition', c)"
-          >
-            <label class="label-body-1"> {{ c.value }}</label>
-            <ion-ripple-effect></ion-ripple-effect>
-          </div>
+          @if (sections.condition) {
+            <div class="accordion-item-content">
+              @for (c of itemsMap.condition; track c._id) {
+                <div
+                  [ngClass]="{ selected: filter.condition.includes(c._id) }"
+                  class="option-item ion-activatable ripple-parent"
+                  (click)="select('condition', c)"
+                >
+                  <label class="label-body-1"> {{ c.value }}</label>
+                  <ion-ripple-effect></ion-ripple-effect>
+                </div>
+              }
+            </div>
           }
-        </div>
-        }
 
-        <ion-ripple-effect></ion-ripple-effect>
-      </div>
-
-      <!-- Gender -->
-      <div class="accordion-item ion-activatable ripple-parent">
-        <div class="accordion-item-header" (click)="openSection('gender')">
-          <div class="flex items-center">
-            <label class="label-body-1">Gênero</label>
-            @if (!sections.gender && filter.gender && filter.gender.length) {
-            <ion-badge
-              mode="ios"
-            >
-              {{ filter.gender.length }}
-            </ion-badge>
-            }
-          </div>
-          <ion-icon
-            name="{{ sections.gender ? 'chevron-up' : 'chevron-down' }}"
-          ></ion-icon>
+          <ion-ripple-effect></ion-ripple-effect>
         </div>
 
-        @if (sections.gender) {
-        <div class="accordion-item-content">
-          @for (c of itemsMap.gender; track c._id) {
-          <div
-            [ngClass]="{ selected: selected('gender', c) }"
-            class="option-item ion-activatable ripple-parent"
-            (click)="selectMultiple('gender', c)"
-          >
-            <label class="label-body-1"> {{ c.value }}</label>
-            <ion-ripple-effect></ion-ripple-effect>
+        <!-- Gender -->
+        <div class="accordion-item ion-activatable ripple-parent">
+          <div class="accordion-item-header" (click)="openSection('gender')">
+            <div class="flex items-center">
+              <label class="label-body-1">Gênero</label>
+              @if (!sections.gender && filter.gender && filter.gender.length) {
+                <ion-badge mode="ios">
+                  {{ filter.gender.length }}
+                </ion-badge>
+              }
+            </div>
+            <ion-icon
+              name="{{ sections.gender ? 'chevron-up' : 'chevron-down' }}"
+            ></ion-icon>
           </div>
+
+          @if (sections.gender) {
+            <div class="accordion-item-content">
+              @for (c of itemsMap.gender; track c._id) {
+                <div
+                  [ngClass]="{ selected: selected('gender', c) }"
+                  class="option-item ion-activatable ripple-parent"
+                  (click)="selectMultiple('gender', c)"
+                >
+                  <label class="label-body-1"> {{ c.value }}</label>
+                  <ion-ripple-effect></ion-ripple-effect>
+                </div>
+              }
+            </div>
           }
+
+          <ion-ripple-effect></ion-ripple-effect>
         </div>
-        }
 
-        <ion-ripple-effect></ion-ripple-effect>
-      </div>
-
-      <!-- Cost -->
-      <div class="accordion-item ion-activatable ripple-parent">
-        <div class="accordion-item-header" (click)="openSection('cost')">
-          <div class="flex items-center">
-            <label class="label-body-1">Preço</label>
-            @if (
+        <!-- Cost -->
+        <div class="accordion-item ion-activatable ripple-parent">
+          <div class="accordion-item-header" (click)="openSection('cost')">
+            <div class="flex items-center">
+              <label class="label-body-1">Preço</label>
+              @if (
                 !sections.cost &&
                 (filter.costLower !== null || filter.costUpper !== null)
               ) {
-            <ion-badge
-              mode="ios"
-              >1
-            </ion-badge>
-            }
+                <ion-badge mode="ios">1 </ion-badge>
+              }
+            </div>
+
+            <ion-icon
+              name="{{ sections.cost ? 'chevron-up' : 'chevron-down' }}"
+            ></ion-icon>
           </div>
 
-          <ion-icon
-            name="{{ sections.cost ? 'chevron-up' : 'chevron-down' }}"
-          ></ion-icon>
+          @if (sections.cost) {
+            <div class="accordion-item-content">
+              <div class="w-full ion-text-center">
+                <label class="label-body-2 color-gray-default">
+                  {{ costRange.lower | cost | currency: 'BRL' : true : '1.0' }}
+                </label>
+
+                @if (costRange.upper < 21000) {
+                  <label class="label-body-2 color-gray-default">
+                    a
+                    {{
+                      costRange.upper | cost | currency: 'BRL' : true : '1.0'
+                    }}
+                  </label>
+                }
+
+                @if (costRange.upper >= 21000) {
+                  <label class="label-body-2 color-gray-default"> a ∞ </label>
+                }
+              </div>
+
+              <div class="w-full">
+                <mat-slider class="w-full" min="0" [max]="maxCost" step="1000">
+                  <input
+                    matSliderStartThumb
+                    [(ngModel)]="costRange.lower"
+                    (ngModelChange)="changeCost()"
+                  />
+                  <input
+                    matSliderEndThumb
+                    [(ngModel)]="costRange.upper"
+                    (ngModelChange)="changeCost()"
+                  />
+                </mat-slider>
+              </div>
+            </div>
+          }
+
+          <ion-ripple-effect></ion-ripple-effect>
         </div>
-
-        @if (sections.cost) {
-        <div class="accordion-item-content">
-          <div class="w-full ion-text-center">
-            <label class="label-body-2 color-gray-default">
-              {{ costRange.lower | cost | currency: 'BRL' : true : '1.0' }}
-            </label>
-
-            @if (costRange.upper < 21000) {
-            <label
-              class="label-body-2 color-gray-default"
-            >
-              a {{ costRange.upper | cost | currency: 'BRL' : true : '1.0' }}
-            </label>
-            }
-
-            @if (costRange.upper >= 21000) {
-            <label
-              class="label-body-2 color-gray-default"
-            >
-              a ∞
-            </label>
-            }
-          </div>
-
-          <ion-row class="w-full">
-            <mat-slider class="w-full" min="0" [max]="maxCost" step="1000">
-              <input
-                matSliderStartThumb
-                [(ngModel)]="costRange.lower"
-                (ngModelChange)="changeCost()"
-              />
-              <input
-                matSliderEndThumb
-                [(ngModel)]="costRange.upper"
-                (ngModelChange)="changeCost()"
-              />
-            </mat-slider>
-          </ion-row>
-        </div>
-        }
-
-        <ion-ripple-effect></ion-ripple-effect>
       </div>
-    </div>
     }
     <!-- End Accordion List -->
   </div>
 </ion-content>
 
 <ion-footer class="px-24 py-16">
-  <button mat-flat-button color="primary" class="action-button" (click)="applyFilters()">
+  <button
+    mat-flat-button
+    color="primary"
+    class="action-button"
+    (click)="applyFilters()"
+  >
     Aplicar filtros
   </button>
 </ion-footer>

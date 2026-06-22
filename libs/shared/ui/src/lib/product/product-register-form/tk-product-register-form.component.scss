@@ -17,6 +17,10 @@
 }
 
 @media (min-width: 768px) {
-  .fields-2 { grid-template-columns: repeat(2, 1fr); }
-  .fields-4 { grid-template-columns: repeat(4, 1fr); }
+  .fields-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .fields-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

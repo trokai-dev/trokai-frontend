@@ -18,8 +18,16 @@ $trokai-theme: mat.define-theme(
       tertiary: brand.$tertiary-palette,
     ),
     typography: (
-      plain-family: ('Manrope', 'Helvetica Neue', sans-serif),
-      brand-family: ('Manrope', 'Helvetica Neue', sans-serif),
+      plain-family: (
+        'Manrope',
+        'Helvetica Neue',
+        sans-serif,
+      ),
+      brand-family: (
+        'Manrope',
+        'Helvetica Neue',
+        sans-serif,
+      ),
     ),
     density: (
       scale: 0,

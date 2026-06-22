@@ -12,7 +12,7 @@
 
 <ion-content>
   @if (checkoutLocal) {
-  <ion-grid class="p-24">
+  <div class="p-24">
     <!-- ENTREGA -->
     <div class="pb-8 mt-24">
       <div class="w-full mt-16">
@@ -51,9 +51,7 @@
               </span>
             </mat-radio-button>
           </div>
-          }
-
-          @if (user?.address && checkoutLocal.owner.shipping) {
+          } @if (user?.address && checkoutLocal.owner.shipping) {
           <div
             [ngClass]="{'border-top': checkoutLocal.owner.inPerson}"
             class="mb-16"
@@ -110,7 +108,7 @@
       </button>
       }
     </div>
-  </ion-grid>
+  </div>
   }
 </ion-content>
 

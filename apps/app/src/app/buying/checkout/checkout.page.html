@@ -11,7 +11,7 @@
 </ion-header>
 @if (checkoutLocal) {
 <ion-content>
-  <ion-grid class="p-24">
+  <div class="p-24">
     <div>
       @for(p of checkoutLocal.products; track p) {
       <div
@@ -20,10 +20,7 @@
       >
         <div class="flex items-center">
           <ion-thumbnail class="product-item">
-            <ion-img
-              src="{{ p.images?.[0]?.sm }}"
-            >
-            </ion-img>
+            <ion-img src="{{ p.images?.[0]?.sm }}"> </ion-img>
           </ion-thumbnail>
 
           <div class="cart-item-text">
@@ -91,7 +88,9 @@
     <div class="py-24 border-top">
       <div class="flex justify-between items-center">
         <span class="label-body-1 color-gray-dark"><b>Cartão</b> </span>
-        <button mat-button color="primary" (click)="newCard()">Adicionar</button>
+        <button mat-button color="primary" (click)="newCard()">
+          Adicionar
+        </button>
       </div>
 
       @if (user.cards && user.cards.length > 0) {
@@ -107,9 +106,8 @@
           </mat-select>
         </mat-form-field>
       </div>
-      }
-
-      @if (user.cards && user.cards.length > 0 && checkoutLocal.cardId !== null) {
+      } @if (user.cards && user.cards.length > 0 && checkoutLocal.cardId !==
+      null) {
       <div>
         <mat-form-field appearance="outline" class="w-full">
           <mat-label>Parcelas</mat-label>
@@ -146,14 +144,12 @@
 
         @for(fee of fees; track fee){
 
-          <ion-item lines="none" class="ion-no-padding">
+        <ion-item lines="none" class="ion-no-padding">
           <span
             (click)="showFeeInfo(fee)"
             class="label-body-2 ion-text-capitalize flex items-center"
           >
-            {{ fee.name }}
-
-            @if (fee.description){
+            {{ fee.name }} @if (fee.description){
             <ion-icon
               name="help-circle-outline"
               style="font-size: 16px"
@@ -163,33 +159,26 @@
 
           @if (fee.type === UserFeeType.BUYER_SHIPPING_REDUCED) {
 
-            <div slot="end" class="flex gap-8 items-center">
-              <span class="label-body-2 color-gray-light-1 line-through mr-4">
-                {{
-                  fullShippingCost | cost | currency : "BRL" : "symbol" : "1.2"
-                }}
-              </span>
+          <div slot="end" class="flex gap-8 items-center">
+            <span class="label-body-2 color-gray-light-1 line-through mr-4">
+              {{ fullShippingCost | cost | currency : "BRL" : "symbol" : "1.2"
+              }}
+            </span>
 
-              <span class="label-body-2">
-                {{ fee.value | cost | currency : "BRL" : "symbol" : "1.2" }}
-              </span>
-            </div>
+            <span class="label-body-2">
+              {{ fee.value | cost | currency : "BRL" : "symbol" : "1.2" }}
+            </span>
+          </div>
 
           } @else {
-            <span slot="end" class="label-body-2">
+          <span slot="end" class="label-body-2">
             {{ fee.value | cost | currency : "BRL" : "symbol" : "1.2" }}
           </span>
 
           }
-
-
-
         </ion-item>
 
-      }
-
-
-        @if (interest) {
+        } @if (interest) {
         <ion-item lines="none" class="ion-no-padding">
           <span class="label-body-2 ion-text-capitalize">
             Juros parcelamento
@@ -228,7 +217,7 @@
     <div class="mt-16">
       <tk-coupon-form></tk-coupon-form>
     </div>
-  </ion-grid>
+  </div>
 </ion-content>
 
 <ion-footer class="px-24 py-16 border-top">

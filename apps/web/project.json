@@ -56,7 +56,11 @@
         "ssr": {
           "entry": "apps/web/server.ts"
         },
-        "allowedCommonJsDependencies": ["compression", "dayjs", "credit-card-type"],
+        "allowedCommonJsDependencies": [
+          "compression",
+          "dayjs",
+          "credit-card-type"
+        ],
         "stylePreprocessorOptions": {
           "includePaths": ["libs/shared/styles"],
           "sass": {

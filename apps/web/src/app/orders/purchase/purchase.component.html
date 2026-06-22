@@ -1,9 +1,7 @@
-<div class="grid-row mb-48">
-  <div class="gcol-12">
-    <button color="primary" mat-button routerLink="/orders/purchases">
-      <mat-icon>arrow_back</mat-icon> Minhas compras
-    </button>
-  </div>
+<div class="mb-48">
+  <button color="primary" mat-button routerLink="/orders/purchases">
+    <mat-icon>arrow_back</mat-icon> Minhas compras
+  </button>
 </div>
 
 @if (order) {
@@ -21,35 +19,33 @@
       <span class="item-label mt-16">QR Code</span>
       <img class="pixQR" src="{{ pixQR }}" alt="QR Code para pagamento Pix" />
       <span class="item-label mt-16"> Copia e cola </span>
-      <div class="grid-row">
-        <div class="gcol-12 gcol-md-6">
-          <mat-form-field
-            appearance="outline"
-            (click)="copyPix($event)"
-            class="w-full"
-            >
-            <input
-              matInput
-              readonly="true"
-              value="{{ order?.pix?.payload }}"
-              (copy)="onInputCopy($event)"
-              type="text"
-              style="user-select: none"
-              />
-            <div matSuffix>
-              <button (click)="copyPix($event)" color="primary" mat-button>
-                <mat-icon>content_copy</mat-icon>
-                Copiar
-              </button>
-            </div>
-          </mat-form-field>
-        </div>
+      <div class="pix-copy">
+        <mat-form-field
+          appearance="outline"
+          (click)="copyPix($event)"
+          class="w-full"
+        >
+          <input
+            matInput
+            readonly="true"
+            value="{{ order?.pix?.payload }}"
+            (copy)="onInputCopy($event)"
+            type="text"
+            style="user-select: none"
+          />
+          <div matSuffix>
+            <button (click)="copyPix($event)" color="primary" mat-button>
+              <mat-icon>content_copy</mat-icon>
+              Copiar
+            </button>
+          </div>
+        </mat-form-field>
       </div>
     </div>
   }
 
-  <div class="grid-row mt-48">
-    <div class="gcol-12 gcol-md-4">
+  <div class="purchase-grid mt-48">
+    <div>
       <!-- Produtos -->
       <div class="page-section-mobile">
         <span class="section-title">Produtos</span>
@@ -66,7 +62,7 @@
       </div>
     </div>
 
-    <div class="gcol-12 gcol-md-4">
+    <div>
       <!-- Detalhes -->
       <div class="page-section">
         <span class="section-title">Detalhes</span>
@@ -75,7 +71,7 @@
           <div>
             <span class="item-label">Data</span>
             <span class="item-value"
-              >{{ order.createdAt | date : "dd/MM/yyyy - HH:mm" }}
+              >{{ order.createdAt | date: 'dd/MM/yyyy - HH:mm' }}
             </span>
           </div>
 
@@ -96,7 +92,7 @@
         (confirmWithdrawalClick)="confirmWithdrawal()"
         [order]="order"
         [isPurchase]="true"
-        />
+      />
 
       <!-- Valores -->
       <div class="page-section">
@@ -105,29 +101,25 @@
         <div class="flex flex-col gap-8">
           <!-- Carrinho -->
           @for (c of order.clothes; track c) {
-            <div
-              class="flex justify-between"
-              >
+            <div class="flex justify-between">
               <span class="item-value capitalize">
                 {{ c.title }}
               </span>
               <span class="item-value">
-                {{ c.cost | cost | currency : "BRL" : true : "1.2-2" }}
+                {{ c.cost | cost | currency: 'BRL' : true : '1.2-2' }}
               </span>
             </div>
           }
 
           <!-- Frete -->
           @if (order.shippingValues) {
-            <div
-              class="flex justify-between"
-              >
+            <div class="flex justify-between">
               <span class="item-value">Frete</span>
               <span class="item-value">
                 {{
-                order.shippingValues.shippingCost
-                | cost
-                | currency : "BRL" : true : "1.2-2"
+                  order.shippingValues.shippingCost
+                    | cost
+                    | currency: 'BRL' : true : '1.2-2'
                 }}
               </span>
             </div>
@@ -137,43 +129,41 @@
           @if (
             order.businessValues.interestValues &&
             order.businessValues.interestValues.interest
-            ) {
-            <div
-              class="flex justify-between"
-              >
+          ) {
+            <div class="flex justify-between">
               <span class="item-value">Juros parcelamento</span>
               <span class="item-value">
                 {{
-                order.businessValues.interestValues.interest
-                | cost
-                | currency : "BRL" : true : "1.2-2"
+                  order.businessValues.interestValues.interest
+                    | cost
+                    | currency: 'BRL' : true : '1.2-2'
                 }}
               </span>
             </div>
           }
 
           <!-- service fee -->
-          @if (order.businessValues.buyerServiceFee){
+          @if (order.businessValues.buyerServiceFee) {
             <div class="flex justify-between">
               <span class="item-value">Taxa de serviço</span>
               <span class="item-value">
                 {{
-                order.businessValues.buyerServiceFee
-                | cost
-                | currency : "BRL" : true : "1.2-2"
+                  order.businessValues.buyerServiceFee
+                    | cost
+                    | currency: 'BRL' : true : '1.2-2'
                 }}
               </span>
             </div>
           }
           <!-- processing fee -->
-          @if (order.businessValues.buyerProcessingFee){
+          @if (order.businessValues.buyerProcessingFee) {
             <div class="flex justify-between">
               <span class="item-value">Taxa de processamento</span>
               <span class="item-value">
                 {{
-                order.businessValues.buyerProcessingFee
-                | cost
-                | currency : "BRL" : true : "1.2-2"
+                  order.businessValues.buyerProcessingFee
+                    | cost
+                    | currency: 'BRL' : true : '1.2-2'
                 }}
               </span>
             </div>
@@ -181,17 +171,15 @@
 
           <!-- desconto cupom -->
           @if (order.businessValues.couponDiscount) {
-            <div
-              class="flex justify-between"
-              >
+            <div class="flex justify-between">
               <span class="item-value">
                 Desconto cupom ({{ order.businessValues.couponCode }})
               </span>
               <span class="item-value">
                 {{
-                -order.businessValues.couponDiscount
-                | cost
-                | currency : "BRL" : true : "1.2-2"
+                  -order.businessValues.couponDiscount
+                    | cost
+                    | currency: 'BRL' : true : '1.2-2'
                 }}
               </span>
             </div>
@@ -199,15 +187,13 @@
 
           <!-- desconto pix -->
           @if (order.businessValues.pixDiscount) {
-            <div
-              class="flex justify-between"
-              >
+            <div class="flex justify-between">
               <span class="item-value">Desconto Pix</span>
               <span class="item-value">
                 {{
-                -order.businessValues.pixDiscount
-                | cost
-                | currency : "BRL" : true : "1.2-2"
+                  -order.businessValues.pixDiscount
+                    | cost
+                    | currency: 'BRL' : true : '1.2-2'
                 }}
               </span>
             </div>
@@ -219,9 +205,9 @@
             <span class="item-value color-primary">
               <b>
                 {{
-                order.businessValues.buyerCost
-                | cost
-                | currency : "BRL" : true : "1.2-2"
+                  order.businessValues.buyerCost
+                    | cost
+                    | currency: 'BRL' : true : '1.2-2'
                 }}
               </b>
             </span>
@@ -243,21 +229,13 @@
 
       <!-- Cancelamento -->
       @if (waiting_shipment || waiting_withdrawal || waiting_payment) {
-        <button
-          class="mt-32 color-error"
-          mat-stroked-button
-          (click)="cancel()"
-          >
+        <button class="mt-32 color-error" mat-stroked-button (click)="cancel()">
           Cancelar compra
         </button>
       }
 
       @if (order_delivered && userMayReturn) {
-        <button
-          class="mt-32 color-error"
-          mat-stroked-button
-          (click)="return()"
-          >
+        <button class="mt-32 color-error" mat-stroked-button (click)="return()">
           Solicitar devolução
         </button>
       }

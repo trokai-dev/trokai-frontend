@@ -4,12 +4,12 @@
   margin-top: 150px;
 
   span {
-    font-family: "poppins" "arial" !important;
+    font-family: 'poppins' 'arial' !important;
     font-size: 12px !important;
   }
 
   p {
-    font-family: "poppins" "arial" !important;
+    font-family: 'poppins' 'arial' !important;
     font-size: 11px !important;
     margin: unset;
   }
@@ -372,7 +372,6 @@
   justify-content: center;
   align-items: center;
 
-
   position: fixed;
   top: 0;
   left: 0;
@@ -381,11 +380,9 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   .nav-etiqueta-actions {
-
     display: flex;
     gap: 1.2rem;
     align-items: center;
     justify-content: center;
   }
-
 }

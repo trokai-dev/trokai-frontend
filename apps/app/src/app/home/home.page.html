@@ -1,8 +1,5 @@
 <ion-header>
-  <ion-toolbar
-    mode="ios"
-    class="flex justify-center items-center px-8"
-  >
+  <ion-toolbar mode="ios" class="flex justify-center items-center px-8">
     <ion-img src="../../assets/icons/trokai-clean.svg"></ion-img>
 
     <ion-buttons slot="primary">
@@ -26,9 +23,7 @@
         <ion-icon name="cart-outline"></ion-icon>
 
         @if (basketCount > 0) {
-        <ion-badge color="tertiary">
-          {{ basketCount }}
-        </ion-badge>
+        <ion-badge color="tertiary"> {{ basketCount }} </ion-badge>
         }
       </button>
     </ion-buttons>
@@ -36,48 +31,39 @@
 </ion-header>
 
 <ion-content>
-  @if(payload){
-  @if (payload.alert) {
+  @if(payload){ @if (payload.alert) {
   <div class="home_header_alert">{{ payload.alert }}</div>
-  }
-
-  @for (home_row of payload.home; track $index; let row = $index) {
+  } @for (home_row of payload.home; track $index; let row = $index) {
   <div class="home_row">
     @if (home_row.title) {
-    <ion-row class="home_row_header">
-      <ion-col size="8">
+    <div class="home_row_header">
+      <div>
         <h2 class="home_row_title">{{ home_row.title }}</h2>
         @if (home_row.description) {
-        <span class="home_row_description">
-          {{ home_row.description }}
-        </span>
+        <span class="home_row_description"> {{ home_row.description }} </span>
         }
-      </ion-col>
+      </div>
       @if (home_row.actionText && home_row.actionUrl) {
-      <ion-col
-        class="flex justify-end"
-      >
+      <div class="flex justify-end">
         <a (click)="navigate(home_row)">
           <span class="label-caption-1 color-primary">
             {{ home_row.actionText }}
           </span>
         </a>
-      </ion-col>
+      </div>
       }
-    </ion-row>
-    }
-
-    @if (!home_row.swiper) {
+    </div>
+    } @if (!home_row.swiper) {
     <div>
       @if (home_row.objectType === 'banner') {
-      <ion-row>
-        <ion-col style="margin-left: 1.2rem; margin-right: 1.2rem">
+      <div>
+        <div style="margin-left: 1.2rem; margin-right: 1.2rem">
           <app-banner
             (navigate)="navigate(home_row.items[0])"
             [item]="home_row.items[0]"
           ></app-banner>
-        </ion-col>
-      </ion-row>
+        </div>
+      </div>
       }
 
       <!--
@@ -98,14 +84,13 @@
       }
       -->
     </div>
-    }
-
-    @if (home_row.swiper) {
+    } @if (home_row.swiper) {
     <div style="position: relative">
       @if (home_row.objectType === 'generic') {
       <div class="swiper-wraper">
         <div id="swiper-{{ row }}" class="row-smooth-scroll">
-          @for (home_generic of home_row.items; track $index; let col = $index) {
+          @for (home_generic of home_row.items; track $index; let col = $index)
+          {
           <div class="custom-swiper-slide">
             <app-home-generic
               (navigate)="navigate(home_generic)"
@@ -116,9 +101,7 @@
           }
         </div>
       </div>
-      }
-
-      @if (home_row.objectType === 'banner') {
+      } @if (home_row.objectType === 'banner') {
       <div class="swiper-wraper">
         <div id="swiper-{{ row }}" class="row-smooth-scroll">
           @for (item of home_row.items; track $index; let col = $index) {
@@ -132,6 +115,5 @@
     </div>
     }
   </div>
-  }
-  }
+  } }
 </ion-content>

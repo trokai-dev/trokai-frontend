@@ -14,7 +14,6 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonGrid,
   IonSpinner,
 } from '@ionic/angular/standalone';
 import { SellerProfileComponent, SellerProfileValue } from '@trokai/shared-ui';
@@ -32,7 +31,6 @@ import { ToastService } from '../services/toast-service';
     IonTitle,
     IonContent,
     IonSpinner,
-    IonGrid,
     BackButtonComponent,
     SellerProfileComponent,
     TkImagePickerComponent,

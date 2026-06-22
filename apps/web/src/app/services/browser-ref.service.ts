@@ -75,7 +75,11 @@ export class BrowserRef {
 
   private loadJivo() {
     if (!environment.production) return;
-    if (!this.window || (window as unknown as Record<string, unknown>).jivoLoaded) return;
+    if (
+      !this.window ||
+      (window as unknown as Record<string, unknown>).jivoLoaded
+    )
+      return;
     const script = document.createElement('script');
     script.src = '//code.jivosite.com/widget/VvxfqN68OV';
     script.async = true;
@@ -84,7 +88,11 @@ export class BrowserRef {
   }
 
   private loadPixel() {
-    if (!this.window || (window as unknown as Record<string, unknown>).fbqLoaded) return;
+    if (
+      !this.window ||
+      (window as unknown as Record<string, unknown>).fbqLoaded
+    )
+      return;
     const script = document.createElement('script');
     script.src = 'https://connect.facebook.net/en_US/fbevents.js';
     script.async = true;
@@ -93,7 +101,11 @@ export class BrowserRef {
   }
 
   public loadAppleSignIn() {
-    if (!this.window || (window as unknown as Record<string, unknown>).appleSignInLoaded) return;
+    if (
+      !this.window ||
+      (window as unknown as Record<string, unknown>).appleSignInLoaded
+    )
+      return;
     const script = document.createElement('script');
     script.src =
       'https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js';

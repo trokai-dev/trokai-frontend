@@ -1,70 +1,62 @@
 <div id="side-menu-nav">
   @if (menuTab === null) {
+    <div class="flex pb-48 items-center justify-between">
+      <h3 class="color-gray-dark">Menu</h3>
+      <button
+        mat-icon-button
+        (click)="menuClose.emit()"
+        aria-label="Fechar"
+        class="mr-16 color-gray-light-1"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
 
-  <div class="flex pb-48 items-center justify-between">
-    <h3 class="color-gray-dark">Menu</h3>
+    @for (link of navLinks; track link) {
+      <button
+        rel="nofollow"
+        (click)="onClickLink(link)"
+        mat-button
+        class="menu-item"
+        [ariaLabel]="link.label"
+      >
+        <span class="label-body-1"> {{ link.label }}</span>
+      </button>
+    }
+
+    <!--  -->
+    @if (!user) {
+      <mat-divider class="my-16"></mat-divider>
+
+      <button
+        rel="nofollow"
+        (click)="onClickSimple('/auth')"
+        mat-button
+        class="menu-item color-primary"
+        aria-label="Entrar"
+      >
+        <span class="label-body-1"> <b>Entrar</b> </span>
+      </button>
+    }
+
     <button
-      mat-icon-button
-      (click)="menuClose.emit()"
-      aria-label="Fechar"
-      class="mr-16 color-gray-light-1"
+      rel="nofollow"
+      (click)="onClickSimple('/sell')"
+      mat-button
+      class="menu-item color-primary"
+      aria-label="Entrar"
     >
-      <mat-icon>close</mat-icon>
+      <span class="label-body-1"> <b>Anunciar</b> </span>
     </button>
-  </div>
 
-  @for (link of navLinks; track link) {
-
-  <button
-    rel="nofollow"
-    (click)="onClickLink(link)"
-    mat-button
-    class="menu-item"
-   
-    [ariaLabel]="link.label"
-  >
-    <span class="label-body-1"> {{ link.label }}</span>
-  </button>
-
-  }
-
-  <!--  -->
-  @if (!user) {
-
-  <mat-divider class="my-16"></mat-divider>
-
-  <button
-    rel="nofollow"
-    (click)="onClickSimple('/auth')"
-    mat-button
-    class="menu-item color-primary"
-   
-    aria-label="Entrar"
-  >
-    <span class="label-body-1"> <b>Entrar</b> </span>
-  </button>
-
-  }
-
-  <button
-    rel="nofollow"
-    (click)="onClickSimple('/sell')"
-    mat-button
-    class="menu-item color-primary"
-   
-    aria-label="Entrar"
-  >
-    <span class="label-body-1"> <b>Anunciar</b> </span>
-  </button>
-
-  <!--  -->
+    <!--  -->
   } @else {
-  <app-nav-expanded-menu
-    [menuTab]="menuTab"
-    [navMenu]="navMenu"
-    [mobile]="true"
-    (back)="onClickBack()"
-    (hideMenu)="menuClose.emit()"
-  ></app-nav-expanded-menu>
+    <app-nav-expanded-menu
+      [menuTab]="menuTab"
+      [navMenu]="navMenu"
+      [mobile]="true"
+      (back)="onClickBack()"
+      (hideMenu)="menuClose.emit()"
+    ></app-nav-expanded-menu>
   }
 </div>

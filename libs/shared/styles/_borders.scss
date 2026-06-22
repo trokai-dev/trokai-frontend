@@ -4,12 +4,30 @@
 
 // `!important` matches the web `$border-trokai` these replace, so border
 // utilities win consistently over component styles in both apps.
-.border { border: var(--border-trokai) !important; }
-.border-top { border-top: var(--border-trokai) !important; }
-.border-bottom { border-bottom: var(--border-trokai) !important; }
-.border-left, .border-start { border-left: var(--border-trokai) !important; }
-.border-right, .border-end { border-right: var(--border-trokai) !important; }
-.border-0 { border: 0 !important; }
+.border {
+  border: var(--border-trokai) !important;
+}
+.border-top {
+  border-top: var(--border-trokai) !important;
+}
+.border-bottom {
+  border-bottom: var(--border-trokai) !important;
+}
+.border-left,
+.border-start {
+  border-left: var(--border-trokai) !important;
+}
+.border-right,
+.border-end {
+  border-right: var(--border-trokai) !important;
+}
+.border-0 {
+  border: 0 !important;
+}
 
-.rounded { border-radius: 0.375rem; }
-.rounded-circle { border-radius: 50%; }
+.rounded {
+  border-radius: 0.375rem;
+}
+.rounded-circle {
+  border-radius: 50%;
+}

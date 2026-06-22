@@ -16,9 +16,8 @@
 @forward 'typography'; // heading/label classes
 @forward 'elements'; // global element defaults + page/section/item helpers
 @forward 'spacing'; // .m-* / .p-* / .gap-* utilities
-@forward 'layout'; // flexbox + grid utilities
+@forward 'layout'; // flexbox + grid utilities + .container primitive
 @forward 'text'; // text align/transform/overflow utilities
 @forward 'borders'; // token-backed border + radius utilities
 @forward 'colors'; // token-backed text-color utilities
-@forward 'grid'; // CSS Grid 12-col responsive layout (container/grid-row/gcol-*)
 @forward 'responsive'; // md+ display + spacing utilities

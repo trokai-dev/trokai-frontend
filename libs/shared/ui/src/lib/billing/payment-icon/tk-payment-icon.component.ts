@@ -17,14 +17,27 @@ export class TkPaymentIconComponent implements OnInit, OnChanges {
 
   load() {
     switch (this.paymentBrand) {
-      case PaymentBrands.PIX: this.imgName = 'pix.svg'; break;
-      case PaymentBrands.MASTERCARD: this.imgName = 'mastercard.svg'; break;
-      case PaymentBrands.VISA: this.imgName = 'visa.svg'; break;
-      case PaymentBrands.ELO: this.imgName = 'elo.svg'; break;
-      default: this.imgName = null;
+      case PaymentBrands.PIX:
+        this.imgName = 'pix.svg';
+        break;
+      case PaymentBrands.MASTERCARD:
+        this.imgName = 'mastercard.svg';
+        break;
+      case PaymentBrands.VISA:
+        this.imgName = 'visa.svg';
+        break;
+      case PaymentBrands.ELO:
+        this.imgName = 'elo.svg';
+        break;
+      default:
+        this.imgName = null;
     }
   }
 
-  ngOnInit() { this.load(); }
-  ngOnChanges() { this.load(); }
+  ngOnInit() {
+    this.load();
+  }
+  ngOnChanges() {
+    this.load();
+  }
 }

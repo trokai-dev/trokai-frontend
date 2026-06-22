@@ -31,7 +31,8 @@ export class TkUserAvatarComponent implements OnInit, OnChanges {
     if (this.overrideUrl) {
       this.avatar = this.overrideUrl;
     } else if (this.user?.avatar) {
-      this.avatar = this.config.imageURL + this.user._id + '/avatar/' + this.user.avatar;
+      this.avatar =
+        this.config.imageURL + this.user._id + '/avatar/' + this.user.avatar;
     } else {
       this.avatar = this.config.defaultAvatar;
     }

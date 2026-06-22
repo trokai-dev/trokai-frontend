@@ -81,9 +81,8 @@ export class CompletingInformationService {
   }
 
   async restoreAction() {
-    const stored = await this.storage.getObject<StoredAction>(
-      'completingAction',
-    );
+    const stored =
+      await this.storage.getObject<StoredAction>('completingAction');
     if (!stored) return;
 
     try {

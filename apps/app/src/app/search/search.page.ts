@@ -17,8 +17,6 @@ import {
   IonToolbar,
   Platform,
   IonSearchbar,
-  IonCol,
-  IonRow,
   IonRippleEffect,
   IonList,
   IonSpinner,
@@ -41,13 +39,11 @@ import { FirebaseService } from '../services/firebase.service';
   standalone: true,
   imports: [
     MatButtonModule,
-    
-    IonCol,
+
     IonSearchbar,
     IonHeader,
     IonToolbar,
     IonIcon,
-    IonRow,
     IonRippleEffect,
     IonList,
     IonSpinner,
@@ -192,7 +188,9 @@ export class SearchPage implements OnInit {
         this.results = this.results.concat(response.clothes);
         this.endOfSearch = response.count <= this.results.length;
       }
-    } finally { /* intentional */ }
+    } finally {
+      /* intentional */
+    }
   }
 
   async searchUsers() {
@@ -210,7 +208,9 @@ export class SearchPage implements OnInit {
         this.results = this.results.concat(response.users);
         this.endOfSearch = response.count <= this.results.length;
       }
-    } finally { /* intentional */ }
+    } finally {
+      /* intentional */
+    }
   }
 
   openClothe(p) {

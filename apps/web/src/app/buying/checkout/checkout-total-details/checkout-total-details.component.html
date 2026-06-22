@@ -17,83 +17,70 @@
       <div class="flex justify-between mt-8">
         <span class="label-body-2"> Carrinho</span>
         <span class="label-body-2">
-          {{ cv.sumCart | cost | currency : "BRL" : "symbol" : "1.2" }}
+          {{ cv.sumCart | cost | currency: 'BRL' : 'symbol' : '1.2' }}
         </span>
       </div>
 
-      @for(fee of cv.fees; track fee){
-      <div class="flex justify-between mt-8">
-        <div class="flex">
+      @for (fee of cv.fees; track fee) {
+        <div class="flex justify-between mt-8">
+          <div class="flex">
+            <span class="label-body-2">
+              {{ fee.name }}
+            </span>
+            <!-- help  -->
+            @if (fee.description) {
+              <mat-icon
+                type="button"
+                class="ml-24 color-gray-default icon-small"
+                mat-icon-button
+                matTooltip="{{ fee.description }}"
+                (click)="showFeeInfo(fee)"
+              >
+                help_outline
+              </mat-icon>
+            }
+          </div>
+
           <span class="label-body-2">
-            {{ fee.name }}
+            {{ fee.value | cost | currency: 'BRL' : 'symbol' : '1.2' }}
           </span>
-          <!-- help  -->
-          @if (fee.description){
-          <mat-icon
-            type="button"
-            class="ml-24 color-gray-default icon-small"
-            mat-icon-button
-            matTooltip="{{ fee.description }}"
-            (click)="showFeeInfo(fee)"
-          >
-            help_outline
-          </mat-icon>
-          }
         </div>
-
-        <span class="label-body-2">
-          {{ fee.value | cost | currency : "BRL" : "symbol" : "1.2" }}
-        </span>
-      </div>
       }
 
-
       <!-- discount -->
-      @if(cv.interest) {
-
-      <div class="flex justify-between mt-8">
-        <span class="label-body-2"> Juros</span>
-        <span class="label-body-2 ">
-
-
-            {{
-              cv.interest | cost | currency : "BRL" : "symbol" : "1.2"
-            }}
-
-        </span>
-      </div>
-
+      @if (cv.interest) {
+        <div class="flex justify-between mt-8">
+          <span class="label-body-2"> Juros</span>
+          <span class="label-body-2">
+            {{ cv.interest | cost | currency: 'BRL' : 'symbol' : '1.2' }}
+          </span>
+        </div>
       }
 
-
       <!-- discount -->
-      @if(cv.couponDiscount) {
-
-      <div class="flex justify-between mt-8">
-        <span class="label-body-2"> Cupom</span>
-        <span class="label-body-2 color-primary">
-          <b>
-            -
-            {{
-              cv.couponDiscount | cost | currency : "BRL" : "symbol" : "1.2"
-            }}</b
-          >
-        </span>
-      </div>
-
+      @if (cv.couponDiscount) {
+        <div class="flex justify-between mt-8">
+          <span class="label-body-2"> Cupom</span>
+          <span class="label-body-2 color-primary">
+            <b>
+              -
+              {{
+                cv.couponDiscount | cost | currency: 'BRL' : 'symbol' : '1.2'
+              }}</b
+            >
+          </span>
+        </div>
       }
       <!-- PIX -->
-      @if(cv.pixDiscount) {
-
-      <div class="flex justify-between mt-8">
-        <span class="label-body-2"> Desconto PIX</span>
-        <span class="label-body-2 color-primary">
-          <b>
-            - {{ cv.pixDiscount | cost | currency : "BRL" : "symbol" : "1.2" }}
-          </b>
-        </span>
-      </div>
-
+      @if (cv.pixDiscount) {
+        <div class="flex justify-between mt-8">
+          <span class="label-body-2"> Desconto PIX</span>
+          <span class="label-body-2 color-primary">
+            <b>
+              - {{ cv.pixDiscount | cost | currency: 'BRL' : 'symbol' : '1.2' }}
+            </b>
+          </span>
+        </div>
       }
 
       <div class="flex justify-between mt-8">
@@ -101,9 +88,7 @@
         <span class="label-body-2 color-gray-dark">
           <b>
             {{
-              cv.totalAfterDiscounts
-                | cost
-                | currency : "BRL" : "symbol" : "1.2"
+              cv.totalAfterDiscounts | cost | currency: 'BRL' : 'symbol' : '1.2'
             }}
           </b>
         </span>

@@ -22,7 +22,6 @@ import {
   IonFooter,
   IonBadge,
   IonRippleEffect,
-  IonRow,
 } from '@ionic/angular/standalone';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
@@ -58,7 +57,6 @@ import { BasicModel, notNullOrEmpty } from '@trokai/shared-core';
     MatButtonModule,
     FormsModule,
     NgClass,
-    IonRow,
     CostPipe,
     CurrencyPipe,
   ],

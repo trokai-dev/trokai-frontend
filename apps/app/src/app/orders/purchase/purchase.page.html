@@ -15,15 +15,13 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="p-24">
+  <div class="p-24">
     <!-- loading -->
     @if (loading) {
     <div class="w-full flex justify-center mt-40">
       <ion-spinner></ion-spinner>
     </div>
-    }
-
-    @if (order) {
+    } @if (order) {
     <div>
       @if (!loading) {
       <div>
@@ -57,8 +55,8 @@
         </div>
         }
 
-        <ion-row class="mt-48">
-          <ion-col size="12" size-md="4">
+        <div class="purchase-grid mt-48">
+          <div>
             <!-- Produtos -->
             <div class="page-section">
               <span class="section-title">Produtos</span>
@@ -73,9 +71,9 @@
               </div>
               }
             </div>
-          </ion-col>
+          </div>
 
-          <ion-col size="12" size-md="4">
+          <div>
             <!-- Detalhes -->
             <div class="page-section">
               <span class="section-title">Detalhes</span>
@@ -116,7 +114,7 @@
                 @for (c of order.clothes; track c._id) {
                 <div class="flex justify-between">
                   <span class="item-value ion-text-capitalize">
-                     {{ c.title }} {{ c.refund ? "(Estornado)" : "" }}
+                    {{ c.title }} {{ c.refund ? "(Estornado)" : "" }}
                   </span>
                   <span class="item-value">
                     {{ c.cost | cost | currency : "BRL" : true : "1.2-2" }}
@@ -129,17 +127,15 @@
                 <div class="flex justify-between">
                   <span class="item-value">Frete</span>
                   <span class="item-value">
-                    {{ order.shippingValues.shippingCost | cost | currency : "BRL"
-                    : true : "1.2-2" }}
+                    {{ order.shippingValues.shippingCost | cost | currency :
+                    "BRL" : true : "1.2-2" }}
                   </span>
                 </div>
                 }
 
                 <!-- Juros -->
-                @if (
-                  order.businessValues.interestValues &&
-                  order.businessValues.interestValues.interest
-                ) {
+                @if ( order.businessValues.interestValues &&
+                order.businessValues.interestValues.interest ) {
                 <div class="flex justify-between">
                   <span class="item-value">Juros parcelamento</span>
                   <span class="item-value">
@@ -164,8 +160,8 @@
                 <div class="flex justify-between">
                   <span class="item-value">Taxa de processamento</span>
                   <span class="item-value">
-                    {{ order.businessValues.buyerProcessingFee | cost | currency :
-                    "BRL" : true : "1.2-2" }}
+                    {{ order.businessValues.buyerProcessingFee | cost | currency
+                    : "BRL" : true : "1.2-2" }}
                   </span>
                 </div>
                 }
@@ -188,8 +184,8 @@
                 <div class="flex justify-between">
                   <span class="item-value">Desconto Pix</span>
                   <span class="item-value">
-                    {{ -order.businessValues.pixDiscount | cost | currency : "BRL"
-                    : true : "1.2-2" }}
+                    {{ -order.businessValues.pixDiscount | cost | currency :
+                    "BRL" : true : "1.2-2" }}
                   </span>
                 </div>
                 }
@@ -199,8 +195,8 @@
                   <span class="item-value"><b>Total</b></span>
                   <span class="item-value color-primary">
                     <b>
-                      {{ order.businessValues.buyerCost | cost | currency : "BRL"
-                      : true : "1.2-2" }}
+                      {{ order.businessValues.buyerCost | cost | currency :
+                      "BRL" : true : "1.2-2" }}
                     </b>
                   </span>
                 </div>
@@ -226,9 +222,7 @@
             >
               Cancelar compra
             </button>
-            }
-
-            @if (order_delivered && userMayReturn) {
+            } @if (order_delivered && userMayReturn) {
             <button
               mat-button
               class="action-button mt-32 w-full color-error"
@@ -237,26 +231,34 @@
               Solicitar devolução
             </button>
             }
-          </ion-col>
-        </ion-row>
+          </div>
+        </div>
       </div>
       }
     </div>
     }
-  </ion-grid>
+  </div>
 </ion-content>
 
 @if (waiting_review && !userMadeReview && !loading) {
 <ion-footer class="px-24 py-16">
-  <button mat-flat-button color="primary" (click)="checkReview()" class="action-button">
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="checkReview()"
+    class="action-button"
+  >
     Avaliar compra
   </button>
 </ion-footer>
-}
-
-@if (waiting_withdrawal && !loading) {
+} @if (waiting_withdrawal && !loading) {
 <ion-footer class="px-24 py-16">
-  <button mat-flat-button color="primary" (click)="confirmWithdrawal()" class="action-button">
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="confirmWithdrawal()"
+    class="action-button"
+  >
     Já recebi minha compra
   </button>
 </ion-footer>

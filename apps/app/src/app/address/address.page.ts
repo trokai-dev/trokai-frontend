@@ -37,8 +37,15 @@ import { FirebaseService } from '../services/firebase.service';
   template: `
     <ion-header>
       <ion-toolbar mode="ios">
-        <app-back-button [nav]="buyingChangeAddress" [blockNavigation]="completingInformation" (onClick)="back()" defaultHref="/main/profile" />
-        <ion-title>{{ completingInformation ? 'Insira seu endereço' : 'Endereço' }}</ion-title>
+        <app-back-button
+          [nav]="buyingChangeAddress"
+          [blockNavigation]="completingInformation"
+          (onClick)="back()"
+          defaultHref="/main/profile"
+        />
+        <ion-title>{{
+          completingInformation ? 'Insira seu endereço' : 'Endereço'
+        }}</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
@@ -49,13 +56,28 @@ import { FirebaseService } from '../services/firebase.service';
       }
       @if (user) {
         <div class="p-24">
-          <tk-address-form [address]="userAddress" [submit]="false" (addressSave)="onAddressSave($event)" />
+          <tk-address-form
+            [address]="userAddress"
+            [submit]="false"
+            (addressSave)="onAddressSave($event)"
+          />
           <div class="mt-56">
-            <button mat-flat-button [disabled]="!formRef?.form.valid" (click)="formRef?.save()" color="primary" class="action-button w-full round">
+            <button
+              mat-flat-button
+              [disabled]="!formRef?.form.valid"
+              (click)="formRef?.save()"
+              color="primary"
+              class="action-button w-full round"
+            >
               {{ getStringButton() }}
             </button>
             @if (buyingChangeAddress && zipShipping) {
-              <button mat-stroked-button (click)="useRegisteredAddress()" color="primary" class="action-button w-full mt-16 round">
+              <button
+                mat-stroked-button
+                (click)="useRegisteredAddress()"
+                color="primary"
+                class="action-button w-full mt-16 round"
+              >
                 Usar endereço cadastrado
               </button>
             }
@@ -87,7 +109,7 @@ export class AddressPage implements OnInit, OnDestroy {
   private backNavSub?: Subscription;
 
   ngOnInit() {
-    this.buyingChangeAddress = !!(this.navParams?.data?.buying);
+    this.buyingChangeAddress = !!this.navParams?.data?.buying;
     this.completingInformation = this.router.url === '/address-completing';
     if (this.navParams?.data?.zip) this.zipShipping = this.navParams.data.zip;
 
@@ -97,7 +119,9 @@ export class AddressPage implements OnInit, OnDestroy {
         if (u.address && !this.formRef?.form.valid) {
           if (this.buyingChangeAddress && this.zipShipping) {
             setTimeout(() => {
-              this.formRef?.form.patchValue({ zipCode: this.zipShipping?.toString() });
+              this.formRef?.form.patchValue({
+                zipCode: this.zipShipping?.toString(),
+              });
               this.formRef?.onChangeCEP();
             }, 300);
           } else {
@@ -107,7 +131,9 @@ export class AddressPage implements OnInit, OnDestroy {
       }
     });
 
-    this.backNavSub = this.platform.backButton.subscribeWithPriority(90, () => this.back());
+    this.backNavSub = this.platform.backButton.subscribeWithPriority(90, () =>
+      this.back(),
+    );
   }
 
   getStringButton() {
@@ -132,7 +158,8 @@ export class AddressPage implements OnInit, OnDestroy {
       } else {
         this.navCtrl.pop();
       }
-    } catch { /* intentional */
+    } catch {
+      /* intentional */
     } finally {
       loading.dismiss();
     }

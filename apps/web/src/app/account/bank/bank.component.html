@@ -1,4 +1,4 @@
-<div class="gcol-12 gcol-md-7">
+<div>
   <h3 class="color-gray-dark">Cofrinho</h3>
 
   @if (isLoading) {
@@ -6,8 +6,8 @@
   }
   @if (balance) {
     <div class="mt-32">
-      <div class="grid-row">
-        <div class="gcol-12">
+      <div class="flex flex-col gap-24">
+        <div>
           <h6 class="color-gray-dark block">Saldo disponível</h6>
           <span class="label-body-2 mt-16 color-primary block">
             <b>
@@ -20,7 +20,7 @@
           </span>
         </div>
 
-        <div class="gcol-12">
+        <div>
           <h6 class="color-gray-dark block">Em adamento</h6>
           <span class="label-body-2 mt-16 color-gray-default block">
             {{
@@ -31,7 +31,7 @@
           </span>
         </div>
 
-        <div class="gcol-12">
+        <div>
           <h6 class="color-gray-dark block">Total vendido</h6>
 
           <span class="label-body-2 mt-16 color-gray-default block">

@@ -117,7 +117,9 @@ export class AuthService {
     email: string,
     token: string,
   ) {
-    const storedJ = await this.storage.getObject<{ userId: string }>('authData');
+    const storedJ = await this.storage.getObject<{ userId: string }>(
+      'authData',
+    );
 
     if (storedJ) {
       if (storedJ['userId'].toString().trim() !== userId.toString().trim()) {
@@ -147,7 +149,9 @@ export class AuthService {
       this._logged.next(null);
       this._user.next(null);
       await this.storage.clear();
-    } catch { /* intentional */ }
+    } catch {
+      /* intentional */
+    }
   }
 
   autoLogin() {

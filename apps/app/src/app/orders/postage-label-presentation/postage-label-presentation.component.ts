@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import {
   IonContent,
   IonFooter,
-  IonGrid,
   ModalController,
 } from '@ionic/angular/standalone';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,14 +12,7 @@ import { AnimationOptions, LottieComponent } from 'ngx-lottie';
   templateUrl: './postage-label-presentation.component.html',
   styleUrls: ['./postage-label-presentation.component.scss'],
   standalone: true,
-  imports: [
-    MatButtonModule,
-    
-    IonContent,
-    IonGrid,
-    IonFooter,
-    LottieComponent,
-  ],
+  imports: [MatButtonModule, IonContent, IonFooter, LottieComponent],
 })
 export class PostageLabelPresentationComponent {
   private modalCtrl = inject(ModalController);

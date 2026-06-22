@@ -5,10 +5,7 @@
   </div>
   <div class="flex-1 flex justify-end">
     <button mat-icon-button (click)="close()" class="pr-16">
-      <ion-icon
-        name="close-outline"
-        class="color-gray-default"
-      ></ion-icon>
+      <ion-icon name="close-outline" class="color-gray-default"></ion-icon>
     </button>
   </div>
 </div>
@@ -16,21 +13,19 @@
 <ion-content>
   <swiper-container #swiper [pagination]="true" class="tips-swiper">
     @for (tip of tips; track $index) {
-    <swiper-slide>
-      <div class="tip-slide">
-        <h5 class="color-gray-dark ion-text-center">{{ tip.label }}</h5>
-        <div class="tip-image-wrapper">
-          <img [src]="tip.img" [alt]="tip.label" class="tip-image" />
+      <swiper-slide>
+        <div class="tip-slide">
+          <h5 class="color-gray-dark ion-text-center">{{ tip.label }}</h5>
+          <div class="tip-image-wrapper">
+            <img [src]="tip.img" [alt]="tip.label" class="tip-image" />
+          </div>
+          @if (tip.description) {
+            <p class="label-body-2 color-gray-default mt-8 ion-text-start">
+              {{ tip.description }}
+            </p>
+          }
         </div>
-        @if (tip.description) {
-        <p
-          class="label-body-2 color-gray-default mt-8 ion-text-start"
-        >
-          {{ tip.description }}
-        </p>
-        }
-      </div>
-    </swiper-slide>
+      </swiper-slide>
     }
   </swiper-container>
 </ion-content>

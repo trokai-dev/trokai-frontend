@@ -1,4 +1,9 @@
-import { SellerStatus, StoreVisibility, User, UserReview } from '@trokai/shared-core';
+import {
+  SellerStatus,
+  StoreVisibility,
+  User,
+  UserReview,
+} from '@trokai/shared-core';
 import { Clothes, ClothesStatus } from '@trokai/shared-core';
 import { InventoryService } from './inventory.service';
 import { AuthService } from './../auth/auth.service';

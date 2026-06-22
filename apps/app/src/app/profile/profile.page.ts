@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { BackButtonComponent } from '../shared/components/back-button/back-button.component';
 import {
   IonContent,
-  IonGrid,
   IonHeader,
   IonSpinner,
   IonTitle,
@@ -34,7 +33,6 @@ import { GlobalService } from '../services/global.service';
     IonHeader,
     IonToolbar,
     IonTitle,
-    IonGrid,
     IonContent,
     IonSpinner,
     BackButtonComponent,

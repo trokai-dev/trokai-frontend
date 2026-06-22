@@ -10,6 +10,6 @@ export function parseMultipleChoiceParam(param: any) {
   if (!Array.isArray(param)) param = [param];
 
   return param.map((value: any) =>
-    typeof value === 'string' ? parseInt(value) : value
+    typeof value === 'string' ? parseInt(value) : value,
   );
 }

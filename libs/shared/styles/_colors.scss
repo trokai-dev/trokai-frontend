@@ -4,16 +4,43 @@
 // (-light-1/-2, -2) map to the canonical token names so templates don't churn.
 // `!important` preserved from the originals so utilities win over element styles.
 
-.color-primary { color: var(--color-primary) !important; }
-.color-primary-2, .color-secondary { color: var(--color-secondary) !important; }
-.color-accent { color: var(--color-accent) !important; }
-.color-primary-light { color: var(--color-primary-light) !important; }
+.color-primary {
+  color: var(--color-primary) !important;
+}
+.color-primary-2,
+.color-secondary {
+  color: var(--color-secondary) !important;
+}
+.color-accent {
+  color: var(--color-accent) !important;
+}
+.color-primary-light {
+  color: var(--color-primary-light) !important;
+}
 
-.color-gray-dark { color: var(--color-gray-dark) !important; }
-.color-gray, .color-gray-default { color: var(--color-gray-default) !important; }
-.color-gray-1, .color-gray-light-1 { color: var(--color-gray-1) !important; }
-.color-gray-2, .color-gray-light-2 { color: var(--color-gray-2) !important; }
+.color-gray-dark {
+  color: var(--color-gray-dark) !important;
+}
+.color-gray,
+.color-gray-default {
+  color: var(--color-gray-default) !important;
+}
+.color-gray-1,
+.color-gray-light-1 {
+  color: var(--color-gray-1) !important;
+}
+.color-gray-2,
+.color-gray-light-2 {
+  color: var(--color-gray-2) !important;
+}
 
-.color-error { color: var(--color-error) !important; }
-.color-success { color: var(--color-success) !important; }
-.color-alert, .color-warning { color: var(--color-warning) !important; }
+.color-error {
+  color: var(--color-error) !important;
+}
+.color-success {
+  color: var(--color-success) !important;
+}
+.color-alert,
+.color-warning {
+  color: var(--color-warning) !important;
+}

@@ -36,12 +36,30 @@
   }
 
   // Soft tint bg + semantic text color (shared palette with seller badge).
-  &--neutral { --_bg: var(--color-gray-25); --_color: var(--color-gray-default); }
-  &--success { --_bg: #e6f4ea; --_color: var(--color-success); }
-  &--warning { --_bg: #fef3e2; --_color: #9a5c00; }
-  &--danger  { --_bg: #fde8e8; --_color: var(--color-error); }
-  &--muted   { --_bg: var(--color-gray-2); --_color: var(--color-gray-default); }
-  &--accent  { --_bg: color-mix(in srgb, var(--color-accent) 30%, transparent); --_color: #9b3848; }
+  &--neutral {
+    --_bg: var(--color-gray-25);
+    --_color: var(--color-gray-default);
+  }
+  &--success {
+    --_bg: #e6f4ea;
+    --_color: var(--color-success);
+  }
+  &--warning {
+    --_bg: #fef3e2;
+    --_color: #9a5c00;
+  }
+  &--danger {
+    --_bg: #fde8e8;
+    --_color: var(--color-error);
+  }
+  &--muted {
+    --_bg: var(--color-gray-2);
+    --_color: var(--color-gray-default);
+  }
+  &--accent {
+    --_bg: color-mix(in srgb, var(--color-accent) 30%, transparent);
+    --_color: #9b3848;
+  }
 
   // outlined: transparent fill, semantic-colored border + text (e.g. vacation badge)
   &--outline {

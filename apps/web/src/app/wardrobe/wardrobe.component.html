@@ -1,151 +1,143 @@
 @if (owner) {
-  <div class="container page">
-    <div class="grid-row">
-      <div class="gcol-12">
-        <tk-seller-header [user]="owner" size="lg" [heading]="true">
-          <div class="flex items-center justify-between w-full mt-8">
-            <tk-review-stars
-              [stars]="owner.reviewsAverage"
-              [amount]="owner.reviewsAmount"
-              [clickable]="!!owner.reviewsAmount"
-              (clicked)="openReviews(owner)"
-            ></tk-review-stars>
-            @if (userOwner && owner.isSeller) {
-              <tk-seller-status-badge [user]="owner" [isLoggedUser]="true" (badgeClick)="goToSellerStatus()" />
-            }
-          </div>
-        </tk-seller-header>
-          <hr class="m-0 mt-48" />
-          <div class="grid-row">
-            <div class="gcol-12">
-              <div class="mt-24 flex gap-24 flex-wrap">
-                <!-- SEARCHBAR -->
-                <div class="nav-search flex">
-                  <input
-                    #searchInput
-                    placeholder="Buscar no armário"
-                    [(ngModel)]="filter.text"
-                    (keyup.Enter)="searchText()"
-                    />
-                  @if (filter.text && filter.text.length){
-                    <mat-icon
-                      role="button"
-                      aria-label="Limpar busca"
-                      class="cursor-pointer color-gray-light-1"
-                      (click)="clearSearch()"
-                      >
-                      close
-                    </mat-icon>
-                  } @else {
-                    <mat-icon
-                      color="primary"
-                      role="button"
-                      aria-label="Buscar"
-                      class="cursor-pointer"
-                      (click)="searchText()"
-                      >
-                      search
-                    </mat-icon>
-                  }
-                </div>
-                @if (userOwner) {
-                  <!-- TODO: FIX TODOS -->
-                  <div>
-                    <mat-form-field appearance="outline">
-                      <mat-select
-                        [(ngModel)]="filter.status"
-                        placeholder="Todos"
-                        aria-label="Filtrar resultados"
-                        (selectionChange)="statusChange()"
-                        >
-                        @for( status of statusList; track status){
-                          <mat-option [value]="status.value">{{
-                            status.name
-                          }}</mat-option>
-                        }
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
-                }
-                <!--  -->
-                <button
-                  mat-stroked-button
-                  matBadge="{{ filter.count() }}"
-                  [matBadgeHidden]="!filter?.count()"
-                  matBadgeSize="small"
-                  matBadgeColor="accent"
-                  (click)="showFiltersDialog()"
-                  color="primary"
-                  >
-                  Filtros
-                </button>
-                <!-- renew -->
-                @if(showRenewAll && filter.status === 4) {
-                  <div>
-                    <button
-                      mat-stroked-button
-                      color="primary"
-                      class="ml-auto mb-24 mb-md-0"
-                      aria-label="Renovar expirados"
-                      (click)="renewAll()"
-                      >
-                      Renovar expirados
-                    </button>
-                  </div>
-                }
-              </div>
-              <div
-                class="label-body-2 w-full flex justify-between"
-                [ngClass]="{ 'mt-24': !userOwner }"
-                >
-                @if (countString) {
-                  <span> {{ countString }}</span>
-                }
-                @if (pageString) {
-                  <span class="block">
-                    {{ pageString }}
-                  </span>
-                }
-              </div>
-              @if (items?.length === 0) {
-                <div class="empty-page full">
-                  <ion-icon name="sad-outline"></ion-icon>
-                  <span class="label-body-2 block"> Nenhum resultado</span>
-                  @if (owner._id === user._id) {
-                    <button
-                      type="button"
-                      mat-flat-button
-                      aria-label="Salvar"
-                      color="primary"
-                      color="primary"
-                      routerLink="/sell"
-                      >
-                      Cadastrar produto
-                    </button>
-                  }
-                </div>
-              }
-              <div class="grid-row grid-cols-2 grid-cols-md-5">
-                @for (item of items; track item; let i = $index) {
-                  <div class="mt-24">
-                    <tk-product-card
-                      [clean]="true"
-                      [product]="item"
-                      [priority]="i === 0"
-                    ></tk-product-card>
-                  </div>
-                }
-              </div>
-              @if (response?.count && items !== null) {
-                <div class="grid-row">
-                  <div class="gcol-12">
-                    <app-paginator [paginator]="paginator"></app-paginator>
-                  </div>
-                </div>
-              }
-            </div>
-          </div>
-        </div>
+  <div class="container fill-height">
+    <tk-seller-header [user]="owner" size="lg" [heading]="true">
+      <div class="flex items-center justify-between w-full mt-8">
+        <tk-review-stars
+          [stars]="owner.reviewsAverage"
+          [amount]="owner.reviewsAmount"
+          [clickable]="!!owner.reviewsAmount"
+          (clicked)="openReviews(owner)"
+        ></tk-review-stars>
+        @if (userOwner && owner.isSeller) {
+          <tk-seller-status-badge
+            [user]="owner"
+            [isLoggedUser]="true"
+            (badgeClick)="goToSellerStatus()"
+          />
+        }
       </div>
+    </tk-seller-header>
+    <hr class="m-0 mt-48" />
+    <div class="mt-24 flex gap-24 flex-wrap">
+      <!-- SEARCHBAR -->
+      <div class="nav-search flex">
+        <input
+          #searchInput
+          placeholder="Buscar no armário"
+          [(ngModel)]="filter.text"
+          (keyup.Enter)="searchText()"
+        />
+        @if (filter.text && filter.text.length) {
+          <mat-icon
+            role="button"
+            aria-label="Limpar busca"
+            class="cursor-pointer color-gray-light-1"
+            (click)="clearSearch()"
+          >
+            close
+          </mat-icon>
+        } @else {
+          <mat-icon
+            color="primary"
+            role="button"
+            aria-label="Buscar"
+            class="cursor-pointer"
+            (click)="searchText()"
+          >
+            search
+          </mat-icon>
+        }
+      </div>
+      @if (userOwner) {
+        <!-- TODO: FIX TODOS -->
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-select
+              [(ngModel)]="filter.status"
+              placeholder="Todos"
+              aria-label="Filtrar resultados"
+              (selectionChange)="statusChange()"
+            >
+              @for (status of statusList; track status) {
+                <mat-option [value]="status.value">{{
+                  status.name
+                }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      }
+      <!--  -->
+      <button
+        mat-stroked-button
+        matBadge="{{ filter.count() }}"
+        [matBadgeHidden]="!filter?.count()"
+        matBadgeSize="small"
+        matBadgeColor="accent"
+        (click)="showFiltersDialog()"
+        color="primary"
+      >
+        Filtros
+      </button>
+      <!-- renew -->
+      @if (showRenewAll && filter.status === 4) {
+        <div>
+          <button
+            mat-stroked-button
+            color="primary"
+            class="ml-auto mb-24 mb-md-0"
+            aria-label="Renovar expirados"
+            (click)="renewAll()"
+          >
+            Renovar expirados
+          </button>
+        </div>
+      }
     </div>
-  }
+    <div
+      class="label-body-2 w-full flex justify-between"
+      [ngClass]="{ 'mt-24': !userOwner }"
+    >
+      @if (countString) {
+        <span> {{ countString }}</span>
+      }
+      @if (pageString) {
+        <span class="block">
+          {{ pageString }}
+        </span>
+      }
+    </div>
+    @if (items?.length === 0) {
+      <div class="empty-page full">
+        <ion-icon name="sad-outline"></ion-icon>
+        <span class="label-body-2 block"> Nenhum resultado</span>
+        @if (owner._id === user._id) {
+          <button
+            type="button"
+            mat-flat-button
+            aria-label="Salvar"
+            color="primary"
+            color="primary"
+            routerLink="/sell"
+          >
+            Cadastrar produto
+          </button>
+        }
+      </div>
+    }
+    <div class="wardrobe-grid">
+      @for (item of items; track item; let i = $index) {
+        <div class="mt-24">
+          <tk-product-card
+            [clean]="true"
+            [product]="item"
+            [priority]="i === 0"
+          ></tk-product-card>
+        </div>
+      }
+    </div>
+    @if (response?.count && items !== null) {
+      <app-paginator [paginator]="paginator"></app-paginator>
+    }
+  </div>
+}

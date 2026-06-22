@@ -2,37 +2,100 @@
 // Flexbox (1D micro-alignment) + CSS Grid (2D macro structure). Replaces the
 // Bootstrap grid/utility classes as templates are migrated.
 
+// --- Page container (layout primitive, not a column) ---
+.container,
+.container-fluid {
+  box-sizing: border-box; // padding must not add to 100% width (no global reset)
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--space-12);
+}
+.container {
+  max-width: 1224px;
+}
+
 // --- Flexbox (1D) ---
-.flex { display: flex; }
-.inline-flex { display: inline-flex; }
-.flex-col { display: flex; flex-direction: column; }
-.flex-row { display: flex; flex-direction: row; }
-.flex-wrap { flex-wrap: wrap; }
-.flex-1 { flex: 1 1 0%; }
-.flex-auto { flex: 1 1 auto; }
-.flex-none { flex: none; }
-.flex-grow-1 { flex-grow: 1; }
-.flex-grow-0 { flex-grow: 0; }
-.flex-shrink-0 { flex-shrink: 0; }
+.flex {
+  display: flex;
+}
+.inline-flex {
+  display: inline-flex;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.flex-1 {
+  flex: 1 1 0%;
+}
+.flex-auto {
+  flex: 1 1 auto;
+}
+.flex-none {
+  flex: none;
+}
+.flex-grow-1 {
+  flex-grow: 1;
+}
+.flex-grow-0 {
+  flex-grow: 0;
+}
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
 
-.items-start { align-items: flex-start; }
-.items-center { align-items: center; }
-.items-end { align-items: flex-end; }
-.items-stretch { align-items: stretch; }
+.items-start {
+  align-items: flex-start;
+}
+.items-center {
+  align-items: center;
+}
+.items-end {
+  align-items: flex-end;
+}
+.items-stretch {
+  align-items: stretch;
+}
 
-.self-start { align-self: flex-start; }
-.self-center { align-self: center; }
-.self-end { align-self: flex-end; }
+.self-start {
+  align-self: flex-start;
+}
+.self-center {
+  align-self: center;
+}
+.self-end {
+  align-self: flex-end;
+}
 
-.justify-start { justify-content: flex-start; }
-.justify-center { justify-content: center; }
-.justify-end { justify-content: flex-end; }
-.justify-between { justify-content: space-between; }
-.justify-around { justify-content: space-around; }
+.justify-start {
+  justify-content: flex-start;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-around {
+  justify-content: space-around;
+}
 
 // --- Grid (2D) ---
-// .grid-cols-* live in _grid.scss (the grid system). Keep them in one place.
-.grid { display: grid; }
+// Multi-column layouts are scoped per component (grid-template-columns in the
+// component's own .scss). These utilities only set the display mode.
+.grid {
+  display: grid;
+}
 // Auto-fill responsive cards: --grid-min sets the minimum track width.
 .grid-auto {
   display: grid;
@@ -40,15 +103,35 @@
 }
 
 // --- Position ---
-.relative { position: relative; }
-.absolute { position: absolute; }
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
 
 // --- Sizing helpers ---
-.w-full { width: 100%; }
-.h-full { height: 100%; }
-.w-25 { width: 25%; }
-.w-50 { width: 50%; }
-.w-75 { width: 75%; }
-.block { display: block; }
-.inline-block { display: inline-block; }
-.hidden { display: none; }
+.w-full {
+  width: 100%;
+}
+.h-full {
+  height: 100%;
+}
+.w-25 {
+  width: 25%;
+}
+.w-50 {
+  width: 50%;
+}
+.w-75 {
+  width: 75%;
+}
+.block {
+  display: block;
+}
+.inline-block {
+  display: inline-block;
+}
+.hidden {
+  display: none;
+}

@@ -1,4 +1,4 @@
-<div class="account-menu page">
+<div class="account-menu fill-height">
   <div class="w-full flex hidden-md pr-16 justify-end">
     @if (!menuOppened) {
       <mat-icon
@@ -24,7 +24,7 @@
 
   <div
     class="block-md"
-    [ngClass]="{ 'block': menuOppened, 'hidden': !menuOppened }"
+    [ngClass]="{ block: menuOppened, hidden: !menuOppened }"
   >
     <h3>Minha conta</h3>
 
@@ -45,7 +45,11 @@
     @if (showSellerOptions) {
       <div class="flex items-center gap-8 mt-48">
         <h3>Minha loja</h3>
-        <tk-seller-status-badge [user]="user" [isLoggedUser]="true" (badgeClick)="goToSellerStatus()" />
+        <tk-seller-status-badge
+          [user]="user"
+          [isLoggedUser]="true"
+          (badgeClick)="goToSellerStatus()"
+        />
       </div>
 
       <div class="side-menu py-48">

@@ -130,7 +130,9 @@ export class SearchService {
   getUserReviews(userId: string) {
     return lastValueFrom(
       this.http
-        .get<{ reviews: unknown }>(environment.urlApi + '/users/' + userId + '/reviews')
+        .get<{
+          reviews: unknown;
+        }>(environment.urlApi + '/users/' + userId + '/reviews')
         .pipe(map((item) => item['reviews'])),
     );
   }

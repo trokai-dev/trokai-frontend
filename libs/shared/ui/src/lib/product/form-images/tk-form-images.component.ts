@@ -120,7 +120,11 @@ export class TkFormImagesComponent implements OnInit, OnDestroy {
   }
 
   /** Create a PictureSlot from a Blob, generating a tracked SafeUrl for display. */
-  private createSlot(blob: Blob, rawBlob?: Blob | null, cropState?: CropState | null): PictureSlot {
+  private createSlot(
+    blob: Blob,
+    rawBlob?: Blob | null,
+    cropState?: CropState | null,
+  ): PictureSlot {
     const objectUrl = URL.createObjectURL(blob);
     return {
       displayUrl: this.sanitizer.bypassSecurityTrustUrl(objectUrl),
@@ -178,7 +182,8 @@ export class TkFormImagesComponent implements OnInit, OnDestroy {
       const blobs = await this.media.pickMultipleFromGallery(this.remaining);
       this.ngZone.run(() => {
         blobs.forEach((blob) => {
-          if (this.slots.length < this.MAX_IMAGES) this.slots.push(this.createSlot(blob));
+          if (this.slots.length < this.MAX_IMAGES)
+            this.slots.push(this.createSlot(blob));
         });
         if (blobs.length) this.emitChange();
         this.isLoading = false;
@@ -196,9 +201,13 @@ export class TkFormImagesComponent implements OnInit, OnDestroy {
     const files = Array.from(input.files).slice(0, this.remaining);
 
     try {
-      const blobs = await Promise.all(files.map((f) => this.media.processFile(f)));
+      const blobs = await Promise.all(
+        files.map((f) => this.media.processFile(f)),
+      );
       this.ngZone.run(() => {
-        blobs.filter((b): b is Blob => !!b).forEach((blob) => this.slots.push(this.createSlot(blob)));
+        blobs
+          .filter((b): b is Blob => !!b)
+          .forEach((blob) => this.slots.push(this.createSlot(blob)));
         this.emitChange();
         this.isLoading = false;
         input.value = '';
@@ -240,7 +249,11 @@ export class TkFormImagesComponent implements OnInit, OnDestroy {
 
   /** A brand-new file was picked inside the picker (not a crop result) → reset raw source + crop state. */
   onRawImagePicked(rawBlob: Blob, index: number) {
-    this.slots[index] = { ...this.slots[index], rawSource: rawBlob, cropState: null };
+    this.slots[index] = {
+      ...this.slots[index],
+      rawSource: rawBlob,
+      cropState: null,
+    };
   }
 
   /** Cropper closed → persist the state so it's restored on next open. */
@@ -259,12 +272,14 @@ export class TkFormImagesComponent implements OnInit, OnDestroy {
     this.onOutputImages.emit(
       this.slots
         .filter((s) => s.blob || s.serverId || s.smUrl || s.serverUrl)
-        .map((s): UploadPictureItem => ({
-          blob: s.blob,
-          serverId: s.serverId,
-          serverUrl: s.serverUrl,
-          smUrl: s.smUrl,
-        })),
+        .map(
+          (s): UploadPictureItem => ({
+            blob: s.blob,
+            serverId: s.serverId,
+            serverUrl: s.serverUrl,
+            smUrl: s.smUrl,
+          }),
+        ),
     );
   }
 }

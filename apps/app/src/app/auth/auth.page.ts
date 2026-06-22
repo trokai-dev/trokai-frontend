@@ -13,13 +13,11 @@ import {
 
 import {
   IonContent,
-  IonGrid,
   IonImg,
   IonNav,
   isPlatform,
   LoadingController,
   IonText,
-  IonRow,
   IonSpinner,
 } from '@ionic/angular/standalone';
 import { MatButtonModule } from '@angular/material/button';
@@ -40,10 +38,8 @@ import { SocialLogin } from '@capgo/capacitor-social-login';
   standalone: true,
   imports: [
     IonSpinner,
-    IonRow,
     IonText,
     IonContent,
-    IonGrid,
     IonImg,
     MatButtonModule,
     TkGoogleBtnComponent,

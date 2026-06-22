@@ -62,7 +62,10 @@ export class ProductService {
 
   askQuestion(clothesId: string, question: string) {
     return lastValueFrom(
-      this.http.post(`${this.urlApi}/clothes/question`, { clothesId, question }),
+      this.http.post(`${this.urlApi}/clothes/question`, {
+        clothesId,
+        question,
+      }),
     );
   }
 

@@ -30,8 +30,6 @@ import {
   IonIcon,
   IonImg,
   IonToolbar,
-  IonRow,
-  IonCol,
   IonBadge,
 } from '@ionic/angular/standalone';
 import { MatButtonModule } from '@angular/material/button';
@@ -49,10 +47,8 @@ import { addIcons } from 'ionicons';
   standalone: true,
   imports: [
     MatButtonModule,
-    
+
     IonBadge,
-    IonCol,
-    IonRow,
     IonHeader,
     IonToolbar,
     IonImg,

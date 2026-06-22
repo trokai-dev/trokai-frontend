@@ -1,6 +1,22 @@
 @import 'variables';
 @import 'placeholders';
 
+:host {
+  display: block;
+}
+
+// Was grid-row + two `gcol-md-6` (photo | CTAs). Stacks on mobile,
+// 50/50 split from md (768px) up.
+.product-layout {
+  display: grid;
+  gap: var(--space-24);
+  align-items: start;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .product-status-container {
   border: 1px solid $color-gray-light-2;
   padding: 0 1.6rem;

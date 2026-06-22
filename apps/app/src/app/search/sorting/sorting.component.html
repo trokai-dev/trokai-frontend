@@ -27,27 +27,32 @@
   <div class="m-24">
     <mat-radio-group [(ngModel)]="sorting" class="w-full">
       @for (op of options; track $index) {
-      <div>
-        <mat-radio-button color="primary" [value]="op.value">
-          <div class="flex flex-col">
-            <span class="color-gray-default label-body-1">
-              {{ op.text }}</span
-            >
-            @if (op.text2) {
-            <span class="color-gray-light-1 label-body-1 capitalize">
-              {{ op.text2 }}
-            </span>
-            }
-          </div>
-        </mat-radio-button>
-      </div>
+        <div>
+          <mat-radio-button color="primary" [value]="op.value">
+            <div class="flex flex-col">
+              <span class="color-gray-default label-body-1">
+                {{ op.text }}</span
+              >
+              @if (op.text2) {
+                <span class="color-gray-light-1 label-body-1 capitalize">
+                  {{ op.text2 }}
+                </span>
+              }
+            </div>
+          </mat-radio-button>
+        </div>
       }
     </mat-radio-group>
   </div>
 </ion-content>
 
 <ion-footer class="px-24 py-16">
-  <button mat-flat-button color="primary" class="action-button" (click)="applySorting()">
+  <button
+    mat-flat-button
+    color="primary"
+    class="action-button"
+    (click)="applySorting()"
+  >
     Aplicar
   </button>
 </ion-footer>

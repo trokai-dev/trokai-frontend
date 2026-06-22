@@ -27,7 +27,7 @@ import { PictureTip } from '@trokai/shared-core';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     MatButtonModule,
-    
+
     IonHeader,
     IonToolbar,
     IonTitle,

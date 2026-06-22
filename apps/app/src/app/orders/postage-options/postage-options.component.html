@@ -7,15 +7,12 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="p-24">
-    <ion-row class="flex flex-1">
-      <ion-col size="12" size-md="8">
-        <span class="label-body-2 mb-4">
-          Selecione um ponto de coleta próximo a você para entregar o seu
-          pedido.
-        </span>
-      </ion-col>
-    </ion-row>
+  <div class="p-24">
+    <div class="postage-intro">
+      <span class="label-body-2 mb-4">
+        Selecione um ponto de coleta próximo a você para entregar o seu pedido.
+      </span>
+    </div>
 
     @if (loading) {
       <div class="w-full flex justify-center my-48">
@@ -47,15 +44,19 @@
         </mat-radio-group>
 
         @if (agencies && visibleAgencies.length < agencies.length) {
-        <div class="flex justify-center mt-4">
-          <button mat-stroked-button color="primary" (click)="loadMoreAgencies()">
-            Mostrar mais
-          </button>
-        </div>
+          <div class="flex justify-center mt-4">
+            <button
+              mat-stroked-button
+              color="primary"
+              (click)="loadMoreAgencies()"
+            >
+              Mostrar mais
+            </button>
+          </div>
         }
       </div>
     }
-  </ion-grid>
+  </div>
 </ion-content>
 
 @if (selectedAgency && !loading) {

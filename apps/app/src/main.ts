@@ -60,7 +60,6 @@ import { MobileStorageService } from './app/core/mobile-storage.service';
 import { MobileCompletingNavigator } from './app/core/mobile-completing-navigator';
 import { GeolocationService } from './app/services/geolocation.service';
 
-
 if (environment.production) {
   enableProdMode();
 }

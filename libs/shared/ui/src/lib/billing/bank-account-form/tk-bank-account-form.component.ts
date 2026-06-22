@@ -22,11 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatOptionModule } from '@angular/material/core';
 import { NgxMaskPipe } from 'ngx-mask';
 import { Observable, startWith, map } from 'rxjs';
-import {
-  BasicModel,
-  getBanksList,
-  User,
-} from '@trokai/shared-core';
+import { BasicModel, getBanksList, User } from '@trokai/shared-core';
 import {
   BankAccountHolderType,
   BankAccountModel,
@@ -73,10 +69,20 @@ export class TkBankAccountFormComponent implements AfterViewInit {
     this.form = new FormGroup({
       holderName: new FormControl(null, Validators.required),
       bank: new FormControl(null, Validators.required),
-      branchNumber: new FormControl(null, [Validators.required, Validators.minLength(4)]),
+      branchNumber: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
       branchCheckDigit: new FormControl(null, Validators.maxLength(1)),
-      accountNumber: new FormControl(null, [Validators.required, Validators.minLength(4)]),
-      accountCheckDigit: new FormControl(null, [Validators.required, Validators.minLength(1), Validators.maxLength(1)]),
+      accountNumber: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
+      accountCheckDigit: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(1),
+      ]),
     });
 
     this.filteredBanks$ = this.form.get('bank')!.valueChanges.pipe(
@@ -100,7 +106,9 @@ export class TkBankAccountFormComponent implements AfterViewInit {
       .slice(0, 30);
   }
 
-  ngAfterViewInit() { this.load(); }
+  ngAfterViewInit() {
+    this.load();
+  }
 
   async load() {
     this.loaded = false;
@@ -108,7 +116,11 @@ export class TkBankAccountFormComponent implements AfterViewInit {
     const account = await this.bankService.fetchAccount();
 
     if (account) {
-      const banco = this.banks.find((b) => b._id === account.bank || b._id === account.bank?.toString().padStart(3, '0'));
+      const banco = this.banks.find(
+        (b) =>
+          b._id === account.bank ||
+          b._id === account.bank?.toString().padStart(3, '0'),
+      );
       this.form.patchValue({ ...account, bank: banco });
       this.form.disable();
       this.accountBkp = account;
@@ -145,15 +157,16 @@ export class TkBankAccountFormComponent implements AfterViewInit {
     account.accountNumber = fv.accountNumber;
     account.accountCheckDigit = fv.accountCheckDigit;
     account.holderDocument = this.user?.cpf ?? '';
-    account.holderType = account.holderDocument.length === 11
-      ? BankAccountHolderType.INDIVIDUAL
-      : BankAccountHolderType.COMPANY;
+    account.holderType =
+      account.holderDocument.length === 11
+        ? BankAccountHolderType.INDIVIDUAL
+        : BankAccountHolderType.COMPANY;
 
     if (
       !this.accountBkp ||
       account.holderName !== this.accountBkp.holderName ||
       account.holderDocument !== this.accountBkp.holderDocument ||
-      (+account.bank! !== +(this.accountBkp.bank ?? '')) ||
+      +account.bank! !== +(this.accountBkp.bank ?? '') ||
       account.branchNumber !== this.accountBkp.branchNumber ||
       account.branchCheckDigit !== this.accountBkp.branchCheckDigit ||
       account.accountNumber !== this.accountBkp.accountNumber ||

@@ -1,5 +1,17 @@
 @import 'variables';
 
+:host {
+  display: block;
+}
+
+// Was gcol-md-6 offset-md-3 — full mobile, centered half on desktop.
+.checkout-shell {
+  @media (min-width: 768px) {
+    max-width: 50%;
+    margin-inline: auto;
+  }
+}
+
 ::ng-deep .custom-radio-group {
   display: flex;
   flex-direction: column;

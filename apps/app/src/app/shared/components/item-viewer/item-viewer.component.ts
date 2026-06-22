@@ -12,7 +12,6 @@ import {
   IonButtons,
   IonContent,
   IonFooter,
-  IonGrid,
   IonHeader,
   IonIcon,
   IonRippleEffect,
@@ -36,13 +35,12 @@ import { GlobalService } from 'src/app/services/global.service';
   standalone: true,
   imports: [
     MatButtonModule,
-    
+
     IonHeader,
     IonToolbar,
     IonButtons,
     IonIcon,
     IonContent,
-    IonGrid,
     TkLikeButtonComponent,
     NgClass,
     CurrencyPipe,
@@ -113,6 +111,4 @@ export class ItemViewerComponent implements OnInit {
       this.firebaseService.log('SHARE_ROUPA_OUTRO');
     }
   }
-
 }
-

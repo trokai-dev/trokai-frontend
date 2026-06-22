@@ -14,18 +14,26 @@ import { BackButtonComponent } from '../../shared/components/back-button/back-bu
   selector: 'app-bank-account-form',
   standalone: true,
   imports: [
-    IonHeader, IonToolbar, IonButtons, IonTitle, IonContent,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonTitle,
+    IonContent,
     BackButtonComponent,
     TkBankAccountFormComponent,
   ],
   template: `
     <ion-header>
       <ion-toolbar mode="ios">
-        <ion-buttons slot="start"><app-back-button defaultHref="/main/profile/options/bank" /></ion-buttons>
+        <ion-buttons slot="start"
+          ><app-back-button defaultHref="/main/profile/options/bank"
+        /></ion-buttons>
         <ion-title>Conta bancária</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content><div class="p-24"><tk-bank-account-form (saved)="onSaved()" /></div></ion-content>
+    <ion-content
+      ><div class="p-24"><tk-bank-account-form (saved)="onSaved()" /></div
+    ></ion-content>
   `,
 })
 export class BankAccountFormPage {

@@ -45,7 +45,11 @@ export default [
             },
             {
               sourceTag: 'type:ui',
-              onlyDependOnLibsWithTags: ['type:core', 'type:data-access', 'type:ui'],
+              onlyDependOnLibsWithTags: [
+                'type:core',
+                'type:data-access',
+                'type:ui',
+              ],
             },
           ],
         },

@@ -1,4 +1,4 @@
-@if((!chats || chats.length === 0)){
+@if (!chats || chats.length === 0) {
   <div class="empty-page full">
     @if (true) {
       <ion-icon name="sad-outline"></ion-icon>
@@ -7,11 +7,11 @@
   </div>
 } @else {
   <!--  -->
-  @for (c of chats; track c){
+  @for (c of chats; track c) {
     <div
       class="flex border-bottom py-48 px-24 cursor-pointer"
       (click)="openChat(c)"
-      >
+    >
       <tk-user-avatar [user]="c.otherUser"></tk-user-avatar>
 
       <div class="block ml-16 flex-col" style="align-items: start !important">
@@ -26,10 +26,10 @@
         <label
           class="label-body-2 text-dots mt-8"
           [ngClass]="{ 'fw-bold': c.unreadCount }"
-          >
+        >
           {{ c.lastMessage.text }}
         </label>
       </div>
     </div>
-
-    } }
+  }
+}

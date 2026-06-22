@@ -1,10 +1,8 @@
-<div class="container page">
+<div class="container fill-height">
   @if (otherUser && user) {
-    <div class="grid-row">
-      <div class="gcol-12 gcol-md-3">
-        <div
-          class="flex mt-32 items-start justify-between justify-md-start"
-        >
+    <div class="chat-grid">
+      <div>
+        <div class="flex mt-32 items-start justify-between justify-md-start">
           <div class="hidden block-md mr-24">
             <tk-user-avatar [user]="otherUser"></tk-user-avatar>
           </div>
@@ -14,7 +12,9 @@
               {{ otherUser.storeName ?? otherUser.name }}
             </h4>
 
-            <span class="label-caption-1 color-gray-default max-user-address block">
+            <span
+              class="label-caption-1 color-gray-default max-user-address block"
+            >
               {{ otherUser.address.city }}, {{ otherUser.address.state }}
             </span>
 
@@ -39,7 +39,7 @@
         </div>
       </div>
 
-      <div class="gcol-12 gcol-md-9 px-0 mt-24 mt-md-0">
+      <div class="px-0 mt-24 mt-md-0">
         <div id="chat-wrapper">
           <tk-chat-thread
             [user]="user"

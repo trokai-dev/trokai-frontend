@@ -42,6 +42,11 @@ a {
     margin-bottom: 1.6rem;
     padding-left: 1rem;
     padding-right: 1rem;
+
+    // Was ion-row (title col + action col) — keep title left / action right.
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
   }
 
   .home_row_title {

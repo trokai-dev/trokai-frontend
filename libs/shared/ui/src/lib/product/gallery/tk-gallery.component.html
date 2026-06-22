@@ -1,4 +1,10 @@
-<div class="dialog-wrapper p-0" role="button" tabindex="0" (click)="dialogRef.close()" (keyup.enter)="dialogRef.close()">
+<div
+  class="dialog-wrapper p-0"
+  role="button"
+  tabindex="0"
+  (click)="dialogRef.close()"
+  (keyup.enter)="dialogRef.close()"
+>
   <button mat-icon-button class="close-button" [mat-dialog-close]="true">
     <mat-icon class="close-icon">close</mat-icon>
   </button>
@@ -22,7 +28,13 @@
           </div>
         }
       </div>
-      <div class="swiper-pagination" role="button" tabindex="0" (click)="$event.stopPropagation()" (keyup.enter)="$event.stopPropagation()"></div>
+      <div
+        class="swiper-pagination"
+        role="button"
+        tabindex="0"
+        (click)="$event.stopPropagation()"
+        (keyup.enter)="$event.stopPropagation()"
+      ></div>
     </div>
   </div>
   <button

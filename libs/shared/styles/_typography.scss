@@ -3,25 +3,72 @@
 // --font-size-* tokens. (Root font-size: 62.5% is set per-app in their global
 // stylesheet, so 1rem = 10px holds for these rem values.)
 
-h1 { font-size: var(--font-size-h1); font-weight: 600; }
-h2 { font-size: var(--font-size-h2); font-weight: 600; }
-h3 { font-size: var(--font-size-h3); font-weight: 500; }
-h4 { font-size: var(--font-size-body-1); font-weight: 500; }
-h5 { font-size: var(--font-size-body-1); font-weight: 600; }
-h6 { font-size: var(--font-size-body-2); font-weight: 400; }
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: 600;
+}
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: 600;
+}
+h3 {
+  font-size: var(--font-size-h3);
+  font-weight: 500;
+}
+h4 {
+  font-size: var(--font-size-body-1);
+  font-weight: 500;
+}
+h5 {
+  font-size: var(--font-size-body-1);
+  font-weight: 600;
+}
+h6 {
+  font-size: var(--font-size-body-2);
+  font-weight: 400;
+}
 
-h1, h2, h3,
-h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: unset;
 }
 
-.label-large-1 { font-size: var(--font-size-h3); font-weight: 400; }
-.label-large-2 { font-size: var(--font-size-body-1); font-weight: 300; }
-.label-body-1 { font-size: var(--font-size-body-1); font-weight: 400; }
+.label-large-1 {
+  font-size: var(--font-size-h3);
+  font-weight: 400;
+}
+.label-large-2 {
+  font-size: var(--font-size-body-1);
+  font-weight: 300;
+}
+.label-body-1 {
+  font-size: var(--font-size-body-1);
+  font-weight: 400;
+}
 // body-2 / caption-1 default to gray (both apps bake this); override with .color-*.
-.label-body-2 { font-size: var(--font-size-body-2); font-weight: 400; color: var(--color-gray-default); }
-.label-caption-1 { font-size: var(--font-size-caption); font-weight: 400; color: var(--color-gray-default); }
-.label-caption-2 { font-size: var(--font-size-caption); font-weight: 700; }
-.label-nano { font-size: var(--font-size-nano); font-weight: 400; }
+.label-body-2 {
+  font-size: var(--font-size-body-2);
+  font-weight: 400;
+  color: var(--color-gray-default);
+}
+.label-caption-1 {
+  font-size: var(--font-size-caption);
+  font-weight: 400;
+  color: var(--color-gray-default);
+}
+.label-caption-2 {
+  font-size: var(--font-size-caption);
+  font-weight: 700;
+}
+.label-nano {
+  font-size: var(--font-size-nano);
+  font-weight: 400;
+}
 
-.strong { font-weight: 600; }
+.strong {
+  font-weight: 600;
+}

@@ -6,17 +6,27 @@
   (click)="onClick()"
   (keyup.enter)="onClick()"
 >
-  <tk-user-avatar class="seller-header__avatar" [user]="user" [size]="avatarSize" />
+  <tk-user-avatar
+    class="seller-header__avatar"
+    [user]="user"
+    [size]="avatarSize"
+  />
 
   <div class="seller-header__info">
     @if (heading) {
-      <h1 class="seller-header__name color-gray-dark capitalize text-dots">{{ name }}</h1>
+      <h1 class="seller-header__name color-gray-dark capitalize text-dots">
+        {{ name }}
+      </h1>
     } @else {
-      <span class="seller-header__name color-gray-dark capitalize text-dots">{{ name }}</span>
+      <span class="seller-header__name color-gray-dark capitalize text-dots">{{
+        name
+      }}</span>
     }
 
     @if (user.address) {
-      <span class="seller-header__address label-body-2 color-gray-default text-dots">
+      <span
+        class="seller-header__address label-body-2 color-gray-default text-dots"
+      >
         {{ user.address.city }}, {{ user.address.state }}
       </span>
     }

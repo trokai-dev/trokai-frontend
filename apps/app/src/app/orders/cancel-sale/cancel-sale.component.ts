@@ -5,9 +5,7 @@ import { FormsModule } from '@angular/forms';
 import {
   IonContent,
   IonFooter,
-  IonGrid,
   IonIcon,
-  IonRow,
   ModalController,
   IonSpinner,
   IonText,
@@ -28,8 +26,6 @@ import { checkmarkOutline, close } from 'ionicons/icons';
     IonText,
     IonSpinner,
     IonContent,
-    IonGrid,
-    IonRow,
     IonIcon,
     IonFooter,
     FormsModule,

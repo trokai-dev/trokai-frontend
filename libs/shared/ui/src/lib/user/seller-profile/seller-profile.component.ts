@@ -113,14 +113,18 @@ export class SellerProfileComponent implements OnInit {
       }
     }
 
-    this.form.get('storeName')?.valueChanges.subscribe((value: string | null) => {
-      if (!this.nicknameEdited) {
-        const nicknameField = this.form.get('nickname');
-        if (nicknameField) {
-          nicknameField.setValue(this.toSlug(value ?? ''), { emitEvent: false });
+    this.form
+      .get('storeName')
+      ?.valueChanges.subscribe((value: string | null) => {
+        if (!this.nicknameEdited) {
+          const nicknameField = this.form.get('nickname');
+          if (nicknameField) {
+            nicknameField.setValue(this.toSlug(value ?? ''), {
+              emitEvent: false,
+            });
+          }
         }
-      }
-    });
+      });
   }
 
   get avatarSatisfied(): boolean {
@@ -148,7 +152,11 @@ export class SellerProfileComponent implements OnInit {
     }
 
     const storeVisibilityField = this.form.get('storeVisibility');
-    if (this.showStoreVisibility && storeVisibilityField && !storeVisibilityField.value) {
+    if (
+      this.showStoreVisibility &&
+      storeVisibilityField &&
+      !storeVisibilityField.value
+    ) {
       return false;
     }
 

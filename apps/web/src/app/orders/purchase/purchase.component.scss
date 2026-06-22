@@ -13,3 +13,26 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+:host {
+  display: block;
+}
+
+// Was grid-row + two `gcol-md-4` (4+4, trailing 4 cols empty). 3 equal
+// columns keeps the two info columns at 1/3 each; mobile stacks.
+.purchase-grid {
+  display: grid;
+  gap: var(--space-24);
+  align-items: start;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Was gcol-12 gcol-md-6 — full mobile, half on desktop.
+.pix-copy {
+  @media (min-width: 768px) {
+    max-width: 50%;
+  }
+}

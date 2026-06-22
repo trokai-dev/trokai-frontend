@@ -17,25 +17,21 @@
       para Android ou iOS.
     </p>
 
-    <div class="grid-row mt-40">
-      <div
-        class="gcol-10 offset-1 gcol-md-6 offset-md-0 flex justify-center"
-        >
+    <div class="download-grid mt-40">
+      <div class="flex justify-center">
         <img
           id="phone-image"
           src="../../../../assets/img/imagem-celular.png"
           alt="Download aplicativo Trokaí"
-          />
+        />
       </div>
-      <div
-        class="gcol-12 gcol-md-6 flex flex-col items-center justify-around"
-        >
+      <div class="flex flex-col items-center justify-around">
         <div class="mx-24 hidden flex-md justify-center">
           <img
             src="../../../../assets/img/qr-code-download.png"
             class="w-75"
             alt="QRCode download aplicativo Trokaí"
-            />
+          />
         </div>
 
         @if (!isAndroid && !isApple) {
@@ -45,7 +41,7 @@
               mat-stroked-button
               color="primary"
               class="w-full flex items-center"
-              >
+            >
               <ion-icon name="logo-google-playstore" class="mr-16"></ion-icon>
               Google Play
             </button>
@@ -54,7 +50,7 @@
               mat-stroked-button
               color="primary"
               class="w-full mt-24 flex items-center"
-              >
+            >
               <ion-icon name="logo-apple" class="mr-16"></ion-icon> App Store
             </button>
           </div>
@@ -67,7 +63,7 @@
                 (click)="clickDownload('android')"
                 mat-stroked-button
                 color="primary"
-                >
+              >
                 <ion-icon name="logo-google-playstore" class="mr-16"></ion-icon>
                 Baixar na Google Play
               </button>
@@ -77,9 +73,9 @@
                 (click)="clickDownload('ios')"
                 mat-stroked-button
                 color="primary"
-                >
-                <ion-icon name="logo-apple" class="mr-16"></ion-icon> Baixar na App
-                Store
+              >
+                <ion-icon name="logo-apple" class="mr-16"></ion-icon> Baixar na
+                App Store
               </button>
             }
           </div>

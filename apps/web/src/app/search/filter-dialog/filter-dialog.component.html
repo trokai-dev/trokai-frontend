@@ -12,38 +12,38 @@
 
   <!-- content -->
   <div class="dialog-content">
-    @if(filter){
-    <app-search-filter
-      [filter]="filter"
-      [hideTitle]="true"
-      (filtersChange)="filter = $event"
-      [enableSorting]="false"
-    ></app-search-filter>
+    @if (filter) {
+      <app-search-filter
+        [filter]="filter"
+        [hideTitle]="true"
+        (filtersChange)="filter = $event"
+        [enableSorting]="false"
+      ></app-search-filter>
     }
   </div>
 
-  @if (filter){
-  <!-- footer -->
-  <div class="dialog-footer">
-    @if (filter.count()){
-    <button
-      mat-button
-      color="accent"
-      aria-label="remover filtros"
-      (click)="clearFilters()"
-    >
-      Remover filtros
-    </button>
-    }
-    <button
-      mat-flat-button
-      color="primary"
-      aria-label="ver produtos"
-      color="primary"
-      (click)="applyFilters(filter)"
-    >
-      Buscar
-    </button>
-  </div>
+  @if (filter) {
+    <!-- footer -->
+    <div class="dialog-footer">
+      @if (filter.count()) {
+        <button
+          mat-button
+          color="accent"
+          aria-label="remover filtros"
+          (click)="clearFilters()"
+        >
+          Remover filtros
+        </button>
+      }
+      <button
+        mat-flat-button
+        color="primary"
+        aria-label="ver produtos"
+        color="primary"
+        (click)="applyFilters(filter)"
+      >
+        Buscar
+      </button>
+    </div>
   }
 </div>

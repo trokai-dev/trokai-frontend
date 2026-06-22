@@ -1,7 +1,10 @@
 import dayjs from 'dayjs';
 
 /** Expiration label from a start date + duration in days. */
-export function mountExpiration(startDate: Date | string, expirationDays: number) {
+export function mountExpiration(
+  startDate: Date | string,
+  expirationDays: number,
+) {
   if (!startDate || !expirationDays) return null;
 
   try {

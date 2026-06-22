@@ -12,21 +12,45 @@
       <div class="mt-48">
         <div class="mt-16 flex justify-between">
           <span class="label-body-2">Valor do produto</span>
-          <span class="label-body-2">- {{ productCost | cost | currency:'BRL':true:'1.2' }}</span>
+          <span class="label-body-2"
+            >- {{ productCost | cost | currency: 'BRL' : true : '1.2' }}</span
+          >
         </div>
         <div class="mt-16 flex justify-between">
-          <span class="label-body-2">Comissão ({{ sellerFees.sellerPercentageFee * 100 | number:'1.0-2' }}%)</span>
-          <span class="label-body-2">- {{ sellerFees.sellerPercentageFee * productCost | cost | currency:'BRL':true:'1.2' }}</span>
+          <span class="label-body-2"
+            >Comissão ({{
+              sellerFees.sellerPercentageFee * 100 | number: '1.0-2'
+            }}%)</span
+          >
+          <span class="label-body-2"
+            >-
+            {{
+              sellerFees.sellerPercentageFee * productCost
+                | cost
+                | currency: 'BRL' : true : '1.2'
+            }}</span
+          >
         </div>
         @if (declaredValue) {
           <div class="mt-16 flex justify-between">
             <span class="label-body-2">Envio seguro</span>
-            <span class="label-body-2">- {{ sellerFees.declaredValueFee | cost | currency:'BRL':true:'1.2' }}</span>
+            <span class="label-body-2"
+              >-
+              {{
+                sellerFees.declaredValueFee
+                  | cost
+                  | currency: 'BRL' : true : '1.2'
+              }}</span
+            >
           </div>
         }
         <div class="mt-16 flex justify-between">
           <span class="label-body-2"><b>Você recebe</b></span>
-          <span class="label-body-2"><b>{{ sellerProfit | cost | currency:'BRL':true:'1.2' }}</b></span>
+          <span class="label-body-2"
+            ><b>{{
+              sellerProfit | cost | currency: 'BRL' : true : '1.2'
+            }}</b></span
+          >
         </div>
       </div>
     }

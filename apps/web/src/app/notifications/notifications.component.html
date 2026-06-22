@@ -1,23 +1,22 @@
-<div #content class="container page">
-  <div class="grid-row">
-    <div class="gcol-12">
-      <div class="w-full">
-        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-          <mat-tab class="fw-bold" label="{{ 'Notificações'  + notificationsString() }}">
-            <!-- Notificações -->
-            <div class="mt-48">
-              <app-notifications-list></app-notifications-list>
-            </div>
-          </mat-tab>
+<div #content class="container fill-height">
+  <div class="w-full">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab
+        class="fw-bold"
+        label="{{ 'Notificações' + notificationsString() }}"
+      >
+        <!-- Notificações -->
+        <div class="mt-48">
+          <app-notifications-list></app-notifications-list>
+        </div>
+      </mat-tab>
 
-          <mat-tab class="fw-bold" label="{{ 'Mensagens' + messagesString() }}">
-            <!-- Mensagens -->
-            <div class="mt-48">
-              <app-chat-list></app-chat-list>
-            </div>
-          </mat-tab>
-        </mat-tab-group>
-      </div>
-    </div>
+      <mat-tab class="fw-bold" label="{{ 'Mensagens' + messagesString() }}">
+        <!-- Mensagens -->
+        <div class="mt-48">
+          <app-chat-list></app-chat-list>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>

@@ -11,30 +11,80 @@ $steps: (0, 4, 8, 12, 16, 24, 32, 40, 48, 56);
 @each $s in $steps {
   $v: var(--space-#{$s});
 
-  .m-#{$s} { margin: $v !important; }
-  .mt-#{$s} { margin-top: $v !important; }
-  .mr-#{$s} { margin-right: $v !important; }
-  .mb-#{$s} { margin-bottom: $v !important; }
-  .ml-#{$s} { margin-left: $v !important; }
-  .mx-#{$s} { margin-left: $v !important; margin-right: $v !important; }
-  .my-#{$s} { margin-top: $v !important; margin-bottom: $v !important; }
+  .m-#{$s} {
+    margin: $v !important;
+  }
+  .mt-#{$s} {
+    margin-top: $v !important;
+  }
+  .mr-#{$s} {
+    margin-right: $v !important;
+  }
+  .mb-#{$s} {
+    margin-bottom: $v !important;
+  }
+  .ml-#{$s} {
+    margin-left: $v !important;
+  }
+  .mx-#{$s} {
+    margin-left: $v !important;
+    margin-right: $v !important;
+  }
+  .my-#{$s} {
+    margin-top: $v !important;
+    margin-bottom: $v !important;
+  }
 
-  .p-#{$s} { padding: $v !important; }
-  .pt-#{$s} { padding-top: $v !important; }
-  .pr-#{$s} { padding-right: $v !important; }
-  .pb-#{$s} { padding-bottom: $v !important; }
-  .pl-#{$s} { padding-left: $v !important; }
-  .px-#{$s} { padding-left: $v !important; padding-right: $v !important; }
-  .py-#{$s} { padding-top: $v !important; padding-bottom: $v !important; }
+  .p-#{$s} {
+    padding: $v !important;
+  }
+  .pt-#{$s} {
+    padding-top: $v !important;
+  }
+  .pr-#{$s} {
+    padding-right: $v !important;
+  }
+  .pb-#{$s} {
+    padding-bottom: $v !important;
+  }
+  .pl-#{$s} {
+    padding-left: $v !important;
+  }
+  .px-#{$s} {
+    padding-left: $v !important;
+    padding-right: $v !important;
+  }
+  .py-#{$s} {
+    padding-top: $v !important;
+    padding-bottom: $v !important;
+  }
 
-  .gap-#{$s} { gap: $v !important; }
+  .gap-#{$s} {
+    gap: $v !important;
+  }
 }
 
 // Auto margins (centering / pushing). Token-free.
-.m-auto { margin: auto !important; }
-.mx-auto { margin-left: auto !important; margin-right: auto !important; }
-.my-auto { margin-top: auto !important; margin-bottom: auto !important; }
-.mt-auto { margin-top: auto !important; }
-.mb-auto { margin-bottom: auto !important; }
-.ml-auto { margin-left: auto !important; }
-.mr-auto { margin-right: auto !important; }
+.m-auto {
+  margin: auto !important;
+}
+.mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.my-auto {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+.mt-auto {
+  margin-top: auto !important;
+}
+.mb-auto {
+  margin-bottom: auto !important;
+}
+.ml-auto {
+  margin-left: auto !important;
+}
+.mr-auto {
+  margin-right: auto !important;
+}

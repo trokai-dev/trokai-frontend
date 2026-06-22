@@ -18,7 +18,12 @@ import { Basket, BuyingService } from '@trokai/shared-data-access';
 import { InventoryService } from '../services/inventory.service';
 import { ClothesPayment } from '@trokai/shared-data-access';
 import { RequiredAdjustsComponent } from '../wardrobe/required-adjusts/required-adjusts.component';
-import { StatusPillComponent, StatusPillVariant, ItemNamePipe, CostPipe } from '@trokai/shared-ui';
+import {
+  StatusPillComponent,
+  StatusPillVariant,
+  ItemNamePipe,
+  CostPipe,
+} from '@trokai/shared-ui';
 import { MainService } from '../services/main.service';
 import { SearchService } from '../services/search.service';
 import Swiper from 'swiper';
@@ -33,7 +38,6 @@ import { TkReviewStarsComponent } from '@trokai/shared-ui';
 import { TkProductCardComponent } from '@trokai/shared-ui';
 import {
   IonContent,
-  IonGrid,
   IonHeader,
   IonicSlides,
   IonSpinner,
@@ -89,7 +93,7 @@ import { CompletingInformationService } from '@trokai/shared-data-access';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     MatButtonModule,
-    
+
     IonText,
     IonBadge,
     IonButtons,
@@ -100,7 +104,6 @@ import { CompletingInformationService } from '@trokai/shared-data-access';
     TkSellerHeaderComponent,
     IonToolbar,
     IonContent,
-    IonGrid,
     IonTitle,
     IonSpinner,
     BackButtonComponent,
@@ -172,7 +175,6 @@ export class ProductPage implements OnInit, OnDestroy {
   displayQuestions = [];
 
   tabUrl = null;
-
 
   adjusts = null;
   expiration = null;
@@ -516,7 +518,9 @@ export class ProductPage implements OnInit, OnDestroy {
       text: 'Cancelar',
       icon: close,
       role: 'cancel',
-      handler: () => { /* intentional */ },
+      handler: () => {
+        /* intentional */
+      },
     });
 
     const ac = await this.actionSheetController.create({
@@ -730,7 +734,6 @@ export class ProductPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-
     if (this.reservesSub) this.reservesSub.unsubscribe();
   }
 }

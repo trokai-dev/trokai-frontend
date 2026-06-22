@@ -6,7 +6,6 @@ import {
   IonTitle,
   IonToolbar,
   IonIcon,
-  IonGrid,
 } from '@ionic/angular/standalone';
 import { MatDialog } from '@angular/material/dialog';
 import { BackButtonComponent } from '../shared/components/back-button/back-button.component';
@@ -26,7 +25,6 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./support.page.scss'],
   standalone: true,
   imports: [
-    IonGrid,
     IonIcon,
     IonContent,
     IonHeader,

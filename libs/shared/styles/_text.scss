@@ -2,25 +2,59 @@
 // Generic alignment/transform/overflow helpers, token-free. Shared by both apps
 // so shared-ui renders identically (replaces the web-only bootstrap-compat text-*).
 
-.text-left { text-align: left; }
-.text-center { text-align: center; }
-.text-right { text-align: right; }
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
 
-.uppercase { text-transform: uppercase; }
-.lowercase { text-transform: lowercase; }
-.capitalize { text-transform: capitalize; }
+.uppercase {
+  text-transform: uppercase;
+}
+.lowercase {
+  text-transform: lowercase;
+}
+.capitalize {
+  text-transform: capitalize;
+}
 
-.small { font-size: 0.875em; }
+.small {
+  font-size: 0.875em;
+}
 
 // `!important` so weight utilities reliably win over Ionic/Material defaults
 // (matches the per-app .fw-* the shared file replaces).
-.fw-light { font-weight: 300 !important; }
-.fw-normal { font-weight: 400 !important; }
-.fw-semibold { font-weight: 600 !important; }
-.fw-bold { font-weight: 700 !important; }
+.fw-light {
+  font-weight: 300 !important;
+}
+.fw-normal {
+  font-weight: 400 !important;
+}
+.fw-semibold {
+  font-weight: 600 !important;
+}
+.fw-bold {
+  font-weight: 700 !important;
+}
 
-.nowrap { white-space: nowrap; }
-.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nowrap {
+  white-space: nowrap;
+}
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 // `text-dots` = legacy alias of `truncate` (kept: ~hundreds of template usages).
-.text-dots { overflow: hidden !important; text-overflow: ellipsis; white-space: nowrap; }
-.line-through { text-decoration: line-through; }
+.text-dots {
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.line-through {
+  text-decoration: line-through;
+}

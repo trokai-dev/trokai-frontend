@@ -9,7 +9,12 @@
 />
 
 <!-- native camera/gallery chooser (only opened when capabilities.camera) -->
-<button type="button" hidden [matMenuTriggerFor]="chooser" #addMenu="matMenuTrigger"></button>
+<button
+  type="button"
+  hidden
+  [matMenuTriggerFor]="chooser"
+  #addMenu="matMenuTrigger"
+></button>
 <mat-menu #chooser="matMenu">
   <button mat-menu-item type="button" (click)="pickFromCamera()">
     <mat-icon>photo_camera</mat-icon>
@@ -71,7 +76,13 @@
 
       <!-- add-more tile (after the last picker, hidden at limit) -->
       @if (!disabled && slots.length < MAX_IMAGES) {
-        <div class="box-image box-image--add" role="button" tabindex="0" (click)="triggerAdd()" (keyup.enter)="triggerAdd()">
+        <div
+          class="box-image box-image--add"
+          role="button"
+          tabindex="0"
+          (click)="triggerAdd()"
+          (keyup.enter)="triggerAdd()"
+        >
           <div class="add-more-circle">
             <mat-icon>add</mat-icon>
           </div>
@@ -81,7 +92,13 @@
   }
 </div>
 
-<div class="pictures-help-cta" role="button" tabindex="0" (click)="helpRequested.emit()" (keyup.enter)="helpRequested.emit()">
+<div
+  class="pictures-help-cta"
+  role="button"
+  tabindex="0"
+  (click)="helpRequested.emit()"
+  (keyup.enter)="helpRequested.emit()"
+>
   <mat-icon class="help-icon">photo_camera</mat-icon>
   <span class="color-gray-dark">
     Fotos boas vendem mais!

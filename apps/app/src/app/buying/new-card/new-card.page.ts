@@ -16,7 +16,11 @@ import { User } from '@trokai/shared-core';
   selector: 'app-new-card',
   standalone: true,
   imports: [
-    IonHeader, IonToolbar, IonButtons, IonTitle, IonContent,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonTitle,
+    IonContent,
     BackButtonComponent,
     TkCardFormComponent,
   ],

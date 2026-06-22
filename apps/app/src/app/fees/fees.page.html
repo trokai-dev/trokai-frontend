@@ -7,16 +7,14 @@
 
 <ion-content>
   @if (params) {
-  <ion-grid class="p-24">
+  <div class="p-24">
     <!-- trokas -->
     <div>
       <div class="border-bottom pb-8">
         <h6 class="color-gray-dark">Das trokas</h6>
       </div>
 
-      <span class="mt-8 block label-body-2"
-        >As trokas são gratuitas.</span
-      >
+      <span class="mt-8 block label-body-2">As trokas são gratuitas.</span>
     </div>
 
     <!-- vendas -->
@@ -33,123 +31,119 @@
       </span>
 
       <div class="fees-table mt-16">
-        <ion-row>
-          <ion-col class="ion-text-center">
-            <span class="label-body-2 color-gray-dark">
-              Valor da venda</span
-            >
-          </ion-col>
+        <div class="fees-row">
+          <div class="ion-text-center">
+            <span class="label-body-2 color-gray-dark"> Valor da venda</span>
+          </div>
 
-          <ion-col class="ion-text-center">
+          <div class="ion-text-center">
             <span class="label-body-2 color-gray-dark">Taxa</span>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-center">
-            <span class="label-body-2 color-gray-dark">
-              Até R$ 15,00</span
-            >
-          </ion-col>
+          </div>
+        </div>
+        <div class="fees-row">
+          <div class="ion-text-center">
+            <span class="label-body-2 color-gray-dark"> Até R$ 15,00</span>
+          </div>
 
-          <ion-col class="ion-text-center">
+          <div class="ion-text-center">
             <span class="label-body-2 color-gray-dark">
               {{ params.sellFixedFee[0] |cost| currency: "BRL" : true :
               '1.2-2'}}
             </span>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-center">
+          </div>
+        </div>
+        <div class="fees-row">
+          <div class="ion-text-center">
             <span class="label-body-2 color-gray-dark">
               R$ 15,01 a R$ 50,00</span
             >
-          </ion-col>
+          </div>
 
-          <ion-col class="ion-text-center">
+          <div class="ion-text-center">
             <span class="label-body-2 color-gray-dark">
               {{ params.sellFixedFee[1] |cost| currency: "BRL" : true :
               '1.2-2'}}
             </span>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-center">
+          </div>
+        </div>
+        <div class="fees-row">
+          <div class="ion-text-center">
             <span class="label-body-2 color-gray-dark">
               R$ 50,01 a R$ 70,00</span
             >
-          </ion-col>
-          <ion-col class="ion-text-center">
+          </div>
+          <div class="ion-text-center">
             <span class="label-body-2 color-gray-dark">
               {{ params.sellFixedFee[2] |cost| currency: "BRL" : true :
               '1.2-2'}}
             </span>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-center">
+          </div>
+        </div>
+        <div class="fees-row">
+          <div class="ion-text-center">
             <span class="label-body-2 color-gray-dark">
               R$ 70,01 a R$ 100,00</span
             >
-          </ion-col>
-          <ion-col class="ion-text-center">
+          </div>
+          <div class="ion-text-center">
             <span class="label-body-2 color-gray-dark">
               {{ params.sellFixedFee[3] |cost| currency: "BRL" : true :
               '1.2-2'}}
             </span>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-center">
+          </div>
+        </div>
+        <div class="fees-row">
+          <div class="ion-text-center">
             <span class="label-body-2 color-gray-dark">
               R$ 100,01 a R$ 150,00</span
             >
-          </ion-col>
-          <ion-col class="ion-text-center">
+          </div>
+          <div class="ion-text-center">
             <span class="label-body-2 color-gray-dark">
               {{ params.sellFixedFee[4] |cost| currency: "BRL" : true :
               '1.2-2'}}
             </span>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-center">
+          </div>
+        </div>
+        <div class="fees-row">
+          <div class="ion-text-center">
             <span class="label-body-2 color-gray-dark">
               R$ 150,01 a R$ 300,00</span
             >
-          </ion-col>
-          <ion-col class="ion-text-center">
+          </div>
+          <div class="ion-text-center">
             <span class="label-body-2 color-gray-dark">
               {{ params.sellFixedFee[5] |cost| currency: "BRL" : true :
               '1.2-2'}}
             </span>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-center">
+          </div>
+        </div>
+        <div class="fees-row">
+          <div class="ion-text-center">
             <span class="label-body-2 color-gray-dark">
               R$ 300,01 a R$ 500,00</span
             >
-          </ion-col>
-          <ion-col class="ion-text-center">
+          </div>
+          <div class="ion-text-center">
             <span class="label-body-2 color-gray-dark">
               {{ params.sellFixedFee[6] |cost| currency: "BRL" : true :
               '1.2-2'}}</span
             >
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-center">
+          </div>
+        </div>
+        <div class="fees-row">
+          <div class="ion-text-center">
             <span class="label-body-2 color-gray-dark">
               Acima de R$ 500,00</span
             >
-          </ion-col>
-          <ion-col class="ion-text-center">
+          </div>
+          <div class="ion-text-center">
             <span class="label-body-2 color-gray-dark">
               {{ params.sellFixedFee[7] |cost| currency: "BRL" : true :
               '1.2-2'}}
             </span>
-          </ion-col>
-        </ion-row>
+          </div>
+        </div>
       </div>
 
       <span class="mt-16 block label-body-2"
@@ -195,6 +189,6 @@
         (última etapa do fluxo de compra) do Aplicativo e/ou Site.
       </span>
     </div>
-  </ion-grid>
+  </div>
   }
 </ion-content>

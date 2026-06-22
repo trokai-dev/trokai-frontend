@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+// Was grid-row + gcol-md-3 (filters, hidden on mobile) / gcol-md-9 (results).
+// Single column on mobile (filters hidden), 3/9 split from md up.
+.search-grid {
+  display: grid;
+  gap: var(--space-24);
+  align-items: start;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 3fr 9fr;
+  }
+}
+
+// Was grid-cols-2 grid-cols-md-4 — 2 product columns on mobile, 4 on desktop.
+.search-products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-24);
+  align-items: start;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

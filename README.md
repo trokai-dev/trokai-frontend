@@ -3,9 +3,9 @@
 Unified [Nx](https://nx.dev) workspace for the Trokaí frontend, merging the two
 previously separate repositories into one:
 
-| App | Was | Now | Type |
-|-----|-----|-----|------|
-| **Web** (`apps/web`) | `trokai-web` | Angular 21 + SSR (Express) | Server-Side Rendered site (SEO) |
+| App                     | Was             | Now                                | Type                                      |
+| ----------------------- | --------------- | ---------------------------------- | ----------------------------------------- |
+| **Web** (`apps/web`)    | `trokai-web`    | Angular 21 + SSR (Express)         | Server-Side Rendered site (SEO)           |
 | **Mobile** (`apps/app`) | `trokai-mobile` | Angular 21 + Ionic 8 + Capacitor 7 | Static SPA wrapped natively (iOS/Android) |
 
 Shared code lives in `libs/shared/*` and is consumed by **both** apps.
@@ -181,7 +181,10 @@ assets are already in place.
 **Design tokens** (any component, no import needed — they're global CSS custom props):
 
 ```scss
-.thing { color: var(--color-primary); padding: var(--space-16); }
+.thing {
+  color: var(--color-primary);
+  padding: var(--space-16);
+}
 ```
 
 **Status pill** (`@trokai/shared-ui`):
@@ -190,9 +193,9 @@ assets are already in place.
 import { StatusPillComponent } from '@trokai/shared-ui';
 // @Component({ imports: [StatusPillComponent] })
 ```
+
 ```html
-<tk-status-pill variant="success" label="Vendido" position="overlay" />
-<tk-status-pill variant="accent" [outline]="true" label="Armário de férias" />
+<tk-status-pill variant="success" label="Vendido" position="overlay" /> <tk-status-pill variant="accent" [outline]="true" label="Armário de férias" />
 ```
 
 **Navigation** (`@trokai/shared-core`) — inject the abstraction, not `Router`/`NavController`:
@@ -230,9 +233,9 @@ const order: Order = await this.ordersService.fetchOrder(id);
 Same pattern for `Clothes`, `Collection`, `Message`:
 
 ```ts
-new Clothes(apiResponse)
-new Collection(apiResponse)
-new Message(apiResponse)
+new Clothes(apiResponse);
+new Collection(apiResponse);
+new Message(apiResponse);
 ```
 
 ### Enum-based status checks
@@ -256,29 +259,30 @@ Models expose computed display values as getters. Components call the getter; th
 
 ```ts
 // Clothes
-clothes.statusFormatted   // 'Em análise' | 'Vendido' | 'Reservado' | …
-clothes.published         // boolean
-clothes.mainImage         // first image md URL
-clothes.thumbnailUrl      // first image sm URL
+clothes.statusFormatted; // 'Em análise' | 'Vendido' | 'Reservado' | …
+clothes.published; // boolean
+clothes.mainImage; // first image md URL
+clothes.thumbnailUrl; // first image sm URL
 
 // Order
-order.shippingStatus      // 'Aguardando envio' | 'Em transporte' | 'Entregue' | …
-order.postageLabelStatus  // PostageLabelStatus enum value
-order.isShipping          // boolean
-order.deliveryEstimate    // Date | undefined
+order.shippingStatus; // 'Aguardando envio' | 'Em transporte' | 'Entregue' | …
+order.postageLabelStatus; // PostageLabelStatus enum value
+order.isShipping; // boolean
+order.deliveryEstimate; // Date | undefined
 
 // User
-user.displayAvatar        // avatar ?? googleAvatar ?? undefined
-user.displayName          // storeName || name
-user.isSeller()           // boolean
-user.accountCompletion()  // { address, personalInfo, sellerInfo, … }
+user.displayAvatar; // avatar ?? googleAvatar ?? undefined
+user.displayName; // storeName || name
+user.isSeller(); // boolean
+user.accountCompletion(); // { address, personalInfo, sellerInfo, … }
 
 // Message (shared-data-access)
-message.timeFormatted     // 'HH:MM'
-message.dayLabel          // 'Hoje' | 'Ontem' | 'Segunda-Feira' | 'DD/MM/YYYY'
+message.timeFormatted; // 'HH:MM'
+message.dayLabel; // 'Hoje' | 'Ontem' | 'Segunda-Feira' | 'DD/MM/YYYY'
 ```
 
 **Before** (logic duplicated in component):
+
 ```ts
 // ❌ component method operating on any
 getMessageTime(item: any): string {
@@ -288,6 +292,7 @@ getMessageTime(item: any): string {
 ```
 
 **After** (getter on the model, component is a one-liner):
+
 ```ts
 // ✅ model carries the logic
 getMessageTime(item: Message): string {
@@ -320,7 +325,7 @@ const reviews: UserReview[] = user.reviews ?? [];
 
 // Collection wraps a Clothes[] with slug/name
 const col = new Collection(apiResponse);
-col.clothes.forEach(c => console.log(c.mainImage));
+col.clothes.forEach((c) => console.log(c.mainImage));
 ```
 
 ---
@@ -336,7 +341,7 @@ col.clothes.forEach(c => console.log(c.mainImage));
   after (both apps): `this.nav.forward([...])`.
 - **Persistent storage via `StorageService`** (`@trokai/shared-core`) — one async `get/set/remove/clear`
   (+ `getObject`/`setObject`/`has`) abstraction; impls `{ provide: StorageService, useClass: WebStorageService
-  | MobileStorageService }` (web = SSR-safe `localStorage` via BrowserRef, app = Capacitor `Preferences`).
+| MobileStorageService }` (web = SSR-safe `localStorage` via BrowserRef, app = Capacitor `Preferences`).
   Components/services never touch `localStorage`/`Preferences` directly. Replaced the old per-feature
   `BuyingStorage`/`PhoneVerifyPlatform`. Sync-only web exceptions (async contract can't cover them): the HTTP
   interceptor/guard session check (`AuthService.checkStorageSession`), the GTM consent getter, the debug `logger`.
@@ -355,11 +360,13 @@ col.clothes.forEach(c => console.log(c.mainImage));
 These are deferred on purpose — each is best done per-page with visual QA rather than
 in one risky sweep:
 
-- [x] **Remove Bootstrap from web** — done. The `bootstrap` dependency + `@import` are gone;
-      `libs/shared/styles/_bootstrap-compat.scss` reimplements the grid (`container/row/col-*`)
-      and the utility class names the templates actually use (`d-flex`, `justify-content-*`,
-      spacing, `w-*`, …) as native Flexbox/Grid — zero per-template churn. New code should prefer
-      the cleaner `_layout.scss`/`_spacing.scss` utilities; migrate templates off the shim over time.
+- [x] **Remove Bootstrap from web** — done, grid included. The `bootstrap` dependency + `@import`
+      are gone, and the interim grid shim (`libs/shared/styles/_grid.scss`: `container/row/col-*`,
+      `gcol-*`, `grid-row`, `grid-cols-*`, `offset-*`) has been **deleted** — every template now uses
+      scoped CSS Grid/Flex in its own component `.scss`. Layout primitives: `.container` (centred
+      max-width band, in `_layout.scss`), plus web `styles.scss` `.page` (routed page shell: band +
+      min-height + vertical rhythm) and `.fill-height` (bare min-height helper for sidebars/menus).
+      Utility classes (`flex`, `justify-*`, spacing, `w-*`, …) come from `_layout.scss`/`_spacing.scss`.
 - [x] **Switch web Material from M2 → M3** — done. `styles/trokai-material.scss` now does
       `@use 'theme'; html { @include theme.trokai-theme(); }` (shared M3 theme from brand palettes),
       replacing the legacy M2 `m2-define-*` palettes; component overrides (mdc-button/dialog/checkbox)
@@ -370,8 +377,7 @@ in one risky sweep:
       SCSS rule remains (safe to delete).
 - [x] **Extract shared services** into `libs/shared/data-access` — bank, notifications, favorites,
       messages, orders, product, catalog, user unified (web-canonical Promise contracts); both apps'
-      local service files are thin re-exports. `itemsMap` name lookups centralized in `CatalogService`
-      + `ItemNamePipe`; identity/auth coupling routed through `NavigationManager`
+      local service files are thin re-exports. `itemsMap` name lookups centralized in `CatalogService` + `ItemNamePipe`; identity/auth coupling routed through `NavigationManager`
       (`ensureAuthenticated`/`isAuthenticated`/`currentUserId`).
       `UserService` holds **user-resource HTTP only** (getUserInfo/updateUser/uploadAvatar/userHasPassword/
       emailRegistered/phoneRegistered/register/deleteAccount/getUserReviews/verifyEmail/unsubscribeEmailMarketing,
@@ -418,8 +424,7 @@ in one risky sweep:
       `BuyingService.openCheckout`. **Only navigation specialized** behind injected `CompletingNavigator`
       (`gate(action)` runs the platform completion gates + redirects + feedback, `toSellRegister`,
       `resetSellDraft`) — `WebCompletingNavigator` (Router routes + `?completing` query params, Material alerts,
-      `minClothesToSell` PENDING_REVIEW gate) / `MobileCompletingNavigator` (app routes, toasts, Ionic register
-      + tutorial). Status source unified web-canonical on `User.accountCompletion()`. Both apps'
+      `minClothesToSell` PENDING_REVIEW gate) / `MobileCompletingNavigator` (app routes, toasts, Ionic register + tutorial). Status source unified web-canonical on `User.accountCompletion()`. Both apps'
       `completing-information.service.ts` are thin re-exports (consumers unchanged); each app provides the
       navigator in `app.config`/`main.ts`. Dropped dead `mayQuestionOrAnswer` (app, no callers). BREAKING (app):
       status now client-derived (`accountCompletion()`) not server `verify-status`; gates now run
@@ -450,22 +455,19 @@ in one risky sweep:
       viacep/googleapis, per-app `authScheme` — web `Bearer `, app raw token), known error-code
       dispatch (`banned`/`token_expired`/`apple_deleted`/`apple_token`) via abstract `onErrorCode`,
       and `showError`. Both apps' interceptors now `extends BaseAuthInterceptor`. Web overrides
-      `shortCircuit` (storage-session logout + in-memory GET cache), `prepare` (SSR `X-Forwarded-For`
-      + `resolveImages`), `onResponse` (cache store); app adds `update_app`/`banned` Ionic routing +
+      `shortCircuit` (storage-session logout + in-memory GET cache), `prepare` (SSR `X-Forwarded-For` + `resolveImages`), `onResponse` (cache store); app adds `update_app`/`banned` Ionic routing +
       Capacitor `Network`/Toast `showError`. DI registration unchanged (`HTTP_INTERCEPTORS` useClass).
-- [x] **Pending product removals** — done.
-      - [x] **plans/subscriptions feature (web)** — deleted `apps/web/src/app/plans/*`,
-            `services/plans.service.ts`, `models/plan.ts`; dropped the (already dead, `return;`-first)
-            `DialogService.openPlansDialog()` + its `PlanDialogComponent` import, and the commented-out
-            `checkPlans()` flow in `product-register` (with its `SubscriptionPlans`/`dayjs` imports).
-            `User.subscription` stays loosely typed in shared-core (already decoupled).
-      - [x] **verified badge + `BrechoStatus`** — removed across both apps. Dropped the
-            `brechoStatus === ACCEPTED` verified-badge blocks (wardrobe, product, carts, navbar,
-            user-card, reviews-dialog, profile-tab, users-list-item) + their `brechoStatus = BrechoStatus`
-            fields/imports, web `AuthService.requestBrecho`, the `BrechoStatus` enum and
-            `brechoStatus`/`brechoRequest` fields from shared-core `User`, the now-dead `.icon-verified`
-            SCSS + `assets/icons/verified.svg`. With BrechoStatus gone, the local `CompletingType` is no
-            longer pinned — pruned its `BRECHO` value, `mayRegisterBrecho()`, and the dead `brecho` branches.
+- [x] **Pending product removals** — done. - [x] **plans/subscriptions feature (web)** — deleted `apps/web/src/app/plans/*`,
+      `services/plans.service.ts`, `models/plan.ts`; dropped the (already dead, `return;`-first)
+      `DialogService.openPlansDialog()` + its `PlanDialogComponent` import, and the commented-out
+      `checkPlans()` flow in `product-register` (with its `SubscriptionPlans`/`dayjs` imports).
+      `User.subscription` stays loosely typed in shared-core (already decoupled). - [x] **verified badge + `BrechoStatus`** — removed across both apps. Dropped the
+      `brechoStatus === ACCEPTED` verified-badge blocks (wardrobe, product, carts, navbar,
+      user-card, reviews-dialog, profile-tab, users-list-item) + their `brechoStatus = BrechoStatus`
+      fields/imports, web `AuthService.requestBrecho`, the `BrechoStatus` enum and
+      `brechoStatus`/`brechoRequest` fields from shared-core `User`, the now-dead `.icon-verified`
+      SCSS + `assets/icons/verified.svg`. With BrechoStatus gone, the local `CompletingType` is no
+      longer pinned — pruned its `BRECHO` value, `mayRegisterBrecho()`, and the dead `brecho` branches.
 - [x] **Shared UI component dedup** — lift duplicated forms, atoms, pipes & directives from both
       app trees into `libs/shared/ui/[domain]`, dropping Bootstrap/Ionic layout for native Flexbox/Grid.
       Forms standardize on **Reactive Forms + Material M3** (`mat-form-field`, `@if`-driven
@@ -475,7 +477,7 @@ in one risky sweep:
       pages → verify build → delete legacy from both trees → check the box. Platform side-effects (routing,
       Capacitor, session) stay in thin per-app shell wrappers; shared form components stay dumb
       (`@Output() submitted` + `@Input() loading/serverError`). Domains (web source / app source → dest):
-  - [x] **auth** *(pilot)* → `libs/shared/ui/auth` — **`login-form` ✅ lifted** (`tk-login-form`: dumb
+  - [x] **auth** _(pilot)_ → `libs/shared/ui/auth` — **`login-form` ✅ lifted** (`tk-login-form`: dumb
         Reactive+M3, `@Output() submitted`/`forgotPassword`/`register`, `@Input() loading`/`serverError`,
         social buttons via `<ng-content>`; both shell pages render it — web routes, app `IonNav` push;
         loading overlay via shared `LoadingService` (web-canon, replaces app's Ionic `LoadingController`)).
@@ -502,8 +504,7 @@ in one risky sweep:
         `@Output() googleClick` — OAuth stays in the shell: web `login`/`register` wire `(googleClick)` →
         `AuthService.startGoogle()`. Web-only consumer for now (app uses native Google), but lives in shared-ui;
         web `auth/google-btn` deleted).
-  - [x] **billing** → `libs/shared/ui/billing` — **`payment-icon` ✅ lifted** (`tk-payment-icon`; `PaymentBrands` enum
-        + `getCreditCardBrand()` moved to `@trokai/shared-core`); **`fees-calculator` ✅ lifted** (`tk-fees-calculator`:
+  - [x] **billing** → `libs/shared/ui/billing` — **`payment-icon` ✅ lifted** (`tk-payment-icon`; `PaymentBrands` enum + `getCreditCardBrand()` moved to `@trokai/shared-core`); **`fees-calculator` ✅ lifted** (`tk-fees-calculator`:
         Material dialog, `@Inject(MAT_DIALOG_DATA)` data `{sellerFees,productCost,declaredValue}`; app swapped
         `ModalController` → `MatDialog`); **`coupon-form` ✅ lifted** (`tk-coupon-form`: web-canonical inline form,
         app checkout swapped `<app-coupon>` → `<tk-coupon-form>`); **`bank-account-form` ✅ lifted**
@@ -532,12 +533,12 @@ in one risky sweep:
         `modules/seller-status-badge` deleted; menu-account/seller-status/wardrobe/user-card consumers migrated),
         ~~profile-form~~ (`tk-profile-form`: dumb Material+ngx-mask form, web-canonical validators — name pattern + 2-word,
         `under18`/`invalidBirth` birthday checks, CPF-focus alert via shared `AlertService`; `@Input() user/loading/
-        completingInformation/emailRegistered/phoneRegistered`, `@Output() submitted/emailBlur/phoneBlur/verifyPhone`;
+completingInformation/emailRegistered/phoneRegistered`, `@Output() submitted/emailBlur/phoneBlur/verifyPhone`;
         both shells build `User`+`updateUser`, run the registered-email/phone checks, and open `tk-phone-verify-dialog`),
         ~~seller-profile~~ (`tk-seller-profile`: web-canonical store-profile form — storeName→nickname auto-slug, nickname
         sanitize/confirm-on-change via `AlertService.question`, bio, sale options, copy-link via CDK `Clipboard`, seller-adjust
         notice; `@Input() user/previewAvatarUrl/pictureUpdating/avatarPresent/requireAvatar/showBio/showStoreVisibility/
-        sellerReviews`, platform image-picker projected via `[avatarPicker]` `<ng-content>`; web uses deferred-blob avatar
+sellerReviews`, platform image-picker projected via `[avatarPicker]` `<ng-content>`; web uses deferred-blob avatar
         upload + `Foto obrigatória`, app uses immediate upload + `storeVisibility` radios; both `store-options` shells render it.
         `profile-tab` is the Ionic account-menu — already on `tk-user-avatar`, no form to lift),
         ~~contact-form~~ (`tk-contact-form`: dumb Material form, `@Input() showName/showType/dismissable/email/loading/done`,
@@ -572,7 +573,7 @@ in one risky sweep:
         (`ngSrc`/`fill`/`priority`) preserved — the app drops Ionic `IonThumbnail`/`IonImg`/`IonSkeletonText` for the
         same `<img ngSrc fill>`, with the skeleton reproduced as a pure-CSS shimmer on the `--color-gray-2`
         image-wrapper (no perf cost). Dumb: `@Input() product/clean/canFavorite/onlyImage/useLink/priority/
-        extraImgClass`, `@Output() open(Clothes)/onFinishLiking`. **Nav stays per-platform via `useLink`**: web sets
+extraImgClass`, `@Output() open(Clothes)/onFinishLiking`. **Nav stays per-platform via `useLink`**: web sets
         `useLink=true` → the real crawlable anchor navigates (SSR/SEO/LCP intact); app sets `[useLink]="false"` and
         handles `(open)` → tab-relative `NavController.navigateForward` (a static routerLink can't express the app's
         `/main/<tab>/product/:id`). `myProduct` via `NavigationManager.currentUserId()`, size/link via shared
@@ -600,7 +601,7 @@ in one risky sweep:
         swipe-gesture + `TutorialService.productRegisterTutorial`. Both apps' local `form-images` UI + specs deleted).
         **`product-register-form` ✅ lifted** (`tk-product-register-form`: web-canonical Reactive Forms + Material
         flat layout — replaces the app's template-driven Ionic accordion. Dumb component: `@Input() itemsMap/params/
-        brands/product/initialImages/duplicating/editingId/waitingAdjustment/adjusts/adjustsNote/loading`,
+brands/product/initialImages/duplicating/editingId/waitingAdjustment/adjusts/adjustsNote/loading`,
         `@Output() submitted({clothes,images})/helpRequested`. Embeds `tk-form-images` + `tk-autocomplete`; live
         seller-fee calc via the shared `ProductService.getSellerFees` (identical `payments/seller-fees` HTTP moved
         out of both apps' `InventoryService`); opens `tk-fees-calculator` itself via `MatDialog`. All platform
@@ -616,12 +617,11 @@ in one risky sweep:
   - [x] **reviews** → `libs/shared/ui/reviews` — **`review-stars` ✅ lifted** (`tk-review-stars`: dumb
         Material `mat-icon` `star`/`star_half`/`star_border` over the `--color-star-full`/`--color-star-empty`
         tokens, replacing both apps' SVG-asset stars + app's `ion-icon`; primitive `@Input() stars/amount/
-        showAmount/clickable` + `@Output() clicked`. Folds web's two-layer `review-stars` + `review-stars-stars`
+showAmount/clickable` + `@Output() clicked`. Folds web's two-layer `review-stars` + `review-stars-stars`
         and app's `review-stars` into one — the dialog/modal open is now a shell concern: web consumers (wardrobe,
         carts, product, seller-status) inject `DialogService.openUserReviews`; app `wardrobe.page` opens the Ionic
         `ReviewsListComponent` modal on `(clicked)`. Pure-renderer web usages (home, `review-comment`,
-        `user-reviews-dialog`) pass `[showAmount]="false"`. Both apps' local `review-stars`(+`review-stars-stars`)
-        + the `assets/review-stars/*.svg` deleted; all consumers repoint to `@trokai/shared-ui`).
+        `user-reviews-dialog`) pass `[showAmount]="false"`. Both apps' local `review-stars`(+`review-stars-stars`) + the `assets/review-stars/*.svg` deleted; all consumers repoint to `@trokai/shared-ui`).
         **`review-card` ✅ lifted** (`tk-review-card`: web-canonical row — `tk-user-avatar` + name + date +
         `tk-review-stars` + comment, `@Input() review: ReviewModel`. App adapted to the canon (its reduced
         name/stars/comment card + first-word `madeByName` truncation dropped — the `/users/:id/reviews` payload
@@ -630,7 +630,7 @@ in one risky sweep:
         `styles.scss` + app `global.scss` `@use 'index'`) so shared-ui renders identically on web/app. Web
         `review-comment` + app `review-card` deleted; web `user-reviews-dialog` + app `reviews-list` repoint;
         dead imports dropped from app `purchase`/`sale` pages).
-        **`reviews-list` ✅ lifted** (`tk-reviews-list`: dumb shared *content* — user header (avatar +
+        **`reviews-list` ✅ lifted** (`tk-reviews-list`: dumb shared _content_ — user header (avatar +
         storeName/name + average + `tk-review-stars` + count) + `tk-review-card` list + empty state,
         `@Input() user/reviews`, shared-utility layout. The platform chrome stays as thin per-app shells:
         web `user-reviews-dialog` keeps the `MatDialog` close button + self-fetch/sort and renders
@@ -761,7 +761,7 @@ service deciding to pop a dialog can't run headless (SSR, background sync, unit 
 
 **Fix (same inversion pattern as `StorageService`/`MediaService`):** the abstract
 **`FeedbackService`** port lives in `shared-core` (`feedback/`) — `startLoading`/`stopLoading`/
-`toast`/`info`/`confirm`. `BuyingService`/`CompletingInformationService` inject the *abstraction*,
+`toast`/`info`/`confirm`. `BuyingService`/`CompletingInformationService` inject the _abstraction_,
 so data-access imports **only `@trokai/shared-core`** (cycle edge gone). The concrete
 `MaterialFeedbackService` (shared-ui) wraps `LoadingService`/`AlertService`; each app binds it
 (`{ provide: FeedbackService, useClass: MaterialFeedbackService }` — web `app.config.ts`, app

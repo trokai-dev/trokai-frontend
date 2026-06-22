@@ -1,13 +1,11 @@
 <ion-content>
-  <ion-grid class="px-24 py-16">
+  <div class="px-24 py-16">
     <div>
       <ion-icon name="close" (click)="close()" class="modal-close" mode="ios">
       </ion-icon>
     </div>
 
-    <div
-      class="w-full flex flex-col justify-center items-center"
-    >
+    <div class="w-full flex flex-col justify-center items-center">
       <ion-icon name="warning" class="color-alert icon-large"></ion-icon>
       <h6 class="color-gray-dark ion-text-center mt-8">
         Ajustes necessários no anúncio
@@ -16,30 +14,35 @@
 
     <ion-list class="mt-32 ion-no-padding px-4">
       @for (adjust of adjusts; track $index) {
-      <ion-item class="ion-no-padding">
-        <span class="label-body-2 color-gray-default py-8">
-          {{ getAdjustInfo(adjust) }}
-        </span>
-      </ion-item>
+        <ion-item class="ion-no-padding">
+          <span class="label-body-2 color-gray-default py-8">
+            {{ getAdjustInfo(adjust) }}
+          </span>
+        </ion-item>
       }
     </ion-list>
 
     @if (adjustsNote && adjustsNote.length > 0) {
-    <div class="px-4 mt-16">
-      <span class="label-body-2 color-gray-dark">Observação</span>
+      <div class="px-4 mt-16">
+        <span class="label-body-2 color-gray-dark">Observação</span>
 
-      <div class="mt-8">
-        <label class="label-body-2 color-gray-default">
-          {{ adjustsNote }}
-        </label>
+        <div class="mt-8">
+          <label class="label-body-2 color-gray-default">
+            {{ adjustsNote }}
+          </label>
+        </div>
       </div>
-    </div>
     }
-  </ion-grid>
+  </div>
 </ion-content>
 
 <ion-footer class="px-24 py-16">
-  <button mat-flat-button color="primary" (click)="adjust()" class="action-button">
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="adjust()"
+    class="action-button"
+  >
     Corrigir anúncio
   </button>
 </ion-footer>

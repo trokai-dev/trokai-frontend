@@ -1,3 +1,8 @@
+// Even 2-col field row (e.g. Número / Complemento).
+.grid-cols-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
 // Uneven 2:1 field row (e.g. Cidade / Estado).
 .grid-2-1 {
   grid-template-columns: 2fr 1fr;

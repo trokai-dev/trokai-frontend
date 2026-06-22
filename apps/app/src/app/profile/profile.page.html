@@ -9,23 +9,23 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="p-24">
+  <div class="p-24">
     @if (!user) {
-      <div class="w-full flex justify-center">
-        <ion-spinner></ion-spinner>
-      </div>
+    <div class="w-full flex justify-center">
+      <ion-spinner></ion-spinner>
+    </div>
     } @else {
-      <tk-profile-form
-        [user]="user"
-        [completingInformation]="completingInformation"
-        [emailRegistered]="emailRegistered"
-        [phoneRegistered]="phoneRegistered"
-        [loading]="loading"
-        (submitted)="save($event)"
-        (emailBlur)="checkMail($event)"
-        (phoneBlur)="checkPhone($event)"
-        (verifyPhone)="verifyPhone()"
-      />
+    <tk-profile-form
+      [user]="user"
+      [completingInformation]="completingInformation"
+      [emailRegistered]="emailRegistered"
+      [phoneRegistered]="phoneRegistered"
+      [loading]="loading"
+      (submitted)="save($event)"
+      (emailBlur)="checkMail($event)"
+      (phoneBlur)="checkPhone($event)"
+      (verifyPhone)="verifyPhone()"
+    />
     }
-  </ion-grid>
+  </div>
 </ion-content>

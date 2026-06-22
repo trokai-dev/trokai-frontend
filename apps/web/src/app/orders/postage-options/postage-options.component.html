@@ -1,9 +1,7 @@
-<div class="grid-row mb-48">
-  <div class="gcol-12">
-    <button color="primary" mat-button routerLink="/orders/sales/{{ orderId }}">
-      <mat-icon>arrow_back</mat-icon> Venda
-    </button>
-  </div>
+<div class="mb-48">
+  <button color="primary" mat-button routerLink="/orders/sales/{{ orderId }}">
+    <mat-icon>arrow_back</mat-icon> Venda
+  </button>
 </div>
 
 <div class="flex flex-1">
@@ -14,7 +12,7 @@
           class="shipping-logo"
           src="../../../assets/shipping/{{ shippingLogo }}"
           alt=""
-          />
+        />
       }
     </div>
 
@@ -31,7 +29,7 @@
         class="shipping-logo"
         src="../../../assets/shipping/{{ shippingLogo }}"
         alt=""
-        />
+      />
     }
   </div>
 </div>
@@ -45,7 +43,7 @@
 @if (!loading) {
   <div class="checkout-body">
     <mat-radio-group class="custom-radio-group" (change)="selectAgency($event)">
-      @for(agency of visibleAgencies; track agency) {
+      @for (agency of visibleAgencies; track agency) {
         <mat-radio-button color="primary" [value]="agency.id">
           <div class="custom-radio-button-content">
             <div class="flex justify-between">
@@ -65,9 +63,7 @@
     </mat-radio-group>
 
     @if (agencies && visibleAgencies.length < agencies.length) {
-      <div
-        class="flex justify-center mt-24"
-        >
+      <div class="flex justify-center mt-24">
         <button mat-stroked-button color="primary" (click)="loadMoreAgencies()">
           Mostrar mais
         </button>
@@ -78,13 +74,12 @@
   @if (selectedAgency) {
     <div class="checkout-fixed-footer border-top mt-40">
       <div class="container my-24">
-        <div class="grid-row">
-          <div class="gcol-12 flex justify-end">
-            <button mat-flat-button color="primary" (click)="confirmSelection()">
-              Continuar
-            </button>
-          </div>
+        <div class="flex justify-end">
+          <button mat-flat-button color="primary" (click)="confirmSelection()">
+            Continuar
+          </button>
         </div>
       </div>
     </div>
-    } }
+  }
+}

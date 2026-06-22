@@ -15,14 +15,20 @@ import { GlobalService } from 'src/app/services/global.service';
   selector: 'app-withdraw',
   standalone: true,
   imports: [
-    IonHeader, IonToolbar, IonButtons, IonTitle, IonContent,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonTitle,
+    IonContent,
     BackButtonComponent,
     TkWithdrawComponent,
   ],
   template: `
     <ion-header>
       <ion-toolbar mode="ios">
-        <ion-buttons slot="start"><app-back-button defaultHref="/main/profile/options/bank" /></ion-buttons>
+        <ion-buttons slot="start"
+          ><app-back-button defaultHref="/main/profile/options/bank"
+        /></ion-buttons>
         <ion-title>Saque</ion-title>
       </ion-toolbar>
     </ion-header>
@@ -46,6 +52,8 @@ export class WithdrawPage implements OnInit {
   }
 
   onDone() {
-    this.router.navigateByUrl('/main/profile/options/bank', { replaceUrl: true });
+    this.router.navigateByUrl('/main/profile/options/bank', {
+      replaceUrl: true,
+    });
   }
 }

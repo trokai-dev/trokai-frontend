@@ -16,64 +16,62 @@
 
   <!-- content -->
   <div class="dialog-content">
-    @if(!selection) {
-    <div class="popup-actions">
-      @for(r of reasons; track r){
-      <div class="popup-action">
-        <span class="label-body-2"> {{ r.text }}</span>
+    @if (!selection) {
+      <div class="popup-actions">
+        @for (r of reasons; track r) {
+          <div class="popup-action">
+            <span class="label-body-2"> {{ r.text }}</span>
 
-        <div class="popup-action-btn">
-          <button mat-icon-button (click)="selection = r">
-            <mat-icon class="action-icon">arrow_forward</mat-icon>
+            <div class="popup-action-btn">
+              <button mat-icon-button (click)="selection = r">
+                <mat-icon class="action-icon">arrow_forward</mat-icon>
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <form [formGroup]="form" (ngSubmit)="next()">
+        <mat-form-field appearance="fill" class="block mt-24">
+          <mat-label>{{ selection.placeholder }}</mat-label>
+          <textarea
+            style="font-size: 14px; min-height: 75px"
+            matInput
+            formControlName="message"
+          ></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="block mt-8">
+          <mat-label>Email</mat-label>
+          <input
+            style="font-size: 14px"
+            matInput
+            type="email"
+            formControlName="email"
+          />
+        </mat-form-field>
+
+        <div class="mt-48 pt-48">
+          <button
+            mat-flat-button
+            type="submit"
+            [disabled]="form.invalid"
+            class="w-full color-primary"
+          >
+            Enviar resposta
+          </button>
+
+          <button
+            mat-button
+            type="button"
+            (click)="back()"
+            style="color: white"
+            class="w-full mt-16"
+          >
+            Voltar
           </button>
         </div>
-      </div>
-      }
-    </div>
-    } @else {
-
-    <form [formGroup]="form" (ngSubmit)="next()">
-      <mat-form-field appearance="fill" class="block mt-24">
-        <mat-label>{{ selection.placeholder }}</mat-label>
-        <textarea
-          style="font-size: 14px; min-height: 75px"
-          matInput
-          formControlName="message"
-        ></textarea>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill" class="block mt-8">
-        <mat-label>Email</mat-label>
-        <input
-          style="font-size: 14px"
-          matInput
-          type="email"
-          formControlName="email"
-        />
-      </mat-form-field>
-
-      <div class="mt-48 pt-48">
-        <button
-          mat-flat-button
-          type="submit"
-          [disabled]="form.invalid"
-          class="w-full color-primary"
-        >
-          Enviar resposta
-        </button>
-
-        <button
-          mat-button
-          type="button"
-          (click)="back()"
-          style="color: white"
-          class="w-full mt-16"
-        >
-          Voltar
-        </button>
-      </div>
-    </form>
-
+      </form>
     }
 
     <p class="label-body-1 text-center mt-24 border-top pt-24">

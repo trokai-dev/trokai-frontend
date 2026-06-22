@@ -84,7 +84,7 @@ export class MobileMediaService extends MediaService {
       const result = await Camera.pickImages({ quality: 90, limit });
       if (!result?.photos?.length) return [];
       const blobs = await Promise.all(
-        result.photos.map((p) => this.processGalleryPhoto(p))
+        result.photos.map((p) => this.processGalleryPhoto(p)),
       );
       return blobs.filter(Boolean) as Blob[];
     } catch {

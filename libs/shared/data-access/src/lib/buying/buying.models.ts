@@ -313,7 +313,9 @@ export class CheckoutResponse {
 
     cv.totalBeforeDiscounts = cv.sumCart + cv.sumFees + (cv.interest ?? 0);
     cv.totalAfterDiscounts =
-      cv.totalBeforeDiscounts - (cv.couponDiscount ?? 0) - (cv.pixDiscount ?? 0);
+      cv.totalBeforeDiscounts -
+      (cv.couponDiscount ?? 0) -
+      (cv.pixDiscount ?? 0);
 
     if (shippingOption != null)
       cv.installments = this.getInstallments(shippingOption, paymentOption);

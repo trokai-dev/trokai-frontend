@@ -1,27 +1,30 @@
 <ion-content>
-  <ion-grid class="px-24 mt-40">
-
+  <div class="px-24 mt-40">
     <h6 class="color-gray-dark ion-text-center">Renovar anúncio</h6>
 
-    <ion-row class="flex justify-center mt-32">
+    <div class="flex justify-center mt-32">
       <label class="label-body-2 ion-text-center">
-        Que tal dar uma atualizada no anúncio antes de renovar?
-        Pode ser legal caprichar mais nas informações para chamar mais atenção.
+        Que tal dar uma atualizada no anúncio antes de renovar? Pode ser legal
+        caprichar mais nas informações para chamar mais atenção.
       </label>
-    </ion-row>
-
-  </ion-grid>
+    </div>
+  </div>
 </ion-content>
 
 <ion-footer class="px-24 py-16">
-  <ion-row>
-    <button mat-flat-button color="primary" (click)="editFirst()" class="action-button">
+  <div>
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="editFirst()"
+      class="action-button"
+    >
       Editar antes
     </button>
-  </ion-row>
-  <ion-row class="mt-8">
+  </div>
+  <div class="mt-8">
     <button mat-button (click)="renew()" class="action-button">
       Renovar sem editar
     </button>
-  </ion-row>
+  </div>
 </ion-footer>

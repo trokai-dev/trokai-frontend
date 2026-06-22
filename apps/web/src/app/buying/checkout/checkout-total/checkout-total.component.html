@@ -2,14 +2,14 @@
   <h3>Valor</h3>
   <div class="flex flex-col items-end">
     @if (cv?.totalAfterDiscounts !== cv?.totalBeforeDiscounts) {
-    <span class="label-body-1 color-gray text-decoration-line-through">
-      {{
-        cv?.totalBeforeDiscounts | cost | currency : "BRL" : "symbol" : "1.2"
-      }}
-    </span>
+      <span class="label-body-1 color-gray text-decoration-line-through">
+        {{
+          cv?.totalBeforeDiscounts | cost | currency: 'BRL' : 'symbol' : '1.2'
+        }}
+      </span>
     }
     <h3>
-      {{ cv?.totalAfterDiscounts | cost | currency : "BRL" : "symbol" : "1.2" }}
+      {{ cv?.totalAfterDiscounts | cost | currency: 'BRL' : 'symbol' : '1.2' }}
     </h3>
 
     <span class="label-button mt-16" (click)="openDetails()">

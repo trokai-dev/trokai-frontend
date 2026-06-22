@@ -91,7 +91,9 @@ export class AppComponent implements OnInit, OnDestroy {
         await this.userService.verifyEmail(body);
         this.alertService.showSuccess('Email verificado!', '');
       }
-    } catch { /* intentional */ }
+    } catch {
+      /* intentional */
+    }
   }
 
   async start() {

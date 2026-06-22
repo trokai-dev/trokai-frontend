@@ -14,7 +14,6 @@ import { IonText } from '@ionic/angular/standalone';
 import { MatButtonModule } from '@angular/material/button';
 import { AlertService } from '@trokai/shared-ui';
 
-
 @Component({
   selector: 'app-reserve-time',
   templateUrl: './reserve-time.component.html',

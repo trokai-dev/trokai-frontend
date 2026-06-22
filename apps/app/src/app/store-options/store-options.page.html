@@ -7,30 +7,30 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="p-24">
+  <div class="p-24">
     @if (!user) {
-      <div class="w-full flex justify-center">
-        <ion-spinner></ion-spinner>
-      </div>
+    <div class="w-full flex justify-center">
+      <ion-spinner></ion-spinner>
+    </div>
     } @else {
-      <tk-seller-profile
-        [user]="user"
-        [pictureUpdating]="pictureUpdating"
-        [requireAvatar]="false"
-        [showBio]="false"
-        [showStoreVisibility]="true"
-        (submitted)="save($event)"
+    <tk-seller-profile
+      [user]="user"
+      [pictureUpdating]="pictureUpdating"
+      [requireAvatar]="false"
+      [showBio]="false"
+      [showStoreVisibility]="true"
+      (submitted)="save($event)"
+    >
+      <tk-image-picker
+        avatarPicker
+        [disabled]="pictureUpdating"
+        [profile]="true"
+        externalURL="{{ user.avatar && user.avatar !== '' ? getUserAvatar() : '' }}"
+        redirectUrl="/profile"
+        (imagePick)="onImagePicked($event)"
       >
-        <tk-image-picker
-          avatarPicker
-          [disabled]="pictureUpdating"
-          [profile]="true"
-          externalURL="{{ user.avatar && user.avatar !== '' ? getUserAvatar() : '' }}"
-          redirectUrl="/profile"
-          (imagePick)="onImagePicked($event)"
-        >
-        </tk-image-picker>
-      </tk-seller-profile>
+      </tk-image-picker>
+    </tk-seller-profile>
     }
-  </ion-grid>
+  </div>
 </ion-content>

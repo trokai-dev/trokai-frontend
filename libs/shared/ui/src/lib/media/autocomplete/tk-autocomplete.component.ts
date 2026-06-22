@@ -34,9 +34,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   templateUrl: './tk-autocomplete.component.html',
   styleUrl: './tk-autocomplete.component.scss',
 })
-export class TkAutocompleteComponent<T extends BasicModel<string | number>>
-  implements OnInit
-{
+export class TkAutocompleteComponent<
+  T extends BasicModel<string | number>,
+> implements OnInit {
   @Input() options!: T[];
   @Input() minLength = 0;
   @Input() name!: string;
@@ -71,7 +71,7 @@ export class TkAutocompleteComponent<T extends BasicModel<string | number>>
           if (len < this.minLength) return [];
 
           return this._filter(value ?? '');
-        })
+        }),
       );
   }
 
@@ -128,7 +128,7 @@ export class TkAutocompleteComponent<T extends BasicModel<string | number>>
     if (
       !this.allowCustom &&
       !this.options.find(
-        (item) => item.value.toLowerCase() === ctrl.value.toLowerCase()
+        (item) => item.value.toLowerCase() === ctrl.value.toLowerCase(),
       )
     ) {
       this.parentForm.get(this.controlName)!.setValue(null);

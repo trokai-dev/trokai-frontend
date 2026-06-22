@@ -1,6 +1,10 @@
 import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { Address, NavigationManager, equalAddresses } from '@trokai/shared-core';
+import {
+  Address,
+  NavigationManager,
+  equalAddresses,
+} from '@trokai/shared-core';
 import { BuyingService } from '@trokai/shared-data-access';
 import { LoadingService } from '../../loading/loading.service';
 import { UserService } from '@trokai/shared-data-access';
@@ -16,7 +20,12 @@ import { TkAddressFormComponent } from '../address-form/tk-address-form.componen
       <tk-address-form [submit]="false" />
     </div>
     <div class="checkout-footer mt-40">
-      <button mat-flat-button color="primary" (click)="onContinue()" [disabled]="!formRef?.form.valid">
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="onContinue()"
+        [disabled]="!formRef?.form.valid"
+      >
         Continuar
       </button>
     </div>
@@ -36,7 +45,11 @@ export class TkShippingAddressComponent implements AfterViewInit {
     const user = this.navManager.currentUser();
     if (user?.address) {
       const a = user.address;
-      this.formRef.form.patchValue({ ...a, zipCode: a.zipCode?.toString(), number: a.number?.toString() });
+      this.formRef.form.patchValue({
+        ...a,
+        zipCode: a.zipCode?.toString(),
+        number: a.number?.toString(),
+      });
       this.currentAddress = user.address;
     }
   }

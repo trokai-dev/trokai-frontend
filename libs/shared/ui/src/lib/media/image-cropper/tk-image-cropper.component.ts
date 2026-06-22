@@ -55,7 +55,11 @@ export class TkImageCropperComponent implements OnInit {
 
   private dialogRef = inject(MatDialogRef<TkImageCropperComponent>);
   private alert = inject(AlertService);
-  public data = inject<{ profile: boolean; imageBlob: Blob; cropState?: CropState }>(MAT_DIALOG_DATA);
+  public data = inject<{
+    profile: boolean;
+    imageBlob: Blob;
+    cropState?: CropState;
+  }>(MAT_DIALOG_DATA);
 
   ngOnInit() {
     if (this.data.profile) this.aspect = 1;

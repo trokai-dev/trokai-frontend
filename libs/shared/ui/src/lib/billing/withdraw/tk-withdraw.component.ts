@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
@@ -46,7 +53,10 @@ export class TkWithdrawComponent implements OnInit {
     this.loading.start();
     try {
       await this.bankService.confirmWithdrawal();
-      this.alert.showDialog('Saque solicitado', 'Você deve receber o valor em até 1 dia útil.');
+      this.alert.showDialog(
+        'Saque solicitado',
+        'Você deve receber o valor em até 1 dia útil.',
+      );
       this.done.emit();
     } finally {
       this.loading.finish();

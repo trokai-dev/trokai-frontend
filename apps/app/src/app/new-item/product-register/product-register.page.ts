@@ -22,7 +22,10 @@ import {
   IonContent,
   IonTitle,
 } from '@ionic/angular/standalone';
-import { AlertService, TkProductRegisterFormComponent } from '@trokai/shared-ui';
+import {
+  AlertService,
+  TkProductRegisterFormComponent,
+} from '@trokai/shared-ui';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { ToastService } from 'src/app/services/toast-service';
@@ -41,9 +44,7 @@ import { ToastService } from 'src/app/services/toast-service';
     TkProductRegisterFormComponent,
   ],
 })
-export class ProductRegisterPage
-  implements OnInit, IDeactivatableComponent
-{
+export class ProductRegisterPage implements OnInit, IDeactivatableComponent {
   private inventoryService = inject(InventoryService);
   private firebaseService = inject(FirebaseService);
   private toastService = inject(ToastService);
@@ -139,5 +140,4 @@ export class ProductRegisterPage
       'Deseja sair e descartar as alterações?',
     );
   }
-
 }

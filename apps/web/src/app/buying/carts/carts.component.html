@@ -1,16 +1,11 @@
-<div class="container page">
-  <div class="grid-row">
-    <div class="gcol-12 gcol-md-6">
-      <div class="flex items-end">
-        <h2 class="color-gray-dark">
-          {{ justAdded ? "Adicionado à sacola" : "Minhas sacolas" }}
-        </h2>
-      </div>
-    </div>
+<div class="container fill-height">
+  <div class="flex items-end">
+    <h2 class="color-gray-dark">
+      {{ justAdded ? 'Adicionado à sacola' : 'Minhas sacolas' }}
+    </h2>
   </div>
 
   @if (baskets && baskets.length) {
-
     <div class="mt-48 frete-unico">
       <h4 class="color-primary">Frete único!</h4>
       <span class="label-body-2 color-gray-default mt-8">
@@ -30,8 +25,8 @@
     }
   } @else {
     @for (basket of baskets; track basket) {
-      <div class="grid-row mt-24 basket-card">
-        <div class="gcol-12 gcol-md-9">
+      <div class="mt-24 basket-card">
+        <div>
           <!-- Loja -->
           <div class="flex items-center cursor-pointer">
             <div
@@ -83,7 +78,7 @@
                   </span>
                   <span class="label-body-2 mt-8">
                     {{
-                      p.cost * 0.95 | cost | currency: "BRL" : "symbol" : "1.2"
+                      p.cost * 0.95 | cost | currency: 'BRL' : 'symbol' : '1.2'
                     }}
                   </span>
                 </div>
@@ -101,9 +96,7 @@
           }
           <!-- <app-reserve-time text="Continuar" color="primary" (open)="restore(cart)" [ownerId]="basket.owner"></app-reserve-time> -->
         </div>
-        <div
-          class="gcol-12 gcol-md-3 mt-48 mt-md-0 flex flex-col justify-end"
-        >
+        <div class="mt-48 mt-md-0 flex flex-col justify-end">
           <div class="flex justify-between">
             <span class="label-body-2"> Total</span>
             <span class="label-body-2 color-gray-dark">
@@ -111,7 +104,7 @@
                 {{
                   basket.total() * 0.95
                     | cost
-                    | currency: "BRL" : "symbol" : "1.2"
+                    | currency: 'BRL' : 'symbol' : '1.2'
                 }}</b
               >
             </span>

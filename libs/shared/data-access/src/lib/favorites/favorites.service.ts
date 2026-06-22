@@ -35,7 +35,7 @@ export class FavoritesService {
       if (!this.checkFavorite(productId)) await this.favorite(productId);
       else await this.removeFavorite(productId);
       this.favoritesChanged$.next();
-    // eslint-disable-next-line no-empty
+      // eslint-disable-next-line no-empty
     } catch {}
   }
 

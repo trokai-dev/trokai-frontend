@@ -8,36 +8,33 @@
 </ion-header>
 
 <ion-content #content>
-  <ion-grid class="ion-no-padding">
+  <div class="ion-no-padding">
     <div>
       <swiper-container #slide [pagination]="true" class="wardrobe-slides">
         @for (img of product.images; track $index; let i = $index) {
-        <swiper-slide>
-          <img
-            src="{{ product.images[i].lg }}"
-            alt="{{ product.title }}"
-          />
-        </swiper-slide>
+          <swiper-slide>
+            <img src="{{ product.images[i].lg }}" alt="{{ product.title }}" />
+          </swiper-slide>
         }
       </swiper-container>
 
       <div class="flex flex-col slide-buttons">
         @if (canFavorite) {
-        <tk-like-button
-          class="small"
-          [productId]="product._id"
-        ></tk-like-button>
+          <tk-like-button
+            class="small"
+            [productId]="product._id"
+          ></tk-like-button>
         }
 
         @if (canShare) {
-        <div
-          (click)="share()"
-          class="image-badge-button small ion-activatable ripple-parent"
-          [ngClass]="{ 'mt-12': canFavorite }"
-        >
-          <ion-icon color="primary" name="share-social-sharp"> </ion-icon>
-          <ion-ripple-effect></ion-ripple-effect>
-        </div>
+          <div
+            (click)="share()"
+            class="image-badge-button small ion-activatable ripple-parent"
+            [ngClass]="{ 'mt-12': canFavorite }"
+          >
+            <ion-icon color="primary" name="share-social-sharp"> </ion-icon>
+            <ion-ripple-effect></ion-ripple-effect>
+          </div>
         }
       </div>
     </div>
@@ -46,9 +43,9 @@
       <div class="flex justify-between mt-24">
         <h5 class="color-gray-dark text-dots">{{ product.title }}</h5>
         @if (product.cost !== null && product.cost > 0) {
-        <h5 class="color-primary">
-          {{ product.cost | cost | currency: 'BRL' : true : '1.2' }}
-        </h5>
+          <h5 class="color-primary">
+            {{ product.cost | cost | currency: 'BRL' : true : '1.2' }}
+          </h5>
         }
       </div>
 
@@ -65,10 +62,13 @@
         />
 
         @if (product.size !== null && product.size !== '') {
-        <tk-status-pill
-          variant="neutral"
-          [label]="'Tam ' + (product.size | itemName: 'size' : product.category : product.age)"
-        />
+          <tk-status-pill
+            variant="neutral"
+            [label]="
+              'Tam ' +
+              (product.size | itemName: 'size' : product.category : product.age)
+            "
+          />
         }
 
         <tk-status-pill
@@ -81,30 +81,30 @@
         />
       </div>
     </div>
-  </ion-grid>
+  </div>
 </ion-content>
 
 @if (buying) {
-<ion-footer class="px-24 py-16">
-  @if (!inCart) {
-  <button
-    mat-flat-button
-    class="action-button"
-    color="primary"
-    (click)="clickAdd()"
-  >
-    Adicionar ao carrinho
-  </button>
-  }
-  @if (inCart) {
-  <button
-    mat-flat-button
-    class="action-button"
-    color="warn"
-    (click)="clickRemove()"
-  >
-    Remover do carrinho
-  </button>
-  }
-</ion-footer>
+  <ion-footer class="px-24 py-16">
+    @if (!inCart) {
+      <button
+        mat-flat-button
+        class="action-button"
+        color="primary"
+        (click)="clickAdd()"
+      >
+        Adicionar ao carrinho
+      </button>
+    }
+    @if (inCart) {
+      <button
+        mat-flat-button
+        class="action-button"
+        color="warn"
+        (click)="clickRemove()"
+      >
+        Remover do carrinho
+      </button>
+    }
+  </ion-footer>
 }

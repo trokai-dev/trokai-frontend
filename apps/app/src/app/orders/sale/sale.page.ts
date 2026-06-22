@@ -23,7 +23,6 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonGrid,
   IonFooter,
   IonButtons,
   IonIcon,
@@ -31,8 +30,6 @@ import {
   IonAvatar,
   IonImg,
   IonRippleEffect,
-  IonCol,
-  IonRow,
   IonThumbnail,
   IonText,
 } from '@ionic/angular/standalone';
@@ -40,7 +37,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
 import { chatbubble, chevronDown, chevronUp } from 'ionicons/icons';
 import { ChatComponent } from 'src/app/chat/chat.component';
-import { AlertService, CostPipe, TkSellerHeaderComponent } from '@trokai/shared-ui';
+import {
+  AlertService,
+  CostPipe,
+  TkSellerHeaderComponent,
+} from '@trokai/shared-ui';
 import { ToastService } from 'src/app/services/toast-service';
 import { TutorialService } from 'src/app/services/tutorial.service';
 import { MainService } from 'src/app/services/main.service';
@@ -54,13 +55,12 @@ import { CartItemComponent } from 'src/app/shared/components/cart-item/cart-item
   standalone: true,
   imports: [
     MatButtonModule,
-    
+
     IonFooter,
     IonHeader,
     IonToolbar,
     IonTitle,
     IonContent,
-    IonGrid,
     BackButtonComponent,
     CurrencyPipe,
     DatePipe,
@@ -71,8 +71,6 @@ import { CartItemComponent } from 'src/app/shared/components/cart-item/cart-item
     IonAvatar,
     IonImg,
     IonRippleEffect,
-    IonCol,
-    IonRow,
     OrderDeliveryComponent,
     CartItemComponent,
     TkSellerHeaderComponent,
@@ -131,7 +129,9 @@ export class SalePage implements OnInit, OnDestroy {
       this.mountBuyer();
 
       this.loading = false;
-    } catch { /* intentional */ }
+    } catch {
+      /* intentional */
+    }
   }
 
   mountStatus() {
@@ -190,7 +190,6 @@ export class SalePage implements OnInit, OnDestroy {
   }
 
   async chat() {
-
     if (!OrderStatusCanChat.includes(this.order.status)) return;
 
     const modal = await this.modalCtrl.create({

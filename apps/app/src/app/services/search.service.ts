@@ -2,7 +2,11 @@ import { User } from '@trokai/shared-core';
 import { Clothes } from '@trokai/shared-core';
 import { inject, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Filters, SearchResponse, UserSearchResponse } from '@trokai/shared-core';
+import {
+  Filters,
+  SearchResponse,
+  UserSearchResponse,
+} from '@trokai/shared-core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { GeolocationService } from './geolocation.service';

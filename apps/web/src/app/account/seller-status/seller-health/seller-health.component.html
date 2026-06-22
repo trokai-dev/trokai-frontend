@@ -1,41 +1,47 @@
 @if (healthData && healthStatus) {
-<div>
-  <div class="flex justify-between items-end mb-8">
-    <span class="score-number color-gray-dark">
-      {{ healthData.finalScore }}<span class="score-max color-gray-light-1">/100</span>
-    </span>
-    <span class="status-badge" [ngClass]="healthStatus.class">{{ healthStatus.label }}</span>
-  </div>
-
-  <div class="progress-bar-bg mb-24">
-    <div
-      class="progress-bar-fill"
-      [style.width.%]="healthData.finalScore"
-      [style.background-color]="healthStatus.color"
-    ></div>
-  </div>
-
-  <h6 class="color-gray-dark mb-16">💡 Dicas para melhorar suas vendas</h6>
-
-  <div class="flex flex-col gap-16">
-    @for (tip of tipList; track $index) {
-    <div
-      class="tip-card"
-      [ngClass]="tip.isGood ? 'tip-card--success' : 'tip-card--alert'"
-    >
-      <p class="label-body-2 strong mb-4">{{ tip.title }}</p>
-      <p class="label-caption-1 color-gray-default mb-0">{{ tip.message }}</p>
+  <div>
+    <div class="flex justify-between items-end mb-8">
+      <span class="score-number color-gray-dark">
+        {{ healthData.finalScore
+        }}<span class="score-max color-gray-light-1">/100</span>
+      </span>
+      <span class="status-badge" [ngClass]="healthStatus.class">{{
+        healthStatus.label
+      }}</span>
     </div>
-    }
 
-    @if (healthData.finalScore >= 90) {
-    <div class="tip-card tip-card--success">
-      <p class="label-body-2 strong mb-4">🎉 Parabéns!</p>
-      <p class="label-caption-1 color-gray-default mb-0">
-        Sua conta está voando. Continue assim para manter seus produtos no topo das buscas do Trokaí.
-      </p>
+    <div class="progress-bar-bg mb-24">
+      <div
+        class="progress-bar-fill"
+        [style.width.%]="healthData.finalScore"
+        [style.background-color]="healthStatus.color"
+      ></div>
     </div>
-    }
+
+    <h6 class="color-gray-dark mb-16">💡 Dicas para melhorar suas vendas</h6>
+
+    <div class="flex flex-col gap-16">
+      @for (tip of tipList; track $index) {
+        <div
+          class="tip-card"
+          [ngClass]="tip.isGood ? 'tip-card--success' : 'tip-card--alert'"
+        >
+          <p class="label-body-2 strong mb-4">{{ tip.title }}</p>
+          <p class="label-caption-1 color-gray-default mb-0">
+            {{ tip.message }}
+          </p>
+        </div>
+      }
+
+      @if (healthData.finalScore >= 90) {
+        <div class="tip-card tip-card--success">
+          <p class="label-body-2 strong mb-4">🎉 Parabéns!</p>
+          <p class="label-caption-1 color-gray-default mb-0">
+            Sua conta está voando. Continue assim para manter seus produtos no
+            topo das buscas do Trokaí.
+          </p>
+        </div>
+      }
+    </div>
   </div>
-</div>
 }

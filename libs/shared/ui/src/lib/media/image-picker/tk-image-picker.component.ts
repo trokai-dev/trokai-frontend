@@ -19,7 +19,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { firstValueFrom } from 'rxjs';
 import { MediaService } from '@trokai/shared-core';
 import { LoadingService } from '../../loading/loading.service';
-import { TkImageCropperComponent, CropState } from '../image-cropper/tk-image-cropper.component';
+import {
+  TkImageCropperComponent,
+  CropState,
+} from '../image-cropper/tk-image-cropper.component';
 
 /**
  * Platform-agnostic image picker. The image source is supplied by the injected
@@ -100,7 +103,7 @@ export class TkImagePickerComponent implements OnInit, OnDestroy {
     this.revokeSelectedUrl();
     this._selectedObjectUrl = URL.createObjectURL(blob);
     this.selectedImage = this.sanitizer.bypassSecurityTrustUrl(
-      this._selectedObjectUrl
+      this._selectedObjectUrl,
     );
   }
 

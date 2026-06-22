@@ -109,8 +109,9 @@ export class PhoneVerifyDialogComponent implements OnInit, OnDestroy {
       this.lastSentTime = new Date();
       await this.storage.set(this.storageKey, this.lastSentTime.toISOString());
       this._startTicker();
-    // eslint-disable-next-line no-empty
-    } catch {} finally {
+      // eslint-disable-next-line no-empty
+    } catch {
+    } finally {
       this.loading.finish();
     }
   }
@@ -123,8 +124,9 @@ export class PhoneVerifyDialogComponent implements OnInit, OnDestroy {
       this._clearTicker();
       await this.storage.remove(this.storageKey);
       this.dialogRef.close({ verified: true });
-    // eslint-disable-next-line no-empty
-    } catch {} finally {
+      // eslint-disable-next-line no-empty
+    } catch {
+    } finally {
       this.loading.finish();
     }
   }

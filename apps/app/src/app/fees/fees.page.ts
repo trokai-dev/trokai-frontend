@@ -6,7 +6,8 @@ import {
   IonContent,
   IonHeader,
   IonTitle,
-  IonToolbar, IonRow, IonCol, IonGrid } from '@ionic/angular/standalone';
+  IonToolbar,
+} from '@ionic/angular/standalone';
 import { GlobalService } from '../services/global.service';
 
 @Component({
@@ -14,7 +15,7 @@ import { GlobalService } from '../services/global.service';
   templateUrl: './fees.page.html',
   styleUrls: ['./fees.page.scss'],
   standalone: true,
-  imports: [IonGrid, IonCol, IonRow,
+  imports: [
     IonHeader,
     IonToolbar,
     IonTitle,

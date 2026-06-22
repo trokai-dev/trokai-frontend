@@ -3,7 +3,9 @@
     @for (m of messages; track m) {
       <!-- day divider -->
       @if (isTimeDivider(m)) {
-        <div class="message-diff-row"><span>{{ m.text }}</span></div>
+        <div class="message-diff-row">
+          <span>{{ m.text }}</span>
+        </div>
       }
 
       <!-- other user message -->
@@ -11,7 +13,9 @@
         <div class="message-other-row">
           <div class="message-container">
             <span>{{ m.text }}</span>
-            <div class="message-footer"><span>{{ getMessageTime(m) }}</span></div>
+            <div class="message-footer">
+              <span>{{ getMessageTime(m) }}</span>
+            </div>
           </div>
         </div>
       }
@@ -21,7 +25,9 @@
         <div class="message-user-row">
           <div class="message-container">
             <span>{{ m.text }}</span>
-            <div class="message-footer"><span>{{ getMessageTime(m) }}</span></div>
+            <div class="message-footer">
+              <span>{{ getMessageTime(m) }}</span>
+            </div>
           </div>
         </div>
       }

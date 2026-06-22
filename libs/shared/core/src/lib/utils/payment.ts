@@ -13,9 +13,13 @@ export function getCreditCardBrand(creditCardNumber: string): PaymentBrands {
 
   const result = creditCardType(creditCardNumber);
   switch (result[0]?.type) {
-    case 'mastercard': return PaymentBrands.MASTERCARD;
-    case 'visa': return PaymentBrands.VISA;
-    case 'elo': return PaymentBrands.ELO;
-    default: return PaymentBrands.CARD;
+    case 'mastercard':
+      return PaymentBrands.MASTERCARD;
+    case 'visa':
+      return PaymentBrands.VISA;
+    case 'elo':
+      return PaymentBrands.ELO;
+    default:
+      return PaymentBrands.CARD;
   }
 }

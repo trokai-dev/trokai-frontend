@@ -14,11 +14,10 @@ export const environment = {
   urlApi: 'http://localhost:3987',
   // imageURL: 'https://images.trokai.com.br/users_dev/',
 
- // AMBIENTE HOMOLOGACAO ----------------------------------------------------------------------
+  // AMBIENTE HOMOLOGACAO ----------------------------------------------------------------------
 
   // urlApi: 'https://api-dev.trokai.com',
   // imageURL: 'https://images.trokai.com.br/users_dev/',
-
 
   firebaseConfig: {
     apiKey: 'AIzaSyDEkb2Mi8eBAkt7839MBpVxS-X6PfSr5ko',

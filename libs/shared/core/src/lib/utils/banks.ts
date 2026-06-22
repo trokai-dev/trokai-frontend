@@ -257,7 +257,7 @@ export function getBanksList(): BasicModel<string>[] {
     '099 Uniprime Central – Central Interestadual De Cooperativas de Credito Ltda.',
     '084 Uniprime Norte Do Paraná – Coop de Economia e Crédito Mútuo Dos Médicos',
     '373 UP.P Sociedade de Empréstimo Entre Pessoas S.A.',
-    '298 Vip\'s Corretora de Câmbio Ltda.',
+    "298 Vip's Corretora de Câmbio Ltda.",
     '296 Vision S.A. Corretora De Cambio',
     '367 Vitreo Distribuidora de Títulos e Valores Mobiliários S.A.',
     '310 Vortx Distribuidora de Titulos e Valores Mobiliarios Ltda.',

@@ -39,7 +39,9 @@ export class BuyingService {
   private navigator = inject(CheckoutNavigator);
 
   private _checkoutLocal = new BehaviorSubject<CheckoutLocal | null>(null);
-  private _checkoutResponse = new BehaviorSubject<CheckoutResponse | null>(null);
+  private _checkoutResponse = new BehaviorSubject<CheckoutResponse | null>(
+    null,
+  );
 
   private _reserves = new BehaviorSubject<any[] | null>(null);
   private _baskets = new BehaviorSubject<Basket[]>([]);
@@ -180,8 +182,9 @@ export class BuyingService {
       this.analytics.beginCheckout(cartTotal, basket.products);
     } catch (error) {
       if ((error as any).error) this.reserveError((error as any).error, basket);
-    // eslint-disable-next-line no-empty
-    } finally {}
+      // eslint-disable-next-line no-empty
+    } finally {
+    }
   }
 
   async cancelReserve(ownerId: string) {
@@ -303,7 +306,7 @@ export class BuyingService {
       this._baskets.next(baskets);
 
       this.refreshFormerReserves(formerReserves);
-    // eslint-disable-next-line no-empty
+      // eslint-disable-next-line no-empty
     } catch {}
   }
 
@@ -331,14 +334,15 @@ export class BuyingService {
 
       this.storeBaskets(baskets);
       this._baskets.next(baskets);
-    // eslint-disable-next-line no-empty
+      // eslint-disable-next-line no-empty
     } catch {}
   }
 
   private isReserved(basket: Basket): boolean {
-    return this._baskets
-      .getValue()
-      .find((b) => b.owner._id === basket.owner._id)?.reserved ?? false;
+    return (
+      this._baskets.getValue().find((b) => b.owner._id === basket.owner._id)
+        ?.reserved ?? false
+    );
   }
 
   async openCheckout(ownerId: string) {
@@ -386,8 +390,9 @@ export class BuyingService {
       await this.loadBasketsStorage();
       await this.getMyReserves();
 
-      const clothes = (this._reserves.getValue() ?? [])
-        .filter((c) => c.owner === checkoutLocal.owner._id);
+      const clothes = (this._reserves.getValue() ?? []).filter(
+        (c) => c.owner === checkoutLocal.owner._id,
+      );
 
       if (!clothes || !clothes.length) {
         this.clearCheckout();
@@ -535,7 +540,9 @@ export class BuyingService {
 
     const payload: BuyingPayload = new BuyingPayload();
 
-    payload.clothesIds = checkoutLocal.products.map((item) => item._id).filter((id): id is string => !!id);
+    payload.clothesIds = checkoutLocal.products
+      .map((item) => item._id)
+      .filter((id): id is string => !!id);
     payload.shippingType = checkoutLocal.shippingOption;
     payload.paymentMethod = checkoutLocal.paymentOption;
 
@@ -589,7 +596,9 @@ export class BuyingService {
     const { products, couponCode } = this._checkoutLocal.getValue()!;
 
     const params: Record<string, string | string[]> = {
-      clothes: products.map((p: Clothes) => p._id).filter((id): id is string => !!id),
+      clothes: products
+        .map((p: Clothes) => p._id)
+        .filter((id): id is string => !!id),
       // add coupon code if exists
       ...(couponCode && { couponCode }),
     };

@@ -1,7 +1,7 @@
 @if (form && itemsMap && params) {
   <div>
     <h2 class="color-gray-dark capitalize">
-      {{ duplicating ? "Duplicar anúncio" : "Anunciar" }}
+      {{ duplicating ? 'Duplicar anúncio' : 'Anunciar' }}
     </h2>
 
     @if (waitingAdjustment && adjusts) {
@@ -152,7 +152,7 @@
         }
         <mat-form-field appearance="outline" class="w-full">
           <mat-label>
-            {{ firstCost ? "Preço novo" : "Preço" }}
+            {{ firstCost ? 'Preço novo' : 'Preço' }}
           </mat-label>
           <input
             [errorStateMatcher]="costRangeErrorMatcher"
@@ -166,7 +166,9 @@
               O valor mínimo é
               <b>
                 {{
-                  params.minProductCost | cost | currency: "BRL" : true : "1.2-2"
+                  params.minProductCost
+                    | cost
+                    | currency: 'BRL' : true : '1.2-2'
                 }}
               </b>
             </mat-error>
@@ -176,7 +178,9 @@
               O valor máximo é
               <b>
                 {{
-                  params.maxProductCost | cost | currency: "BRL" : true : "1.2-2"
+                  params.maxProductCost
+                    | cost
+                    | currency: 'BRL' : true : '1.2-2'
                 }}
               </b>
             </mat-error>
@@ -194,7 +198,7 @@
             firstCost
           ) {
             <span class="label-caption-1 color-primary">
-              {{ (1 - currentCost / firstCost) * 100 | number: "1.2-2" }}% de
+              {{ (1 - currentCost / firstCost) * 100 | number: '1.2-2' }}% de
               desconto
             </span>
           }

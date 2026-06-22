@@ -1,5 +1,15 @@
 @import 'variables';
 
+:host {
+  display: block;
+}
+
+// Was gcol-12 gcol-md-6 mx-auto — full on mobile, centered ~6/12 (57rem) on desktop.
+.question-card {
+  max-width: 57rem;
+  margin-inline: auto;
+}
+
 .questions-help-cta {
   display: flex;
   align-items: center;

@@ -1,4 +1,4 @@
-<div class="page-wrap">
+<div class="page">
   <div class="login-card text-center">
     <h2 class="color-gray-dark">Fazer login no Trokaí</h2>
 
@@ -13,7 +13,10 @@
 
       <tk-google-btn (googleClick)="googleLogin()"></tk-google-btn>
 
-      <tk-apple-btn class="mt-8 block" (appleClick)="appleLogin()"></tk-apple-btn>
+      <tk-apple-btn
+        class="mt-8 block"
+        (appleClick)="appleLogin()"
+      ></tk-apple-btn>
     </tk-login-form>
   </div>
 </div>

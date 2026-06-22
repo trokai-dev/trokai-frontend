@@ -15,7 +15,6 @@ import { ReserveTimeComponent } from '../buying/reserve-time/reserve-time.compon
 import {
   IonButtons,
   IonContent,
-  IonGrid,
   IonHeader,
   IonTitle,
   IonToolbar,
@@ -31,7 +30,11 @@ import { addIcons } from 'ionicons';
 import { sadOutline } from 'ionicons/icons';
 import { closeOutline } from 'ionicons/icons';
 import { CompletingInformationService } from '@trokai/shared-data-access';
-import { LoadingService, CostPipe, TkUserAvatarComponent } from '@trokai/shared-ui';
+import {
+  LoadingService,
+  CostPipe,
+  TkUserAvatarComponent,
+} from '@trokai/shared-ui';
 
 @Component({
   selector: 'app-carts',
@@ -40,7 +43,7 @@ import { LoadingService, CostPipe, TkUserAvatarComponent } from '@trokai/shared-
   standalone: true,
   imports: [
     MatButtonModule,
-    
+
     TkUserAvatarComponent,
     IonIcon,
     IonRippleEffect,
@@ -50,7 +53,6 @@ import { LoadingService, CostPipe, TkUserAvatarComponent } from '@trokai/shared-
     IonButtons,
     IonTitle,
     IonContent,
-    IonGrid,
     BackButtonComponent,
     RouterLink,
     ReserveTimeComponent,
@@ -85,8 +87,7 @@ export class CartsPage implements OnDestroy, OnInit {
       this.mount(baskets),
     );
 
-    if (this.authService.getUserValue())
-      this.buyingService.getMyReserves(); // to update previous reserves
+    if (this.authService.getUserValue()) this.buyingService.getMyReserves(); // to update previous reserves
   }
 
   goToWardrobe(userId) {
@@ -141,7 +142,9 @@ export class CartsPage implements OnDestroy, OnInit {
       }
 
       this.baskets = [suggBasket];
-    } catch { /* intentional */ }
+    } catch {
+      /* intentional */
+    }
   }
 
   async checkout(ownerId: string) {
@@ -174,5 +177,4 @@ export class CartsPage implements OnDestroy, OnInit {
   ngOnDestroy(): void {
     if (this.subs) this.subs.unsubscribe();
   }
-
 }

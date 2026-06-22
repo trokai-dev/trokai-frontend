@@ -1,6 +1,6 @@
 <ion-content>
-  <ion-grid class="p-24">
-    <ion-row>
+  <div class="p-24">
+    <div>
       <ion-icon
         name="close"
         (click)="closeExit()"
@@ -8,72 +8,68 @@
         mode="ios"
       >
       </ion-icon>
-    </ion-row>
+    </div>
 
     @if (!done && !loading) {
-    <ion-row class="flex justify-center">
-      <h2 class="color-gray-dark">Solicitar cancelamento</h2>
-    </ion-row>
+      <div class="flex justify-center">
+        <h2 class="color-gray-dark">Solicitar cancelamento</h2>
+      </div>
     }
 
     @if (loading) {
-    <div
-      class="flex justify-center items-center mt-40"
-    >
-      <ion-spinner name="crescent"></ion-spinner>
-    </div>
+      <div class="flex justify-center items-center mt-40">
+        <ion-spinner name="crescent"></ion-spinner>
+      </div>
     }
 
     @if (!done && !loading) {
-    <div>
-      <mat-form-field appearance="outline" class="w-full mt-40">
-        <textarea
-          matInput
-          cdkTextareaAutosize
-          cdkAutosizeMinRows="4"
-          maxlength="500"
-          (input)="inputArea()"
-          [(ngModel)]="message"
-          placeholder="Qual o motivo do cancelamento?"
-        ></textarea>
-      </mat-form-field>
-    </div>
+      <div>
+        <mat-form-field appearance="outline" class="w-full mt-40">
+          <textarea
+            matInput
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="4"
+            maxlength="500"
+            (input)="inputArea()"
+            [(ngModel)]="message"
+            placeholder="Qual o motivo do cancelamento?"
+          ></textarea>
+        </mat-form-field>
+      </div>
     }
 
     @if (done && !loading) {
-    <div
-      class="flex flex-col justify-center items-center"
-    >
-      <ion-icon
-        name="checkmark-outline"
-        class="color-primary mt-40"
-        style="font-size: 7rem"
-      >
-      </ion-icon>
+      <div class="flex flex-col justify-center items-center">
+        <ion-icon
+          name="checkmark-outline"
+          class="color-primary mt-40"
+          style="font-size: 7rem"
+        >
+        </ion-icon>
 
-      <h6 class="color-gray-dark mt-16">Cancelamento solicitado!</h6>
+        <h6 class="color-gray-dark mt-16">Cancelamento solicitado!</h6>
 
-      <span class="label-body-2 text-center color-gray-default mt-40 block">
-        Vamos te responder no email
-        <ion-text>
-          <b>{{ order.seller.email }}</b>
-        </ion-text>
-      </span>
-    </div>
+        <span class="label-body-2 text-center color-gray-default mt-40 block">
+          Vamos te responder no email
+          <ion-text>
+            <b>{{ order.seller.email }}</b>
+          </ion-text>
+        </span>
+      </div>
     }
-  </ion-grid>
+  </div>
 </ion-content>
 
 <ion-footer class="px-24 py-16">
   @if (!done) {
-  <button
-    mat-flat-button
-    color="primary"
-    class="action-button"
-    [disabled]="loading || !formValid()"
-    (click)="sendMessage()"
-  >
-    Solicitar cancelamento
-  </button>
+    <button
+      mat-flat-button
+      color="primary"
+      class="action-button"
+      [disabled]="loading || !formValid()"
+      (click)="sendMessage()"
+    >
+      Solicitar cancelamento
+    </button>
   }
 </ion-footer>

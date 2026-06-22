@@ -23,7 +23,7 @@ export class AuthGuard {
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    state: RouterStateSnapshot,
   ):
     | boolean
     | UrlTree
@@ -39,7 +39,7 @@ export class AuthGuard {
   // canLoad ao inves de canActivate para evitar que o lazy loaded baixe a pagina que nao poderei acessar
   canLoad(
     route: Route,
-    segments: UrlSegment[]
+    segments: UrlSegment[],
   ): Observable<boolean> | Promise<boolean> | boolean {
     const allows = !!this.authService.getUserValue();
 

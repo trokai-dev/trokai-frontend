@@ -10,7 +10,6 @@ import {
   IonButtons,
   IonTitle,
   IonContent,
-  IonGrid,
   IonIcon,
   IonRippleEffect,
 } from '@ionic/angular/standalone';
@@ -39,7 +38,6 @@ import { FirebaseService } from '../services/firebase.service';
     IonButtons,
     IonTitle,
     IonContent,
-    IonGrid,
     IonIcon,
     IonRippleEffect,
     BackButtonComponent,
@@ -76,8 +74,7 @@ export class OptionsPage implements OnInit {
 
     if (this.authService.hasPassword !== null)
       this.hasPassword = this.authService.hasPassword;
-    else
-      this.hasPassword = await this.authService.userHasPassword();
+    else this.hasPassword = await this.authService.userHasPassword();
   }
 
   async askDelete() {

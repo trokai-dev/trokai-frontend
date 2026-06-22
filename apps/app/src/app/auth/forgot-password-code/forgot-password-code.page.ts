@@ -9,7 +9,6 @@ import { NewPasswordPage } from 'src/app/new-password/new-password.page';
 import { BackButtonComponent } from '../../shared/components/back-button/back-button.component';
 import {
   IonContent,
-  IonGrid,
   IonHeader,
   IonNav,
   IonToolbar,
@@ -28,7 +27,6 @@ import { CompletingInformationService } from '@trokai/shared-data-access';
   imports: [
     IonHeader,
     IonContent,
-    IonGrid,
     IonToolbar,
     BackButtonComponent,
     RecoveryCodeFormComponent,

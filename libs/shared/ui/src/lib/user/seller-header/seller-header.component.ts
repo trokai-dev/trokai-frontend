@@ -17,7 +17,12 @@ import { TkUserAvatarComponent } from '../user-avatar/user-avatar.component';
   templateUrl: './seller-header.component.html',
   styleUrls: ['./seller-header.component.scss'],
   standalone: true,
-  imports: [TkUserAvatarComponent, MatIconModule, MatButtonModule, MatTooltipModule],
+  imports: [
+    TkUserAvatarComponent,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+  ],
 })
 export class TkSellerHeaderComponent {
   @Input() user!: User;

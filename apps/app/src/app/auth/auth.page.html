@@ -1,46 +1,41 @@
 <ion-content>
-
   <div class="top-div">
-    <ion-img src="../../assets/icons/trokai-clean.svg">
-    </ion-img>
+    <ion-img src="../../assets/icons/trokai-clean.svg"> </ion-img>
   </div>
 
-
-  <ion-grid class="p-24">
-
+  <div class="p-24">
     @if (!loading) {
     <div>
-
       <tk-google-btn (googleClick)="googleLogin()"></tk-google-btn>
 
       @if (showApple) {
-      <tk-apple-btn class="mt-8 block" (appleClick)="appleLogin()"></tk-apple-btn>
+      <tk-apple-btn
+        class="mt-8 block"
+        (appleClick)="appleLogin()"
+      ></tk-apple-btn>
       }
 
       <button mat-flat-button (click)="goToLogin()" class="action-button mt-40">
         Entrar com email
       </button>
 
-
       <div class="w-full ion-text-center mt-40">
-        <span class="label-body-2  w-full">
+        <span class="label-body-2 w-full">
           Ao continuar, você aceita nossa
-          <ion-text color="primary" (click)="openPoliticas()">Política de Privacidade</ion-text> e
-          <ion-text color="primary" (click)="openTermos()"> Termos de Uso </ion-text>
+          <ion-text color="primary" (click)="openPoliticas()"
+            >Política de Privacidade</ion-text
+          >
+          e
+          <ion-text color="primary" (click)="openTermos()">
+            Termos de Uso
+          </ion-text>
         </span>
       </div>
-
-
-
+    </div>
+    } @if (loading) {
+    <div class="flex justify-center">
+      <ion-spinner name="crescent"> </ion-spinner>
     </div>
     }
-
-    @if (loading) {
-    <ion-row class="flex justify-center">
-      <ion-spinner name="crescent">
-      </ion-spinner>
-    </ion-row>
-    }
-  </ion-grid>
-
+  </div>
 </ion-content>

@@ -7,22 +7,12 @@
 
     <ion-buttons slot="primary">
       @if (basketCount > 0 && !myProduct) {
-      <button
-        mat-icon-button
-        class="ml-16"
-        (click)="clickCart()"
-      >
+      <button mat-icon-button class="ml-16" (click)="clickCart()">
         <ion-icon name="cart-outline"></ion-icon>
         <ion-badge color="tertiary"> {{ basketCount }} </ion-badge>
       </button>
-      }
-
-      @if (myProduct) {
-      <button
-        mat-icon-button
-        class="mr-4"
-        (click)="clickOptions()"
-      >
+      } @if (myProduct) {
+      <button mat-icon-button class="mr-4" (click)="clickOptions()">
         <ion-icon name="ellipsis-horizontal"></ion-icon>
       </button>
       }
@@ -31,7 +21,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="p-0 pb-24">
+  <div class="p-0 pb-24">
     <div
       class="p-0 relative"
       [ngClass]="{
@@ -47,18 +37,14 @@
       <div class="w-full flex justify-center mt-24">
         <ion-spinner></ion-spinner>
       </div>
-      }
-
-      @if (statusText) {
-      <tk-status-pill [variant]="statusVariant" [label]="statusText" position="overlay" />
-      }
-
-      @if (product) {
-      <swiper-container
-        #swiper
-        [pagination]="true"
-        class="wardrobe-slides"
-      >
+      } @if (statusText) {
+      <tk-status-pill
+        [variant]="statusVariant"
+        [label]="statusText"
+        position="overlay"
+      />
+      } @if (product) {
+      <swiper-container #swiper [pagination]="true" class="wardrobe-slides">
         @for (img of product.clothes.images; track $index; let i = $index) {
         <swiper-slide>
           <img
@@ -69,15 +55,10 @@
         </swiper-slide>
         }
       </swiper-container>
-      }
-
-      @if (product) {
+      } @if (product) {
       <div class="flex flex-col slide-buttons">
         @if (product && !myProduct) {
-        <tk-like-button
-          class="large"
-          [productId]="product.clothes._id"
-        >
+        <tk-like-button class="large" [productId]="product.clothes._id">
         </tk-like-button>
         }
 
@@ -115,21 +96,15 @@
             {{expiration?.text}}
           </span>
         </div>
-        }
-
-        @if (waiting_publication && myProduct) {
-        <div
-          class="mt-16 flex status-wrapper"
-        >
+        } @if (waiting_publication && myProduct) {
+        <div class="mt-16 flex status-wrapper">
           <ion-icon
             name="time-outline"
             class="color-primary icon-smaller mr-8"
           ></ion-icon>
           <span class="label-body-2">Em análise</span>
         </div>
-        }
-
-        @if (reserved) {
+        } @if (reserved) {
         <div class="mt-16 flex status-wrapper">
           <ion-icon
             name="time-outline"
@@ -137,9 +112,7 @@
           ></ion-icon>
           <span class="label-body-2">Produto reservado</span>
         </div>
-        }
-
-        @if (paused) {
+        } @if (paused) {
         <div class="mt-16 flex status-wrapper">
           <ion-icon
             name="pause-outline"
@@ -147,9 +120,7 @@
           ></ion-icon>
           <span class="label-body-2">Anúncio pausado</span>
         </div>
-        }
-
-        @if (sold) {
+        } @if (sold) {
         <div class="mt-16 flex status-wrapper">
           <ion-icon
             name="cash-outline"
@@ -157,9 +128,7 @@
           ></ion-icon>
           <span class="label-body-2">Produto vendido</span>
         </div>
-        }
-
-        @if (selling) {
+        } @if (selling) {
         <div class="mt-16 flex status-wrapper">
           <ion-icon
             name="time-outline"
@@ -167,9 +136,7 @@
           ></ion-icon>
           <span class="label-body-2">Reservado</span>
         </div>
-        }
-
-        @if (expired && myProduct) {
+        } @if (expired && myProduct) {
         <div class="mt-16 flex status-wrapper">
           <ion-icon
             name="alert-circle-outline"
@@ -177,24 +144,16 @@
           ></ion-icon>
           <span class="label-body-2">Anúncio expirado</span>
         </div>
-        }
-
-        @if ((expired && !myProduct) || unavailable) {
-        <div
-          class="mt-16 flex status-wrapper"
-        >
+        } @if ((expired && !myProduct) || unavailable) {
+        <div class="mt-16 flex status-wrapper">
           <ion-icon
             name="alert-circle-outline"
             class="color-error icon-smaller mr-8"
           ></ion-icon>
           <span class="label-body-2">Produto indisponível</span>
         </div>
-        }
-
-        @if (waiting_adjustment && myProduct) {
-        <div
-          class="mt-16 flex status-wrapper"
-        >
+        } @if (waiting_adjustment && myProduct) {
+        <div class="mt-16 flex status-wrapper">
           <ion-icon
             name="alert-circle-outline"
             class="color-error icon-smaller mr-8"
@@ -207,14 +166,9 @@
       @if (published || myProduct) {
       <div>
         <!-- CTA Venda -->
-        @if (product.clothes.sell &&
-                        (published ||
-                          reserved ||
-                          waiting_adjustment ||
-                          waiting_publication)) {
-        <div
-          class="product-cta"
-        >
+        @if (product.clothes.sell && (published || reserved ||
+        waiting_adjustment || waiting_publication)) {
+        <div class="product-cta">
           <div class="product-cta-footer">
             <div class="product-cta-costs">
               @if (product.payment) {
@@ -253,12 +207,8 @@
                     .installmentValue | cost | currency : "BRL" : "symbol" :
                     "1.2" }} sem juros
                   </span>
-                  @if (
-                    product.payment.creditCard.maxInstallments
-                      .installments >
-                    product.payment.creditCard.maxNoInterest
-                      .installments
-                  ) {
+                  @if ( product.payment.creditCard.maxInstallments .installments
+                  > product.payment.creditCard.maxNoInterest .installments ) {
                   <span class="product-installments-secondary">
                     ou até {{ product.payment.creditCard.maxInstallments
                     .installments }}x com juros
@@ -269,23 +219,18 @@
 
                 <div class="product-cta-delivery">
                   @if (owner?.inPerson) {
-                  <span
-                    class="{{ owner.shipping ? ' mb-8 block' : '' }}"
-                  >
-                    Retirada presencial
-                    @if (!myProduct) {
+                  <span class="{{ owner.shipping ? ' mb-8 block' : '' }}">
+                    Retirada presencial @if (!myProduct) {
                     <ion-text>gratuita</ion-text>
                     }
                   </span>
-                  }
-                  @if (owner?.shipping && !myProduct) {
+                  } @if (owner?.shipping && !myProduct) {
                   <div>
                     <tk-zipcode-shipping-fee
                       [productId]="productId"
                     ></tk-zipcode-shipping-fee>
                   </div>
-                  }
-                  @if (owner?.shipping && myProduct) {
+                  } @if (owner?.shipping && myProduct) {
                   <div>
                     <span>Envio pelos correios</span>
                   </div>
@@ -310,9 +255,7 @@
                   sacola" : "COMPRAR" }}
                 </b>
               </button>
-              }
-
-              @if (product_in_basket) {
+              } @if (product_in_basket) {
               <button
                 mat-flat-button
                 class="action-button"
@@ -321,9 +264,7 @@
               >
                 <b> Ver na sacola </b>
               </button>
-              }
-
-              @if (product_in_basket) {
+              } @if (product_in_basket) {
               <button
                 mat-stroked-button
                 class="action-button mt-12 btn-tertiary"
@@ -355,9 +296,7 @@
         </div>
         }
       </div>
-      }
-
-      @if (isInReserves && owner) {
+      } @if (isInReserves && owner) {
       <div class="mt-4">
         <app-reserve-time
           [ownerId]="owner._id"
@@ -378,7 +317,10 @@
 
       <div class="flex mt-16 flex-wrap gap-8">
         @if (product.clothes.brand) {
-        <tk-status-pill variant="neutral" [label]="product.clothes.brand.name" />
+        <tk-status-pill
+          variant="neutral"
+          [label]="product.clothes.brand.name"
+        />
         }
 
         <tk-status-pill
@@ -417,25 +359,18 @@
         >
           <div class="flex flex-col">
             <h6 class="color-gray-dark text-dots">{{q.question}}</h6>
-            <span
-              class="mt-8 text-dots block label-body-2 color-gray-default"
+            <span class="mt-8 text-dots block label-body-2 color-gray-default"
               >{{ q.answer ? q.answer : 'Aguardando resposta' }}
             </span>
           </div>
           <ion-icon name="chevron-forward" class="color-primary"></ion-icon>
           <ion-ripple-effect></ion-ripple-effect>
         </div>
-        }
-
-        @if (displayQuestions && displayQuestions.length === 0) {
+        } @if (displayQuestions && displayQuestions.length === 0) {
         <div class="mt-16">
-          <span class="label-body-2 color-gray-default"
-            >Nenhuma pergunta
-          </span>
+          <span class="label-body-2 color-gray-default">Nenhuma pergunta </span>
         </div>
-        }
-
-        @if (!myProduct && published) {
+        } @if (!myProduct && published) {
         <div>
           <button mat-button class="action-button" (click)="askQuestion()">
             Fazer pergunta
@@ -507,10 +442,7 @@
 
       <ion-list class="mt-16 px-24 py-0">
         @for (item of otherClothes; track item._id) {
-        <div
-          class="related-card"
-          (click)="openAnotherProduct(item)"
-        >
+        <div class="related-card" (click)="openAnotherProduct(item)">
           <tk-product-card [useLink]="false" [product]="item">
           </tk-product-card>
         </div>
@@ -518,24 +450,39 @@
       </ion-list>
     </div>
     }
-  </ion-grid>
+  </div>
 </ion-content>
 
 @if (expired) {
 <ion-footer class="px-24 py-16">
-  <button mat-flat-button color="primary" (click)="renewProduct()" class="action-button">
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="renewProduct()"
+    class="action-button"
+  >
     Renovar anúncio
   </button>
 </ion-footer>
 } @else if (waiting_adjustment) {
 <ion-footer class="px-24 py-16">
-  <button mat-flat-button color="primary" (click)="modalAdjusts()" class="action-button">
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="modalAdjusts()"
+    class="action-button"
+  >
     Corrigir anúncio
   </button>
 </ion-footer>
 } @else if (paused) {
 <ion-footer class="px-24 py-16">
-  <button mat-flat-button color="primary" (click)="activateProduct()" class="action-button">
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="activateProduct()"
+    class="action-button"
+  >
     Ativar anúncio
   </button>
 </ion-footer>

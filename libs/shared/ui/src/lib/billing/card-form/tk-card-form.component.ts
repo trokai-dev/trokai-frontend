@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -48,7 +55,10 @@ export class TkCardFormComponent implements OnInit {
     holderName: [null, Validators.required],
     holderDocument: [null, Validators.required],
     number: [null, Validators.required],
-    cvv: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(4)]],
+    cvv: [
+      null,
+      [Validators.required, Validators.minLength(3), Validators.maxLength(4)],
+    ],
     expirationFull: [null, Validators.required],
   });
 
@@ -61,8 +71,6 @@ export class TkCardFormComponent implements OnInit {
     number: [null, Validators.required],
     complement: [null],
   });
-
-
 
   ngOnInit() {
     this.useUserAddress = !!this.user?.address;

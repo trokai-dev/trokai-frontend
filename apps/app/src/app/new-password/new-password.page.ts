@@ -6,7 +6,6 @@ import { LoginPage } from '../auth/login/login.page';
 import { BackButtonComponent } from '../shared/components/back-button/back-button.component';
 import {
   IonContent,
-  IonGrid,
   IonHeader,
   IonNav,
   IonTitle,
@@ -28,7 +27,6 @@ import { NewPasswordFormComponent, NewPasswordValue } from '@trokai/shared-ui';
     IonHeader,
     IonToolbar,
     IonTitle,
-    IonGrid,
     IonContent,
     BackButtonComponent,
     NewPasswordFormComponent,
@@ -75,7 +73,9 @@ export class NewPasswordPage implements OnInit, OnDestroy {
         this.toastService.makeToast('Senha alterada!');
         this.navCtrl.pop();
       }
-    } catch { /* intentional */ }
+    } catch {
+      /* intentional */
+    }
   }
 
   async clickBack() {

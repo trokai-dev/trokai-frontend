@@ -173,19 +173,16 @@ hr {
   @extend .text-dots;
 }
 
-.container {
-  max-width: 1224px;
-}
-
-.page {
+// Bare min-height helper for sidebars/menus (was `.page`). Pairs with
+// `.container` when a routed page needs the band but not the full `.page` shell.
+.fill-height {
   min-height: calc(100vh - 161px - 65px);
   // min-height: -webkit-fill-available;
 }
 
-// Page shell — one class for routed content pages. Replaces the repeated
-// `container page my-48` trio: centered max-width container + min-height +
-// vertical rhythm. Bare `.page` stays for sidebars/menus that only need height.
-.page-wrap {
+// Page shell — one class for routed content pages: centered max-width band +
+// min-height + vertical rhythm. (Was `.page-wrap` / the `container page` trio.)
+.page {
   box-sizing: border-box;
   width: 100%;
   max-width: 1224px;
@@ -606,14 +603,14 @@ body {
 // medias
 
 @media (max-width: 1199px) {
-  .page {
+  .fill-height {
     padding-top: 1.6rem;
     padding-bottom: 1.6rem;
   }
 }
 
 @media (min-width: 1200px) {
-  .page {
+  .fill-height {
     padding-top: 3.2rem;
     padding-bottom: 3.2rem;
   }

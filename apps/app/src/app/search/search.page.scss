@@ -11,9 +11,16 @@ ion-list {
   margin-left: unset;
   margin-right: unset;
 
-  .tab-trokai{
+  .tab-trokai {
     margin-left: 8px;
     margin-right: 8px;
   }
+}
 
+// Was ion-row + ion-col (50% each). 2-column product grid.
+.search-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-8);
+  align-items: start;
 }

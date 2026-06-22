@@ -18,7 +18,9 @@
       "src/*": ["src/*"],
       "@trokai/shared-ui": ["../../libs/shared/ui/src/index.ts"],
       "@trokai/shared-core": ["../../libs/shared/core/src/index.ts"],
-      "@trokai/shared-data-access": ["../../libs/shared/data-access/src/index.ts"]
+      "@trokai/shared-data-access": [
+        "../../libs/shared/data-access/src/index.ts"
+      ]
     }
   },
   "angularCompilerOptions": {

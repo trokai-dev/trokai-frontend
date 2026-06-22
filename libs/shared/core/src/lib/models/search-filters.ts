@@ -87,8 +87,10 @@ export class Filters {
     // default sorting
     if (!params.sorting) params.sorting = 'relevance';
 
-    if (params.costLower == 0 || isNaN(params.costLower!)) delete params.costLower;
-    if (params.costUpper == 0 || isNaN(params.costUpper!)) delete params.costUpper;
+    if (params.costLower == 0 || isNaN(params.costLower!))
+      delete params.costLower;
+    if (params.costUpper == 0 || isNaN(params.costUpper!))
+      delete params.costUpper;
 
     if (params.costLower)
       params.costLower = parseInt(params.costLower.toString());

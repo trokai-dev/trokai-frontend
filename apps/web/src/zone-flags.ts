@@ -15,13 +15,13 @@
 // Zone.js to register EventTasks for every listener, polluting the zone.
 (window as unknown as Record<string, unknown>).__zone_symbol__UNPATCHED_EVENTS =
   [
-  'scroll',
-  'mousemove',
-  'mouseenter',
-  'mouseleave',
-  'mouseover',
-  'mouseout',
-  'wheel',
-  'resize',
-  'touchmove',
-];
+    'scroll',
+    'mousemove',
+    'mouseenter',
+    'mouseleave',
+    'mouseover',
+    'mouseout',
+    'wheel',
+    'resize',
+    'touchmove',
+  ];

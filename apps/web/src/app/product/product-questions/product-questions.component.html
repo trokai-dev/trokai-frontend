@@ -6,31 +6,43 @@
     @if (questions?.length > 0) {
       <div class="mt-24">
         @for (q of questions; track q) {
-          <div class="flex items-center justify-between py-16" matRipple
-            routerLink="question/{{q._id}}">
+          <div
+            class="flex items-center justify-between py-16"
+            matRipple
+            routerLink="question/{{ q._id }}"
+          >
             <div class="flex flex-col justify-between">
-              <h4 class="color-gray-dark">{{q.question}}</h4>
-              <span class="label-body-2 color-gray-default">{{q.answer?? 'Aguardando resposta'}}</span>
+              <h4 class="color-gray-dark">{{ q.question }}</h4>
+              <span class="label-body-2 color-gray-default">{{
+                q.answer ?? 'Aguardando resposta'
+              }}</span>
             </div>
-            <mat-icon color="primary">
-              chevron_right
-            </mat-icon>
+            <mat-icon color="primary"> chevron_right </mat-icon>
           </div>
         }
       </div>
     }
     @if (!questions || questions?.length === 0) {
       <div class="mt-24">
-        <div class="flex items-center justify-between ">
+        <div class="flex items-center justify-between">
           <div class="flex flex-col justify-between">
-            <span class="label-body-2 color-gray-default mt-16">Nenhuma pergunta</span>
+            <span class="label-body-2 color-gray-default mt-16"
+              >Nenhuma pergunta</span
+            >
           </div>
         </div>
       </div>
     }
     @if (!ownerVision) {
       <div class="mt-48">
-        <button mat-stroked-button class="w-full" color="primary" routerLink="question">Fazer uma pergunta</button>
+        <button
+          mat-stroked-button
+          class="w-full"
+          color="primary"
+          routerLink="question"
+        >
+          Fazer uma pergunta
+        </button>
       </div>
     }
   </div>

@@ -10,26 +10,24 @@
 <ion-content>
   <!-- loading -->
   @if (isLoading || !balance) {
-  <ion-grid class="p-24">
+  <div class="p-24">
     <div class="empty-page full w-full">
       <ion-spinner name="crescent"> </ion-spinner>
     </div>
-  </ion-grid>
+  </div>
   }
 
   <!-- loaded -->
   @if (!isLoading && balance) {
 
-  <ion-grid class="p-24">
+  <div class="p-24">
     <!-- SALDO DISPONIVEL -->
 
     <span class="block color-gray-dark">
       <b>Balanço</b>
     </span>
 
-    <div
-      class="flex items-center justify-between pb-8 border-bottom mt-24"
-    >
+    <div class="flex items-center justify-between pb-8 border-bottom mt-24">
       <span class="color-gray-dark">Saldo disponível</span>
       <span class="color-primary">
         <b>
@@ -38,9 +36,7 @@
       </span>
     </div>
     <!-- EM ANDAMENTO -->
-    <div
-      class="flex items-center justify-between mt-8 pb-8 border-bottom"
-    >
+    <div class="flex items-center justify-between mt-8 pb-8 border-bottom">
       <span class="color-gray-dark">Em andamento</span>
       <span class="color-gray-dark">
         {{ balance.vendasEmAndamento | cost | currency: "BRL" : true : '1.2-2'}}
@@ -48,9 +44,7 @@
     </div>
 
     <!-- TOTAL JA VENDIDO -->
-    <div
-      class="flex items-center justify-between mt-8 pb-8 border-bottom"
-    >
+    <div class="flex items-center justify-between mt-8 pb-8 border-bottom">
       <span class="color-gray-dark">Total vendido</span>
 
       <span class="color-gray-dark">
@@ -95,9 +89,7 @@
         <!-- items -->
         <div class="block">
           @if(order.items){
-          <div
-            class="mt-8 flex w-full items-start justify-between"
-          >
+          <div class="mt-8 flex w-full items-start justify-between">
             <!-- items -->
             <div>
               @for (i of order.items; track i) {
@@ -138,9 +130,7 @@
           <!-- status -->
           @if (order.transferAt) {
           <div (click)="alertSaquePrevisao()">
-            <span
-              class="label-body-2 color-gray-default flex items-end"
-            >
+            <span class="label-body-2 color-gray-default flex items-end">
               Previsão de saque: {{order.transferAt | date: "dd/MM/YYYY"}}
               <ion-icon
                 name="information-circle-outline"
@@ -156,6 +146,6 @@
       }
     </ion-list>
     }
-  </ion-grid>
+  </div>
   }
 </ion-content>

@@ -43,7 +43,7 @@ export abstract class MediaService {
         (blob) =>
           blob ? resolve(blob) : reject(new Error('toBlob returned null')),
         'image/jpeg',
-        0.9
+        0.9,
       );
     });
   }
@@ -86,7 +86,7 @@ export abstract class MediaService {
           0,
           0,
           canvas.width,
-          canvas.height
+          canvas.height,
         );
 
         try {
@@ -136,7 +136,7 @@ export abstract class MediaService {
           0,
           0,
           canvas.width,
-          canvas.height
+          canvas.height,
         );
 
         try {

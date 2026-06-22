@@ -12,3 +12,11 @@ ion-col {
 .fees-table {
   border: 0.5px solid $color-gray-default;
 }
+
+// Was ion-row + two ion-col — a 2-column fee table row.
+.fees-row {
+  display: flex;
+}
+.fees-row > div {
+  flex: 1;
+}

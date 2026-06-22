@@ -11,7 +11,6 @@ import { OrdersService } from '@trokai/shared-data-access';
 import { NgClass, CurrencyPipe, DatePipe } from '@angular/common';
 import {
   IonContent,
-  IonGrid,
   IonHeader,
   IonRefresher,
   IonRefresherContent,
@@ -40,7 +39,6 @@ import { sadOutline } from 'ionicons/icons';
     IonToolbar,
     IonTitle,
     IonContent,
-    IonGrid,
     IonRefresher,
     IonRefresherContent,
     NgClass,
@@ -128,7 +126,6 @@ export class NegotiationsPage implements OnInit {
     this.purchases = displays;
 
     console.log(this.purchases);
-
   }
 
   getOrderImages(order: OrderListItem) {
@@ -137,11 +134,9 @@ export class NegotiationsPage implements OnInit {
 
     products = order.clothes;
 
-    if (products[0]?.images?.[0]?.sm)
-      images.push(products[0].images[0].sm);
+    if (products[0]?.images?.[0]?.sm) images.push(products[0].images[0].sm);
 
-    if (products[1]?.images?.[0]?.sm)
-      images.push(products[1].images[0].sm);
+    if (products[1]?.images?.[0]?.sm) images.push(products[1].images[0].sm);
 
     return images;
   }

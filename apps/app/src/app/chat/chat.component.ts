@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, inject } from '@angular/core';
-import { TkUserAvatarComponent, TkChatThreadComponent } from '@trokai/shared-ui';
+import {
+  TkUserAvatarComponent,
+  TkChatThreadComponent,
+} from '@trokai/shared-ui';
 import { take } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,14 +11,11 @@ import {
   ActionSheetController,
   IonButtons,
   IonContent,
-  IonGrid,
   IonHeader,
   IonIcon,
-  IonRow,
   IonToolbar,
   ModalController,
   Platform,
-  IonCol,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { alert, close, ellipsisVertical } from 'ionicons/icons';
@@ -32,9 +32,6 @@ import { BackButtonComponent } from '../shared/components/back-button/back-butto
     IonToolbar,
     IonButtons,
     IonIcon,
-    IonGrid,
-    IonRow,
-    IonCol,
     IonContent,
     TkUserAvatarComponent,
     TkChatThreadComponent,
@@ -79,7 +76,14 @@ export class ChatComponent implements OnInit {
             icon: 'alert',
             handler: () => this.ngZone.run(() => this.report()),
           },
-          { text: 'Cancelar', icon: 'close', role: 'cancel', handler: () => { /* intentional */ } },
+          {
+            text: 'Cancelar',
+            icon: 'close',
+            role: 'cancel',
+            handler: () => {
+              /* intentional */
+            },
+          },
         ],
       })
       .then((ac) => ac.present());

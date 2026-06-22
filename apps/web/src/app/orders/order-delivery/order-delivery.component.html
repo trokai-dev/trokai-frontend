@@ -1,183 +1,193 @@
 @if (order.processedAndValid) {
+  <div class="page-section">
+    <span class="section-title">Entrega</span>
 
-<div class="page-section">
-  <span class="section-title">Entrega</span>
-
-  <!-- Shipping -->
-  @if (order.isShipping) {
-
-  <div class="grid gap-16">
-    <!-- Service -->
-    @if (isSale) {
-    <div>
-      <span class="item-label"> Serviço </span>
-      <span class="item-value">
-        {{ order.shippingServiceName }}
-      </span>
-    </div>
-    }
-
-    <!-- Etiqueta -->
-    @if (showEtiquetaInfo) {
-    <div>
-      <span class="item-label"> Etiqueta </span>
-      <span class="item-value">
-        @if (order.postageLabelCreated) { Expira em
-        {{ order.postageLabelExpiration | date : "short" }}
-        } @else if (order.postageLabelExpired) { Expirada em
-        {{ order.postageLabelExpiration | date : "short" }}
+    <!-- Shipping -->
+    @if (order.isShipping) {
+      <div class="grid gap-16">
+        <!-- Service -->
+        @if (isSale) {
+          <div>
+            <span class="item-label"> Serviço </span>
+            <span class="item-value">
+              {{ order.shippingServiceName }}
+            </span>
+          </div>
         }
-      </span>
-    </div>
-    }
 
-    <!-- Previsao entrega -->
-    @if(order.orderSent && !order.isDeliveryDone) {
-    <div>
-      <div class="flex-1">
-        <span class="item-label"> Previsão de entrega </span>
-        <span class="item-value">
-          @if (order.deliveryEstimate) {
-          {{ order.deliveryEstimate | date : "dd/MM/yy" }}
-          } @else { - }
-        </span>
+        <!-- Etiqueta -->
+        @if (showEtiquetaInfo) {
+          <div>
+            <span class="item-label"> Etiqueta </span>
+            <span class="item-value">
+              @if (order.postageLabelCreated) {
+                Expira em
+                {{ order.postageLabelExpiration | date: 'short' }}
+              } @else if (order.postageLabelExpired) {
+                Expirada em
+                {{ order.postageLabelExpiration | date: 'short' }}
+              }
+            </span>
+          </div>
+        }
+
+        <!-- Previsao entrega -->
+        @if (order.orderSent && !order.isDeliveryDone) {
+          <div>
+            <div class="flex-1">
+              <span class="item-label"> Previsão de entrega </span>
+              <span class="item-value">
+                @if (order.deliveryEstimate) {
+                  {{ order.deliveryEstimate | date: 'dd/MM/yy' }}
+                } @else {
+                  -
+                }
+              </span>
+            </div>
+          </div>
+        }
+
+        <!-- Entregue em -->
+        @if (order.isDeliveryDone && order.deliveryDoneDate) {
+          <div>
+            <span class="item-label">Entregue em</span>
+            <span class="item-value">
+              {{ order.deliveryDoneDate | date: 'short' }}
+            </span>
+          </div>
+        }
+
+        <!-- Rastreio (legacy) -->
+        @if (showTracking && order.isLegacyShipping) {
+          <div>
+            <span class="item-label"> Código Rastreio </span>
+            <span class="item-value">
+              {{ order.postageLabel.object }}
+            </span>
+          </div>
+        }
       </div>
-    </div>
+
+      <!-- Ponto de coleta -->
+      @if (isPurchase) {
+        <div class="flex-1 mt-16">
+          <span class="item-label">Endereço</span>
+
+          <span class="item-value block">
+            {{ order.shippingAddress.street }},
+            {{ order.shippingAddress.number }}
+            {{
+              order.shippingAddress.complement
+                ? ', ' + order.shippingAddress.complement
+                : ''
+            }}
+          </span>
+          <span class="item-value block">
+            {{ order.shippingAddress.zipCode | mask: '00000-000' }},
+            {{ order.shippingAddress.neighborhood }}
+          </span>
+          <span class="item-value block">
+            {{ order.shippingAddress.city }} - {{ order.shippingAddress.state }}
+          </span>
+        </div>
+      }
+
+      <!-- Ponto de coleta -->
+      @if (showPontoColetaInfo) {
+        <div class="flex-1 mt-16">
+          <span class="item-label">Ponto de coleta</span>
+
+          <span class="item-value">
+            {{ order.postageLabel?.melhorEnvioAgency.name }}
+          </span>
+          <span class="item-value block">
+            {{ order.postageLabel?.melhorEnvioAgency.displayAddress }}.
+            {{ order.postageLabel?.melhorEnvioAgency.note }}
+          </span>
+        </div>
+      }
+
+      <!-- Action buttons -->
+
+      <!-- Rastrear -->
+      @if (showTracking && !order.isLegacyShipping) {
+        <button
+          mat-stroked-button
+          class="mt-16"
+          color="primary"
+          (click)="onClickRastrear()"
+        >
+          Rastrear pedido
+        </button>
+      }
+
+      <!-- GERAR ETIQUETA -->
+      @if (isSale && !order.orderSent) {
+        <button
+          mat-stroked-button
+          class="mt-16 w-full"
+          color="primary"
+          (click)="onClickEtiqueta()"
+        >
+          {{
+            order.postageLabelExpired
+              ? 'Gerar nova etiqueta'
+              : 'Imprimir etiqueta'
+          }}
+        </button>
+      }
     }
 
-    <!-- Entregue em -->
-    @if (order.isDeliveryDone && order.deliveryDoneDate) {
-    <div>
-      <span class="item-label">Entregue em</span>
-      <span class="item-value">
-        {{ order.deliveryDoneDate | date : "short" }}
-      </span>
-    </div>
-    }
+    <!-- WITHDRAWAL -->
+    @if (!order.isShipping) {
+      <div class="flex flex-wrap gap-16">
+        <div class="flex-1">
+          <span class="item-label">Retirada presencial</span>
+          <span class="item-value">
+            {{ order.inPersonCity }}
+          </span>
+        </div>
 
-    <!-- Rastreio (legacy) -->
-    @if (showTracking && order.isLegacyShipping) {
-    <div>
-      <span class="item-label"> Código Rastreio </span>
-      <span class="item-value">
-        {{ order.postageLabel.object }}
-      </span>
-    </div>
-    }
-  </div>
+        @if (order.isDeliveryDone && order.deliveryDoneDate) {
+          <div class="flex-1">
+            <span class="item-label">Confirmado em</span>
+            <span class="item-value">
+              {{ order.deliveryDoneDate | date: 'short' }}
+            </span>
+          </div>
+        }
+      </div>
 
-  <!-- Ponto de coleta -->
-  @if (isPurchase) {
-  <div class="flex-1 mt-16">
-    <span class="item-label">Endereço</span>
+      @if (!order.isDeliveryDone) {
+        <!-- BUYER -->
+        @if (isPurchase) {
+          <div class="mt-16">
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="onConfirmWithdrawal()"
+            >
+              Confirmar retirada
+            </button>
 
-    <span class="item-value block">
-      {{ order.shippingAddress.street }},
-      {{ order.shippingAddress.number }}
-      {{
-        order.shippingAddress.complement
-          ? ", " + order.shippingAddress.complement
-          : ""
-      }}
-    </span>
-    <span class="item-value block">
-      {{ order.shippingAddress.zipCode | mask : "00000-000" }},
-      {{ order.shippingAddress.neighborhood }}
-    </span>
-    <span class="item-value block">
-      {{ order.shippingAddress.city }} - {{ order.shippingAddress.state }}
-    </span>
-  </div>
-  }
+            <span class="block mt-8 label-caption-1">
+              Confirme a retirada quando estiver com os produtos em mãos
+            </span>
+          </div>
+        }
 
-  <!-- Ponto de coleta -->
-  @if (showPontoColetaInfo) {
-  <div class="flex-1 mt-16">
-    <span class="item-label">Ponto de coleta</span>
-
-    <span class="item-value">
-      {{ order.postageLabel?.melhorEnvioAgency.name }}
-    </span>
-    <span class="item-value block">
-      {{ order.postageLabel?.melhorEnvioAgency.displayAddress }}.
-      {{ order.postageLabel?.melhorEnvioAgency.note }}
-    </span>
-  </div>
-  }
-
-  <!-- Action buttons -->
-
-  <!-- Rastrear -->
-  @if(showTracking && !order.isLegacyShipping) {
-  <button
-    mat-stroked-button
-    class="mt-16"
-    color="primary"
-    (click)="onClickRastrear()"
-  >
-    Rastrear pedido
-  </button>
-  }
-
-  <!-- GERAR ETIQUETA -->
-  @if (isSale && !order.orderSent) {
-  <button
-    mat-stroked-button
-    class="mt-16 w-full"
-    color="primary"
-    (click)="onClickEtiqueta()"
-  >
-    {{
-      order.postageLabelExpired ? "Gerar nova etiqueta" : "Imprimir etiqueta"
-    }}
-  </button>
-  } }
-
-  <!-- WITHDRAWAL -->
-  @if (!order.isShipping) {
-
-  <div class="flex flex-wrap gap-16">
-    <div class="flex-1">
-      <span class="item-label">Retirada presencial</span>
-      <span class="item-value">
-        {{ order.inPersonCity }}
-      </span>
-    </div>
-
-    @if (order.isDeliveryDone && order.deliveryDoneDate) {
-    <div class="flex-1">
-      <span class="item-label">Confirmado em</span>
-      <span class="item-value">
-        {{ order.deliveryDoneDate | date : "short" }}
-      </span>
-    </div>
+        <!-- SELLER -->
+        @if (isSale) {
+          <div class="mt-16">
+            <span class="color-error block">Atenção</span>
+            <span>
+              Para liberar seu pagamento, solicite que
+              {{ order.buyer.name.split(' ')[0] }} confirme o recebimento pela
+              plataforma quando vocês se encontrarem.
+            </span>
+          </div>
+        }
+      }
     }
   </div>
-
-  @if (!order.isDeliveryDone) {
-  <!-- BUYER -->
-  @if (isPurchase) {
-  <div class="mt-16">
-    <button mat-flat-button color="primary" (click)="onConfirmWithdrawal()">
-      Confirmar retirada
-    </button>
-
-    <span class="block mt-8 label-caption-1">
-      Confirme a retirada quando estiver com os produtos em mãos
-    </span>
-  </div>
-  }
-
-  <!-- SELLER -->
-  @if (isSale) {
-  <div class="mt-16">
-    <span class="color-error block">Atenção</span>
-    <span>
-      Para liberar seu pagamento, solicite que
-      {{ order.buyer.name.split(" ")[0] }} confirme o recebimento pela
-      plataforma quando vocês se encontrarem.
-    </span>
-  </div>
-  } } }
-</div>
 }

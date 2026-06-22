@@ -16,9 +16,11 @@ import {
   IonInfiniteScrollContent,
   IonRefresher,
   IonRefresherContent,
-  IonRow,
   IonTitle,
-  IonToolbar, IonIcon, IonCol, IonSpinner } from '@ionic/angular/standalone';
+  IonToolbar,
+  IonIcon,
+  IonSpinner,
+} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { close } from 'ionicons/icons';
 
@@ -27,14 +29,15 @@ import { close } from 'ionicons/icons';
   templateUrl: './favorites.page.html',
   styleUrls: ['./favorites.page.scss'],
   standalone: true,
-  imports: [IonSpinner, IonCol, IonIcon, 
+  imports: [
+    IonSpinner,
+    IonIcon,
     IonHeader,
     IonToolbar,
     IonContent,
     IonTitle,
     IonRefresher,
     IonRefresherContent,
-    IonRow,
     IonInfiniteScroll,
     IonInfiniteScrollContent,
     BackButtonComponent,
@@ -77,10 +80,12 @@ export class FavoritesPage implements OnInit, OnDestroy {
     this.url = environment.imageURL;
 
     // usuario favoritou algo nas outras telas
-    this.favMustChange = this.favoritesService.favoritesChanged$.subscribe(() => {
-      if (this.pageActive) return; // nao faz nada se a acao foi aqui
-      this.mustUpdate = true; // vai atualizar quando voltar pra tela
-    });
+    this.favMustChange = this.favoritesService.favoritesChanged$.subscribe(
+      () => {
+        if (this.pageActive) return; // nao faz nada se a acao foi aqui
+        this.mustUpdate = true; // vai atualizar quando voltar pra tela
+      },
+    );
 
     this.fetchFavorites();
   }
@@ -102,7 +107,9 @@ export class FavoritesPage implements OnInit, OnDestroy {
         this.favoritesBkp = this.favoritesBkp.concat([...response.clothes]);
         this.endOfSearch = response.count <= this.favorites?.length;
       }
-    } finally { /* intentional */ }
+    } finally {
+      /* intentional */
+    }
   }
 
   getLabel(p) {

@@ -49,7 +49,7 @@ export class MessagesService {
 
       const notReadCount = chats.reduce((acc, c) => acc + c.unreadCount, 0);
       this._notReadCount.next(notReadCount);
-    // eslint-disable-next-line no-empty
+      // eslint-disable-next-line no-empty
     } catch {}
   }
 

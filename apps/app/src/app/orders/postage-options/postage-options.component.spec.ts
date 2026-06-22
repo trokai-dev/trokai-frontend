@@ -8,10 +8,9 @@ describe('PostageOptionsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PostageOptionsComponent]
-    })
-    .compileComponents();
-    
+      imports: [PostageOptionsComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(PostageOptionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

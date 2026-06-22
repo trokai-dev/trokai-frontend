@@ -23,8 +23,9 @@
 <!-- nx configuration end-->
 
 # CLAUDE.md - Rules for Claude Code
+
 - Mode: Repetitive bulk migration of components to Angular 21 monorepo libraries.
-- Framework: No prose, no greetings, no explanations. 
-- Execution: Output ONLY code blocks or direct Git Diffs. 
+- Framework: No prose, no greetings, no explanations.
+- Execution: Output ONLY code blocks or direct Git Diffs.
 - Styling: Zero Bootstrap allowed. Rewrite layouts strictly using native CSS Flexbox/Grid.
 - Commentary: Limit any technical alerts to 5 words or less.

@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,7 +16,13 @@ import { LoadingService } from '../../loading/loading.service';
 @Component({
   selector: 'tk-coupon-form',
   standalone: true,
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule],
+  imports: [
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './tk-coupon-form.component.html',
   styleUrl: './tk-coupon-form.component.scss',
 })
@@ -26,7 +38,9 @@ export class TkCouponFormComponent implements OnInit {
   private buyingService = inject(BuyingService);
 
   ngOnInit() {
-    this.buyingService.checkoutLocal$.subscribe((c) => (this.checkoutLocal = c!));
+    this.buyingService.checkoutLocal$.subscribe(
+      (c) => (this.checkoutLocal = c!),
+    );
   }
 
   async onApply() {
@@ -57,7 +71,10 @@ export class TkCouponFormComponent implements OnInit {
   async clearSelection() {
     try {
       this.loading.start();
-      this.buyingService.setCheckoutLocal({ ...this.checkoutLocal, couponCode: undefined as any });
+      this.buyingService.setCheckoutLocal({
+        ...this.checkoutLocal,
+        couponCode: undefined as any,
+      });
       await this.buyingService.getCheckoutData();
       this.couponApplied = false;
       this.showInput = false;

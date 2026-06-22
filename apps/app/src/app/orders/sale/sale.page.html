@@ -15,20 +15,18 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="p-24">
+  <div class="p-24">
     <!-- loading -->
     @if (loading) {
     <div class="w-full flex justify-center mt-40">
       <ion-spinner></ion-spinner>
     </div>
-    }
-
-    @if (order) {
+    } @if (order) {
     <div>
       @if (!loading) {
       <div>
-        <ion-row class="mt-48">
-          <ion-col size="12" size-md="4">
+        <div class="sale-grid mt-48">
+          <div>
             <!-- Produtos -->
             <div class="page-section">
               <span class="section-title">Produtos</span>
@@ -43,9 +41,9 @@
               </div>
               }
             </div>
-          </ion-col>
+          </div>
 
-          <ion-col size="12" size-md="4">
+          <div>
             <!-- Detalhes -->
             <div class="page-section">
               <span class="section-title">Detalhes</span>
@@ -99,8 +97,8 @@
                 <div class="flex justify-between">
                   <span class="item-value"> Envio seguro </span>
                   <span class="item-value">
-                    - {{ order.shippingValues.finalDeclaredValue | cost | currency
-                    : "BRL" : true : "1.2" }}
+                    - {{ order.shippingValues.finalDeclaredValue | cost |
+                    currency : "BRL" : true : "1.2" }}
                   </span>
                 </div>
                 }
@@ -110,8 +108,8 @@
                   <span class="item-value"><b>A receber</b></span>
                   <span class="item-value color-primary">
                     <b>
-                      {{ order.businessValues.sellerSplitBeforeAnticipation | cost
-                      | currency : "BRL" : true : "1.2" }}
+                      {{ order.businessValues.sellerSplitBeforeAnticipation |
+                      cost | currency : "BRL" : true : "1.2" }}
                     </b>
                   </span>
                 </div>
@@ -119,11 +117,7 @@
 
               <!-- Link to bank -->
               <div class="mt-16">
-                <button
-                  mat-button
-                  class="color-primary"
-                  (click)="goToBank()"
-                >
+                <button mat-button class="color-primary" (click)="goToBank()">
                   Abrir cofrinho
                 </button>
               </div>
@@ -144,11 +138,11 @@
               Cancelar venda
             </button>
             }
-          </ion-col>
-        </ion-row>
+          </div>
+        </div>
       </div>
       }
     </div>
     }
-  </ion-grid>
+  </div>
 </ion-content>

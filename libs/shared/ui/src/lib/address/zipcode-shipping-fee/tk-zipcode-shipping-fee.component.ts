@@ -1,5 +1,13 @@
 import { CurrencyPipe, NgClass, isPlatformServer } from '@angular/common';
-import { Component, ElementRef, Input, OnInit, PLATFORM_ID, ViewChild, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  PLATFORM_ID,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -12,35 +20,79 @@ import { CostPipe } from '../../pipes/cost.pipe';
 @Component({
   selector: 'tk-zipcode-shipping-fee',
   standalone: true,
-  imports: [MatFormFieldModule, NgClass, MatInputModule, FormsModule, MatProgressSpinnerModule, CurrencyPipe, CostPipe, NgxMaskDirective, NgxMaskPipe],
+  imports: [
+    MatFormFieldModule,
+    NgClass,
+    MatInputModule,
+    FormsModule,
+    MatProgressSpinnerModule,
+    CurrencyPipe,
+    CostPipe,
+    NgxMaskDirective,
+    NgxMaskPipe,
+  ],
   template: `
     <div class="flex">
       @if (!typeZip && !zipLoading && zipCode) {
-        <span class="block shipping-label label-body-2" role="button" tabindex="0" (click)="clickShippingLabel($event)" (keyup.enter)="clickShippingLabel($event)">
+        <span
+          class="block shipping-label label-body-2"
+          role="button"
+          tabindex="0"
+          (click)="clickShippingLabel($event)"
+          (keyup.enter)="clickShippingLabel($event)"
+        >
           Em até {{ shippingInfo?.maxDeliveryTime }} dias após o envio por
           <span>
-            @if (shippingInfo?.fullShippingCost && shippingInfo!.fullShippingCost! > shippingInfo!.shippingCost) {
+            @if (
+              shippingInfo?.fullShippingCost &&
+              shippingInfo!.fullShippingCost! > shippingInfo!.shippingCost
+            ) {
               <span class="label-body-2 color-gray-light-1 line-through">
-                {{ shippingInfo!.fullShippingCost | cost | currency:'BRL':'symbol':'1.2' }}
+                {{
+                  shippingInfo!.fullShippingCost
+                    | cost
+                    | currency: 'BRL' : 'symbol' : '1.2'
+                }}
               </span>
             }
-            <b>{{ shippingInfo?.shippingCost ?? 0 | cost | currency:'BRL':'symbol':'1.0-2' }}</b>
+            <b>{{
+              shippingInfo?.shippingCost ?? 0
+                | cost
+                | currency: 'BRL' : 'symbol' : '1.0-2'
+            }}</b>
           </span>
-          (CEP {{ zipCode | mask:'00000-000' }})
+          (CEP {{ zipCode | mask: '00000-000' }})
         </span>
       }
       @if (!typeZip && !zipLoading && !zipCode) {
-        <span class="block shipping-label label-body-2 color-primary" role="button" tabindex="0" (click)="clickShippingLabel($event)" (keyup.enter)="clickShippingLabel($event)">
+        <span
+          class="block shipping-label label-body-2 color-primary"
+          role="button"
+          tabindex="0"
+          (click)="clickShippingLabel($event)"
+          (keyup.enter)="clickShippingLabel($event)"
+        >
           <b>Calcular frete de entrega</b>
         </span>
       }
       @if (typeZip) {
-      <mat-form-field appearance="outline" [ngClass]="{ 'hidden': !typeZip, 'block': typeZip }">
-        <input matInput #zipInput [(ngModel)]="zipCode" (blur)="zipBlur()" (input)="zipChange()" type="text" mask="00000-000" placeholder="Digite o CEP" />
-      </mat-form-field>
+        <mat-form-field
+          appearance="outline"
+          [ngClass]="{ hidden: !typeZip, block: typeZip }"
+        >
+          <input
+            matInput
+            #zipInput
+            [(ngModel)]="zipCode"
+            (blur)="zipBlur()"
+            (input)="zipChange()"
+            type="text"
+            mask="00000-000"
+            placeholder="Digite o CEP"
+          />
+        </mat-form-field>
       }
       @if (zipLoading) {
-
         <div class="flex items-center">
           <mat-spinner color="primary" class="spinner-nano"></mat-spinner>
           <span class="label-caption ml-24">Buscando valor do frete</span>
@@ -91,7 +143,10 @@ export class TkZipcodeShippingFeeComponent implements OnInit {
     try {
       if (!this.productId || !this.zipCode) return;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.shippingInfo = await this.buyingService.calculateShippingFee(this.zipCode.toString(), [{ _id: this.productId } as any]);
+      this.shippingInfo = await this.buyingService.calculateShippingFee(
+        this.zipCode.toString(),
+        [{ _id: this.productId } as any],
+      );
       this.locationService.changeSearchZip(this.zipCode!);
     } catch {
       this.zipCode = undefined;
@@ -106,5 +161,4 @@ export class TkZipcodeShippingFeeComponent implements OnInit {
     this.typeZip = false;
     if (this.zipCode?.toString().length !== 8) this.zipCode = undefined;
   }
-
 }

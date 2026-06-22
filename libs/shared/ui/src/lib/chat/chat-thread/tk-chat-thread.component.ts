@@ -58,7 +58,9 @@ export class TkChatThreadComponent implements OnInit, OnDestroy {
   private connectivity = inject(ConnectivityService);
 
   get inputDisabled(): boolean {
-    return !this.networkConnected || !this.enabled || this.otherUser?.status === 3;
+    return (
+      !this.networkConnected || !this.enabled || this.otherUser?.status === 3
+    );
   }
 
   get canSend(): boolean {
@@ -71,14 +73,16 @@ export class TkChatThreadComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    this.networkSub = this.connectivity.connected$.subscribe(async (connected) => {
-      if (!connected) {
-        this.networkConnected = false;
-      } else {
-        if (!this.networkConnected) await this.refresh();
-        this.networkConnected = true;
-      }
-    });
+    this.networkSub = this.connectivity.connected$.subscribe(
+      async (connected) => {
+        if (!connected) {
+          this.networkConnected = false;
+        } else {
+          if (!this.networkConnected) await this.refresh();
+          this.networkConnected = true;
+        }
+      },
+    );
 
     await this.refresh();
     this.startInterval();
@@ -105,7 +109,11 @@ export class TkChatThreadComponent implements OnInit, OnDestroy {
 
   private addMessage(m: Message) {
     if (this.needsTimeDiff(m)) {
-      const divider: ChatTimeDivider = { timeDiff: true, senderId: m.senderId, text: m.dayLabel };
+      const divider: ChatTimeDivider = {
+        timeDiff: true,
+        senderId: m.senderId,
+        text: m.dayLabel,
+      };
       this.messages.push(divider);
     }
     this.messages.push(m);

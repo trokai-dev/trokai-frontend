@@ -1,5 +1,20 @@
 @import 'variables';
 
+:host {
+  display: block;
+}
+
+// Was grid-row + gcol-md-3 / gcol-md-9. Stacks on mobile, 3/9 split on desktop.
+.chat-grid {
+  display: grid;
+  gap: var(--space-24);
+  align-items: start;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 3fr 9fr;
+  }
+}
+
 #chat-wrapper {
   height: 75dvh;
   border: 1px solid $color-gray-light-2;

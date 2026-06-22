@@ -1,20 +1,23 @@
 <ion-list class="horizontal-list pt-0 px-24 pb-8">
   @if (enableStatusFilter && statusFilter?.length) {
-  <div class="chip-filter">
-    <div class="flex ion-activatable ripple-parent">
-      <mat-form-field class="chip-select w-full label-body-2" subscriptSizing="dynamic">
-        <mat-select
-          [value]="filters.status"
-          (selectionChange)="changeStatusFilter($event.value)"
+    <div class="chip-filter">
+      <div class="flex ion-activatable ripple-parent">
+        <mat-form-field
+          class="chip-select w-full label-body-2"
+          subscriptSizing="dynamic"
         >
-          @for (s of statusFilter; track s.value) {
-          <mat-option [value]="s.value">{{ s.name }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-      <ion-ripple-effect></ion-ripple-effect>
+          <mat-select
+            [value]="filters.status"
+            (selectionChange)="changeStatusFilter($event.value)"
+          >
+            @for (s of statusFilter; track s.value) {
+              <mat-option [value]="s.value">{{ s.name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
     </div>
-  </div>
   }
 
   <div class="chip-filter" (click)="openFilterModal()">
@@ -24,32 +27,27 @@
       <ion-ripple-effect></ion-ripple-effect>
     </div>
     @if (filters?.enabled()) {
-    <ion-badge mode="ios">{{
-      filters.count()
-    }}</ion-badge>
+      <ion-badge mode="ios">{{ filters.count() }}</ion-badge>
     }
   </div>
 
   @if (filters?.sorting && enableSorting) {
-  <div
-    class="chip-filter"
-    (click)="openSortingAction()"
-  >
-    <div class="flex ion-activatable ripple-parent">
-      <ion-icon name="reorder-two-outline"></ion-icon>
-      <span class="label-body-2"> {{ getSortingText() }} </span>
-      <ion-ripple-effect></ion-ripple-effect>
+    <div class="chip-filter" (click)="openSortingAction()">
+      <div class="flex ion-activatable ripple-parent">
+        <ion-icon name="reorder-two-outline"></ion-icon>
+        <span class="label-body-2"> {{ getSortingText() }} </span>
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
     </div>
-  </div>
   }
 
   @if (filters?.enabled()) {
-  <div class="chip-filter" (click)="clearFilters()">
-    <div class="flex ion-activatable ripple-parent">
-      <ion-icon name="trash"></ion-icon>
-      <span class="label-body-2"> Limpar </span>
-      <ion-ripple-effect></ion-ripple-effect>
+    <div class="chip-filter" (click)="clearFilters()">
+      <div class="flex ion-activatable ripple-parent">
+        <ion-icon name="trash"></ion-icon>
+        <span class="label-body-2"> Limpar </span>
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
     </div>
-  </div>
   }
 </ion-list>

@@ -1,4 +1,4 @@
-<div class="gcol-12 gcol-md-7">
+<div>
   <h3 class="color-gray-dark">Perfil da loja</h3>
 
   <tk-seller-profile
@@ -14,7 +14,9 @@
       avatarPicker
       mode="button"
       [disabled]="pictureUpdating"
-      externalURL="{{ user?.avatar && user.avatar !== '' ? getUserAvatar() : '' }}"
+      externalURL="{{
+        user?.avatar && user.avatar !== '' ? getUserAvatar() : ''
+      }}"
       [profile]="true"
       (imagePick)="onImagePicked($event)"
     >

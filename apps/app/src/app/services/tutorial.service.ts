@@ -32,7 +32,7 @@ export class TutorialService {
   }
 
   async productRegisterTutorial(force = false) {
-    if (!force && await this.didPresent('product_pictures_dialog')) return;
+    if (!force && (await this.didPresent('product_pictures_dialog'))) return;
 
     const modal = await this.modalCtrl.create({
       component: PicturesHelpModalComponent,

@@ -19,7 +19,14 @@ export class ItemNamePipe implements PipeTransform {
 
   transform(
     id: number,
-    kind: 'gender' | 'special' | 'condition' | 'age' | 'category' | 'piece' | 'size',
+    kind:
+      | 'gender'
+      | 'special'
+      | 'condition'
+      | 'age'
+      | 'category'
+      | 'piece'
+      | 'size',
     category?: number,
     age?: number,
   ): string {

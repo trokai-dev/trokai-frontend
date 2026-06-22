@@ -11,7 +11,11 @@
         [ngStyle]="{ display: activeImage === i ? 'block' : 'none' }"
       >
         @if (!product.published) {
-          <tk-status-pill [variant]="statusVariant" [label]="product.statusFormatted" position="overlay" />
+          <tk-status-pill
+            [variant]="statusVariant"
+            [label]="product.statusFormatted"
+            position="overlay"
+          />
         }
 
         <img
@@ -25,7 +29,10 @@
 
         <div class="slide-buttons">
           @if (product && !myProduct) {
-            <tk-like-button class="large" [productId]="product._id!"></tk-like-button>
+            <tk-like-button
+              class="large"
+              [productId]="product._id!"
+            ></tk-like-button>
           }
         </div>
       </div>
@@ -33,7 +40,13 @@
 
     <div class="my-thumbs">
       @for (img of product.images; track img; let i = $index) {
-        <div role="button" tabindex="0" (click)="activeImage = i" (keyup.enter)="activeImage = i" class="thumb-wrapper">
+        <div
+          role="button"
+          tabindex="0"
+          (click)="activeImage = i"
+          (keyup.enter)="activeImage = i"
+          class="thumb-wrapper"
+        >
           <img
             alt="{{ product.title }}"
             hideLoading
@@ -50,7 +63,11 @@
   <!-- mobile (swiper) -->
   <div class="product-image-mobile">
     @if (!product.published) {
-      <tk-status-pill [variant]="statusVariant" [label]="product.statusFormatted" position="overlay" />
+      <tk-status-pill
+        [variant]="statusVariant"
+        [label]="product.statusFormatted"
+        position="overlay"
+      />
     }
     <div class="swiper product-image-swiper">
       <div class="swiper-wrapper">
@@ -71,7 +88,13 @@
           </div>
         }
       </div>
-      <div class="swiper-pagination" role="button" tabindex="0" (click)="$event.stopPropagation()" (keyup.enter)="$event.stopPropagation()"></div>
+      <div
+        class="swiper-pagination"
+        role="button"
+        tabindex="0"
+        (click)="$event.stopPropagation()"
+        (keyup.enter)="$event.stopPropagation()"
+      ></div>
     </div>
   </div>
 </div>

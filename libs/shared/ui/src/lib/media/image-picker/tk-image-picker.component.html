@@ -1,10 +1,27 @@
 @if (mode === 'default') {
-  <div class="picker" role="button" tabindex="0" (click)="onPickImage()" (keyup.enter)="onPickImage()" [ngClass]="{ disabled: disabled }">
+  <div
+    class="picker"
+    role="button"
+    tabindex="0"
+    (click)="onPickImage()"
+    (keyup.enter)="onPickImage()"
+    [ngClass]="{ disabled: disabled }"
+  >
     @if (selectedImage && showPreview) {
-      <img role="button" class="image" alt="Imagem selecionada" [src]="selectedImage" />
+      <img
+        role="button"
+        class="image"
+        alt="Imagem selecionada"
+        [src]="selectedImage"
+      />
     }
     @if (externalURL && !selectedImage && showPreview) {
-      <img role="button" class="image" alt="Imagem externa" [src]="externalURL" />
+      <img
+        role="button"
+        class="image"
+        alt="Imagem externa"
+        [src]="externalURL"
+      />
     }
     @if ((!selectedImage && !externalURL) || !showPreview) {
       <div class="add-circle">
@@ -12,7 +29,12 @@
       </div>
     }
 
-    <mat-menu hasBackdrop="true" #menu="matMenu" xPosition="after" yPosition="below">
+    <mat-menu
+      hasBackdrop="true"
+      #menu="matMenu"
+      xPosition="after"
+      yPosition="below"
+    >
       @if (media.capabilities.camera) {
         <button mat-menu-item (click)="takeFromCamera()">
           <mat-icon>photo_camera</mat-icon>

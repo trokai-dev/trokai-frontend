@@ -108,7 +108,9 @@ export class QuestionsPage implements OnInit {
       }
 
       await this.handleAlerts();
-    } catch { /* intentional */ }
+    } catch {
+      /* intentional */
+    }
   }
 
   async handleAlerts() {

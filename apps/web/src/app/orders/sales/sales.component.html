@@ -2,21 +2,21 @@
 
 <div class="mt-48">
   @for (s of sales; track s) {
-    <div class="grid-row border-bottom mt-32 pb-48">
-      <div class="gcol-12 gcol-md-8">
+    <div class="order-row border-bottom mt-32 pb-48">
+      <div>
         @for (c of s.clothes; track c) {
           <div>
             <app-cart-item [product]="c" [showRemove]="false"></app-cart-item>
           </div>
         }
       </div>
-      <div class="gcol-12 gcol-md-4 flex flex-col">
+      <div class="flex flex-col">
         <div class="flex text-right flex-col">
           <span class="item-value">
-            {{ s.createdAt | date : "dd/MM/yy" }}
+            {{ s.createdAt | date: 'dd/MM/yy' }}
           </span>
           <span class="item-value color-gray-dark">
-            {{ s.sellerProfit | cost | currency : "BRL" : "symbol" : "1.2" }}
+            {{ s.sellerProfit | cost | currency: 'BRL' : 'symbol' : '1.2' }}
           </span>
           <h6 class="color-gray-dark">{{ s.status }}</h6>
         </div>
@@ -25,7 +25,7 @@
           mat-stroked-button
           color="primary"
           routerLink="{{ s._id }}"
-          >
+        >
           Detalhes
         </button>
         <span class="order-id">cód. {{ s.customId }}</span>

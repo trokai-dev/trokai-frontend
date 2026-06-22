@@ -1,3 +1,18 @@
+:host {
+  display: block;
+}
+
+// Was grid-row + two gcol-md-6 (phone | buttons). Stacks on mobile, 50/50 on desktop.
+.download-grid {
+  display: grid;
+  gap: var(--space-24);
+  align-items: start;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 #phone-image {
   max-width: 70%;
 }

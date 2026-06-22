@@ -54,9 +54,7 @@ export class OrdersService {
 
   reviewOrder(rate: ReviewModel) {
     rate.type = 'order';
-    return lastValueFrom(
-      this.http.post(`${this.urlApi}/users/review`, rate),
-    );
+    return lastValueFrom(this.http.post(`${this.urlApi}/users/review`, rate));
   }
 
   cancelPurchase(orderId: string) {
@@ -82,7 +80,9 @@ export class OrdersService {
   listShippingAgencies(orderId: string) {
     return lastValueFrom(
       this.http
-        .get<PostageAgency[]>(`${this.urlApi}/shipment/order/${orderId}/agencies`)
+        .get<
+          PostageAgency[]
+        >(`${this.urlApi}/shipment/order/${orderId}/agencies`)
         .pipe(map((agencies) => agencies.map((a) => new PostageAgency(a)))),
     );
   }

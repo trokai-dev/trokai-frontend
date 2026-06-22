@@ -33,7 +33,12 @@
           "libs/shared/styles/trokai-material.scss"
         ],
         "scripts": [],
-        "allowedCommonJsDependencies": ["dayjs", "xml2js", "scriptjs", "core-js"],
+        "allowedCommonJsDependencies": [
+          "dayjs",
+          "xml2js",
+          "scriptjs",
+          "core-js"
+        ],
         "stylePreprocessorOptions": {
           "includePaths": ["libs/shared/styles"],
           "sass": {

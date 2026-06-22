@@ -1,3 +1,11 @@
 h6 {
   white-space: normal !important;
 }
+
+// Was ion-row + ion-col (50% each). 2-column product grid.
+.wardrobe-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-8);
+  align-items: start;
+}

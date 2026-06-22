@@ -5,7 +5,6 @@ import {
   NavController,
   IonSpinner,
   IonText,
-  IonGrid,
 } from '@ionic/angular/standalone';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
@@ -41,7 +40,6 @@ import { LoadingService, CostPipe } from '@trokai/shared-ui';
   styleUrls: ['./shipping-options.page.scss'],
   standalone: true,
   imports: [
-    IonGrid,
     IonText,
     IonHeader,
     IonToolbar,
@@ -143,7 +141,9 @@ export class ShippingOptionsPage implements OnInit, OnDestroy {
           this.changeAddressOption(this.enumAddress.INPERSON);
         }
       }
-    } catch { /* intentional */ }
+    } catch {
+      /* intentional */
+    }
   }
 
   async ionViewDidEnter() {

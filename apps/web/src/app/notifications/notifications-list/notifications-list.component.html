@@ -6,13 +6,12 @@
     <span class="label-body-2 block"> Nenhuma notificação</span>
   </div>
 } @else {
-
   <!--  -->
-  @for( n of notifications; track n) {
+  @for (n of notifications; track n) {
     <div
       class="flex border-bottom py-48 px-24 cursor-pointer items-center"
       (click)="n.action()"
-      >
+    >
       <div style="width: 32px">
         @if (true) {
           <ion-icon class="color-primary" name="{{ n.icon }}"></ion-icon>
@@ -24,4 +23,5 @@
         [innerHtml]="n.text + n.date"
       ></span>
     </div>
-    } }
+  }
+}

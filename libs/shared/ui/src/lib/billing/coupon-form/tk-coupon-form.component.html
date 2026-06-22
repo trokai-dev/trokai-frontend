@@ -1,7 +1,9 @@
 <div class="mt-16">
   @if (!couponApplied) {
     @if (!showInput) {
-      <button mat-button color="primary" (click)="onShowInput()">Adicionar cupom</button>
+      <button mat-button color="primary" (click)="onShowInput()">
+        Adicionar cupom
+      </button>
     } @else {
       <mat-form-field appearance="outline" class="w-full">
         <input
@@ -13,7 +15,15 @@
           (keyup.Enter)="onApply()"
           (blur)="onBlur()"
         />
-        <button mat-button color="primary" class="ml-16" matSuffix (click)="onApply()">Aplicar</button>
+        <button
+          mat-button
+          color="primary"
+          class="ml-16"
+          matSuffix
+          (click)="onApply()"
+        >
+          Aplicar
+        </button>
       </mat-form-field>
     }
   } @else {
@@ -21,11 +31,17 @@
       <div class="flex items-center">
         <mat-icon class="color-primary">local_activity</mat-icon>
         <div class="flex flex-col ml-16 py-16">
-          <span class="label-body-2"><b>{{ couponCode }}</b></span>
+          <span class="label-body-2"
+            ><b>{{ couponCode }}</b></span
+          >
           <span class="label-body-2 color-primary">Cupom aplicado!</span>
         </div>
       </div>
-      <button mat-icon-button class="color-gray-default" (click)="clearSelection()">
+      <button
+        mat-icon-button
+        class="color-gray-default"
+        (click)="clearSelection()"
+      >
         <mat-icon>close</mat-icon>
       </button>
     </div>

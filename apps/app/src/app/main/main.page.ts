@@ -1,5 +1,11 @@
 import { User } from '@trokai/shared-core';
-import { Component, inject, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import {
   Platform,

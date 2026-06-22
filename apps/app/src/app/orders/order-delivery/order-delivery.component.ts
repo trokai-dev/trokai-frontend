@@ -1,6 +1,13 @@
 import { Order } from '@trokai/shared-core';
 import { DatePipe } from '@angular/common';
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Browser } from '@capacitor/browser';
 import { MatButtonModule } from '@angular/material/button';
@@ -91,7 +98,9 @@ export class OrderDeliveryComponent implements OnInit {
 
       // por fim, abre melhor envio correios
       await this.openMelhorEnvioCorreios();
-    } finally { /* intentional */ }
+    } finally {
+      /* intentional */
+    }
   }
 
   protected async onClickRastrear() {

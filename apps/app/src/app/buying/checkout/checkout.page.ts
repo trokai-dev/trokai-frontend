@@ -29,7 +29,6 @@ import {
   IonContent,
   LoadingController,
   ModalController,
-  IonGrid,
   IonThumbnail,
   IonImg,
   IonItem,
@@ -60,7 +59,6 @@ import { AlertService } from '@trokai/shared-ui';
     IonToolbar,
     IonTitle,
     IonFooter,
-    IonGrid,
     IonItem,
     IonIcon,
     IonContent,
@@ -237,7 +235,6 @@ export class CheckoutPage implements OnInit, OnDestroy {
       this.fullShippingCost =
         this.checkoutResponse.shipping.shippingValues.fullShippingCost;
     }
-
 
     if (shippingOption == null) return;
 

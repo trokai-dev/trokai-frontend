@@ -14,7 +14,10 @@ import { AuthService } from '../services/auth.service';
 import { UserService } from '@trokai/shared-data-access';
 
 import { Share } from '@capacitor/share';
-import { StatusPillComponent, TkSellerHeaderComponent } from '@trokai/shared-ui';
+import {
+  StatusPillComponent,
+  TkSellerHeaderComponent,
+} from '@trokai/shared-ui';
 import { environment } from 'src/environments/environment';
 import { SearchService } from '../services/search.service';
 import { statusForOwner } from './status-list';
@@ -35,9 +38,7 @@ import {
   IonHeader,
   IonButtons,
   IonContent,
-  IonGrid,
   IonIcon,
-  IonRow,
   IonToolbar,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
@@ -47,7 +48,6 @@ import {
   IonChip,
   IonSpinner,
   IonList,
-  IonCol,
 } from '@ionic/angular/standalone';
 import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
@@ -70,7 +70,7 @@ import { ToastService } from '../services/toast-service';
   standalone: true,
   imports: [
     MatButtonModule,
-    
+
     StatusPillComponent,
     IonHeader,
     IonToolbar,
@@ -80,17 +80,13 @@ import { ToastService } from '../services/toast-service';
     IonButtons,
     IonIcon,
     IonContent,
-    IonGrid,
     IonInfiniteScroll,
     IonInfiniteScrollContent,
-    IonRow,
     TkSellerHeaderComponent,
     IonChip,
     IonSearchbar,
     IonSpinner,
     IonList,
-    IonRow,
-    IonCol,
     BackButtonComponent,
     TkReviewStarsComponent,
     FormsModule,
@@ -171,7 +167,13 @@ export class WardrobePage implements OnInit, OnDestroy {
     });
 
     this.inventoryService._recentProducts.subscribe(async (recentProducts) => {
-      if (!this.userIsOwner || !this.owner || !recentProducts || !recentProducts.size) return;
+      if (
+        !this.userIsOwner ||
+        !this.owner ||
+        !recentProducts ||
+        !recentProducts.size
+      )
+        return;
 
       let nextFilterStatus = ClothesStatus.WAITING_PUBLICATION;
 
@@ -295,7 +297,6 @@ export class WardrobePage implements OnInit, OnDestroy {
 
     this.firebaseService.log('SHARE_ARMARIO_USER');
   }
-
 
   // async changeFilter(status: ClothesStatus) {
   //   this.items = undefined;

@@ -5,8 +5,10 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
-  IonGrid,
-  IonRow, IonAccordionGroup, IonAccordion, IonItem } from '@ionic/angular/standalone';
+  IonAccordionGroup,
+  IonAccordion,
+  IonItem,
+} from '@ionic/angular/standalone';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from 'src/app/services/global.service';
 import { BackButtonComponent } from 'src/app/shared/components/back-button/back-button.component';
@@ -17,9 +19,10 @@ import { FaqData } from '@trokai/shared-core';
   templateUrl: './faq.page.html',
   styleUrls: ['./faq.page.scss'],
   standalone: true,
-  imports: [IonItem, IonAccordion, IonAccordionGroup,
-    IonRow,
-    IonGrid,
+  imports: [
+    IonItem,
+    IonAccordion,
+    IonAccordionGroup,
     IonContent,
     IonHeader,
     IonTitle,

@@ -10,7 +10,6 @@ import { MessagesService } from '@trokai/shared-data-access';
 
 import {
   IonContent,
-  IonGrid,
   IonHeader,
   IonIcon,
   IonRippleEffect,
@@ -48,7 +47,6 @@ import { FirebaseService } from '../services/firebase.service';
     IonBadge,
     IonHeader,
     IonContent,
-    IonGrid,
     IonIcon,
     IonRippleEffect,
     IonToolbar,

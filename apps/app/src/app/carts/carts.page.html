@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="p-24">
+  <div class="p-24">
     @if (baskets && !baskets.length) {
     <div class="empty-page full">
       <ion-icon name="sad-outline"></ion-icon>
@@ -25,18 +25,14 @@
         Ver produtos
       </button>
     </div>
-    }
-
-    @if (baskets && baskets.length) {
+    } @if (baskets && baskets.length) {
     <div class="mt-48 frete-unico">
       <h4 class="color-primary">Frete único!</h4>
       <span class="label-body-2 color-gray-default mt-8">
         Compre mais produtos do mesmo brechó e pague apenas um frete.
       </span>
     </div>
-    }
-
-    @for (basket of baskets; track $index) {
+    } @for (basket of baskets; track $index) {
     <div class="mt-24 border-bottom pb-24">
       <div>
         <!-- Perfil -->
@@ -69,19 +65,14 @@
           </div>
           <ion-ripple-effect></ion-ripple-effect>
         </div>
-        }
-
-        @for (p of basket.products; track p._id) {
+        } @for (p of basket.products; track p._id) {
         <div
           (click)="open(p)"
           class="cart-item mt-16 flex w-full justify-between"
         >
           <div class="flex items-center">
             <ion-thumbnail class="product-item">
-              <ion-img
-                src="{{ p.images?.[0]?.sm }}"
-              >
-              </ion-img>
+              <ion-img src="{{ p.images?.[0]?.sm }}"> </ion-img>
             </ion-thumbnail>
 
             <div class="cart-item-text">
@@ -95,10 +86,7 @@
             </div>
           </div>
           @if (!basket.reserved) {
-          <div
-            class="cart-action remove ml-8"
-            (click)="removeProduct(p)"
-          >
+          <div class="cart-action remove ml-8" (click)="removeProduct(p)">
             <ion-icon name="close-outline"></ion-icon>
           </div>
           }
@@ -106,9 +94,7 @@
         }
       </div>
 
-      <div
-        class="col-12 col-md-3 mt-24 mt-md-0 flex flex-col justify-end"
-      >
+      <div class="mt-24 mt-md-0 flex flex-col justify-end">
         <div class="flex justify-between">
           <span class="label-body-1 color-gray-dark"> <b>Total</b></span>
           <span class="label-body-1 color-gray-dark">
@@ -138,9 +124,7 @@
             <b>Ir para pagamento</b>
           </button>
         </div>
-        }
-
-        @if (basket.reserved) {
+        } @if (basket.reserved) {
         <div class="mt-16">
           <app-reserve-time
             [ownerId]="basket.owner._id"
@@ -152,5 +136,5 @@
       </div>
     </div>
     }
-  </ion-grid>
+  </div>
 </ion-content>

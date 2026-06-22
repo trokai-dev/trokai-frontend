@@ -16,14 +16,14 @@
   @if (data.dialogQuestion) {
     <mat-dialog-actions class="flex justify-end gap-8 mt-24">
       <button mat-stroked-button (click)="close(false)">
-        {{ data.btnNoText ? data.btnNoText : "Não" }}
+        {{ data.btnNoText ? data.btnNoText : 'Não' }}
       </button>
       <button
         mat-flat-button
         color="{{ data.danger ? 'accent' : 'primary' }}"
         (click)="close(true)"
-        >
-        {{ data.btnOkText ? data.btnOkText : "Sim" }}
+      >
+        {{ data.btnOkText ? data.btnOkText : 'Sim' }}
       </button>
     </mat-dialog-actions>
   }
