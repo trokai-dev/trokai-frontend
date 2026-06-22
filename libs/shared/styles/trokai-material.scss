@@ -26,6 +26,13 @@ html {
   --mat-button-tonal-container-shape: 0.4rem;
 }
 
+// Outlined/stroked button border — lighter than the default M3 outline,
+// matching the form-field borders (.btn-tertiary keeps its tertiary outline).
+.mat-mdc-outlined-button,
+.mat-mdc-stroked-button {
+  --mat-outlined-button-outline-color: var(--color-gray-15);
+}
+
 .mat-mdc-checkbox.mat-primary {
   --mdc-checkbox-selected-checkmark-color: white !important;
 }

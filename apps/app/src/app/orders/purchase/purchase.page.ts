@@ -49,7 +49,7 @@ import {
   copyOutline,
 } from 'ionicons/icons';
 import { ChatComponent } from 'src/app/chat/chat.component';
-import { AlertService, CostPipe } from '@trokai/shared-ui';
+import { AlertService, CostPipe, TkSellerHeaderComponent } from '@trokai/shared-ui';
 import { GlobalService } from 'src/app/services/global.service';
 import { ToastService } from 'src/app/services/toast-service';
 import dayjs from 'dayjs';
@@ -85,6 +85,7 @@ import { CartItemComponent } from 'src/app/shared/components/cart-item/cart-item
     IonAvatar,
     OrderDeliveryComponent,
     CartItemComponent,
+    TkSellerHeaderComponent,
   ],
 })
 export class PurchasePage implements OnInit, OnDestroy {

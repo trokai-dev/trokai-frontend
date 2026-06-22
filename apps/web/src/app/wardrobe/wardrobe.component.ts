@@ -32,7 +32,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { TkProductCardComponent } from '@trokai/shared-ui';
 import { MatDialog } from '@angular/material/dialog';
 import { FilterDialogComponent } from '../search/filter-dialog/filter-dialog.component';
-import { TkUserAvatarComponent } from '@trokai/shared-ui';
+import { TkSellerHeaderComponent } from '@trokai/shared-ui';
 import { TkSellerStatusBadgeComponent } from '@trokai/shared-ui';
 import { environment } from '../../environments/environment';
 
@@ -54,7 +54,7 @@ import { environment } from '../../environments/environment';
     MatSelectModule,
     FormsModule,
     NgClass,
-    TkUserAvatarComponent,
+    TkSellerHeaderComponent,
     TkSellerStatusBadgeComponent,
   ],
 })

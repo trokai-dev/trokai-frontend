@@ -107,10 +107,10 @@
 
       <!-- Comprador -->
       <div class="page-section pt-48">
-        <tk-user-header
+        <tk-seller-header
           [user]="order.buyer"
+          size="md"
           [showChatButton]="showContact"
-          [canOpenProfile]="false"
           (chatClick)="openChat()"
         />
       </div>

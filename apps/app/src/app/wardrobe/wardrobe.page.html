@@ -23,51 +23,29 @@
 
   <ion-grid class="px-24 pt-24 pb-12">
     @if (owner) {
-    <div class="flex items-center border-bottom pb-24">
-      <tk-user-avatar [user]="owner" class="mr-16" />
+    <div class="border-bottom pb-24">
+      <tk-seller-header [user]="owner" size="sm">
+        @if (owner && reviews) {
+        <div class="mt-8 flex items-center justify-between">
+          <tk-review-stars
+            [stars]="owner.reviewsAverage"
+            [amount]="reviews.length"
+            [showAmount]="true"
+            [clickable]="reviews.length > 0"
+            (clicked)="openReviews()"
+          ></tk-review-stars>
 
-      <div class="flex justify-between">
-        <div class="flex flex-col">
-          <div class="flex">
-            <h6
-              class="color-gray-dark max-user-name ion-text-capitalize flex items-center"
-            >
-              {{owner.storeName ?? owner.name}}
-            </h6>
-          </div>
-
-          @if (owner.address) {
-          <div class="flex mt-4 items-start">
-            <div class="flex flex-col">
-              <label
-                class="label-caption-1 color-gray-default max-user-address"
-              >
-                {{owner.address.city}}, {{owner.address.state}}
-              </label>
-            </div>
-          </div>
-          } @if (owner && reviews) {
-          <div class="mt-8 flex items-center justify-between">
-            <tk-review-stars
-              [stars]="owner.reviewsAverage"
-              [amount]="reviews.length"
-              [showAmount]="true"
-              [clickable]="reviews.length > 0"
-              (clicked)="openReviews()"
-            ></tk-review-stars>
-
-            @if (owner.storeVisibility === storeVisibility.PAUSED) {
-            <tk-status-pill
-              class="ml-16"
-              variant="accent"
-              [outline]="true"
-              label="Vendas pausadas"
-            />
-            }
-          </div>
+          @if (owner.storeVisibility === storeVisibility.PAUSED) {
+          <tk-status-pill
+            class="ml-16"
+            variant="accent"
+            [outline]="true"
+            label="Vendas pausadas"
+          />
           }
         </div>
-      </div>
+        }
+      </tk-seller-header>
     </div>
     }
 

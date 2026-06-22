@@ -1,5 +1,9 @@
 @import 'variables';
 
+:host {
+  display: block;
+}
+
 // Large devices (desktops, 992px and up)
 @media (max-width: 992px) {
   .home_row {
@@ -17,6 +21,10 @@
   margin-bottom: 6rem;
 
   .home_row_header {
+    display: grid;
+    grid-template-columns: 8fr 4fr;
+    gap: var(--space-24);
+    align-items: start;
     margin-bottom: 2rem;
     margin-left: 7.5px;
     margin-right: 7.5px;
@@ -93,8 +101,6 @@
     @include text-overflow(5);
   }
 }
-
-
 
 .custom-prev,
 .custom-next {

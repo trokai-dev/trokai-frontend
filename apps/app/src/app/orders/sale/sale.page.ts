@@ -40,7 +40,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
 import { chatbubble, chevronDown, chevronUp } from 'ionicons/icons';
 import { ChatComponent } from 'src/app/chat/chat.component';
-import { AlertService, CostPipe } from '@trokai/shared-ui';
+import { AlertService, CostPipe, TkSellerHeaderComponent } from '@trokai/shared-ui';
 import { ToastService } from 'src/app/services/toast-service';
 import { TutorialService } from 'src/app/services/tutorial.service';
 import { MainService } from 'src/app/services/main.service';
@@ -75,6 +75,7 @@ import { CartItemComponent } from 'src/app/shared/components/cart-item/cart-item
     IonRow,
     OrderDeliveryComponent,
     CartItemComponent,
+    TkSellerHeaderComponent,
   ],
 })
 export class SalePage implements OnInit, OnDestroy {

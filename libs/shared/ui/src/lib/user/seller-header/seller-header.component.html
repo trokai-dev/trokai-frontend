@@ -1,0 +1,36 @@
+<div
+  class="seller-header seller-header--{{ size }}"
+  [class.clickable]="clickable"
+  [attr.role]="clickable ? 'button' : null"
+  [attr.tabindex]="clickable ? 0 : null"
+  (click)="onClick()"
+  (keyup.enter)="onClick()"
+>
+  <tk-user-avatar class="seller-header__avatar" [user]="user" [size]="avatarSize" />
+
+  <div class="seller-header__info">
+    @if (heading) {
+      <h1 class="seller-header__name color-gray-dark capitalize text-dots">{{ name }}</h1>
+    } @else {
+      <span class="seller-header__name color-gray-dark capitalize text-dots">{{ name }}</span>
+    }
+
+    @if (user.address) {
+      <span class="seller-header__address label-body-2 color-gray-default text-dots">
+        {{ user.address.city }}, {{ user.address.state }}
+      </span>
+    }
+
+    <ng-content></ng-content>
+  </div>
+
+  @if (showChatButton) {
+    <button
+      mat-icon-button
+      matTooltip="Abrir chat"
+      (click)="$event.stopPropagation(); chatClick.emit()"
+    >
+      <mat-icon class="color-primary">chat</mat-icon>
+    </button>
+  }
+</div>

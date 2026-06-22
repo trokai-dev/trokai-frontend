@@ -73,7 +73,7 @@ import {
   timeOutline,
   trashOutline,
 } from 'ionicons/icons';
-import { AlertService, TkUserAvatarComponent } from '@trokai/shared-ui';
+import { AlertService, TkSellerHeaderComponent } from '@trokai/shared-ui';
 import { FirebaseService } from '../services/firebase.service';
 import { GlobalService } from '../services/global.service';
 import { ProductService } from '@trokai/shared-data-access';
@@ -97,7 +97,7 @@ import { CompletingInformationService } from '@trokai/shared-data-access';
     IonHeader,
     IonList,
     IonRippleEffect,
-    TkUserAvatarComponent,
+    TkSellerHeaderComponent,
     IonToolbar,
     IonContent,
     IonGrid,

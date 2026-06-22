@@ -131,32 +131,7 @@
 
             <!-- Comprador -->
             <div class="page-section pt-48 mt-16">
-              <div
-                class="w-full flex ion-activatable ripple-parent cursor-pointer"
-              >
-                <ion-avatar>
-                  <ion-img [src]="buyerAvatar"></ion-img>
-                </ion-avatar>
-
-                <div
-                  class="ml-24 flex items-start flex-col justify-center"
-                >
-                  <h6 class="color-gray-dark max-user-name">
-                    {{order.buyer.storeName ?? order.buyer.name}}
-                  </h6>
-
-                  <div class="flex mt-4 items-start">
-                    <label
-                      class="label-caption-1 color-gray-default max-user-address"
-                    >
-                      {{ order.buyer.address?.city }}, {{
-                      order.buyer.address?.state }}
-                    </label>
-                  </div>
-                </div>
-
-                <ion-ripple-effect></ion-ripple-effect>
-              </div>
+              <tk-seller-header [user]="order.buyer" size="md" />
             </div>
 
             <!-- CANCELAMENTO -->

@@ -1,0 +1,48 @@
+:host {
+  display: block;
+}
+
+.seller-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+
+  &.clickable {
+    cursor: pointer;
+  }
+}
+
+.seller-header__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0; // lets name/address ellipsis (text-dots) work inside flex
+  flex: 1;
+}
+
+.seller-header__name {
+  margin: 0;
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+}
+
+.seller-header__address {
+  max-width: 100%;
+}
+
+.seller-header--sm {
+  gap: var(--space-12);
+
+  .seller-header__name {
+    font-size: var(--font-size-body-1);
+  }
+}
+
+.seller-header--lg {
+  gap: var(--space-24);
+
+  .seller-header__name {
+    font-size: var(--font-size-h1);
+    font-weight: 700;
+  }
+}

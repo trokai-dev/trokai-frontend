@@ -29,7 +29,7 @@ import {
   OrderStatusString,
 } from '@trokai/shared-core';
 import { OrderDeliveryComponent } from '../order-delivery/order-delivery.component';
-import { TkUserHeaderComponent } from '@trokai/shared-ui';
+import { TkSellerHeaderComponent } from '@trokai/shared-ui';
 
 @Component({
   selector: 'app-purchase',
@@ -51,7 +51,7 @@ import { TkUserHeaderComponent } from '@trokai/shared-ui';
     FormsModule,
     ReactiveFormsModule,
     OrderDeliveryComponent,
-    TkUserHeaderComponent,
+    TkSellerHeaderComponent,
   ],
 })
 export class PurchaseComponent implements OnInit {

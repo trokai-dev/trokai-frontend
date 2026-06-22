@@ -1,0 +1,20 @@
+:host {
+  display: block;
+}
+
+.user-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-16);
+  cursor: pointer;
+  width: 100%;
+}
+
+.user-card__avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vw;
+  max-height: 120px;
+}

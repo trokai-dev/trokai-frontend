@@ -1,9 +1,17 @@
-// All colors come from @trokai/shared-styles tokens (var(--color-*)) — zero hex.
-// Each variant sets a fill color (--_bg) and text color (--_fg); the filled and
-// outlined treatments both derive from those, so one base covers product status
-// (filled) and seller status (outlined) alike.
+// Soft tag style matching the seller-status badge: a light tinted background
+// (--_bg) paired with a darker semantic text/border color (--_color). This keeps
+// labels readable on any surface — no dark-on-dark — and unifies product status
+// pills with the seller badge look.
 :host {
   display: inline-flex;
+}
+
+// Overlay pills must not reserve a line box in the card (was pushing content down).
+:host:has(.pill--overlay) {
+  position: absolute;
+  top: var(--space-8);
+  left: var(--space-8);
+  z-index: 2;
 }
 
 .pill {
@@ -11,44 +19,39 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-4);
-  padding: var(--space-4) var(--space-8);
-  border-radius: var(--radius-sm);
+  padding: var(--space-4) var(--space-12);
+  border-radius: 999px;
   font-size: var(--font-size-caption);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.2;
   white-space: nowrap;
   border: 1px solid transparent;
 
-  // filled (default): solid background, contrast text
-  background-color: var(--_bg);
-  color: var(--_fg);
+  background-color: var(--_bg, var(--color-gray-25));
+  color: var(--_color, var(--color-gray-default));
 
   &__label {
     display: inline-block;
     text-transform: capitalize;
   }
 
-  // --- Variant palette (token-driven; fixes the legacy #6b6b6b drift) ---
-  &--neutral { --_bg: var(--color-gray-25); --_fg: var(--color-on-surface); }
-  &--success { --_bg: var(--color-primary); --_fg: var(--color-on-primary); }
-  &--warning { --_bg: var(--color-warning); --_fg: var(--color-gray-default); }
-  &--danger { --_bg: var(--color-error); --_fg: #fff; }
-  &--muted { --_bg: var(--color-gray-default); --_fg: #fff; }
-  &--accent { --_bg: var(--color-accent); --_fg: var(--color-gray-default); }
+  // Soft tint bg + semantic text color (shared palette with seller badge).
+  &--neutral { --_bg: var(--color-gray-25); --_color: var(--color-gray-default); }
+  &--success { --_bg: #e6f4ea; --_color: var(--color-success); }
+  &--warning { --_bg: #fef3e2; --_color: #9a5c00; }
+  &--danger  { --_bg: #fde8e8; --_color: var(--color-error); }
+  &--muted   { --_bg: var(--color-gray-2); --_color: var(--color-gray-default); }
+  &--accent  { --_bg: color-mix(in srgb, var(--color-accent) 30%, transparent); --_color: #9b3848; }
 
-  // outlined: transparent fill, variant-colored border + text (e.g. vacation badge)
+  // outlined: transparent fill, semantic-colored border + text (e.g. vacation badge)
   &--outline {
     background-color: transparent;
-    border-color: var(--_bg);
-    color: var(--_bg);
+    border-color: var(--_color);
+    color: var(--_color);
   }
 
-  // absolutely positioned over a media element (e.g. product thumbnail)
+  // positioned by :host (above); shadow lifts the tag off the thumbnail
   &--overlay {
-    position: absolute;
-    top: var(--space-4);
-    left: var(--space-4);
-    z-index: 2;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
   }
 }

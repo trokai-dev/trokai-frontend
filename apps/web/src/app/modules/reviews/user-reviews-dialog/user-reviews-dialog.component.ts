@@ -49,8 +49,12 @@ export class UserReviewsDialogComponent implements OnInit {
       this.user._id,
     )) as ReviewModel[];
 
-    this.reviews = (reviews ?? []).sort((a, b) =>
-      (a.createdAt?.getTime() ?? 0) < (b.createdAt?.getTime() ?? 0) ? 1 : -1,
+    this.reviews = (reviews ?? []).sort(
+      (a, b) =>
+        (a.createdAt ? new Date(a.createdAt).getTime() : 0) <
+        (b.createdAt ? new Date(b.createdAt).getTime() : 0)
+          ? 1
+          : -1,
     );
   }
 

@@ -411,77 +411,53 @@
                     </div>
                     <!-- Loja -->
                     <div
-                      class="flex items-center py-48 cursor-pointer"
+                      class="py-48 cursor-pointer"
                       routerLink="/users/{{ owner.nickname }}"
                       >
-                      <div
-                        class="flex justify-center items-center p-24"
-                        >
-                        <tk-user-avatar [user]="owner" size="medium" />
-                      </div>
-                      <div
-                        class="flex-1 flex ml-0 ml-md-8 flex-col items-start justify-center px-md-0"
-                        >
-                        <div class="flex items-center">
-                          <h4 class="color-gray-dark capitalize">
-                            {{ owner.storeName ?? owner.name }}
-                          </h4>
-                          </div>
-                          <div class="flex items-center mt-4">
-                            <div class="flex flex-col">
-                              <span
-                                class="label-caption-1 color-gray-default max-user-address"
-                                >
-                                {{ owner.address.city }},
-                                {{ owner.address.state }}
-                              </span>
-                            </div>
-                          </div>
-                          <div
-                            class="mt-8 flex justify-between items-center"
-                            >
-                            <tk-review-stars
-                              [stars]="owner.reviewsAverage"
-                              [amount]="owner.reviewsAmount"
-                              [clickable]="!!owner.reviewsAmount"
-                              (clicked)="openReviews(owner)"
-                            ></tk-review-stars>
-                          </div>
-                          <div class="flex flex-wrap gap-48 mt-32">
-                            @if (owner.productsSold > 0) {
-                              <div class="flex flex-col">
-                                <span class="label-caption-1 fw-300 color-gray-default">
-                                  Vendidos
-                                </span>
-                                <span class="label-caption-1 color-gray-dark">
-                                  {{ owner.productsSold }}
-                                </span>
-                              </div>
-                            }
+                      <tk-seller-header [user]="owner" size="md">
+                        <div class="mt-8 flex justify-between items-center">
+                          <tk-review-stars
+                            [stars]="owner.reviewsAverage"
+                            [amount]="owner.reviewsAmount"
+                            [clickable]="!!owner.reviewsAmount"
+                            (clicked)="openReviews(owner)"
+                          ></tk-review-stars>
+                        </div>
+                        <div class="flex flex-wrap gap-48 mt-32">
+                          @if (owner.productsSold > 0) {
                             <div class="flex flex-col">
                               <span class="label-caption-1 fw-300 color-gray-default">
-                                À venda
+                                Vendidos
                               </span>
                               <span class="label-caption-1 color-gray-dark">
-                                {{ owner.productsForSale }}
+                                {{ owner.productsSold }}
                               </span>
                             </div>
-                            @if (owner?.productsSold > 0) {
-                              <div class="flex flex-col">
-                                <span class="label-caption-1 fw-300 color-gray-default">
-                                  Tempo médio de envio
-                                </span>
-                                <span class="label-caption-1 color-gray-dark">
-                                  {{ owner.avgPostageDays }}
-                                  {{
-                                  owner.avgPostageDays > 1 ? "dias úteis" : "dia útil"
-                                  }}
-                                </span>
-                              </div>
-                            }
+                          }
+                          <div class="flex flex-col">
+                            <span class="label-caption-1 fw-300 color-gray-default">
+                              À venda
+                            </span>
+                            <span class="label-caption-1 color-gray-dark">
+                              {{ owner.productsForSale }}
+                            </span>
                           </div>
+                          @if (owner?.productsSold > 0) {
+                            <div class="flex flex-col">
+                              <span class="label-caption-1 fw-300 color-gray-default">
+                                Tempo médio de envio
+                              </span>
+                              <span class="label-caption-1 color-gray-dark">
+                                {{ owner.avgPostageDays }}
+                                {{
+                                owner.avgPostageDays > 1 ? "dias úteis" : "dia útil"
+                                }}
+                              </span>
+                            </div>
+                          }
                         </div>
-                      </div>
+                      </tk-seller-header>
+                    </div>
                       @if (myProduct || product.published) {
                         <!-- Perguntas -->
                         <div class="grid-row">

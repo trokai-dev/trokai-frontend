@@ -1,8 +1,8 @@
 @for (home_row of payload; track home_row; let row = $index) {
   <div class="container px-0 home_row" style="position: relative">
     @if (home_row.title && home_row.visibleWeb) {
-      <div class="grid-row home_row_header">
-        <div class="gcol-8 px-0">
+      <div class="home_row_header">
+        <div class="px-0">
           <h2 class="home_row_title my-0">{{ home_row.title }}</h2>
           @if (home_row.description) {
             <span class="home_row_description">
@@ -11,7 +11,7 @@
           }
         </div>
         @if (home_row.actionText && home_row.actionUrl) {
-          <div class="gcol-4 px-0 flex justify-end">
+          <div class="px-0 flex justify-end">
             @if (home_row.route) {
               <a
                 rel="nofollow"

@@ -31,7 +31,7 @@ import { TrokaiGtmService } from '../services/trokai-gtm.service';
 import { SearchService } from '../search/search.service';
 import { Filters, GlobalParams } from '@trokai/shared-core';
 import { PreloadService } from '../services/preload.service';
-import { TkUserAvatarComponent } from '@trokai/shared-ui';
+import { TkSellerHeaderComponent } from '@trokai/shared-ui';
 import { TkReviewStarsComponent } from '@trokai/shared-ui';
 import { DialogService } from '../services/dialog.service';
 import {
@@ -61,7 +61,7 @@ import { TkGalleryComponent, TkProductImageComponent } from '@trokai/shared-ui';
     TitleCasePipe,
     CurrencyPipe,
     CostPipe,
-    TkUserAvatarComponent,
+    TkSellerHeaderComponent,
     TkReviewStarsComponent,
     ReserveTimeComponent,
     TkProductImageComponent,

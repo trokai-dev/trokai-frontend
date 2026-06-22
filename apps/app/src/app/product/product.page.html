@@ -448,75 +448,49 @@
       @if (!myProduct && owner) {
       <div
         (click)="openOwnerWardrobe()"
-        class="mt-40 flex pb-8 ion-activatable ripple-parent items-center"
+        class="mt-40 pb-8 ion-activatable ripple-parent"
       >
-        <tk-user-avatar [user]="owner" class="mr-16" />
+        <tk-seller-header [user]="owner" size="sm">
+          <div class="mt-8">
+            <tk-review-stars
+              [stars]="owner.reviewsAverage"
+              [amount]="owner.reviewsAmount"
+              [showAmount]="!!owner.reviewsAmount"
+            ></tk-review-stars>
+          </div>
 
-        <div class="flex justify-between flex-1">
-          <div class="flex flex-col justify-center flex-1">
-            <div class="flex items-center">
-              <h6
-                class="color-gray-dark max-user-name ion-text-capitalize flex items-center"
-              >
-                {{owner.storeName ?? owner.name}}
-              </h6>
-            </div>
-
-            <div class="flex mt-4 items-start">
-              <div class="flex flex-col">
-                <label
-                  class="label-caption-1 color-gray-default max-user-address"
-                >
-                  {{ owner.address.city }}, {{ owner.address.state }}
-                </label>
-              </div>
-            </div>
-
-            @if (owner) {
-            <div class="mt-8">
-              <tk-review-stars
-                [stars]="owner.reviewsAverage"
-                [amount]="owner.reviewsAmount"
-                [showAmount]="!!owner.reviewsAmount"
-              ></tk-review-stars>
+          <div class="flex justify-between mt-24">
+            @if (owner.productsSold > 0) {
+            <div class="flex flex-col">
+              <span class="label-caption-1 fw-300 color-gray-default">
+                Vendidos
+              </span>
+              <span class="label-caption-1 color-gray-dark">
+                {{ owner.productsSold }}
+              </span>
             </div>
             }
-
-            @if (owner) {
-            <div class="flex justify-between mt-24">
-              @if (owner.productsSold > 0) {
-              <div class="flex flex-col">
-                <span class="label-caption-1 fw-300 color-gray-default">
-                  Vendidos
-                </span>
-                <span class="label-caption-1 color-gray-dark">
-                  {{ owner.productsSold }}
-                </span>
-              </div>
-              }
-              <div class="flex flex-col">
-                <span class="label-caption-1 fw-300 color-gray-default">
-                  À venda
-                </span>
-                <span class="label-caption-1 color-gray-dark">
-                  {{ owner.productsForSale }}
-                </span>
-              </div>
-              @if (owner.productsSold > 0) {
-              <div class="flex flex-col">
-                <span class="label-caption-1 fw-300 color-gray-default">
-                  Tempo médio de envio
-                </span>
-                <span class="label-caption-1 color-gray-dark">
-                  {{ owner.avgPostageDays }} {{ owner.avgPostageDays > 1 ? 'dias
-                  úteis' : 'dia útil' }}
-                </span>
-              </div>
-              }
+            <div class="flex flex-col">
+              <span class="label-caption-1 fw-300 color-gray-default">
+                À venda
+              </span>
+              <span class="label-caption-1 color-gray-dark">
+                {{ owner.productsForSale }}
+              </span>
+            </div>
+            @if (owner.productsSold > 0) {
+            <div class="flex flex-col">
+              <span class="label-caption-1 fw-300 color-gray-default">
+                Tempo médio de envio
+              </span>
+              <span class="label-caption-1 color-gray-dark">
+                {{ owner.avgPostageDays }} {{ owner.avgPostageDays > 1 ? 'dias
+                úteis' : 'dia útil' }}
+              </span>
             </div>
             }
           </div>
-        </div>
+        </tk-seller-header>
         <ion-ripple-effect></ion-ripple-effect>
       </div>
       }

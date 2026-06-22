@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { FilterTagsComponent } from '../shared/components/filter-tags/filter-tags.component';
 import { TkProductCardComponent } from '@trokai/shared-ui';
-import { TkUserHeaderComponent } from '@trokai/shared-ui';
+import { TkUserCardComponent } from '@trokai/shared-ui';
 import {
   IonContent,
   IonHeader,
@@ -59,7 +59,7 @@ import { FirebaseService } from '../services/firebase.service';
     FilterTagsComponent,
     NgClass,
     TkProductCardComponent,
-    TkUserHeaderComponent,
+    TkUserCardComponent,
   ],
 })
 export class SearchPage implements OnInit {

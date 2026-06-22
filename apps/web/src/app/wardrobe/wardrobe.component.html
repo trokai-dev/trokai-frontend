@@ -2,50 +2,19 @@
   <div class="container page">
     <div class="grid-row">
       <div class="gcol-12">
-        <div class="flex items-center">
-          <div
-            class="flex justify-center items-center p-24"
-            >
-            <tk-user-avatar
-              [user]="owner"
-              size="large"
-              [priority]="true"
-            ></tk-user-avatar>
+        <tk-seller-header [user]="owner" size="lg" [heading]="true">
+          <div class="flex items-center justify-between w-full mt-8">
+            <tk-review-stars
+              [stars]="owner.reviewsAverage"
+              [amount]="owner.reviewsAmount"
+              [clickable]="!!owner.reviewsAmount"
+              (clicked)="openReviews(owner)"
+            ></tk-review-stars>
+            @if (userOwner && owner.isSeller) {
+              <tk-seller-status-badge [user]="owner" [isLoggedUser]="true" (badgeClick)="goToSellerStatus()" />
+            }
           </div>
-          <div
-            class="flex-1 ml-0 ml-md-24 flex flex-col items-start justify-center"
-            >
-            <div class="flex items-center w-full">
-              <h1 class="color-gray-dark capitalize text-dots">
-                {{ owner.storeName ?? owner.name }}
-              </h1>
-              </div>
-              <div class="flex items-center mt-8">
-                <div class="flex flex-col">
-                  @if (owner.address) {
-                    <span
-                      class="label-body-2 color-gray-default max-user-address"
-                      >
-                      {{ owner.address?.city }}, {{ owner.address?.state }}
-                    </span>
-                  }
-                </div>
-              </div>
-              <div class="mt-8 w-full">
-                <div class="flex items-center justify-between">
-                  <tk-review-stars
-                    [stars]="owner.reviewsAverage"
-                    [amount]="owner.reviewsAmount"
-                    [clickable]="!!owner.reviewsAmount"
-                    (clicked)="openReviews(owner)"
-                  ></tk-review-stars>
-                  @if (userOwner && owner.isSeller) {
-                    <tk-seller-status-badge [user]="owner" [isLoggedUser]="true" (badgeClick)="goToSellerStatus()" />
-                  }
-                </div>
-              </div>
-            </div>
-          </div>
+        </tk-seller-header>
           <hr class="m-0 mt-48" />
           <div class="grid-row">
             <div class="gcol-12">
@@ -158,9 +127,7 @@
               }
               <div class="grid-row grid-cols-2 grid-cols-md-5">
                 @for (item of items; track item; let i = $index) {
-                  <div
-                    class="mt-24 pt-16"
-                    >
+                  <div class="mt-24">
                     <tk-product-card
                       [clean]="true"
                       [product]="item"

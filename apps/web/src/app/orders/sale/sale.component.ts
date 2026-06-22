@@ -21,7 +21,7 @@ import { CartItemComponent } from '../../modules/cart-item/cart-item.component';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 
 import { LoadingService } from '@trokai/shared-ui';
-import { TkUserHeaderComponent } from '@trokai/shared-ui';
+import { TkSellerHeaderComponent } from '@trokai/shared-ui';
 import { A11yModule } from '@angular/cdk/a11y';
 import { OrderDeliveryComponent } from '../order-delivery/order-delivery.component';
 
@@ -39,7 +39,7 @@ import { OrderDeliveryComponent } from '../order-delivery/order-delivery.compone
     DatePipe,
     CostPipe,
     RouterModule,
-    TkUserHeaderComponent,
+    TkSellerHeaderComponent,
     A11yModule,
     OrderDeliveryComponent,
   ],

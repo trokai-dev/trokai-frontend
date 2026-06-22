@@ -1,25 +1,21 @@
 <div class="reviews-list">
   @if (user) {
-    <div class="flex items-center gap-16 reviews-header">
-      <tk-user-avatar [user]="user" size="large"></tk-user-avatar>
+    <tk-seller-header [user]="user" size="md" class="reviews-header">
+      <div class="flex items-center gap-8">
+        <span class="label-body-2 average">{{
+          user.reviewsAverage | number: '1.1-1'
+        }}</span>
 
-      <div class="flex flex-col">
-        <h2 class="name">{{ user.storeName ?? user.name }}</h2>
+        <tk-review-stars
+          [stars]="user.reviewsAverage"
+          [showAmount]="false"
+        ></tk-review-stars>
 
-        <div class="flex items-center gap-8">
-          <span class="label-body-2 average">{{
-            user.reviewsAverage | number: '1.1-1'
-          }}</span>
-
-          <tk-review-stars
-            [stars]="user.reviewsAverage"
-            [showAmount]="false"
-          ></tk-review-stars>
-
-          <span class="label-caption-1 count">{{ user.reviewsAmount }} avaliações</span>
-        </div>
+        <span class="label-caption-1 count"
+          >{{ user.reviewsAmount }} avaliações</span
+        >
       </div>
-    </div>
+    </tk-seller-header>
   }
 
   <div class="reviews-content">

@@ -14,7 +14,7 @@ import { AuthService } from '../services/auth.service';
 import { UserService } from '@trokai/shared-data-access';
 
 import { Share } from '@capacitor/share';
-import { StatusPillComponent, TkUserAvatarComponent } from '@trokai/shared-ui';
+import { StatusPillComponent, TkSellerHeaderComponent } from '@trokai/shared-ui';
 import { environment } from 'src/environments/environment';
 import { SearchService } from '../services/search.service';
 import { statusForOwner } from './status-list';
@@ -84,7 +84,7 @@ import { ToastService } from '../services/toast-service';
     IonInfiniteScroll,
     IonInfiniteScrollContent,
     IonRow,
-    TkUserAvatarComponent,
+    TkSellerHeaderComponent,
     IonChip,
     IonSearchbar,
     IonSpinner,

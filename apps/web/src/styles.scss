@@ -108,7 +108,9 @@ button {
 }
 
 hr {
-  border-color: #b6b6b6 !important;
+  height: 1px;
+  border: none !important;
+  background: var(--color-border);
 }
 
 // .flex-1 / .border-* come from shared `@use 'index'` (_layout/_borders).

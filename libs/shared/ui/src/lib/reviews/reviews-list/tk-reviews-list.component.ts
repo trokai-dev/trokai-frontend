@@ -3,7 +3,7 @@ import { DecimalPipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { User } from '@trokai/shared-core';
 import { ReviewModel } from '@trokai/shared-data-access';
-import { TkUserAvatarComponent } from '../../user/user-avatar/user-avatar.component';
+import { TkSellerHeaderComponent } from '../../user/seller-header/seller-header.component';
 import { TkReviewStarsComponent } from '../review-stars/tk-review-stars.component';
 import { TkReviewCardComponent } from '../review-card/tk-review-card.component';
 
@@ -13,7 +13,7 @@ import { TkReviewCardComponent } from '../review-card/tk-review-card.component';
   imports: [
     DecimalPipe,
     MatIconModule,
-    TkUserAvatarComponent,
+    TkSellerHeaderComponent,
     TkReviewStarsComponent,
     TkReviewCardComponent,
   ],

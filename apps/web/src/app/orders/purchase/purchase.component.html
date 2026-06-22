@@ -231,8 +231,10 @@
 
       <!-- Vendedor -->
       <div class="page-section pt-48">
-        <tk-user-header
+        <tk-seller-header
           [user]="order.seller"
+          size="md"
+          [clickable]="true"
           [showChatButton]="showContact"
           (clicked)="openOtherUser()"
           (chatClick)="openChat()"
