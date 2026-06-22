@@ -5,7 +5,11 @@ import { Directive, ElementRef, HostListener, inject } from '@angular/core';
 export class HideLoadingImageDirective {
   private el = inject(ElementRef);
 
-  @HostListener('error') load() {
+  @HostListener('load') onLoad() {
+    this.el.nativeElement.style.visibility = 'visible';
+  }
+
+  @HostListener('error') onError() {
     this.el.nativeElement.style.visibility = 'hidden';
   }
 }
