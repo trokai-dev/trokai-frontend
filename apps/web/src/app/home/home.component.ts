@@ -15,8 +15,10 @@ import { GlobalService } from '../services/global.service';
 import { HomeService } from '../services/home.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { HomeGenericComponent } from './home-generic/home-generic.component';
-import { BannerComponent } from './banner/banner.component';
+import {
+  TkBannerComponent,
+  TkHomeGenericComponent,
+} from '@trokai/shared-features';
 import Swiper from 'swiper';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { BrowserRef } from '../services/browser-ref.service';
@@ -30,8 +32,8 @@ import { BreakpointObserver } from '@angular/cdk/layout';
   standalone: true,
   imports: [
     RouterLink,
-    BannerComponent,
-    HomeGenericComponent,
+    TkBannerComponent,
+    TkHomeGenericComponent,
     MatButtonModule,
     MatIconModule,
     RouterModule,

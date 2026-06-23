@@ -5,7 +5,6 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   ElementRef,
   inject,
-  NgZone,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -48,7 +47,6 @@ import {
   NavController,
   IonIcon,
   IonButtons,
-  ActionSheetController,
   IonList,
   IonRippleEffect,
   IonBadge,
@@ -63,7 +61,6 @@ import {
   cartOutline,
   cashOutline,
   chevronForward,
-  close,
   closeCircle,
   copyOutline,
   createOutline,
@@ -78,6 +75,7 @@ import {
   trashOutline,
 } from 'ionicons/icons';
 import { AlertService, TkSellerHeaderComponent } from '@trokai/shared-ui';
+import { TkProductOwnerButtonsComponent } from '@trokai/shared-features';
 import { FirebaseService } from '../services/firebase.service';
 import { GlobalService } from '../services/global.service';
 import { ProductService } from '@trokai/shared-data-access';
@@ -117,6 +115,7 @@ import { CompletingInformationService } from '@trokai/shared-data-access';
     ReserveTimeComponent,
     StatusPillComponent,
     ItemNamePipe,
+    TkProductOwnerButtonsComponent,
   ],
 })
 export class ProductPage implements OnInit, OnDestroy {
@@ -136,8 +135,6 @@ export class ProductPage implements OnInit, OnDestroy {
   private modalCtrl = inject(ModalController);
   private matDialog = inject(MatDialog);
   private productsService = inject(ProductService);
-  private actionSheetController = inject(ActionSheetController);
-  private ngZone = inject(NgZone);
   private completingInformation = inject(CompletingInformationService);
 
   swiperModules = [IonicSlides];
@@ -407,127 +404,6 @@ export class ProductPage implements OnInit, OnDestroy {
 
   clickCart() {
     this.mainService.navigateToCarts(this.owner._id);
-  }
-
-  async clickOptions() {
-    if (!this.myProduct) return;
-
-    const buttons = [];
-
-    // waiting adjustments
-    if (this.waiting_adjustment) {
-      buttons.push({
-        text: 'Corrigir anúncio',
-        icon: alertCircleOutline,
-        handler: () => {
-          this.ngZone.run(() => {
-            this.modalAdjusts();
-          });
-        },
-      });
-    }
-
-    // show renew if expired
-    if (this.showRenew) {
-      buttons.push({
-        text: 'Renovar anúncio',
-        icon: refreshOutline,
-        handler: () => {
-          this.ngZone.run(() => {
-            this.renewProduct();
-          });
-        },
-      });
-    }
-
-    if (!this.waiting_adjustment && !this.showRenew && !this.sold) {
-      buttons.push({
-        text: 'Editar',
-        icon: createOutline,
-        handler: () => {
-          this.ngZone.run(() => {
-            this.editProduct();
-          });
-        },
-      });
-    }
-
-    // allow duplicate if not waiting adjustment or expired
-    if (
-      !this.waiting_adjustment &&
-      !this.expired &&
-      !this.waiting_publication
-    ) {
-      buttons.push({
-        text: 'Duplicar',
-        icon: copyOutline,
-        handler: () => {
-          this.ngZone.run(() => {
-            this.duplicateProduct();
-          });
-        },
-      });
-    }
-
-    // deactivate if published
-    if (this.published) {
-      buttons.push({
-        text: 'Pausar',
-        icon: pauseOutline,
-        handler: () => {
-          this.ngZone.run(() => {
-            this.deactivateProduct();
-          });
-        },
-      });
-    }
-
-    // activate if paused
-    if (this.paused) {
-      buttons.push({
-        text: 'Ativar',
-        icon: playOutline,
-        handler: () => {
-          this.ngZone.run(() => {
-            this.activateProduct();
-          });
-        },
-      });
-    }
-
-    // delete if published, expired or waiting adjustment
-    if (
-      this.waiting_publication ||
-      this.waiting_adjustment ||
-      this.published ||
-      this.paused ||
-      this.expired
-    ) {
-      buttons.push({
-        text: 'Excluir',
-        icon: trashOutline,
-        handler: () => {
-          this.ngZone.run(() => {
-            this.deleteProduct();
-          });
-        },
-      });
-    }
-
-    buttons.push({
-      text: 'Cancelar',
-      icon: close,
-      role: 'cancel',
-      handler: () => {
-        /* intentional */
-      },
-    });
-
-    const ac = await this.actionSheetController.create({
-      buttons: buttons,
-    });
-
-    ac.present();
   }
 
   async clickBuy() {

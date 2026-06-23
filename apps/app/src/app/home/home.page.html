@@ -58,10 +58,11 @@
       @if (home_row.objectType === 'banner') {
       <div>
         <div style="margin-left: 1.2rem; margin-right: 1.2rem">
-          <app-banner
+          <tk-banner
+            [useLink]="false"
             (navigate)="navigate(home_row.items[0])"
             [item]="home_row.items[0]"
-          ></app-banner>
+          ></tk-banner>
         </div>
       </div>
       }
@@ -92,11 +93,12 @@
           @for (home_generic of home_row.items; track $index; let col = $index)
           {
           <div class="custom-swiper-slide">
-            <app-home-generic
+            <tk-home-generic
+              [useLink]="false"
               (navigate)="navigate(home_generic)"
               [home_generic]="home_generic"
               [home_row]="home_row"
-            ></app-home-generic>
+            ></tk-home-generic>
           </div>
           }
         </div>
@@ -106,7 +108,11 @@
         <div id="swiper-{{ row }}" class="row-smooth-scroll">
           @for (item of home_row.items; track $index; let col = $index) {
           <div class="custom-swiper-slide">
-            <app-banner (navigate)="navigate(item)" [item]="item"></app-banner>
+            <tk-banner
+              [useLink]="false"
+              (navigate)="navigate(item)"
+              [item]="item"
+            ></tk-banner>
           </div>
           }
         </div>

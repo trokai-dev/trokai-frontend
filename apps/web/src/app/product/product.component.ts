@@ -22,7 +22,6 @@ import { CompletingInformationService } from '@trokai/shared-data-access';
 import { Basket, BuyingService } from '@trokai/shared-data-access';
 import { ProductsHorizontalListComponent } from '../modules/products-list/products-horizontal-list/products-horizontal-list.component';
 import { ProductQuestionsComponent } from './product-questions/product-questions.component';
-import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TkZipcodeShippingFeeComponent as ZipcodeShippingFeeComponent } from '@trokai/shared-ui';
 import { MatButtonModule } from '@angular/material/button';
@@ -43,6 +42,7 @@ import {
 import { ReserveTimeComponent } from '../buying/reserve-time/reserve-time.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TkGalleryComponent, TkProductImageComponent } from '@trokai/shared-ui';
+import { TkProductOwnerButtonsComponent } from '@trokai/shared-features';
 
 @Component({
   selector: 'app-product',
@@ -54,7 +54,6 @@ import { TkGalleryComponent, TkProductImageComponent } from '@trokai/shared-ui';
     MatButtonModule,
     ZipcodeShippingFeeComponent,
     MatTooltipModule,
-    MatIconModule,
     RouterLink,
     ProductQuestionsComponent,
     ProductsHorizontalListComponent,
@@ -67,6 +66,7 @@ import { TkGalleryComponent, TkProductImageComponent } from '@trokai/shared-ui';
     TkProductImageComponent,
     StatusPillComponent,
     ItemNamePipe,
+    TkProductOwnerButtonsComponent,
   ],
 })
 export class ProductComponent implements OnInit, OnDestroy {

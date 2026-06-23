@@ -43,11 +43,11 @@
                 <div class="swiper-wrapper">
                   @for (item of home_row.items; track item) {
                     <div class="swiper-slide">
-                      <app-banner
+                      <tk-banner
                         [viewportHeight]="viewportHeight"
                         [item]="item"
                         [priority]="row < 2"
-                      ></app-banner>
+                      ></tk-banner>
                     </div>
                   }
                 </div>
@@ -64,11 +64,11 @@
             </div>
           } @else {
             <div class="__item banner">
-              <app-banner
+              <tk-banner
                 [viewportHeight]="viewportHeight"
                 [item]="home_row.items[0]"
                 [priority]="row < 2"
-              ></app-banner>
+              ></tk-banner>
             </div>
           }
         </div>
@@ -86,12 +86,12 @@
               [style.maxWidth]="home_row.itemMobileWidth"
               [style.width]="home_row.itemMobileWidth"
             >
-              <app-home-generic
+              <tk-home-generic
                 [home_generic]="home_generic"
                 [home_row]="home_row"
                 [viewportHeight]="viewportHeight"
               >
-              </app-home-generic>
+              </tk-home-generic>
             </div>
           }
         </div>

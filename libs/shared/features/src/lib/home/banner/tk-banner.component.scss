@@ -2,6 +2,8 @@
 
 .home_banner {
   width: 100%;
+  border: 0px;
+  opacity: 1;
 
   .image-wrapper {
     width: 100%;
@@ -14,6 +16,12 @@
   img {
     width: 100%;
     height: auto;
+  }
+
+  // App tap-to-navigate variant
+  .mobile img {
+    object-fit: contain;
+    border-radius: 4px;
   }
 }
 

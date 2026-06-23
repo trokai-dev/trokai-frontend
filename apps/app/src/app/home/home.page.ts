@@ -18,8 +18,10 @@ import { MessagesService } from '@trokai/shared-data-access';
 import { BuyingService } from '@trokai/shared-data-access';
 import { RouterLink } from '@angular/router';
 import { NgIf, NgFor } from '@angular/common';
-import { BannerComponent } from './banner/banner.component';
-import { HomeGenericComponent } from './home-generic/home-generic.component';
+import {
+  TkBannerComponent,
+  TkHomeGenericComponent,
+} from '@trokai/shared-features';
 import {
   IonButtons,
   IonContent,
@@ -55,8 +57,8 @@ import { addIcons } from 'ionicons';
     RouterLink,
     NgIf,
     NgFor,
-    BannerComponent,
-    HomeGenericComponent,
+    TkBannerComponent,
+    TkHomeGenericComponent,
   ],
 })
 export class HomePage implements OnInit {

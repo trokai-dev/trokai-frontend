@@ -1,0 +1,77 @@
+<div class="flex gap-8">
+  <!-- BTN DUPLICATE -->
+  @if (!showRenew && !unavailable && myProduct) {
+    <button
+      mat-stroked-button
+      (click)="duplicate.emit()"
+      aria-label="duplicar anúncio"
+      matTooltip="Duplicar anúncio"
+    >
+      <mat-icon class="color-gray-dark">content_copy</mat-icon>
+    </button>
+  }
+  <!-- BTN PAUSE / ACTIVATE -->
+  @if (paused) {
+    <button
+      mat-stroked-button
+      (click)="activate.emit()"
+      aria-label="publicar anúncio"
+      matTooltip="Publicar anúncio"
+    >
+      <mat-icon class="color-gray-dark">play_arrow</mat-icon>
+    </button>
+  } @else if (published) {
+    <button
+      mat-stroked-button
+      (click)="deactivate.emit()"
+      aria-label="pausar anúncio"
+      matTooltip="Pausar anúncio"
+    >
+      <mat-icon class="color-gray-dark">pause</mat-icon>
+    </button>
+  }
+  @if (showEditGroup) {
+    <!-- BTN RENEW -->
+    @if (showRenew) {
+      <button
+        mat-stroked-button
+        (click)="renew.emit()"
+        aria-label="renovar anúncio"
+        matTooltip="Renovar anúncio"
+      >
+        <mat-icon class="color-gray-dark">refresh</mat-icon>
+      </button>
+    }
+    <!-- BTN CORRECT (requires adjustments) -->
+    @if (!showRenew && waitingAdjustment) {
+      <button
+        mat-stroked-button
+        (click)="correct.emit()"
+        aria-label="corrigir anúncio"
+        matTooltip="Corrigir anúncio"
+      >
+        <mat-icon class="color-gray-dark">build</mat-icon>
+      </button>
+    }
+    <!-- BTN EDIT -->
+    @if (!showRenew && !waitingAdjustment) {
+      <button
+        mat-stroked-button
+        (click)="edit.emit()"
+        aria-label="editar anúncio"
+        matTooltip="Editar anúncio"
+      >
+        <mat-icon class="color-gray-dark">edit</mat-icon>
+      </button>
+    }
+    <!-- BTN DELETE -->
+    <button
+      mat-stroked-button
+      (click)="remove.emit()"
+      aria-label="apagar anúncio"
+      matTooltip="Apagar anúncio"
+    >
+      <mat-icon class="color-gray-dark">delete</mat-icon>
+    </button>
+  }
+</div>

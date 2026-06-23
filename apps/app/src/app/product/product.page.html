@@ -11,10 +11,6 @@
         <ion-icon name="cart-outline"></ion-icon>
         <ion-badge color="tertiary"> {{ basketCount }} </ion-badge>
       </button>
-      } @if (myProduct) {
-      <button mat-icon-button class="mr-4" (click)="clickOptions()">
-        <ion-icon name="ellipsis-horizontal"></ion-icon>
-      </button>
       }
     </ion-buttons>
   </ion-toolbar>
@@ -162,6 +158,22 @@
         </div>
         }
       </div>
+
+      @if (myProduct) {
+      <tk-product-owner-buttons
+        class="block mt-16"
+        [product]="product.clothes"
+        [myProduct]="myProduct"
+        [showRenew]="showRenew"
+        (edit)="editProduct()"
+        (duplicate)="duplicateProduct()"
+        (deactivate)="deactivateProduct()"
+        (activate)="activateProduct()"
+        (remove)="deleteProduct()"
+        (renew)="renewProduct()"
+        (correct)="modalAdjusts()"
+      ></tk-product-owner-buttons>
+      }
 
       @if (published || myProduct) {
       <div>

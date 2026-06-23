@@ -1,5 +1,6 @@
 @if (home_row.itemsType !== 'products') {
-  <div>
+  @if (useLink) {
+    <!-- Web: SEO routerLink / external href -->
     @if (home_generic.route) {
       <a
         rel="nofollow"
@@ -12,13 +13,11 @@
             style="position: relative"
           >
             @if (home_generic.imgUrl) {
-              @if (home_generic.imgUrl) {
-                <img
-                  alt="{{ home_generic.label }}"
-                  ngSrc="{{ home_generic.imgUrl }}"
-                  fill
-                />
-              }
+              <img
+                alt="{{ home_generic.label }}"
+                ngSrc="{{ home_generic.imgUrl }}"
+                fill
+              />
             }
           </div>
           @if (home_row.showLabels) {
@@ -35,13 +34,11 @@
             style="position: relative"
           >
             @if (home_generic.imgUrl) {
-              @if (home_generic.imgUrl) {
-                <img
-                  alt="{{ home_generic.label }}"
-                  ngSrc="{{ home_generic.imgUrl }}"
-                  fill
-                />
-              }
+              <img
+                alt="{{ home_generic.label }}"
+                ngSrc="{{ home_generic.imgUrl }}"
+                fill
+              />
             }
           </div>
           @if (home_row.showLabels) {
@@ -50,22 +47,37 @@
         </div>
       </a>
     }
-  </div>
+  } @else {
+    <!-- App: click → emit navigate -->
+    <div
+      class="home_generic"
+      role="button"
+      tabindex="0"
+      (click)="navigate.emit()"
+      (keydown.enter)="navigate.emit()"
+    >
+      <div class="home_generic_box home_generic_{{ home_row.itemsShape }}">
+        @if (home_generic.imgUrl) {
+          <img alt="{{ home_generic.label }}" [src]="home_generic.imgUrl" />
+        }
+      </div>
+      @if (home_row.showLabels) {
+        <span class="home_generic_label">{{ home_generic.label }}</span>
+      }
+    </div>
+  }
 }
 
 @if (home_row.itemsType === 'products') {
   <div class="home_generic">
     <div class="home_generic_box home_generic_{{ home_row.itemsShape }}">
-      @if (
-        home_row.itemsType === 'products' &&
-        home_generic.extras &&
-        home_generic.extras.product
-      ) {
+      @if (home_generic.extras && home_generic.extras.product) {
         <tk-product-card
           [product]="home_generic.extras.product"
           [extraImgClass]="childClass"
-        >
-        </tk-product-card>
+          [useLink]="useLink"
+          (open)="navigate.emit()"
+        ></tk-product-card>
       }
     </div>
     @if (home_row.showLabels) {

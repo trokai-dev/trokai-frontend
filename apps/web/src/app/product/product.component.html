@@ -272,80 +272,18 @@
                   }
                 </div>
                 <!-- BUTTONS -->
-                <div class="flex gap-8">
-                  <!-- BTN DUPLICATE -->
-                  @if (!showRenew && !product.unavailable && myProduct) {
-                    <button
-                      mat-stroked-button
-                      (click)="duplicateProduct()"
-                      aria-label="duplicar anúncio"
-                      matTooltip="Duplicar anúncio"
-                    >
-                      <mat-icon class="color-gray-dark">content_copy</mat-icon>
-                    </button>
-                  }
-                  <!-- pause -->
-                  @if (product.paused) {
-                    <button
-                      mat-stroked-button
-                      (click)="activateProduct()"
-                      aria-label="publicar anúncio"
-                      matTooltip="Publicar anúncio"
-                    >
-                      <mat-icon class="color-gray-dark">play_arrow</mat-icon>
-                    </button>
-                  } @else if (product.published) {
-                    <button
-                      mat-stroked-button
-                      (click)="deactivateProduct()"
-                      aria-label="pausar anúncio"
-                      matTooltip="Pausar anúncio"
-                    >
-                      <mat-icon class="color-gray-dark">pause</mat-icon>
-                    </button>
-                  }
-                  <!--  -->
-                  @if (
-                    myProduct &&
-                    (product.published ||
-                      product.waitingPublication ||
-                      product.paused ||
-                      product.waitingAdjustment ||
-                      showRenew)
-                  ) {
-                    <!-- BTN RENEW -->
-                    @if (showRenew) {
-                      <button
-                        mat-stroked-button
-                        (click)="renewProduct()"
-                        aria-label="renovar anúncio"
-                        matTooltip="Renovar anúncio"
-                      >
-                        <mat-icon class="color-gray-dark">refresh</mat-icon>
-                      </button>
-                    }
-                    <!-- BTN EDIT -->
-                    @if (!showRenew) {
-                      <button
-                        mat-stroked-button
-                        (click)="editProduct()"
-                        aria-label="editar anúncio"
-                        matTooltip="Editar anúncio"
-                      >
-                        <mat-icon class="color-gray-dark">edit</mat-icon>
-                      </button>
-                    }
-                    <!-- BTN DELETE -->
-                    <button
-                      mat-stroked-button
-                      (click)="deleteProduct()"
-                      aria-label="apagar anúncio"
-                      matTooltip="Apagar anúncio"
-                    >
-                      <mat-icon class="color-gray-dark">delete</mat-icon>
-                    </button>
-                  }
-                </div>
+                <tk-product-owner-buttons
+                  [product]="product"
+                  [myProduct]="myProduct"
+                  [showRenew]="showRenew"
+                  (edit)="editProduct()"
+                  (duplicate)="duplicateProduct()"
+                  (deactivate)="deactivateProduct()"
+                  (activate)="activateProduct()"
+                  (remove)="deleteProduct()"
+                  (renew)="renewProduct()"
+                  (correct)="editProduct()"
+                ></tk-product-owner-buttons>
               </div>
             </div>
           }
