@@ -1,0 +1,42 @@
+<div class="order-row border-bottom mt-32 pb-48">
+  <div>
+    @for (c of order.clothes; track c) {
+      <div>
+        <tk-cart-item [product]="c" [showRemove]="false"></tk-cart-item>
+      </div>
+    }
+  </div>
+  <div class="flex flex-col">
+    <div class="flex text-right flex-col">
+      <span class="label-body-2 color-gray-dark">
+        {{ order.createdAt | date: 'dd/MM/yy' }}
+      </span>
+      <span class="label-body-2 color-gray-dark">
+        {{ order.sellerProfit | cost | currency: 'BRL' : 'symbol' : '1.2' }}
+      </span>
+      <h6 class="color-gray-dark">{{ order.status }}</h6>
+    </div>
+    @if (useLink) {
+      <button
+        class="mt-16"
+        mat-stroked-button
+        color="primary"
+        routerLink="{{ order._id }}"
+      >
+        Detalhes
+      </button>
+    } @else {
+      <button
+        class="mt-16"
+        mat-stroked-button
+        color="primary"
+        (click)="open.emit(order)"
+      >
+        Detalhes
+      </button>
+    }
+    @if (order.customId) {
+      <span class="order-id">cód. {{ order.customId }}</span>
+    }
+  </div>
+</div>

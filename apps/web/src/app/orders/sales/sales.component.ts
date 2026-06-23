@@ -1,4 +1,3 @@
-import { CostPipe } from '@trokai/shared-ui';
 import { OrderDisplay, OrderListItem } from '@trokai/shared-core';
 import {
   Component,
@@ -7,10 +6,7 @@ import {
   inject,
 } from '@angular/core';
 import { OrdersService } from '@trokai/shared-data-access';
-import { RouterLink } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { TkCartItemComponent } from '@trokai/shared-ui';
-import { CurrencyPipe, DatePipe } from '@angular/common';
+import { TkSaleListItemComponent } from '@trokai/shared-features';
 
 @Component({
   selector: 'app-sales',
@@ -18,14 +14,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
   styleUrls: ['./sales.component.scss'],
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [
-    TkCartItemComponent,
-    MatButtonModule,
-    RouterLink,
-    CurrencyPipe,
-    DatePipe,
-    CostPipe,
-  ],
+  imports: [TkSaleListItemComponent],
 })
 export class SalesComponent implements OnInit {
   private ordersService = inject(OrdersService);

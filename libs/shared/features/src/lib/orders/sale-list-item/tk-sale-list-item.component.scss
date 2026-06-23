@@ -1,0 +1,23 @@
+@import 'variables';
+
+:host {
+  display: block;
+}
+
+.order-id {
+  font-size: 1.2rem !important;
+  text-align: end;
+  margin-top: 1rem;
+  opacity: 0.7;
+}
+
+// Stacks on mobile, 8/4 split on desktop.
+.order-row {
+  display: grid;
+  gap: var(--space-24);
+  align-items: start;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 8fr 4fr;
+  }
+}

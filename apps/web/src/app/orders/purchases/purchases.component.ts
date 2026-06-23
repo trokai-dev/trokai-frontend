@@ -1,4 +1,3 @@
-import { CostPipe } from '@trokai/shared-ui';
 import { OrderDisplay, OrderListItem } from '@trokai/shared-core';
 import {
   Component,
@@ -8,10 +7,7 @@ import {
 } from '@angular/core';
 import { OrdersService } from '@trokai/shared-data-access';
 import { environment } from 'src/environments/environment';
-import { RouterLink } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { TkCartItemComponent } from '@trokai/shared-ui';
-import { CurrencyPipe, DatePipe } from '@angular/common';
+import { TkPurchaseListItemComponent } from '@trokai/shared-features';
 
 @Component({
   selector: 'app-purchases',
@@ -19,14 +15,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
   styleUrls: ['./purchases.component.scss'],
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [
-    TkCartItemComponent,
-    MatButtonModule,
-    RouterLink,
-    CurrencyPipe,
-    DatePipe,
-    CostPipe,
-  ],
+  imports: [TkPurchaseListItemComponent],
 })
 export class PurchasesComponent implements OnInit {
   private ordersService = inject(OrdersService);

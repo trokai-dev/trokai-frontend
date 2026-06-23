@@ -2,35 +2,7 @@
 
 <div class="mt-48">
   @for (p of purchases; track p) {
-    <div class="order-row border-bottom mt-32 pb-48">
-      <div>
-        @for (c of p.clothes; track c) {
-          <div>
-            <tk-cart-item [product]="c" [showRemove]="false"></tk-cart-item>
-          </div>
-        }
-      </div>
-      <div class="flex flex-col">
-        <div class="flex text-right flex-col">
-          <span class="label-body-2 color-gray-dark">
-            {{ p.createdAt | date: 'dd/MM/yy' }}
-          </span>
-          <span class="label-body-2 color-gray-dark">
-            {{ p.buyerCost | cost | currency: 'BRL' : 'symbol' : '1.2' }}
-          </span>
-          <h6 class="color-gray-dark">{{ p.status }}</h6>
-        </div>
-        <button
-          class="mt-16"
-          mat-stroked-button
-          color="primary"
-          routerLink="{{ p._id }}"
-        >
-          Ver compra
-        </button>
-        <span class="order-id">cód. {{ p.customId }}</span>
-      </div>
-    </div>
+    <tk-purchase-list-item [order]="p"></tk-purchase-list-item>
   }
 
   @if (!purchases || !purchases.length) {

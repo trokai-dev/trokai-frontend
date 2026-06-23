@@ -38,34 +38,11 @@
     @if (!isLoading && tab === 'Compras') {
     <div class="w-full negotiations">
       @for (p of purchases; track p._id) {
-      <div
-        class="border-bottom py-24 w-full flex justify-between ion-activatable ripple-parent"
-        (click)="openPurchase(p)"
-      >
-        <div class="w-75 flex items-center">
-          @if (p.images[0]) {
-          <ion-thumbnail>
-            <ion-img [src]="p.images[0]"></ion-img>
-          </ion-thumbnail>
-          } @if (p.images[1]) {
-          <ion-thumbnail class="ml-8">
-            <ion-img [src]="p.images[1]"></ion-img>
-          </ion-thumbnail>
-          }
-        </div>
-
-        <div class="w-full ion-text-end">
-          <label class="label-caption-1"
-            >{{p.createdAt | date: 'dd/MM/YYYY - HH:mm'}}</label
-          >
-          <h6 class="color-gray-dark">{{p.status}}</h6>
-          <label class="label-body-2">
-            {{ p.buyerCost | cost | currency: "BRL" : true : '1.2-2'}}</label
-          >
-        </div>
-
-        <ion-ripple-effect></ion-ripple-effect>
-      </div>
+      <tk-purchase-list-item
+        [order]="p"
+        [useLink]="false"
+        (open)="openPurchase(p)"
+      ></tk-purchase-list-item>
       } @if (!purchases || purchases.length === 0) {
       <div class="empty-page full">
         <ion-icon name="sad-outline"></ion-icon>
@@ -79,34 +56,11 @@
     @if (!isLoading && tab === 'Vendas') {
     <div class="w-full negotiations">
       @for (s of sales; track s._id) {
-      <div
-        class="border-bottom py-24 w-full flex justify-between ion-activatable ripple-parent"
-        (click)="openSale(s)"
-      >
-        <div class="w-75 flex items-center">
-          @if (s.images[0]) {
-          <ion-thumbnail>
-            <ion-img [src]="s.images[0]"></ion-img>
-          </ion-thumbnail>
-          } @if (s.images[1]) {
-          <ion-thumbnail class="ml-8">
-            <ion-img [src]="s.images[1]"></ion-img>
-          </ion-thumbnail>
-          }
-        </div>
-
-        <div class="w-full ion-text-end">
-          <label class="label-caption-1"
-            >{{s.updatedAt | date: 'dd/MM/YYYY - HH:mm'}}</label
-          >
-          <h6 class="color-gray-dark">{{s.status}}</h6>
-          <label class="label-body-2">
-            {{ s.sellerProfit | cost | currency: "BRL" : true : '1.2-2'}}</label
-          >
-        </div>
-
-        <ion-ripple-effect></ion-ripple-effect>
-      </div>
+      <tk-sale-list-item
+        [order]="s"
+        [useLink]="false"
+        (open)="openSale(s)"
+      ></tk-sale-list-item>
       } @if (!sales || sales.length === 0) {
       <div class="empty-page full">
         <ion-icon name="sad-outline"></ion-icon>

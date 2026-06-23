@@ -1,14 +1,15 @@
-import { CostPipe } from '@trokai/shared-ui';
 import { OrderDisplay, OrderListItem } from '@trokai/shared-core';
+import {
+  TkPurchaseListItemComponent,
+  TkSaleListItemComponent,
+} from '@trokai/shared-features';
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 import { AuthService } from '../services/auth.service';
 import { MainService } from '../services/main.service';
 import { OrdersService } from '@trokai/shared-data-access';
 
-import { NgClass, CurrencyPipe, DatePipe } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   IonContent,
   IonHeader,
@@ -16,11 +17,8 @@ import {
   IonRefresherContent,
   IonTitle,
   IonToolbar,
-  IonImg,
-  IonRippleEffect,
   IonIcon,
   IonSpinner,
-  IonThumbnail,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { sadOutline } from 'ionicons/icons';
@@ -33,8 +31,6 @@ import { sadOutline } from 'ionicons/icons';
   imports: [
     IonSpinner,
     IonIcon,
-    IonRippleEffect,
-    IonImg,
     IonHeader,
     IonToolbar,
     IonTitle,
@@ -42,10 +38,8 @@ import { sadOutline } from 'ionicons/icons';
     IonRefresher,
     IonRefresherContent,
     NgClass,
-    CurrencyPipe,
-    DatePipe,
-    CostPipe,
-    IonThumbnail,
+    TkPurchaseListItemComponent,
+    TkSaleListItemComponent,
   ],
 })
 export class NegotiationsPage implements OnInit {
