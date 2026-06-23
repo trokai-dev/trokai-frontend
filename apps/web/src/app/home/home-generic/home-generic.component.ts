@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { TkProductCardComponent } from '@trokai/shared-ui';
 import { RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
-import { HomePayloadRow } from '../home.component';
+import { HomePayloadRow } from '@trokai/shared-core';
 
 @Component({
   selector: 'app-home-generic',

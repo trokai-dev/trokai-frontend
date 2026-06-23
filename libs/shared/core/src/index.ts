@@ -8,6 +8,7 @@ export * from './lib/models/brands';
 export * from './lib/models/postage-agency';
 export * from './lib/models/basic';
 export * from './lib/models/clothes-status';
+export * from './lib/models/wardrobe-status';
 export * from './lib/models/clothes';
 export * from './lib/models/review';
 export * from './lib/models/collection';

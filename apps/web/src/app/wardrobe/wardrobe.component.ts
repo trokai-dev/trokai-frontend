@@ -30,7 +30,7 @@ import { SearchService } from '../search/search.service';
 import { lastValueFrom, skip } from 'rxjs';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
-import { statusForOwner } from './status-list';
+import { statusForOwner } from '@trokai/shared-core';
 import { AlertService } from '@trokai/shared-ui';
 import { Filters, SearchResponse } from '@trokai/shared-core';
 import { MatBadgeModule } from '@angular/material/badge';

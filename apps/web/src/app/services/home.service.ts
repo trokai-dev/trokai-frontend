@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { tap } from 'rxjs/operators';
-import { HomePayloadRow } from '../home/home.component';
+import { HomePayloadRow } from '@trokai/shared-core';
 import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { PreloadService } from './preload.service';
 import { GeolocationService } from './geolocation.service';

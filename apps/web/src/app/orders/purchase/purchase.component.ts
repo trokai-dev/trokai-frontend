@@ -13,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { RatingFormComponent } from '../rating-modal/rating-modal.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatRippleModule } from '@angular/material/core';
-import { CartItemComponent } from '../../modules/cart-item/cart-item.component';
+import { TkCartItemComponent } from '@trokai/shared-ui';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CurrencyPipe, DatePipe } from '@angular/common';
@@ -39,7 +39,7 @@ import { TkSellerHeaderComponent } from '@trokai/shared-ui';
   imports: [
     MatButtonModule,
     MatIconModule,
-    CartItemComponent,
+    TkCartItemComponent,
     MatRippleModule,
     RouterLink,
     MatTooltipModule,

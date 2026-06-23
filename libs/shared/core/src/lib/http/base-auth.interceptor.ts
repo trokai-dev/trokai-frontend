@@ -41,11 +41,12 @@ export abstract class BaseAuthInterceptor implements HttpInterceptor {
     return request;
   }
 
-  /* eslint-disable-next-line @typescript-eslint/no-empty-function */
   protected onResponse(
     _event: HttpEvent<unknown>,
     _request: HttpRequest<unknown>,
-  ): void {}
+  ): void {
+    /* default: no-op; overridden per app */
+  }
 
   protected isExternalApi(url: string): boolean {
     return EXTERNAL_APIS.some((api) => url.includes(api));

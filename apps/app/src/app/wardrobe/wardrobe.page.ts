@@ -20,7 +20,7 @@ import {
 } from '@trokai/shared-ui';
 import { environment } from 'src/environments/environment';
 import { SearchService } from '../services/search.service';
-import { statusForOwner } from './status-list';
+import { statusForOwner } from '@trokai/shared-core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MainService } from '../services/main.service';
 import { Filters, SearchResponse } from '@trokai/shared-core';

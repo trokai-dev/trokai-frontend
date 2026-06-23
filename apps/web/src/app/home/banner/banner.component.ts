@@ -1,6 +1,6 @@
 import { HideLoadingImageDirective } from '@trokai/shared-ui';
 import { Component, Input } from '@angular/core';
-import { HomePayloadRowItem } from '../home.component';
+import { HomePayloadRowItem } from '@trokai/shared-core';
 import { RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 

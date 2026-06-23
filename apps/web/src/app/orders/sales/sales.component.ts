@@ -9,7 +9,7 @@ import {
 import { OrdersService } from '@trokai/shared-data-access';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { CartItemComponent } from '../../modules/cart-item/cart-item.component';
+import { TkCartItemComponent } from '@trokai/shared-ui';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
@@ -19,7 +19,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
-    CartItemComponent,
+    TkCartItemComponent,
     MatButtonModule,
     RouterLink,
     CurrencyPipe,

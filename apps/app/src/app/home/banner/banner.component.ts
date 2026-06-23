@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { HomePayloadRowItem } from '../../services/home.service';
+import { HomePayloadRowItem } from '@trokai/shared-core';
 
 @Component({
   selector: 'app-banner',

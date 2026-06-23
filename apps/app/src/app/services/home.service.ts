@@ -10,8 +10,6 @@ import { SearchPageService } from './search-page.service';
 import { MainService } from './main.service';
 import { GeolocationService } from './geolocation.service';
 
-export { HomePayloadRow, HomePayloadRowItem };
-
 @Injectable({
   providedIn: 'root',
 })

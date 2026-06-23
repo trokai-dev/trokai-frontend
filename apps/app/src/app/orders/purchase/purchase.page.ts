@@ -55,7 +55,7 @@ import { GlobalService } from 'src/app/services/global.service';
 import { ToastService } from 'src/app/services/toast-service';
 import dayjs from 'dayjs';
 import { OrderDeliveryComponent } from '../order-delivery/order-delivery.component';
-import { CartItemComponent } from 'src/app/shared/components/cart-item/cart-item.component';
+import { TkCartItemComponent } from '@trokai/shared-ui';
 
 @Component({
   selector: 'app-purchase',
@@ -82,7 +82,7 @@ import { CartItemComponent } from 'src/app/shared/components/cart-item/cart-item
     CostPipe,
     IonAvatar,
     OrderDeliveryComponent,
-    CartItemComponent,
+    TkCartItemComponent,
     TkSellerHeaderComponent,
   ],
 })

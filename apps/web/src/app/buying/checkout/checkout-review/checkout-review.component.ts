@@ -15,7 +15,7 @@ import {
   CheckoutResponse,
 } from '@trokai/shared-data-access';
 import { AuthService } from 'src/app/auth/auth.service';
-import { CartItemComponent } from 'src/app/modules/cart-item/cart-item.component';
+import { TkCartItemComponent } from '@trokai/shared-ui';
 import { NgxMaskPipe } from 'ngx-mask';
 import { LoadingService } from '@trokai/shared-ui';
 import { Router } from '@angular/router';
@@ -27,7 +27,7 @@ import { Router } from '@angular/router';
     MatButtonModule,
     PaymentIconComponent,
     CheckoutTotalComponent,
-    CartItemComponent,
+    TkCartItemComponent,
     NgxMaskPipe,
   ],
   templateUrl: './checkout-review.component.html',

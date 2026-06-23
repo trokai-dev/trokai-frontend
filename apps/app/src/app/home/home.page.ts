@@ -12,11 +12,8 @@ import { environment } from 'src/environments/environment';
 
 import { MainService } from '../services/main.service';
 import { NotificationsService } from '@trokai/shared-data-access';
-import {
-  HomePayloadRow,
-  HomePayloadRowItem,
-  HomeService,
-} from '../services/home.service';
+import { HomePayloadRow, HomePayloadRowItem } from '@trokai/shared-core';
+import { HomeService } from '../services/home.service';
 import { MessagesService } from '@trokai/shared-data-access';
 import { BuyingService } from '@trokai/shared-data-access';
 import { RouterLink } from '@angular/router';

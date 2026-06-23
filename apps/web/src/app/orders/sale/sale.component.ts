@@ -17,7 +17,7 @@ import { BrowserRef } from 'src/app/services/browser-ref.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
-import { CartItemComponent } from '../../modules/cart-item/cart-item.component';
+import { TkCartItemComponent } from '@trokai/shared-ui';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 
 import { LoadingService } from '@trokai/shared-ui';
@@ -31,7 +31,7 @@ import { OrderDeliveryComponent } from '../order-delivery/order-delivery.compone
   styleUrls: ['./sale.component.scss'],
   standalone: true,
   imports: [
-    CartItemComponent,
+    TkCartItemComponent,
     MatButtonModule,
     MatTooltipModule,
     MatIconModule,

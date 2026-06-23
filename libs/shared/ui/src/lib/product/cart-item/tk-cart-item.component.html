@@ -1,11 +1,15 @@
-<div class="cart-item mt-16" (click)="clickProduct.emit()">
+<div
+  class="cart-item mt-16"
+  role="button"
+  tabindex="0"
+  (click)="clickProduct.emit()"
+  (keyup.enter)="clickProduct.emit()"
+>
   <img
     alt="{{ product.title }}"
     hideLoading
-    lazyLoad="{{
-      product.images?.[0]?.sm ??
-        url + product.owner + '/' + product.smallPicture?.url
-    }}"
+    loading="lazy"
+    [src]="product.thumbnailUrl"
     class="cart-item-img"
   />
 

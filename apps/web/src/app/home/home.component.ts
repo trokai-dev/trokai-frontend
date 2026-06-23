@@ -23,8 +23,6 @@ import { BrowserRef } from '../services/browser-ref.service';
 import { TkReviewStarsComponent } from '@trokai/shared-ui';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
-export { HomePayloadRow, HomePayloadRowItem };
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

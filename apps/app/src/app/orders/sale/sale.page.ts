@@ -46,7 +46,7 @@ import { ToastService } from 'src/app/services/toast-service';
 import { TutorialService } from 'src/app/services/tutorial.service';
 import { MainService } from 'src/app/services/main.service';
 import { OrderDeliveryComponent } from '../order-delivery/order-delivery.component';
-import { CartItemComponent } from 'src/app/shared/components/cart-item/cart-item.component';
+import { TkCartItemComponent } from '@trokai/shared-ui';
 
 @Component({
   selector: 'app-sale',
@@ -72,7 +72,7 @@ import { CartItemComponent } from 'src/app/shared/components/cart-item/cart-item
     IonImg,
     IonRippleEffect,
     OrderDeliveryComponent,
-    CartItemComponent,
+    TkCartItemComponent,
     TkSellerHeaderComponent,
   ],
 })

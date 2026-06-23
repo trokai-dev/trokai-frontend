@@ -63,11 +63,11 @@
 
               @for (product of order.clothes; track product._id) {
               <div class="cursor-pointer mt-16">
-                <app-cart-item
+                <tk-cart-item
                   (click)="openProduct(product)"
                   [product]="product"
                   [showRemove]="false"
-                ></app-cart-item>
+                ></tk-cart-item>
               </div>
               }
             </div>

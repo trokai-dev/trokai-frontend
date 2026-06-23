@@ -16,10 +16,11 @@ export class AlertService {
   // --- snackbar toasts ---
 
   public alert(msg: string) {
-    // eslint-disable-next-line no-empty
     try {
       this.show(msg);
-    } catch {}
+    } catch {
+      /* ignore */
+    }
   }
 
   public errorDefault() {

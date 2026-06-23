@@ -17,8 +17,6 @@ import { AppState } from '@capacitor/app';
 
 import { FaqData, GlobalParams, NavbarItem } from '@trokai/shared-core';
 
-export { CategoryModel, ItemsMap };
-
 @Injectable({
   providedIn: 'root',
 })
