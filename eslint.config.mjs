@@ -51,6 +51,16 @@ export default [
                 'type:ui',
               ],
             },
+            // Feature libs orchestrate ui + data-access + core (smart pages)
+            {
+              sourceTag: 'type:feature',
+              onlyDependOnLibsWithTags: [
+                'type:core',
+                'type:data-access',
+                'type:ui',
+                'type:feature',
+              ],
+            },
           ],
         },
       ],

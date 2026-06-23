@@ -9,7 +9,8 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { SortingComponent } from 'src/app/search/sorting/sorting.component';
-import { FilterComponent } from 'src/app/search/filter/filter.component';
+import { MatDialog } from '@angular/material/dialog';
+import { TkFilterDialogComponent } from '@trokai/shared-features';
 import { ClothesStatus, Filters } from '@trokai/shared-core';
 
 import { addIcons } from 'ionicons';
@@ -39,6 +40,7 @@ export class FilterTagsComponent {
 
   private toastService = inject(ToastService);
   private modalCtrl = inject(ModalController);
+  private dialog = inject(MatDialog);
 
   constructor() {
     addIcons({ filterOutline, reorderTwoOutline, trash });
@@ -97,23 +99,17 @@ export class FilterTagsComponent {
   openFilterModal() {
     if (!this.filters) return;
 
-    this.modalCtrl
-      .create({
-        component: FilterComponent,
-        componentProps: {
-          filter: this.filters,
-        },
-        cssClass: 'modal-95',
+    this.dialog
+      .open(TkFilterDialogComponent, {
+        data: { filter: this.filters },
+        panelClass: 'dialog-large',
+        width: '95vw',
+        maxWidth: '95vw',
       })
-      .then((modalEl) => {
-        // this.isSelecting.emit(true);
-        modalEl.present();
-        return modalEl.onDidDismiss();
-      })
-      .then((res) => {
-        if (!res || !res.data) return;
-        if (!res.data.filtersChanged) return;
-        this.filters = res.data.filters;
+      .afterClosed()
+      .subscribe((res) => {
+        if (!res?.filter) return;
+        this.filters = res.filter;
         this.filtersChanged.emit(this.filters);
       });
   }

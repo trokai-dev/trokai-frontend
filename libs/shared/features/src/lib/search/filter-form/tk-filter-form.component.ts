@@ -1,4 +1,11 @@
-import { BasicModel, Filters, notNullOrEmpty } from '@trokai/shared-core';
+import {
+  BasicModel,
+  CategoryModel,
+  Filters,
+  ItemsMap,
+  notNullOrEmpty,
+} from '@trokai/shared-core';
+import { CatalogService } from '@trokai/shared-data-access';
 import {
   AfterViewInit,
   Component,
@@ -11,9 +18,6 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { GlobalService } from 'src/app/services/global.service';
-import { ItemsMap, CategoryModel } from '@trokai/shared-core';
-
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
@@ -26,10 +30,15 @@ import { Subscription } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
+/**
+ * Canonical search-filter content (Material). Platform-agnostic: itemsMap comes
+ * from the shared CatalogService, never a per-app GlobalService. Hosted inline
+ * (web sidebar) or inside TkFilterDialogComponent (MatDialog) on both platforms.
+ */
 @Component({
-  selector: 'app-search-filter',
-  templateUrl: './search-filter.component.html',
-  styleUrls: ['./search-filter.component.scss'],
+  selector: 'tk-filter-form',
+  templateUrl: './tk-filter-form.component.html',
+  styleUrls: ['./tk-filter-form.component.scss'],
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -46,7 +55,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
   ],
 })
-export class SearchFilterComponent
+export class TkFilterFormComponent
   implements OnInit, AfterViewInit, OnDestroy, OnChanges
 {
   itemsMap: ItemsMap | null = null;
@@ -79,11 +88,11 @@ export class SearchFilterComponent
 
   itemsMapSub!: Subscription;
 
-  private globalService = inject(GlobalService);
+  private catalog = inject(CatalogService);
   private ngZone = inject(NgZone);
 
   ngOnInit() {
-    this.itemsMapSub = this.globalService.itemsMap.subscribe((itemsMap) => {
+    this.itemsMapSub = this.catalog.itemsMap$.subscribe((itemsMap) => {
       if (itemsMap) {
         this.itemsMap = itemsMap;
         this.resetLocalFilter();

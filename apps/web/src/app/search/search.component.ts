@@ -15,13 +15,15 @@ import { ItemsMap } from '@trokai/shared-core';
 import { TkProductCardComponent } from '@trokai/shared-ui';
 import { MatBadgeModule } from '@angular/material/badge';
 import { FormsModule } from '@angular/forms';
-import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Clothes, Filters } from '@trokai/shared-core';
 import { SearchPageService } from '../services/search-page.service';
 import { MatDialog } from '@angular/material/dialog';
-import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
+import {
+  TkFilterDialogComponent,
+  TkFilterFormComponent,
+} from '@trokai/shared-features';
 import { first, lastValueFrom } from 'rxjs';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -37,7 +39,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   imports: [
     MatButtonModule,
     MatIconModule,
-    SearchFilterComponent,
+    TkFilterFormComponent,
     FormsModule,
     MatBadgeModule,
     TkProductCardComponent,
@@ -172,7 +174,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   async showFiltersDialog() {
-    const dialogRef = this.matDialog.open(FilterDialogComponent, {
+    const dialogRef = this.matDialog.open(TkFilterDialogComponent, {
       data: { filter: this.filters },
       panelClass: 'dialog-large',
     });

@@ -7,7 +7,8 @@ import {
   User,
 } from '@trokai/shared-core';
 import { Component, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductService } from '@trokai/shared-data-access';
 import { Network } from '@capacitor/network';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -46,6 +47,8 @@ import { ToastService } from 'src/app/services/toast-service';
 })
 export class ProductRegisterPage implements OnInit, IDeactivatableComponent {
   private inventoryService = inject(InventoryService);
+  private productService = inject(ProductService);
+  private route = inject(ActivatedRoute);
   private firebaseService = inject(FirebaseService);
   private toastService = inject(ToastService);
   private router = inject(Router);
@@ -68,7 +71,7 @@ export class ProductRegisterPage implements OnInit, IDeactivatableComponent {
 
   mayLeave = false;
 
-  ngOnInit() {
+  async ngOnInit() {
     this.routerOutlet.swipeGesture = false;
     this.itemsMap = this.globalService.getItemsMapValue();
     this.params = this.globalService.getParamsValue();
@@ -76,17 +79,36 @@ export class ProductRegisterPage implements OnInit, IDeactivatableComponent {
       .getBrandsValue()
       .map((b) => new BasicModel<string>(b.slug, b.name));
 
-    if (this.inventoryService.item._id) {
-      this.product = new Clothes({ ...this.inventoryService.item });
-      this.initialImages = [...this.inventoryService.pendingPictures];
-      this.editingId = this.inventoryService.item._id;
-      this.duplicating = !!this.inventoryService.item.copyOf;
-    } else {
-      this.initialImages = [];
-    }
+    this.editingId = this.route.snapshot.paramMap.get('product_id');
+    this.duplicating =
+      this.route.snapshot.queryParamMap.get('duplicate') === 'true';
+
+    if (this.editingId) await this.loadForEdit();
+    else this.initialImages = [];
 
     this.authService.user.subscribe((user) => (this.user = user));
     this.firebaseService.log('ROUPA_ABRIU_CADASTRO');
+  }
+
+  // Always fetch the product when editing/duplicating instead of relying on
+  // in-memory inventory state set by the caller.
+  async loadForEdit() {
+    try {
+      if (!this.editingId) return;
+      const { clothes } = await this.productService.fetchProduct(
+        this.editingId,
+      );
+
+      if (this.duplicating) await this.inventoryService.startDuplicate(clothes);
+      else this.inventoryService.startEditing(clothes);
+
+      this.product = new Clothes({ ...this.inventoryService.item });
+      this.initialImages = [...this.inventoryService.pendingPictures];
+    } catch {
+      this.router.navigateByUrl('/main/profile/inventory', {
+        replaceUrl: true,
+      });
+    }
   }
 
   async onSubmitted({

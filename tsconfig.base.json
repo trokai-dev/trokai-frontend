@@ -17,7 +17,8 @@
     "paths": {
       "@trokai/shared-ui": ["./libs/shared/ui/src/index.ts"],
       "@trokai/shared-core": ["./libs/shared/core/src/index.ts"],
-      "@trokai/shared-data-access": ["./libs/shared/data-access/src/index.ts"]
+      "@trokai/shared-data-access": ["./libs/shared/data-access/src/index.ts"],
+      "@trokai/shared-features": ["./libs/shared/features/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

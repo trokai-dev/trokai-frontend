@@ -21,4 +21,12 @@ export default [
       ),
     canDeactivate: [CanDeactivateGuard],
   },
+  {
+    path: 'register/:product_id',
+    loadComponent: () =>
+      import('./product-register/product-register.page').then(
+        (m) => m.ProductRegisterPage,
+      ),
+    canDeactivate: [CanDeactivateGuard],
+  },
 ] satisfies Route[];

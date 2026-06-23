@@ -36,7 +36,7 @@ import { Filters, SearchResponse } from '@trokai/shared-core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { TkProductCardComponent } from '@trokai/shared-ui';
 import { MatDialog } from '@angular/material/dialog';
-import { FilterDialogComponent } from '../search/filter-dialog/filter-dialog.component';
+import { TkFilterDialogComponent } from '@trokai/shared-features';
 import { TkSellerHeaderComponent } from '@trokai/shared-ui';
 import { TkSellerStatusBadgeComponent } from '@trokai/shared-ui';
 import { environment } from '../../environments/environment';
@@ -265,7 +265,7 @@ export class WardrobeComponent implements OnInit {
   }
 
   async showFiltersDialog() {
-    const dialogRef = this.matDialog.open(FilterDialogComponent, {
+    const dialogRef = this.matDialog.open(TkFilterDialogComponent, {
       data: { filter: this.filter },
       panelClass: 'dialog-large',
     });

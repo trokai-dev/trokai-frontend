@@ -1,0 +1,26 @@
+@import 'variables';
+
+:host {
+  display: block;
+}
+
+h4 {
+  font-weight: 300 !important;
+  font-size: 1.4rem !important;
+}
+
+.mat-expansion-panel-header {
+  padding: 0.8rem;
+  border-bottom: $border-trokai;
+}
+
+.mat-expanded {
+  h4 {
+    font-weight: 500 !important;
+  }
+
+  .mat-expansion-panel-header {
+    height: 48px;
+    background-color: $color-gray-light-2;
+  }
+}

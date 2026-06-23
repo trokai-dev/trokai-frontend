@@ -13,12 +13,12 @@
   <!-- content -->
   <div class="dialog-content">
     @if (filter) {
-      <app-search-filter
+      <tk-filter-form
         [filter]="filter"
         [hideTitle]="true"
         (filtersChange)="filter = $event"
         [enableSorting]="false"
-      ></app-search-filter>
+      ></tk-filter-form>
     }
   </div>
 
@@ -39,7 +39,6 @@
         mat-flat-button
         color="primary"
         aria-label="ver produtos"
-        color="primary"
         (click)="applyFilters(filter)"
       >
         Buscar

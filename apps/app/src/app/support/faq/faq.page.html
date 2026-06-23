@@ -8,29 +8,7 @@
 <ion-content>
   <div class="p-24">
     @if (faq) {
-
-    <ion-accordion-group>
-      @for (topic of faq.topics; track topic) {
-
-      <span class="section-title mt-24 mb-8" [id]="topic.slug"
-        >{{ topic.title }}</span
-      >
-
-      @for (q of topic.questions; track q) {
-      <ion-accordion [value]="q.slug">
-        <ion-item slot="header">
-          <span class="label-body-2">{{ q.question }}</span>
-        </ion-item>
-        <div class="ion-padding accordion-content" slot="content">
-          <p
-            class="label-body-2 my-0"
-            [innerHTML]="getAnswerHtml(q.answer)"
-          ></p>
-        </div>
-      </ion-accordion>
-      } }
-    </ion-accordion-group>
-
+      <tk-faq [faq]="faq"></tk-faq>
     }
   </div>
 </ion-content>

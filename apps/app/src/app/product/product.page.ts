@@ -612,7 +612,7 @@ export class ProductPage implements OnInit, OnDestroy {
     }
   }
 
-  async editProduct() {
+  editProduct() {
     if (!this.product || !this.myProduct) return;
 
     const status = this.product.clothes.status;
@@ -630,14 +630,17 @@ export class ProductPage implements OnInit, OnDestroy {
       return;
     }
 
-    await this.inventoryService.startEditing(this.product.clothes);
-    this.navCtrl.navigateForward('/new-item/register');
+    this.navCtrl.navigateForward(
+      `/new-item/register/${this.product.clothes._id}`,
+    );
   }
 
-  async duplicateProduct() {
+  duplicateProduct() {
     if (!this.product || !this.myProduct) return;
-    await this.inventoryService.startDuplicate(this.product.clothes);
-    this.navCtrl.navigateForward('/new-item/register');
+    this.navCtrl.navigateForward(
+      `/new-item/register/${this.product.clothes._id}`,
+      { queryParams: { duplicate: true } },
+    );
   }
 
   async deactivateProduct() {

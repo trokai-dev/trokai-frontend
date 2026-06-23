@@ -6,30 +6,35 @@ import {
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { SearchFilterComponent } from '../search-filter/search-filter.component';
 import { Filters } from '@trokai/shared-core';
+import { TkFilterFormComponent } from '../filter-form/tk-filter-form.component';
 
+/**
+ * Shared MatDialog wrapper around the filter content. Both web and app open it
+ * via MatDialog (the app no longer uses Ionic ModalController). itemsMap is
+ * resolved inside TkFilterFormComponent from the shared CatalogService, so
+ * callers only pass `{ filter }` and read back `{ filter }`.
+ */
 @Component({
-  selector: 'app-filter-dialog',
+  selector: 'tk-filter-dialog',
   standalone: true,
   imports: [
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
-    SearchFilterComponent,
+    TkFilterFormComponent,
   ],
-  templateUrl: './filter-dialog.component.html',
-  styleUrl: './filter-dialog.component.scss',
+  templateUrl: './tk-filter-dialog.component.html',
+  styleUrl: './tk-filter-dialog.component.scss',
 })
-export class FilterDialogComponent implements AfterViewInit {
-  public dialogRef = inject(MatDialogRef<FilterDialogComponent>);
+export class TkFilterDialogComponent implements AfterViewInit {
+  public dialogRef = inject(MatDialogRef<TkFilterDialogComponent>);
   public data = inject<{ filter: Filters }>(MAT_DIALOG_DATA);
 
   filter!: Filters;
 
   ngAfterViewInit() {
     // avoid expression has changed after it was checked
-
     setTimeout(() => {
       this.filter = this.data?.filter
         ? new Filters(this.data.filter)
@@ -38,7 +43,7 @@ export class FilterDialogComponent implements AfterViewInit {
   }
 
   applyFilters(filter: Filters) {
-    this.dialogRef.close({ filter: filter });
+    this.dialogRef.close({ filter });
   }
 
   clearFilters() {

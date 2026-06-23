@@ -5,14 +5,12 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
-  IonAccordionGroup,
-  IonAccordion,
-  IonItem,
 } from '@ionic/angular/standalone';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from 'src/app/services/global.service';
 import { BackButtonComponent } from 'src/app/shared/components/back-button/back-button.component';
 import { FaqData } from '@trokai/shared-core';
+import { TkFaqComponent } from '@trokai/shared-features';
 
 @Component({
   selector: 'app-faq',
@@ -20,9 +18,7 @@ import { FaqData } from '@trokai/shared-core';
   styleUrls: ['./faq.page.scss'],
   standalone: true,
   imports: [
-    IonItem,
-    IonAccordion,
-    IonAccordionGroup,
+    TkFaqComponent,
     IonContent,
     IonHeader,
     IonTitle,
@@ -50,9 +46,5 @@ export class FaqPage implements OnInit {
     } catch {
       this.router.navigate(['/help']);
     }
-  }
-
-  getAnswerHtml(answer: string) {
-    return answer.replace(/\n/g, '<br>');
   }
 }

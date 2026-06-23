@@ -2,10 +2,10 @@
   <div class="search-grid">
     <!-- WRAPPER FILTROS -->
     <div class="hidden block-md">
-      <app-search-filter
+      <tk-filter-form
         (filtersChange)="applyFilters($event)"
         [filter]="filters"
-      ></app-search-filter>
+      ></tk-filter-form>
     </div>
 
     <!-- Resultados -->

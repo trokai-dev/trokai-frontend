@@ -7,17 +7,17 @@ import {
   OnInit,
 } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { GlobalService } from 'src/app/services/global.service';
 import { FaqData } from '@trokai/shared-core';
+import { TkFaqComponent } from '@trokai/shared-features';
 
 @Component({
   selector: 'app-faq',
   standalone: true,
-  imports: [MatExpansionModule, MatButtonModule, MatIconModule, RouterLink],
+  imports: [TkFaqComponent, MatButtonModule, MatIconModule, RouterLink],
   templateUrl: './faq.component.html',
   styleUrl: './faq.component.scss',
 })
@@ -78,9 +78,5 @@ export class FaqComponent implements OnInit {
     script.type = 'application/ld+json';
     script.text = JSON.stringify(faqJsonLd);
     this.renderer.appendChild(this.document.head, script);
-  }
-
-  getAnswerHtml(answer: string) {
-    return answer.replace(/\n/g, '<br>');
   }
 }

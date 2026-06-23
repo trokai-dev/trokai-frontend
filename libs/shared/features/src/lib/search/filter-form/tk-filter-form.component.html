@@ -75,7 +75,10 @@
           <div class="accordion-item-content">
             @for (c of pieces; track c) {
               <div
+                role="button"
+                tabindex="0"
                 (click)="selectMultiple('piece', c)"
+                (keydown.enter)="selectMultiple('piece', c)"
                 class="option-item"
                 [ngClass]="{ selected: selected('piece', c) }"
               >
@@ -149,7 +152,10 @@
           <div class="accordion-item-content">
             @for (s of sizes; track s) {
               <div
+                role="button"
+                tabindex="0"
                 (click)="selectMultiple('size', s)"
+                (keydown.enter)="selectMultiple('size', s)"
                 class="option-item ion-activatable ripple-parent"
                 [ngClass]="{ selected: selected('size', s) }"
               >
@@ -190,9 +196,12 @@
           <div class="accordion-item-content">
             @for (c of itemsMap.condition; track c) {
               <div
+                role="button"
+                tabindex="0"
                 [ngClass]="{ selected: selected('condition', c) }"
                 class="option-item ion-activatable ripple-parent"
                 (click)="select('condition', c)"
+                (keydown.enter)="select('condition', c)"
               >
                 <span class="label-body-2"> {{ c.value }}</span>
               </div>
@@ -217,9 +226,12 @@
           <div class="accordion-item-content">
             @for (c of itemsMap.gender; track c) {
               <div
+                role="button"
+                tabindex="0"
                 [ngClass]="{ selected: selected('gender', c) }"
                 class="option-item ion-activatable ripple-parent"
                 (click)="selectMultiple('gender', c)"
+                (keydown.enter)="selectMultiple('gender', c)"
               >
                 <span class="label-body-2"> {{ c.value }}</span>
               </div>

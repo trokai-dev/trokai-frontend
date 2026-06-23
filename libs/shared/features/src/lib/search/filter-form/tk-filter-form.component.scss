@@ -2,7 +2,6 @@
 @import 'placeholders';
 
 .accordion-item {
-  //   padding: 1.6rem 0rem;
   border-bottom: 1px solid $color-gray-light-2;
 
   mat-checkbox {
@@ -24,7 +23,6 @@
   }
 
   .accordion-item-content {
-    // margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
     margin-left: 2.5rem;

@@ -20,7 +20,8 @@
       "@trokai/shared-core": ["../../libs/shared/core/src/index.ts"],
       "@trokai/shared-data-access": [
         "../../libs/shared/data-access/src/index.ts"
-      ]
+      ],
+      "@trokai/shared-features": ["../../libs/shared/features/src/index.ts"]
     }
   },
   "angularCompilerOptions": {
