@@ -171,7 +171,7 @@ export class ProductRegisterComponent implements OnInit {
         await this.inventoryService.upload();
       }
 
-      this.router.navigateByUrl(`/users/${this.user.nickname}`, {
+      this.router.navigateByUrl(`/users/${this.user.seller?.nickname}`, {
         replaceUrl: true,
       });
 

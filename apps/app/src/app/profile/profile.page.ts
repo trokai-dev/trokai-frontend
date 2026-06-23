@@ -76,21 +76,23 @@ export class ProfilePage implements AfterViewInit {
   }
 
   async save(value: ProfileFormValue) {
-    const _user = new User();
-    _user.name = value.name;
-    _user.email = value.email;
-    _user.cpf = value.cpf;
-    _user.phone = value.phone;
-    _user.birthday = value.birthday;
+    // PATCH /users/me expects FLAT keys (mapped to seller.* server-side).
+    const patch: Record<string, unknown> = {
+      name: value.name,
+      email: value.email,
+      cpf: value.cpf,
+      phone: value.phone,
+      birthday: value.birthday,
+    };
 
-    if (this.user.inPerson == null) _user.inPerson = false;
-    if (this.user.shipping == null) _user.shipping = false;
+    if (this.user.seller?.inPerson == null) patch['inPerson'] = false;
+    if (this.user.seller?.shipping == null) patch['shipping'] = false;
 
     const loading = await this.loadingCtrl.create({ message: 'Salvando...' });
     loading.present();
 
     try {
-      await this.authService.updateUser(_user);
+      await this.authService.updateUser(patch);
 
       if (this.completingInformation) {
         this.completingInfoService.next();

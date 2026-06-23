@@ -40,7 +40,7 @@ export class TkRatingFormComponent {
   private ordersService = inject(OrdersService);
 
   get firstName(): string {
-    return (this.otherUser?.storeName ?? this.otherUser?.name ?? '').split(
+    return (this.otherUser?.seller?.storeName ?? this.otherUser?.name ?? '').split(
       ' ',
     )[0];
   }

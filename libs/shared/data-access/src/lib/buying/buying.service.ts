@@ -446,7 +446,8 @@ export class BuyingService {
     const owner = checkoutLocal?.owner;
 
     // if only in person, can skip address validation
-    if (owner?.inPerson && !owner?.shipping) this.navigator.toShipping();
+    if (owner?.seller?.inPerson && !owner?.seller?.shipping)
+      this.navigator.toShipping();
     else if (!user?.address) this.navigator.toShippingAddress();
     else this.navigator.toShipping();
   }
@@ -661,9 +662,9 @@ export class BuyingService {
       let msg;
 
       if (titles.length === 1)
-        msg = `${basket.owner.storeName} alterou informações do anúncio ${strTitles}. Será preciso adicioná-lo novamente à sacola.`;
+        msg = `${basket.owner.seller?.storeName} alterou informações do anúncio ${strTitles}. Será preciso adicioná-lo novamente à sacola.`;
       else
-        msg = `${basket.owner.storeName} alterou informações dos anúncios ${strTitles}. Será preciso adicioná-los novamente à sacola.`;
+        msg = `${basket.owner.seller?.storeName} alterou informações dos anúncios ${strTitles}. Será preciso adicioná-los novamente à sacola.`;
 
       this.feedback.info('Oh não!', msg);
     }

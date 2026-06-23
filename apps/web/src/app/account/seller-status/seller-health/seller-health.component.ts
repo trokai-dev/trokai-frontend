@@ -6,6 +6,7 @@ import {
   OnChanges,
   OnInit,
 } from '@angular/core';
+import { SellerHealth, SellerHealthStatus } from '@trokai/shared-core';
 
 export interface MetricDetail {
   value: number;
@@ -89,22 +90,93 @@ const METRIC_CONFIG: Record<
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SellerHealthComponent implements OnInit, OnChanges {
-  @Input() healthData!: SellerHealthData;
+  // Real seller health, carried inside the user payload (GET /users/me).
+  @Input() health?: SellerHealth | null;
+  @Input() sellerName = '';
 
+  healthData: SellerHealthData | null = null;
   healthStatus!: HealthStatus;
   tipList: TipItem[] = [];
 
   ngOnInit(): void {
-    if (!this.healthData) {
-      this.healthData = this.getMockData();
-    }
-    this.computeDerivedData();
+    this.rebuild();
   }
 
   ngOnChanges(): void {
-    if (this.healthData) {
-      this.computeDerivedData();
-    }
+    this.rebuild();
+  }
+
+  private rebuild(): void {
+    this.healthData = this.health ? this.mapHealth(this.health) : null;
+    if (this.healthData) this.computeDerivedData();
+  }
+
+  // Map the backend health shape (score 0-1, raw metric values) into the
+  // component's view model (score 0-100, per-metric good/warning/critical).
+  private mapHealth(h: SellerHealth): SellerHealthData {
+    const m = h.metrics ?? {};
+    const metrics: SellerHealthData['metrics'] = {};
+
+    if (m.cancelRate != null)
+      metrics.cancellationRate = this.toMetric(
+        'Taxa de Cancelamento',
+        m.cancelRate,
+        this.thresholdLower(m.cancelRate, 0.05, 0.15),
+      );
+    if (m.avgShippingDays != null)
+      metrics.deliveryTime = this.toMetric(
+        'Tempo de Envio (Dias)',
+        m.avgShippingDays,
+        this.thresholdLower(m.avgShippingDays, 2, 4),
+      );
+    if (m.reviewsAvg != null)
+      metrics.reviewsAverage = this.toMetric(
+        'Média de Avaliações',
+        m.reviewsAvg,
+        this.thresholdHigher(m.reviewsAvg, 4.5, 4),
+      );
+    if (m.questionResponseRate != null)
+      metrics.responseRate = this.toMetric(
+        'Taxa de Resposta',
+        m.questionResponseRate,
+        this.thresholdHigher(m.questionResponseRate, 0.9, 0.7),
+      );
+
+    return {
+      sellerName: this.sellerName,
+      finalScore: Math.round((h.score ?? 0) * 100),
+      metrics,
+    };
+  }
+
+  private toMetric(
+    label: string,
+    value: number,
+    status: MetricDetail['status'],
+  ): MetricDetail {
+    return { value, score: 0, label, status };
+  }
+
+  // Lower is better (cancel rate, shipping days).
+  private thresholdLower(
+    v: number,
+    good: number,
+    warn: number,
+  ): MetricDetail['status'] {
+    if (v <= good) return 'good';
+    if (v <= warn) return 'warning';
+    return 'critical';
+  }
+
+  // Higher is better (reviews average, response rate).
+  private thresholdHigher(
+    v: number,
+    good: number,
+    warn: number,
+  ): MetricDetail['status'] {
+    if (v >= good) return 'good';
+    if (v >= warn) return 'warning';
+    return 'critical';
   }
 
   private computeDerivedData(): void {
@@ -113,7 +185,11 @@ export class SellerHealthComponent implements OnInit, OnChanges {
   }
 
   private resolveHealthStatus(): HealthStatus {
-    const score = this.healthData.finalScore;
+    // Brand-new sellers have no score yet.
+    if (this.health?.status === SellerHealthStatus.INCUBATING || this.health?.score == null)
+      return { label: 'Em formação', color: '#58b692', class: 'good' };
+
+    const score = this.healthData?.finalScore ?? 0;
     if (score >= 90)
       return { label: 'Excelente', color: '#0f800d', class: 'excellent' };
     if (score >= 70) return { label: 'Bom', color: '#58b692', class: 'good' };
@@ -124,7 +200,7 @@ export class SellerHealthComponent implements OnInit, OnChanges {
 
   private resolveTipList(): TipItem[] {
     return (
-      Object.entries(this.healthData.metrics) as [
+      Object.entries(this.healthData?.metrics ?? {}) as [
         string,
         MetricDetail | undefined,
       ][]
@@ -145,32 +221,5 @@ export class SellerHealthComponent implements OnInit, OnChanges {
         };
       })
       .filter((tip): tip is TipItem => tip !== null);
-  }
-
-  private getMockData(): SellerHealthData {
-    return {
-      sellerName: 'Loja do Trokaí',
-      finalScore: 68,
-      metrics: {
-        cancellationRate: {
-          value: 0.12,
-          score: 4,
-          label: 'Taxa de Cancelamento',
-          status: 'critical',
-        },
-        deliveryTime: {
-          value: 1.5,
-          score: 9,
-          label: 'Tempo de Envio (Dias)',
-          status: 'good',
-        },
-        reviewsAverage: {
-          value: 4.2,
-          score: 8,
-          label: 'Média de Avaliações',
-          status: 'good',
-        },
-      },
-    };
   }
 }

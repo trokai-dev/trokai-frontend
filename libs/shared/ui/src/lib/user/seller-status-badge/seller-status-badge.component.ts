@@ -22,13 +22,13 @@ export class TkSellerStatusBadgeComponent {
   get variant(): string {
     if (!this.user) return '';
     if (
-      this.user.sellerStatus === SellerStatus.APPROVED &&
-      this.user.storeVisibility === StoreVisibility.PAUSED
+      this.user.seller?.status === SellerStatus.APPROVED &&
+      this.user.seller?.storeVisibility === StoreVisibility.PAUSED
     )
       return 'vacation';
-    if (this.user.sellerProfileStatus === SellerProfileStatus.ADJUSTS_REQUIRED)
+    if (this.user.seller?.profileStatus === SellerProfileStatus.ADJUSTS_REQUIRED)
       return 'adjusts-required';
-    switch (this.user.sellerStatus) {
+    switch (this.user.seller?.status) {
       case SellerStatus.ONBOARDING:
         return 'onboarding';
       case SellerStatus.APPROVED:
@@ -45,13 +45,13 @@ export class TkSellerStatusBadgeComponent {
   get label(): string {
     if (!this.user) return '';
     if (
-      this.user.sellerStatus === SellerStatus.APPROVED &&
-      this.user.storeVisibility === StoreVisibility.PAUSED
+      this.user.seller?.status === SellerStatus.APPROVED &&
+      this.user.seller?.storeVisibility === StoreVisibility.PAUSED
     )
       return 'Em pausa';
-    if (this.user.sellerProfileStatus === SellerProfileStatus.ADJUSTS_REQUIRED)
+    if (this.user.seller?.profileStatus === SellerProfileStatus.ADJUSTS_REQUIRED)
       return 'Requer ajustes';
-    switch (this.user.sellerStatus) {
+    switch (this.user.seller?.status) {
       case SellerStatus.ONBOARDING:
         return 'Em cadastro';
       case SellerStatus.APPROVED:

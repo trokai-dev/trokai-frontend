@@ -361,7 +361,8 @@ export class Coupon {
     percentageDiscountValue: number;
   };
 
-  sellerUser?: User;
+  // Flat partial sent by the coupon endpoint (not a full User document).
+  sellerUser?: { _id: string; storeName?: string; avatar?: string };
 }
 
 export class Pix {
@@ -378,7 +379,9 @@ export class Basket {
   reserved: boolean;
 
   constructor(owner: User, products: Clothes[], lastAction?: Date) {
-    this.owner = owner;
+    // owner may arrive flat (from /clothes/:id) or restored from storage —
+    // normalize so `owner.seller?.*` reads are uniform.
+    this.owner = new User(owner);
     this.products = products;
     this.lastAction = lastAction ?? new Date();
     this.reserved = false;

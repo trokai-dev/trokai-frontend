@@ -3,16 +3,16 @@
     <tk-seller-header [user]="user" size="md" class="reviews-header">
       <div class="flex items-center gap-8">
         <span class="label-body-2 average">{{
-          user.reviewsAverage | number: '1.1-1'
+          user.seller?.health?.reviewsAverage | number: '1.1-1'
         }}</span>
 
         <tk-review-stars
-          [stars]="user.reviewsAverage"
+          [stars]="user.seller?.health?.reviewsAverage ?? 0"
           [showAmount]="false"
         ></tk-review-stars>
 
         <span class="label-caption-1 count"
-          >{{ user.reviewsAmount }} avaliações</span
+          >{{ user.seller?.health?.reviewsAmount }} avaliações</span
         >
       </div>
     </tk-seller-header>

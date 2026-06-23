@@ -48,7 +48,7 @@ export class StoreOptionsComponent implements OnInit {
       this.user = u;
 
       if (
-        ((u.sellerAdjusts?.length ?? 0) > 0 || u.sellerAdjustsNote) &&
+        ((u.seller?.adjusts?.length ?? 0) > 0 || u.seller?.adjustsNote) &&
         this.sellerReviews.length === 0
       ) {
         this.http
@@ -75,15 +75,17 @@ export class StoreOptionsComponent implements OnInit {
   }
 
   async save(value: SellerProfileValue) {
-    const _user = new User();
-    _user.inPerson = value.inPerson;
-    _user.shipping = value.shipping;
-    _user.storeName = value.storeName;
-    _user.nickname = value.nickname;
-    _user.profileBio = value.profileBio;
+    // PATCH /users/me expects FLAT keys (mapped to seller.* server-side).
+    const patch = {
+      inPerson: value.inPerson,
+      shipping: value.shipping,
+      storeName: value.storeName,
+      nickname: value.nickname,
+      profileBio: value.profileBio,
+    };
 
     try {
-      await this.authService.updateUser(_user);
+      await this.authService.updateUser(patch);
 
       if (this.pendingAvatarBlob !== undefined) {
         this.pictureUpdating = true;

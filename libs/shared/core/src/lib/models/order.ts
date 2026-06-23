@@ -93,6 +93,28 @@ export enum PostageLabelStatus {
   EXPIRED,
 }
 
+export enum OrderCanceledBy {
+  BUYER = 'buyer',
+  SELLER = 'seller',
+  TROKAI = 'trokai',
+}
+
+export enum OrderCancellationReason {
+  OUT_OF_STOCK = 'out_of_stock',
+  WRONG_PRICE = 'wrong_price',
+  BUYER_REQUESTED = 'buyer_requested',
+  SELLER_REQUESTED = 'seller_requested',
+  TROKAI_DECISION = 'trokai_decision',
+  OTHER = 'other',
+}
+
+export interface OrderCancellation {
+  canceledBy: OrderCanceledBy;
+  canceledAt?: Date;
+  reason?: OrderCancellationReason;
+  description?: string;
+}
+
 export class Order {
   _id!: string;
   customId!: string;
@@ -136,7 +158,15 @@ export class Order {
   };
 
   reviews?: UserReview[];
-  canceledBy?: string;
+  cancellation?: OrderCancellation;
+  buyerReviewedAt?: Date;
+  shippingCorrection?: boolean;
+  reviewReminderSentAt?: {
+    inApp?: Date;
+    push?: Date;
+    whatsapp?: Date;
+    email?: Date;
+  };
   returnedBy?: string;
   sellerShippingAddress?: Address;
   pix?: Pix;
@@ -385,5 +415,14 @@ export class Order {
     }
 
     return true;
+  }
+
+  // Review flow is now gated by `buyerReviewedAt` (order no longer auto-concludes).
+  get alreadyReviewedByBuyer(): boolean {
+    return !!this.buyerReviewedAt;
+  }
+
+  get isCanceled(): boolean {
+    return this.status === OrderStatus.CANCELED || !!this.cancellation;
   }
 }

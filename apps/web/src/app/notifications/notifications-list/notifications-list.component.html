@@ -1,27 +1,30 @@
 @if (!notifications || notifications.length === 0) {
   <div class="empty-page full">
-    @if (true) {
-      <ion-icon name="sad-outline"></ion-icon>
-    }
+    <ion-icon name="sad-outline"></ion-icon>
     <span class="label-body-2 block"> Nenhuma notificação</span>
   </div>
 } @else {
-  <!--  -->
-  @for (n of notifications; track n) {
+  @for (n of notifications; track n.id) {
     <div
       class="flex border-bottom py-48 px-24 cursor-pointer items-center"
-      (click)="n.action()"
+      (click)="open(n)"
     >
-      <div style="width: 32px">
-        @if (true) {
-          <ion-icon class="color-primary" name="{{ n.icon }}"></ion-icon>
+      <div class="notif-icon">
+        @if (n.image_url) {
+          <img [src]="n.image_url" alt="" />
+        } @else {
+          <ion-icon class="color-primary" name="notifications-outline"></ion-icon>
         }
       </div>
-      <span
-        class="label-body-2 ml-24"
-        [ngClass]="{ 'fw-bold': !n.read }"
-        [innerHtml]="n.text + n.date"
-      ></span>
+      <div class="flex flex-col ml-24">
+        <span class="label-body-2" [ngClass]="{ 'fw-bold': !n.is_read }">
+          {{ n.title }}
+        </span>
+        <span class="label-caption-1 color-gray-light-1">{{ n.description }}</span>
+        <span class="label-caption-1 color-gray-light-1">
+          {{ n.created_at | shortDate }}
+        </span>
+      </div>
     </div>
   }
 }

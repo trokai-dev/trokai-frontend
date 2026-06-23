@@ -9,33 +9,33 @@
   @if (user) {
     <!-- Macro sellerStatus info -->
 
-    @if (user.sellerStatus !== SellerStatus.APPROVED) {
+    @if (user.seller?.status !== SellerStatus.APPROVED) {
       <div
         class="info-notice mt-16"
         [ngClass]="{
-          'info-notice--warning': user.sellerStatus === SellerStatus.SUSPENDED,
-          'info-notice--danger': user.sellerStatus === SellerStatus.REJECTED,
+          'info-notice--warning': user.seller?.status === SellerStatus.SUSPENDED,
+          'info-notice--danger': user.seller?.status === SellerStatus.REJECTED,
         }"
       >
         <ion-icon
           [name]="
-            user.sellerStatus === SellerStatus.REJECTED
+            user.seller?.status === SellerStatus.REJECTED
               ? 'close-circle-outline'
-              : user.sellerStatus === SellerStatus.SUSPENDED
+              : user.seller?.status === SellerStatus.SUSPENDED
                 ? 'warning-outline'
                 : 'information-circle-outline'
           "
           class="info-notice__icon"
         ></ion-icon>
         <p class="label-body-2 color-gray-default mb-0">
-          @if (user.sellerStatus === SellerStatus.ONBOARDING) {
+          @if (user.seller?.status === SellerStatus.ONBOARDING) {
             Sua loja ficará visível ao público somente após a
             <strong>aprovação da conta</strong> e das
             <strong>{{ minClothesToSell }} primeiras peças</strong>.
-          } @else if (user.sellerStatus === SellerStatus.REJECTED) {
+          } @else if (user.seller?.status === SellerStatus.REJECTED) {
             Sua conta foi <strong>reprovada</strong>. Entre em contato com nosso
             suporte para mais informações.
-          } @else if (user.sellerStatus === SellerStatus.SUSPENDED) {
+          } @else if (user.seller?.status === SellerStatus.SUSPENDED) {
             Sua loja está <strong>suspensa</strong>. Entre em contato com nosso
             suporte para regularizar sua situação.
           }
@@ -44,17 +44,20 @@
     }
 
     <!-- ONBOARDING: detailed onboarding flow -->
-    @if (user.sellerStatus === SellerStatus.ONBOARDING) {
+    @if (user.seller?.status === SellerStatus.ONBOARDING) {
       <app-seller-status-onboarding [user]="user" />
     }
 
     <!-- only for APPROVED -->
-    @if (user.sellerStatus === SellerStatus.APPROVED) {
+    @if (user.seller?.status === SellerStatus.APPROVED) {
       <!-- Reviews -->
       <div class="section mt-24">
         <h6 class="color-gray-dark mb-4">Saúde da conta</h6>
 
-        <app-seller-health />
+        <app-seller-health
+          [health]="user.seller?.health"
+          [sellerName]="user.displayName"
+        />
       </div>
 
       <!-- Reviews -->
@@ -65,10 +68,10 @@
         </p>
 
         <tk-review-stars
-          [stars]="user?.reviewsAverage ?? 0"
-          [amount]="user?.reviewsAmount ?? null"
+          [stars]="user?.seller?.health?.reviewsAverage ?? 0"
+          [amount]="user?.seller?.health?.reviewsAmount ?? null"
           [showAmount]="true"
-          [clickable]="!!user?.reviewsAmount"
+          [clickable]="!!user?.seller?.health?.reviewsAmount"
           (clicked)="openReviews(user!)"
         />
       </div>
@@ -79,7 +82,7 @@
 
         <div class="flex justify-between items-center py-16">
           <span class="label-body-2">Vendas concluidas</span>
-          <span class="label-body-2">{{ user.salesCount ?? 0 }}</span>
+          <span class="label-body-2">{{ user.seller?.health?.salesCount ?? 0 }}</span>
         </div>
         <mat-divider></mat-divider>
 
@@ -110,7 +113,7 @@
             type="button"
             class="visibility-option"
             [class.visibility-option--active]="
-              user.storeVisibility === StoreVisibility.OPEN
+              user.seller?.storeVisibility === StoreVisibility.OPEN
             "
             [disabled]="savingVisibility"
             (click)="setVisibility(StoreVisibility.OPEN)"
@@ -134,7 +137,7 @@
             type="button"
             class="visibility-option"
             [class.visibility-option--active]="
-              user.storeVisibility === StoreVisibility.PAUSED
+              user.seller?.storeVisibility === StoreVisibility.PAUSED
             "
             [disabled]="savingVisibility"
             (click)="setVisibility(StoreVisibility.PAUSED)"

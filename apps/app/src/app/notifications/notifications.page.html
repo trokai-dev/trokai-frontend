@@ -51,17 +51,33 @@
     </div>
     } @if (!isLoading) {
     <div>
-      @for (n of notifications; track $index) {
-      <div class="menu-item ion-activatable ripple-parent" (click)="n.action()">
+      @for (n of notifications; track n.id) {
+      <div class="menu-item ion-activatable ripple-parent" (click)="open(n)">
         <div>
-          <ion-icon name="{{n.icon}}"></ion-icon>
-          <label
-            class="label-body-1 ml-16"
-            [innerHtml]="n.text + n.date"
-          ></label>
+          @if (n.image_url) {
+          <ion-avatar>
+            <ion-img [src]="n.image_url"></ion-img>
+          </ion-avatar>
+          } @else {
+          <ion-icon name="notifications-outline"></ion-icon>
+          }
+          <div
+            class="block ml-16 flex-col"
+            style="align-items: start !important"
+          >
+            <label class="label-body-1" [ngClass]="{ 'fw-bold': !n.is_read }">
+              {{ n.title }}
+            </label>
+            <label class="label-caption-1 color-gray-light-1">
+              {{ n.description }}
+            </label>
+            <label class="label-caption-1 color-gray-light-1">
+              {{ n.created_at | shortDate }}
+            </label>
+          </div>
         </div>
         <ion-ripple-effect></ion-ripple-effect>
-        @if (!n.read) {
+        @if (!n.is_read) {
         <div class="notification-badge"></div>
         }
       </div>
@@ -98,7 +114,7 @@
           >
             <div>
               <h6 class="label-body-1 text-dots color-gray-dark">
-                {{c.otherUser.storeName ?? c.otherUser.name}}
+                {{c.otherUser.seller?.storeName ?? c.otherUser.name}}
                 <label class="label-caption-1 ml-8 color-gray-light-1">
                   {{c.lastMessage.createdAt| shortDate}}
                 </label>

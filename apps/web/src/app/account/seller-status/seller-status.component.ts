@@ -60,12 +60,13 @@ export class SellerStatusComponent implements OnInit {
 
   getStatusCount(status: ClothesStatus): number {
     return (
-      this.user?.clothesSummary?.find((s) => s.status === status)?.count ?? 0
+      this.user?.seller?.health?.clothesSummary?.find((s) => s.status === status)
+        ?.count ?? 0
     );
   }
 
   openReviews(store: User) {
-    if (!store?.reviewsAmount) return;
+    if (!store?.seller?.health?.reviewsAmount) return;
     this.dialogService.openUserReviews(store);
   }
 
@@ -94,7 +95,11 @@ export class SellerStatusComponent implements OnInit {
       'Cancelar',
     );
 
-    if (!proceed || this.savingVisibility || this.user?.storeVisibility === v) {
+    if (
+      !proceed ||
+      this.savingVisibility ||
+      this.user?.seller?.storeVisibility === v
+    ) {
       return;
     }
 

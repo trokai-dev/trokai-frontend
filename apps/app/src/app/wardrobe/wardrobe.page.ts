@@ -214,7 +214,8 @@ export class WardrobePage implements OnInit, OnDestroy {
         this.userIsOwner = true;
         this.filter.status = null;
       } else {
-        this.userIsOwner = ownerRef === user._id || ownerRef === user.nickname;
+        this.userIsOwner =
+          ownerRef === user._id || ownerRef === user.seller?.nickname;
 
         if (!ownerRef) {
           this.router.navigate(['/main/home']);
@@ -285,13 +286,13 @@ export class WardrobePage implements OnInit, OnDestroy {
 
   async shareWardrobe() {
     const text = `Veja os looks de ${
-      this.owner.storeName ?? this.owner.name
+      this.owner.seller?.storeName ?? this.owner.name
     } no Trokaí`;
 
     await Share.share({
-      title: this.owner.storeName ?? this.owner.name,
+      title: this.owner.seller?.storeName ?? this.owner.name,
       text: text,
-      url: 'https://www.trokai.com.br/users/' + this.owner.nickname,
+      url: 'https://www.trokai.com.br/users/' + this.owner.seller?.nickname,
       dialogTitle: 'Compartilhar armário',
     });
 
@@ -377,7 +378,7 @@ export class WardrobePage implements OnInit, OnDestroy {
     if (!this.userIsOwner || !this.owner) return;
 
     const newList = JSON.parse(JSON.stringify(statusForOwner));
-    const summary = this.owner.clothesSummary;
+    const summary = this.owner.seller?.health?.clothesSummary;
 
     if (!summary) {
       this.statusFilter = newList;

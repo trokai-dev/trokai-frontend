@@ -44,15 +44,15 @@
             >
               <div class="flex items-center">
                 <h4 class="color-gray-dark capitalize">
-                  {{ basket.owner.storeName ?? basket.owner.name }}
+                  {{ basket.owner.seller?.storeName ?? basket.owner.name }}
                 </h4>
               </div>
               <div class="mt-24">
                 <tk-review-stars
                   [showAmount]="false"
-                  [stars]="basket.owner.reviewsAverage"
-                  [amount]="basket.owner.reviewsAmount"
-                  [clickable]="!!basket.owner.reviewsAmount"
+                  [stars]="basket.owner.seller?.health?.reviewsAverage ?? 0"
+                  [amount]="basket.owner.seller?.health?.reviewsAmount"
+                  [clickable]="!!basket.owner.seller?.health?.reviewsAmount"
                   (clicked)="openReviews(basket.owner)"
                 ></tk-review-stars>
               </div>
@@ -115,7 +115,7 @@
                 class="mt-16 w-full"
                 mat-stroked-button
                 color="primary"
-                routerLink="/users/{{ basket.owner.nickname }}"
+                routerLink="/users/{{ basket.owner.seller?.nickname }}"
               >
                 <b>Adicionar mais produtos</b>
               </button>

@@ -9,9 +9,9 @@
     <tk-user-avatar [user]="user" size="medium" />
   </div>
   <span class="label-body-2 text-dots capitalize color-gray-dark">
-    {{ user?.storeName ?? user?.name }}
+    {{ user?.seller?.storeName ?? user?.name }}
   </span>
   <span class="label-caption-1 color-gray-1 text-dots">
-    @{{ user?.nickname ?? '-' }}
+    @{{ user?.seller?.nickname ?? '-' }}
   </span>
 </div>

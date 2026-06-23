@@ -17,7 +17,7 @@
       <div class="block ml-16 flex-col" style="align-items: start !important">
         <div>
           <h6 class="label-body-1 text-dots color-gray-dark">
-            {{ c.otherUser.storeName ?? c.otherUser.name }}
+            {{ c.otherUser.seller?.storeName ?? c.otherUser.name }}
             <label class="label-caption-1 ml-8 color-gray-light-1">
               {{ c.lastMessage.createdAt | shortDate }}
             </label>

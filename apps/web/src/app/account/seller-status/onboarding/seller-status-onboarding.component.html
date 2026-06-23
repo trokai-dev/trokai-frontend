@@ -7,7 +7,7 @@
   <div class="status-card__body flex-col">
     <div class="flex gap-24 items-center">
       <div class="status-card__icon">
-        @switch (user.sellerProfileStatus) {
+        @switch (user.seller?.profileStatus) {
           @case (SellerProfileStatus.PENDING_REVIEW) {
             <ion-icon name="time-outline"></ion-icon>
           }
@@ -24,7 +24,7 @@
       </div>
       <div class="status-card__content">
         <p class="label-body-2 color-gray-default mb-0">
-          @switch (user.sellerProfileStatus) {
+          @switch (user.seller?.profileStatus) {
             @case (SellerProfileStatus.PENDING_REVIEW) {
               Nossa equipe está revisando as informações da sua loja. Em breve
               entraremos em contato.
@@ -47,7 +47,7 @@
     </div>
 
     <!-- Seller adjusts alert -->
-    @if (user.sellerProfileStatus === SellerProfileStatus.ADJUSTS_REQUIRED) {
+    @if (user.seller?.profileStatus === SellerProfileStatus.ADJUSTS_REQUIRED) {
       <a
         class="clothes-alert clothes-alert--warning mt-24"
         routerLink="/account/wardrobe"
@@ -93,7 +93,7 @@
         @if (adjustsCount > 0) {
           <a
             class="clothes-alert clothes-alert--warning"
-            routerLink="/users/{{ user.nickname }}"
+            routerLink="/users/{{ user.seller?.nickname }}"
             [queryParams]="{ status: ClothesStatus.WAITING_ADJUSTMENT }"
           >
             <ion-icon
@@ -120,7 +120,7 @@
           class="mt-24"
           mat-stroked-button
           color="primary"
-          routerLink="/users/{{ user.nickname }}"
+          routerLink="/users/{{ user.seller?.nickname }}"
         >
           Ver meus produtos
         </button>

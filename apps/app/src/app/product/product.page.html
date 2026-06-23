@@ -218,19 +218,19 @@
                 }
 
                 <div class="product-cta-delivery">
-                  @if (owner?.inPerson) {
-                  <span class="{{ owner.shipping ? ' mb-8 block' : '' }}">
+                  @if (owner?.seller?.inPerson) {
+                  <span class="{{ owner.seller?.shipping ? ' mb-8 block' : '' }}">
                     Retirada presencial @if (!myProduct) {
                     <ion-text>gratuita</ion-text>
                     }
                   </span>
-                  } @if (owner?.shipping && !myProduct) {
+                  } @if (owner?.seller?.shipping && !myProduct) {
                   <div>
                     <tk-zipcode-shipping-fee
                       [productId]="productId"
                     ></tk-zipcode-shipping-fee>
                   </div>
-                  } @if (owner?.shipping && myProduct) {
+                  } @if (owner?.seller?.shipping && myProduct) {
                   <div>
                     <span>Envio pelos correios</span>
                   </div>
@@ -388,20 +388,20 @@
         <tk-seller-header [user]="owner" size="sm">
           <div class="mt-8">
             <tk-review-stars
-              [stars]="owner.reviewsAverage"
-              [amount]="owner.reviewsAmount"
-              [showAmount]="!!owner.reviewsAmount"
+              [stars]="owner.seller?.health?.reviewsAverage ?? 0"
+              [amount]="owner.seller?.health?.reviewsAmount"
+              [showAmount]="!!owner.seller?.health?.reviewsAmount"
             ></tk-review-stars>
           </div>
 
           <div class="flex justify-between mt-24">
-            @if (owner.productsSold > 0) {
+            @if ((owner.seller?.health?.productsSold ?? 0) > 0) {
             <div class="flex flex-col">
               <span class="label-caption-1 fw-300 color-gray-default">
                 Vendidos
               </span>
               <span class="label-caption-1 color-gray-dark">
-                {{ owner.productsSold }}
+                {{ owner.seller?.health?.productsSold }}
               </span>
             </div>
             }
@@ -410,17 +410,21 @@
                 À venda
               </span>
               <span class="label-caption-1 color-gray-dark">
-                {{ owner.productsForSale }}
+                {{ owner.seller?.health?.productsForSale }}
               </span>
             </div>
-            @if (owner.productsSold > 0) {
+            @if ((owner.seller?.health?.productsSold ?? 0) > 0) {
             <div class="flex flex-col">
               <span class="label-caption-1 fw-300 color-gray-default">
                 Tempo médio de envio
               </span>
               <span class="label-caption-1 color-gray-dark">
-                {{ owner.avgPostageDays }} {{ owner.avgPostageDays > 1 ? 'dias
-                úteis' : 'dia útil' }}
+                {{ owner.seller?.health?.avgPostageDays }}
+                {{
+                  (owner.seller?.health?.avgPostageDays ?? 0) > 1
+                    ? 'dias úteis'
+                    : 'dia útil'
+                }}
               </span>
             </div>
             }

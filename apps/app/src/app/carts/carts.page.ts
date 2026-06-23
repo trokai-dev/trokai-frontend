@@ -134,8 +134,8 @@ export class CartsPage implements OnDestroy, OnInit {
 
       // shows suggestions instead of other baskets
       if (this.suggestions.length > 0) {
-        this.suggestionHeader = `Mais de ${suggBasket?.owner?.storeName}`;
-        this.suggestionLink = `/users/${suggBasket?.owner?.nickname}`;
+        this.suggestionHeader = `Mais de ${suggBasket?.owner?.seller?.storeName}`;
+        this.suggestionLink = `/users/${suggBasket?.owner?.seller?.nickname}`;
       } else {
         this.suggestionHeader = null;
         this.suggestionLink = null;

@@ -103,7 +103,7 @@ export class WardrobeComponent implements OnInit {
   pageString: string | null = null;
 
   openReviews(store: User) {
-    if (!store?.reviewsAmount) return;
+    if (!store?.seller?.health?.reviewsAmount) return;
     this.dialogService.openUserReviews(store);
   }
 
@@ -120,7 +120,7 @@ export class WardrobeComponent implements OnInit {
   }
 
   statusChange() {
-    this.router.navigate(['/users', this.owner.nickname], {
+    this.router.navigate(['/users', this.owner.seller?.nickname], {
       queryParams: {
         page: 1,
         ...this.filter,
@@ -131,7 +131,7 @@ export class WardrobeComponent implements OnInit {
   clearSearch() {
     this.filter.text = '';
 
-    this.router.navigate(['/users', this.owner.nickname], {
+    this.router.navigate(['/users', this.owner.seller?.nickname], {
       queryParams: {
         page: 1,
       },
@@ -146,7 +146,7 @@ export class WardrobeComponent implements OnInit {
 
   summarizeStatusList(list: { name: string; value: ClothesStatus | null }[]) {
     const newList = JSON.parse(JSON.stringify(list));
-    const summary = this.owner.clothesSummary;
+    const summary = this.owner.seller?.health?.clothesSummary;
 
     if (!summary) {
       this.statusList = newList;
@@ -192,9 +192,9 @@ export class WardrobeComponent implements OnInit {
         const user = this.authService.getUserValue();
         this.userOwner = user?._id === this.owner._id;
         // set metas
-        this.globalService.setTitle(this.owner.storeName);
+        this.globalService.setTitle(this.owner.seller?.storeName ?? '');
         this.globalService.setMetaDescription(
-          `Veja os produtos de ${this.owner.storeName} no Trokaí.`,
+          `Veja os produtos de ${this.owner.seller?.storeName} no Trokaí.`,
         );
       }
 

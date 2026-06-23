@@ -47,8 +47,8 @@ export class ShippingOptionsComponent
 
         // checkout.owner.inPerson = true; // TODO: remove this line
 
-        this.shipping = checkout.owner.shipping;
-        this.inPerson = checkout.owner.inPerson;
+        this.shipping = checkout.owner.seller?.shipping ?? false;
+        this.inPerson = checkout.owner.seller?.inPerson ?? false;
 
         if (this.inPerson && !this.shipping)
           // only inPerson

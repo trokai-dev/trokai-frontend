@@ -1,4 +1,12 @@
 export const NotificationType = {
+  // SWAP
+  SwapCreated: 'swap.created',
+  SwapAccepted: 'swap.accepted',
+  SwapCanceled: 'swap.canceled',
+  SwapExpiredOwner: 'swap.expired.owner',
+  SwapExpiredBuyer: 'swap.expired.buyer',
+  SwapReviewCreate: 'swap.review.created',
+  SwapReviewCreatedByOtherUser: 'swap.review.createdByOtherUser',
   // ORDER
   OrderPaymentApprovedBuyer: 'order.paymentApproved.buyer',
   OrderPaymentReproved: 'order.paymentReproved',
@@ -9,6 +17,8 @@ export const NotificationType = {
   OrderReviewCreate: 'order.review.create',
   OrderCanceled: 'order.canceled',
   OrderReviewCreatedByOtherUser: 'order.review.createdByOtherUser',
+  OrderPostageLabelExpired: 'order.postageLabelExpired',
+  OrderShippingReminder: 'order.shippingReminder',
   // CLOTHES
   ClothesAdjust: 'clothes.adjust',
   ClothesExpired: 'clothes.expired',
@@ -21,12 +31,42 @@ export const NotificationType = {
   // TRANSFERS
   TransferCompleted: 'transfer.completed',
   TransferFailed: 'transfer.failed',
+  // SYSTEM
+  SystemAlert: 'system.alert',
 };
 
+export enum NotificationCategory {
+  SWAP = 'swap',
+  ORDER = 'order',
+  CLOTHES = 'clothes',
+  FAVORITES = 'favorites',
+  TRANSFER = 'transfer',
+  SOCIAL = 'social',
+  SYSTEM = 'system',
+}
+
+/**
+ * Server-rendered notification (snake_case wire contract). The backend now
+ * resolves title/description/icon/link, so the client just displays them.
+ */
 export class NotificationModel {
-  _id!: string;
+  id!: string;
   type!: string;
-  message!: string;
-  createdAt!: Date;
-  read!: boolean;
+  category!: string;
+  title!: string;
+  description!: string;
+  image_url!: string | null;
+  target_url!: string | null;
+  is_read!: boolean;
+  created_at!: Date;
+}
+
+export interface NotificationsResponse {
+  data: NotificationModel[];
+  meta: {
+    unread_count: number;
+    skip: number;
+    limit: number;
+    has_more: boolean;
+  };
 }

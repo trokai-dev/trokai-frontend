@@ -67,15 +67,15 @@ export class WebCompletingNavigator extends CompletingNavigator {
     // 6. conta em análise (PENDING_REVIEW) — bloqueia além do mínimo
     if (
       sell &&
-      user.sellerStatus === SellerStatus.ONBOARDING &&
-      user.sellerProfileStatus === SellerProfileStatus.PENDING_REVIEW
+      user.seller?.status === SellerStatus.ONBOARDING &&
+      user.seller?.profileStatus === SellerProfileStatus.PENDING_REVIEW
     ) {
       const params = await firstValueFrom(
         this.globalService.params.pipe(filter(Boolean), take(1)),
       );
       const minClothes = params?.minClothesToSell || 5;
       const pendingCount =
-        user.clothesSummary?.find(
+        user.seller?.health?.clothesSummary?.find(
           (s) =>
             s.status === ClothesStatus.WAITING_PUBLICATION ||
             s.status === ClothesStatus.WAITING_ADJUSTMENT ||

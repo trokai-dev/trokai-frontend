@@ -130,13 +130,13 @@ export class ShippingOptionsPage implements OnInit, OnDestroy {
 
       if (this.checkoutLocal.shippingOption == undefined) {
         if (
-          this.checkoutLocal.owner.shipping &&
-          !this.checkoutLocal.owner.inPerson
+          this.checkoutLocal.owner.seller?.shipping &&
+          !this.checkoutLocal.owner.seller?.inPerson
         ) {
           this.changeAddressOption(this.enumAddress.SHIPPING);
         } else if (
-          !this.checkoutLocal.owner.shipping &&
-          this.checkoutLocal.owner.inPerson
+          !this.checkoutLocal.owner.seller?.shipping &&
+          this.checkoutLocal.owner.seller?.inPerson
         ) {
           this.changeAddressOption(this.enumAddress.INPERSON);
         }

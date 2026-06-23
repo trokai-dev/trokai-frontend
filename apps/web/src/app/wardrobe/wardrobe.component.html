@@ -3,9 +3,9 @@
     <tk-seller-header [user]="owner" size="lg" [heading]="true">
       <div class="flex items-center justify-between w-full mt-8">
         <tk-review-stars
-          [stars]="owner.reviewsAverage"
-          [amount]="owner.reviewsAmount"
-          [clickable]="!!owner.reviewsAmount"
+          [stars]="owner.seller?.health?.reviewsAverage ?? 0"
+          [amount]="owner.seller?.health?.reviewsAmount"
+          [clickable]="!!owner.seller?.health?.reviewsAmount"
           (clicked)="openReviews(owner)"
         ></tk-review-stars>
         @if (userOwner && owner.isSeller) {

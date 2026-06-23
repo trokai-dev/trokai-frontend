@@ -57,14 +57,75 @@ export enum SellerProfileStatus {
   PENDING_REVIEW = 'PENDING_REVIEW', // Aguardando revisão pelo admin
   ADJUSTS_REQUIRED = 'ADJUSTS_REQUIRED', // Admin solicitou ajustes
   APPROVED = 'APPROVED', // Perfil aprovado pelo admin
+  REJECTED = 'REJECTED', // Perfil rejeitado pelo admin
+}
+
+export enum SellerHealthStatus {
+  INCUBATING = 'INCUBATING',
+  EXCELLENT = 'EXCELLENT',
+  GOOD = 'GOOD',
+  ATTENTION = 'ATTENTION',
+  CRITICAL = 'CRITICAL',
+}
+
+export interface SellerHealthMetrics {
+  cancelRate?: number | null;
+  reviewsAvg?: number | null;
+  avgShippingDays?: number | null;
+  avgClothesRelevance?: number | null;
+  questionResponseRate?: number | null;
+  avgQuestionResponseHours?: number | null;
+}
+
+export class SellerHealth {
+  score?: number | null;
+  status?: SellerHealthStatus;
+  metrics?: SellerHealthMetrics;
+  updatedAt?: Date;
+  reviewsAverage?: number;
+  reviewsAmount?: number;
+  avgPostageDays?: number;
+  salesCount?: number;
+  faultCancellationsCount?: number;
+  productsSold?: number;
+  productsForSale?: number;
+  clothesSummary?: {
+    status: ClothesStatus;
+    count: number;
+  }[];
+
+  constructor(init?: Partial<SellerHealth>) {
+    Object.assign(this, init);
+  }
+}
+
+export class Seller {
+  status?: SellerStatus;
+  profileStatus?: SellerProfileStatus;
+  storeName?: string;
+  nickname?: string;
+  shipping?: boolean;
+  inPerson?: boolean;
+  storeVisibility?: StoreVisibility;
+  profileBio?: string;
+  adjusts?: number[];
+  adjustsNote?: string;
+  minClothesApproved?: boolean;
+  brechoStatus?: string;
+  hideFromHome?: boolean;
+  reviews?: UserReview[];
+  health?: SellerHealth;
+
+  constructor(init?: Partial<Seller>) {
+    Object.assign(this, init);
+    this.health = new SellerHealth(init?.health);
+  }
 }
 
 export class User {
   avatar!: string;
   email!: string;
   name!: string;
-  storeName!: string;
-  nickname!: string;
   cpf!: string;
   birthday!: Date;
   phone!: string;
@@ -74,31 +135,14 @@ export class User {
   googleId!: string;
   googleAvatar!: string;
   address!: Address;
-  shipping!: boolean;
-  inPerson!: boolean;
   cards!: Card[];
-  reviewsAverage!: number;
-  reviewsAmount?: number;
-  reviews?: UserReview[];
   status!: number;
   phoneVerified!: boolean;
-  storeVisibility!: StoreVisibility;
-  clothesSummary?: {
-    status: ClothesStatus;
-    count: number;
-  }[];
   blockedUsers?: string[];
-  hideFromHome?: boolean;
-  productsSold?: number;
-  productsForSale?: number;
-  salesCount?: number;
-  avgPostageDays?: number;
-  sellerStatus?: SellerStatus;
-  sellerProfileStatus?: SellerProfileStatus;
-  sellerAdjusts?: number[];
-  sellerAdjustsNote?: string;
-  minClothesApproved?: number;
-  profileBio?: string;
+
+  // Seller account — nested namespace mirroring the backend `seller.*` schema.
+  // Always populated by this constructor; optional for plain-cast payloads.
+  seller?: Seller;
 
   // check these
   pagarMeRecipientStatus?: PagarMeRecipientStatus;
@@ -106,6 +150,47 @@ export class User {
 
   constructor(init?: Partial<User>) {
     Object.assign(this, init);
+
+    // The backend returns the seller namespace in several shapes:
+    // - GET /users/me     -> fully nested `seller.*` / `seller.health.*`
+    // - GET /users/:id    -> seller core nested, health stats copied to root
+    // - GET /clothes/:id  -> seller core + stats FLATTENED to root
+    // - coupon / top-sellers -> a few flat seller fields
+    // Normalize all of them into the canonical nested `seller` so every reader
+    // uses `user.seller?.*` / `user.seller?.health?.*`. `??` keeps nested when
+    // both are present, so already-nested payloads pass through unchanged.
+    const src = (init ?? {}) as Record<string, unknown>;
+    const g = <T>(k: string) => src[k] as T | undefined;
+
+    this.seller = new Seller(src['seller'] as Partial<Seller> | undefined);
+    const s = this.seller;
+
+    s.storeName ??= g<string>('storeName');
+    s.nickname ??= g<string>('nickname');
+    s.shipping ??= g<boolean>('shipping');
+    s.inPerson ??= g<boolean>('inPerson');
+    s.storeVisibility ??= g<StoreVisibility>('storeVisibility');
+    s.profileBio ??= g<string>('profileBio');
+    s.hideFromHome ??= g<boolean>('hideFromHome');
+    s.brechoStatus ??= g<string>('brechoStatus');
+    s.minClothesApproved ??= g<boolean>('minClothesApproved');
+    s.reviews ??= g<UserReview[]>('reviews');
+    // legacy flat seller-status names (older payloads / cached sessions)
+    s.status ??= g<SellerStatus>('sellerStatus');
+    s.profileStatus ??= g<SellerProfileStatus>('sellerProfileStatus');
+    s.adjusts ??= g<number[]>('sellerAdjusts');
+    s.adjustsNote ??= g<string>('sellerAdjustsNote');
+
+    const h = s.health as SellerHealth;
+    h.reviewsAverage ??= g<number>('reviewsAverage');
+    h.productsSold ??= g<number>('productsSold');
+    h.productsForSale ??= g<number>('productsForSale');
+    h.avgPostageDays ??= g<number>('avgPostageDays');
+    h.salesCount ??= g<number>('salesCount');
+    h.clothesSummary ??= g<{ status: ClothesStatus; count: number }[]>(
+      'clothesSummary',
+    );
+    h.reviewsAmount ??= g<number>('reviewsAmount') ?? s.reviews?.length;
   }
 
   accountCompletion() {
@@ -121,18 +206,18 @@ export class User {
 
       // seller only
       sellerInfo:
-        (this.inPerson || this.shipping) &&
+        (this.seller?.inPerson || this.seller?.shipping) &&
         this.avatar != null &&
-        this.storeName != null,
+        this.seller?.storeName != null,
 
-      sellerStatus: this.sellerStatus,
+      sellerStatus: this.seller?.status,
       phoneVerified: this.phoneVerified,
-      minClothesApproved: this.minClothesApproved,
+      minClothesApproved: this.seller?.minClothesApproved,
     };
   }
 
   isSeller() {
-    return this.sellerStatus != null;
+    return this.seller?.status != null;
   }
 
   get displayAvatar(): string | undefined {
@@ -140,6 +225,6 @@ export class User {
   }
 
   get displayName(): string {
-    return this.storeName || this.name;
+    return this.seller?.storeName || this.name;
   }
 }

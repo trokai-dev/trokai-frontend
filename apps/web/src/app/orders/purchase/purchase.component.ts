@@ -164,7 +164,7 @@ export class PurchaseComponent implements OnInit {
   }
 
   openOtherUser() {
-    this.router.navigateByUrl(`/users/${this.order.seller.nickname}`);
+    this.router.navigateByUrl(`/users/${this.order.seller.seller?.nickname}`);
   }
 
   openChat() {
@@ -233,7 +233,7 @@ export class PurchaseComponent implements OnInit {
 
   async openProduct(product: Clothes) {
     this.router.navigateByUrl(
-      `/users/${this.order.seller.nickname}/${product._id}`,
+      `/users/${this.order.seller.seller?.nickname}/${product._id}`,
     );
   }
 

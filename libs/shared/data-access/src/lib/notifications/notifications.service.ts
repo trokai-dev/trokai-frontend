@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { APP_CONFIG } from '@trokai/shared-core';
 import { BehaviorSubject, Subject, lastValueFrom } from 'rxjs';
-import { NotificationModel } from './notifications.models';
+import { NotificationsResponse } from './notifications.models';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationsService {
@@ -16,12 +16,14 @@ export class NotificationsService {
     return this._notReadCount.asObservable();
   }
 
-  fetchNotifications(skip: number) {
-    return lastValueFrom(
-      this.http.get<NotificationModel[]>(
+  async fetchNotifications(skip: number): Promise<NotificationsResponse> {
+    const res = await lastValueFrom(
+      this.http.get<NotificationsResponse>(
         `${this.urlApi}/users/notifications?skip=${skip}&limit=${20}`,
       ),
     );
+    this._notReadCount.next(res.meta.unread_count);
+    return res;
   }
 
   async fetchUnreadCount() {
@@ -39,6 +41,13 @@ export class NotificationsService {
       this.http.patch(`${this.urlApi}/users/notifications/read`, {}),
     );
     this._notReadCount.next(0);
+  }
+
+  async markOneRead(id: string) {
+    await lastValueFrom(
+      this.http.patch(`${this.urlApi}/users/notifications/${id}/read`, {}),
+    );
+    this._notReadCount.next(Math.max(0, this._notReadCount.getValue() - 1));
   }
 
   reset() {

@@ -146,9 +146,7 @@ export class AddressPage implements OnInit, OnDestroy {
     const loading = await this.loadingCtrl.create({ message: 'Salvando...' });
     loading.present();
     try {
-      const _user = new User();
-      _user.address = address;
-      await this.authService.updateUser(_user);
+      await this.authService.updateUser({ address });
 
       if (this.completingInformation) {
         this.completingInfoService.next();

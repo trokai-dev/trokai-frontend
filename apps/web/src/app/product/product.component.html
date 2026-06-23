@@ -93,9 +93,11 @@
                         </div>
                       }
                       <div class="product-cta-delivery">
-                        @if (owner.inPerson) {
+                        @if (owner.seller?.inPerson) {
                           <span
-                            class="{{ owner.shipping ? ' mb-8 block' : '' }}"
+                            class="{{
+                              owner.seller?.shipping ? ' mb-8 block' : ''
+                            }}"
                           >
                             Retirada presencial
                             @if (!myProduct) {
@@ -103,14 +105,14 @@
                             }
                           </span>
                         }
-                        @if (owner.shipping && !myProduct) {
+                        @if (owner.seller?.shipping && !myProduct) {
                           <div>
                             <tk-zipcode-shipping-fee
                               [productId]="productId"
                             ></tk-zipcode-shipping-fee>
                           </div>
                         }
-                        @if (owner.shipping && myProduct) {
+                        @if (owner.seller?.shipping && myProduct) {
                           <div>
                             <span>Envio pelos correios</span>
                           </div>
@@ -389,25 +391,25 @@
           <!-- Loja -->
           <div
             class="py-48 cursor-pointer"
-            routerLink="/users/{{ owner.nickname }}"
+            routerLink="/users/{{ owner.seller?.nickname }}"
           >
             <tk-seller-header [user]="owner" size="md">
               <div class="mt-8 flex justify-between items-center">
                 <tk-review-stars
-                  [stars]="owner.reviewsAverage"
-                  [amount]="owner.reviewsAmount"
-                  [clickable]="!!owner.reviewsAmount"
+                  [stars]="owner.seller?.health?.reviewsAverage ?? 0"
+                  [amount]="owner.seller?.health?.reviewsAmount"
+                  [clickable]="!!owner.seller?.health?.reviewsAmount"
                   (clicked)="openReviews(owner)"
                 ></tk-review-stars>
               </div>
               <div class="flex flex-wrap gap-48 mt-32">
-                @if (owner.productsSold > 0) {
+                @if ((owner.seller?.health?.productsSold ?? 0) > 0) {
                   <div class="flex flex-col">
                     <span class="label-caption-1 fw-300 color-gray-default">
                       Vendidos
                     </span>
                     <span class="label-caption-1 color-gray-dark">
-                      {{ owner.productsSold }}
+                      {{ owner.seller?.health?.productsSold }}
                     </span>
                   </div>
                 }
@@ -416,17 +418,21 @@
                     À venda
                   </span>
                   <span class="label-caption-1 color-gray-dark">
-                    {{ owner.productsForSale }}
+                    {{ owner.seller?.health?.productsForSale }}
                   </span>
                 </div>
-                @if (owner?.productsSold > 0) {
+                @if ((owner.seller?.health?.productsSold ?? 0) > 0) {
                   <div class="flex flex-col">
                     <span class="label-caption-1 fw-300 color-gray-default">
                       Tempo médio de envio
                     </span>
                     <span class="label-caption-1 color-gray-dark">
-                      {{ owner.avgPostageDays }}
-                      {{ owner.avgPostageDays > 1 ? 'dias úteis' : 'dia útil' }}
+                      {{ owner.seller?.health?.avgPostageDays }}
+                      {{
+                        (owner.seller?.health?.avgPostageDays ?? 0) > 1
+                          ? 'dias úteis'
+                          : 'dia útil'
+                      }}
                     </span>
                   </div>
                 }
@@ -447,11 +453,11 @@
     <!-- Mais da loja -->
     @if (itemsMap && otherClothes && otherClothes.length > 0) {
       <app-products-horizontal-list
-        title="Mais de {{ owner.storeName ?? owner.name | titlecase }}"
+        title="Mais de {{ owner.seller?.storeName ?? owner.name | titlecase }}"
         [products]="otherClothes"
         [seeMore]="true"
         [navText]="'Ver tudo'"
-        navMore="/users/{{ owner.nickname }}"
+        navMore="/users/{{ owner.seller?.nickname }}"
       >
       </app-products-horizontal-list>
     }

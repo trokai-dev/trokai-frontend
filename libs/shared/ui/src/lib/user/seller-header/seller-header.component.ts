@@ -39,7 +39,7 @@ export class TkSellerHeaderComponent {
   @Output() chatClick = new EventEmitter<void>();
 
   get name(): string {
-    return this.user?.storeName ?? this.user?.name ?? '';
+    return this.user?.seller?.storeName ?? this.user?.name ?? '';
   }
 
   get avatarSize(): 'small' | 'medium' | 'large' {

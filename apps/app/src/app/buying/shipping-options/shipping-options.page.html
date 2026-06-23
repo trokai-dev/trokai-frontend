@@ -20,7 +20,7 @@
           [value]="checkoutLocal.shippingOption"
           (change)="changeAddressOption($event.value)"
         >
-          @if (checkoutLocal.owner.inPerson) {
+          @if (checkoutLocal.owner.seller?.inPerson) {
           <div class="w-full">
             <mat-radio-button
               color="primary"
@@ -51,9 +51,9 @@
               </span>
             </mat-radio-button>
           </div>
-          } @if (user?.address && checkoutLocal.owner.shipping) {
+          } @if (user?.address && checkoutLocal.owner.seller?.shipping) {
           <div
-            [ngClass]="{'border-top': checkoutLocal.owner.inPerson}"
+            [ngClass]="{'border-top': checkoutLocal.owner.seller?.inPerson}"
             class="mb-16"
           >
             <mat-radio-button
@@ -97,7 +97,7 @@
         </mat-radio-group>
       </div>
 
-      @if (checkoutLocal.owner.shipping) {
+      @if (checkoutLocal.owner.seller?.shipping) {
       <button
         mat-button
         [disabled]="checkoutLocal.shippingOption !== enumAddress.SHIPPING"

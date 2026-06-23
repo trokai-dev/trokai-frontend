@@ -129,7 +129,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   reservesSub!: Subscription;
 
   openReviews(store: User) {
-    if (!store?.reviewsAmount) return;
+    if (!store?.seller?.health?.reviewsAmount) return;
     this.dialogService.openUserReviews(store);
   }
 
@@ -395,7 +395,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     try {
       await this.inventoryService.deleteItem(this.product);
       this.alert.alert('Anúncio excluído!');
-      this.router.navigateByUrl('/users/' + this.user.nickname);
+      this.router.navigateByUrl('/users/' + this.user.seller?.nickname);
     } catch {
       /* intentional */
     }

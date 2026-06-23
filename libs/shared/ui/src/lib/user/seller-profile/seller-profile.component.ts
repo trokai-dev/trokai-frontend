@@ -105,10 +105,12 @@ export class SellerProfileComponent implements OnInit {
 
   ngOnInit() {
     if (this.user) {
-      this.form.patchValue(this.user as Partial<SellerProfileValue> & object);
-      this.initialNickname = this.user.nickname;
-      if (this.user.nickname) this.nicknameEdited = true;
-      if (this.showStoreVisibility && this.user.storeVisibility == null) {
+      this.form.patchValue(
+        (this.user.seller ?? {}) as Partial<SellerProfileValue> & object,
+      );
+      this.initialNickname = this.user.seller?.nickname;
+      if (this.user.seller?.nickname) this.nicknameEdited = true;
+      if (this.showStoreVisibility && this.user.seller?.storeVisibility == null) {
         this.form.get('storeVisibility')?.setValue(StoreVisibility.OPEN);
       }
     }

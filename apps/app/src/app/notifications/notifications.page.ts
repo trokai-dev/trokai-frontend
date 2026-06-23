@@ -4,7 +4,6 @@ import { AuthService } from '../services/auth.service';
 import {
   NotificationModel,
   NotificationsService,
-  NotificationType,
 } from '@trokai/shared-data-access';
 import { environment } from 'src/environments/environment';
 import {
@@ -19,7 +18,7 @@ import {
 } from '@ionic/angular/standalone';
 import { MainService } from '../services/main.service';
 
-import { CurrencyPipe, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Chat, MessagesService } from '@trokai/shared-data-access';
 import { BackButtonComponent } from '../shared/components/back-button/back-button.component';
 import {
@@ -32,21 +31,8 @@ import {
   IonToolbar,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import {
-  alertOutline,
-  cashOutline,
-  chatbubbleOutline,
-  checkmarkOutline,
-  cubeOutline,
-  heartOutline,
-  homeOutline,
-  notificationsOutline,
-  sadOutline,
-  shirtOutline,
-  starOutline,
-} from 'ionicons/icons';
+import { notificationsOutline, sadOutline } from 'ionicons/icons';
 import { AlertService, ShortDatePipe } from '@trokai/shared-ui';
-import { NotificationDisplay } from '@trokai/shared-core';
 
 @Component({
   selector: 'app-notifications',
@@ -80,13 +66,11 @@ export class NotificationsPage implements OnInit {
   private authService = inject(AuthService);
   private alertService = inject(AlertService);
   private messagesService = inject(MessagesService);
-  private shortDatePipe = inject(ShortDatePipe);
-  private currency = inject(CurrencyPipe);
 
   isLoading = true;
   user: User;
 
-  notifications = [];
+  notifications: NotificationModel[] = [];
   url = environment.imageURL;
 
   tab = 'Notificações';
@@ -100,19 +84,7 @@ export class NotificationsPage implements OnInit {
   unreadNotif = null;
 
   ngOnInit() {
-    addIcons({
-      sadOutline,
-      checkmarkOutline,
-      alertOutline,
-      starOutline,
-      heartOutline,
-      cashOutline,
-      shirtOutline,
-      chatbubbleOutline,
-      cubeOutline,
-      homeOutline,
-      notificationsOutline,
-    });
+    addIcons({ sadOutline, notificationsOutline });
 
     this.notificationsService.resetNotif.subscribe(() => {
       this.notifications = [];
@@ -145,316 +117,42 @@ export class NotificationsPage implements OnInit {
 
   async fetchNotifications() {
     try {
-      const notif = await this.notificationsService.fetchNotifications(
-        this.skip,
-      );
-      const mounted = this.mountNotifications(notif);
-      this.notifications = this.notifications.concat(mounted);
-
-      if (notif.length === 0) this.endOfSearch = true;
-
-      this.skip += notif.length;
+      const res = await this.notificationsService.fetchNotifications(this.skip);
+      this.notifications = this.notifications.concat(res.data);
+      this.skip += res.data.length;
+      if (!res.meta.has_more) this.endOfSearch = true;
     } catch {
       this.endOfSearch = true;
     }
   }
 
-  mountNotifications(notifications: NotificationModel[]) {
-    const list = [];
+  // Route the server-provided deep link to the matching mobile screen.
+  open(n: NotificationModel) {
+    const url = n.target_url;
+    if (!url) return;
+    const path = url.replace(/^\//, '');
+    let m: RegExpMatchArray | null;
 
-    for (const n of notifications) {
-      const display = this.notificationDisplay(n);
-      if (!display) continue;
-
-      const fDate = this.shortDatePipe.transform(n.createdAt);
-
-      const item: NotificationDisplay = {
-        text: display.text,
-        icon: display.icon,
-        action: display.action,
-        read: n.read,
-        type: n.type,
-        date: `<label class="label-caption-1 ml-8 color-gray-light-1 nowrap">${fDate}</label>`,
-      };
-
-      list.push(item);
-    }
-
-    return list;
-  }
-
-  notificationDisplay(notification: NotificationModel) {
-    const message = JSON.parse(notification.message);
-
-    try {
-      switch (notification.type) {
-        // FAVORITES
-        case NotificationType.FavoritesCreated: {
-          return {
-            icon: 'heart-outline',
-            text:
-              message.madeByName + ' curtiu sua peça ' + message.clothesTitle,
-            action: () => {
-              this.openWardrobe(message.madeById);
-            },
-          };
-        }
-
-        // BANK
-        case NotificationType.TransferCompleted: {
-          return {
-            icon: 'cash-outline',
-            text:
-              'Saque de ' +
-              this.currency.transform(message.value / 100, 'BRL', true, '1.2') +
-              ' realizado.',
-            action: () => {
-              this.openBank();
-            },
-          };
-        }
-
-        // BANK
-        case NotificationType.TransferFailed: {
-          return {
-            icon: 'alert-outline',
-            text:
-              'Saque de ' +
-              this.currency.transform(message.value / 100, 'BRL', true, '1.2') +
-              ' falhou.',
-            action: () => {
-              this.openBank();
-            },
-          };
-        }
-
-        // CLOTHES
-        case NotificationType.ClothesAdjust: {
-          return {
-            icon: 'alert-outline',
-            text:
-              'O anúncio "' + message.clothesTitle + '" requer alguns ajustes.',
-            action: () => {
-              this.openInventory();
-            },
-          };
-        }
-
-        case NotificationType.ClothesApproved: {
-          return {
-            icon: 'shirt-outline',
-            text: 'O anúncio "' + message.clothesTitle + '" foi publicado.',
-            action: () => {
-              this.openInventory();
-            },
-          };
-        }
-
-        case NotificationType.ClothesExpired: {
-          return {
-            icon: 'alert-outline',
-            text: 'O anúncio "' + message.clothesTitle + '" expirou.',
-            action: () => {
-              this.openInventory();
-            },
-          };
-        }
-
-        case NotificationType.ClothesReproved: {
-          return {
-            icon: 'alert-outline',
-            text:
-              'O anúncio "' +
-              message.clothesTitle +
-              '" foi reprovado na análise.',
-            action: () => {
-              this.openAlert(
-                'Anúncio reprovado',
-                'O anúncio "' +
-                  message.clothesTitle +
-                  '" foi reprovado por ir contra as normas do Trokaí.',
-              );
-            },
-          };
-        }
-
-        case NotificationType.ClothesQuestionCreated: {
-          return {
-            icon: 'chatbubble-outline',
-            text:
-              message.otherUserName +
-              ' fez uma pergunta no anúncio ' +
-              message.clothesTitle,
-            action: () => {
-              this.openClothes(message.clothesId);
-            },
-          };
-        }
-
-        case NotificationType.ClothesQuestionAnswered: {
-          return {
-            icon: 'chatbubble-outline',
-            text:
-              message.otherUserName +
-              ' respondeu a sua pergunta no anúncio ' +
-              message.clothesTitle,
-            action: () => {
-              this.openClothes(message.clothesId);
-            },
-          };
-        }
-
-        case NotificationType.OrderPaymentApprovedBuyer: {
-          return {
-            icon: 'cash-outline',
-            text: 'Compra realizada! Seu pagamento foi aprovado.',
-            action: () => {
-              this.openPurchase(message.orderId);
-            },
-          };
-        }
-
-        case NotificationType.OrderPaymentReproved: {
-          return {
-            icon: 'alert-outline',
-            text: 'Compra negada. Seu pagamento foi recusado.',
-            action: () => {
-              this.openPurchase(message.orderId);
-            },
-          };
-        }
-
-        case NotificationType.OrderPaymentApprovedSellerShipping: {
-          return {
-            icon: 'cash-outline',
-            text:
-              'Vendeu!!! ' +
-              message.buyerName +
-              ' fez uma compra no seu armário, com opção de envio pelos correios.',
-            action: () => {
-              this.openSale(message.orderId);
-            },
-          };
-        }
-        case NotificationType.OrderPaymentApprovedSellerInPerson: {
-          return {
-            icon: 'cash-outline',
-            text:
-              'Vendeu!!! ' +
-              message.buyerName +
-              ' fez uma compra no seu armário, com opção de retirada presencial.',
-            action: () => {
-              this.openSale(message.orderId);
-            },
-          };
-        }
-
-        case NotificationType.OrderSent: {
-          return {
-            icon: 'cube-outline',
-            text:
-              'Pedido a caminho! ' +
-              message.sellerName +
-              ' enviou o seu pedido pelos correios.',
-            action: () => {
-              this.openSale(message.orderId);
-            },
-          };
-        }
-
-        case NotificationType.OrderDelivered: {
-          return {
-            icon: 'home-outline',
-            text: 'Eba! Pedido entregue!',
-            action: () => {
-              this.openSale(message.orderId);
-            },
-          };
-        }
-
-        case NotificationType.OrderReviewCreate: {
-          if (this.user._id.toString() === message.buyerId.toString()) {
-            return {
-              icon: 'star-outline',
-              text:
-                'Avaliação pendente. Faça a avaliação de ' + message.sellerName,
-              action: () => {
-                this.openPurchase(message.negotiationId);
-              },
-            };
-          } else {
-            return {
-              icon: 'star-outline',
-              text:
-                'Avaliação pendente. Faça a avaliação de ' + message.buyerName,
-              action: () => {
-                this.openSale(message.negotiationId);
-              },
-            };
-          }
-        }
-
-        case NotificationType.OrderCanceled: {
-          return {
-            icon: 'alert-outline',
-            text:
-              message.madeByName +
-              ' cancelou a compra. Não faça o envio do produto.',
-            action: () => {
-              this.openSale(message.orderId);
-            },
-          };
-        }
-
-        case NotificationType.OrderReviewCreatedByOtherUser: {
-          if (this.user._id.toString() === message.buyerId.toString()) {
-            return {
-              icon: 'star-outline',
-              text: message.otherUserName + ' te avaliou.',
-              action: () => {
-                this.openPurchase(message.negotiationId);
-              },
-            };
-          } else {
-            return {
-              icon: 'star-outline',
-              text: message.otherUserName + ' te avaliou.',
-              action: () => {
-                this.openSale(message.negotiationId);
-              },
-            };
-          }
-        }
-
-        default: {
-          console.log(notification);
-
-          return {
-            icon: 'notifications-outline',
-            text: 'Notificação',
-            action: () => {
-              this.openAlert('Ops!', 'Algo deu errado.');
-            },
-          };
-        }
-      }
-    } catch {
-      return null;
-    }
+    if ((m = path.match(/^orders\/sales\/(.+)$/))) this.openSale(m[1]);
+    else if ((m = path.match(/^orders\/purchases\/(.+)$/)))
+      this.openPurchase(m[1]);
+    else if ((m = path.match(/^items\/(.+)$/)))
+      this.openClothes(m[1].split('-').pop());
+    else if ((m = path.match(/^users\/(.+)$/))) this.openWardrobe(m[1]);
+    else if (path === 'profile/products') this.openInventory();
+    else if (path === 'wallet') this.openBank();
+    else this.openAlert('Ops!', 'Algo deu errado.');
   }
 
   async doRefresh(event) {
     try {
       this.skip = 0;
+      this.endOfSearch = false;
       this.notifications = [];
       await this.fetchNotifications();
     } finally {
       event.target.complete();
     }
-  }
-
-  getStyle(item) {
-    return { 'font-size': '5vw', color: item.icon.color };
   }
 
   async loadData(event) {

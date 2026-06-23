@@ -34,6 +34,11 @@ export class Clothes {
   weight!: number;
   declaredValue?: boolean;
   owner?: string;
+  // Denormalized owner state (kept in sync server-side for catalog filtering).
+  ownerStatus?: number;
+  ownerSellerStatus?: string;
+  ownerVisibility?: number;
+  ownerHealthScore?: number;
   status?: ClothesStatus;
   adjusts: number[];
   adjustsNote!: string;

@@ -1,20 +1,19 @@
 @if (user) {
   <form [formGroup]="form" (ngSubmit)="save()" class="seller-profile">
     @if (
-      user.sellerProfileStatus === SellerProfileStatus.ADJUSTS_REQUIRED &&
-      ((user.sellerAdjusts && user.sellerAdjusts.length > 0) ||
-        !!user.sellerAdjustsNote)
+      user.seller?.profileStatus === SellerProfileStatus.ADJUSTS_REQUIRED &&
+      ((user.seller?.adjusts?.length ?? 0) > 0 || !!user.seller?.adjustsNote)
     ) {
       <div class="seller-profile__adjusts">
         <h6 class="color-error">Ajustes necessários</h6>
-        @for (adjustId of user.sellerAdjusts; track adjustId; let i = $index) {
+        @for (adjustId of user.seller?.adjusts; track adjustId; let i = $index) {
           <span class="block label-caption-1">
             {{ i + 1 }}) {{ getAdjustLabel(adjustId) }}
           </span>
         }
-        @if (user.sellerAdjustsNote) {
+        @if (user.seller?.adjustsNote) {
           <span class="block label-caption-1"
-            >Nota: {{ user.sellerAdjustsNote }}</span
+            >Nota: {{ user.seller.adjustsNote }}</span
           >
         }
       </div>

@@ -55,7 +55,7 @@ export class ReportUserComponent {
   });
 
   get firstName(): string {
-    const name = this.otherUser?.storeName ?? this.otherUser?.name ?? '';
+    const name = this.otherUser?.seller?.storeName ?? this.otherUser?.name ?? '';
     return name.split(' ')[0];
   }
 

@@ -88,18 +88,20 @@ export class StoreOptionsPage implements OnInit {
   }
 
   async save(value: SellerProfileValue) {
-    const _user = new User();
-    _user.inPerson = value.inPerson;
-    _user.shipping = value.shipping;
-    _user.storeName = value.storeName;
-    _user.nickname = value.nickname;
-    _user.storeVisibility = value.storeVisibility;
+    // PATCH /users/me expects FLAT keys (mapped to seller.* server-side).
+    const patch = {
+      inPerson: value.inPerson,
+      shipping: value.shipping,
+      storeName: value.storeName,
+      nickname: value.nickname,
+      storeVisibility: value.storeVisibility,
+    };
 
     const loading = await this.loadingCtrl.create({ message: 'Salvando...' });
     loading.present();
 
     try {
-      await this.authService.updateUser(_user);
+      await this.authService.updateUser(patch);
 
       if (this.completingInformation) {
         this.completingInfoService.next();

@@ -307,9 +307,9 @@ export class ProductPage implements OnInit, OnDestroy {
   }
 
   mountDeliveryString() {
-    if (this.owner.inPerson && this.owner.shipping) {
+    if (this.owner.seller?.inPerson && this.owner.seller?.shipping) {
       this.deliveryString = 'Correios ou retirada presencial';
-    } else if (this.owner.inPerson) {
+    } else if (this.owner.seller?.inPerson) {
       this.deliveryString = 'Apenas retirada presencial';
     } else {
       this.deliveryString = 'Receba em casa pelos correios';

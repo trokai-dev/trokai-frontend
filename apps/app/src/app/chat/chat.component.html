@@ -26,12 +26,12 @@
 
               <div class="flex justify-center items-start flex-col">
                 <h6 class="color-gray-dark max-user-name">
-                  {{ otherUser.storeName }}
+                  {{ otherUser.seller?.storeName }}
                 </h6>
 
                 @if (showStatus) {
                   <label class="label-caption-1 color-gray-default mt-8">
-                    {{ otherUser.nickname }}
+                    {{ otherUser.seller?.nickname }}
                   </label>
                 }
               </div>

@@ -7,7 +7,7 @@
       <button mat-icon-button (click)="editWardrobe()">
         <ion-icon name="create-outline" class="color-icon"> </ion-icon>
       </button>
-      } @if (owner?.nickname) {
+      } @if (owner?.seller?.nickname) {
       <button mat-icon-button (click)="shareWardrobe()">
         <ion-icon name="share-social" class="color-icon"> </ion-icon>
       </button>
@@ -28,14 +28,14 @@
         @if (owner && reviews) {
         <div class="mt-8 flex items-center justify-between">
           <tk-review-stars
-            [stars]="owner.reviewsAverage"
+            [stars]="owner.seller?.health?.reviewsAverage ?? 0"
             [amount]="reviews.length"
             [showAmount]="true"
             [clickable]="reviews.length > 0"
             (clicked)="openReviews()"
           ></tk-review-stars>
 
-          @if (owner.storeVisibility === storeVisibility.PAUSED) {
+          @if (owner.seller?.storeVisibility === storeVisibility.PAUSED) {
           <tk-status-pill
             class="ml-16"
             variant="accent"

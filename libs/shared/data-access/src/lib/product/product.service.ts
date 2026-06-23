@@ -34,14 +34,16 @@ export class ProductService {
     return this.catalog.getSizeName(size, category, age);
   }
 
-  fetchProduct(productId: string) {
-    return lastValueFrom(
+  async fetchProduct(productId: string) {
+    const res = await lastValueFrom(
       this.http.get<{
         clothes: Clothes;
         otherClothes: Clothes[];
         user: User;
       }>(`${this.urlApi}/clothes/${productId}`),
     );
+    // `/clothes/:id` returns the owner with flat seller fields — normalize.
+    return { ...res, user: new User(res.user) };
   }
 
   getSellerFees(cost: number) {

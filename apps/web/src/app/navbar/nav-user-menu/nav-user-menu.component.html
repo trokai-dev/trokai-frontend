@@ -18,7 +18,9 @@
       rel="nofollow"
       mat-menu-item
       routerLink="{{
-        user.nickname ? '/users/' + user.nickname : '/account/wardrobe'
+        user.seller?.nickname
+          ? '/users/' + user.seller.nickname
+          : '/account/wardrobe'
       }}"
     >
       <ion-icon name="shirt-outline"></ion-icon>

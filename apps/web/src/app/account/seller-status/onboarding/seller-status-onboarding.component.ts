@@ -31,7 +31,7 @@ export class SellerStatusOnboardingComponent {
 
   get publishedCount(): number {
     return (
-      this.user?.clothesSummary?.find(
+      this.user?.seller?.health?.clothesSummary?.find(
         (s) => s.status === ClothesStatus.PUBLISHED,
       )?.count ?? 0
     );
@@ -39,7 +39,7 @@ export class SellerStatusOnboardingComponent {
 
   get pendingCount(): number {
     return (
-      this.user?.clothesSummary?.find(
+      this.user?.seller?.health?.clothesSummary?.find(
         (s) => s.status === ClothesStatus.WAITING_PUBLICATION,
       )?.count ?? 0
     );
@@ -47,7 +47,7 @@ export class SellerStatusOnboardingComponent {
 
   get adjustsCount(): number {
     return (
-      this.user?.clothesSummary?.find(
+      this.user?.seller?.health?.clothesSummary?.find(
         (s) => s.status === ClothesStatus.WAITING_ADJUSTMENT,
       )?.count ?? 0
     );
@@ -55,7 +55,7 @@ export class SellerStatusOnboardingComponent {
 
   get reprovedCount(): number {
     return (
-      this.user?.clothesSummary?.find(
+      this.user?.seller?.health?.clothesSummary?.find(
         (s) => s.status === ClothesStatus.ANALYSIS_REPROVED,
       )?.count ?? 0
     );
@@ -70,7 +70,7 @@ export class SellerStatusOnboardingComponent {
   }
 
   get profileStatusVariant(): string {
-    switch (this.user?.sellerProfileStatus) {
+    switch (this.user?.seller?.profileStatus) {
       case SellerProfileStatus.PENDING_REVIEW:
         return 'pending-review';
       case SellerProfileStatus.ADJUSTS_REQUIRED:
@@ -85,13 +85,13 @@ export class SellerStatusOnboardingComponent {
 
   get showAddProductsCta(): boolean {
     return (
-      !this.user?.minClothesApproved &&
+      !this.user?.seller?.minClothesApproved &&
       this.pendingCount < this.minClothesToSell
     );
   }
 
   async goAddProducts(): Promise<void> {
-    if (this.user?.sellerProfileStatus === SellerProfileStatus.INCOMPLETE) {
+    if (this.user?.seller?.profileStatus === SellerProfileStatus.INCOMPLETE) {
       await this.completingInformationService.canRegisterProduct();
     } else {
       this.router.navigateByUrl('/sell');
