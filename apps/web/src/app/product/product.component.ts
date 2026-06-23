@@ -39,10 +39,9 @@ import {
   Router,
   RouterLink,
 } from '@angular/router';
-import { ReserveTimeComponent } from '../buying/reserve-time/reserve-time.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TkGalleryComponent, TkProductImageComponent } from '@trokai/shared-ui';
-import { TkProductOwnerButtonsComponent } from '@trokai/shared-features';
+import { TkProductOwnerButtonsComponent, TkReserveTimeComponent } from '@trokai/shared-features';
 
 @Component({
   selector: 'app-product',
@@ -62,7 +61,7 @@ import { TkProductOwnerButtonsComponent } from '@trokai/shared-features';
     CostPipe,
     TkSellerHeaderComponent,
     TkReviewStarsComponent,
-    ReserveTimeComponent,
+    TkReserveTimeComponent,
     TkProductImageComponent,
     StatusPillComponent,
     ItemNamePipe,

@@ -1,148 +1,31 @@
 <ion-header>
   <ion-toolbar mode="ios">
     <app-back-button defaultHref="/main/negotiations/1"></app-back-button>
-
     <ion-title> Venda </ion-title>
-
-    @if (showContact) {
-    <ion-buttons slot="primary">
-      <button mat-icon-button (click)="chat()">
-        <ion-icon name="chatbubble" class="color-primary"></ion-icon>
-      </button>
-    </ion-buttons>
-    }
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="p-24">
-    <!-- loading -->
     @if (loading) {
-    <div class="w-full flex justify-center mt-40">
-      <ion-spinner></ion-spinner>
-    </div>
-    } @if (order) {
-    <div>
-      @if (!loading) {
-      <div>
-        <div class="sale-grid mt-48">
-          <div>
-            <!-- Produtos -->
-            <div class="page-section">
-              <span class="section-title">Produtos</span>
-
-              @for (product of order.clothes; track product._id) {
-              <div class="cursor-pointer mt-16">
-                <tk-cart-item
-                  (click)="openProduct(product)"
-                  [product]="product"
-                  [showRemove]="false"
-                ></tk-cart-item>
-              </div>
-              }
-            </div>
-          </div>
-
-          <div>
-            <!-- Detalhes -->
-            <div class="page-section">
-              <span class="section-title">Detalhes</span>
-
-              <div class="grid gap-16">
-                <div>
-                  <span class="item-label">Data</span>
-                  <span class="item-value">
-                    {{ order.createdAt | date : "dd/MM/yyyy - HH:mm" }}
-                  </span>
-                </div>
-
-                <div>
-                  <span class="item-label">Status</span>
-                  <span class="item-value"> {{ getOrderStatus() }} </span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Entrega -->
-            <app-order-delivery [order]="order" [isSale]="true" />
-
-            <!-- Valores -->
-            <div class="page-section">
-              <span class="section-title">Valores</span>
-
-              <div class="flex flex-col gap-8">
-                <!-- Carrinho -->
-                @for (c of order.clothes; track c._id) {
-                <div class="flex justify-between">
-                  <span class="item-value ion-text-capitalize">
-                    {{ c.title }} {{ c.refund ? "(Estornado)" : "" }}
-                  </span>
-                  <span class="item-value">
-                    {{ c.cost | cost | currency : "BRL" : true : "1.2-2" }}
-                  </span>
-                </div>
-                }
-
-                <!-- Comissao -->
-                <div class="flex justify-between">
-                  <span class="item-value"> Comissão </span>
-                  <span class="item-value">
-                    - {{ order.businessValues.sellerFinalPercentageFee | cost |
-                    currency : "BRL" : true : "1.2" }}
-                  </span>
-                </div>
-
-                <!-- Envio seguro -->
-                @if(order.shippingValues?.finalDeclaredValue) {
-                <div class="flex justify-between">
-                  <span class="item-value"> Envio seguro </span>
-                  <span class="item-value">
-                    - {{ order.shippingValues.finalDeclaredValue | cost |
-                    currency : "BRL" : true : "1.2" }}
-                  </span>
-                </div>
-                }
-
-                <!-- Total a receber -->
-                <div class="flex justify-between">
-                  <span class="item-value"><b>A receber</b></span>
-                  <span class="item-value color-primary">
-                    <b>
-                      {{ order.businessValues.sellerSplitBeforeAnticipation |
-                      cost | currency : "BRL" : true : "1.2" }}
-                    </b>
-                  </span>
-                </div>
-              </div>
-
-              <!-- Link to bank -->
-              <div class="mt-16">
-                <button mat-button class="color-primary" (click)="goToBank()">
-                  Abrir cofrinho
-                </button>
-              </div>
-            </div>
-
-            <!-- Comprador -->
-            <div class="page-section pt-48 mt-16">
-              <tk-seller-header [user]="order.buyer" size="md" />
-            </div>
-
-            <!-- CANCELAMENTO -->
-            @if (waiting_shipment || waiting_withdrawal) {
-            <button
-              mat-button
-              class="action-button mt-32 w-full color-error"
-              (click)="cancel()"
-            >
-              Cancelar venda
-            </button>
-            }
-          </div>
-        </div>
+      <div class="w-full flex justify-center mt-40">
+        <ion-spinner></ion-spinner>
       </div>
-      }
-    </div>
+    }
+    @if (order && !loading) {
+      <tk-sale-detail
+        [order]="order"
+        (openProduct)="openProduct($event)"
+        (openChat)="chat()"
+        (goToBank)="goToBank()"
+        (cancelOrder)="cancel()"
+      >
+        <app-order-delivery
+          delivery
+          [order]="order"
+          [isSale]="true"
+        ></app-order-delivery>
+      </tk-sale-detail>
     }
   </div>
 </ion-content>

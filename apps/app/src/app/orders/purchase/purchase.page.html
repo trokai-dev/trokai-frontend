@@ -1,265 +1,59 @@
 <ion-header>
   <ion-toolbar mode="ios">
     <app-back-button defaultHref="/main/negotiations/0"></app-back-button>
-
     <ion-title> Compra </ion-title>
-
-    @if (showContact) {
-    <ion-buttons slot="primary">
-      <button mat-icon-button (click)="chat()">
-        <ion-icon name="chatbubble" class="color-primary"></ion-icon>
-      </button>
-    </ion-buttons>
-    }
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="p-24">
-    <!-- loading -->
     @if (loading) {
-    <div class="w-full flex justify-center mt-40">
-      <ion-spinner></ion-spinner>
-    </div>
-    } @if (order) {
-    <div>
-      @if (!loading) {
-      <div>
-        <!-- PIX -->
-        @if (order.pix && waiting_payment) {
-        <div class="page-section">
-          <span class="section-title">PIX</span>
-
-          <span class="item-label"> Vencimento </span>
-
-          <span class="item-value">
-            Realize o pagamento até <b>{{ pixExpiration }}</b>
-          </span>
-
-          <span class="item-label mt-16"> Copia e cola </span>
-
-          <mat-form-field appearance="outline" class="w-full mt-8">
-            <input
-              matInput
-              (copy)="copyPix($event)"
-              readonly
-              [value]="order?.pix?.payload"
-              style="user-select: none"
-            />
-
-            <button mat-button matSuffix (click)="copyPix($event)">
-              <ion-icon name="copy-outline"></ion-icon>
-              Copiar
-            </button>
-          </mat-form-field>
-        </div>
-        }
-
-        <div class="purchase-grid mt-48">
-          <div>
-            <!-- Produtos -->
-            <div class="page-section">
-              <span class="section-title">Produtos</span>
-
-              @for (product of order.clothes; track product._id) {
-              <div class="cursor-pointer mt-16">
-                <tk-cart-item
-                  (click)="openProduct(product)"
-                  [product]="product"
-                  [showRemove]="false"
-                ></tk-cart-item>
-              </div>
-              }
-            </div>
-          </div>
-
-          <div>
-            <!-- Detalhes -->
-            <div class="page-section">
-              <span class="section-title">Detalhes</span>
-
-              <div class="grid gap-16">
-                <div>
-                  <span class="item-label">Data</span>
-                  <span class="item-value">
-                    {{ order.createdAt | date : "dd/MM/yyyy - HH:mm" }}
-                  </span>
-                </div>
-
-                <div>
-                  <span class="item-label">Status</span>
-                  <span class="item-value"> {{ getOrderStatus() }} </span>
-                </div>
-
-                <div>
-                  <span class="item-label">Pagamento</span>
-                  <span class="item-value"> {{ getPayment() }} </span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Entrega -->
-            <app-order-delivery
-              (confirmWithdrawalClick)="confirmWithdrawal()"
-              [order]="order"
-              [isPurchase]="true"
-            />
-
-            <!-- Valores -->
-            <div class="page-section">
-              <span class="section-title">Valores</span>
-
-              <div class="flex flex-col gap-8">
-                <!-- Carrinho -->
-                @for (c of order.clothes; track c._id) {
-                <div class="flex justify-between">
-                  <span class="item-value ion-text-capitalize">
-                    {{ c.title }} {{ c.refund ? "(Estornado)" : "" }}
-                  </span>
-                  <span class="item-value">
-                    {{ c.cost | cost | currency : "BRL" : true : "1.2-2" }}
-                  </span>
-                </div>
-                }
-
-                <!-- Frete -->
-                @if (order.shippingValues) {
-                <div class="flex justify-between">
-                  <span class="item-value">Frete</span>
-                  <span class="item-value">
-                    {{ order.shippingValues.shippingCost | cost | currency :
-                    "BRL" : true : "1.2-2" }}
-                  </span>
-                </div>
-                }
-
-                <!-- Juros -->
-                @if ( order.businessValues.interestValues &&
-                order.businessValues.interestValues.interest ) {
-                <div class="flex justify-between">
-                  <span class="item-value">Juros parcelamento</span>
-                  <span class="item-value">
-                    {{ order.businessValues.interestValues.interest | cost |
-                    currency : "BRL" : true : "1.2-2" }}
-                  </span>
-                </div>
-                }
-
-                <!-- service fee -->
-                @if (order.businessValues.buyerServiceFee){
-                <div class="flex justify-between">
-                  <span class="item-value">Taxa de serviço</span>
-                  <span class="item-value">
-                    {{ order.businessValues.buyerServiceFee | cost | currency :
-                    "BRL" : true : "1.2-2" }}
-                  </span>
-                </div>
-                }
-                <!-- processing fee -->
-                @if (order.businessValues.buyerProcessingFee){
-                <div class="flex justify-between">
-                  <span class="item-value">Taxa de processamento</span>
-                  <span class="item-value">
-                    {{ order.businessValues.buyerProcessingFee | cost | currency
-                    : "BRL" : true : "1.2-2" }}
-                  </span>
-                </div>
-                }
-
-                <!-- desconto cupom -->
-                @if (order.businessValues.couponDiscount) {
-                <div class="flex justify-between">
-                  <span class="item-value">
-                    Desconto cupom ({{ order.businessValues.couponCode }})
-                  </span>
-                  <span class="item-value">
-                    {{ -order.businessValues.couponDiscount | cost | currency :
-                    "BRL" : true : "1.2-2" }}
-                  </span>
-                </div>
-                }
-
-                <!-- desconto pix -->
-                @if (order.businessValues.pixDiscount) {
-                <div class="flex justify-between">
-                  <span class="item-value">Desconto Pix</span>
-                  <span class="item-value">
-                    {{ -order.businessValues.pixDiscount | cost | currency :
-                    "BRL" : true : "1.2-2" }}
-                  </span>
-                </div>
-                }
-
-                <!-- Total -->
-                <div class="flex justify-between">
-                  <span class="item-value"><b>Total</b></span>
-                  <span class="item-value color-primary">
-                    <b>
-                      {{ order.businessValues.buyerCost | cost | currency :
-                      "BRL" : true : "1.2-2" }}
-                    </b>
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Vendedor -->
-            <div class="page-section pt-48 mt-16">
-              <tk-seller-header
-                [user]="order.seller"
-                size="md"
-                [clickable]="true"
-                (clicked)="openOtherUser()"
-              />
-            </div>
-
-            <!-- CANCELAMENTO -->
-            @if (waiting_shipment || waiting_withdrawal || waiting_payment) {
-            <button
-              mat-button
-              class="action-button mt-32 w-full color-error"
-              (click)="cancel()"
-            >
-              Cancelar compra
-            </button>
-            } @if (order_delivered && userMayReturn) {
-            <button
-              mat-button
-              class="action-button mt-32 w-full color-error"
-              (click)="return()"
-            >
-              Solicitar devolução
-            </button>
-            }
-          </div>
-        </div>
+      <div class="w-full flex justify-center mt-40">
+        <ion-spinner></ion-spinner>
       </div>
-      }
-    </div>
+    }
+    @if (order && !loading) {
+      <tk-purchase-detail
+        [order]="order"
+        [globalParams]="globalParams"
+        (openProduct)="openProduct($event)"
+        (openSeller)="openOtherUser()"
+        (openChat)="chat()"
+        (copyPix)="copyPix()"
+        (reload)="reload()"
+      >
+        <app-order-delivery
+          delivery
+          (confirmWithdrawalClick)="confirmWithdrawal()"
+          [order]="order"
+          [isPurchase]="true"
+        ></app-order-delivery>
+      </tk-purchase-detail>
     }
   </div>
 </ion-content>
 
 @if (waiting_review && !userMadeReview && !loading) {
-<ion-footer class="px-24 py-16">
-  <button
-    mat-flat-button
-    color="primary"
-    (click)="checkReview()"
-    class="action-button"
-  >
-    Avaliar compra
-  </button>
-</ion-footer>
-} @if (waiting_withdrawal && !loading) {
-<ion-footer class="px-24 py-16">
-  <button
-    mat-flat-button
-    color="primary"
-    (click)="confirmWithdrawal()"
-    class="action-button"
-  >
-    Já recebi minha compra
-  </button>
-</ion-footer>
+  <ion-footer class="px-24 py-16">
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="checkReview()"
+      class="action-button"
+    >
+      Avaliar compra
+    </button>
+  </ion-footer>
+}
+@if (waiting_withdrawal && !loading) {
+  <ion-footer class="px-24 py-16">
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="confirmWithdrawal()"
+      class="action-button"
+    >
+      Já recebi minha compra
+    </button>
+  </ion-footer>
 }

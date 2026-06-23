@@ -6,7 +6,7 @@
   @if (interval && timeLeft && timeLeft.getTime() > 0) {
     <div class="reserved-info">
       <button
-        (click)="open.emit()"
+        (click)="reserveOpen.emit()"
         [color]="color"
         mat-flat-button
         class="w-full mt-24"

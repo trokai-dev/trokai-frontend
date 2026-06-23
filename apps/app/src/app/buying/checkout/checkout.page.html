@@ -221,12 +221,12 @@
 </ion-content>
 
 <ion-footer class="px-24 py-16 border-top">
-  <app-reserve-time
+  <tk-reserve-time
     [ownerId]="checkoutLocal.owner._id"
     (reserveOpen)="finish()"
     [text]="'Finalizar compra'"
     [hideCancel]="true"
   >
-  </app-reserve-time>
+  </tk-reserve-time>
 </ion-footer>
 }

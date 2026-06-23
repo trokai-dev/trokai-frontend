@@ -20,7 +20,7 @@ import { NewCardPage } from '../new-card/new-card.page';
 import { BackButtonComponent } from '../../shared/components/back-button/back-button.component';
 import { CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ReserveTimeComponent } from '../reserve-time/reserve-time.component';
+import { TkReserveTimeComponent } from '@trokai/shared-features';
 import {
   IonFooter,
   IonHeader,
@@ -70,7 +70,7 @@ import { AlertService } from '@trokai/shared-ui';
     IonImg,
     BackButtonComponent,
     FormsModule,
-    ReserveTimeComponent,
+    TkReserveTimeComponent,
     CurrencyPipe,
     CostPipe,
     TkCouponFormComponent,

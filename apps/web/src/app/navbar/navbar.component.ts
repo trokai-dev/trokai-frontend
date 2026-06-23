@@ -36,7 +36,7 @@ import { SearchPageService } from '../services/search-page.service';
 import { navbarLinks } from './navbar-links';
 import { NavUserMenuComponent } from './nav-user-menu/nav-user-menu.component';
 import { NavExpandedMenuComponent } from './nav-expanded-menu/nav-expanded-menu.component';
-import { ReserveTimeComponent } from '../buying/reserve-time/reserve-time.component';
+import { TkReserveTimeComponent } from '@trokai/shared-features';
 
 @Component({
   selector: 'app-navbar',
@@ -52,7 +52,7 @@ import { ReserveTimeComponent } from '../buying/reserve-time/reserve-time.compon
     TkBadgeComponent,
     NavUserMenuComponent,
     NavExpandedMenuComponent,
-    ReserveTimeComponent,
+    TkReserveTimeComponent,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',

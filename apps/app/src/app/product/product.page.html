@@ -310,13 +310,13 @@
       </div>
       } @if (isInReserves && owner) {
       <div class="mt-4">
-        <app-reserve-time
+        <tk-reserve-time
           [ownerId]="owner._id"
           (reserveOpen)="openCheckout(owner._id)"
           [text]="'Continuar compra'"
           [hideCancel]="true"
         >
-        </app-reserve-time>
+        </tk-reserve-time>
       </div>
       }
 

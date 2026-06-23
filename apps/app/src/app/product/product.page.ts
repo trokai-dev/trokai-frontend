@@ -75,12 +75,11 @@ import {
   trashOutline,
 } from 'ionicons/icons';
 import { AlertService, TkSellerHeaderComponent } from '@trokai/shared-ui';
-import { TkProductOwnerButtonsComponent } from '@trokai/shared-features';
+import { TkProductOwnerButtonsComponent, TkReserveTimeComponent } from '@trokai/shared-features';
 import { FirebaseService } from '../services/firebase.service';
 import { GlobalService } from '../services/global.service';
 import { ProductService } from '@trokai/shared-data-access';
 import { ToastService } from '../services/toast-service';
-import { ReserveTimeComponent } from '../buying/reserve-time/reserve-time.component';
 import { CompletingInformationService } from '@trokai/shared-data-access';
 
 @Component({
@@ -112,7 +111,7 @@ import { CompletingInformationService } from '@trokai/shared-data-access';
     TkProductCardComponent,
     CurrencyPipe,
     CostPipe,
-    ReserveTimeComponent,
+    TkReserveTimeComponent,
     StatusPillComponent,
     ItemNamePipe,
     TkProductOwnerButtonsComponent,

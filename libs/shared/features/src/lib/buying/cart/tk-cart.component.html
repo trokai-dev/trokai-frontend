@@ -1,0 +1,143 @@
+<div class="flex items-end">
+  <h2 class="color-gray-dark">
+    {{ justAdded ? 'Adicionado à sacola' : 'Minhas sacolas' }}
+  </h2>
+</div>
+
+@if (baskets && baskets.length) {
+  <div class="mt-48 frete-unico">
+    <h4 class="color-primary">Frete único!</h4>
+    <span class="label-body-2 color-gray-default mt-8">
+      Compre mais produtos de um mesmo brechó e pague apenas um frete.
+    </span>
+  </div>
+}
+
+@if (baskets && !baskets.length) {
+  <div class="empty-page full">
+    <mat-icon class="color-gray-light-1">sentiment_dissatisfied</mat-icon>
+    <span class="label-body-2 block"> Nenhuma sacolinha</span>
+    <button (click)="browseProducts.emit()" mat-flat-button color="primary">
+      Ver produtos
+    </button>
+  </div>
+} @else {
+  @for (basket of baskets; track basket) {
+    <div class="mt-24 basket-card">
+      <div>
+        <!-- Loja -->
+        <div class="flex items-center">
+          <div
+            role="button"
+            tabindex="0"
+            (click)="openOwner.emit(basket.owner)"
+            (keydown.enter)="openOwner.emit(basket.owner)"
+            class="flex justify-center items-center cursor-pointer"
+          >
+            <tk-user-avatar [user]="basket.owner" size="medium"></tk-user-avatar>
+          </div>
+          <div
+            class="flex ml-0 ml-md-8 flex-col items-start justify-center px-md-0"
+          >
+            <div
+              role="button"
+              tabindex="0"
+              (click)="openOwner.emit(basket.owner)"
+              (keydown.enter)="openOwner.emit(basket.owner)"
+              class="flex items-center cursor-pointer"
+            >
+              <h4 class="color-gray-dark capitalize">
+                {{ basket.owner.seller?.storeName ?? basket.owner.name }}
+              </h4>
+            </div>
+            <div class="mt-24">
+              <tk-review-stars
+                [showAmount]="false"
+                [stars]="basket.owner.seller?.health?.reviewsAverage ?? 0"
+                [amount]="basket.owner.seller?.health?.reviewsAmount"
+                [clickable]="!!basket.owner.seller?.health?.reviewsAmount"
+                (clicked)="openReviews.emit(basket.owner)"
+              ></tk-review-stars>
+            </div>
+          </div>
+        </div>
+
+        @for (p of basket.products; track p) {
+          <div
+            role="button"
+            tabindex="0"
+            (click)="openProduct.emit(p)"
+            (keydown.enter)="openProduct.emit(p)"
+            class="cart-item mt-24 cursor-pointer"
+          >
+            <img
+              alt="{{ p.title }}"
+              [src]="p.images?.[0]?.sm"
+              class="cart-item-img"
+            />
+            <div class="cart-item-text">
+              <span class="label-body-2 color-gray-dark capitalize">
+                <b>{{ p.title }}</b>
+              </span>
+              <span class="label-body-2 mt-8">
+                {{ p.cost | cost | currency: 'BRL' : 'symbol' : '1.2' }}
+              </span>
+            </div>
+            @if (!basket.reserved) {
+              <button
+                mat-icon-button
+                class="color-gray-light-1 button-remove"
+                (click)="remove(p, $event)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="mt-48 mt-md-0 flex flex-col justify-end">
+        <div class="flex justify-between">
+          <span class="label-body-2"> Total</span>
+          <span class="label-body-2 color-gray-dark">
+            <b>
+              {{ basket.total() | cost | currency: 'BRL' : 'symbol' : '1.2' }}</b
+            >
+          </span>
+        </div>
+        @if (!basket.reserved) {
+          <div>
+            <button
+              class="mt-16 w-full"
+              mat-stroked-button
+              color="primary"
+              (click)="addMore.emit(basket.owner)"
+            >
+              <b>Adicionar mais produtos</b>
+            </button>
+            <button
+              mat-flat-button
+              class="mt-8 w-full"
+              color="primary"
+              (click)="checkout.emit(basket.owner._id)"
+            >
+              Ir para pagamento
+            </button>
+          </div>
+        }
+        @if (basket.reserved) {
+          <div>
+            <tk-reserve-time
+              [ownerId]="basket.owner._id"
+              (reserveOpen)="checkout.emit(basket.owner._id)"
+              text="Continuar compra"
+            ></tk-reserve-time>
+          </div>
+        }
+      </div>
+    </div>
+  }
+}
+
+<!-- Suggestions ("Mais de [loja]") — projected by the platform shell -->
+<ng-content select="[suggestions]"></ng-content>

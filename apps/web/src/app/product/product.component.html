@@ -123,13 +123,13 @@
                 </div>
                 @if (isInReserves && owner) {
                   <div class="mt-24">
-                    <app-reserve-time
+                    <tk-reserve-time
                       [ownerId]="owner._id"
-                      (open)="openCheckout()"
+                      (reserveOpen)="openCheckout()"
                       [text]="'Continuar compra'"
                       [hideCancel]="true"
                     >
-                    </app-reserve-time>
+                    </tk-reserve-time>
                   </div>
                 }
                 <!-- DA OUTRA PESSOA -->

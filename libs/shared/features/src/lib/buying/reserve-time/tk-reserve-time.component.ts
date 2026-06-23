@@ -2,41 +2,47 @@ import {
   Component,
   EventEmitter,
   Input,
+  NgZone,
   OnDestroy,
   OnInit,
   Output,
   inject,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { BuyingService } from '@trokai/shared-data-access';
-import { DatePipe } from '@angular/common';
-import { IonText } from '@ionic/angular/standalone';
-import { MatButtonModule } from '@angular/material/button';
 import { AlertService } from '@trokai/shared-ui';
+import { BuyingService } from '@trokai/shared-data-access';
+import { MatButtonModule } from '@angular/material/button';
+import { DatePipe } from '@angular/common';
 
+/**
+ * Reservation countdown + CTA (canonical web). Injects only the shared
+ * BuyingService/AlertService, so it is platform-agnostic. Emits `reserveOpen`
+ * when the user continues the reserved purchase.
+ */
 @Component({
-  selector: 'app-reserve-time',
-  templateUrl: './reserve-time.component.html',
-  styleUrls: ['./reserve-time.component.scss'],
+  selector: 'tk-reserve-time',
+  templateUrl: './tk-reserve-time.component.html',
+  styleUrl: './tk-reserve-time.component.scss',
   standalone: true,
-  imports: [MatButtonModule, IonText, DatePipe],
+  imports: [MatButtonModule, DatePipe],
 })
-export class ReserveTimeComponent implements OnInit, OnDestroy {
-  @Input() ownerId: string = null;
-  @Input() hideCancel = false;
-  @Input() timerOnly = false;
-  @Input() text = 'Adicionar à sacola';
-  @Input() color = 'primary';
-
-  @Output() reserveOpen = new EventEmitter();
-
-  timeLeft: Date = null;
-  interval;
-
-  reserveSub: Subscription;
-
+export class TkReserveTimeComponent implements OnInit, OnDestroy {
   private buyingService = inject(BuyingService);
   private alert = inject(AlertService);
+  private ngZone = inject(NgZone);
+
+  @Input() ownerId = '';
+  @Input() text = 'Adicionar à sacola';
+  @Input() color = 'primary';
+  @Input() hideCancel = false;
+  @Input() showTimeOnly = false;
+
+  @Output() reserveOpen = new EventEmitter<void>();
+
+  timeLeft: Date | null = null;
+  interval: ReturnType<typeof setInterval> | null = null;
+
+  reserveSub!: Subscription;
 
   ngOnInit() {
     this.reserveSub = this.buyingService.reserves$.subscribe((clothes) => {
@@ -55,12 +61,11 @@ export class ReserveTimeComponent implements OnInit, OnDestroy {
 
   finish() {
     if (this.interval) clearInterval(this.interval);
-
     this.timeLeft = null;
     this.interval = null;
   }
 
-  startCountDown(reservedAt) {
+  startCountDown(reservedAt: string | number | Date) {
     reservedAt = new Date(reservedAt);
 
     const limitTime = new Date(
@@ -72,16 +77,22 @@ export class ReserveTimeComponent implements OnInit, OnDestroy {
 
     if (this.timeLeft.getTime() <= 0) return;
 
-    this.interval = setInterval(() => {
-      this.timeLeft = new Date(
-        new Date().setTime(limitTime.getTime() - new Date().getTime()),
-      );
+    this.ngZone.runOutsideAngular(() => {
+      this.interval = setInterval(() => {
+        this.timeLeft = new Date(
+          new Date().setTime(limitTime.getTime() - new Date().getTime()),
+        );
 
-      if (this.timeLeft.getTime() <= 0) {
-        clearInterval(this.interval);
-        this.buyingService.reserveExpired();
-      }
-    }, 1000);
+        if (this.timeLeft.getTime() <= 0) {
+          clearInterval(this.interval ?? undefined);
+          this.buyingService.reserveExpired();
+        }
+
+        this.ngZone.run(() => {
+          /* trigger change detection */
+        });
+      }, 1000);
+    });
   }
 
   async cancel() {

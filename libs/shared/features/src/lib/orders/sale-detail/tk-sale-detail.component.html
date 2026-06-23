@@ -1,0 +1,129 @@
+@if (order) {
+  <span class="page-title">Venda</span>
+  <span class="item-value">cód. {{ order.customId }}</span>
+
+  <div class="sale-grid mt-48">
+    <div>
+      <!-- Produtos -->
+      <div class="page-section-mobile">
+        <span class="section-title">Produtos</span>
+        @for (c of order.clothes; track c) {
+          <div class="cursor-pointer">
+            <tk-cart-item
+              (click)="openProduct.emit(c)"
+              [product]="c"
+              [showRemove]="false"
+            ></tk-cart-item>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div>
+      <!-- Detalhes -->
+      <div class="page-section">
+        <span class="section-title">Detalhes</span>
+        <div class="grid gap-16">
+          <div>
+            <span class="item-label">Data</span>
+            <span class="item-value">
+              {{ order.createdAt | date: 'dd/MM/yyyy - HH:mm' }}
+            </span>
+          </div>
+          <div>
+            <span class="item-label">Status</span>
+            <span class="item-value"> {{ getOrderStatus() }} </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Entrega — projected by the platform shell -->
+      <ng-content select="[delivery]"></ng-content>
+
+      <!-- Valores -->
+      <div class="page-section">
+        <span class="section-title">Valores</span>
+        <div class="flex flex-col gap-8">
+          @for (c of order.clothes; track c) {
+            <div class="flex justify-between">
+              <span class="item-value capitalize">
+                {{ c.title }} {{ c.refund ? '(Estornado)' : '' }}
+              </span>
+              <span class="item-value">
+                {{ c.cost | cost | currency: 'BRL' : true : '1.2-2' }}
+              </span>
+            </div>
+          }
+
+          <div class="flex justify-between">
+            <span class="item-value"> Comissão </span>
+            <span class="item-value">
+              -
+              {{
+                order.businessValues.sellerFinalPercentageFee
+                  | cost
+                  | currency: 'BRL' : true : '1.2'
+              }}
+            </span>
+          </div>
+
+          @if (order.shippingValues?.finalDeclaredValue) {
+            <div class="flex justify-between">
+              <span class="item-value"> Envio seguro </span>
+              <span class="item-value">
+                -
+                {{
+                  order.shippingValues.finalDeclaredValue
+                    | cost
+                    | currency: 'BRL' : true : '1.2'
+                }}
+              </span>
+            </div>
+          }
+
+          <div class="flex justify-between">
+            <span class="item-value"> Recebimento </span>
+            <span class="item-value color-primary">
+              {{
+                order.businessValues.sellerSplitBeforeAnticipation
+                  | cost
+                  | currency: 'BRL' : true : '1.2'
+              }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Cofrinho -->
+        <button
+          mat-stroked-button
+          (click)="goToBank.emit()"
+          class="mt-16"
+          color="primary"
+        >
+          Ver cofrinho
+        </button>
+      </div>
+
+      <!-- Comprador -->
+      <div class="page-section pt-48">
+        <tk-seller-header
+          [user]="order.buyer"
+          size="md"
+          [showChatButton]="showContact"
+          (chatClick)="openChat.emit()"
+        />
+      </div>
+
+      <!-- Cancelamento -->
+      @if (waiting_shipment || waiting_withdrawal) {
+        <button
+          class="mt-32 color-error"
+          mat-stroked-button
+          (click)="cancelOrder.emit()"
+        >
+          Cancelar venda
+        </button>
+      }
+    </div>
+  </div>
+}

@@ -1,5 +1,4 @@
-import { CostPipe } from '@trokai/shared-ui';
-import { Clothes, ClothesStatus } from '@trokai/shared-core';
+import { Clothes, ClothesStatus, Filters, User } from '@trokai/shared-core';
 import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
@@ -8,27 +7,16 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-
 import { Basket, BuyingService } from '@trokai/shared-data-access';
-import { environment } from 'src/environments/environment';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Subscription } from 'rxjs';
-import { ReserveTimeComponent } from '../reserve-time/reserve-time.component';
-import { MatIconModule } from '@angular/material/icon';
-import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { MatButtonModule } from '@angular/material/button';
-import { CurrencyPipe, isPlatformServer } from '@angular/common';
+import { isPlatformServer } from '@angular/common';
 import { ProductsHorizontalListComponent } from 'src/app/modules/products-list/products-horizontal-list/products-horizontal-list.component';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SearchService } from 'src/app/search/search.service';
-import { Filters } from '@trokai/shared-core';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { TkUserAvatarComponent } from '@trokai/shared-ui';
-import { TkReviewStarsComponent } from '@trokai/shared-ui';
 import { CompletingInformationService } from '@trokai/shared-data-access';
 import { DialogService } from 'src/app/services/dialog.service';
-import { User } from '@trokai/shared-core';
+import { TkCartComponent } from '@trokai/shared-features';
 
 @Component({
   selector: 'app-carts',
@@ -36,20 +24,7 @@ import { User } from '@trokai/shared-core';
   styleUrls: ['./carts.component.scss'],
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [
-    MatButtonModule,
-    RouterLink,
-    LazyLoadImageModule,
-    MatIconModule,
-    ReserveTimeComponent,
-    CurrencyPipe,
-    CostPipe,
-    ProductsHorizontalListComponent,
-    MatProgressSpinnerModule,
-    MatTooltipModule,
-    TkUserAvatarComponent,
-    TkReviewStarsComponent,
-  ],
+  imports: [ProductsHorizontalListComponent, TkCartComponent],
 })
 export class CartsComponent implements OnDestroy, OnInit {
   private buyingService = inject(BuyingService);
@@ -62,7 +37,6 @@ export class CartsComponent implements OnDestroy, OnInit {
   private platformId = inject(PLATFORM_ID);
 
   baskets: Basket[] = [];
-  url = environment.imageURL;
 
   // suggestions
   suggestionHeader: string | null = null;
@@ -77,12 +51,7 @@ export class CartsComponent implements OnDestroy, OnInit {
       this.mount(baskets),
     );
     if (this.authService.getUserValue())
-      await this.buyingService.getMyReserves(); // to update previous reserves
-  }
-
-  openReviews(store: User) {
-    if (!store?.seller?.health?.reviewsAmount) return;
-    this.dialogService.openUserReviews(store);
+      await this.buyingService.getMyReserves();
   }
 
   async mount(baskets: Basket[]) {
@@ -90,13 +59,11 @@ export class CartsComponent implements OnDestroy, OnInit {
 
     const params = this.route.snapshot.queryParams;
 
-    // if came from other paths
     if (!params || !params['from']) {
       this.baskets = baskets;
       return;
     }
 
-    // if came from product or wardrobe
     const suggOwner = params['from'];
     const suggBasket = baskets.find((b) => b.owner._id === suggOwner);
 
@@ -129,7 +96,6 @@ export class CartsComponent implements OnDestroy, OnInit {
         )
       ).clothes;
 
-      // shows suggestions instead of other baskets
       if (this.suggestions.length > 0) {
         this.suggestionHeader = `Mais de ${suggBasket?.owner?.seller?.storeName}`;
         this.suggestionLink = `/users/${suggBasket?.owner?.seller?.nickname}`;
@@ -148,8 +114,7 @@ export class CartsComponent implements OnDestroy, OnInit {
     await this.completingInformation.tryStartPurchase(ownerId);
   }
 
-  removeProduct(product: Clothes, ev?: Event) {
-    if (ev) ev.stopPropagation();
+  removeProduct(product: Clothes) {
     this.buyingService.removeProduct(product);
   }
 
@@ -157,28 +122,20 @@ export class CartsComponent implements OnDestroy, OnInit {
     this.router.navigateByUrl(`/users/${owner.seller?.nickname}`);
   }
 
+  openReviews(store: User) {
+    if (!store?.seller?.health?.reviewsAmount) return;
+    this.dialogService.openUserReviews(store);
+  }
+
+  openProduct(product: Clothes) {
+    this.router.navigateByUrl(`/items/${product._id}`);
+  }
+
+  browseProducts() {
+    this.router.navigateByUrl('/search');
+  }
+
   ngOnDestroy(): void {
     if (this.subs) this.subs.unsubscribe();
-  }
-
-  getOwnerAvatar(owner: User) {
-    if (owner.avatar && owner.avatar != '') {
-      return environment.imageURL + owner._id + '/avatar/' + owner.avatar;
-    } else {
-      return environment.defaultAvatar1;
-    }
-  }
-
-  mountProductLink(p: Clothes): string {
-    let str = p.title.toString().trim().toLowerCase();
-
-    str = str.replace(/[àáâãäå]/g, 'a');
-    str = str.replace(/[èéêë]/g, 'e');
-    str = str.replace(/[íìïî]/g, 'i');
-    str = str.replace(/[óòõôö]/g, 'o');
-    str = str.replace(/[úùüû]/g, 'u');
-    str = str.replace(/[ ]/g, '-');
-
-    return `/items/${str}-${p._id}`;
   }
 }

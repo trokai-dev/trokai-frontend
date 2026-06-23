@@ -22,7 +22,7 @@ import {
 import { CheckoutPage } from '../checkout/checkout.page';
 import { BackButtonComponent } from '../../shared/components/back-button/back-button.component';
 import { NgClass, CurrencyPipe } from '@angular/common';
-import { ReserveTimeComponent } from '../reserve-time/reserve-time.component';
+import { TkReserveTimeComponent } from '@trokai/shared-features';
 import { NgxMaskPipe } from 'ngx-mask';
 import {
   IonContent,
@@ -50,7 +50,7 @@ import { LoadingService, CostPipe } from '@trokai/shared-ui';
     MatButtonModule,
     BackButtonComponent,
     NgClass,
-    ReserveTimeComponent,
+    TkReserveTimeComponent,
     CurrencyPipe,
     CostPipe,
     NgxMaskPipe,

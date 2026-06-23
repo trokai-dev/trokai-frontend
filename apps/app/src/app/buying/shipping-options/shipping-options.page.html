@@ -114,12 +114,12 @@
 
 <ion-footer class="px-24 py-24 border-top">
   @if (checkoutLocal && checkoutLocal.owner._id) {
-  <app-reserve-time
+  <tk-reserve-time
     [ownerId]="checkoutLocal.owner._id"
     (reserveOpen)="continue()"
     text="Continuar"
     [hideCancel]="true"
   >
-  </app-reserve-time>
+  </tk-reserve-time>
   }
 </ion-footer>

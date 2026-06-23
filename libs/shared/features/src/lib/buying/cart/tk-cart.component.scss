@@ -1,0 +1,30 @@
+@import 'variables';
+
+:host {
+  display: block;
+}
+
+.frete-unico {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.4rem;
+  padding: 1.2rem;
+  border: $border-trokai;
+  gap: 0rem;
+}
+
+// Stacks on mobile, 9fr items / 3fr totals from md up.
+.basket-card {
+  border-radius: 0.4rem;
+  border: 1px solid #ebebeb !important;
+  margin: 0rem;
+  padding: 1.6rem 0.4rem;
+
+  display: grid;
+  gap: var(--space-24);
+  align-items: start;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 9fr 3fr;
+  }
+}
