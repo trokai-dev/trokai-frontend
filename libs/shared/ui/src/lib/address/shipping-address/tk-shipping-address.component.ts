@@ -58,11 +58,11 @@ export class TkShippingAddressComponent implements AfterViewInit {
     if (!this.formRef.form.valid) return;
 
     const v = this.formRef.form.value;
-    const zipCode = +v.zipCode!.toString().replace('-', '');
+    const zipCode = v.zipCode!.toString().replace('-', '');
     const address: Address = {
       zipCode,
       street: v.street!,
-      number: v.number ? +v.number : undefined,
+      number: v.number || undefined,
       complement: v.complement || undefined,
       neighborhood: v.neighborhood!,
       city: v.city!,

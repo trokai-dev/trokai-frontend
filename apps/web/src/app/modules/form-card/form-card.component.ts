@@ -144,8 +144,8 @@ export class FormCardComponent implements OnInit, OnChanges {
       const av = this.formAddressComponent.form.value;
       card.address = {
         ...av,
-        zipCode: av.zipCode ? +av.zipCode.replace('-', '') : undefined,
-        number: av.number ? +av.number : undefined,
+        zipCode: av.zipCode ? av.zipCode.replace('-', '') : undefined,
+        number: av.number || undefined,
       } as typeof card.address;
     }
 

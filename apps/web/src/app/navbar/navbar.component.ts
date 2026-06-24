@@ -94,7 +94,7 @@ export class NavbarComponent implements OnInit {
 
   menuTab: number | null = null;
 
-  user!: User;
+  user?: User;
 
   showSearch = false;
   buying = false;
@@ -128,7 +128,7 @@ export class NavbarComponent implements OnInit {
     });
 
     this.authService.user$.subscribe((u) => {
-      if (u) this.user = u;
+      this.user = u;
     });
 
     this.buyingService.baskets$.subscribe((baskets) => {

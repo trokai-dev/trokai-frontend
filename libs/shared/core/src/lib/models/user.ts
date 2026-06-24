@@ -6,8 +6,8 @@ export class Address {
   neighborhood?: string;
   city?: string;
   state?: string;
-  zipCode?: number;
-  number?: number;
+  zipCode?: string;
+  number?: string;
   complement?: string;
   country?: string;
   location?: {

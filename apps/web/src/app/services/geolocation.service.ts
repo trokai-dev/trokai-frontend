@@ -41,7 +41,7 @@ export class GeolocationService {
       this.setSearchLocation(
         u.address.location.coordinates[1],
         u.address.location.coordinates[0],
-        u.address.zipCode,
+        +u.address.zipCode,
         true,
       );
     });
@@ -121,7 +121,7 @@ export class GeolocationService {
       if (user && user.address?.location && user.address.zipCode != null) {
         const lat = user.address.location.coordinates[1];
         const lng = user.address.location.coordinates[0];
-        const zip = user.address.zipCode;
+        const zip = +user.address.zipCode;
         await this.setSearchLocation(lat, lng, zip);
         return;
       }

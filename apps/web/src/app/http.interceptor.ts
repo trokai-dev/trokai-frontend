@@ -77,11 +77,7 @@ export class CustomHttpInterceptor extends BaseAuthInterceptor {
       if (clientIp) headers = headers.append('X-Forwarded-For', clientIp);
     }
 
-    // Ask the backend for resolved image URLs (images[].sm/md/lg).
-    return request.clone({
-      headers,
-      params: request.params.set('resolveImages', 'true'),
-    });
+    return request.clone({ headers });
   }
 
   protected override onResponse(

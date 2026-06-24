@@ -182,11 +182,11 @@ export class TkAddressFormComponent implements OnChanges {
       return;
     }
     const v = this.form.value;
-    const zipCode = +v.zipCode!.toString().replace('-', '');
+    const zipCode = v.zipCode!.toString().replace('-', '');
     const address: Address = {
       zipCode,
       street: v.street!,
-      number: v.number ? +v.number : undefined,
+      number: v.number || undefined,
       complement: v.complement || undefined,
       neighborhood: v.neighborhood!,
       city: v.city!,
