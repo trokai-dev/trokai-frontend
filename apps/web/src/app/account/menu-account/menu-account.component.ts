@@ -84,7 +84,7 @@ export class MenuAccountComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.authService.user.subscribe((user?) => {
+    this.authService.user$.subscribe((user?) => {
       console.log('user', user);
       this.user = user ?? null;
       this.showSellerOptions = user?.isSeller() || false;

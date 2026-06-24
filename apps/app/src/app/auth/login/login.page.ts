@@ -10,7 +10,7 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
-import { Subscription } from 'rxjs';
+import { lastValueFrom, Subscription } from 'rxjs';
 import { ForgotPasswordEmailPage } from '../forgot-password-email/forgot-password-email.page';
 import { RegisterPage } from '../register/register.page';
 import { Keyboard } from '@capacitor/keyboard';
@@ -49,7 +49,7 @@ export class LoginPage implements OnInit, OnDestroy {
   backNavSub: Subscription;
 
   ngOnInit() {
-    this.authService.logged.subscribe((logged) => {
+    this.authService.logged$.subscribe((logged) => {
       if (logged && !this.completingInfoService.hasFlow)
         this.router.navigateByUrl('/main/home', { replaceUrl: true });
     });
@@ -77,7 +77,7 @@ export class LoginPage implements OnInit, OnDestroy {
     try {
       this.loading = true;
       this.loadingService.start('Verificando');
-      await this.authService.login(email, password).toPromise();
+      await lastValueFrom(this.authService.login(email, password));
       this.router.navigateByUrl('/main/home', { replaceUrl: true });
     } finally {
       this.loading = false;

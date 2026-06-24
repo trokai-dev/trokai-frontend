@@ -68,7 +68,7 @@ export class GlobalService {
   }
 
   public async checkMobileVersion() {
-    const res = await this.fetchMobileVersion().toPromise();
+    const res = await lastValueFrom(this.fetchMobileVersion());
 
     if (res.mobileVersion <= environment.mobileVersion) return true;
 
@@ -76,7 +76,7 @@ export class GlobalService {
   }
 
   // GETS
-  public itemsMap() {
+  public itemsMap$() {
     return this._itemsMap.asObservable();
   }
 
@@ -88,11 +88,11 @@ export class GlobalService {
     return this._brands.getValue();
   }
 
-  public clothesAdjusts() {
+  public clothesAdjusts$() {
     return this._clothesAdjusts.asObservable();
   }
 
-  public params() {
+  public params$() {
     return this._globalParams.asObservable();
   }
 

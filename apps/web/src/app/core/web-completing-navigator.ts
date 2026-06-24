@@ -71,7 +71,7 @@ export class WebCompletingNavigator extends CompletingNavigator {
       user.seller?.profileStatus === SellerProfileStatus.PENDING_REVIEW
     ) {
       const params = await firstValueFrom(
-        this.globalService.params.pipe(filter(Boolean), take(1)),
+        this.globalService.params$.pipe(filter(Boolean), take(1)),
       );
       const minClothes = params?.minClothesToSell || 5;
       const pendingCount =

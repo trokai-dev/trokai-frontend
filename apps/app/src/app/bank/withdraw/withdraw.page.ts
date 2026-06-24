@@ -46,7 +46,7 @@ export class WithdrawPage implements OnInit {
   private router = inject(Router);
 
   ngOnInit() {
-    this.globalService.params().subscribe((p) => {
+    this.globalService.params$().subscribe((p) => {
       this.fee = p?.gatewayWithdrawFee ?? 0;
     });
   }

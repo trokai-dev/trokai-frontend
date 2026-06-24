@@ -94,7 +94,7 @@ export class SearchPage implements OnInit {
       () => this.content.scrollToTop(400), // rola a pagina ao escolher um item
     );
 
-    this.searchPageService.filters.subscribe((filters) => {
+    this.searchPageService.filters$.subscribe((filters) => {
       this.filters = filters;
       this.checkLink();
     });

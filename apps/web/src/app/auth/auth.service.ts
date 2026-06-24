@@ -44,11 +44,11 @@ export class AuthService {
 
   hasPassword: boolean | null = null;
 
-  get logged() {
+  get logged$() {
     return this._logged.asObservable();
   }
 
-  get user() {
+  get user$() {
     return this._user.asObservable();
   }
 

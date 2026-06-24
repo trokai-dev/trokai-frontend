@@ -63,7 +63,7 @@ export class QuestionsPageComponent implements OnInit {
 
       this.questionId = this.route.snapshot.paramMap.get('question_id');
 
-      this.authService.user.subscribe((u) => {
+      this.authService.user$.subscribe((u) => {
         if (!u) return;
         this.user = u;
       });

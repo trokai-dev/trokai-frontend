@@ -146,7 +146,7 @@ export class CheckoutPage implements OnInit, OnDestroy {
       (c) => this.onCheckoutResponseChange(c),
     );
 
-    this.userSub = this.authService.user.subscribe((u) => (this.user = u));
+    this.userSub = this.authService.user$.subscribe((u) => (this.user = u));
 
     if (!this.checkoutLocal) {
       this.mainService.navigateToCarts();

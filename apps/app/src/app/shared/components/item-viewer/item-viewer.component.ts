@@ -74,7 +74,7 @@ export class ItemViewerComponent implements OnInit {
   user;
 
   ngOnInit() {
-    this.authService.user.pipe(take(1)).subscribe((u) => {
+    this.authService.user$.pipe(take(1)).subscribe((u) => {
       this.user = u;
     });
   }

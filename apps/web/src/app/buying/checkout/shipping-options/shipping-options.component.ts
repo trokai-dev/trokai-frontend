@@ -59,7 +59,7 @@ export class ShippingOptionsComponent
           this.selectedOption = AddressOption.SHIPPING;
       });
 
-    this.authService.user
+    this.authService.user$
       .pipe(takeUntil(this.destroySignal))
       .subscribe((user) => {
         if (!user) return;

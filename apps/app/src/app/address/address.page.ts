@@ -113,7 +113,7 @@ export class AddressPage implements OnInit, OnDestroy {
     this.completingInformation = this.router.url === '/address-completing';
     if (this.navParams?.data?.zip) this.zipShipping = this.navParams.data.zip;
 
-    this.authService.user.subscribe((u) => {
+    this.authService.user$.subscribe((u) => {
       if (u) {
         this.user = u;
         if (u.address && !this.formRef?.form.valid) {

@@ -86,7 +86,7 @@ export class ProductRegisterPage implements OnInit, IDeactivatableComponent {
     if (this.editingId) await this.loadForEdit();
     else this.initialImages = [];
 
-    this.authService.user.subscribe((user) => (this.user = user));
+    this.authService.user$.subscribe((user) => (this.user = user));
     this.firebaseService.log('ROUPA_ABRIU_CADASTRO');
   }
 

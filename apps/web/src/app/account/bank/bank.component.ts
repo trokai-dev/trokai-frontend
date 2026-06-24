@@ -61,7 +61,7 @@ export class BankComponent implements OnInit {
   async ngOnInit() {
     this.bankService.fetchBalance().subscribe();
 
-    this.bankService.balance.subscribe((balance) => {
+    this.bankService.balance$.subscribe((balance) => {
       if (!balance) return;
       this.balance = balance;
       this.mountList();

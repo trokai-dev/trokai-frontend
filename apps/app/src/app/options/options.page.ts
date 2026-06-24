@@ -68,7 +68,7 @@ export class OptionsPage implements OnInit {
   }
 
   async ngOnInit() {
-    this.authService.user.subscribe((u) => {
+    this.authService.user$.subscribe((u) => {
       if (u) this.user = u;
     });
 

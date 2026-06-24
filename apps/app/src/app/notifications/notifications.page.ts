@@ -102,7 +102,7 @@ export class NotificationsPage implements OnInit {
     );
 
     this.messagesService.chats$.subscribe((chats) => (this.chats = chats));
-    this.authService.user.subscribe((u) => (this.user = u));
+    this.authService.user$.subscribe((u) => (this.user = u));
     this.startNotifications();
   }
 

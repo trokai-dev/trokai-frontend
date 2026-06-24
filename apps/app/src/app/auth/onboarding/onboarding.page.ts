@@ -81,7 +81,7 @@ export class OnboardingPage
   }
 
   ngOnInit() {
-    this.authService.user.pipe(take(1)).subscribe((u) => (this.user = u));
+    this.authService.user$.pipe(take(1)).subscribe((u) => (this.user = u));
 
     this.subBack = this.platform.backButton.subscribeWithPriority(201, () => {
       this.onClose();

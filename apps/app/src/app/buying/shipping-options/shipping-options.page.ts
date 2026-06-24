@@ -90,7 +90,7 @@ export class ShippingOptionsPage implements OnInit, OnDestroy {
       (c) => this.onCheckoutResponseChange(c),
     );
 
-    this.userSub = this.authService.user.subscribe((u) => {
+    this.userSub = this.authService.user$.subscribe((u) => {
       this.user = u;
       this.load();
     });

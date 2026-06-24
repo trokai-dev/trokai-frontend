@@ -45,7 +45,7 @@ export class ChatComponent implements OnInit {
   ];
 
   async ngOnInit() {
-    this.authService.user.pipe(take(1)).subscribe((u) => {
+    this.authService.user$.pipe(take(1)).subscribe((u) => {
       if (u) this.user = u;
     });
     const routeSegments = this.route.snapshot.url.map((s) => s.path);

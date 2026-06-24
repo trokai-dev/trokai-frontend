@@ -53,7 +53,7 @@ export class RegisterPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.firebaseService.log('AUTH_ABRIU_CADASTRO');
 
-    this.authService.logged.subscribe((logged) => {
+    this.authService.logged$.subscribe((logged) => {
       if (logged && !this.completingInfoService.hasFlow)
         this.router.navigateByUrl('/main/home', { replaceUrl: true });
     });

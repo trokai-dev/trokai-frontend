@@ -18,7 +18,7 @@ export class PasswordServiceService {
 
   changePassword(currentPassword, newPassword) {
     let token;
-    this.authService.user.pipe(take(1)).subscribe((u) => (token = u.token));
+    this.authService.user$.pipe(take(1)).subscribe((u) => (token = u.token));
 
     // tslint:disable-next-line: object-literal-shorthand
     return this.httpClient.post(

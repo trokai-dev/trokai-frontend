@@ -14,7 +14,7 @@ export class FavoritesService {
   /** emits após toggle — telas escutam pra atualizar listas */
   readonly favoritesChanged$ = new Subject<void>();
 
-  get favorites() {
+  get favorites$() {
     return this._favoritesIds.asObservable();
   }
 

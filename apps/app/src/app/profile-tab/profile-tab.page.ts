@@ -95,7 +95,7 @@ export class ProfileTabPage implements OnInit {
       this.content.scrollToTop(400); // rola a pagina ao escolher um item
     });
 
-    this.authService.user.subscribe((u) => (this.user = u));
+    this.authService.user$.subscribe((u) => (this.user = u));
 
     this.notificationsService.notReadedCount$.subscribe((count) => {
       this.notificationCount = count;

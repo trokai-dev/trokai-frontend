@@ -137,18 +137,18 @@ export class ProductComponent implements OnInit, OnDestroy {
       if (ev instanceof NavigationEnd) this.start();
     });
 
-    this.globalService.itemsMap.subscribe((res) => {
+    this.globalService.itemsMap$.subscribe((res) => {
       if (!res) return;
       this.itemsMap = res;
     });
 
-    this.authService.user.subscribe((u) => {
+    this.authService.user$.subscribe((u) => {
       if (!u) return;
       this.user = u;
       this.mountStatus();
     });
 
-    this.globalService.params.subscribe((params) => {
+    this.globalService.params$.subscribe((params) => {
       this.params = params;
       this.mountExpiration();
     });

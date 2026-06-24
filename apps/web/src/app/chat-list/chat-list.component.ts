@@ -33,7 +33,7 @@ export class ChatListComponent implements OnInit {
 
   ngOnInit(): void {
     this.messagesService.chats$.subscribe((chats) => (this.chats = chats));
-    this.authService.user.subscribe((u) => {
+    this.authService.user$.subscribe((u) => {
       if (u) this.user = u;
     });
   }

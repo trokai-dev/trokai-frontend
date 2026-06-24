@@ -2,7 +2,7 @@ import { Component, OnDestroy, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
-import { Subscription } from 'rxjs';
+import { lastValueFrom, Subscription } from 'rxjs';
 import { PasswordServiceService } from 'src/app/services/password-service.service';
 
 import { NewPasswordPage } from 'src/app/new-password/new-password.page';
@@ -51,12 +51,12 @@ export class ForgotPasswordCodePage implements OnDestroy {
     this.email = this.passwordService.emailToCode;
 
     try {
-      await this.passwordService.sendForgotCode(this.email).toPromise();
+      await lastValueFrom(this.passwordService.sendForgotCode(this.email));
     } catch {
       this.navCtrl.pop();
     }
 
-    this.authSub = this.authService.logged.subscribe((logged) => {
+    this.authSub = this.authService.logged$.subscribe((logged) => {
       if (logged && !this.completingInfoService.hasFlow)
         this.router.navigateByUrl('/main/home', { replaceUrl: true });
     });
@@ -72,9 +72,9 @@ export class ForgotPasswordCodePage implements OnDestroy {
   async verify(code: string) {
     this.loadingService.start('Verificando');
     try {
-      const response = await this.passwordService
-        .verifyCode(code, this.email)
-        .toPromise();
+      const response = await lastValueFrom(
+        this.passwordService.verifyCode(code, this.email),
+      );
       this.passwordService.validatingUser = response.user;
       this.ionNav.push(NewPasswordPage, { auth: true });
     } catch {

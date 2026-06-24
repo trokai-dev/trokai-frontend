@@ -24,7 +24,7 @@ export class AddressComponent implements OnInit {
   address?: Address;
 
   ngOnInit(): void {
-    this.authService.user.subscribe((u) => {
+    this.authService.user$.subscribe((u) => {
       if (u) this.address = u.address;
     });
   }

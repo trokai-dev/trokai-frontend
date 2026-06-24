@@ -60,19 +60,19 @@ export class GlobalService {
       );
   }
 
-  get itemsMap() {
+  get itemsMap$() {
     return this._itemsMap.asObservable();
   }
 
-  get params() {
+  get params$() {
     return this._globalParams.asObservable();
   }
 
-  get navbar() {
+  get navbar$() {
     return this._navbar.asObservable();
   }
 
-  get brands() {
+  get brands$() {
     return this._brands.asObservable();
   }
 

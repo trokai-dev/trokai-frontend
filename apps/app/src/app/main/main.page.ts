@@ -79,7 +79,7 @@ export class MainPage implements OnInit {
       this.navCtrl.back();
     });
 
-    this.authService.user.subscribe((u) => (this.user = u));
+    this.authService.user$.subscribe((u) => (this.user = u));
   }
 
   async registerItem() {

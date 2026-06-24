@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class SearchPageService {
   private _mainSearchText = new BehaviorSubject<string>('');
 
-  get mainSearchText() {
+  get mainSearchText$() {
     return this._mainSearchText.asObservable();
   }
 

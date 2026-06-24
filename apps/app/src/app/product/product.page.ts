@@ -227,7 +227,7 @@ export class ProductPage implements OnInit, OnDestroy {
 
     this.productId = this.route.snapshot.paramMap.get('product_id');
 
-    this.authService.user.subscribe((user) => {
+    this.authService.user$.subscribe((user) => {
       this.user = user;
       this.mountStatus();
     });
@@ -243,11 +243,11 @@ export class ProductPage implements OnInit, OnDestroy {
       this.isInReserves = isReserved;
     });
 
-    this.globalService.clothesAdjusts().subscribe((items) => {
+    this.globalService.clothesAdjusts$().subscribe((items) => {
       this.adjusts = items;
     });
 
-    this.globalService.params().subscribe((params) => {
+    this.globalService.params$().subscribe((params) => {
       this.params = params;
       this.mountExpiration();
     });

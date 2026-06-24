@@ -80,7 +80,7 @@ export class BankPage implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.tutorialService.bankPresentation();
-    this.bankService.balance.subscribe((balance) => {
+    this.bankService.balance$.subscribe((balance) => {
       if (!balance) return;
       this.balance = balance;
       this.mountList();

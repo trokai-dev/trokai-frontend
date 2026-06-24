@@ -26,12 +26,12 @@ export class GeolocationService {
   private _searchLocation = new BehaviorSubject<SearchLocation | null>(null);
   private _user;
 
-  get searchLocation() {
+  get searchLocation$() {
     return this._searchLocation.asObservable();
   }
 
   constructor() {
-    this.authService.user.subscribe((u) => {
+    this.authService.user$.subscribe((u) => {
       if (!u) return;
 
       if (

@@ -57,26 +57,26 @@ export class ProductRegisterComponent implements OnInit {
     this.globalService.setTitle('Anunciar');
     this.duplicating = this.route.snapshot.url[0]?.path === 'duplicate';
 
-    this.globalService.itemsMap.subscribe((itemsMap) => {
+    this.globalService.itemsMap$.subscribe((itemsMap) => {
       if (!itemsMap) return;
       this.itemsMap = itemsMap;
       this.checkLoadedToEdit();
     });
 
-    this.globalService.params.subscribe((params) => {
+    this.globalService.params$.subscribe((params) => {
       if (!params) return;
       this.params = params;
       this.checkLoadedToEdit();
     });
 
-    this.globalService.brands.subscribe(() => {
+    this.globalService.brands$.subscribe(() => {
       this.brands =
         this.globalService
           .getBrandsValue()
           ?.map((b) => new BasicModel<string>(b.slug, b.name)) ?? [];
     });
 
-    this.authService.user.subscribe((u) => {
+    this.authService.user$.subscribe((u) => {
       if (u) this.user = u;
     });
   }

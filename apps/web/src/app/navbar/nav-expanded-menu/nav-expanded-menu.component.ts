@@ -39,7 +39,7 @@ export class NavExpandedMenuComponent implements OnInit {
   user?: User;
 
   ngOnInit() {
-    this.authService.user.subscribe((user) => (this.user = user));
+    this.authService.user$.subscribe((user) => (this.user = user));
 
     // deep copy
     this.navMenu = JSON.parse(JSON.stringify(this.navMenu));

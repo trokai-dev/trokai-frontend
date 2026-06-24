@@ -16,7 +16,7 @@ export class WithdrawComponent implements OnInit {
   fee = 0;
 
   ngOnInit() {
-    this.globalService.params.subscribe((p) => {
+    this.globalService.params$.subscribe((p) => {
       this.fee = p?.gatewayWithdrawFee ?? 0;
     });
   }

@@ -35,7 +35,7 @@ export class SellerOnboardingComponent {
   minClothesToSell = 5;
 
   constructor() {
-    this.globalService.params.subscribe((params) => {
+    this.globalService.params$.subscribe((params) => {
       this.minClothesToSell = params?.minClothesToSell || 5;
     });
 

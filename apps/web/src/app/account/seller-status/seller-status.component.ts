@@ -71,10 +71,10 @@ export class SellerStatusComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.user.subscribe((user) => {
+    this.authService.user$.subscribe((user) => {
       this.user = user ?? null;
     });
-    this.globalService.params.subscribe((params) => {
+    this.globalService.params$.subscribe((params) => {
       if (params) this.minClothesToSell = params.minClothesToSell || 5;
     });
   }

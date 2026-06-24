@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy, NgZone, inject } from '@angular/core';
 
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './services/auth.service';
+import { lastValueFrom } from 'rxjs';
 import { UserService } from '@trokai/shared-data-access';
 import { SearchService } from './services/search.service';
 import { NotificationsService } from '@trokai/shared-data-access';
@@ -116,7 +117,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.firebaseService.setScreen(r.url, r.url);
     });
 
-    this.authService.logged.subscribe((logged) => {
+    this.authService.logged$.subscribe((logged) => {
       if (!logged && this.wasLogged) this.onLogout();
       if (logged) this.onLogin();
       this.wasLogged = logged;
@@ -222,7 +223,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   async autoLogin() {
-    await this.authService.autoLogin().toPromise();
+    await lastValueFrom(this.authService.autoLogin());
   }
 
   ngOnDestroy() {

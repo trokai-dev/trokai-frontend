@@ -63,7 +63,7 @@ export class PaymentOptionsComponent extends AutoUnsubscribe implements OnInit {
   maxInstallments?: Installment;
 
   ngOnInit() {
-    this.authService.user.subscribe((user) => {
+    this.authService.user$.subscribe((user) => {
       this.cards = user?.cards || [];
     });
 

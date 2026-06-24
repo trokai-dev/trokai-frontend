@@ -60,7 +60,7 @@ export class ChatComponent implements OnInit {
     addIcons({ ellipsisVertical, close, alert });
     if (this.platform.is('ios')) this.backBtnMode = 'ios';
     if (!this.otherUser) this.close();
-    this.authService.user.pipe(take(1)).subscribe((u) => (this.user = u));
+    this.authService.user$.pipe(take(1)).subscribe((u) => (this.user = u));
   }
 
   close() {

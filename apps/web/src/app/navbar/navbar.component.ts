@@ -100,7 +100,7 @@ export class NavbarComponent implements OnInit {
   buying = false;
 
   ngOnInit(): void {
-    this.searchPageService.mainSearchText.subscribe(
+    this.searchPageService.mainSearchText$.subscribe(
       (text) => (this.searchText = text),
     );
 
@@ -127,7 +127,7 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-    this.authService.user.subscribe((u) => {
+    this.authService.user$.subscribe((u) => {
       if (u) this.user = u;
     });
 
@@ -139,7 +139,7 @@ export class NavbarComponent implements OnInit {
       this.baskets = sum;
     });
 
-    this.globalService.navbar.subscribe((nav) => {
+    this.globalService.navbar$.subscribe((nav) => {
       if (nav) this.navMenu = nav;
     });
 

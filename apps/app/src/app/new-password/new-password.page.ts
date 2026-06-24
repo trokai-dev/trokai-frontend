@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { PasswordServiceService } from '../services/password-service.service';
-import { Subscription } from 'rxjs';
+import { lastValueFrom, Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { LoginPage } from '../auth/login/login.page';
 import { BackButtonComponent } from '../shared/components/back-button/back-button.component';
@@ -62,13 +62,15 @@ export class NewPasswordPage implements OnInit, OnDestroy {
   async save({ currentPassword, password }: NewPasswordValue) {
     try {
       if (this.forgot) {
-        await this.passwordService.changePasswordForgot(password).toPromise();
+        await lastValueFrom(
+          this.passwordService.changePasswordForgot(password),
+        );
         this.toastService.makeToast('Senha alterada!');
         this.ionNav.setRoot(LoginPage);
       } else {
-        await this.passwordService
-          .changePassword(currentPassword, password)
-          .toPromise();
+        await lastValueFrom(
+          this.passwordService.changePassword(currentPassword, password),
+        );
         this.firebaseService.log('ALTERAR_SENHA');
         this.toastService.makeToast('Senha alterada!');
         this.navCtrl.pop();

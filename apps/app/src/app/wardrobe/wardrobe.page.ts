@@ -160,7 +160,7 @@ export class WardrobePage implements OnInit, OnDestroy {
       pencil,
     });
 
-    this.subsUser = this.authService.user.subscribe(async (u) => {
+    this.subsUser = this.authService.user$.subscribe(async (u) => {
       if (u && this.user && this.user._id === u._id) return; // user didn't change
       this.user = u;
       this.load();

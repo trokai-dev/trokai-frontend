@@ -103,7 +103,7 @@ export class FormCardComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.authService.user.subscribe((u) => {
+    this.authService.user$.subscribe((u) => {
       if (u) {
         this.user = u;
         this.useUserAddress = !!u.address;

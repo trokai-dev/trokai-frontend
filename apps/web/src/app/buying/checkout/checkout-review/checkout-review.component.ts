@@ -49,7 +49,7 @@ export class CheckoutReviewComponent extends AutoUnsubscribe implements OnInit {
   user?: User;
 
   ngOnInit(): void {
-    this.authService.user.subscribe((user) => (this.user = user));
+    this.authService.user$.subscribe((user) => (this.user = user));
 
     this.buyingService.checkoutLocal$
       .pipe(takeUntil(this.destroySignal))

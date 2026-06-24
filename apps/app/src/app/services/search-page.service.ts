@@ -17,10 +17,10 @@ export class SearchPageService {
   private _filters = new BehaviorSubject<Filters>(new Filters());
 
   constructor() {
-    this.locationService.searchLocation.subscribe(() => this.reset());
+    this.locationService.searchLocation$.subscribe(() => this.reset());
   }
 
-  get filters() {
+  get filters$() {
     return this._filters.asObservable();
   }
 

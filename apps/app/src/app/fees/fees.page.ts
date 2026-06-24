@@ -31,7 +31,7 @@ export class FeesPage implements OnInit {
   params;
 
   ngOnInit() {
-    this.globalService.params().subscribe((params) => {
+    this.globalService.params$().subscribe((params) => {
       this.params = params;
     });
   }

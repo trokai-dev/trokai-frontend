@@ -81,7 +81,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       });
 
     // For the global items map, if you only need it once for the render:
-    this.globalService.itemsMap
+    this.globalService.itemsMap$
       .pipe(first((res) => !!res)) // Only take the first valid value
       .subscribe((res) => {
         this.itemsMap = res;

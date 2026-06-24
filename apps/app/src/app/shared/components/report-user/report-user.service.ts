@@ -14,7 +14,7 @@ export class ReportUserService {
 
   sendMessage(reportedUserId: string, message: string, type: string) {
     let user;
-    this.authService.user.pipe(take(1)).subscribe((u) => (user = u));
+    this.authService.user$.pipe(take(1)).subscribe((u) => (user = u));
 
     const contact = {
       reportedUserId: reportedUserId,

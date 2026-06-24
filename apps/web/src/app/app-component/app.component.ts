@@ -193,7 +193,7 @@ export class AppComponent implements OnInit {
       }
     });
 
-    this.authService.logged.subscribe((logged) => {
+    this.authService.logged$.subscribe((logged) => {
       if (!logged && this.wasLogged) this.onLogout();
       if (logged) this.onLogin();
       this.wasLogged = !!logged;

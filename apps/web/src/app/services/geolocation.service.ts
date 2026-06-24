@@ -62,7 +62,7 @@ export class GeolocationService {
     }
   }
 
-  get searchLocation() {
+  get searchLocation$() {
     return this._searchLocation.asObservable();
   }
 

@@ -43,7 +43,7 @@ export class StoreOptionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.user.subscribe((u) => {
+    this.authService.user$.subscribe((u) => {
       if (!u) return;
       this.user = u;
 

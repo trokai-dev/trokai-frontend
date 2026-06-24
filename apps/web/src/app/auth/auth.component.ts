@@ -19,7 +19,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   authsub!: Subscription;
 
   ngOnInit(): void {
-    this.authsub = this.authService.logged.subscribe((logged) => {
+    this.authsub = this.authService.logged$.subscribe((logged) => {
       if (logged && !this.completingService.hasFlow)
         this.router.navigate(['/']);
     });

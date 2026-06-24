@@ -10,7 +10,7 @@ export class BankService {
   private urlApi = inject(APP_CONFIG).urlApi;
   private _balance = new BehaviorSubject<BalanceModel | null>(null);
 
-  get balance() {
+  get balance$() {
     return this._balance.asObservable();
   }
 

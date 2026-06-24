@@ -69,7 +69,7 @@ export class PurchasePage implements OnInit, OnDestroy {
 
     if (this.route.snapshot.paramMap.get('open_chat')) this.chat();
 
-    this.paramsSub = this.globalService.params().subscribe((params) => {
+    this.paramsSub = this.globalService.params$().subscribe((params) => {
       this.globalParams = params;
     });
   }

@@ -104,7 +104,7 @@ export class DialogService {
   }
 
   async openPhoneVerifyDialog(): Promise<boolean> {
-    const params = await firstValueFrom(this.globalService.params);
+    const params = await firstValueFrom(this.globalService.params$);
     const dialogRef = this.dialog.open(PhoneVerifyDialogComponent, {
       panelClass: 'dialog-phone-verify',
       scrollStrategy: this.overlay.scrollStrategies.noop(),

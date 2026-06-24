@@ -48,7 +48,7 @@ export class NewCardPage implements OnInit {
   private ionNav = inject(IonNav, { optional: true });
 
   ngOnInit() {
-    this.authService.user.subscribe((u) => (this.user = u));
+    this.authService.user$.subscribe((u) => (this.user = u));
     this.buying = this.navParams?.data?.buying ?? false;
   }
 

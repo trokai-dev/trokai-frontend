@@ -39,7 +39,7 @@ export class TkWithdrawComponent implements OnInit {
   private alert = inject(AlertService);
 
   ngOnInit() {
-    this.bankService.balance.subscribe((balance) => {
+    this.bankService.balance$.subscribe((balance) => {
       if (balance) this.balance = balance;
     });
   }

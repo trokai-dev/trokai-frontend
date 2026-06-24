@@ -46,7 +46,7 @@ export class PurchaseComponent implements OnInit, OnDestroy {
 
     await this.start(orderId);
 
-    this.paramsSub = this.globalService.params.subscribe((params) => {
+    this.paramsSub = this.globalService.params$.subscribe((params) => {
       this.globalParams = params;
     });
   }

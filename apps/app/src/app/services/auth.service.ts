@@ -29,11 +29,11 @@ export class AuthService {
   private _user = new BehaviorSubject<User>(null); // atualiza os objetos de usuario
   private _logged = new BehaviorSubject<boolean>(null); // atualiza o usuario apenas login/logout
 
-  get logged() {
+  get logged$() {
     return this._logged.asObservable();
   }
 
-  get user() {
+  get user$() {
     return this._user.asObservable();
   }
 
@@ -51,7 +51,7 @@ export class AuthService {
   }
 
   syncAvatar(avatar) {
-    this.user.pipe(take(1)).subscribe((u) => {
+    this.user$.pipe(take(1)).subscribe((u) => {
       u.avatar = avatar;
       this._user.next(u);
     });

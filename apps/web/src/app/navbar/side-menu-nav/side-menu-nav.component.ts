@@ -37,10 +37,10 @@ export class SideMenuNav implements OnInit {
   user?: User;
 
   ngOnInit(): void {
-    this.globalService.navbar.subscribe((nav) => {
+    this.globalService.navbar$.subscribe((nav) => {
       if (nav) this.navMenu = nav;
     });
-    this.authService.user.subscribe((user) => (this.user = user));
+    this.authService.user$.subscribe((user) => (this.user = user));
   }
 
   onClickBack() {
