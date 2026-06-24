@@ -4,9 +4,7 @@
       <!-- Foto(s) -->
       <!-- FOTOS -->
       <div class="product-main">
-        <h2
-          class="color-gray-dark capitalize block hidden-md px-24 px-md-0 pb-24"
-        >
+        <h2 class="color-gray-dark capitalize block hidden-md pb-24">
           {{ product.title }}
         </h2>
         <tk-product-image
@@ -21,171 +19,15 @@
         </h1>
         <div class="w-full">
           <!-- CTA Venda -->
-          @if (
-            product.sell && (product.published || product.reserved || myProduct)
-          ) {
-            <div class="product-cta">
-              <div class="product-cta-footer">
-                <div class="product-cta-cost">
-                  @if (payment) {
-                    <div>
-                      <!-- pix -->
-                      <div>
-                        <span class="product-cta-first-cost">
-                          {{
-                            product.firstCost
-                              ? (product.firstCost
-                                | cost
-                                | currency: 'BRL' : 'symbol' : '1.2')
-                              : ''
-                          }}
-                        </span>
-                        @if (this.myProduct) {
-                          <span class="product-cta-main-cost">
-                            {{
-                              product.cost
-                                | cost
-                                | currency: 'BRL' : 'symbol' : '1.2'
-                            }}
-                          </span>
-                        } @else {
-                          <span class="product-cta-main-cost">
-                            {{
-                              payment.pix.buyerCost
-                                | cost
-                                | currency: 'BRL' : 'symbol' : '1.2'
-                            }}
-                            <span class="color-primary-2 label-body-2">
-                              ({{ payment.pix.pixDiscountPercentage * 100 }}%
-                              OFF no Pix)
-                            </span>
-                          </span>
-                        }
-                      </div>
-                      <!-- cc -->
-                      @if (!myProduct && product.published) {
-                        <div class="product-installments">
-                          <span class="product-installments-primary">
-                            <b>
-                              {{
-                                payment.creditCard.maxNoInterest.installments
-                              }}x
-                              {{
-                                payment.creditCard.maxNoInterest
-                                  .installmentValue
-                                  | cost
-                                  | currency: 'BRL' : 'symbol' : '1.2'
-                              }}
-                              sem juros
-                            </b>
-                          </span>
-                          @if (
-                            payment.creditCard.maxInstallments.installments >
-                            payment.creditCard.maxNoInterest.installments
-                          ) {
-                            <span class="product-installments-secondary">
-                              ou até
-                              {{
-                                payment.creditCard.maxInstallments.installments
-                              }}x com juros
-                            </span>
-                          }
-                        </div>
-                      }
-                      <div class="product-cta-delivery">
-                        @if (owner.seller?.inPerson) {
-                          <span
-                            class="{{
-                              owner.seller?.shipping ? ' mb-8 block' : ''
-                            }}"
-                          >
-                            Retirada presencial
-                            @if (!myProduct) {
-                              <span> gratuita</span>
-                            }
-                          </span>
-                        }
-                        @if (owner.seller?.shipping && !myProduct) {
-                          <div>
-                            <tk-zipcode-shipping-fee
-                              [productId]="productId"
-                            ></tk-zipcode-shipping-fee>
-                          </div>
-                        }
-                        @if (owner.seller?.shipping && myProduct) {
-                          <div>
-                            <span>Envio pelos correios</span>
-                          </div>
-                        }
-                      </div>
-                    </div>
-                  }
-                </div>
-                @if (isInReserves && owner) {
-                  <div class="mt-24">
-                    <tk-reserve-time
-                      [ownerId]="owner._id"
-                      (reserveOpen)="openCheckout()"
-                      [text]="'Continuar compra'"
-                      [hideCancel]="true"
-                    >
-                    </tk-reserve-time>
-                  </div>
-                }
-                <!-- DA OUTRA PESSOA -->
-                @if (!myProduct && product.published) {
-                  <div>
-                    @if (!product_in_basket) {
-                      <button
-                        (click)="clickBuy()"
-                        mat-flat-button
-                        color="primary"
-                      >
-                        {{
-                          wardrobe_basket && !wardrobe_reserved
-                            ? 'Adicionar à sacola'
-                            : 'COMPRAR'
-                        }}
-                      </button>
-                    }
-                    @if (product_in_basket) {
-                      <div class="flex flex-col">
-                        <button
-                          routerLink="/buying/carts"
-                          mat-flat-button
-                          color="primary"
-                        >
-                          Ver na sacola
-                        </button>
-                        <button
-                          class="mt-12"
-                          (click)="removeFromBasket()"
-                          mat-stroked-button
-                          color="accent"
-                        >
-                          Remover da sacola
-                        </button>
-                      </div>
-                    }
-                    <div class="product-cta-hints">
-                      <div class="product-cta-hint">
-                        <ion-icon name="shield-checkmark"></ion-icon>
-                        <span class="product-cta-hint-title">
-                          Compra protegida pelo Trokaí
-                        </span>
-                      </div>
-                      <div class="product-cta-hint">
-                        <ion-icon name="arrow-undo"></ion-icon>
-                        <span class="product-cta-hint-title">
-                          Devolução garantida
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                }
-              </div>
-            </div>
-          }
+          <tk-product-cta
+            [product]="product"
+            [payment]="payment"
+            [owner]="owner"
+            [myProduct]="myProduct"
+            [productId]="productId"
+            [isInReserves]="isInReserves"
+            (openCheckout)="openCheckout()"
+          ></tk-product-cta>
           <!-- Status do produto -->
           @if (myProduct || !product.published) {
             <div class="w-full mt-48 pb-24">

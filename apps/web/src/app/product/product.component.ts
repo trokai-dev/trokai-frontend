@@ -1,7 +1,7 @@
 import { User } from '@trokai/shared-core';
 import { Clothes, ClothesStatus } from '@trokai/shared-core';
 import { InventoryService } from './../wardrobe/inventory.service';
-import { AlertService, CostPipe } from '@trokai/shared-ui';
+import { AlertService } from '@trokai/shared-ui';
 import { AuthService } from 'src/app/auth/auth.service';
 import {
   Component,
@@ -19,13 +19,12 @@ import { ItemsMap } from '@trokai/shared-core';
 import { StatusPillComponent, ItemNamePipe } from '@trokai/shared-ui';
 import { Subscription } from 'rxjs';
 import { CompletingInformationService } from '@trokai/shared-data-access';
-import { Basket, BuyingService } from '@trokai/shared-data-access';
+import { BuyingService } from '@trokai/shared-data-access';
 import { ProductsHorizontalListComponent } from '../modules/products-list/products-horizontal-list/products-horizontal-list.component';
 import { ProductQuestionsComponent } from './product-questions/product-questions.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { TkZipcodeShippingFeeComponent as ZipcodeShippingFeeComponent } from '@trokai/shared-ui';
 import { MatButtonModule } from '@angular/material/button';
-import { TitleCasePipe, CurrencyPipe } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import { TrokaiGtmService } from '../services/trokai-gtm.service';
 import { SearchService } from '../search/search.service';
 import { Filters, GlobalParams } from '@trokai/shared-core';
@@ -41,7 +40,10 @@ import {
 } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { TkGalleryComponent, TkProductImageComponent } from '@trokai/shared-ui';
-import { TkProductOwnerButtonsComponent, TkReserveTimeComponent } from '@trokai/shared-features';
+import {
+  TkProductCtaComponent,
+  TkProductOwnerButtonsComponent,
+} from '@trokai/shared-features';
 
 @Component({
   selector: 'app-product',
@@ -51,17 +53,14 @@ import { TkProductOwnerButtonsComponent, TkReserveTimeComponent } from '@trokai/
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     MatButtonModule,
-    ZipcodeShippingFeeComponent,
     MatTooltipModule,
     RouterLink,
     ProductQuestionsComponent,
     ProductsHorizontalListComponent,
     TitleCasePipe,
-    CurrencyPipe,
-    CostPipe,
     TkSellerHeaderComponent,
     TkReviewStarsComponent,
-    TkReserveTimeComponent,
+    TkProductCtaComponent,
     TkProductImageComponent,
     StatusPillComponent,
     ItemNamePipe,
@@ -99,13 +98,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   itemsMap: ItemsMap | undefined;
 
   myProduct = false;
-
-  // cart
-  product_in_basket = false;
-  wardrobe_basket = false;
-  wardrobe_reserved = false;
-
-  baskets: Basket[] = [];
 
   expiration: {
     text: string;
@@ -157,11 +149,6 @@ export class ProductComponent implements OnInit, OnDestroy {
 
     await this.start();
 
-    this.buyingService.baskets$.subscribe((baskets) => {
-      this.baskets = baskets;
-      this.processBaskets();
-    });
-
     this.reservesSub = this.buyingService.reserves$.subscribe((clothes) => {
       if (!clothes) return;
 
@@ -208,8 +195,6 @@ export class ProductComponent implements OnInit, OnDestroy {
           this.product.waitingPublication)
       )
         throw new Error('Status not allowed');
-
-      this.processBaskets();
 
       if (!this.myProduct && this.user)
         setTimeout(() => {
@@ -365,19 +350,8 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl(`/sell/duplicate/${this.productId}`);
   }
 
-  async clickBuy() {
-    if (!this.product) return;
-    this.buyingService.addProduct(this.owner, this.product);
-    // this.router.navigateByUrl(`/buying/carts?from=${this.owner._id}`);
-  }
-
   async openCheckout() {
     await this.completingInformation.tryStartPurchase(this.owner._id);
-  }
-
-  removeFromBasket() {
-    if (!this.product) return;
-    this.buyingService.removeProduct(this.product);
   }
 
   async deleteProduct() {
@@ -418,31 +392,6 @@ export class ProductComponent implements OnInit, OnDestroy {
       }
     } catch {
       /* intentional */
-    }
-  }
-
-  processBaskets() {
-    if (!this.baskets || !this.owner) {
-      this.product_in_basket = false;
-      this.wardrobe_basket = false;
-      this.wardrobe_reserved = false;
-      return;
-    }
-
-    const basket = this.baskets.find((b) => b.owner._id === this.owner._id);
-
-    if (basket) {
-      // check if there is basket for the wardrobe
-      this.wardrobe_basket = true;
-      // check if this product is in basket
-      this.product_in_basket = basket.products.some(
-        (product) => product._id === this.product?._id,
-      );
-      this.wardrobe_reserved = basket.reserved;
-    } else {
-      this.product_in_basket = false;
-      this.wardrobe_basket = false;
-      this.wardrobe_reserved = false;
     }
   }
 

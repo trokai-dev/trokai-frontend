@@ -175,150 +175,19 @@
       ></tk-product-owner-buttons>
       }
 
-      @if (published || myProduct) {
-      <div>
-        <!-- CTA Venda -->
-        @if (product.clothes.sell && (published || reserved ||
-        waiting_adjustment || waiting_publication)) {
-        <div class="product-cta">
-          <div class="product-cta-footer">
-            <div class="product-cta-costs">
-              @if (product.payment) {
-              <div>
-                <!-- pix -->
-
-                <div>
-                  <span class="product-cta-first-cost">
-                    {{ product.clothes.firstCost ? (product.clothes.firstCost |
-                    cost | currency : "BRL" : "symbol" : "1.2") : "" }}
-                  </span>
-
-                  @if (myProduct) {
-                  <span class="product-cta-current-cost">
-                    {{ product.clothes.cost | cost | currency : "BRL" : "symbol"
-                    : "1.2" }}
-                  </span>
-                  } @else {
-                  <span class="product-cta-current-cost">
-                    {{ product.payment.pix.buyerCost | cost | currency : "BRL" :
-                    "symbol" : "1.2" }}
-                    <span class="color-primary label-body-2">
-                      ({{ product.payment.pix.pixDiscountPercentage * 100 }}%
-                      OFF no Pix)
-                    </span>
-                  </span>
-                  }
-                </div>
-
-                <!-- cc -->
-                @if (!myProduct && published){
-                <div class="product-installments">
-                  <span class="product-installments-primary">
-                    {{ product.payment.creditCard.maxNoInterest .installments
-                    }}x {{ product.payment.creditCard.maxNoInterest
-                    .installmentValue | cost | currency : "BRL" : "symbol" :
-                    "1.2" }} sem juros
-                  </span>
-                  @if ( product.payment.creditCard.maxInstallments .installments
-                  > product.payment.creditCard.maxNoInterest .installments ) {
-                  <span class="product-installments-secondary">
-                    ou até {{ product.payment.creditCard.maxInstallments
-                    .installments }}x com juros
-                  </span>
-                  }
-                </div>
-                }
-
-                <div class="product-cta-delivery">
-                  @if (owner?.seller?.inPerson) {
-                  <span class="{{ owner.seller?.shipping ? ' mb-8 block' : '' }}">
-                    Retirada presencial @if (!myProduct) {
-                    <ion-text>gratuita</ion-text>
-                    }
-                  </span>
-                  } @if (owner?.seller?.shipping && !myProduct) {
-                  <div>
-                    <tk-zipcode-shipping-fee
-                      [productId]="productId"
-                    ></tk-zipcode-shipping-fee>
-                  </div>
-                  } @if (owner?.seller?.shipping && myProduct) {
-                  <div>
-                    <span>Envio pelos correios</span>
-                  </div>
-                  }
-                </div>
-              </div>
-              }
-            </div>
-
-            <!-- DA OUTRA PESSOA -->
-            @if (!myProduct && published) {
-            <div>
-              @if (!product_in_basket) {
-              <button
-                mat-flat-button
-                class="action-button"
-                (click)="clickBuy()"
-                color="primary"
-              >
-                <b>
-                  {{ wardrobe_basket && !wardrobe_reserved ? "Adicionar \à
-                  sacola" : "COMPRAR" }}
-                </b>
-              </button>
-              } @if (product_in_basket) {
-              <button
-                mat-flat-button
-                class="action-button"
-                (click)="clickCart()"
-                color="primary"
-              >
-                <b> Ver na sacola </b>
-              </button>
-              } @if (product_in_basket) {
-              <button
-                mat-stroked-button
-                class="action-button mt-12 btn-tertiary"
-                (click)="removeFromBasket()"
-              >
-                <b> Remover da sacola </b>
-              </button>
-              }
-
-              <div class="product-cta-hints">
-                <div class="product-cta-hint">
-                  <ion-icon name="shield-checkmark"></ion-icon>
-                  <span class="product-cta-hint-title">
-                    Compra protegida pelo Trokaí
-                  </span>
-                </div>
-
-                <div class="product-cta-hint">
-                  <ion-icon name="arrow-undo"></ion-icon>
-
-                  <span class="product-cta-hint-title"
-                    >Devolução garantida</span
-                  >
-                </div>
-              </div>
-            </div>
-            }
-          </div>
-        </div>
-        }
-      </div>
-      } @if (isInReserves && owner) {
-      <div class="mt-4">
-        <tk-reserve-time
-          [ownerId]="owner._id"
-          (reserveOpen)="openCheckout(owner._id)"
-          [text]="'Continuar compra'"
-          [hideCancel]="true"
-        >
-        </tk-reserve-time>
-      </div>
-      }
+      <!-- CTA Venda -->
+      <tk-product-cta
+        [product]="product.clothes"
+        [payment]="product.payment"
+        [owner]="owner"
+        [myProduct]="myProduct"
+        [productId]="productId"
+        [isInReserves]="isInReserves"
+        [useLink]="false"
+        (buy)="onBuy()"
+        (openCheckout)="openCheckout(owner._id)"
+        (goToCart)="clickCart()"
+      ></tk-product-cta>
 
       <!-- descricao -->
       <div class="mt-16 pt-16 border-top">

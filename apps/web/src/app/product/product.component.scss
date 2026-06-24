@@ -20,6 +20,19 @@
   }
 }
 
+// Below the 768px grid breakpoint .product-main is full-row; bleed it past
+// the page's `.container` padding-inline so the image hits 100vw, then give
+// the title back the same inset as every other section (text only).
+@media (max-width: 767px) {
+  .product-main {
+    margin-inline: calc(-1 * var(--space-12));
+
+    h2 {
+      padding-inline: var(--space-12);
+    }
+  }
+}
+
 .product-status-container {
   border: 1px solid $color-gray-light-2;
   padding: 0 1.6rem;
@@ -64,107 +77,12 @@ button {
   padding-top: 2.4rem;
 }
 
-.product-cta {
-  // border: 1px solid $color-gray-light-2;
-
-  .product-cta-delivery {
-    span {
-      @extend %label-body-2;
-    }
-
-    .product-cta-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.8rem;
-
-      span {
-        @extend %label-body-1;
-        font-weight: 500 !important;
-        color: $color-gray-dark !important;
-      }
-    }
-
-    margin-top: 2.4rem;
-  }
-
-  .product-cta-footer {
-    .product-cta-cost {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .product-cta-first-cost {
-        @extend %label-large-2;
-        color: $color-gray-light-1;
-        text-decoration: line-through;
-        display: block;
-      }
-
-      .product-cta-main-cost {
-        font-size: 2.4rem !important;
-        font-weight: 400 !important;
-        color: $color-gray-dark;
-      }
-    }
-
-    .product-installments {
-      .product-installments-primary {
-        font-weight: 400 !important;
-        font-size: 1.4rem !important;
-      }
-
-      .product-installments-secondary {
-        font-weight: 300 !important;
-        font-size: 1.4rem !important;
-      }
-    }
-
-    button {
-      margin-top: 3.2rem;
-      width: 100%;
-      text-transform: uppercase;
-    }
-
-    .product-cta-hints {
-      margin-top: 1.6rem;
-    }
-
-    .product-cta-hint {
-      margin-top: 0.8rem;
-      display: flex;
-      align-items: center;
-
-      ion-icon {
-        @extend %icon-small;
-        color: $color-primary;
-        margin-right: 0.8rem;
-      }
-
-      .product-cta-hint-title {
-        font-size: 1.4rem !important;
-        margin-right: 0.4rem;
-      }
-
-      .product-cta-hint-text {
-        @extend %label-caption-1;
-        color: $color-gray-light-1;
-      }
-    }
-  }
-
-  ion-icon {
-    color: $color-gray-dark;
-  }
-}
+// Buy CTA (price/installments/delivery/buy button/hints) -> shared
+// @trokai/shared-features <tk-product-cta>.
 
 @media (max-width: 992px) {
   .product-main {
     padding: 0px !important;
-  }
-
-  .product-cta-footer {
-    padding: 1.2rem 0rem;
   }
 }
 
@@ -172,9 +90,5 @@ button {
 @media (min-width: 992px) {
   .product-ctas {
     padding-left: 6rem;
-  }
-
-  .product-cta-footer {
-    padding: 3.2rem 0rem;
   }
 }

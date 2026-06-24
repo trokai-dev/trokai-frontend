@@ -21,7 +21,6 @@ import {
   StatusPillComponent,
   StatusPillVariant,
   ItemNamePipe,
-  CostPipe,
 } from '@trokai/shared-ui';
 import { MainService } from '../services/main.service';
 import { SearchService } from '../services/search.service';
@@ -30,9 +29,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { TkGalleryComponent } from '@trokai/shared-ui';
 import { Filters, GlobalParams } from '@trokai/shared-core';
 import { BackButtonComponent } from '../shared/components/back-button/back-button.component';
-import { NgClass, CurrencyPipe } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { TkLikeButtonComponent } from '@trokai/shared-ui';
-import { TkZipcodeShippingFeeComponent as ZipcodeShippingFeeComponent } from '@trokai/shared-ui';
 import { TkReviewStarsComponent } from '@trokai/shared-ui';
 import { TkProductCardComponent } from '@trokai/shared-ui';
 import {
@@ -50,14 +48,12 @@ import {
   IonList,
   IonRippleEffect,
   IonBadge,
-  IonText,
 } from '@ionic/angular/standalone';
 import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
 import {
   alertCircle,
   alertCircleOutline,
-  arrowUndo,
   cartOutline,
   cashOutline,
   chevronForward,
@@ -70,12 +66,14 @@ import {
   refreshOutline,
   resize,
   shareSocial,
-  shieldCheckmark,
   timeOutline,
   trashOutline,
 } from 'ionicons/icons';
 import { AlertService, TkSellerHeaderComponent } from '@trokai/shared-ui';
-import { TkProductOwnerButtonsComponent, TkReserveTimeComponent } from '@trokai/shared-features';
+import {
+  TkProductCtaComponent,
+  TkProductOwnerButtonsComponent,
+} from '@trokai/shared-features';
 import { FirebaseService } from '../services/firebase.service';
 import { GlobalService } from '../services/global.service';
 import { ProductService } from '@trokai/shared-data-access';
@@ -91,7 +89,6 @@ import { CompletingInformationService } from '@trokai/shared-data-access';
   imports: [
     MatButtonModule,
 
-    IonText,
     IonBadge,
     IonButtons,
     IonIcon,
@@ -106,12 +103,9 @@ import { CompletingInformationService } from '@trokai/shared-data-access';
     BackButtonComponent,
     TkLikeButtonComponent,
     NgClass,
-    ZipcodeShippingFeeComponent,
     TkReviewStarsComponent,
     TkProductCardComponent,
-    CurrencyPipe,
-    CostPipe,
-    TkReserveTimeComponent,
+    TkProductCtaComponent,
     StatusPillComponent,
     ItemNamePipe,
     TkProductOwnerButtonsComponent,
@@ -184,11 +178,6 @@ export class ProductPage implements OnInit, OnDestroy {
   deliveryString = '';
   otherClothes = [];
 
-  // cart
-  product_in_basket = false;
-  wardrobe_basket = false;
-  wardrobe_reserved = false;
-
   baskets: Basket[] = [];
   basketCount = 0;
   statusText;
@@ -214,14 +203,12 @@ export class ProductPage implements OnInit, OnDestroy {
       cashOutline,
       alertCircleOutline,
       cartOutline,
-      shieldCheckmark,
       createOutline,
       copyOutline,
       trashOutline,
       ellipsisHorizontal,
       pauseOutline,
       playOutline,
-      arrowUndo,
       refreshOutline,
     });
 
@@ -261,10 +248,7 @@ export class ProductPage implements OnInit, OnDestroy {
   }
 
   processBaskets() {
-    if (!this.baskets || !this.baskets.length || !this.owner) {
-      this.product_in_basket = false;
-      this.wardrobe_basket = false;
-      this.wardrobe_reserved = false;
+    if (!this.baskets || !this.baskets.length) {
       this.basketCount = 0;
       return;
     }
@@ -272,22 +256,6 @@ export class ProductPage implements OnInit, OnDestroy {
     this.basketCount = this.baskets.reduce((acc, basket) => {
       return acc + basket.products.length;
     }, 0);
-
-    const basket = this.baskets.find((b) => b.owner._id === this.owner._id);
-
-    if (basket) {
-      // check if there is basket for the wardrobe
-      this.wardrobe_basket = true;
-      // check if this product is in basket
-      this.product_in_basket = basket.products.some(
-        (product) => product._id === this.product.clothes._id,
-      );
-      this.wardrobe_reserved = basket.reserved;
-    } else {
-      this.product_in_basket = false;
-      this.wardrobe_basket = false;
-      this.wardrobe_reserved = false;
-    }
   }
 
   async mountExpiration() {
@@ -317,6 +285,10 @@ export class ProductPage implements OnInit, OnDestroy {
       this.product = await this.productsService.fetchCompleteProduct(
         this.productId,
       );
+      // `tk-product-cta` relies on the `Clothes` model getters (published/
+      // reserved/etc derived from `status`) — the raw HTTP response is a
+      // plain object, so it needs the same wrapping web already does.
+      this.product.clothes = new Clothes(this.product.clothes);
 
       this.owner = await this.searchService.getUserInfo(
         this.product.clothes.owner,
@@ -405,15 +377,9 @@ export class ProductPage implements OnInit, OnDestroy {
     this.mainService.navigateToCarts(this.owner._id);
   }
 
-  async clickBuy() {
+  onBuy() {
     this.firebaseService.log('COMPRA_CLICOU_COMPRAR');
     this.toastService.makeToast('Produto adicionado à sacola!');
-    this.buyingService.addProduct(this.owner, this.product.clothes);
-    // this.mainService.navigateToCarts(this.owner._id);
-  }
-
-  removeFromBasket() {
-    this.buyingService.removeProduct(this.product.clothes);
   }
 
   async openCheckout(ownerId: string) {
