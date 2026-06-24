@@ -11,6 +11,7 @@ import {
 import { CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
 import { RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Clothes, User } from '@trokai/shared-core';
@@ -21,6 +22,7 @@ import {
 } from '@trokai/shared-data-access';
 import { CostPipe, TkZipcodeShippingFeeComponent } from '@trokai/shared-ui';
 import { TkReserveTimeComponent } from '../../buying/reserve-time/tk-reserve-time.component';
+import { TkCartAddedDialogComponent } from '../../buying/cart-added-dialog/tk-cart-added-dialog.component';
 
 /**
  * Product buy CTA (canonical web): price/installments/delivery, reserve-time
@@ -46,6 +48,7 @@ import { TkReserveTimeComponent } from '../../buying/reserve-time/tk-reserve-tim
 })
 export class TkProductCtaComponent implements OnInit, OnChanges, OnDestroy {
   private buyingService = inject(BuyingService);
+  private matDialog = inject(MatDialog);
 
   @Input({ required: true }) product!: Clothes;
   @Input() payment?: ClothesPayment;
@@ -58,6 +61,7 @@ export class TkProductCtaComponent implements OnInit, OnChanges, OnDestroy {
   @Output() buy = new EventEmitter<void>();
   @Output() openCheckout = new EventEmitter<void>();
   @Output() goToCart = new EventEmitter<void>();
+  @Output() addMore = new EventEmitter<User>();
 
   productInBasket = false;
   wardrobeBasket = false;
@@ -108,6 +112,19 @@ export class TkProductCtaComponent implements OnInit, OnChanges, OnDestroy {
     if (!this.product) return;
     this.buyingService.addProduct(this.owner, this.product);
     this.buy.emit();
+
+    const basket = this.buyingService.getBasketFromOwner(this.owner._id);
+    if (!basket) return;
+
+    this.matDialog
+      .open(TkCartAddedDialogComponent, {
+        data: { basket },
+        panelClass: 'dialog-normal',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result?.addMore) this.addMore.emit(this.owner);
+      });
   }
 
   removeFromBasket() {

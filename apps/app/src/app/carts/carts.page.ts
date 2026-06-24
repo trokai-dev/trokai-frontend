@@ -1,6 +1,6 @@
 import { Clothes, User } from '@trokai/shared-core';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { BuyingService, Basket } from '@trokai/shared-data-access';
@@ -34,14 +34,12 @@ import { TkCartComponent } from '@trokai/shared-features';
 export class CartsPage implements OnDestroy, OnInit {
   private buyingService = inject(BuyingService);
   private router = inject(Router);
-  private route = inject(ActivatedRoute);
   private authService = inject(AuthService);
   private completingInformation = inject(CompletingInformationService);
   private mainService = inject(MainService);
   private modalCtrl = inject(ModalController);
 
   baskets: Basket[] = [];
-  justAdded = false;
 
   subs!: Subscription;
 
@@ -53,26 +51,8 @@ export class CartsPage implements OnDestroy, OnInit {
     if (this.authService.getUserValue()) this.buyingService.getMyReserves();
   }
 
-  async mount(baskets: Basket[]) {
-    const params = this.route.snapshot.queryParams;
-
-    if (!params || !params['from']) {
-      this.baskets = baskets;
-      return;
-    }
-
-    const suggOwner = params['from'];
-    const suggBasket = baskets.find((b) => b.owner._id === suggOwner);
-
-    this.justAdded = !!suggOwner;
-
-    if (!suggBasket) {
-      this.baskets = baskets;
-      return;
-    }
-
-    // The app keeps the matching basket; suggestions are web-only for now.
-    this.baskets = [suggBasket];
+  mount(baskets: Basket[]) {
+    this.baskets = baskets;
   }
 
   async checkout(ownerId: string) {

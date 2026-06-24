@@ -1,0 +1,71 @@
+<div class="dialog-wrapper">
+  <div class="dialog-header flex justify-end">
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+      <mat-icon class="close-icon">close</mat-icon>
+    </button>
+  </div>
+
+  <div class="dialog-content">
+    <div class="cart-added-feedback">
+      <mat-icon class="color-primary cart-added-icon">check_circle</mat-icon>
+      <h4 class="color-gray-dark">Adicionado à sacola!</h4>
+    </div>
+
+    <div class="cart-added-seller mt-24">
+      <tk-user-avatar [user]="basket.owner" size="medium"></tk-user-avatar>
+      <div class="cart-added-seller-info">
+        <h4 class="color-gray-dark capitalize">
+          {{ basket.owner.seller?.storeName ?? basket.owner.name }}
+        </h4>
+        <tk-review-stars
+          [showAmount]="false"
+          [stars]="basket.owner.seller?.health?.reviewsAverage ?? 0"
+          [amount]="basket.owner.seller?.health?.reviewsAmount"
+          [clickable]="false"
+        ></tk-review-stars>
+      </div>
+    </div>
+
+    <div class="cart-added-items mt-16">
+      @for (p of basket.products; track p) {
+        <div class="cart-item">
+          <img
+            alt="{{ p.title }}"
+            [src]="p.images?.[0]?.sm"
+            class="cart-item-img"
+          />
+          <div class="cart-item-text">
+            <span class="label-body-2 color-gray-dark capitalize">
+              <b>{{ p.title }}</b>
+            </span>
+            <span class="label-body-2 mt-8">
+              {{ p.cost | cost | currency: 'BRL' : 'symbol' : '1.2' }}
+            </span>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="frete-unico mt-24">
+      <h4 class="color-primary">Frete único!</h4>
+      <span class="label-body-2 color-gray-default mt-8">
+        Compre mais produtos de um mesmo brechó e pague apenas um frete.
+      </span>
+    </div>
+
+    <button
+      mat-stroked-button
+      color="primary"
+      class="w-full mt-16"
+      (click)="addMore()"
+    >
+      <b>Adicionar mais produtos</b>
+    </button>
+  </div>
+
+  <div class="dialog-footer">
+    <button mat-flat-button color="primary" class="w-full" (click)="goToPayment()">
+      Ir para pagamento
+    </button>
+  </div>
+</div>

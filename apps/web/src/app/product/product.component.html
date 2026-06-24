@@ -27,6 +27,7 @@
             [productId]="productId"
             [isInReserves]="isInReserves"
             (openCheckout)="openCheckout()"
+            (addMore)="openOwnerWardrobe()"
           ></tk-product-cta>
           <!-- Status do produto -->
           @if (myProduct || !product.published) {

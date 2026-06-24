@@ -354,6 +354,10 @@ export class ProductComponent implements OnInit, OnDestroy {
     await this.completingInformation.tryStartPurchase(this.owner._id);
   }
 
+  openOwnerWardrobe() {
+    this.router.navigateByUrl(`/users/${this.owner.seller?.nickname}`);
+  }
+
   async deleteProduct() {
     if (!this.myProduct || !this.product) return;
 

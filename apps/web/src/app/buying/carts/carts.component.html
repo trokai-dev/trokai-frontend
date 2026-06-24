@@ -1,7 +1,6 @@
 <div class="container fill-height">
   <tk-cart
     [baskets]="baskets"
-    [justAdded]="justAdded"
     (checkout)="checkout($event)"
     (removeProduct)="removeProduct($event)"
     (openProduct)="openProduct($event)"
@@ -9,19 +8,5 @@
     (openReviews)="openReviews($event)"
     (addMore)="openOwner($event)"
     (browseProducts)="browseProducts()"
-  >
-    @if (suggestionHeader && suggestions && suggestions.length) {
-      <app-products-horizontal-list
-        suggestions
-        title="{{ suggestionHeader }}"
-        [products]="suggestions"
-        [seeMore]="suggestionLink && suggestions && suggestions.length > 0"
-        navText="Ver tudo"
-        [navMore]="suggestionLink"
-        [colsDesk]="6"
-        [borderBottom]="false"
-      >
-      </app-products-horizontal-list>
-    }
-  </tk-cart>
+  ></tk-cart>
 </div>

@@ -12,10 +12,11 @@ import {
 import { TkReserveTimeComponent } from '../reserve-time/tk-reserve-time.component';
 
 /**
- * Shared cart CONTENT (canonical web). The platform shell owns the data (baskets$
- * + suggestion fetch via its own SearchService) and projects the suggestions list
- * via `ng-content select="[suggestions]"`. All navigation/modal intents are
- * emitted; removal/checkout go through the shared BuyingService in the shell.
+ * Shared cart CONTENT (canonical web). The platform shell owns the data
+ * (baskets$) and all navigation/modal intents are emitted; removal/checkout go
+ * through the shared BuyingService in the shell. The "added to cart" upsell
+ * (suggestions + frete único) now lives in `TkCartAddedDialogComponent`,
+ * opened right when an item is added — this component only lists baskets.
  */
 @Component({
   selector: 'tk-cart',
@@ -34,7 +35,6 @@ import { TkReserveTimeComponent } from '../reserve-time/tk-reserve-time.componen
 })
 export class TkCartComponent {
   @Input() baskets: Basket[] = [];
-  @Input() justAdded = false;
 
   @Output() checkout = new EventEmitter<string>();
   @Output() removeProduct = new EventEmitter<Clothes>();
