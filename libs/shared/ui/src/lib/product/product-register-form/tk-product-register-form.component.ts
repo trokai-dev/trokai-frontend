@@ -36,6 +36,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { AlertService } from '../../alert/alert.service';
+import { canSaveForm } from '../../forms';
 import { CostPipe } from '../../pipes/cost.pipe';
 import { TkAutocompleteComponent } from '../../media/autocomplete/tk-autocomplete.component';
 import { TkFeesCalculatorComponent } from '../../billing/fees-calculator/tk-fees-calculator.component';
@@ -142,6 +143,10 @@ export class TkProductRegisterFormComponent implements OnInit, OnChanges {
     isErrorState: () =>
       this.costErrorMax || this.costErrorMin || this.costErrorOffer,
   };
+
+  get canSave(): boolean {
+    return canSaveForm(this.form, !!this.editingId);
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({

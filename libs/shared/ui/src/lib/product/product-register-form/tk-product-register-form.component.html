@@ -229,9 +229,9 @@
 
       <div class="flex justify-end mt-24">
         <button
-          class="w-25"
+          class="min-w-160"
           type="submit"
-          [disabled]="form.disabled"
+          [disabled]="form.disabled || !canSave"
           mat-flat-button
           aria-label="Salvar"
           color="primary"
