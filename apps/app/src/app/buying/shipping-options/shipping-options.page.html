@@ -51,7 +51,7 @@
               </span>
             </mat-radio-button>
           </div>
-          } @if (user?.address && checkoutLocal.owner.seller?.shipping) {
+          } @if (user?.address && checkoutLocal.owner.seller?.shipping && checkoutResponse) {
           <div
             [ngClass]="{'border-top': checkoutLocal.owner.seller?.inPerson}"
             class="mb-16"
@@ -69,14 +69,14 @@
                 <!-- Shipping info -->
                 <span class="flex justify-between items-center mt-4">
                   <span class="color-gray-default fw-semibold label-body-2">
-                    @if(checkoutResponse.shipping.shippingValues.maxDeliveryTime)
+                    @if(checkoutResponse?.shipping?.shippingValues?.maxDeliveryTime)
                     {
                     <span>
                       Em até {{
                       checkoutResponse.shipping.shippingValues.maxDeliveryTime
                       }} dias após o envio por
                     </span>
-                    {{ checkoutResponse.shipping.shippingValues.shippingCost |
+                    {{ checkoutResponse?.shipping?.shippingValues?.shippingCost |
                     cost | currency : "BRL" : "symbol" : "1.2" }} }
                   </span>
                 </span>

@@ -6,7 +6,7 @@
         mat-icon-button
         class="onboarding-nav-prev"
         (click)="prev()"
-        [class.invisible]="isFirstSlide"
+        [style.visibility]="isFirstSlide ? 'hidden' : 'visible'"
       >
         <mat-icon>arrow_back</mat-icon>
       </button>
@@ -99,21 +99,20 @@
 
     <!-- pagination + action -->
     <div class="onboarding-footer">
+      @if (!isLastSlide) {
       <button
         mat-flat-button
         color="primary"
         class="onboarding-nav-next w-full"
-        [class.d-none]="isLastSlide"
         (click)="next()"
       >
         Próximo
       </button>
-
+      } @else {
       <mat-checkbox
         [(ngModel)]="accepted"
         color="primary"
         class="acceptance-check"
-        [class.d-none]="!isLastSlide"
       >
         Estou ciente e aceito os critérios de curadoria para vender no Trokaí.
       </mat-checkbox>
@@ -122,12 +121,12 @@
         mat-flat-button
         color="primary"
         class="w-full"
-        [class.d-none]="!isLastSlide"
         [disabled]="!accepted"
         (click)="start()"
       >
         Criar minha loja
       </button>
+      }
     </div>
   </div>
 </div>
