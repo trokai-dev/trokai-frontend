@@ -23,6 +23,7 @@ import { NgxMaskDirective } from 'ngx-mask';
 import dayjs from 'dayjs';
 import { User } from '@trokai/shared-core';
 import { AlertService } from '../../alert/alert.service';
+import { canSaveForm } from '../../forms';
 
 export interface ProfileFormValue {
   name: string;
@@ -66,6 +67,7 @@ export class ProfileFormComponent implements OnChanges {
   under18 = false;
   invalidBirth = false;
   showedDocMsg = false;
+  private hadInitialData = false;
 
   readonly form = new FormGroup({
     name: new FormControl<string | null>(null, [
@@ -104,7 +106,12 @@ export class ProfileFormComponent implements OnChanges {
     if (changes['user'] && this.user) this.fillForm();
   }
 
+  get canSave(): boolean {
+    return canSaveForm(this.form, this.hadInitialData);
+  }
+
   fillForm() {
+    this.hadInitialData = !!(this.user.name && this.user.cpf);
     if (this.form.valid) return;
     this.form.patchValue({
       name: this.user.name,

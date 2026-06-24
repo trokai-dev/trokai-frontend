@@ -2,8 +2,11 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
+  ViewChild,
   inject,
 } from '@angular/core';
 import {
@@ -15,13 +18,16 @@ import {
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 import { NgxMaskDirective } from 'ngx-mask';
-import { Card, User } from '@trokai/shared-core';
+import { Card, User, getCreditCardBrand, PaymentBrands } from '@trokai/shared-core';
 import { BuyingService } from '@trokai/shared-data-access';
 import { AlertService } from '../../alert/alert.service';
-import { getCreditCardBrand, PaymentBrands } from '@trokai/shared-core';
+import { TkAddressFormComponent } from '../../address/address-form/tk-address-form.component';
 import { TkPaymentIconComponent } from '../payment-icon/tk-payment-icon.component';
 
 @Component({
@@ -34,22 +40,32 @@ import { TkPaymentIconComponent } from '../payment-icon/tk-payment-icon.componen
     MatInputModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatDividerModule,
+    MatIconModule,
+    MatListModule,
     NgxMaskDirective,
+    TkAddressFormComponent,
     TkPaymentIconComponent,
   ],
   templateUrl: './tk-card-form.component.html',
   styleUrl: './tk-card-form.component.scss',
 })
-export class TkCardFormComponent implements OnInit {
+export class TkCardFormComponent implements OnInit, OnChanges {
   @Input() user!: User;
+  @Input() encapsulated = false; // ? (1 cta grande) : (salvar e cancelar pequenos)
+  @Input() onlyForm = false;
+
   @Output() saved = new EventEmitter<Partial<Card>>();
 
-  private fb = inject(FormBuilder);
-  private buyingService = inject(BuyingService);
-  private alert = inject(AlertService);
+  @ViewChild(TkAddressFormComponent) addressForm!: TkAddressFormComponent;
 
-  useUserAddress = false;
+  private fb = inject(FormBuilder);
+  private alert = inject(AlertService);
+  private buyingService = inject(BuyingService);
+
   cardBrand = PaymentBrands.CARD;
+  formNew = false;
+  useUserAddress = false;
 
   form: FormGroup = this.fb.group({
     holderName: [null, Validators.required],
@@ -62,35 +78,29 @@ export class TkCardFormComponent implements OnInit {
     expirationFull: [null, Validators.required],
   });
 
-  addressForm: FormGroup = this.fb.group({
-    street: [null, Validators.required],
-    neighborhood: [null, Validators.required],
-    city: [null, Validators.required],
-    state: [null, Validators.required],
-    zipCode: [null, Validators.required],
-    number: [null, Validators.required],
-    complement: [null],
-  });
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.useUserAddress = !!this.user?.address;
+    if (this.onlyForm) this.formNew = true;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['user'] && !changes['user'].firstChange) {
+      this.useUserAddress = !!this.user?.address;
+    }
+  }
+
+  addressValid(): boolean {
+    return this.useUserAddress || this.addressForm?.form?.valid;
   }
 
   checkBrand() {
     this.cardBrand = getCreditCardBrand(this.form.value.number);
   }
 
-  isValid() {
-    if (this.form.invalid) return false;
-    if (!this.useUserAddress && this.addressForm.invalid) return false;
-    return true;
-  }
-
   async save(): Promise<Partial<Card> | null> {
-    this.form.markAllAsTouched();
-    if (!this.useUserAddress) this.addressForm.markAllAsTouched();
+    if (!this.useUserAddress) this.addressForm.validateForm();
 
-    if (!this.isValid()) {
+    if (this.form.invalid || (!this.useUserAddress && this.addressForm.form.invalid)) {
       this.alert.formError();
       return null;
     }
@@ -109,12 +119,39 @@ export class TkCardFormComponent implements OnInit {
       card.address = { ...this.user.address };
       delete card.address.location;
     } else {
-      card.address = { ...this.addressForm.value };
+      const av = this.addressForm.form.value;
+      card.address = {
+        ...av,
+        zipCode: av.zipCode ? av.zipCode.replace('-', '') : undefined,
+        number: av.number || undefined,
+      } as typeof card.address;
     }
+
     card.address.country = 'BR';
 
     const created = await this.buyingService.createCard(card);
+    this.close();
     this.saved.emit(created);
     return created;
+  }
+
+  close() {
+    this.form.reset();
+    this.form.markAsPristine();
+    this.form.markAsUntouched();
+    this.formNew = false;
+  }
+
+  async deleteCard(card: Card) {
+    const answer = await this.alert.question(
+      'Essa ação não pode ser desfeita.',
+      'Excluir cartão?',
+      'Excluir',
+      'Cancelar',
+    );
+    if (!answer) return;
+
+    await this.buyingService.deleteCard(card);
+    this.alert.alert('Cartão apagado!');
   }
 }

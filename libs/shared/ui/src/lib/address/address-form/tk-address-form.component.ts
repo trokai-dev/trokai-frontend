@@ -18,6 +18,7 @@ import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { Address, RespostaCep } from '@trokai/shared-core';
 import { AlertService } from '../../alert/alert.service';
+import { canSaveForm } from '../../forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -48,6 +49,13 @@ import { NgxMaskDirective } from 'ngx-mask';
           />
           @if (viaCepError) {
             <mat-hint>CEP inválido</mat-hint>
+          } @else if (form.controls.zipCode.hasError('required')) {
+            <mat-error>Informe o CEP</mat-error>
+          } @else if (
+            form.controls.zipCode.hasError('minlength') ||
+            form.controls.zipCode.hasError('maxlength')
+          ) {
+            <mat-error>CEP inválido</mat-error>
           }
         </mat-form-field>
       </div>
@@ -55,12 +63,18 @@ import { NgxMaskDirective } from 'ngx-mask';
         <mat-form-field appearance="outline" class="w-full">
           <mat-label>Endereço</mat-label>
           <input matInput type="text" formControlName="street" />
+          @if (form.controls.street.hasError('required')) {
+            <mat-error>Informe o endereço</mat-error>
+          }
         </mat-form-field>
       </div>
       <div class="tk-row tk-row--cols">
         <mat-form-field appearance="outline" class="tk-col-4">
           <mat-label>Número</mat-label>
           <input matInput type="text" formControlName="number" maxlength="6" />
+          @if (form.controls.number.hasError('required')) {
+            <mat-error>Informe o número</mat-error>
+          }
         </mat-form-field>
         <mat-form-field appearance="outline" class="tk-col-8">
           <mat-label>Complemento</mat-label>
@@ -71,16 +85,25 @@ import { NgxMaskDirective } from 'ngx-mask';
         <mat-form-field appearance="outline" class="w-full">
           <mat-label>Bairro</mat-label>
           <input matInput type="text" formControlName="neighborhood" />
+          @if (form.controls.neighborhood.hasError('required')) {
+            <mat-error>Informe o bairro</mat-error>
+          }
         </mat-form-field>
       </div>
       <div class="tk-row tk-row--cols">
         <mat-form-field appearance="outline" class="tk-col-8">
           <mat-label>Cidade</mat-label>
           <input matInput readonly type="text" formControlName="city" />
+          @if (form.controls.city.hasError('required')) {
+            <mat-error>Informe a cidade</mat-error>
+          }
         </mat-form-field>
         <mat-form-field appearance="outline" class="tk-col-4">
           <mat-label>Estado</mat-label>
           <input matInput readonly type="text" formControlName="state" />
+          @if (form.controls.state.hasError('required')) {
+            <mat-error>Informe o estado</mat-error>
+          }
         </mat-form-field>
       </div>
       @if (submit) {
@@ -90,7 +113,15 @@ import { NgxMaskDirective } from 'ngx-mask';
               Cancelar
             </button>
           }
-          <button type="submit" mat-flat-button color="primary">Salvar</button>
+          <button
+            type="submit"
+            mat-flat-button
+            color="primary"
+            class="min-w-160"
+            [disabled]="!canSave"
+          >
+            Salvar
+          </button>
         </div>
       }
     </form>
@@ -100,7 +131,7 @@ import { NgxMaskDirective } from 'ngx-mask';
       .tk-address-form {
         display: flex;
         flex-direction: column;
-        gap: 0;
+        gap: var(--space-8);
       }
       .tk-row {
         width: 100%;
@@ -135,6 +166,7 @@ export class TkAddressFormComponent implements OnChanges {
   private alert = inject(AlertService);
 
   viaCepError = false;
+  private hadInitialData = false;
 
   form = new FormGroup({
     street: new FormControl<string | null>(null, [Validators.required]),
@@ -209,6 +241,10 @@ export class TkAddressFormComponent implements OnChanges {
     this.formClose.emit();
   }
 
+  get canSave(): boolean {
+    return canSaveForm(this.form, this.hadInitialData);
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (
       changes['address'] &&
@@ -216,6 +252,7 @@ export class TkAddressFormComponent implements OnChanges {
       changes['address'].currentValue != null &&
       !this.form.valid
     ) {
+      this.hadInitialData = true;
       const a = this.address!;
       this.form.patchValue({
         ...a,

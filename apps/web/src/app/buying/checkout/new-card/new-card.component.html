@@ -1,16 +1,14 @@
 <h3 class="checkout-title">Novo cartão de crédito</h3>
 
 <div class="checkout-body">
-  <app-form-card [onlyForm]="true" [encapsulated]="true" />
+  <tk-card-form [user]="user" [onlyForm]="true" [encapsulated]="true" />
 </div>
 
 <div class="checkout-footer mt-40">
   <button
     mat-flat-button
     color="primary"
-    [disabled]="
-      !formCardComponent?.form?.valid || !formCardComponent?.addressValid()
-    "
+    [disabled]="!cardForm?.form?.valid || !cardForm?.addressValid()"
     (click)="onContinue()"
   >
     Continuar

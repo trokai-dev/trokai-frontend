@@ -46,6 +46,11 @@
         placeholder="Nome da loja que será exibido para os usuários"
         maxlength="50"
       />
+      @if (form.controls.storeName.hasError('required')) {
+        <mat-error>Informe o nome da loja</mat-error>
+      } @else if (form.controls.storeName.hasError('minlength')) {
+        <mat-error>Mínimo de 3 caracteres</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="seller-profile__field">
@@ -68,7 +73,11 @@
           Copiar
         </button>
       </div>
-      @if (invalidNickname()) {
+      @if (form.controls.nickname.hasError('required')) {
+        <mat-error>Informe o link da loja</mat-error>
+      } @else if (form.controls.nickname.hasError('minlength')) {
+        <mat-error>Mínimo de 3 caracteres</mat-error>
+      } @else if (invalidNickname()) {
         <mat-error
           >Use apenas letras, números, ponto, traço ou sublinhado.</mat-error
         >
@@ -157,7 +166,14 @@
     }
 
     <div class="seller-profile__actions">
-      <button type="submit" mat-flat-button aria-label="Salvar" color="primary">
+      <button
+        type="submit"
+        mat-flat-button
+        aria-label="Salvar"
+        color="primary"
+        class="min-w-160"
+        [disabled]="!canSave"
+      >
         Salvar
       </button>
     </div>

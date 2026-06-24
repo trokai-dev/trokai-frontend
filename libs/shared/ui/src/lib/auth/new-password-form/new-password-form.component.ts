@@ -18,7 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { TrokaiErrorStateMatcher } from '../../forms';
+import { TrokaiErrorStateMatcher, canSaveForm } from '../../forms';
 
 export interface NewPasswordValue {
   /** Present only when not in the forgot flow. */
@@ -83,6 +83,10 @@ export class NewPasswordFormComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.forgot) this.form.controls.currentPassword.disable();
+  }
+
+  get canSave(): boolean {
+    return canSaveForm(this.form, false);
   }
 
   submit() {

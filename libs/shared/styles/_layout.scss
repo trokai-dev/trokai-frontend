@@ -126,6 +126,11 @@
 .w-75 {
   width: 75%;
 }
+.min-w-160 {
+  // !important: beats Angular Material's own `.mdc-button` min-width (same
+  // specificity, loaded after this utility in the global stylesheet).
+  min-width: 16rem !important;
+}
 .block {
   display: block;
 }

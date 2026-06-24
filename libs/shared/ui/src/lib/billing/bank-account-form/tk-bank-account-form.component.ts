@@ -29,6 +29,7 @@ import {
   BankService,
 } from '@trokai/shared-data-access';
 import { NavigationManager } from '@trokai/shared-core';
+import { canSaveForm } from '../../forms';
 
 @Component({
   selector: 'tk-bank-account-form',
@@ -96,6 +97,13 @@ export class TkBankAccountFormComponent implements AfterViewInit {
 
   displayBank(option: BasicModel<string>): string {
     return option?.value ?? '';
+  }
+
+  get canSave(): boolean {
+    return (
+      canSaveForm(this.form, !!this.accountBkp) &&
+      !!this.form.get('bank')?.value?._id
+    );
   }
 
   private _filterBanks(value: string): BasicModel<string>[] {

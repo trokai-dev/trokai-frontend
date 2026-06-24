@@ -1,7 +1,7 @@
 .seller-profile {
   display: flex;
   flex-direction: column;
-  gap: var(--space-16);
+  gap: var(--space-8);
 }
 
 .seller-profile__adjusts {
@@ -17,6 +17,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  margin-bottom: var(--space-24);
 }
 
 .seller-profile__avatar-actions {

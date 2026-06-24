@@ -28,6 +28,7 @@ import {
 } from '@trokai/shared-core';
 import { TkUserAvatarComponent } from '../user-avatar/user-avatar.component';
 import { AlertService } from '../../alert/alert.service';
+import { canSaveForm } from '../../forms';
 
 export interface SellerProfileValue {
   storeName: string;
@@ -76,6 +77,7 @@ export class SellerProfileComponent implements OnInit {
   submitAttempted = false;
   initialNickname: string | null = null;
   nicknameEdited = false;
+  private hadInitialData = false;
 
   readonly form = new FormGroup({
     storeName: new FormControl<string | null>(null, [
@@ -105,6 +107,7 @@ export class SellerProfileComponent implements OnInit {
 
   ngOnInit() {
     if (this.user) {
+      this.hadInitialData = !!this.user.seller?.storeName;
       this.form.patchValue(
         (this.user.seller ?? {}) as Partial<SellerProfileValue> & object,
       );
@@ -131,6 +134,10 @@ export class SellerProfileComponent implements OnInit {
 
   get avatarSatisfied(): boolean {
     return !this.requireAvatar || this.avatarPresent;
+  }
+
+  get canSave(): boolean {
+    return canSaveForm(this.form, this.hadInitialData);
   }
 
   getAdjustLabel(id: number): string {

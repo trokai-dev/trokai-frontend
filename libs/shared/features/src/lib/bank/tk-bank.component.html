@@ -1,11 +1,11 @@
-<div>
-  <h3 class="color-gray-dark">Cofrinho</h3>
+<div class="bank">
+  <h3 class="color-gray-dark mb-48">Cofrinho</h3>
 
   @if (isLoading) {
-    <mat-spinner color="primary" class="spinner-small mt-24"></mat-spinner>
+    <mat-spinner color="primary" class="spinner-small"></mat-spinner>
   }
   @if (balance) {
-    <div class="mt-32">
+    <div>
       <div class="flex flex-col gap-24">
         <div>
           <h6 class="color-gray-dark block">Saldo disponível</h6>

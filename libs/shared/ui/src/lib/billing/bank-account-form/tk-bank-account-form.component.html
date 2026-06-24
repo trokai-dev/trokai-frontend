@@ -1,8 +1,15 @@
 @if (user) {
-  <form [formGroup]="form" (ngSubmit)="save()">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="save()"
+    class="flex flex-col gap-8"
+  >
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>Nome completo</mat-label>
       <input matInput type="text" formControlName="holderName" />
+      @if (form.controls['holderName'].hasError('required')) {
+        <mat-error>Informe o nome do titular</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="w-full">
@@ -32,6 +39,9 @@
           <mat-option [value]="b">{{ b.value | titlecase }}</mat-option>
         }
       </mat-autocomplete>
+      @if (form.controls['bank'].hasError('required')) {
+        <mat-error>Selecione o banco</mat-error>
+      }
     </mat-form-field>
 
     <div class="grid grid-cols-2 gap-12">
@@ -44,6 +54,11 @@
           formControlName="branchNumber"
           maxlength="4"
         />
+        @if (form.controls['branchNumber'].hasError('required')) {
+          <mat-error>Informe a agência</mat-error>
+        } @else if (form.controls['branchNumber'].hasError('minlength')) {
+          <mat-error>Agência inválida</mat-error>
+        }
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Dígito (se houver)</mat-label>
@@ -66,6 +81,11 @@
           inputmode="numeric"
           formControlName="accountNumber"
         />
+        @if (form.controls['accountNumber'].hasError('required')) {
+          <mat-error>Informe a conta</mat-error>
+        } @else if (form.controls['accountNumber'].hasError('minlength')) {
+          <mat-error>Conta inválida</mat-error>
+        }
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Dígito (se houver)</mat-label>
@@ -76,10 +96,13 @@
           formControlName="accountCheckDigit"
           maxlength="1"
         />
+        @if (form.controls['accountCheckDigit'].hasError('required')) {
+          <mat-error>Informe o dígito</mat-error>
+        }
       </mat-form-field>
     </div>
 
-    <div class="w-full flex justify-between mt-16">
+    <div class="bank-account-form__actions w-full flex justify-between mt-16">
       @if (accountBkp && !changingAccount) {
         <button
           type="button"
@@ -104,7 +127,8 @@
         type="submit"
         mat-flat-button
         color="primary"
-        [disabled]="form.invalid || !form.get('bank')?.value?._id"
+        class="min-w-160"
+        [disabled]="!canSave"
       >
         Confirmar
       </button>

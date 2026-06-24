@@ -1,9 +1,9 @@
-<div>
-  <h3 class="color-gray-dark">Dados pessoais</h3>
+<div class="profile">
+  <h3 class="color-gray-dark mb-48">Dados pessoais</h3>
 
   @if (user) {
     <tk-profile-form
-      class="mt-48 block"
+      class="block"
       [user]="user"
       [completingInformation]="completingInformation"
       [emailRegistered]="emailRegistered"

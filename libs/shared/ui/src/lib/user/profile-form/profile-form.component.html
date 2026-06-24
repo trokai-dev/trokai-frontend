@@ -110,7 +110,8 @@
       mat-flat-button
       aria-label="Salvar"
       color="primary"
-      [disabled]="loading"
+      class="min-w-160"
+      [disabled]="loading || !canSave"
     >
       Salvar
     </button>

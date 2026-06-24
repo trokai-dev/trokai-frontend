@@ -10,7 +10,7 @@ import { CompletingInformationService } from '@trokai/shared-data-access';
   imports: [TkAddressFormComponent],
   template: `
     <div class="address">
-      <h3 class="color-gray-dark">Endereço</h3>
+      <h3 class="color-gray-dark mb-48">Endereço</h3>
       <tk-address-form [address]="address" (addressSave)="save($event)" />
     </div>
   `,
