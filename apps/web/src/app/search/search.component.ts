@@ -12,8 +12,7 @@ import { Paginator, PaginatorComponent } from './paginator/paginator.component';
 import { SearchService } from './search.service';
 import { ItemsMap } from '@trokai/shared-core';
 
-import { TkProductCardComponent } from '@trokai/shared-ui';
-import { MatBadgeModule } from '@angular/material/badge';
+import { TkBadgeComponent, TkProductCardComponent } from '@trokai/shared-ui';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -41,7 +40,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatIconModule,
     TkFilterFormComponent,
     FormsModule,
-    MatBadgeModule,
+    TkBadgeComponent,
     TkProductCardComponent,
     PaginatorComponent,
     MatSelectModule,

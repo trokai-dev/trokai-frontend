@@ -10,7 +10,7 @@
 
     <!-- Resultados -->
     @if (itemsMap && results) {
-      <div class="mt-24">
+      <div class="mt-md-24">
         @if (filters.text) {
           <h1 class="color-gray-dark hidden block-md">
             {{ filters.text }}
@@ -18,17 +18,15 @@
         }
         <div class="block hidden-md">
           <div class="flex gap-24 items-center">
-            <button
-              mat-stroked-button
-              matBadge="{{ filters?.count() }}"
-              [matBadgeHidden]="true"
-              matBadgeSize="small"
-              matBadgeColor="accent"
-              (click)="showFiltersDialog()"
-              color="primary"
-            >
-              Filtros
-            </button>
+            <tk-badge [count]="filters?.count() ?? 0">
+              <button
+                mat-stroked-button
+                (click)="showFiltersDialog()"
+                color="primary"
+              >
+                Filtros
+              </button>
+            </tk-badge>
             <button
               mat-stroked-button
               (click)="showSortingDialog()"
