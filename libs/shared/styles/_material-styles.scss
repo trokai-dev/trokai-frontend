@@ -46,8 +46,10 @@
   border-color: var(--color-gray-1) !important;
 }
 
-.mat-menu-panel {
+.mat-menu-panel,
+.mat-mdc-menu-panel {
   min-width: 200px !important;
+  --mat-menu-container-color: #fff;
 }
 
 .mat-mdc-menu-item {
