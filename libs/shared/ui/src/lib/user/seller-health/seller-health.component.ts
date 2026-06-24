@@ -82,14 +82,14 @@ const METRIC_CONFIG: Record<
 };
 
 @Component({
-  selector: 'app-seller-health',
+  selector: 'tk-seller-health',
   standalone: true,
   imports: [NgClass],
   templateUrl: './seller-health.component.html',
   styleUrls: ['./seller-health.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SellerHealthComponent implements OnInit, OnChanges {
+export class TkSellerHealthComponent implements OnInit, OnChanges {
   // Real seller health, carried inside the user payload (GET /users/me).
   @Input() health?: SellerHealth | null;
   @Input() sellerName = '';

@@ -13,9 +13,9 @@ import { TkSellerStatusBadgeComponent } from '@trokai/shared-ui';
 import { SellerStatusOnboardingComponent } from './onboarding/seller-status-onboarding.component';
 import { AlertService } from '@trokai/shared-ui';
 import { TkReviewStarsComponent } from '@trokai/shared-ui';
+import { TkSellerHealthComponent } from '@trokai/shared-ui';
 import { DialogService } from '../../services/dialog.service';
 import { MatDividerModule } from '@angular/material/divider';
-import { SellerHealthComponent } from './seller-health/seller-health.component';
 
 @Component({
   selector: 'app-seller-status',
@@ -29,7 +29,7 @@ import { SellerHealthComponent } from './seller-health/seller-health.component';
     SellerStatusOnboardingComponent,
     TkReviewStarsComponent,
     MatDividerModule,
-    SellerHealthComponent,
+    TkSellerHealthComponent,
   ],
 })
 export class SellerStatusComponent implements OnInit {

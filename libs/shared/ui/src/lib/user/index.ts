@@ -6,3 +6,4 @@ export * from './profile-form/profile-form.component';
 export * from './contact-form/contact-form.component';
 export * from './report-user/report-user.component';
 export * from './seller-profile/seller-profile.component';
+export * from './seller-health/seller-health.component';

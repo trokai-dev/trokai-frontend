@@ -21,7 +21,7 @@
         </div>
 
         <div>
-          <h6 class="color-gray-dark block">Em adamento</h6>
+          <h6 class="color-gray-dark block">Em andamento</h6>
           <span class="label-body-2 mt-16 color-gray-default block">
             {{
               balance.vendasEmAndamento
@@ -48,31 +48,30 @@
         color="primary"
         (click)="withdraw()"
       >
-        Soliciar saque
+        Solicitar saque
       </button>
     </div>
 
-    @if (ordersAndTransfers && ordersAndTransfers.length) {
+    @if (movements && movements.length) {
       <h6 class="color-gray-dark block mt-32">Movimentações</h6>
 
       <mat-list class="mt-16">
-        @for (order of ordersAndTransfers; track order) {
+        @for (m of movements; track m) {
           <div class="py-24">
             <div class="w-full">
               <div class="flex justify-between">
-                <h6 class="color-gray-dark block">{{ order.title }}</h6>
+                <h6 class="color-gray-dark block">{{ m.title }}</h6>
 
                 <span class="label-caption-1 ml-16">
-                  {{ order.date | date: 'dd/MM/yyyy' }}
+                  {{ m.date | date: 'dd/MM/yyyy' }}
                 </span>
               </div>
 
-              <!--  -->
               <div class="flex justify-between mt-16">
                 <div>
-                  @if (order.items) {
+                  @if (m.items) {
                     <div class="my-8">
-                      @for (i of order.items; track i) {
+                      @for (i of m.items; track i) {
                         <span
                           class="text-dots orderTransferText block label-caption-1 color-gray-default"
                         >
@@ -81,19 +80,18 @@
                       }
                     </div>
                   }
-                  <!--  -->
-                  @if (order.text) {
+                  @if (m.text) {
                     <span class="mt-8 label-caption-1 orderTransferText">
-                      {{ order.text }}
+                      {{ m.text }}
                     </span>
                   }
-                  @if (order.transferAt) {
+                  @if (m.transferAt) {
                     <div>
                       <span
                         class="mt-8 label-caption-1 color-gray-default flex items-end"
                       >
                         Previsão de saque:
-                        {{ order.transferAt | date: 'dd/MM/yyyy' }}
+                        {{ m.transferAt | date: 'dd/MM/yyyy' }}
                         <mat-icon
                           type="button"
                           class="ml-24 mt-4 color-gray-default pt-8 icon-small"
@@ -110,15 +108,11 @@
                   <span
                     class="label-body-2"
                     [ngClass]="
-                      order.title === 'Venda'
-                        ? 'color-primary'
-                        : 'color-gray-default'
+                      m.title === 'Venda' ? 'color-primary' : 'color-gray-default'
                     "
                   >
                     <b>
-                      {{
-                        order.amount | cost | currency: 'BRL' : true : '1.2-2'
-                      }}</b
+                      {{ m.amount | cost | currency: 'BRL' : true : '1.2-2' }}</b
                     >
                   </span>
                 </div>
