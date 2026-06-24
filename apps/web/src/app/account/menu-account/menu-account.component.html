@@ -1,41 +1,10 @@
-<div class="account-menu fill-height">
-  <div class="w-full flex hidden-md pr-16 justify-end">
-    @if (!menuOppened) {
-      <mat-icon
-        type="button"
-        class="color-gray-default"
-        mat-icon-button
-        (click)="toggleMenu()"
-      >
-        menu
-      </mat-icon>
-    }
-    @if (menuOppened) {
-      <mat-icon
-        type="button"
-        class="color-gray-default"
-        mat-icon-button
-        (click)="toggleMenu()"
-      >
-        close
-      </mat-icon>
-    }
-  </div>
-
-  <div
-    class="block-md"
-    [ngClass]="{ block: menuOppened, hidden: !menuOppened }"
-  >
+<div class="account-menu">
+  <div class="hidden block-md fill-height">
     <h3>Minha conta</h3>
 
     <div class="side-menu py-48">
       @for (i of accountTabs; track i) {
-        <a
-          routerLinkActive="active-link"
-          routerLink="{{ i.route }}"
-          (click)="toggleMenu()"
-          mat-menu-item
-        >
+        <a routerLinkActive="active-link" routerLink="{{ i.route }}" mat-menu-item>
           <ion-icon name="{{ i.icon }}"></ion-icon>
           <span>{{ i.text }}</span>
         </a>
@@ -54,12 +23,7 @@
 
       <div class="side-menu py-48">
         @for (i of sellerTabs; track i) {
-          <a
-            routerLinkActive="active-link"
-            routerLink="{{ i.route }}"
-            (click)="toggleMenu()"
-            mat-menu-item
-          >
+          <a routerLinkActive="active-link" routerLink="{{ i.route }}" mat-menu-item>
             <ion-icon name="{{ i.icon }}"></ion-icon>
             <span>{{ i.text }}</span>
           </a>

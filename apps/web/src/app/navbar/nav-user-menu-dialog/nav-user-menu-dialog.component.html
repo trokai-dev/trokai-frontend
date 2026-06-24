@@ -1,0 +1,109 @@
+<div class="dialog-wrapper" id="nav-user-menu-dialog">
+  <div class="dialog-header flex items-center justify-end">
+    <button
+      mat-icon-button
+      class="close-button"
+      [mat-dialog-close]="true"
+      aria-label="Fechar"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="dialog-content">
+    <h3>Minha conta</h3>
+
+    <div class="side-menu py-8">
+      <a rel="nofollow" routerLink="/account/profile" mat-menu-item [mat-dialog-close]="true">
+        <ion-icon name="person-outline"></ion-icon>
+        <span class="label-body-2 color-gray-dark py-8">Dados pessoais</span>
+      </a>
+
+      <a rel="nofollow" routerLink="/account/cards" mat-menu-item [mat-dialog-close]="true">
+        <ion-icon name="card-outline"></ion-icon>
+        <span class="label-body-2 color-gray-dark py-8">Cartões</span>
+      </a>
+
+      <a rel="nofollow" routerLink="/account/address" mat-menu-item [mat-dialog-close]="true">
+        <ion-icon name="location-outline"></ion-icon>
+        <span class="label-body-2 color-gray-dark py-8">Endereço</span>
+      </a>
+
+      <a rel="nofollow" routerLink="/account/options" mat-menu-item [mat-dialog-close]="true">
+        <ion-icon name="shield-outline"></ion-icon>
+        <span class="label-body-2 color-gray-dark py-8">Segurança</span>
+      </a>
+
+      <a rel="nofollow" routerLink="/orders/purchases/" mat-menu-item [mat-dialog-close]="true">
+        <ion-icon name="bag-outline"></ion-icon>
+        <span class="label-body-2 color-gray-dark py-8">Compras</span>
+      </a>
+
+      <a rel="nofollow" routerLink="/notifications/" mat-menu-item [mat-dialog-close]="true">
+        <tk-badge [count]="notificationsCount">
+          <ion-icon name="notifications-outline"></ion-icon>
+        </tk-badge>
+        <span class="label-body-2 color-gray-dark py-8"> Notificações </span>
+      </a>
+
+      <a rel="nofollow" routerLink="/favorites/" mat-menu-item [mat-dialog-close]="true">
+        <ion-icon name="heart-outline"></ion-icon>
+        <span class="label-body-2 color-gray-dark py-8">Favoritos</span>
+      </a>
+    </div>
+
+    @if (user?.isSeller()) {
+      <div class="flex items-center gap-8 mt-8">
+        <h3>Minha loja</h3>
+        <tk-seller-status-badge
+          [user]="user"
+          [isLoggedUser]="true"
+          (badgeClick)="goToSellerStatus()"
+        />
+      </div>
+
+      <div class="side-menu py-8">
+        <a rel="nofollow" routerLink="/orders/sales/" mat-menu-item [mat-dialog-close]="true">
+          <ion-icon name="cash-outline"></ion-icon>
+          <span class="label-body-2 color-gray-dark py-8">Vendas</span>
+        </a>
+
+        <a
+          rel="nofollow"
+          mat-menu-item
+          [mat-dialog-close]="true"
+          routerLink="{{
+            user.seller?.nickname
+              ? '/users/' + user.seller.nickname
+              : '/account/wardrobe'
+          }}"
+        >
+          <ion-icon name="shirt-outline"></ion-icon>
+          <span class="label-body-2 color-gray-dark py-8">Armário</span>
+        </a>
+
+        <a rel="nofollow" routerLink="/account/wardrobe" mat-menu-item [mat-dialog-close]="true">
+          <ion-icon name="storefront-outline"></ion-icon>
+          <span class="label-body-2 color-gray-dark py-8">Perfil da loja</span>
+        </a>
+
+        <a rel="nofollow" routerLink="/account/seller-status" mat-menu-item [mat-dialog-close]="true">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <span class="label-body-2 color-gray-dark py-8">Status da loja</span>
+        </a>
+
+        <a rel="nofollow" routerLink="/account/bank" mat-menu-item [mat-dialog-close]="true">
+          <ion-icon name="cash-outline"></ion-icon>
+          <span class="label-body-2 color-gray-dark py-8">Cofrinho</span>
+        </a>
+      </div>
+    }
+
+    <div class="side-menu py-8">
+      <a rel="nofollow" mat-menu-item (click)="logout()">
+        <ion-icon name="exit-outline"></ion-icon>
+        <span class="label-body-2 color-gray-dark py-8">Sair</span>
+      </a>
+    </div>
+  </div>
+</div>

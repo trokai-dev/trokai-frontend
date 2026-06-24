@@ -107,7 +107,8 @@
             <li
               class="li-user"
               #menuTrigger="matMenuTrigger"
-              [matMenuTriggerFor]="menu"
+              [matMenuTriggerFor]="isMobile ? null : menu"
+              (click)="openUserMenu()"
               aria-label="Menu"
             >
               <tk-user-avatar

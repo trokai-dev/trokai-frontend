@@ -14,6 +14,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 
@@ -35,6 +36,7 @@ import { NotificationsService } from '@trokai/shared-data-access';
 import { SearchPageService } from '../services/search-page.service';
 import { navbarLinks } from './navbar-links';
 import { NavUserMenuComponent } from './nav-user-menu/nav-user-menu.component';
+import { NavUserMenuDialogComponent } from './nav-user-menu-dialog/nav-user-menu-dialog.component';
 import { NavExpandedMenuComponent } from './nav-expanded-menu/nav-expanded-menu.component';
 import { TkReserveTimeComponent } from '@trokai/shared-features';
 
@@ -64,6 +66,7 @@ export class NavbarComponent implements OnInit {
   private renderer = inject(Renderer2);
   private searchPageService = inject(SearchPageService);
   private dialog = inject(MatDialog);
+  private bpObserver = inject(BreakpointObserver);
   private notificationService = inject(NotificationsService);
   private globalService = inject(GlobalService);
   private messagesService = inject(MessagesService);
@@ -95,6 +98,8 @@ export class NavbarComponent implements OnInit {
   menuTab: number | null = null;
 
   user?: User;
+
+  isMobile = false;
 
   showSearch = false;
   buying = false;
@@ -131,6 +136,13 @@ export class NavbarComponent implements OnInit {
       this.user = u;
     });
 
+    // Mobile matches the breakpoint where the hamburger/avatar take over the nav.
+    this.ngZone.runOutsideAngular(() => {
+      this.bpObserver.observe('(max-width: 1199px)').subscribe((result) => {
+        this.ngZone.run(() => (this.isMobile = result.matches));
+      });
+    });
+
     this.buyingService.baskets$.subscribe((baskets) => {
       let sum = 0;
 
@@ -160,6 +172,18 @@ export class NavbarComponent implements OnInit {
     else this.router.navigate(['/search'], { queryParams: { page: 1 } });
 
     this.searchInput.nativeElement.blur();
+  }
+
+  openUserMenu() {
+    if (!this.isMobile || !this.user) return;
+
+    this.dialog.open(NavUserMenuDialogComponent, {
+      data: {
+        user: this.user,
+        notificationsCount: this.notificationCount + this.messageCount,
+      },
+      panelClass: 'dialog-normal',
+    });
   }
 
   showMenu(category: number) {
