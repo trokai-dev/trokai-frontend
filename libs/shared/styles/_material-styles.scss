@@ -6,6 +6,10 @@
 // current behaviour is lost.
 :root {
   --mat-badge-background-color: var(--color-accent);
+  // M3 defaults these panels to `surface-container` (a tinted grey). Force
+  // pure white to match the menu panel override below.
+  --mat-autocomplete-background-color: #fff;
+  --mat-select-panel-background-color: #fff;
 }
 
 .mat-badge-content {
