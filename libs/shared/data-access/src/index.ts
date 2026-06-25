@@ -8,6 +8,7 @@ export * from './lib/messages/messages.service';
 export * from './lib/orders/orders.models';
 export * from './lib/orders/orders.service';
 export * from './lib/catalog/catalog.service';
+export * from './lib/search-history/search-history.service';
 export * from './lib/product/product.models';
 export * from './lib/product/product.service';
 export * from './lib/user/user.models';

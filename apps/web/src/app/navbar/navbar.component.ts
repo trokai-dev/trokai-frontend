@@ -2,7 +2,6 @@ import { NavbarItem, User } from '@trokai/shared-core';
 import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
-  ElementRef,
   EventEmitter,
   Input,
   NgZone,
@@ -18,7 +17,6 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 
-import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
   ActivationStart,
@@ -28,6 +26,7 @@ import {
 } from '@angular/router';
 import { TkUserAvatarComponent, TkBadgeComponent } from '@trokai/shared-ui';
 import { MatDialog } from '@angular/material/dialog';
+import { lastValueFrom } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { BuyingService } from '@trokai/shared-data-access';
 import { GlobalService } from '../services/global.service';
@@ -38,7 +37,12 @@ import { navbarLinks } from './navbar-links';
 import { NavUserMenuComponent } from './nav-user-menu/nav-user-menu.component';
 import { NavUserMenuDialogComponent } from './nav-user-menu-dialog/nav-user-menu-dialog.component';
 import { NavExpandedMenuComponent } from './nav-expanded-menu/nav-expanded-menu.component';
-import { TkReserveTimeComponent } from '@trokai/shared-features';
+import {
+  SearchRequest,
+  TkReserveTimeComponent,
+  TkSearchBarComponent,
+  TkSearchDialogComponent,
+} from '@trokai/shared-features';
 
 @Component({
   selector: 'app-navbar',
@@ -48,13 +52,13 @@ import { TkReserveTimeComponent } from '@trokai/shared-features';
     RouterLink,
     MatButtonModule,
     MatIconModule,
-    FormsModule,
     MatMenuModule,
     TkUserAvatarComponent,
     TkBadgeComponent,
     NavUserMenuComponent,
     NavExpandedMenuComponent,
     TkReserveTimeComponent,
+    TkSearchBarComponent,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
@@ -77,7 +81,6 @@ export class NavbarComponent implements OnInit {
   @Input() checkoutOwner?: string;
 
   @Output() toggleNav = new EventEmitter<void>();
-  @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild(MatMenuTrigger) menuTrigger!: MatMenuTrigger;
 
   hideMenuTimer?: ReturnType<typeof setTimeout>;
@@ -164,14 +167,28 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  search() {
-    if (this.searchText && this.searchText.trim().length > 0)
-      this.router.navigate(['/search'], {
-        queryParams: { text: this.searchText.trim(), page: 1 },
-      });
-    else this.router.navigate(['/search'], { queryParams: { page: 1 } });
+  onSearchTextChange(text: string) {
+    this.searchPageService.setMainSearchText(text);
+  }
 
-    this.searchInput.nativeElement.blur();
+  async openSearchDialog() {
+    const dialogRef = this.dialog.open(TkSearchDialogComponent, {
+      data: { navMenu: this.navMenu, initialText: this.searchText },
+      panelClass: 'dialog-large',
+    });
+
+    const request = await lastValueFrom(dialogRef.afterClosed());
+    if (request) this.onSearchRequested(request);
+  }
+
+  onSearchRequested(request: SearchRequest) {
+    this.router.navigate(['/search'], {
+      queryParams: {
+        ...request.filters.getUrlParams(),
+        scope: request.scope,
+        page: 1,
+      },
+    });
   }
 
   openUserMenu() {

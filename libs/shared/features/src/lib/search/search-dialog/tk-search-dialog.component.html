@@ -1,0 +1,17 @@
+<div class="dialog-wrapper">
+  <div class="dialog-header flex justify-end">
+    <button mat-icon-button class="close-button" (click)="onDismiss()">
+      <mat-icon class="close-icon">close</mat-icon>
+    </button>
+  </div>
+
+  <div class="dialog-content">
+    <tk-search-bar
+      [expanded]="true"
+      [navMenu]="data.navMenu"
+      [initialText]="data.initialText ?? ''"
+      (searchRequested)="onSearchRequested($event)"
+      (dismiss)="onDismiss()"
+    />
+  </div>
+</div>

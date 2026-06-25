@@ -1,4 +1,5 @@
 import { Clothes } from './clothes';
+import { User } from './user';
 
 export class SearchResponse {
   count!: number;
@@ -7,7 +8,7 @@ export class SearchResponse {
 
 export class UserSearchResponse {
   count!: number;
-  users!: Clothes[];
+  users!: User[];
 }
 
 export class CollectionResponse {

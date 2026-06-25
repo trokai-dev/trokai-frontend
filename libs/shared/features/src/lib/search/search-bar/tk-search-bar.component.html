@@ -1,0 +1,110 @@
+<div class="tk-search-bar" cdkOverlayOrigin #origin="cdkOverlayOrigin">
+  <div class="tk-search-bar-field">
+    <mat-icon color="primary">search</mat-icon>
+    <input
+      type="text"
+      placeholder="Buscar no Trokaí"
+      [(ngModel)]="query"
+      (focus)="onFocus()"
+      (input)="onInput()"
+      (keyup.enter)="onEnter()"
+      (keydown.escape)="onEscape()"
+    />
+    @if (query) {
+      <button
+        type="button"
+        mat-icon-button
+        aria-label="Limpar busca"
+        (click)="clearQuery()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+  </div>
+
+  @if (expanded && panelOpen) {
+    <div class="tk-search-panel tk-search-panel--inline">
+      <ng-container *ngTemplateOutlet="panel"></ng-container>
+    </div>
+  }
+</div>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayOpen]="!expanded && panelOpen"
+  [cdkConnectedOverlayHasBackdrop]="true"
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  (backdropClick)="onBackdropClick()"
+>
+  <div class="tk-search-panel tk-search-panel--overlay">
+    <ng-container *ngTemplateOutlet="panel"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #panel>
+  @if (suggestions) {
+    <div class="tk-search-section">
+      @for (c of suggestions.categories; track c.categoryId) {
+        <button type="button" class="tk-search-row" (click)="selectSuggestion(c)">
+          <span class="label-body-1"><b>{{ c.query }}</b> em {{ c.categoryLabel }}</span>
+        </button>
+      }
+      <hr class="tk-search-divider" />
+      <button
+        type="button"
+        class="tk-search-row"
+        (click)="selectSuggestion(suggestions.vendors)"
+      >
+        <span class="label-body-1"><b>{{ suggestions.vendors.query }}</b> em Vendedores</span>
+      </button>
+    </div>
+  } @else {
+    @if (history.length) {
+      <div class="tk-search-section">
+        <div class="tk-search-section-header">
+          <span class="label-body-2 color-gray-default">Últimas buscas</span>
+          <button type="button" class="tk-search-clear" (click)="clearHistory()">
+            Limpar
+          </button>
+        </div>
+        @for (h of history; track h.at) {
+          <button type="button" class="tk-search-row" (click)="selectHistoryEntry(h)">
+            <span class="label-body-1">
+              "<b>{{ h.query }}</b>"
+              @if (h.categoryLabel) {
+                em {{ h.categoryLabel }}
+              }
+              @if (h.vendors) {
+                em Vendedores
+              }
+            </span>
+          </button>
+        }
+      </div>
+    }
+
+    @if (expanded && navMenu && navMenu.length) {
+      <div class="tk-search-section">
+        @for (item of navMenu; track item.label) {
+          <div class="tk-search-nav-group">
+            <span class="label-body-2"><b>{{ item.label }}</b></span>
+            <div class="tk-search-nav-links">
+              @for (col of item.cols; track $index) {
+                @for (c of col.list; track $index) {
+                  <button
+                    type="button"
+                    class="tk-search-nav-link"
+                    (click)="selectNavLink(c)"
+                  >
+                    {{ c.label }}
+                  </button>
+                }
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
+  }
+</ng-template>

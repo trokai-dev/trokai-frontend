@@ -30,15 +30,12 @@
 
       @if (!clearNav && !checkout) {
         <div class="nav-search desktop-only">
-          <input
-            #searchInput
-            placeholder="Buscar no Trokaí"
-            [(ngModel)]="searchText"
-            (keyup.Enter)="search()"
+          <tk-search-bar
+            [navMenu]="navMenu"
+            [initialText]="searchText"
+            (textChange)="onSearchTextChange($event)"
+            (searchRequested)="onSearchRequested($event)"
           />
-          <mat-icon color="primary" class="cursor-pointer" (click)="search()">
-            search
-          </mat-icon>
         </div>
       }
     </div>
@@ -159,17 +156,10 @@
 
   @if (!clearNav && !checkout && showSearch) {
     <div class="container mobile-only">
-      <div class="nav-search">
-        <input
-          #searchInput
-          placeholder="Buscar no Trokaí"
-          [(ngModel)]="searchText"
-          (keyup.Enter)="search()"
-        />
-        <mat-icon color="primary" class="cursor-pointer" (click)="search()">
-          search
-        </mat-icon>
-      </div>
+      <button type="button" class="nav-search nav-search-trigger" (click)="openSearchDialog()">
+        <span class="color-gray-default">{{ searchText || 'Buscar no Trokaí' }}</span>
+        <mat-icon color="primary">search</mat-icon>
+      </button>
     </div>
   }
 </div>

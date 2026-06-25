@@ -12,16 +12,17 @@ import { Paginator, PaginatorComponent } from './paginator/paginator.component';
 import { SearchService } from './search.service';
 import { ItemsMap } from '@trokai/shared-core';
 
-import { TkBadgeComponent, TkProductCardComponent } from '@trokai/shared-ui';
+import { TkBadgeComponent } from '@trokai/shared-ui';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Clothes, Filters } from '@trokai/shared-core';
+import { Clothes, Filters, User } from '@trokai/shared-core';
 import { SearchPageService } from '../services/search-page.service';
 import { MatDialog } from '@angular/material/dialog';
 import {
   TkFilterDialogComponent,
-  TkFilterFormComponent,
+  TkProductListComponent,
+  TkUserListComponent,
 } from '@trokai/shared-features';
 import { first, lastValueFrom } from 'rxjs';
 import { MatSelectModule } from '@angular/material/select';
@@ -38,10 +39,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   imports: [
     MatButtonModule,
     MatIconModule,
-    TkFilterFormComponent,
     FormsModule,
     TkBadgeComponent,
-    TkProductCardComponent,
+    TkProductListComponent,
+    TkUserListComponent,
     PaginatorComponent,
     MatSelectModule,
     MatFormFieldModule,
@@ -58,6 +59,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   private destroyRef = inject(DestroyRef);
 
   results: Clothes[] = [];
+  userResults: User[] = [];
+  scope: 'clothes' | 'vendors' = 'clothes';
   filters: Filters = new Filters();
   itemsMap?: ItemsMap;
 
@@ -103,10 +106,13 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     // page
+    this.scope = params.scope === 'vendors' ? 'vendors' : 'clothes';
     this.filters = new Filters(params);
     this.mobileSearchText = this.filters.text ?? '';
     this.searchPageService.setMainSearchText(this.filters.text ?? '');
-    this.searchClothes();
+
+    if (this.scope === 'vendors') this.searchUsers();
+    else this.searchClothes();
   }
 
   setMeta(params: Params = {}) {
@@ -226,6 +232,32 @@ export class SearchComponent implements OnInit, OnDestroy {
     } finally {
       /* intentional */
     }
+  }
+
+  async searchUsers() {
+    try {
+      const response = await this.searchService.getUsers(
+        this.limit * this.activePage,
+        this.limit,
+        this.filters.text ?? '',
+      );
+
+      if (response) {
+        this.userResults = response.users;
+        this.mountCountString(response.users.length, response.count);
+
+        this.paginator = new Paginator(
+          this.activePage + 1,
+          response.count / this.limit,
+        );
+      }
+    } finally {
+      /* intentional */
+    }
+  }
+
+  openUser(user: User) {
+    this.router.navigate(['/users', user.seller?.nickname]);
   }
 
   ngOnDestroy() {

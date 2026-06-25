@@ -1,60 +1,65 @@
 <div class="container fill-height">
-  <div class="search-grid">
-    <!-- WRAPPER FILTROS -->
-    <div class="hidden block-md">
-      <tk-filter-form
-        (filtersChange)="applyFilters($event)"
-        [filter]="filters"
-      ></tk-filter-form>
-    </div>
+  @if (scope === 'vendors') {
+    <div class="mt-md-24">
+      @if (filters.text) {
+        <h1 class="color-gray-dark hidden block-md">
+          {{ filters.text }}
+        </h1>
+      }
 
-    <!-- Resultados -->
-    @if (itemsMap && results) {
-      <div class="mt-md-24">
-        @if (filters.text) {
-          <h1 class="color-gray-dark hidden block-md">
-            {{ filters.text }}
-          </h1>
+      <div class="label-body-2 flex justify-between items-center py-16">
+        <span> {{ countString }}</span>
+        @if (pageString) {
+          <span> {{ pageString }}</span>
         }
-        <div class="block hidden-md">
-          <div class="flex gap-24 items-center">
-            <tk-badge [count]="filters?.count() ?? 0">
-              <button
-                mat-stroked-button
-                (click)="showFiltersDialog()"
-                color="primary"
-              >
-                Filtros
-              </button>
-            </tk-badge>
+      </div>
+
+      <tk-user-list [users]="userResults" (clicked)="openUser($event)"></tk-user-list>
+      <app-paginator [paginator]="paginator"></app-paginator>
+    </div>
+  }
+  @if (scope === 'clothes' && itemsMap && results) {
+    <tk-product-list
+      [products]="results"
+      [filter]="filters"
+      (filtersChange)="applyFilters($event)"
+    >
+      @if (filters.text) {
+        <h1 class="color-gray-dark hidden block-md">
+          {{ filters.text }}
+        </h1>
+      }
+      <div class="block hidden-md">
+        <div class="flex gap-24 items-center">
+          <tk-badge [count]="filters?.count() ?? 0">
             <button
               mat-stroked-button
-              (click)="showSortingDialog()"
+              (click)="showFiltersDialog()"
               color="primary"
             >
-              ({{ getSortingString() }})
+              Filtros
             </button>
-          </div>
+          </tk-badge>
+          <button
+            mat-stroked-button
+            (click)="showSortingDialog()"
+            color="primary"
+          >
+            ({{ getSortingString() }})
+          </button>
         </div>
+      </div>
 
-        <div class="label-body-2 flex justify-between items-center py-16">
-          <span> {{ countString }}</span>
-          @if (pageString) {
-            <span> {{ pageString }}</span>
-          }
-        </div>
+      <div class="label-body-2 flex justify-between items-center py-16">
+        <span> {{ countString }}</span>
+        @if (pageString) {
+          <span> {{ pageString }}</span>
+        }
+      </div>
 
-        <div class="search-products">
-          @for (product of results; track product; let i = $index) {
-            <tk-product-card
-              [clean]="true"
-              [product]="product"
-              [priority]="i < 2"
-            ></tk-product-card>
-          }
-        </div>
+      <div after>
         <app-paginator [paginator]="paginator"></app-paginator>
       </div>
-    }
-  </div>
+    </tk-product-list>
+  }
 </div>

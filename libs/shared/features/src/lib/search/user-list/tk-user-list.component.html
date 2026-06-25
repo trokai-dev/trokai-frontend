@@ -1,0 +1,5 @@
+<div class="tk-user-list-grid">
+  @for (user of users; track user._id) {
+    <tk-user-card [user]="user" (clicked)="clicked.emit($event)"></tk-user-card>
+  }
+</div>

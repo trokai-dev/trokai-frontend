@@ -4,11 +4,13 @@ import { MainService } from '../services/main.service';
 import { Keyboard } from '@capacitor/keyboard';
 import { Filters, NavbarItem } from '@trokai/shared-core';
 import { SearchPageService } from '../services/search-page.service';
-import { FormsModule } from '@angular/forms';
-import { NgClass } from '@angular/common';
 import { FilterTagsComponent } from '../shared/components/filter-tags/filter-tags.component';
-import { TkProductCardComponent } from '@trokai/shared-ui';
-import { TkUserCardComponent } from '@trokai/shared-ui';
+import {
+  SearchRequest,
+  TkProductListComponent,
+  TkSearchBarComponent,
+  TkUserListComponent,
+} from '@trokai/shared-features';
 import {
   IonContent,
   IonHeader,
@@ -16,20 +18,12 @@ import {
   IonInfiniteScroll,
   IonToolbar,
   Platform,
-  IonSearchbar,
-  IonRippleEffect,
   IonList,
   IonSpinner,
   IonInfiniteScrollContent,
 } from '@ionic/angular/standalone';
-import { MatButtonModule } from '@angular/material/button';
 import { addIcons } from 'ionicons';
-import {
-  sadOutline,
-  search,
-  shirtOutline,
-  storefrontOutline,
-} from 'ionicons/icons';
+import { sadOutline } from 'ionicons/icons';
 import { FirebaseService } from '../services/firebase.service';
 
 @Component({
@@ -38,24 +32,18 @@ import { FirebaseService } from '../services/firebase.service';
   styleUrls: ['./search.page.scss'],
   standalone: true,
   imports: [
-    MatButtonModule,
-
-    IonSearchbar,
     IonHeader,
     IonToolbar,
     IonIcon,
-    IonRippleEffect,
     IonList,
     IonSpinner,
     IonInfiniteScroll,
     IonInfiniteScrollContent,
     IonContent,
-    FormsModule,
-    IonSearchbar,
     FilterTagsComponent,
-    NgClass,
-    TkProductCardComponent,
-    TkUserCardComponent,
+    TkSearchBarComponent,
+    TkProductListComponent,
+    TkUserListComponent,
   ],
 })
 export class SearchPage implements OnInit {
@@ -70,7 +58,7 @@ export class SearchPage implements OnInit {
   @ViewChild(IonInfiniteScroll)
   infiniteScroll: IonInfiniteScroll;
 
-  searchText = null; // current search text
+  searchText = null; // current search bar text
   lastSearch = null; // last submission search text
 
   endOfSearch = false;
@@ -80,7 +68,6 @@ export class SearchPage implements OnInit {
   limit = 16;
 
   menu: NavbarItem[];
-  activeMenuTab = 0;
   filters: Filters;
 
   get isLoading() {
@@ -88,7 +75,7 @@ export class SearchPage implements OnInit {
   }
 
   ngOnInit() {
-    addIcons({ search, shirtOutline, storefrontOutline, sadOutline });
+    addIcons({ sadOutline });
 
     this.mainService.searchTab.subscribe(
       () => this.content.scrollToTop(400), // rola a pagina ao escolher um item
@@ -127,7 +114,7 @@ export class SearchPage implements OnInit {
   }
 
   checkLink() {
-    // se veio da home, preenche o campo de busca e faz a pesquisa
+    // se veio de um deep link externo (?search=...), preenche o campo de busca e faz a pesquisa
     if (this.searchPageService.homeSearch) {
       this.searchPageService.homeSearch = false; // reseta a flag
       this.target = 'clothes';
@@ -159,10 +146,27 @@ export class SearchPage implements OnInit {
     return !this.lastSearch && !this.filtersOn();
   }
 
-  // called after filter component event
+  // called after filter component event (app-filter-tags)
   applyFilters(filters: Filters) {
     this.searchPageService.setFilters(filters);
-    this.enter();
+    this.runSearch();
+  }
+
+  onSearchTextChange(text: string) {
+    this.searchText = text;
+  }
+
+  onSearchRequested({ filters, scope }: SearchRequest) {
+    const target = scope === 'vendors' ? 'users' : 'clothes';
+    if (target !== this.target) this.searchPageService.reset();
+
+    this.target = target;
+    this.searchText = filters.text ?? '';
+    this.applyFilters(filters);
+
+    this.firebaseService.log(
+      target === 'clothes' ? 'PESQUISA_ROUPAS' : 'PESQUISA_USERS',
+    );
   }
 
   preSearch() {
@@ -170,6 +174,25 @@ export class SearchPage implements OnInit {
     this.lastSearch = this.searchText;
     this.endOfSearch = false;
     this.content?.scrollToTop(300);
+  }
+
+  runSearch() {
+    if (this.platform.is('mobile') && this.platform.is('hybrid')) {
+      Keyboard.setAccessoryBarVisible({ isVisible: false });
+      Keyboard.hide();
+    }
+
+    if (!this.searchText && !this.filtersOn()) {
+      this.searchPageService.reset();
+      return;
+    }
+
+    if (!this.target) this.target = 'clothes';
+
+    this.preSearch();
+
+    if (this.target === 'clothes') this.searchClothes();
+    else this.searchUsers();
   }
 
   async searchClothes() {
@@ -221,75 +244,5 @@ export class SearchPage implements OnInit {
   openUser(u) {
     this.firebaseService.log('PESQUISA_ABRIU_USER');
     this.mainService.navigateToWardrobe(u._id);
-  }
-
-  // SEARCH BAR
-  enter(event?) {
-    if (event && event.key !== 'Enter') return;
-
-    if (this.platform.is('mobile') && this.platform.is('hybrid')) {
-      Keyboard.setAccessoryBarVisible({ isVisible: false });
-      Keyboard.hide();
-    }
-
-    if (!this.searchText && !this.filtersOn()) {
-      this.searchPageService.reset();
-      return;
-    }
-
-    if (!this.target) this.target = 'clothes';
-
-    this.preSearch();
-
-    if (this.target === 'clothes') this.searchClothes();
-    else this.searchUsers();
-  }
-
-  clearSearchText() {
-    this.searchPageService.reset();
-    this.searchText = null;
-    this.lastSearch = null;
-  }
-
-  clickSuggestion(target) {
-    if (target != this.target) this.searchPageService.reset();
-    this.target = target;
-
-    this.preSearch();
-
-    if (target === 'clothes') {
-      this.searchClothes();
-      this.firebaseService.log('PESQUISA_ROUPAS');
-    }
-    if (target === 'users') {
-      this.searchUsers();
-      this.firebaseService.log('PESQUISA_USERS');
-    }
-  }
-
-  changeText() {
-    if (
-      (this.searchText === '' || this.searchText === null) &&
-      !this.filtersOn()
-    ) {
-      this.target = null;
-      this.lastSearch = null;
-    }
-  }
-
-  selectInitialCat(cat) {
-    this.searchPageService.reset();
-    this.preSearch();
-
-    const parsed = JSON.parse(JSON.stringify(cat)); // deep copy
-
-    this.searchPageService.setFilters(parsed.params);
-    this.searchText = parsed.params.text;
-    this.lastSearch = parsed.params.text;
-    this.target = 'clothes';
-    this.searchClothes();
-    this.firebaseService.log('PESQUISA_SUGESTAO_CATEGORIA', {
-      cat: parsed.name,
-    });
   }
 }

@@ -106,6 +106,18 @@
   }
 }
 
+.nav-search-trigger {
+  background: none;
+  cursor: pointer;
+  text-align: left;
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
 // until 1200px
 @media (max-width: 1199px) {
   .nav-left {

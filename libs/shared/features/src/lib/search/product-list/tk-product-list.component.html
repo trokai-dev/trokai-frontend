@@ -1,0 +1,29 @@
+<div class="tk-product-list" [class.tk-product-list--with-filters]="showFilters">
+  @if (showFilters) {
+    <div class="hidden block-md">
+      <tk-filter-form
+        [filter]="filter"
+        [enableSorting]="enableSorting"
+        (filtersChange)="filtersChange.emit($event)"
+      ></tk-filter-form>
+    </div>
+  }
+
+  <div class="mt-md-24">
+    <ng-content></ng-content>
+
+    <div class="tk-product-list-grid">
+      @for (product of products; track product._id; let i = $index) {
+        <tk-product-card
+          [product]="product"
+          [useLink]="useLink"
+          [priority]="i < 2"
+          (open)="open.emit($event)"
+          (onFinishLiking)="onFinishLiking.emit()"
+        ></tk-product-card>
+      }
+    </div>
+
+    <ng-content select="[after]"></ng-content>
+  </div>
+</div>

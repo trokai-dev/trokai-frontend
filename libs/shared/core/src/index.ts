@@ -25,6 +25,8 @@ export * from './lib/models/picture-tip';
 export * from './lib/models/notification-display';
 export * from './lib/models/auth';
 export * from './lib/models/search';
+export * from './lib/models/search-history';
+export * from './lib/models/search-suggestion';
 export * from './lib/models/gtm';
 export * from './lib/models/marketing';
 export * from './lib/models/global-params';
