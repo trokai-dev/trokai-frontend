@@ -1,17 +1,15 @@
-@import 'variables';
-
 // ─── Status Card ────────────────────────────────────────────────────────────
 
 .status-card {
   padding: 2rem;
   border-radius: 12px;
-  border: 1.5px solid $color-gray-light-2;
-  background: #ffffff;
+  border: 1.5px solid var(--color-gray-2);
+  background: var(--color-surface);
 
   &__body {
     display: flex;
     flex-direction: column;
-    gap: 1.6rem;
+    gap: var(--space-16);
   }
 
   &__icon {
@@ -26,13 +24,13 @@
   }
 
   &--incomplete &__icon {
-    color: $color-gray-light-1;
+    color: var(--color-gray-1);
   }
   &--pending-review &__icon {
-    color: $color-gray-light-1;
+    color: var(--color-gray-1);
   }
   &--profile-approved &__icon {
-    color: $color-success;
+    color: var(--color-success);
   }
   &--adjusts-required &__icon {
     color: #c97a10;
@@ -43,28 +41,28 @@
 
 .clothes-progress {
   padding: 2rem;
-  background: #ffffff;
+  background: var(--color-surface);
   border-radius: 12px;
-  border: 1.5px solid $color-gray-light-2;
+  border: 1.5px solid var(--color-gray-2);
 }
 
 .progress-row {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: var(--space-12);
 }
 
 .progress-bar-wrapper {
   flex: 1;
   height: 8px;
-  background: $color-gray-light-2;
+  background: var(--color-gray-2);
   border-radius: 4px;
   overflow: hidden;
 }
 
 .progress-bar-fill {
   height: 100%;
-  background: $color-primary;
+  background: var(--color-primary);
   border-radius: 4px;
   transition: width 0.4s ease;
   min-width: 4px;
@@ -82,14 +80,14 @@
 .clothes-alerts {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: var(--space-8);
 }
 
 .clothes-alert {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
-  padding: 1.2rem 1.6rem;
+  gap: var(--space-12);
+  padding: var(--space-12) var(--space-16);
   border-radius: 10px;
   text-decoration: none;
 
@@ -99,14 +97,14 @@
   }
 
   &--warning {
-    background: #fef3e2;
-    color: #9a5c00;
+    background: var(--color-warning-bg);
+    color: var(--color-warning-text);
     border: 1px solid #f5c97a;
   }
 
   &--error {
-    background: #fde8e8;
-    color: $color-error;
+    background: var(--color-error-bg);
+    color: var(--color-error);
     border: 1px solid #f5a3a3;
   }
 }
@@ -116,24 +114,24 @@
 .seller-guide-card {
   display: flex;
   align-items: center;
-  gap: 1.6rem;
-  padding: 1.6rem 2rem;
+  gap: var(--space-16);
+  padding: var(--space-16) 2rem;
   border-radius: 12px;
-  border: 1.5px solid $color-gray-light-2;
-  background: #ffffff;
+  border: 1.5px solid var(--color-gray-2);
+  background: var(--color-surface);
   text-decoration: none;
   transition:
     border-color 0.2s,
     box-shadow 0.2s;
 
   &:hover {
-    border-color: $color-primary;
+    border-color: var(--color-primary);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   }
 
   &__icon {
     font-size: 2.4rem;
-    color: $color-primary;
+    color: var(--color-primary);
     flex-shrink: 0;
   }
 
@@ -144,7 +142,7 @@
 
   &__arrow {
     font-size: 2rem;
-    color: $color-gray-light-1;
+    color: var(--color-gray-1);
     flex-shrink: 0;
   }
 }
