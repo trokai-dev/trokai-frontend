@@ -45,7 +45,6 @@ import {
   IonTitle,
   IonRefresher,
   IonRefresherContent,
-  IonChip,
   IonSpinner,
   IonList,
 } from '@ionic/angular/standalone';
@@ -83,7 +82,6 @@ import { FeedbackService } from '@trokai/shared-core';
     IonInfiniteScroll,
     IonInfiniteScrollContent,
     TkSellerHeaderComponent,
-    IonChip,
     IonSearchbar,
     IonSpinner,
     IonList,

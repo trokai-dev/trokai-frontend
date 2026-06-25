@@ -17,7 +17,6 @@ import { HomeService } from '../services/home.service';
 import { MessagesService } from '@trokai/shared-data-access';
 import { BuyingService } from '@trokai/shared-data-access';
 import { RouterLink } from '@angular/router';
-import { NgIf, NgFor } from '@angular/common';
 import {
   TkBannerComponent,
   TkHomeGenericComponent,
@@ -55,8 +54,6 @@ import { addIcons } from 'ionicons';
     IonIcon,
     IonContent,
     RouterLink,
-    NgIf,
-    NgFor,
     TkBannerComponent,
     TkHomeGenericComponent,
   ],

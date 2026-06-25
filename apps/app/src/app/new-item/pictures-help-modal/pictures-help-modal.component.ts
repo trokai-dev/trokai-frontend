@@ -6,12 +6,8 @@ import {
   inject,
 } from '@angular/core';
 import {
-  IonButtons,
   IonContent,
-  IonHeader,
   IonIcon,
-  IonTitle,
-  IonToolbar,
   ModalController,
 } from '@ionic/angular/standalone';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,16 +21,7 @@ import { PictureTip } from '@trokai/shared-core';
   styleUrls: ['./pictures-help-modal.component.scss'],
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [
-    MatButtonModule,
-
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonButtons,
-    IonIcon,
-    IonContent,
-  ],
+  imports: [MatButtonModule, IonIcon, IonContent],
 })
 export class PicturesHelpModalComponent {
   private modalCtrl = inject(ModalController);
