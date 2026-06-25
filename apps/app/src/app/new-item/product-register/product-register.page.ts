@@ -29,7 +29,7 @@ import {
 } from '@trokai/shared-ui';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { GlobalService } from 'src/app/services/global.service';
-import { ToastService } from 'src/app/services/toast-service';
+import { FeedbackService } from '@trokai/shared-core';
 
 @Component({
   selector: 'app-product-register',
@@ -50,7 +50,7 @@ export class ProductRegisterPage implements OnInit, IDeactivatableComponent {
   private productService = inject(ProductService);
   private route = inject(ActivatedRoute);
   private firebaseService = inject(FirebaseService);
-  private toastService = inject(ToastService);
+  private feedback = inject(FeedbackService);
   private router = inject(Router);
   private globalService = inject(GlobalService);
   private alertService = inject(AlertService);
@@ -125,7 +125,7 @@ export class ProductRegisterPage implements OnInit, IDeactivatableComponent {
     try {
       const connection = await Network.getStatus();
       if (!connection.connected) {
-        this.toastService.makeToastInternet(false);
+        this.feedback.error('Sem conexão');
         return;
       }
 
@@ -142,7 +142,7 @@ export class ProductRegisterPage implements OnInit, IDeactivatableComponent {
         replaceUrl: true,
       });
 
-      this.toastService.makeToast('Anúncio enviado');
+      this.feedback.success('Anúncio enviado');
       this.firebaseService.log('ROUPA_CADASTRADA');
     } finally {
       this.loading = false;

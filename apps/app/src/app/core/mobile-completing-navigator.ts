@@ -1,9 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular/standalone';
-import { CompletingType } from '@trokai/shared-core';
+import { CompletingType, FeedbackService } from '@trokai/shared-core';
 import { CompletingNavigator, UserService } from '@trokai/shared-data-access';
-import { ToastService } from '../services/toast-service';
 import { InventoryService } from '../services/inventory.service';
 import { TutorialService } from '../services/tutorial.service';
 
@@ -13,7 +12,7 @@ export class MobileCompletingNavigator extends CompletingNavigator {
   private router = inject(Router);
   private navCtrl = inject(NavController);
   private userService = inject(UserService);
-  private toastService = inject(ToastService);
+  private feedback = inject(FeedbackService);
   private inventoryService = inject(InventoryService);
   private tutorialService = inject(TutorialService);
 
@@ -29,28 +28,28 @@ export class MobileCompletingNavigator extends CompletingNavigator {
     // 1. Informações pessoais incompletas (TODOS)
     if (!status.personalInfo) {
       this.goTo('/profile-completing');
-      this.toastService.makeToast('Complete o seu cadastro');
+      this.feedback.warning('Complete o seu cadastro');
       return true;
     }
 
     // 2. Falta verificação de telefone (VENDEDOR)
     if (!status.phoneVerified && sell) {
       this.goTo('/phone-verification');
-      this.toastService.makeToast('Verifique seu telefone');
+      this.feedback.warning('Verifique seu telefone');
       return true;
     }
 
     // 3. Faltam store options (VENDEDOR)
     if (!status.sellerInfo && sell) {
       this.goTo('/store-completing');
-      this.toastService.makeToast('Complete o cadastro do seu brechó');
+      this.feedback.warning('Complete o cadastro do seu brechó');
       return true;
     }
 
     // 4. usuário sem endereço
     if (!status.address) {
       this.goTo('/address-completing');
-      this.toastService.makeToast('Cadastre seu endereço para prosseguir');
+      this.feedback.warning('Cadastre seu endereço para prosseguir');
       return true;
     }
 

@@ -1,4 +1,4 @@
-import { User } from '@trokai/shared-core';
+import { User, FeedbackService } from '@trokai/shared-core';
 import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
@@ -8,7 +8,7 @@ import {
 import { Chat, MessagesService } from '@trokai/shared-data-access';
 import { AuthService } from '../auth/auth.service';
 import { TkUserAvatarComponent } from '@trokai/shared-ui';
-import { AlertService, ShortDatePipe } from '@trokai/shared-ui';
+import { ShortDatePipe } from '@trokai/shared-ui';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 import { DialogService } from '../services/dialog.service';
@@ -24,7 +24,7 @@ import { DialogService } from '../services/dialog.service';
 export class ChatListComponent implements OnInit {
   private messagesService = inject(MessagesService);
   private authService = inject(AuthService);
-  private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private router = inject(Router);
   private dialogService = inject(DialogService);
 
@@ -44,6 +44,6 @@ export class ChatListComponent implements OnInit {
       this.router.navigateByUrl(`/orders/purchases/${chat.negotiationId}/chat`);
     else if (chat.negotiationType === 'sale')
       this.router.navigateByUrl(`/orders/sales/${chat.negotiationId}/chat`);
-    else this.alert.alert('Mensagem não encontrada');
+    else this.feedback.error('Mensagem não encontrada');
   }
 }

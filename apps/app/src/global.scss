@@ -13,6 +13,7 @@
 @import '@ionic/angular/css/flex-utils.css';
 @import 'variables'; // @trokai/shared-styles Sass $vars (color fns etc.)
 @import 'material-styles'; // @trokai/shared-styles global Material overrides
+@import 'toast-styles'; // @trokai/shared-styles toast (MatSnackBar) panel classes
 @import 'dialogs'; // @trokai/shared-styles Material dialog layout
 // spacing: margins/paddings now come from shared `@use 'index'` (_spacing.scss)
 
@@ -251,32 +252,6 @@ hr {
 
 .alert-message {
   @extend .label-body-2;
-}
-
-.myToast {
-  // transform: translateY(-64px) !important;
-  // font-size: 4vw !important;
-  // opacity: 1;
-  // --box-shadow: 1px 1px 3px 0px #8a8a8a !important;
-  // --border-radius: 10px !important;
-  // color: white;
-
-  transform: translateY(-64px) !important;
-  font-size: 1.6rem !important;
-  opacity: 0.95;
-  --box-shadow: 1px 1px 3px 0px #8a8a8a !important;
-  --border-radius: 50px !important;
-  color: white;
-  text-align: center;
-  --width: fit-content;
-
-  .toast-content {
-    padding: 10px;
-  }
-}
-
-.toast-wrapper.toast-bottom {
-  width: fit-content;
 }
 
 ion-button {

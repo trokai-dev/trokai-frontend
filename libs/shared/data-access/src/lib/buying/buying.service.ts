@@ -93,7 +93,7 @@ export class BuyingService {
       baskets.push(new Basket(owner, [product]));
     }
 
-    this.feedback.toast('Produto adicionado à sacola!');
+    this.feedback.success('Produto adicionado à sacola!');
     this.storeBaskets(baskets);
     this._baskets.next(baskets);
 
@@ -110,7 +110,7 @@ export class BuyingService {
       basket.products.findIndex((p) => p._id === product._id),
       1,
     );
-    this.feedback.toast('Produto removido');
+    this.feedback.success('Produto removido');
 
     if (!basket.products.length)
       baskets = baskets.filter((b) => b.owner._id !== basket.owner._id);
@@ -211,12 +211,12 @@ export class BuyingService {
 
   async reserveCanceled() {
     await this.clearCheckout();
-    this.feedback.toast('Reserva cancelada');
+    this.feedback.success('Reserva cancelada');
   }
 
   async reserveExpired() {
     await this.clearCheckout();
-    this.feedback.toast('Reserva expirada');
+    this.feedback.error('Reserva expirada');
   }
 
   async reservePurchased(
@@ -353,7 +353,7 @@ export class BuyingService {
       const basket = baskets.find((b) => b.owner._id === ownerId);
 
       if (!basket) {
-        this.feedback.toast('Nenhum produto encontrado');
+        this.feedback.error('Nenhum produto encontrado');
         return;
       }
 

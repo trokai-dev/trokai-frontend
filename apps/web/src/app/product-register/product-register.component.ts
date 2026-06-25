@@ -2,6 +2,7 @@ import {
   BasicModel,
   Clothes,
   ClothesStatus,
+  FeedbackService,
   GlobalParams,
   ItemsMap,
   UploadPictureItem,
@@ -11,10 +12,7 @@ import { CompletingInformationService } from '@trokai/shared-data-access';
 import { ProductService } from '@trokai/shared-data-access';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  AlertService,
-  TkProductRegisterFormComponent,
-} from '@trokai/shared-ui';
+import { TkProductRegisterFormComponent } from '@trokai/shared-ui';
 import { AuthService } from './../auth/auth.service';
 import { InventoryService } from './../wardrobe/inventory.service';
 import { GlobalService } from '../services/global.service';
@@ -37,7 +35,7 @@ export class ProductRegisterComponent implements OnInit {
   private router = inject(Router);
   private dialog = inject(MatDialog);
   private inventoryService = inject(InventoryService);
-  private alertService = inject(AlertService);
+  private feedback = inject(FeedbackService);
 
   itemsMap!: ItemsMap;
   params!: GlobalParams;
@@ -175,7 +173,7 @@ export class ProductRegisterComponent implements OnInit {
         replaceUrl: true,
       });
 
-      this.alertService.alert('Anúncio enviado!');
+      this.feedback.success('Anúncio enviado!');
     } catch {
       this.loading = false;
     }

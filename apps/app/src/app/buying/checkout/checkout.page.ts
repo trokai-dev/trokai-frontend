@@ -43,7 +43,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { addIcons } from 'ionicons';
 import { cardOutline, closeOutline, helpCircleOutline } from 'ionicons/icons';
-import { ToastService } from 'src/app/services/toast-service';
+import { FeedbackService } from '@trokai/shared-core';
 import { Router } from '@angular/router';
 import { LoadingService, CostPipe } from '@trokai/shared-ui';
 import { TkCouponFormComponent } from '@trokai/shared-ui';
@@ -81,7 +81,7 @@ export class CheckoutPage implements OnInit, OnDestroy {
   private authService = inject(AuthService);
   private modalCtrl = inject(ModalController);
   private router = inject(Router);
-  private toast = inject(ToastService);
+  private feedback = inject(FeedbackService);
   private loading = inject(LoadingService);
   private mainService = inject(MainService);
   private orderService = inject(OrdersService);
@@ -270,23 +270,23 @@ export class CheckoutPage implements OnInit, OnDestroy {
     if (this.loading.isLoading()) return false;
 
     if (shippingOption == null) {
-      this.toast.makeToast('Escolha a opção de entrega');
+      this.feedback.error('Escolha a opção de entrega');
       return false;
     }
 
     if (paymentOption == null) {
-      this.toast.makeToast('Selecione um método de pagamento');
+      this.feedback.error('Selecione um método de pagamento');
       return false;
     }
 
     if (paymentOption == PaymentOption.CREDIT_CARD) {
       if (!cardId) {
-        this.toast.makeToast('Selecione um cartão');
+        this.feedback.error('Selecione um cartão');
         return false;
       }
 
       if (!selectedInstallments) {
-        this.toast.makeToast('Selecione o número de parcelas');
+        this.feedback.error('Selecione o número de parcelas');
         return false;
       }
     }

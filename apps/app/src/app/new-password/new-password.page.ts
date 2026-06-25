@@ -15,7 +15,7 @@ import {
   Platform,
 } from '@ionic/angular/standalone';
 import { FirebaseService } from '../services/firebase.service';
-import { ToastService } from '../services/toast-service';
+import { FeedbackService } from '@trokai/shared-core';
 import { NewPasswordFormComponent, NewPasswordValue } from '@trokai/shared-ui';
 
 @Component({
@@ -35,7 +35,7 @@ import { NewPasswordFormComponent, NewPasswordValue } from '@trokai/shared-ui';
 export class NewPasswordPage implements OnInit, OnDestroy {
   private passwordService = inject(PasswordServiceService);
   private navCtrl = inject(NavController);
-  private toastService = inject(ToastService);
+  private feedback = inject(FeedbackService);
   private authService = inject(AuthService);
   private firebaseService = inject(FirebaseService);
   private platform = inject(Platform);
@@ -65,14 +65,14 @@ export class NewPasswordPage implements OnInit, OnDestroy {
         await lastValueFrom(
           this.passwordService.changePasswordForgot(password),
         );
-        this.toastService.makeToast('Senha alterada!');
+        this.feedback.success('Senha alterada!');
         this.ionNav.setRoot(LoginPage);
       } else {
         await lastValueFrom(
           this.passwordService.changePassword(currentPassword, password),
         );
         this.firebaseService.log('ALTERAR_SENHA');
-        this.toastService.makeToast('Senha alterada!');
+        this.feedback.success('Senha alterada!');
         this.navCtrl.pop();
       }
     } catch {

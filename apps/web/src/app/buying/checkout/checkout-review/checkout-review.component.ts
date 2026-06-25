@@ -1,4 +1,4 @@
-import { Card, User } from '@trokai/shared-core';
+import { Card, FeedbackService, User } from '@trokai/shared-core';
 import { Component, OnInit, inject } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -38,6 +38,7 @@ export class CheckoutReviewComponent extends AutoUnsubscribe implements OnInit {
   private authService = inject(AuthService);
   private loading = inject(LoadingService);
   private router = inject(Router);
+  private feedback = inject(FeedbackService);
 
   cv?: CheckoutValues;
   checkoutLocal!: CheckoutLocal;
@@ -91,7 +92,10 @@ export class CheckoutReviewComponent extends AutoUnsubscribe implements OnInit {
     try {
       this.loading.start();
       const res = await this.buyingService.buy();
-      if (res) this.router.navigateByUrl(`/orders/purchases/${res.orderId}`);
+      if (res) {
+        this.feedback.success('Compra realizada com sucesso!');
+        this.router.navigateByUrl(`/orders/purchases/${res.orderId}`);
+      }
     } finally {
       this.loading.finish();
     }

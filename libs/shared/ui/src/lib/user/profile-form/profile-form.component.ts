@@ -23,6 +23,7 @@ import { NgxMaskDirective } from 'ngx-mask';
 import dayjs from 'dayjs';
 import { User } from '@trokai/shared-core';
 import { AlertService } from '../../alert/alert.service';
+import { FeedbackService } from '@trokai/shared-core';
 import { canSaveForm } from '../../forms';
 
 export interface ProfileFormValue {
@@ -101,6 +102,7 @@ export class ProfileFormComponent implements OnChanges {
   };
 
   private alertService = inject(AlertService);
+  private feedback = inject(FeedbackService);
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['user'] && this.user) this.fillForm();
@@ -191,7 +193,7 @@ export class ProfileFormComponent implements OnChanges {
     if (this.under18 || this.shortName || !this.nameValid) return;
 
     if (this.form.invalid) {
-      this.alertService.alert('Preencha todos os campos corretamente');
+      this.feedback.error('Preencha todos os campos corretamente');
       return;
     }
 

@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { AlertService } from '@trokai/shared-ui';
+import { FeedbackService } from '@trokai/shared-core';
 import { NewPasswordFormComponent, NewPasswordValue } from '@trokai/shared-ui';
 import { PasswordService } from 'src/app/services/password.service';
 
@@ -21,7 +21,7 @@ import { PasswordService } from 'src/app/services/password.service';
 })
 export class PasswordComponent implements OnInit {
   private authService = inject(AuthService);
-  private alertService = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private router = inject(Router);
   private passwordService = inject(PasswordService);
 
@@ -59,7 +59,7 @@ export class PasswordComponent implements OnInit {
           password,
         );
       }
-      this.alertService.alert('Senha alterada!');
+      this.feedback.success('Senha alterada!');
     } catch {
       /* intentional */
     }

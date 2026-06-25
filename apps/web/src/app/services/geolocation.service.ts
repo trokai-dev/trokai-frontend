@@ -4,11 +4,14 @@ import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { environment } from 'src/environments/environment';
-import { AlertService } from '@trokai/shared-ui';
 import { BrowserRef } from './browser-ref.service';
 import { CookiesService } from './cookies.service';
 
-import { RespostaCep, SearchLocation } from '@trokai/shared-core';
+import {
+  FeedbackService,
+  RespostaCep,
+  SearchLocation,
+} from '@trokai/shared-core';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +19,7 @@ import { RespostaCep, SearchLocation } from '@trokai/shared-core';
 export class GeolocationService {
   private http = inject(HttpClient);
   private browserRef = inject(BrowserRef);
-  private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private authService = inject(AuthService);
   private cookiesService = inject(CookiesService);
   private platformId = inject(PLATFORM_ID);
@@ -145,7 +148,7 @@ export class GeolocationService {
       };
 
       if (res.results.length === 0) {
-        this.alert.alert('CEP não encontrado');
+        this.feedback.error('CEP não encontrado');
         return;
       }
 

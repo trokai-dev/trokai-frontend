@@ -1,14 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { Network } from '@capacitor/network';
 import { BehaviorSubject } from 'rxjs';
-import { ToastService } from './toast-service';
+import { FeedbackService } from '@trokai/shared-core';
 import { PluginListenerHandle } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NetworkService {
-  private toastService = inject(ToastService);
+  private feedback = inject(FeedbackService);
 
   private sub: PluginListenerHandle;
   private _status = new BehaviorSubject<boolean>(undefined);
@@ -22,9 +22,11 @@ export class NetworkService {
       const lastStatus = this._status.value;
       this._status.next(status.connected);
       console.log('Network status changed: ', status.connected);
-      if (lastStatus !== undefined && lastStatus !== status.connected)
+      if (lastStatus !== undefined && lastStatus !== status.connected) {
         // se nao for a primeira vez
-        this.toastService.makeToastInternet(status.connected);
+        if (status.connected) this.feedback.success('Conectado');
+        else this.feedback.error('Sem conexão');
+      }
     });
 
     const status = await Network.getStatus();

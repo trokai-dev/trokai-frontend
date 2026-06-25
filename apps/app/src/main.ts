@@ -37,7 +37,6 @@ import {
   MaterialFeedbackService,
   ShortDatePipe,
 } from '@trokai/shared-ui';
-import { ToastService } from './app/services/toast-service';
 import { NetworkService } from './app/services/network.service';
 import {
   APP_CONFIG,
@@ -101,7 +100,6 @@ bootstrapApplication(AppComponent, {
     { provide: ShortDatePipe },
     { provide: CurrencyPipe },
     { provide: AlertService },
-    { provide: ToastService },
     FirebaseService,
     provideEnvironmentNgxMask(),
     provideHttpClient(withInterceptorsFromDi()),

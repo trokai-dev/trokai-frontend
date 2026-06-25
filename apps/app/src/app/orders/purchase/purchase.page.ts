@@ -20,7 +20,6 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { ChatComponent } from 'src/app/chat/chat.component';
 import { AlertService } from '@trokai/shared-ui';
-import { ToastService } from 'src/app/services/toast-service';
 import { OrderDeliveryComponent } from '../order-delivery/order-delivery.component';
 import { TkPurchaseDetailComponent } from '@trokai/shared-features';
 import { GlobalService } from 'src/app/services/global.service';
@@ -50,7 +49,6 @@ export class PurchasePage implements OnInit, OnDestroy {
   private modalCtrl = inject(ModalController);
   private alertService = inject(AlertService);
   private route = inject(ActivatedRoute);
-  private toastService = inject(ToastService);
 
   order!: Order;
   loading = true;

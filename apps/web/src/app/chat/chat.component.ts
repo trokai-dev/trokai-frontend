@@ -1,9 +1,8 @@
-import { OrderStatus } from '@trokai/shared-core';
+import { OrderStatus, FeedbackService } from '@trokai/shared-core';
 import { User } from '@trokai/shared-core';
 import { Component, OnInit, inject } from '@angular/core';
 import { take } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import { AlertService } from '@trokai/shared-ui';
 import {
   TkUserAvatarComponent,
   TkChatThreadComponent,
@@ -24,7 +23,7 @@ export class ChatComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private ordersService = inject(OrdersService);
-  private alertService = inject(AlertService);
+  private feedback = inject(FeedbackService);
 
   user!: User;
 
@@ -60,7 +59,7 @@ export class ChatComponent implements OnInit {
         this.typeString = 'compra';
         break;
       default:
-        this.alertService.alert('Negociação não encontrada');
+        this.feedback.error('Negociação não encontrada');
         this.router.navigate(['/']);
         return;
     }
@@ -68,7 +67,7 @@ export class ChatComponent implements OnInit {
     this.negotiationId = routeSegments[1];
 
     if (!this.negotiationId) {
-      this.alertService.alert('Negociação não encontrada');
+      this.feedback.error('Negociação não encontrada');
       this.router.navigate(['/']);
       return;
     }
@@ -76,13 +75,13 @@ export class ChatComponent implements OnInit {
     const order = await this.ordersService.fetchOrder(this.negotiationId);
 
     if (!order) {
-      this.alertService.alert('Negociação não encontrada');
+      this.feedback.error('Negociação não encontrada');
       this.router.navigate(['/']);
       return;
     }
 
     if (this.forbiddenStatus.includes(order.status)) {
-      this.alertService.alert('Chat indisponível para esta negociação');
+      this.feedback.error('Chat indisponível para esta negociação');
       this.router.navigate(['/']);
       return;
     }

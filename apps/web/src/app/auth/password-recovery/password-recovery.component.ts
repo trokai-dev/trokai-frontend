@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { AlertService } from '@trokai/shared-ui';
+import { FeedbackService } from '@trokai/shared-core';
 import {
   RecoveryCodeFormComponent,
   RecoveryEmailFormComponent,
@@ -21,7 +21,7 @@ import { PasswordComponent } from '../../account/password/password.component';
   ],
 })
 export class PasswordRecoveryComponent implements OnInit {
-  private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private passwordService = inject(PasswordService);
   private globalService = inject(GlobalService);
   private router = inject(Router);
@@ -39,7 +39,7 @@ export class PasswordRecoveryComponent implements OnInit {
     try {
       this.email = email;
       await this.passwordService.sendForgotCode(email);
-      this.alert.alert('Código enviado!');
+      this.feedback.success('Código enviado!');
       this.emailSent = true;
     } catch {
       /* intentional */

@@ -11,11 +11,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { SortingComponent } from 'src/app/search/sorting/sorting.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TkFilterDialogComponent } from '@trokai/shared-features';
-import { ClothesStatus, Filters } from '@trokai/shared-core';
+import { ClothesStatus, Filters, FeedbackService } from '@trokai/shared-core';
 
 import { addIcons } from 'ionicons';
 import { filterOutline, reorderTwoOutline, trash } from 'ionicons/icons';
-import { ToastService } from 'src/app/services/toast-service';
 
 @Component({
   selector: 'app-filter-tags',
@@ -38,7 +37,7 @@ export class FilterTagsComponent {
   @Input() statusFilter = undefined;
   @Input() enableStatusFilter = true;
 
-  private toastService = inject(ToastService);
+  private feedback = inject(FeedbackService);
   private modalCtrl = inject(ModalController);
   private dialog = inject(MatDialog);
 
@@ -50,7 +49,7 @@ export class FilterTagsComponent {
     this.filters = new Filters({ status: this.filters?.status });
     // if (!this.statusFilter?.length) this.filters.status = null;
     this.filtersChanged.emit(this.filters);
-    this.toastService.makeToast('Filtros removidos');
+    this.feedback.success('Filtros removidos');
   }
 
   getSortingText() {
@@ -111,6 +110,7 @@ export class FilterTagsComponent {
         if (!res?.filter) return;
         this.filters = res.filter;
         this.filtersChanged.emit(this.filters);
+        this.feedback.success('Filtros aplicados');
       });
   }
 }

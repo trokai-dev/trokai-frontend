@@ -2,6 +2,7 @@ import { User } from '@trokai/shared-core';
 import { Clothes, ClothesStatus } from '@trokai/shared-core';
 import { InventoryService } from './../wardrobe/inventory.service';
 import { AlertService } from '@trokai/shared-ui';
+import { FeedbackService } from '@trokai/shared-core';
 import { AuthService } from 'src/app/auth/auth.service';
 import {
   Component,
@@ -73,6 +74,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   private authService = inject(AuthService);
   private inventoryService = inject(InventoryService);
   private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private productService = inject(ProductService);
   private globalService = inject(GlobalService);
   private router = inject(Router);
@@ -258,7 +260,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 
       await this.getSuggestionClothes();
     } catch {
-      this.alert.alert('Produto não encontrado!');
+      this.feedback.error('Produto não encontrado!');
       this.router.navigateByUrl('/');
     }
   }
@@ -371,7 +373,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 
     try {
       await this.inventoryService.deleteItem(this.product);
-      this.alert.alert('Anúncio excluído!');
+      this.feedback.success('Anúncio excluído!');
       this.router.navigateByUrl('/users/' + this.user.seller?.nickname);
     } catch {
       /* intentional */
@@ -402,14 +404,14 @@ export class ProductComponent implements OnInit, OnDestroy {
   async deactivateProduct() {
     if (!this.myProduct || !this.productId) return;
     await this.inventoryService.deactivateProduct(this.productId);
-    this.alert.alert('Anúncio pausado');
+    this.feedback.success('Anúncio pausado');
     this.start();
   }
 
   async activateProduct() {
     if (!this.myProduct || !this.productId) return;
     await this.inventoryService.activateProduct(this.productId);
-    this.alert.alert('Anúncio ativado');
+    this.feedback.success('Anúncio ativado');
     this.start();
   }
 

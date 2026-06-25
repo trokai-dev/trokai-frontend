@@ -1,6 +1,6 @@
 import { User } from '@trokai/shared-core';
 import { Clothes } from '@trokai/shared-core';
-import { StorageService } from '@trokai/shared-core';
+import { StorageService, FeedbackService } from '@trokai/shared-core';
 import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { AlertService } from '@trokai/shared-ui';
 import { ProductService } from '@trokai/shared-data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
@@ -31,7 +30,7 @@ import { CompletingInformationService } from '@trokai/shared-data-access';
 export class QuestionsPageComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private authService = inject(AuthService);
-  private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private productService = inject(ProductService);
   private router = inject(Router);
   private dialogService = inject(DialogService);
@@ -68,7 +67,7 @@ export class QuestionsPageComponent implements OnInit {
         this.user = u;
       });
     } catch {
-      this.alert.alert('Produto não encontrado!');
+      this.feedback.error('Produto não encontrado!');
       this.router.navigateByUrl('/');
     }
     this.start();
@@ -96,7 +95,7 @@ export class QuestionsPageComponent implements OnInit {
         this.router.navigateByUrl(
           this.productService.mountProductLink(this.product),
         );
-        this.alert.alert('Pergunta não encontrada!');
+        this.feedback.error('Pergunta não encontrada!');
       }
 
       await this.handleAlerts();
@@ -142,10 +141,10 @@ export class QuestionsPageComponent implements OnInit {
             this.product._id,
             this.message,
           );
-        this.alert.alert('Resposta enviada!');
+        this.feedback.success('Resposta enviada!');
       } else {
         await this.productService.askQuestion(this.product._id, this.message);
-        this.alert.alert('Pergunta enviada!');
+        this.feedback.success('Pergunta enviada!');
       }
 
       this.sent = true;

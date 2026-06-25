@@ -61,7 +61,7 @@ import {
 } from 'ionicons/icons';
 import { AlertService } from '@trokai/shared-ui';
 import { FirebaseService } from '../services/firebase.service';
-import { ToastService } from '../services/toast-service';
+import { FeedbackService } from '@trokai/shared-core';
 
 @Component({
   selector: 'app-wardrobe',
@@ -102,7 +102,7 @@ export class WardrobePage implements OnInit, OnDestroy {
   private userService = inject(UserService);
   public inventoryService = inject(InventoryService);
   private alertService = inject(AlertService);
-  private toastService = inject(ToastService);
+  private feedback = inject(FeedbackService);
   private firebaseService = inject(FirebaseService);
   private navCtrl = inject(NavController);
   private modalCtrl = inject(ModalController);
@@ -342,7 +342,7 @@ export class WardrobePage implements OnInit, OnDestroy {
 
     await this.inventoryService.renewAll(this.user._id);
     this.applyFilters(new Filters()); // reseta filtro
-    this.toastService.makeToast('Anúncios renovados!');
+    this.feedback.success('Anúncios renovados!');
   }
 
   // search

@@ -32,7 +32,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { statusForOwner } from '@trokai/shared-core';
 import { AlertService } from '@trokai/shared-ui';
-import { Filters, SearchResponse } from '@trokai/shared-core';
+import {
+  Filters,
+  SearchResponse,
+  FeedbackService,
+} from '@trokai/shared-core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { TkProductCardComponent } from '@trokai/shared-ui';
 import { MatDialog } from '@angular/material/dialog';
@@ -72,6 +76,7 @@ export class WardrobeComponent implements OnInit {
   private authService = inject(AuthService);
   private globalService = inject(GlobalService);
   private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private matDialog = inject(MatDialog);
   private dialogService = inject(DialogService);
 
@@ -294,7 +299,7 @@ export class WardrobeComponent implements OnInit {
       this.lastNickname = null; // force reload user info (summary)
       await this.processParams();
 
-      this.alert.alert('Anúncios renovados!');
+      this.feedback.success('Anúncios renovados!');
     } finally {
       /* intentional */
     }

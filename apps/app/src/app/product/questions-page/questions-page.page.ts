@@ -1,4 +1,9 @@
-import { Clothes, StorageService, User } from '@trokai/shared-core';
+import {
+  Clothes,
+  FeedbackService,
+  StorageService,
+  User,
+} from '@trokai/shared-core';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { NavController } from '@ionic/angular/standalone';
@@ -17,7 +22,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { ProductService } from '@trokai/shared-data-access';
 import {
-  AlertService,
   QUESTIONS_SECURITY_DIALOG_AGREED_KEY,
   TkQuestionsSecurityDialogComponent,
 } from '@trokai/shared-ui';
@@ -45,7 +49,7 @@ import { BackButtonComponent } from '../../shared/components/back-button/back-bu
 export class QuestionsPage implements OnInit {
   private route = inject(ActivatedRoute);
   private authService = inject(AuthService);
-  private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private productService = inject(ProductService);
   private navCtrl = inject(NavController);
   private matDialog = inject(MatDialog);
@@ -82,7 +86,7 @@ export class QuestionsPage implements OnInit {
 
   async start() {
     if (!this.productId) {
-      this.alert.alert('Produto não encontrado!');
+      this.feedback.error('Produto não encontrado!');
       this.navCtrl.back();
       return;
     }
@@ -102,7 +106,7 @@ export class QuestionsPage implements OnInit {
         );
 
       if (!this.question && this.isOwner) {
-        this.alert.alert('Pergunta não encontrada!');
+        this.feedback.error('Pergunta não encontrada!');
         this.navCtrl.back();
         return;
       }
@@ -147,10 +151,10 @@ export class QuestionsPage implements OnInit {
         this.product._id,
         this.message,
       );
-      this.alert.alert('Resposta enviada!');
+      this.feedback.success('Resposta enviada!');
     } else {
       await this.productService.askQuestion(this.product._id, this.message);
-      this.alert.alert('Pergunta enviada!');
+      this.feedback.success('Pergunta enviada!');
     }
 
     this.sent = true;

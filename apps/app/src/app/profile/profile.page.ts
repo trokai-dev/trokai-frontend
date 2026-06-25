@@ -21,7 +21,7 @@ import {
   ProfileFormValue,
 } from '@trokai/shared-ui';
 import { CompletingInformationService } from '@trokai/shared-data-access';
-import { ToastService } from '../services/toast-service';
+import { FeedbackService } from '@trokai/shared-core';
 import { GlobalService } from '../services/global.service';
 
 @Component({
@@ -42,7 +42,7 @@ import { GlobalService } from '../services/global.service';
 export class ProfilePage implements AfterViewInit {
   private authService = inject(AuthService);
   private userService = inject(UserService);
-  private toastService = inject(ToastService);
+  private feedback = inject(FeedbackService);
   private loadingCtrl = inject(LoadingController);
   private router = inject(Router);
   private completingInfoService = inject(CompletingInformationService);
@@ -99,7 +99,7 @@ export class ProfilePage implements AfterViewInit {
       } else {
         this.navCtrl.pop();
       }
-      this.toastService.makeToast('Dados atualizados!');
+      this.feedback.success('Dados atualizados!');
     } catch {
       // updateUser surfaces its own error
     } finally {

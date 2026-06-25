@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription, firstValueFrom } from 'rxjs';
 import { AlertService } from '@trokai/shared-ui';
+import { FeedbackService } from '@trokai/shared-core';
 import { GlobalService } from 'src/app/services/global.service';
 import { OrdersService } from '@trokai/shared-data-access';
 import { Clipboard } from '@angular/cdk/clipboard';
@@ -30,6 +31,7 @@ export class PurchaseComponent implements OnInit, OnDestroy {
   private ordersService = inject(OrdersService);
   private globalService = inject(GlobalService);
   private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private clipboard = inject(Clipboard);
@@ -83,7 +85,7 @@ export class PurchaseComponent implements OnInit, OnDestroy {
   copyPix() {
     if (!this.order.pix) return;
     this.clipboard.copy(this.order.pix.payload);
-    this.alert.alert('Código PIX copiado!');
+    this.feedback.success('Código PIX copiado!');
   }
 
   async checkReview() {

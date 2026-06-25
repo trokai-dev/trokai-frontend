@@ -5,9 +5,9 @@ import { LoadingController, Platform } from '@ionic/angular/standalone';
 import { BehaviorSubject, lastValueFrom, map } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
-import { ToastService } from './toast-service';
 
 import {
+  FeedbackService,
   RespostaCep,
   SearchLocation,
   StorageService,
@@ -19,7 +19,7 @@ import {
 export class GeolocationService {
   private http = inject(HttpClient);
   private platform = inject(Platform);
-  private toastService = inject(ToastService);
+  private feedback = inject(FeedbackService);
   private authService = inject(AuthService);
   private storage = inject(StorageService);
 
@@ -75,7 +75,7 @@ export class GeolocationService {
 
   private async checkGpsPermission(): Promise<boolean> {
     if (!(this.platform.is('mobile') && this.platform.is('hybrid'))) {
-      this.toastService.makeToast('Sem permissão para localização');
+      this.feedback.error('Sem permissão para localização');
       return false;
     }
 
@@ -89,7 +89,7 @@ export class GeolocationService {
     // se permissao aceita
     if (permissions.location === 'granted') return true;
 
-    this.toastService.makeToast('Sem permissão para localização');
+    this.feedback.error('Sem permissão para localização');
     return false;
   }
 
@@ -178,7 +178,7 @@ export class GeolocationService {
       const res: any = await this.getLatLngFromCep(zipCode);
 
       if (res.results.length === 0) {
-        this.toastService.makeToast('CEP não encontrado');
+        this.feedback.error('CEP não encontrado');
         return;
       }
 
@@ -188,7 +188,7 @@ export class GeolocationService {
       await this.setSearchLocation(lat, lng, zipCode);
     } catch (error) {
       console.log(error);
-      this.toastService.makeToast('Erro ao buscar CEP');
+      this.feedback.error('Erro ao buscar CEP');
     }
   }
 

@@ -1,4 +1,4 @@
-import { User } from '@trokai/shared-core';
+import { User, FeedbackService } from '@trokai/shared-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
@@ -18,7 +18,6 @@ import {
 } from '@ionic/angular/standalone';
 import { SellerProfileComponent, SellerProfileValue } from '@trokai/shared-ui';
 import { CompletingInformationService } from '@trokai/shared-data-access';
-import { ToastService } from '../services/toast-service';
 
 @Component({
   selector: 'app-store-options',
@@ -39,7 +38,7 @@ import { ToastService } from '../services/toast-service';
 export class StoreOptionsPage implements OnInit {
   private authService = inject(AuthService);
   private http = inject(HttpClient);
-  private toastService = inject(ToastService);
+  private feedback = inject(FeedbackService);
   private loadingCtrl = inject(LoadingController);
   private router = inject(Router);
   private completingInfoService = inject(CompletingInformationService);
@@ -72,7 +71,7 @@ export class StoreOptionsPage implements OnInit {
           this.http.delete(environment.urlApi + '/users/me/avatar'),
         );
         this.authService.syncAvatar(null);
-        this.toastService.makeToast('Foto de perfil removida');
+        this.feedback.success('Foto de perfil removida');
       } finally {
         this.pictureUpdating = false;
       }
@@ -81,7 +80,7 @@ export class StoreOptionsPage implements OnInit {
 
     try {
       await this.authService.uploadAvatar(blob);
-      this.toastService.makeToast('Foto de perfil atualizada');
+      this.feedback.success('Foto de perfil atualizada');
     } finally {
       this.pictureUpdating = false;
     }
@@ -109,7 +108,7 @@ export class StoreOptionsPage implements OnInit {
         this.navCtrl.pop();
       }
 
-      this.toastService.makeToast('Dados atualizados!');
+      this.feedback.success('Dados atualizados!');
     } catch {
       // updateUser surfaces its own error
     } finally {

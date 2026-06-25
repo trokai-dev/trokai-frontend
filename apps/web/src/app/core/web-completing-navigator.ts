@@ -9,6 +9,7 @@ import {
 } from '@trokai/shared-core';
 import { CompletingNavigator, UserService } from '@trokai/shared-data-access';
 import { AlertService } from '@trokai/shared-ui';
+import { FeedbackService } from '@trokai/shared-core';
 import { GlobalService } from '../services/global.service';
 import { InventoryService } from '../wardrobe/inventory.service';
 
@@ -18,6 +19,7 @@ export class WebCompletingNavigator extends CompletingNavigator {
   private router = inject(Router);
   private userService = inject(UserService);
   private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private globalService = inject(GlobalService);
   private inventoryService = inject(InventoryService);
 
@@ -33,7 +35,7 @@ export class WebCompletingNavigator extends CompletingNavigator {
     // 1. Informações pessoais incompletas (TODOS)
     if (!status.personalInfo) {
       this.goTo('/account/profile?completing=true');
-      this.alert.alert('Complete o seu cadastro');
+      this.feedback.warning('Complete o seu cadastro');
       return true;
     }
 
@@ -46,21 +48,21 @@ export class WebCompletingNavigator extends CompletingNavigator {
     // 3. usuário sem endereço (compra valida no checkout)
     if (!status.address && sell) {
       this.goTo('/account/address?completing=true');
-      this.alert.alert('Cadastre seu endereço para prosseguir');
+      this.feedback.warning('Cadastre seu endereço para prosseguir');
       return true;
     }
 
     // 4. falta verificação de telefone (VENDEDOR)
     if (!status.phoneVerified && sell) {
       this.goTo('/account/profile?phone-verify=true');
-      this.alert.alert('Verifique seu telefone');
+      this.feedback.warning('Verifique seu telefone');
       return true;
     }
 
     // 5. faltam store options (VENDEDOR)
     if (!status.sellerInfo && sell) {
       this.goTo('/account/wardrobe?completing=true');
-      this.alert.alert('Complete o cadastro da sua loja');
+      this.feedback.warning('Complete o cadastro da sua loja');
       return true;
     }
 

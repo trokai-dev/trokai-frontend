@@ -20,7 +20,6 @@ import { FirebaseService } from './services/firebase.service';
 import { GeolocationService } from './services/geolocation.service';
 import { GlobalService } from './services/global.service';
 import { NetworkService } from './services/network.service';
-import { ToastService } from './services/toast-service';
 import {
   LoadingController,
   NavController,
@@ -56,7 +55,6 @@ export class AppComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private notificationService = inject(NotificationsService);
   private networkService = inject(NetworkService);
-  private toastService = inject(ToastService);
   private locationService = inject(GeolocationService);
   private favoritesService = inject(FavoritesService);
   private buyingService = inject(BuyingService);

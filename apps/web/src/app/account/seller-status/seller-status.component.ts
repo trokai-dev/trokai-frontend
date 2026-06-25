@@ -1,4 +1,9 @@
-import { SellerStatus, StoreVisibility, User } from '@trokai/shared-core';
+import {
+  SellerStatus,
+  StoreVisibility,
+  User,
+  FeedbackService,
+} from '@trokai/shared-core';
 import { ClothesStatus } from '@trokai/shared-core';
 import {
   Component,
@@ -35,6 +40,7 @@ import { MatDividerModule } from '@angular/material/divider';
 export class SellerStatusComponent implements OnInit {
   private authService = inject(AuthService);
   private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private globalService = inject(GlobalService);
   private dialogService = inject(DialogService);
 
@@ -107,6 +113,9 @@ export class SellerStatusComponent implements OnInit {
 
     try {
       await this.authService.updateUser({ storeVisibility: v });
+      this.feedback.success(
+        v === StoreVisibility.OPEN ? 'Vendas retomadas!' : 'Vendas pausadas!',
+      );
     } finally {
       this.savingVisibility = false;
     }

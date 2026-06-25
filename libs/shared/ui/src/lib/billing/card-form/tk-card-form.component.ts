@@ -27,6 +27,7 @@ import { NgxMaskDirective } from 'ngx-mask';
 import { Card, User, getCreditCardBrand, PaymentBrands } from '@trokai/shared-core';
 import { BuyingService } from '@trokai/shared-data-access';
 import { AlertService } from '../../alert/alert.service';
+import { FeedbackService } from '@trokai/shared-core';
 import { TkAddressFormComponent } from '../../address/address-form/tk-address-form.component';
 import { TkPaymentIconComponent } from '../payment-icon/tk-payment-icon.component';
 
@@ -61,6 +62,7 @@ export class TkCardFormComponent implements OnInit, OnChanges {
 
   private fb = inject(FormBuilder);
   private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private buyingService = inject(BuyingService);
 
   cardBrand = PaymentBrands.CARD;
@@ -101,7 +103,7 @@ export class TkCardFormComponent implements OnInit, OnChanges {
     if (!this.useUserAddress) this.addressForm.validateForm();
 
     if (this.form.invalid || (!this.useUserAddress && this.addressForm.form.invalid)) {
-      this.alert.formError();
+      this.feedback.error('Preencha os campos corretamente');
       return null;
     }
 
@@ -152,6 +154,6 @@ export class TkCardFormComponent implements OnInit, OnChanges {
     if (!answer) return;
 
     await this.buyingService.deleteCard(card);
-    this.alert.alert('Cartão apagado!');
+    this.feedback.success('Cartão apagado!');
   }
 }

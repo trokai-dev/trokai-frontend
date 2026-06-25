@@ -28,6 +28,7 @@ import {
 } from '@trokai/shared-core';
 import { TkUserAvatarComponent } from '../user-avatar/user-avatar.component';
 import { AlertService } from '../../alert/alert.service';
+import { FeedbackService } from '@trokai/shared-core';
 import { canSaveForm } from '../../forms';
 
 export interface SellerProfileValue {
@@ -103,6 +104,7 @@ export class SellerProfileComponent implements OnInit {
   };
 
   private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private clipboard = inject(Clipboard);
 
   ngOnInit() {
@@ -148,7 +150,7 @@ export class SellerProfileComponent implements OnInit {
     if (!this.avatarSatisfied) return false;
 
     if (!this.form.valid) {
-      this.alert.formError();
+      this.feedback.error('Preencha os campos corretamente');
       return false;
     }
 
@@ -239,7 +241,7 @@ export class SellerProfileComponent implements OnInit {
     if (field == null) return;
 
     this.clipboard.copy(`https://trokai.com.br/${field.value}`);
-    this.alert.success('Link da loja copiado!');
+    this.feedback.success('Link da loja copiado!');
   }
 
   toSlug(value: string): string {

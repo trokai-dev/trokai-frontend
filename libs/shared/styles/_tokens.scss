@@ -26,8 +26,12 @@
 
   // --- Semantic states (no Material equivalent → brand-owned) ---
   --color-success: #0f800d;
+  --color-success-bg: #e6f4ea;
   --color-warning: #faca23;
+  --color-warning-bg: #fef3e2;
+  --color-warning-text: #9a5c00;
   --color-error: var(--mat-sys-error, #d43c3c);
+  --color-error-bg: #fde8e8;
   --color-star-full: #f3b410;
   --color-star-empty: #adacac;
 

@@ -26,8 +26,8 @@ import {
   trashOutline,
 } from 'ionicons/icons';
 import { AlertService } from '@trokai/shared-ui';
+import { FeedbackService } from '@trokai/shared-core';
 import { FirebaseService } from '../services/firebase.service';
-import { ToastService } from '../services/toast-service';
 
 @Component({
   selector: 'app-cards',
@@ -54,7 +54,7 @@ export class CardsPage implements OnInit {
   private firebaseService = inject(FirebaseService);
   private navCtrl = inject(NavController);
   private buyingService = inject(BuyingService);
-  private toastService = inject(ToastService);
+  private feedback = inject(FeedbackService);
   private alertService = inject(AlertService);
   private loadingCtrl = inject(LoadingController);
 
@@ -87,7 +87,7 @@ export class CardsPage implements OnInit {
 
     try {
       await this.buyingService.deleteCard(card);
-      this.toastService.makeToast('Cartão apagado!');
+      this.feedback.success('Cartão apagado!');
     } finally {
       loading.dismiss();
     }

@@ -77,7 +77,7 @@ import {
 import { FirebaseService } from '../services/firebase.service';
 import { GlobalService } from '../services/global.service';
 import { ProductService } from '@trokai/shared-data-access';
-import { ToastService } from '../services/toast-service';
+import { FeedbackService } from '@trokai/shared-core';
 import { CompletingInformationService } from '@trokai/shared-data-access';
 
 @Component({
@@ -117,7 +117,7 @@ export class ProductPage implements OnInit, OnDestroy {
   private globalService = inject(GlobalService);
   private mainService = inject(MainService);
   public inventoryService = inject(InventoryService);
-  private toastService = inject(ToastService);
+  private feedback = inject(FeedbackService);
   private navCtrl = inject(NavController);
   private searchService = inject(SearchService);
   private loadingCtrl = inject(LoadingController);
@@ -320,7 +320,7 @@ export class ProductPage implements OnInit, OnDestroy {
 
       this.firstStart = false;
     } catch (err) {
-      this.toastService.makeToast('Produto não encontrado!');
+      this.feedback.error('Produto não encontrado!');
       this.navCtrl.back();
     }
   }
@@ -379,7 +379,7 @@ export class ProductPage implements OnInit, OnDestroy {
 
   onBuy() {
     this.firebaseService.log('COMPRA_CLICOU_COMPRAR');
-    this.toastService.makeToast('Produto adicionado à sacola!');
+    this.feedback.success('Produto adicionado à sacola!');
   }
 
   async openCheckout(ownerId: string) {
@@ -446,7 +446,7 @@ export class ProductPage implements OnInit, OnDestroy {
       try {
         await this.inventoryService.deleteItem(this.product.clothes);
         this.navCtrl.pop();
-        this.toastService.makeToast('Anúncio excluido');
+        this.feedback.success('Anúncio excluido');
       } finally {
         loading.dismiss();
       }
@@ -467,7 +467,7 @@ export class ProductPage implements OnInit, OnDestroy {
         status === ClothesStatus.PAUSED_BY_USER
       )
     ) {
-      this.toastService.makeToast('Não é possível editar esse anúncio.');
+      this.feedback.error('Não é possível editar esse anúncio.');
       return;
     }
 
@@ -487,14 +487,14 @@ export class ProductPage implements OnInit, OnDestroy {
   async deactivateProduct() {
     if (!this.myProduct) return;
     await this.inventoryService.deactivateProduct(this.productId);
-    this.toastService.makeToast('Anúncio pausado');
+    this.feedback.success('Anúncio pausado');
     this.start();
   }
 
   async activateProduct() {
     if (!this.myProduct) return;
     await this.inventoryService.activateProduct(this.productId);
-    this.toastService.makeToast('Anúncio ativado');
+    this.feedback.success('Anúncio ativado');
     this.start();
   }
 
@@ -512,7 +512,7 @@ export class ProductPage implements OnInit, OnDestroy {
       this.editProduct();
     } else if (res != null) {
       await this.inventoryService.renewProduct(this.productId);
-      this.toastService.makeToast('Anúncio renovado');
+      this.feedback.success('Anúncio renovado');
       this.start();
     }
   }

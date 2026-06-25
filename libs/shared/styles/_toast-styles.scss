@@ -1,0 +1,33 @@
+// @trokai/shared-styles — toast (MatSnackBar) panel classes.
+// Applied via `panelClass: ['tk-toast', 'tk-toast-success' | 'tk-toast-error' | 'tk-toast-warning']`
+// from `MaterialFeedbackService` (shared-ui). Position (top) is set per-call
+// in `MatSnackBarConfig`, not here.
+//
+// Material 21 uses M3 theming — the snackbar surface reads `--mat-snack-bar-*`
+// tokens (NOT the legacy MDC `--mdc-snackbar-*` names), set globally as a
+// low-specificity `:root`/`html` default. Overriding them here on the
+// higher-specificity `.tk-toast-*` class wins the cascade regardless of
+// stylesheet order.
+
+.tk-toast {
+  margin-top: env(safe-area-inset-top, 0);
+}
+
+.tk-toast-success {
+  --mat-snack-bar-container-color: var(--color-success-bg);
+  --mat-snack-bar-supporting-text-color: var(--color-success);
+  --mat-snack-bar-button-color: var(--color-success);
+}
+
+.tk-toast-error {
+  --mat-snack-bar-container-color: var(--color-error-bg);
+  --mat-snack-bar-supporting-text-color: var(--color-error);
+  --mat-snack-bar-button-color: var(--color-error);
+}
+
+// Informational, non success/error notices (e.g. "complete your profile").
+.tk-toast-warning {
+  --mat-snack-bar-container-color: var(--color-warning-bg);
+  --mat-snack-bar-supporting-text-color: var(--color-warning-text);
+  --mat-snack-bar-button-color: var(--color-warning-text);
+}

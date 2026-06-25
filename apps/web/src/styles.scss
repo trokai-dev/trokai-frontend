@@ -3,6 +3,7 @@
 @use 'index'; // @trokai/shared-styles utilities (layout/spacing/typography/grid) — shared with the app
 @import 'variables'; // @trokai/shared-styles Sass $vars (color fns etc.)
 @import 'material-styles'; // @trokai/shared-styles global Material overrides
+@import 'toast-styles'; // @trokai/shared-styles toast (MatSnackBar) panel classes
 @import 'dialogs'; // @trokai/shared-styles Material dialog layout
 // spacing: margins/paddings now come from shared `@use 'index'` (_spacing.scss)
 

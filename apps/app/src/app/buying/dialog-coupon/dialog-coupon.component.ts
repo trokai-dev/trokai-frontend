@@ -26,7 +26,7 @@ import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { close, sadOutline } from 'ionicons/icons';
 import { GlobalService } from 'src/app/services/global.service';
-import { ToastService } from 'src/app/services/toast-service';
+import { FeedbackService } from '@trokai/shared-core';
 import { BackButtonComponent } from 'src/app/shared/components/back-button/back-button.component';
 import { LoadingService } from '@trokai/shared-ui';
 
@@ -54,7 +54,7 @@ export class DialogCoupon implements OnInit {
   private router = inject(Router);
   private navCtrl = inject(NavController);
   private buyingService = inject(BuyingService);
-  private toastService = inject(ToastService);
+  private feedback = inject(FeedbackService);
   private globalService = inject(GlobalService);
   private loading = inject(LoadingService);
   private authService = inject(AuthService);
@@ -83,7 +83,7 @@ export class DialogCoupon implements OnInit {
       this.checkoutLocal.couponCode = this.couponCode;
       this.buyingService.setCheckoutLocal(this.checkoutLocal);
       await this.buyingService.getCheckoutData();
-      this.toastService.makeToast('Cupom de desconto aplicado!');
+      this.feedback.success('Cupom de desconto aplicado!');
       this.modalCtrl.dismiss({ couponCode: this.couponCode });
     } catch {
       delete this.checkoutLocal.couponCode;

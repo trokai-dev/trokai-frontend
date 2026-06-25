@@ -1,5 +1,5 @@
-import { Address } from '@trokai/shared-core';
-import { AlertService, TkAddressFormComponent } from '@trokai/shared-ui';
+import { Address, FeedbackService } from '@trokai/shared-core';
+import { TkAddressFormComponent } from '@trokai/shared-ui';
 import { AuthService } from './../../auth/auth.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { CompletingInformationService } from '@trokai/shared-data-access';
@@ -18,7 +18,7 @@ import { CompletingInformationService } from '@trokai/shared-data-access';
 })
 export class AddressComponent implements OnInit {
   private authService = inject(AuthService);
-  private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private completingInfo = inject(CompletingInformationService);
 
   address?: Address;
@@ -32,7 +32,7 @@ export class AddressComponent implements OnInit {
   async save(address: Address) {
     try {
       await this.authService.updateAddress(address);
-      this.alert.postSuccess();
+      this.feedback.success('Informações salvas!');
       this.completingInfo.next();
     } catch {
       /* intentional */

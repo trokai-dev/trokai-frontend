@@ -2,14 +2,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { NavController } from '@ionic/angular/standalone';
 import { Injectable, inject } from '@angular/core';
 import { Network } from '@capacitor/network';
-import { BaseAuthInterceptor } from '@trokai/shared-core';
+import { BaseAuthInterceptor, FeedbackService } from '@trokai/shared-core';
 import { AuthService } from 'src/app/services/auth.service';
 import { AlertService } from '@trokai/shared-ui';
-import { ToastService } from 'src/app/services/toast-service';
 
 @Injectable({ providedIn: 'root' })
 export class HttpErrorInterceptor extends BaseAuthInterceptor {
-  private toastService = inject(ToastService);
+  private feedback = inject(FeedbackService);
   private alertService = inject(AlertService);
   private navCtrl = inject(NavController);
   private authService = inject(AuthService);
@@ -37,11 +36,11 @@ export class HttpErrorInterceptor extends BaseAuthInterceptor {
   protected async showError(message: string | null): Promise<void> {
     const networkStatus = await Network.getStatus();
     if (!networkStatus.connected) {
-      this.toastService.makeToastInternet(false); // sem conexao
+      this.feedback.error('Sem conexão');
     } else if (message && message.toString().length > 0) {
-      this.toastService.makeToast(message, 4000); // msg de erro do back
+      this.feedback.error(message);
     } else {
-      this.toastService.makeToastErrorDefault(); // msg de erro padrao
+      this.feedback.error('Ops! Algo deu errado!');
     }
   }
 }

@@ -17,7 +17,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { Address, RespostaCep } from '@trokai/shared-core';
-import { AlertService } from '../../alert/alert.service';
+import { FeedbackService } from '@trokai/shared-core';
 import { canSaveForm } from '../../forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -163,7 +163,7 @@ export class TkAddressFormComponent implements OnChanges {
   @Output() formClose = new EventEmitter<void>();
 
   private http = inject(HttpClient);
-  private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
 
   viaCepError = false;
   private hadInitialData = false;
@@ -210,7 +210,7 @@ export class TkAddressFormComponent implements OnChanges {
 
   async save() {
     if (!this.form.valid) {
-      this.alert.formError();
+      this.feedback.error('Preencha os campos corretamente');
       return;
     }
     const v = this.form.value;

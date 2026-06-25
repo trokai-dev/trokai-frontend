@@ -7,9 +7,8 @@ import {
 import { Observable, of } from 'rxjs';
 import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-import { BaseAuthInterceptor } from '@trokai/shared-core';
+import { BaseAuthInterceptor, FeedbackService } from '@trokai/shared-core';
 import { AuthService } from 'src/app/auth/auth.service';
-import { AlertService } from '@trokai/shared-ui';
 import { REQUEST } from './express.tokens';
 import { Request } from 'express';
 
@@ -26,7 +25,7 @@ const DEFAULT_CACHE_DURATION_MS = 5 * 60 * 1000; // 5 minutes
 export class CustomHttpInterceptor extends BaseAuthInterceptor {
   protected override readonly authScheme = 'Bearer ';
 
-  private alertService = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private authService = inject(AuthService);
   private platformId = inject(PLATFORM_ID);
   private request = inject<Request>(REQUEST, { optional: true });
@@ -99,24 +98,24 @@ export class CustomHttpInterceptor extends BaseAuthInterceptor {
 
   protected onErrorCode(code: string, _error: HttpErrorResponse): void {
     if (code === 'banned') {
-      this.alertService.alert('Conta banida');
+      this.feedback.error('Conta banida');
       this.authService.logout();
     } else if (code === 'token_expired') {
       this.authService.logout();
     } else if (code === 'apple_deleted') {
       this.authService.logout();
-      this.alertService.alert('Conta excluída');
+      this.feedback.error('Conta excluída');
     } else if (code === 'apple_token') {
       this.authService.logout();
-      this.alertService.alert('Sessão expirada');
+      this.feedback.error('Sessão expirada');
     }
   }
 
   protected showError(message: string | null): void {
     if (message && message.toString().length > 0) {
-      this.alertService.alert(message);
+      this.feedback.error(message);
     } else {
-      this.alertService.errorDefault();
+      this.feedback.error('Ops! Algo deu errado!');
     }
   }
 }

@@ -31,7 +31,7 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
-import { ToastService } from 'src/app/services/toast-service';
+import { FeedbackService } from '@trokai/shared-core';
 import { LoadingService, CostPipe } from '@trokai/shared-ui';
 
 @Component({
@@ -75,7 +75,7 @@ export class ShippingOptionsPage implements OnInit, OnDestroy {
 
   private buyingService = inject(BuyingService);
   private authService = inject(AuthService);
-  private toast = inject(ToastService);
+  private feedback = inject(FeedbackService);
   private mainService = inject(MainService);
   private ionNav = inject(IonNav);
   private navCtrl = inject(NavController);
@@ -171,7 +171,7 @@ export class ShippingOptionsPage implements OnInit, OnDestroy {
 
   validate(): boolean {
     if (this.checkoutLocal.shippingOption == null) {
-      this.toast.makeToast('Escolha a opção de entrega');
+      this.feedback.error('Escolha a opção de entrega');
       return false;
     }
 

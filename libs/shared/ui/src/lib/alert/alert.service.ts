@@ -1,62 +1,20 @@
 import { Injectable, NgZone, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Overlay } from '@angular/cdk/overlay';
 import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 
+/**
+ * Modal dialog service (question/info/confirm). For transient toasts use
+ * `FeedbackService.success()` / `.error()` (shared-core port, implemented
+ * by `MaterialFeedbackService`) instead.
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class AlertService {
   private dialog = inject(MatDialog);
-  private snack = inject(MatSnackBar);
   private overlay = inject(Overlay);
   private ngZone = inject(NgZone);
-
-  // --- snackbar toasts ---
-
-  public alert(msg: string) {
-    try {
-      this.show(msg);
-    } catch {
-      /* ignore */
-    }
-  }
-
-  public errorDefault() {
-    this.show('Ops! Algo deu errado!');
-  }
-
-  public success(msg: string) {
-    this.show(msg);
-  }
-
-  public error(msg: string) {
-    this.show(msg);
-  }
-
-  public warning(msg: string) {
-    this.show(msg);
-  }
-
-  public postSuccess() {
-    this.show('Informações salvas!');
-  }
-
-  public formError() {
-    this.show('Preencha os campos corretamente');
-  }
-
-  private show(msg: string) {
-    this.ngZone.runOutsideAngular(() => {
-      const ref = this.snack.open(msg, '', { duration: 0 });
-      // Zone.js-unpatched setTimeout so the dismiss timer never keeps
-      // ApplicationRef unstable.
-      const nativeSetTimeout: typeof setTimeout =
-        (window as any).__zone_symbol__setTimeout ?? setTimeout;
-      nativeSetTimeout(() => ref.dismiss(), 3000);
-    });
-  }
 
   // --- web question/info dialogs ---
 

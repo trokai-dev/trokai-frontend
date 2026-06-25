@@ -35,7 +35,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
-import { AlertService } from '../../alert/alert.service';
+import { FeedbackService } from '@trokai/shared-core';
 import { canSaveForm } from '../../forms';
 import { CostPipe } from '../../pipes/cost.pipe';
 import { TkAutocompleteComponent } from '../../media/autocomplete/tk-autocomplete.component';
@@ -87,7 +87,7 @@ export class TkProductRegisterFormComponent implements OnInit, OnChanges {
   @Output() helpRequested = new EventEmitter<void>();
 
   private productService = inject(ProductService);
-  private alertService = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private dialog = inject(MatDialog);
 
   categories: any[] | null = null;
@@ -437,12 +437,12 @@ export class TkProductRegisterFormComponent implements OnInit, OnChanges {
 
   save() {
     if (!this.images || this.images.length < 2) {
-      this.alertService.alert('Adicione ao menos duas fotos ao anúncio');
+      this.feedback.error('Adicione ao menos duas fotos ao anúncio');
       return;
     }
 
     if (!this.form.valid || !this.isCostValid() || this.titleError) {
-      this.alertService.formError();
+      this.feedback.error('Preencha os campos corretamente');
       return;
     }
 

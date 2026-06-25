@@ -1,10 +1,6 @@
-import { User } from '@trokai/shared-core';
+import { User, FeedbackService } from '@trokai/shared-core';
 import { UserService } from '@trokai/shared-data-access';
-import {
-  AlertService,
-  ProfileFormComponent,
-  ProfileFormValue,
-} from '@trokai/shared-ui';
+import { ProfileFormComponent, ProfileFormValue } from '@trokai/shared-ui';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { CompletingInformationService } from '@trokai/shared-data-access';
@@ -21,7 +17,7 @@ import { DialogService } from 'src/app/services/dialog.service';
 export class ProfileComponent implements OnInit {
   private authService = inject(AuthService);
   private userService = inject(UserService);
-  private alertService = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private completingInfoService = inject(CompletingInformationService);
   private route = inject(ActivatedRoute);
   private dialogService = inject(DialogService);
@@ -70,7 +66,7 @@ export class ProfileComponent implements OnInit {
     try {
       await this.authService.updateUser(patch);
       if (this.completingInformation) this.completingInfoService.next();
-      this.alertService.postSuccess();
+      this.feedback.success('Informações salvas!');
     } catch {
       // updateUser surfaces its own error
     }

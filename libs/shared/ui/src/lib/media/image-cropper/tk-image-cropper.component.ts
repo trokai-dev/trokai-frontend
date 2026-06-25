@@ -12,7 +12,7 @@ import {
 } from 'ngx-image-cropper';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { AlertService } from '../../alert/alert.service';
+import { FeedbackService } from '@trokai/shared-core';
 
 export interface CropState {
   cropper: CropperPosition;
@@ -54,7 +54,7 @@ export class TkImageCropperComponent implements OnInit {
   hasSavedState = false;
 
   private dialogRef = inject(MatDialogRef<TkImageCropperComponent>);
-  private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   public data = inject<{
     profile: boolean;
     imageBlob: Blob;
@@ -138,12 +138,12 @@ export class TkImageCropperComponent implements OnInit {
     if (!this.myImageFile || !this.croppedBlob) return;
 
     if (this.tooLarge) {
-      this.alert.alert('Diminua a largura ou aumente a altura');
+      this.feedback.error('Diminua a largura ou aumente a altura');
       return;
     }
 
     if (this.tooTall) {
-      this.alert.alert('Aumente a largura ou diminua a altura');
+      this.feedback.error('Aumente a largura ou diminua a altura');
       return;
     }
 

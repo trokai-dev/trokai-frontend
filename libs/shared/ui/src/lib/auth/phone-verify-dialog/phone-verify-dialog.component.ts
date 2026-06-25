@@ -11,9 +11,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxMaskPipe } from 'ngx-mask';
-import { PhoneOtpMethod, StorageService } from '@trokai/shared-core';
+import {
+  FeedbackService,
+  PhoneOtpMethod,
+  StorageService,
+} from '@trokai/shared-core';
 import { UserService } from '@trokai/shared-data-access';
-import { AlertService } from '../../alert/alert.service';
 import { LoadingService } from '../../loading/loading.service';
 
 /** Data passed by the opener into the shared dialog. */
@@ -60,7 +63,7 @@ export class PhoneVerifyDialogComponent implements OnInit, OnDestroy {
 
   private storage = inject(StorageService);
   private userService = inject(UserService);
-  private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private loading = inject(LoadingService);
   private dialogRef = inject(MatDialogRef<PhoneVerifyDialogComponent>);
 
@@ -70,7 +73,7 @@ export class PhoneVerifyDialogComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     if (!this.smsAvailable && !this.whatsappAvailable) {
-      this.alert.error(
+      this.feedback.error(
         'Nenhum método de envio de código OTP está disponível no momento. Por favor, tente novamente mais tarde.',
       );
       this.dialogRef.close();
@@ -120,7 +123,7 @@ export class PhoneVerifyDialogComponent implements OnInit, OnDestroy {
     this.loading.start('Verificando código...');
     try {
       await this.userService.verifyPhoneOtp(code);
-      this.alert.success('Telefone verificado com sucesso!');
+      this.feedback.success('Telefone verificado com sucesso!');
       this._clearTicker();
       await this.storage.remove(this.storageKey);
       this.dialogRef.close({ verified: true });

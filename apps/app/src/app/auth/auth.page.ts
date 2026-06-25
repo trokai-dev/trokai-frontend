@@ -27,7 +27,7 @@ import {
   TkGoogleBtnComponent,
 } from '@trokai/shared-ui';
 import { FirebaseService } from '../services/firebase.service';
-import { ToastService } from '../services/toast-service';
+import { FeedbackService } from '@trokai/shared-core';
 import { MainService } from '../services/main.service';
 import { environment } from 'src/environments/environment';
 import { SocialLogin } from '@capgo/capacitor-social-login';
@@ -50,7 +50,7 @@ export class AuthPage implements OnDestroy, AfterViewInit {
   private router = inject(Router);
   private loadingCtrl = inject(LoadingController);
   private authService = inject(AuthService);
-  private toastService = inject(ToastService);
+  private feedback = inject(FeedbackService);
   private ionNav = inject(IonNav);
   private firebaseService = inject(FirebaseService);
   private mainService = inject(MainService);
@@ -96,7 +96,7 @@ export class AuthPage implements OnDestroy, AfterViewInit {
     } catch (ex) {
       console.log('ERRO GOOGLE');
       console.log(JSON.stringify(ex));
-      this.toastService.makeToastErrorDefault();
+      this.feedback.error('Ops! Algo deu errado!');
       // this.alert.showAlert('ERRO GOOGLE', JSON.stringify(ex));
     }
   }
@@ -135,10 +135,10 @@ export class AuthPage implements OnDestroy, AfterViewInit {
 
         this.proceedToLoginApple(appleUser);
       } else {
-        this.toastService.makeToastErrorDefault();
+        this.feedback.error('Ops! Algo deu errado!');
       }
     } catch (error) {
-      this.toastService.makeToastErrorDefault();
+      this.feedback.error('Ops! Algo deu errado!');
       console.log(error);
     }
   }
@@ -162,7 +162,7 @@ export class AuthPage implements OnDestroy, AfterViewInit {
         this.firebaseService.log('AUTH_GOOGLE_LOGIN');
       }
     } catch {
-      this.toastService.makeToast('Não foi possível logar');
+      this.feedback.error('Não foi possível logar');
     } finally {
       loading.dismiss();
     }
@@ -187,7 +187,7 @@ export class AuthPage implements OnDestroy, AfterViewInit {
         this.firebaseService.log('AUTH_APPLE_LOGIN');
       }
     } catch {
-      this.toastService.makeToast('Não foi possível logar');
+      this.feedback.error('Não foi possível logar');
     } finally {
       loading.dismiss();
     }

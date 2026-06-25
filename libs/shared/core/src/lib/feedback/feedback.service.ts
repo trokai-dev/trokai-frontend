@@ -16,8 +16,11 @@ export abstract class FeedbackService {
   abstract startLoading(message?: string): void;
   abstract stopLoading(): void;
 
-  /** Transient toast/snackbar. */
-  abstract toast(message: string): void;
+  /** Transient toast/snackbar — success (green) or error (red) styling. */
+  abstract success(message: string): void;
+  abstract error(message: string): void;
+  /** Neutral notice — not a success/error outcome (e.g. "complete your profile"). */
+  abstract warning(message: string): void;
 
   /** Informational dialog; resolves when dismissed. */
   abstract info(title?: string, text?: string): Promise<boolean>;

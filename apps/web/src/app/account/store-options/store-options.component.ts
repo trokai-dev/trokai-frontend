@@ -1,10 +1,6 @@
-import { User } from '@trokai/shared-core';
+import { User, FeedbackService } from '@trokai/shared-core';
 import { lastValueFrom } from 'rxjs';
-import {
-  AlertService,
-  SellerProfileComponent,
-  SellerProfileValue,
-} from '@trokai/shared-ui';
+import { SellerProfileComponent, SellerProfileValue } from '@trokai/shared-ui';
 import { AuthService } from './../../auth/auth.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -22,7 +18,7 @@ import { CompletingInformationService } from '@trokai/shared-data-access';
 export class StoreOptionsComponent implements OnInit {
   private authService = inject(AuthService);
   private http = inject(HttpClient);
-  private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   private completingInfoService = inject(CompletingInformationService);
 
   user!: User;
@@ -104,7 +100,7 @@ export class StoreOptionsComponent implements OnInit {
         }
       }
 
-      this.alert.postSuccess();
+      this.feedback.success('Informações salvas!');
       this.completingInfoService.next();
     } catch {
       // updateUser surfaces its own error

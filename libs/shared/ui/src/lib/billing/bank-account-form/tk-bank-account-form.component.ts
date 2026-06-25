@@ -22,7 +22,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatOptionModule } from '@angular/material/core';
 import { NgxMaskPipe } from 'ngx-mask';
 import { Observable, startWith, map } from 'rxjs';
-import { BasicModel, getBanksList, User } from '@trokai/shared-core';
+import {
+  BasicModel,
+  FeedbackService,
+  getBanksList,
+  User,
+} from '@trokai/shared-core';
 import {
   BankAccountHolderType,
   BankAccountModel,
@@ -65,6 +70,7 @@ export class TkBankAccountFormComponent implements AfterViewInit {
 
   private bankService = inject(BankService);
   private nav = inject(NavigationManager);
+  private feedback = inject(FeedbackService);
 
   constructor() {
     this.form = new FormGroup({
@@ -181,6 +187,7 @@ export class TkBankAccountFormComponent implements AfterViewInit {
       account.accountCheckDigit !== this.accountBkp.accountCheckDigit
     ) {
       await this.bankService.saveAccount(account);
+      this.feedback.success('Conta bancária salva!');
     }
 
     this.saved.emit();

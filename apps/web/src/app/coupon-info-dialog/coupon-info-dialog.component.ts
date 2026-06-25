@@ -9,7 +9,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Coupon } from '@trokai/shared-data-access';
-import { AlertService } from '@trokai/shared-ui';
+import { FeedbackService } from '@trokai/shared-core';
 import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
@@ -22,12 +22,12 @@ import { Clipboard } from '@angular/cdk/clipboard';
 export class CouponInfoDialogComponent {
   public data = inject<{ coupon: Coupon }>(MAT_DIALOG_DATA);
   private clipboard = inject(Clipboard);
-  private alert = inject(AlertService);
+  private feedback = inject(FeedbackService);
   public dialogRef = inject(MatDialogRef<CouponInfoDialogComponent>);
 
   copyCode() {
     this.clipboard.copy(this.data.coupon.code);
-    this.alert.alert('Cupom copiado');
+    this.feedback.success('Cupom copiado');
     this.dialogRef.close();
   }
 
