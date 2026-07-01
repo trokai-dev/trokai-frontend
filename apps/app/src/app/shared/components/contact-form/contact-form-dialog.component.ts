@@ -11,8 +11,8 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   selector: 'app-contact-form',
   template: `
     <tk-contact-form
-      [showType]="true"
       [dismissable]="true"
+      [name]="name"
       [email]="email"
       [loading]="loading"
       [done]="done"
@@ -24,6 +24,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   imports: [ContactFormComponent],
 })
 export class ContactFormDialogComponent {
+  name = '';
   email = '';
   loading = false;
   done = false;
@@ -35,7 +36,9 @@ export class ContactFormDialogComponent {
   private feedback = inject(FeedbackService);
 
   constructor() {
-    this.email = this.authService.getUserValue()?.email ?? '';
+    const user = this.authService.getUserValue();
+    this.name = user?.name ?? '';
+    this.email = user?.email ?? '';
   }
 
   async sendMessage(value: ContactFormValue) {
@@ -44,7 +47,7 @@ export class ContactFormDialogComponent {
       await firstValueFrom(
         this.contactFormService.sendMessage(
           value.message,
-          value.type,
+          value.name,
           value.email,
         ),
       );

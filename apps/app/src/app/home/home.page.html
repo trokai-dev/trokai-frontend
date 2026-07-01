@@ -31,9 +31,10 @@
 </ion-header>
 
 <ion-content>
-  @if(payload){ @if (payload.alert) {
-  <div class="home_header_alert">{{ payload.alert }}</div>
-  } @for (home_row of payload.home; track $index; let row = $index) {
+  <div class="home_header_alert" [hidden]="!payload.alert">
+    {{ payload.alert }}
+  </div>
+  @for (home_row of payload.home; track $index; let row = $index) {
   <div class="home_row">
     @if (home_row.title) {
     <div class="home_row_header">
@@ -121,5 +122,5 @@
     </div>
     }
   </div>
-  } }
+  }
 </ion-content>

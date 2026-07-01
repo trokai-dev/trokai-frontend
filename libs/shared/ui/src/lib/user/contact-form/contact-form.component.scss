@@ -1,3 +1,9 @@
+:host-context(.mat-mdc-dialog-container) {
+  display: block;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -11,12 +17,6 @@
 .contact-form__title {
   text-align: center;
   margin-bottom: var(--space-24);
-}
-
-.contact-form__types {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: var(--space-16);
 }
 
 .contact-form__field {

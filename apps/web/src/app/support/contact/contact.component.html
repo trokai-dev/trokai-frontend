@@ -13,7 +13,8 @@
     </span>
 
     <tk-contact-form
-      [showName]="true"
+      [name]="name"
+      [email]="email"
       [loading]="loading"
       (submitted)="sendMail($event)"
     />

@@ -39,25 +39,15 @@
   <h2 class="color-gray-dark contact-form__title">Fale com o Trokaí</h2>
 
   <form [formGroup]="form" (ngSubmit)="submit()" class="contact-form">
-    @if (showType) {
-      <mat-radio-group formControlName="type" class="contact-form__types">
-        <mat-radio-button value="BUG">Problema</mat-radio-button>
-        <mat-radio-button value="Dúvida">Dúvida</mat-radio-button>
-        <mat-radio-button value="Sugestão">Sugestão</mat-radio-button>
-      </mat-radio-group>
-    }
-
-    @if (showName) {
-      <mat-form-field appearance="outline" class="contact-form__field">
-        <mat-label>Nome</mat-label>
-        <input
-          matInput
-          formControlName="name"
-          type="text"
-          [errorStateMatcher]="matcher"
-        />
-      </mat-form-field>
-    }
+    <mat-form-field appearance="outline" class="contact-form__field">
+      <mat-label>Nome</mat-label>
+      <input
+        matInput
+        formControlName="name"
+        type="text"
+        [errorStateMatcher]="matcher"
+      />
+    </mat-form-field>
 
     <mat-form-field appearance="outline" class="contact-form__field">
       <mat-label>E-mail para contato</mat-label>

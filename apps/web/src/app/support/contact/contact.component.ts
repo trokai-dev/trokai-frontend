@@ -8,6 +8,7 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-contact',
@@ -20,11 +21,17 @@ export class ContactComponent implements OnInit {
   private globalService = inject(GlobalService);
   private alert = inject(AlertService);
   private router = inject(Router);
+  private authService = inject(AuthService);
 
   loading = false;
+  name = '';
+  email = '';
 
   ngOnInit(): void {
     this.globalService.setTitle('Contato');
+    const user = this.authService.getUserValue();
+    this.name = user?.name ?? '';
+    this.email = user?.email ?? '';
   }
 
   async sendMail(value: ContactFormValue) {

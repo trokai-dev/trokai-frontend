@@ -74,7 +74,7 @@ export class HomePage implements OnInit {
   url;
 
   //new home
-  payload?: { home: HomePayloadRow[]; alert?: string };
+  payload: { home: HomePayloadRow[]; alert?: string } = { home: [] };
   swiperBindTimer;
 
   basketCount = 0;
@@ -120,6 +120,8 @@ export class HomePage implements OnInit {
       alert: payload.alert,
     };
 
+    this.changeDetectorRef.detectChanges();
+
     this.bindSwiper();
   }
 
@@ -138,6 +140,8 @@ export class HomePage implements OnInit {
         const swiperEl: Element = this.el.nativeElement.querySelector(
           `#swiper-${i}`,
         );
+
+        if (!swiperEl) continue;
 
         // if (swiperEl && swiperEl.swiper) {
         //   const items = this.payload[i].items.length;

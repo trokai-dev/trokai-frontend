@@ -13,7 +13,7 @@ export class ContactFormService {
   private authService = inject(AuthService);
   private platform = inject(Platform);
 
-  sendMessage(message: string, type: string, email: string) {
+  sendMessage(message: string, name: string, email: string) {
     const user = this.authService.getUserValue();
 
     let platform = null;
@@ -22,7 +22,7 @@ export class ContactFormService {
     else if (this.platform.is('android')) platform = 'Android';
     else platform = 'Web';
 
-    const contact = { userId: user?._id, message, type, platform, email };
+    const contact = { userId: user?._id, message, name, platform, email };
     return this.httpClient.post(
       environment.urlApi + '/contact-form/app/',
       contact,

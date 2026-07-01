@@ -43,8 +43,6 @@ export class SupportPage implements OnInit {
   }
 
   contact() {
-    this.dialog.open(ContactFormDialogComponent, {
-      panelClass: 'modal-95',
-    });
+    this.dialog.open(ContactFormDialogComponent);
   }
 }
